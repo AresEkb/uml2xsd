@@ -38,7 +38,7 @@
       <ownedRule xmi:id="_bCA70EhnEeOLq4Iwk7H-wA" constrainedElement="_XEyGsEhmEeOLq4Iwk7H-wA">
         <specification xmi:type="uml:OpaqueExpression" xmi:id="_bCBi4EhnEeOLq4Iwk7H-wA">
           <language>OCL</language>
-          <body>driver->forAll(age >= 18)</body>
+          <body>driver->forAll(age >= 18) and driver->exists(age >= 21)</body>
         </specification>
       </ownedRule>
       <ownedRule xmi:id="_gaDXgEhnEeOLq4Iwk7H-wA" name="Maximum two drivers" constrainedElement="_XEyGsEhmEeOLq4Iwk7H-wA">

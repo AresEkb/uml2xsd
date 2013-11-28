@@ -7,7 +7,7 @@
       <ownedType xsi:type="pivot:Class" xmi:id="T.OclTest.Package1.Person" name="Person"
           superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
         <ownedAttribute xmi:id="p.OclTest.Package1.Person.age" name="age" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.Integer"/>
-        <ownedAttribute xmi:id="p.OclTest.Package1.Person.car" name="car" type="#_TnKaUFf-EeOeteGK2JbAkA"
+        <ownedAttribute xmi:id="p.OclTest.Package1.Person.car" name="car" type="#_oZAxcFgmEeO4PedcUTR1hg"
             opposite="#p.OclTest.Package1.Car.driver"/>
         <ownedAttribute xmi:id="p.OclTest.Package1.Person.name" name="name" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
         <ownedInvariant constrainedElement="#T.OclTest.Package1.Person">
@@ -32,7 +32,7 @@
       <ownedType xsi:type="pivot:Class" xmi:id="T.OclTest.Package1.Car" name="Car"
           superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
         <ownedAttribute xmi:id="p.OclTest.Package1.Car.class" name="class" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
-        <ownedAttribute xmi:id="p.OclTest.Package1.Car.driver" name="driver" type="#_TnKaUVf-EeOeteGK2JbAkA"
+        <ownedAttribute xmi:id="p.OclTest.Package1.Car.driver" name="driver" type="#_oZAxcVgmEeO4PedcUTR1hg"
             opposite="#p.OclTest.Package1.Person.car"/>
         <ownedAttribute xmi:id="p.OclTest.Package1.Car.engine" name="engine" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
         <ownedAttribute xmi:id="p.OclTest.Package1.Car.isForSale" name="isForSale"
@@ -43,7 +43,7 @@
             type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
         <ownedInvariant constrainedElement="#T.OclTest.Package1.Car">
           <specification>
-            <body>driver->forAll(age >= 18)</body>
+            <body>driver->forAll(age >= 18) and driver->exists(age >= 21)</body>
             <language>OCL</language>
           </specification>
         </ownedInvariant>
@@ -64,51 +64,51 @@
     </nestedPackage>
   </nestedPackage>
   <nestedPackage xmi:id="P.$$" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
-    <ownedType xsi:type="pivot:SetType" xmi:id="_TnKaUFf-EeOeteGK2JbAkA" name="Set"
-        superClass="#_TnKaUlf-EeOeteGK2JbAkA #_TnKaU1f-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Car">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_oZAxcFgmEeO4PedcUTR1hg" name="Set"
+        superClass="#_oZAxclgmEeO4PedcUTR1hg #_oZAxc1gmEeO4PedcUTR1hg" elementType="#T.OclTest.Package1.Car">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="#T.OclTest.Package1.Car" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" xmi:id="_TnKaUVf-EeOeteGK2JbAkA" name="Set"
-        superClass="#_TnKaVFf-EeOeteGK2JbAkA #_TnKaVVf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Person"
+    <ownedType xsi:type="pivot:SetType" xmi:id="_oZAxcVgmEeO4PedcUTR1hg" name="Set"
+        superClass="#_oZAxdFgmEeO4PedcUTR1hg #_oZAxdVgmEeO4PedcUTR1hg" elementType="#T.OclTest.Package1.Person"
         lower="1">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="#T.OclTest.Package1.Person" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_TnKaUlf-EeOeteGK2JbAkA" name="Bag"
-        superClass="#_TnLBYFf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Car">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_oZAxclgmEeO4PedcUTR1hg" name="Bag"
+        superClass="#_oZAxdlgmEeO4PedcUTR1hg" elementType="#T.OclTest.Package1.Car">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
         <parameterSubstitution actual="#T.OclTest.Package1.Car" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_TnKaU1f-EeOeteGK2JbAkA" name="UniqueCollection"
-        superClass="#_TnLBYFf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Car">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_oZAxc1gmEeO4PedcUTR1hg" name="UniqueCollection"
+        superClass="#_oZAxdlgmEeO4PedcUTR1hg" elementType="#T.OclTest.Package1.Car">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="#T.OclTest.Package1.Car" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" xmi:id="_TnKaVFf-EeOeteGK2JbAkA" name="Bag"
-        superClass="#_TnLBYVf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Person">
+    <ownedType xsi:type="pivot:BagType" xmi:id="_oZAxdFgmEeO4PedcUTR1hg" name="Bag"
+        superClass="#_oZBYgFgmEeO4PedcUTR1hg" elementType="#T.OclTest.Package1.Person">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
         <parameterSubstitution actual="#T.OclTest.Package1.Person" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_TnKaVVf-EeOeteGK2JbAkA" name="UniqueCollection"
-        superClass="#_TnLBYVf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Person">
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_oZAxdVgmEeO4PedcUTR1hg" name="UniqueCollection"
+        superClass="#_oZBYgFgmEeO4PedcUTR1hg" elementType="#T.OclTest.Package1.Person">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="#T.OclTest.Package1.Person" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_TnLBYFf-EeOeteGK2JbAkA" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_oZAxdlgmEeO4PedcUTR1hg" name="Collection"
         superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
         elementType="#T.OclTest.Package1.Car">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
         <parameterSubstitution actual="#T.OclTest.Package1.Car" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" xmi:id="_TnLBYVf-EeOeteGK2JbAkA" name="Collection"
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_oZBYgFgmEeO4PedcUTR1hg" name="Collection"
         superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
         elementType="#T.OclTest.Package1.Person">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">

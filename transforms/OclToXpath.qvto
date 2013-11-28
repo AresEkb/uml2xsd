@@ -1,12 +1,12 @@
-modeltype ocl "strict" uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
-modeltype xpath2 "strict" uses 'http://www.emftext.org/language/xpath2';
+modeltype ocl 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
+modeltype xpath2 'strict' uses 'http://www.emftext.org/language/xpath2';
 
 transformation OclToXpath(in o : ocl, out x : xpath2);
 
 main() {
 //	o.rootObjects()[ExpressionInOCL].map Root2Root();
 	var res := object Expr {};
-	o.rootObjects()[ExpressionInOCL]->sortedBy(body->first()) .map Root2Root()->forEach(e) {
+	o.rootObjects()[ExpressionInOCL]->sortedBy(body->first()).map Root2Root()->forEach(e) {
 		res.expr += e.expr;
 	};
 }
@@ -18,42 +18,18 @@ mapping ExpressionInOCL::Root2Root() : Expr {
 
 mapping OCLExpression::OclToXpath() : ExprSingle
 disjuncts
+	OperationCallExp::leftNotNull,
+	OperationCallExp::rightNotNull,
 	OperationCallExp::toIfExpr,
 	OperationCallExp::toOrExpr,
-	OperationCallExp::anyOperation,
 	OCLExpression::toOrExprChild
-//	OperationCallExp::toAdditiveExpr,
-//	OCLExpression::toAdditiveExprChild
 {}
-
-property trueExpr = object FunctionCall { name := object QName { prefix := 'fn'; name := 'true' } };
-property falseExpr = object FunctionCall { name := object QName { prefix := 'fn'; name := 'true' } };
-
-
-query String::quote() : String = '\'' + self.replaceAll('\'', '\'\'') + '\'';
-
-mapping OperationCallExp::anyOperation() : StringLiteral
-{
-	value := self.referredOperation.repr().quote();
-}
 
 mapping OperationCallExp::toIfExpr() : OrExpr
 when { self.name = 'implies' }
 {
 	operand := self.source.xmap OclToXpath().notExpr();
 	operand += self.argument[OCLExpression].xmap toOrExprChild();
-}
-
-query ExprSingle::notExpr() : FunctionCall =
-	object FunctionCall {
-		name := object QName { prefix := 'fn'; name := 'not' };
-		arg := self; };
-
-mapping PropertyCallExp::toPath() : PathExpr
-{
-	step := object SelfStepExpr { step := object AxisStep { step := object AbbrevForwardStep {
-		kind := AbbrevForwardStepKind::child;
-		nodeTest := object QNameTest { name := object QName { name := self.referredProperty.name } } } } };
 }
 
 // It's not necessary, but it's better to flatten a left recursion.
@@ -93,8 +69,29 @@ disjuncts
 	OCLExpression::toComparisonExprChild
 {}
 
+query OCLExpression::isNullLiteralExp() : Boolean = self.oclIsKindOf(NullLiteralExp);
+query OrderedSet(OCLExpression)::isNullLiteralExp() : Boolean =
+	self->size() = 1 and self->first().oclIsKindOf(NullLiteralExp);
+
+mapping OperationCallExp::leftNotNull() : ExprSingle
+when { self.name = '<>' and self.argument->isNullLiteralExp() }
+{
+	init {
+		result := self.source.xmap OclToXpath();
+	}
+}
+
+mapping OperationCallExp::rightNotNull() : ExprSingle
+when { self.name = '<>' and self.source.isNullLiteralExp() }
+{
+	init {
+		result := self.argument->first().xmap OclToXpath();
+	}
+}
+
+
 mapping OperationCallExp::toComparisonExpr() : ComparisonExpr
-when { self.name.toGeneralComp() <> null }
+when { self.name.toGeneralComp() <> null and not(self.source.isNullLiteralExp() or self.argument->isNullLiteralExp()) }
 {
 	left := self.source.xmap toComparisonExprChild();
 	operator := object GeneralComp { operator := self.name.toGeneralComp() };
@@ -142,11 +139,93 @@ when { self.name.toMultiplicativeOp() <> null }
 mapping OCLExpression::toMultiplicativeExprChild() : MultiplicativeExprChild
 disjuncts
 	PropertyCallExp::toPath,
+	OperationCallExp::count,
+	OperationCallExp::stringLength,
+	IteratorExp::exists,
+	IteratorExp::forAll,
 	UnlimitedNaturalLiteralExp::toLiteral,
 	RealLiteralExp::toLiteral,
 	StringLiteralExp::toLiteral,
 	OCLExpression::toParenthesizedExpr
 {}
+
+mapping PropertyCallExp::toPath() : PathExpr
+{
+	step := object SelfStepExpr { step := object AxisStep { step := object AbbrevForwardStep {
+		kind := AbbrevForwardStepKind::child;
+		nodeTest := object QNameTest { name := object QName { name := self.referredProperty.name } } } } };
+}
+
+mapping OperationCallExp::count() : FunctionCall
+when { self.referredOperation.name = 'size' and self.referredOperation.owningType.name = 'Collection' }
+{
+	name := object QName { prefix := 'fn'; name := 'count' };
+	arg := self.source.xmap OclToXpath();
+/*	arg += object OrExpr {
+	operand += object StringLiteral { value := self.referredOperation.repr().quote() };
+	operand += object StringLiteral { value := self.referredOperation.type.repr().quote() };
+	operand += object StringLiteral { value := self.referredOperation.name };
+	operand += object StringLiteral { value := self.referredOperation.owningType.name };
+	operand += object StringLiteral { value := self.referredOperation.implementation.repr() };
+	operand += object StringLiteral { value := self.referredOperation.implementationClass };
+	}*/
+}
+
+mapping OperationCallExp::stringLength() : FunctionCall
+when { self.referredOperation.name = 'size' and self.referredOperation.owningType.name = 'String' }
+{
+	name := object QName { prefix := 'fn'; name := 'string-length' };
+	arg := self.source.xmap OclToXpath();
+/*	arg += object OrExpr {
+	operand += object StringLiteral { value := self.referredOperation.repr().quote() };
+	operand += object StringLiteral { value := self.referredOperation.type.repr().quote() };
+	operand += object StringLiteral { value := self.referredOperation.name };
+	operand += object StringLiteral { value := self.referredOperation.owningType.name };
+	operand += object StringLiteral { value := self.referredOperation.ownedParameter->first().repr() };
+	operand += object StringLiteral { value := self.referredOperation.implementation.repr() };
+	operand += object StringLiteral { value := self.referredOperation.implementationClass };
+	}*/
+}
+
+mapping IteratorExp::exists() : FilterExpr
+when { self.referredIteration.name = 'exists' }
+{
+	primaryExpr := object ParenthesizedExpr { expr := self.source.xmap OclToXpath(); };
+	predicate := object Predicate { expr := self.body.xmap OclToXpath() };
+}
+
+mapping IteratorExp::forAll() : FunctionCall
+when { self.referredIteration.name = 'forAll' }
+{
+	init {
+		result := object FilterExpr {
+			primaryExpr := object ParenthesizedExpr { expr := self.source.xmap OclToXpath(); };
+			predicate := object Predicate { expr := self.body.xmap OclToXpath().notExpr() };
+		}.notExpr();
+	}
+/*	arg += object OrExpr {
+	operand += object StringLiteral { value := self.referredIteration.repr().quote() };
+	operand += object StringLiteral { value := self.referredIteration.type.repr().quote() };
+	operand += object StringLiteral { value := self.referredIteration.name };
+	operand += object StringLiteral { value := self.referredIteration.owningType.name };
+	operand += object StringLiteral { value := self.referredIteration.ownedParameter->first().repr() };
+	operand += object StringLiteral { value := self.referredIteration.implementation.repr() };
+	operand += object StringLiteral { value := self.referredIteration.implementationClass };
+	}*/
+}
+
+mapping OperationCallExp::forAll() : FunctionCall
+{
+	name := object QName { prefix := 'fn'; name := 'forAll' };
+	arg := self.source.xmap OclToXpath();
+/*	arg += object OrExpr {
+	operand += object StringLiteral { value := self.referredOperation.repr().quote() };
+	operand += object StringLiteral { value := self.referredOperation.type.repr().quote() };
+	operand += object StringLiteral { value := self.referredOperation.name };
+	operand += object StringLiteral { value := self.referredOperation.implementation.repr() };
+	operand += object StringLiteral { value := self.referredOperation.implementationClass };
+	}*/
+}
 
 mapping UnlimitedNaturalLiteralExp::toLiteral() : IntegerLiteral
 {
@@ -165,7 +244,7 @@ mapping RealLiteralExp::toLiteral() : NumericLiteral
 
 mapping StringLiteralExp::toLiteral() : StringLiteral
 {
-	value := '\'' + self.stringSymbol.replaceAll('\'', '\'\'') + '\'';
+	value := self.stringSymbol.quote();
 }
 
 
@@ -217,3 +296,15 @@ mapping OCLExpression::toVarRef() : VarRef {
 	object VarRef { varName := object VarName { name := self.name } }
 	//test := object VarRef { varName := object VarName { name := self.name } };
 }
+
+
+// Helpers
+
+query String::quote() : String = '\'' + self.replaceAll('\'', '\'\'') + '\'';
+
+query trueExpr() : FunctionCall = object FunctionCall { name := object QName { prefix := 'fn'; name := 'true' } };
+query falseExpr() : FunctionCall = object FunctionCall { name := object QName { prefix := 'fn'; name := 'false' } };
+query ExprSingle::notExpr() : FunctionCall =
+	object FunctionCall {
+		name := object QName { prefix := 'fn'; name := 'not' };
+		arg := self; };
