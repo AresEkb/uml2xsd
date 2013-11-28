@@ -1,0 +1,219 @@
+modeltype ocl "strict" uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
+modeltype xpath2 "strict" uses 'http://www.emftext.org/language/xpath2';
+
+transformation OclToXpath(in o : ocl, out x : xpath2);
+
+main() {
+//	o.rootObjects()[ExpressionInOCL].map Root2Root();
+	var res := object Expr {};
+	o.rootObjects()[ExpressionInOCL]->sortedBy(body->first()) .map Root2Root()->forEach(e) {
+		res.expr += e.expr;
+	};
+}
+
+mapping ExpressionInOCL::Root2Root() : Expr {
+	log("Converting " + self.body->first());
+	expr := self.bodyExpression.map OclToXpath();
+}
+
+mapping OCLExpression::OclToXpath() : ExprSingle
+disjuncts
+	OperationCallExp::toIfExpr,
+	OperationCallExp::toOrExpr,
+	OperationCallExp::anyOperation,
+	OCLExpression::toOrExprChild
+//	OperationCallExp::toAdditiveExpr,
+//	OCLExpression::toAdditiveExprChild
+{}
+
+property trueExpr = object FunctionCall { name := object QName { prefix := 'fn'; name := 'true' } };
+property falseExpr = object FunctionCall { name := object QName { prefix := 'fn'; name := 'true' } };
+
+
+query String::quote() : String = '\'' + self.replaceAll('\'', '\'\'') + '\'';
+
+mapping OperationCallExp::anyOperation() : StringLiteral
+{
+	value := self.referredOperation.repr().quote();
+}
+
+mapping OperationCallExp::toIfExpr() : OrExpr
+when { self.name = 'implies' }
+{
+	operand := self.source.xmap OclToXpath().notExpr();
+	operand += self.argument[OCLExpression].xmap toOrExprChild();
+}
+
+query ExprSingle::notExpr() : FunctionCall =
+	object FunctionCall {
+		name := object QName { prefix := 'fn'; name := 'not' };
+		arg := self; };
+
+mapping PropertyCallExp::toPath() : PathExpr
+{
+	step := object SelfStepExpr { step := object AxisStep { step := object AbbrevForwardStep {
+		kind := AbbrevForwardStepKind::child;
+		nodeTest := object QNameTest { name := object QName { name := self.referredProperty.name } } } } };
+}
+
+// It's not necessary, but it's better to flatten a left recursion.
+mapping OperationCallExp::toOrExpr() : OrExpr
+when { self.name = 'or' }
+{
+	init {
+		result := self.source[OperationCallExp]->collectOne(map toOrExpr());
+	}
+	if (operand->isEmpty()) {
+		operand := self.source.xmap toOrExprChild();
+	} endif;
+	operand += self.argument->toOrExprChild();
+}
+
+mapping OCLExpression::toOrExprChild() : OrExprChild
+disjuncts
+	OperationCallExp::toAndExpr,
+	OCLExpression::toAndExprChild
+{}
+
+mapping OperationCallExp::toAndExpr() : AndExpr
+when { self.name = 'and' }
+{
+	init {
+		result := self.source[OperationCallExp]->collectOne(map toAndExpr());
+	}
+	if (operand->isEmpty()) {
+		operand := self.source.xmap toAndExprChild();
+	} endif;
+	operand += self.argument->toAndExprChild();
+}
+
+mapping OCLExpression::toAndExprChild() : AndExprChild
+disjuncts
+	OperationCallExp::toComparisonExpr,
+	OCLExpression::toComparisonExprChild
+{}
+
+mapping OperationCallExp::toComparisonExpr() : ComparisonExpr
+when { self.name.toGeneralComp() <> null }
+{
+	left := self.source.xmap toComparisonExprChild();
+	operator := object GeneralComp { operator := self.name.toGeneralComp() };
+	right := self.argument->first().xmap toComparisonExprChild();
+}
+
+mapping OCLExpression::toComparisonExprChild() : ComparisonExprChild
+disjuncts
+	OperationCallExp::toAdditiveExpr,
+	OCLExpression::toAdditiveExprChild
+{}
+
+mapping OperationCallExp::toAdditiveExpr() : AdditiveExpr
+when { self.name.toAdditiveOp() <> null }
+{
+	init {
+		result := self.source[OperationCallExp]->collectOne(map toAdditiveExpr());
+	}
+	if (operand->isEmpty()) {
+		operand := self.source.xmap toAdditiveExprChild();
+	} endif;
+	operand += self.argument->toAdditiveExprChild();
+	operator += self.name.toAdditiveOp();
+}
+
+mapping OCLExpression::toAdditiveExprChild() : AdditiveExprChild
+disjuncts
+	OperationCallExp::toMultiplicativeExpr,
+	OCLExpression::toMultiplicativeExprChild
+{}
+
+mapping OperationCallExp::toMultiplicativeExpr() : MultiplicativeExpr
+when { self.name.toMultiplicativeOp() <> null }
+{
+	init {
+		result := self.source[OperationCallExp]->collectOne(map toMultiplicativeExpr());
+	}
+	if (operand->isEmpty()) {
+		operand := self.source.xmap toMultiplicativeExprChild();
+	} endif;
+	operand += self.argument->toMultiplicativeExprChild();
+	operator += self.name.toMultiplicativeOp();
+}
+
+mapping OCLExpression::toMultiplicativeExprChild() : MultiplicativeExprChild
+disjuncts
+	PropertyCallExp::toPath,
+	UnlimitedNaturalLiteralExp::toLiteral,
+	RealLiteralExp::toLiteral,
+	StringLiteralExp::toLiteral,
+	OCLExpression::toParenthesizedExpr
+{}
+
+mapping UnlimitedNaturalLiteralExp::toLiteral() : IntegerLiteral
+{
+	value := self.unlimitedNaturalSymbol.oclAsType(Integer);
+}
+
+mapping RealLiteralExp::toLiteral() : NumericLiteral
+{
+	init {
+		var val := self.realSymbol.repr().toReal();
+		result := if (val.repr().matches('.+[eE].+'))
+			then object DoubleLiteral { value := val }
+			else object DecimalLiteral { value := val } endif;
+	}
+}
+
+mapping StringLiteralExp::toLiteral() : StringLiteral
+{
+	value := '\'' + self.stringSymbol.replaceAll('\'', '\'\'') + '\'';
+}
+
+
+mapping OCLExpression::toParenthesizedExpr() : ParenthesizedExpr
+//when { self.xmap OclToXpath() <> null }
+{
+	expr := self.xmap OclToXpath()
+}
+
+query String::toGeneralComp() : GeneralCompKind =
+  if (self = "=")  then GeneralCompKind::eq
+elif (self = "<>") then GeneralCompKind::ne
+elif (self = "<")  then GeneralCompKind::lt
+elif (self = "<=") then GeneralCompKind::le
+elif (self = ">")  then GeneralCompKind::gt
+elif (self = ">=") then GeneralCompKind::ge
+endif;
+/*
+query String::toValueComp() : GeneralCompKind =
+  if (self = "eq") then GeneralCompKind::eq
+elif (self = "ne") then GeneralCompKind::ne
+elif (self = "lt") then GeneralCompKind::lt
+elif (self = "le") then GeneralCompKind::le
+elif (self = "gt") then GeneralCompKind::gt
+elif (self = "ge") then GeneralCompKind::ge
+endif;
+
+query String::toNodeComp() : NodeCompKind =
+  if (self = "is") then NodeCompKind::is
+elif (self = "<<") then NodeCompKind::precedes
+elif (self = ">>") then NodeCompKind::follows
+endif;
+*/
+query String::toAdditiveOp() : AdditiveOpKind =
+  if (self = "+") then AdditiveOpKind::addition
+elif (self = "-") then AdditiveOpKind::subtraction
+endif;
+
+query String::toMultiplicativeOp() : MultiplicativeOpKind =
+  if (self = "*")    then MultiplicativeOpKind::multiplication
+elif (self = "div")  then MultiplicativeOpKind::div
+elif (self = "idiv") then MultiplicativeOpKind::idiv
+elif (self = "mod")  then MultiplicativeOpKind::mod
+endif;
+
+
+
+mapping OCLExpression::toVarRef() : VarRef {
+	object VarRef { varName := object VarName { name := self.name } }
+	//test := object VarRef { varName := object VarName { name := self.name } };
+}

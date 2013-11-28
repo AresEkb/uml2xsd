@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pivot:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xsi:schemaLocation="http://www.eclipse.org/ocl/3.1.0/Pivot java://org.eclipse.ocl.examples.pivot.PivotPackage"
+    name="OclTest.uml.oclas" externalURI="file:/C:/Work/workspace/OclToXPath/model/OclTest.uml.oclas">
+  <nestedPackage xmi:id="P.OclTest" name="OclTest" importedPackage="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#P.PrimitiveTypes">
+    <nestedPackage xmi:id="P.OclTest.Package1" name="Package1">
+      <ownedType xsi:type="pivot:Class" xmi:id="T.OclTest.Package1.Person" name="Person"
+          superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
+        <ownedAttribute xmi:id="p.OclTest.Package1.Person.age" name="age" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.Integer"/>
+        <ownedAttribute xmi:id="p.OclTest.Package1.Person.car" name="car" type="#_TnKaUFf-EeOeteGK2JbAkA"
+            opposite="#p.OclTest.Package1.Car.driver"/>
+        <ownedAttribute xmi:id="p.OclTest.Package1.Person.name" name="name" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
+        <ownedInvariant constrainedElement="#T.OclTest.Package1.Person">
+          <specification>
+            <body>age >= 0</body>
+            <language>OCL</language>
+          </specification>
+        </ownedInvariant>
+        <ownedInvariant name="Person must have a name" constrainedElement="#T.OclTest.Package1.Person">
+          <specification>
+            <body>self.name &lt;> null and self.name.size() > 0</body>
+            <language>OCL</language>
+          </specification>
+        </ownedInvariant>
+        <ownedInvariant constrainedElement="#T.OclTest.Package1.Person">
+          <specification>
+            <body>1 + 2 * 3 &lt;> 4 or 5 &lt; 6 and (7 > 8 or 1 > 2) and ('qwe' = 'asd' and 1.5 + 2.7 + 5.1e-4 = 1)</body>
+            <language>OCL</language>
+          </specification>
+        </ownedInvariant>
+      </ownedType>
+      <ownedType xsi:type="pivot:Class" xmi:id="T.OclTest.Package1.Car" name="Car"
+          superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
+        <ownedAttribute xmi:id="p.OclTest.Package1.Car.class" name="class" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
+        <ownedAttribute xmi:id="p.OclTest.Package1.Car.driver" name="driver" type="#_TnKaUVf-EeOeteGK2JbAkA"
+            opposite="#p.OclTest.Package1.Person.car"/>
+        <ownedAttribute xmi:id="p.OclTest.Package1.Car.engine" name="engine" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
+        <ownedAttribute xmi:id="p.OclTest.Package1.Car.isForSale" name="isForSale"
+            type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.Boolean"/>
+        <ownedAttribute xmi:id="p.OclTest.Package1.Car.layout" name="layout" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
+        <ownedAttribute xmi:id="p.OclTest.Package1.Car.price" name="price" type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.UnlimitedNatural"/>
+        <ownedAttribute xmi:id="p.OclTest.Package1.Car.transmission" name="transmission"
+            type="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.String"/>
+        <ownedInvariant constrainedElement="#T.OclTest.Package1.Car">
+          <specification>
+            <body>driver->forAll(age >= 18)</body>
+            <language>OCL</language>
+          </specification>
+        </ownedInvariant>
+        <ownedInvariant name="Maximum two drivers" constrainedElement="#T.OclTest.Package1.Car">
+          <specification>
+            <body>driver->size() &lt;= 2</body>
+            <language>OCL</language>
+          </specification>
+        </ownedInvariant>
+        <ownedInvariant constrainedElement="#T.OclTest.Package1.Car">
+          <specification>
+            <body>isForSale implies price > 0.0</body>
+            <language>OCL</language>
+          </specification>
+        </ownedInvariant>
+      </ownedType>
+      <ownedType xsi:type="pivot:PrimitiveType" xmi:id="Money" name="Money"/>
+    </nestedPackage>
+  </nestedPackage>
+  <nestedPackage xmi:id="P.$$" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
+    <ownedType xsi:type="pivot:SetType" xmi:id="_TnKaUFf-EeOeteGK2JbAkA" name="Set"
+        superClass="#_TnKaUlf-EeOeteGK2JbAkA #_TnKaU1f-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Car">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
+        <parameterSubstitution actual="#T.OclTest.Package1.Car" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:SetType" xmi:id="_TnKaUVf-EeOeteGK2JbAkA" name="Set"
+        superClass="#_TnKaVFf-EeOeteGK2JbAkA #_TnKaVVf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Person"
+        lower="1">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
+        <parameterSubstitution actual="#T.OclTest.Package1.Person" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:BagType" xmi:id="_TnKaUlf-EeOeteGK2JbAkA" name="Bag"
+        superClass="#_TnLBYFf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Car">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
+        <parameterSubstitution actual="#T.OclTest.Package1.Car" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_TnKaU1f-EeOeteGK2JbAkA" name="UniqueCollection"
+        superClass="#_TnLBYFf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Car">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
+        <parameterSubstitution actual="#T.OclTest.Package1.Car" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:BagType" xmi:id="_TnKaVFf-EeOeteGK2JbAkA" name="Bag"
+        superClass="#_TnLBYVf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Person">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
+        <parameterSubstitution actual="#T.OclTest.Package1.Person" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_TnKaVVf-EeOeteGK2JbAkA" name="UniqueCollection"
+        superClass="#_TnLBYVf-EeOeteGK2JbAkA" elementType="#T.OclTest.Package1.Person">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
+        <parameterSubstitution actual="#T.OclTest.Package1.Person" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_TnLBYFf-EeOeteGK2JbAkA" name="Collection"
+        superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+        elementType="#T.OclTest.Package1.Car">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
+        <parameterSubstitution actual="#T.OclTest.Package1.Car" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" xmi:id="_TnLBYVf-EeOeteGK2JbAkA" name="Collection"
+        superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+        elementType="#T.OclTest.Package1.Person">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
+        <parameterSubstitution actual="#T.OclTest.Package1.Person" formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+  </nestedPackage>
+</pivot:Root>

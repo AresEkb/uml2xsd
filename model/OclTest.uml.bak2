@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_SJpCYEhmEeOLq4Iwk7H-wA" name="OclTest">
+  <packageImport xmi:id="_SJpCYkhmEeOLq4Iwk7H-wA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_TkXT8EhmEeOLq4Iwk7H-wA" name="Package1">
+    <packagedElement xmi:type="uml:Class" xmi:id="_VABZoEhmEeOLq4Iwk7H-wA" name="Person">
+      <ownedRule xmi:id="_YO23sEhnEeOLq4Iwk7H-wA" constrainedElement="_VABZoEhmEeOLq4Iwk7H-wA">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_YO3ewEhnEeOLq4Iwk7H-wA">
+          <language>OCL</language>
+          <body>1 + 2 - 3 + 4</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_3B_0wEhnEeOLq4Iwk7H-wA" name="Person must have a name" constrainedElement="_VABZoEhmEeOLq4Iwk7H-wA">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_3CAb0EhnEeOLq4Iwk7H-wA">
+          <language>OCL</language>
+          <body>(1 + 2) - 3 + 4</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_euliYFaYEeOQaLRuwdVaCQ" constrainedElement="_VABZoEhmEeOLq4Iwk7H-wA">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_iNGQoFaYEeOQaLRuwdVaCQ">
+          <language>OCL</language>
+          <body>1 + (2 - 3) + 4</body>
+        </specification>
+      </ownedRule>
+      <ownedAttribute xmi:id="_0tEaMEhmEeOLq4Iwk7H-wA" name="name" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_2NMJIEhmEeOLq4Iwk7H-wA" name="age" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_arz3wEhmEeOLq4Iwk7H-wA" name="car" visibility="public" type="_XEyGsEhmEeOLq4Iwk7H-wA" association="_artxIEhmEeOLq4Iwk7H-wA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ar1F4EhmEeOLq4Iwk7H-wA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ar1F4UhmEeOLq4Iwk7H-wA" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_XEyGsEhmEeOLq4Iwk7H-wA" name="Car">
+      <ownedRule xmi:id="_bCA70EhnEeOLq4Iwk7H-wA" constrainedElement="_XEyGsEhmEeOLq4Iwk7H-wA">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_bCBi4EhnEeOLq4Iwk7H-wA">
+          <language>OCL</language>
+          <body>1 + 2 - (3 + 4)</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_gaDXgEhnEeOLq4Iwk7H-wA" name="Maximum two drivers" constrainedElement="_XEyGsEhmEeOLq4Iwk7H-wA">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_gaD-kEhnEeOLq4Iwk7H-wA">
+          <language>OCL</language>
+          <body>(1 + 2 - 3) + 4</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_E7lOYEiiEeOe6t7R0EmS_w" constrainedElement="_XEyGsEhmEeOLq4Iwk7H-wA">
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_E7tKMEiiEeOe6t7R0EmS_w">
+          <language>OCL</language>
+          <body>1 + (2 - 3 + 4)</body>
+        </specification>
+      </ownedRule>
+      <ownedAttribute xmi:id="_C2EVMEhnEeOLq4Iwk7H-wA" name="class" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_I8ZaQEhnEeOLq4Iwk7H-wA" name="layout" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_K8N88EhnEeOLq4Iwk7H-wA" name="engine" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_L1-2gEhnEeOLq4Iwk7H-wA" name="transmission" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_2tQB4EhpEeOLq4Iwk7H-wA" name="isForSale" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_4jtNMEhpEeOLq4Iwk7H-wA" name="price" visibility="public">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_arwNYEhmEeOLq4Iwk7H-wA" name="driver" visibility="public" type="_VABZoEhmEeOLq4Iwk7H-wA" association="_artxIEhmEeOLq4Iwk7H-wA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_aryCkEhmEeOLq4Iwk7H-wA" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_aryCkUhmEeOLq4Iwk7H-wA" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_artxIEhmEeOLq4Iwk7H-wA" memberEnd="_arwNYEhmEeOLq4Iwk7H-wA _arz3wEhmEeOLq4Iwk7H-wA"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_otbUMEhtEeOLq4Iwk7H-wA" name="Money"/>
+  </packagedElement>
+  <profileApplication xmi:id="_SJpCZUhmEeOLq4Iwk7H-wA">
+    <eAnnotations xmi:id="_SJpCZkhmEeOLq4Iwk7H-wA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="Default.profile.uml#_IN8k8MmBEdqBcN1R6EvWUw"/>
+    </eAnnotations>
+    <appliedProfile href="Default.profile.uml#_a_S3wNWLEdiy4IqP8whjFA"/>
+  </profileApplication>
+  <profileApplication xmi:id="_SJpCZ0hmEeOLq4Iwk7H-wA">
+    <eAnnotations xmi:id="_SJpCaEhmEeOLq4Iwk7H-wA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="Deployment.profile.uml#_IrdAUMmBEdqBcN1R6EvWUw"/>
+    </eAnnotations>
+    <appliedProfile href="Deployment.profile.uml#_vjbuwOvHEdiDX5bji0iVSA"/>
+  </profileApplication>
+</uml:Model>
