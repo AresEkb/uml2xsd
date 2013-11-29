@@ -1,0 +1,54 @@
+modeltype ocl 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
+
+transformation NewTransformation(in o : ocl, out o2 : ocl);
+
+main() {
+	o.rootObjects()[ExpressionInOCL].map Root2Root();
+}
+
+mapping ExpressionInOCL::Root2Root() : ExpressionInOCL {
+	log('Converting ' + self.body->first());
+	self.bodyExpression.map visit();
+}
+
+mapping OCLExpression::visit() : NullLiteralExp
+disjuncts
+	OperationCallExp::visit,
+	PropertyCallExp::visit,
+	VariableExp::visit,
+	UnlimitedNaturalLiteralExp::visit
+{}
+
+mapping OperationCallExp::visit() : NullLiteralExp
+{
+	log('  OperationCallExp found:');
+	// Operations resolved only during first run of the script!
+	// The script won't resolve them during 2nd, 3rd, ... runs until you restart Eclipse!
+	log('    referredOperation: ' + self.referredOperation.repr());
+	self.source.map visit();
+	self.argument->visit();
+}
+
+mapping PropertyCallExp::visit() : NullLiteralExp
+{
+	log('  PropertyCallExp found:');
+	log('    referredProperty: ' + self.referredProperty.repr());
+	// The type of an age property won't be resolved because it defined in a nonexistent file:
+	// pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.Integer
+	log('    referredProperty.type: ' + self.referredProperty.type.repr());
+	self.source.map visit();
+}
+
+mapping VariableExp::visit() : NullLiteralExp
+{
+	log('  VariableExp found:');
+	// The type of a self variable isn't resolved too:
+	// http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.815
+	log('    referredVariable: ' + self.referredVariable.repr());
+}
+
+mapping UnlimitedNaturalLiteralExp::visit() : NullLiteralExp
+{
+	log('  UnlimitedNaturalLiteralExp found:');
+	log('    unlimitedNaturalSymbol: ' + self.unlimitedNaturalSymbol.repr());
+}

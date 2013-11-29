@@ -1,92 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xpath2="http://www.emftext.org/language/xpath2" xsi:schemaLocation="http://www.emftext.org/language/xpath2 ../../org.emftext.language.xpath2/metamodel/xpath2.ecore">
-  <xpath2:FunctionCall>
-    <name name="true" prefix="fn"/>
-  </xpath2:FunctionCall>
-  <xpath2:FunctionCall>
-    <name name="true" prefix="fn"/>
-  </xpath2:FunctionCall>
-  <xpath2:Expr>
-    <expr xsi:type="xpath2:OrExpr">
-      <operand xsi:type="xpath2:ComparisonExpr">
-        <left xsi:type="xpath2:AdditiveExpr">
-          <operand xsi:type="xpath2:IntegerLiteral" value="1"/>
-          <operand xsi:type="xpath2:MultiplicativeExpr">
-            <operand xsi:type="xpath2:IntegerLiteral" value="2"/>
-            <operand xsi:type="xpath2:IntegerLiteral" value="3"/>
-            <operator>multiplication</operator>
-          </operand>
-          <operator>addition</operator>
-        </left>
-        <operator xsi:type="xpath2:GeneralComp" operator="ne"/>
-        <right xsi:type="xpath2:IntegerLiteral" value="4"/>
-      </operand>
-      <operand xsi:type="xpath2:AndExpr">
-        <operand xsi:type="xpath2:ComparisonExpr">
-          <left xsi:type="xpath2:IntegerLiteral" value="5"/>
-          <operator xsi:type="xpath2:GeneralComp" operator="lt"/>
-          <right xsi:type="xpath2:IntegerLiteral" value="6"/>
-        </operand>
-        <operand xsi:type="xpath2:ParenthesizedExpr">
-          <expr xsi:type="xpath2:OrExpr">
-            <operand xsi:type="xpath2:ComparisonExpr">
-              <left xsi:type="xpath2:IntegerLiteral" value="7"/>
-              <operator xsi:type="xpath2:GeneralComp" operator="gt"/>
-              <right xsi:type="xpath2:IntegerLiteral" value="8"/>
-            </operand>
-            <operand xsi:type="xpath2:ComparisonExpr">
-              <left xsi:type="xpath2:IntegerLiteral" value="1"/>
-              <operator xsi:type="xpath2:GeneralComp" operator="gt"/>
-              <right xsi:type="xpath2:IntegerLiteral" value="2"/>
-            </operand>
-          </expr>
-        </operand>
-        <operand xsi:type="xpath2:ParenthesizedExpr">
-          <expr xsi:type="xpath2:StringLiteral" value="'null() : &quot;&lt;null>&quot;'"/>
-        </operand>
-      </operand>
-    </expr>
-    <expr xsi:type="xpath2:StringLiteral" value="'null() : &quot;&lt;null>&quot;'"/>
-    <expr xsi:type="xpath2:ParenthesizedExpr"/>
-    <expr xsi:type="xpath2:StringLiteral" value="'null() : &quot;&lt;null>&quot;'"/>
-    <expr xsi:type="xpath2:OrExpr">
-      <operand xsi:type="xpath2:FunctionCall">
-        <name name="not" prefix="fn"/>
-        <arg xsi:type="xpath2:PathExpr">
-          <step xsi:type="xpath2:SelfStepExpr">
-            <step xsi:type="xpath2:AxisStep">
-              <step xsi:type="xpath2:AbbrevForwardStep">
-                <nodeTest xsi:type="xpath2:QNameTest">
-                  <name name="isForSale"/>
-                </nodeTest>
-              </step>
-            </step>
-          </step>
-        </arg>
-      </operand>
-      <operand xsi:type="xpath2:ComparisonExpr">
-        <left xsi:type="xpath2:PathExpr">
-          <step xsi:type="xpath2:SelfStepExpr">
-            <step xsi:type="xpath2:AxisStep">
-              <step xsi:type="xpath2:AbbrevForwardStep">
-                <nodeTest xsi:type="xpath2:QNameTest">
-                  <name name="price"/>
-                </nodeTest>
-              </step>
-            </step>
-          </step>
-        </left>
-        <operator xsi:type="xpath2:GeneralComp" operator="gt"/>
-        <right xsi:type="xpath2:DecimalLiteral"/>
-      </operand>
-    </expr>
-    <expr xsi:type="xpath2:StringLiteral" value="'null() : &quot;&lt;null>&quot;'"/>
-  </xpath2:Expr>
-  <xpath2:Expr/>
-  <xpath2:Expr/>
-  <xpath2:Expr/>
-  <xpath2:Expr/>
-  <xpath2:Expr/>
-  <xpath2:Expr/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot">
+  <pivot:ExpressionInOCL/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:ExpressionInOCL/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:ExpressionInOCL/>
+  <pivot:NullLiteralExp/>
+  <pivot:ExpressionInOCL/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:ExpressionInOCL/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:ExpressionInOCL/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
+  <pivot:NullLiteralExp/>
 </xmi:XMI>

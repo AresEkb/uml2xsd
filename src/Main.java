@@ -13,9 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
-import org.eclipse.emf.ecore.util.ExtendedMetaData;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
@@ -44,7 +41,7 @@ public class Main {
 
     public static void main(String[] args) {
         final String input = "model/OclTest.uml";
-        final String oclAST = "output/parsedOcl.ecore";
+        final String oclAST = "output/parsedOcl.ecore.oclas";
         final String transform = "transforms/OclToXpath.qvto";
         final String xpathAST = "output/result.ecore";
         final String output = "output/result.xpath2";
@@ -74,11 +71,11 @@ public class Main {
             System.out.println("Saving OCL AST into " + oclAST);
             saveModel(rs, ocl, createFileURI(oclAST));
             System.out.println("Transforming OCL rules by " + transform);
-            List<EObject> xpath = transformOclToXpath(rs, createFileURI(transform), ocl);
+            List<EObject> xpath = transformModel(rs, createFileURI(transform), ocl);
             System.out.println("Saving XPath AST into " + xpathAST);
             saveModel(rs, xpath, createFileURI(xpathAST));
-            System.out.println("Printing XPath AST into " + output);
-            printXpath(rs, xpath, createFileURI(output));
+            System.out.println("Printing XPath expressions into " + output);
+            saveModel(rs, xpath, createFileURI(output));
             System.out.println("Done!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,7 +108,7 @@ public class Main {
 
         Root root = UML2Pivot.importFromUML(metaModelManager, null, resource);
 
-        root.eResource().save(null);
+        //root.eResource().save(null);
 
         EList<Constraint> constraints = getAllConstraints(metaModelManager, root);
         for (Constraint constraint : constraints) {
@@ -163,7 +160,7 @@ public class Main {
         return null;
     }
     
-    private static List<EObject> transformOclToXpath(ResourceSet rs, URI transformation, EList<EObject> source) throws Exception
+    private static List<EObject> transformModel(ResourceSet rs, URI transformation, EList<EObject> source) throws Exception
     {
         TransformationExecutor executor = new TransformationExecutor(transformation);
         ExecutionContextImpl context = new ExecutionContextImpl();
@@ -179,13 +176,13 @@ public class Main {
         }
     }
     
-    private static void printXpath(ResourceSet rs, List<EObject> xpath, URI output) throws IOException
-    {
-        final ExtendedMetaData extendedMetaData = new BasicExtendedMetaData(rs.getPackageRegistry());
-        rs.getLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
-
-        Resource res = rs.createResource(output);
-
+//    private static void printXpath(ResourceSet rs, List<EObject> xpath, URI output) throws IOException
+//    {
+//        final ExtendedMetaData extendedMetaData = new BasicExtendedMetaData(rs.getPackageRegistry());
+//        rs.getLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
+//
+//        Resource res = rs.createResource(output);
+//
 //        EObject eObject = xpath.get(0);
 //        if (eObject instanceof EPackage) {
 //            EPackage p = (EPackage)eObject;
@@ -193,8 +190,8 @@ public class Main {
 //            System.out.println(p);
 //            System.out.println(p.getNsURI());
 //        }
-
-        res.getContents().addAll(xpath);
-        res.save(null);
-    }
+//
+//        res.getContents().addAll(xpath);
+//        res.save(null);
+//    }
 }

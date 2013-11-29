@@ -10,9 +10,15 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.xpath2.resource.xpath2.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2m.qvt.oml.project.QVTONature</nature>
+		<nature>org.emftext.language.xpath2.resource.xpath2.nature</nature>
 	</natures>
 </projectDescription>
