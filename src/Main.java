@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -41,13 +42,15 @@ public class Main {
 
     public static void main(String[] args) {
         final String input = "model/OclTest.uml";
+        //final String input = "model2/SMDataModel.uml";
         final String oclAST = "output/parsedOcl.ecore.oclas";
         final String transform = "transforms/OclToXpath.qvto";
         final String xpathAST = "output/result.ecore";
         final String output = "output/result.xpath2";
         
         ResourceSet rs = new ResourceSetImpl();
-
+        rs.setURIConverter(new CustomURIConverter());
+        
         org.eclipse.ocl.examples.pivot.OCL.initialize(rs);
         org.eclipse.ocl.examples.pivot.uml.UML2Pivot.initialize(rs);
         org.eclipse.ocl.examples.pivot.model.OCLstdlib.install();
