@@ -1,165 +1,103 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot">
   <pivot:ExpressionInOCL isRequired="false">
-    <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-    <body>driver->forAll(age >= 18)</body>
-    <language>OCL</language>
-    <bodyExpression xsi:type="pivot:IteratorExp" isRequired="false">
-      <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-      <source xsi:type="pivot:PropertyCallExp">
-        <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1550"/>
-        <source xsi:type="pivot:VariableExp" implicit="true" referredVariable="/0/@contextVariable">
-          <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1549"/>
-        </source>
-        <referredProperty href="../model/OclTest.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@ownedType.1/@ownedAttribute.1"/>
-      </source>
-      <body xsi:type="pivot:OperationCallExp" name=">=">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-        <source xsi:type="pivot:PropertyCallExp">
-          <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"/>
-          <source xsi:type="pivot:VariableExp" isRequired="false" implicit="true" referredVariable="/0/@bodyExpression/@iterator.0">
-            <type href="../model/OclTest.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@ownedType.0"/>
-          </source>
-          <referredProperty href="../model/OclTest.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@ownedType.0/@ownedAttribute.0"/>
-        </source>
-        <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" unlimitedNaturalSymbol="18">
-          <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"/>
-        </argument>
-        <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Real.%62%%61%..ocl.OclSelf"/>
-      </body>
-      <iterator name="1_" isRequired="false" implicit="true">
-        <type href="../model/OclTest.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@ownedType.0"/>
-        <representedParameter href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i0i.ocl.Collection.forAll..T"/>
-      </iterator>
-      <referredIteration href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i.ocl.Collection.forAll..T"/>
-    </bodyExpression>
-    <contextVariable name="self">
-      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1549"/>
-    </contextVariable>
-  </pivot:ExpressionInOCL>
-  <pivot:ExpressionInOCL isRequired="false">
-    <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-    <body>isForSale implies price > 0.0</body>
+    <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17"/>
+    <body>CheckpointDetails.CheckpointDetails.AddressDetails.AddressDetails.CountryCode.CountryCode = 'RU'
+implies
+ConsignerDetails.ConsignerDetails.AddressDetails.AddressDetails.CountryCode.CountryCode = 'BY'</body>
     <language>OCL</language>
     <bodyExpression xsi:type="pivot:OperationCallExp" name="implies" isRequired="false">
-      <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-      <source xsi:type="pivot:PropertyCallExp">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-        <source xsi:type="pivot:VariableExp" implicit="true" referredVariable="/1/@contextVariable">
-          <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1549"/>
-        </source>
-        <referredProperty href="../model/OclTest.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@ownedType.1/@ownedAttribute.3"/>
-      </source>
-      <argument xsi:type="pivot:OperationCallExp" name=">">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
+      <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17"/>
+      <source xsi:type="pivot:OperationCallExp" name="=">
+        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17"/>
         <source xsi:type="pivot:PropertyCallExp">
-          <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"/>
-          <source xsi:type="pivot:VariableExp" implicit="true" referredVariable="/1/@contextVariable">
-            <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1549"/>
-          </source>
-          <referredProperty href="../model/OclTest.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@ownedType.1/@ownedAttribute.5"/>
-        </source>
-        <argument xsi:type="pivot:RealLiteralExp" realSymbol="0.0">
-          <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Real"/>
-        </argument>
-        <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Real.%62%..ocl.OclSelf"/>
-      </argument>
-      <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Boolean.implies..ocl.Boolean"/>
-    </bodyExpression>
-    <contextVariable name="self">
-      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1549"/>
-    </contextVariable>
-  </pivot:ExpressionInOCL>
-  <pivot:ExpressionInOCL>
-    <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-    <body>driver->size() &lt;= 2</body>
-    <language>OCL</language>
-    <bodyExpression xsi:type="pivot:OperationCallExp" name="&lt;=">
-      <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-      <source xsi:type="pivot:OperationCallExp">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"/>
-        <source xsi:type="pivot:PropertyCallExp">
-          <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1550"/>
-          <source xsi:type="pivot:VariableExp" implicit="true" referredVariable="/2/@contextVariable">
-            <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1549"/>
-          </source>
-          <referredProperty href="../model/OclTest.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@ownedType.1/@ownedAttribute.1"/>
-        </source>
-        <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Collection.size"/>
-      </source>
-      <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" unlimitedNaturalSymbol="2">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"/>
-      </argument>
-      <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Real.%60%%61%..ocl.OclSelf"/>
-    </bodyExpression>
-    <contextVariable name="self">
-      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1549"/>
-    </contextVariable>
-  </pivot:ExpressionInOCL>
-  <pivot:ExpressionInOCL>
-    <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-    <body>age >= 0</body>
-    <language>OCL</language>
-    <bodyExpression xsi:type="pivot:OperationCallExp" name=">=">
-      <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-      <source xsi:type="pivot:PropertyCallExp">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"/>
-        <source xsi:type="pivot:VariableExp" implicit="true" referredVariable="/3/@contextVariable">
-          <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1548"/>
-        </source>
-        <referredProperty href="../model/OclTest.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@ownedType.0/@ownedAttribute.0"/>
-      </source>
-      <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" unlimitedNaturalSymbol="0">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"/>
-      </argument>
-      <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Real.%62%%61%..ocl.OclSelf"/>
-    </bodyExpression>
-    <contextVariable name="self">
-      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1548"/>
-    </contextVariable>
-  </pivot:ExpressionInOCL>
-  <pivot:ExpressionInOCL isRequired="false">
-    <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-    <body>self.name &lt;> null and self.name.size() > 0</body>
-    <language>OCL</language>
-    <bodyExpression xsi:type="pivot:OperationCallExp" name="and" isRequired="false">
-      <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-      <source xsi:type="pivot:OperationCallExp" name="&lt;>">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-        <source xsi:type="pivot:PropertyCallExp" isRequired="false">
-          <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
-          <source xsi:type="pivot:VariableExp" referredVariable="/4/@contextVariable">
-            <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1548"/>
-          </source>
-          <referredProperty href="http://www.eclipse.org/ocl/3.1.0/Pivot#//@nestedPackage.1/@ownedType.53/@ownedAttribute.1"/>
-        </source>
-        <argument xsi:type="pivot:NullLiteralExp" isRequired="false">
-          <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclVoid"/>
-        </argument>
-        <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%60%%62%..ocl.OclSelf"/>
-      </source>
-      <argument xsi:type="pivot:OperationCallExp" name=">">
-        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
-        <source xsi:type="pivot:OperationCallExp">
-          <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"/>
+          <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.2/@nestedPackage.0/@ownedType.2"/>
           <source xsi:type="pivot:PropertyCallExp" isRequired="false">
-            <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
-            <source xsi:type="pivot:VariableExp" referredVariable="/4/@contextVariable">
-              <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1548"/>
+            <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.2/@nestedPackage.1/@ownedType.41"/>
+            <source xsi:type="pivot:PropertyCallExp">
+              <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.0/@ownedType.2"/>
+              <source xsi:type="pivot:PropertyCallExp" isRequired="false">
+                <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.1/@ownedType.3"/>
+                <source xsi:type="pivot:PropertyCallExp">
+                  <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.0/@ownedType.4"/>
+                  <source xsi:type="pivot:PropertyCallExp">
+                    <type href="../model2/SMDataModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedType.4"/>
+                    <source xsi:type="pivot:VariableExp" implicit="true" referredVariable="/0/@contextVariable">
+                      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1561"/>
+                    </source>
+                    <referredProperty href="../model2/SMDataModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.1/@ownedType.6/@ownedAttribute.1"/>
+                  </source>
+                  <referredProperty href="../model2/SMDataModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedType.4/@ownedAttribute.0"/>
+                </source>
+                <referredProperty href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.0/@ownedType.4/@ownedAttribute.0"/>
+              </source>
+              <referredProperty href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.1/@ownedType.3/@ownedAttribute.0"/>
             </source>
-            <referredProperty href="http://www.eclipse.org/ocl/3.1.0/Pivot#//@nestedPackage.1/@ownedType.53/@ownedAttribute.1"/>
+            <referredProperty href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.0/@ownedType.2/@ownedAttribute.3"/>
           </source>
-          <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.size"/>
+          <referredProperty href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.2/@nestedPackage.1/@ownedType.41/@ownedAttribute.0"/>
         </source>
-        <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" unlimitedNaturalSymbol="0">
-          <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"/>
+        <argument xsi:type="pivot:StringLiteralExp" stringSymbol="RU">
+          <type href="../model2/NewOCLstdlibFile.oclstdlib.oclas#//@nestedPackage.0/@ownedType.0"/>
         </argument>
-        <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Real.%62%..ocl.OclSelf"/>
+        <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.3/@ownedOperation.1"/>
+      </source>
+      <argument xsi:type="pivot:OperationCallExp" name="=">
+        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17"/>
+        <source xsi:type="pivot:PropertyCallExp">
+          <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.2/@nestedPackage.0/@ownedType.2"/>
+          <source xsi:type="pivot:PropertyCallExp" isRequired="false">
+            <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.2/@nestedPackage.1/@ownedType.41"/>
+            <source xsi:type="pivot:PropertyCallExp">
+              <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.0/@ownedType.2"/>
+              <source xsi:type="pivot:PropertyCallExp" isRequired="false">
+                <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.1/@ownedType.3"/>
+                <source xsi:type="pivot:PropertyCallExp">
+                  <type href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.0/@ownedType.4"/>
+                  <source xsi:type="pivot:PropertyCallExp">
+                    <type href="../model2/SMDataModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedType.0"/>
+                    <source xsi:type="pivot:VariableExp" implicit="true" referredVariable="/0/@contextVariable">
+                      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1561"/>
+                    </source>
+                    <referredProperty href="../model2/SMDataModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.1/@ownedType.6/@ownedAttribute.5"/>
+                  </source>
+                  <referredProperty href="../model2/SMDataModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@ownedType.0/@ownedAttribute.0"/>
+                </source>
+                <referredProperty href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.0/@ownedType.4/@ownedAttribute.0"/>
+              </source>
+              <referredProperty href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.1/@ownedType.3/@ownedAttribute.0"/>
+            </source>
+            <referredProperty href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.3/@nestedPackage.0/@ownedType.2/@ownedAttribute.3"/>
+          </source>
+          <referredProperty href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.2/@nestedPackage.1/@ownedType.41/@ownedAttribute.0"/>
+        </source>
+        <argument xsi:type="pivot:StringLiteralExp" stringSymbol="BY">
+          <type href="../model2/NewOCLstdlibFile.oclstdlib.oclas#//@nestedPackage.0/@ownedType.0"/>
+        </argument>
+        <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.3/@ownedOperation.1"/>
       </argument>
-      <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Boolean.and..ocl.Boolean"/>
+      <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17/@ownedOperation.4"/>
     </bodyExpression>
     <contextVariable name="self">
-      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1548"/>
+      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1561"/>
+    </contextVariable>
+  </pivot:ExpressionInOCL>
+  <pivot:ExpressionInOCL>
+    <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17"/>
+    <body>'qwe'.extraOperation(false)</body>
+    <language>OCL</language>
+    <bodyExpression xsi:type="pivot:OperationCallExp">
+      <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17"/>
+      <source xsi:type="pivot:StringLiteralExp" stringSymbol="qwe">
+        <type href="../model2/NewOCLstdlibFile.oclstdlib.oclas#//@nestedPackage.0/@ownedType.0"/>
+      </source>
+      <argument xsi:type="pivot:BooleanLiteralExp" booleanSymbol="false">
+        <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17"/>
+      </argument>
+      <referredOperation href="../model2/NewOCLstdlibFile.oclstdlib.oclas#//@nestedPackage.0/@ownedType.0/@ownedOperation.0"/>
+    </bodyExpression>
+    <contextVariable name="self">
+      <type href="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.1560"/>
     </contextVariable>
   </pivot:ExpressionInOCL>
 </xmi:XMI>

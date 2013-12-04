@@ -1,9 +1,9 @@
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -38,11 +38,13 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.emftext.language.xpath2.Xpath2Package;
 import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2ResourceFactory;
 
+import ReferenceModel.EECReferenceModel.EECReferenceDataModel.BDT.BDTPackage;
+
 public class Main {
 
     public static void main(String[] args) {
-        final String input = "model/OclTest.uml";
-        //final String input = "model2/SMDataModel.uml";
+        //final String input = "model/OclTest.uml";
+        final String input = "model2/SMDataModel.uml";
         final String oclAST = "output/parsedOcl.ecore.oclas";
         final String transform = "transforms/OclToXpath.qvto";
         final String xpathAST = "output/result.ecore";
@@ -60,10 +62,14 @@ public class Main {
         org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup.doSetup();
         org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.getAdapter(rs);
 
-        Xpath2Package xpathPckg = Xpath2Package.eINSTANCE;
-        rs.getPackageRegistry().put(xpathPckg.getNsURI(), xpathPckg);
+        Xpath2Package xpathPkg = Xpath2Package.eINSTANCE;
+        rs.getPackageRegistry().put(xpathPkg.getNsURI(), xpathPkg);
 
-        //rs.getPackageRegistry().put(GenModelPackage.eINSTANCE.getNsURI(), GenModelPackage.eINSTANCE);
+        BDTPackage bdtPkg = BDTPackage.eINSTANCE;
+        rs.getPackageRegistry().put(bdtPkg.getNsURI(), bdtPkg);
+        //rs.getPackageRegistry().put("file:/C:/Work/workspace/OclToXPath/model2/ReferenceModel.uml", bdtPkg);
+
+        rs.getPackageRegistry().put(GenModelPackage.eINSTANCE.getNsURI(), GenModelPackage.eINSTANCE);
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xpath2", new Xpath2ResourceFactory());
@@ -100,13 +106,24 @@ public class Main {
 
     private static EList<EObject> parseOcl(ResourceSet rs, URI source)
             throws ParserException, IOException {
+        //String oclFile = "model2/NewOCLstdlibFile.oclstdlib";
+        //String oclFile = "model2/ReferenceModel.ocl";
         Resource resource = rs.getResource(source, true);
         MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(resource);
+        //metaModelManager.setDefaultStandardLibraryURI(oclFile);
         PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory(null, metaModelManager);
         PivotEnvironment environment = envFactory.createEnvironment();
         OCL ocl = OCL.newInstance(environment);
         OCLHelper oclHelper = ocl.createOCLHelper();
 
+        //Resource rules = ocl.load(createFileURI(oclFile));
+        //System.out.println(rules);
+
+//        EList<EObject> list = rules.getContents();
+//        for (EObject item : list) {
+//            System.out.println(item);
+//        }
+        
         EList<EObject> c = new BasicEList<EObject>();
 
         Root root = UML2Pivot.importFromUML(metaModelManager, null, resource);

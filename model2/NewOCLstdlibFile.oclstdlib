@@ -1,0 +1,32 @@
+-- import an existing library to be extended
+import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';
+
+--import 'ReferenceModel.uml';
+
+-- import an extension library re-using the imported library nsURI
+library lib : lib = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib' {
+    type String : PrimitiveType {
+    	-- define an additional operation accessed by my.strings.ExtraOperation.INSTANCE.evaluate
+    	operation extraOperation(elem : Boolean) : Boolean 
+    	{
+    	    body: not(elem);
+    	}
+    }
+    
+    type MeasureType1 {
+        operation extraOperation(elem : Boolean) : Boolean 
+        {
+            body: not(elem);
+        }
+    }
+
+    type MeasureType {
+        operation compareTo(x : Real) : Boolean; 
+        operation ">"(x : Real) : Boolean; 
+    }
+    
+--    type ReferenceModel::EECReferenceModel::EECReferenceDataModel::BDT::MeasureType {
+--        operation compareTo(x : Real) : Boolean; 
+--        operation ">"(x : Real) : Boolean; 
+--    }
+}

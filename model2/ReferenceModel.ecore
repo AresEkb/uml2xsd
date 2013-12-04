@@ -1,0 +1,1080 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ReferenceModel" nsURI="http://test/ReferenceModel" nsPrefix="rm">
+  <eSubpackages name="EECReferenceModel" nsURI="http:///ReferenceModel/EECReferenceModel.ecore"
+      nsPrefix="ReferenceModel.EECReferenceModel">
+    <eSubpackages name="EECReferenceDataModel" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel.ecore"
+        nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel">
+      <eSubpackages name="XSD" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/XSD.ecore"
+          nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel.XSD">
+        <eClassifiers xsi:type="ecore:EDataType" name="decimal" instanceClassName="decimal">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Подмножество множества действительных чисел, которые могут быть представлены десятичными цифрами"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EDataType" name="base64Binary" instanceClassName="base64Binary">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Конечная последовательность двоичных цифр (битов)"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EDataType" name="token" instanceClassName="token">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Строка, которая не содержит символов разрыва строки (#xA), символов табуляции (#x9), не имеет пробелов ни в начале, ни в&#xD;&#xA;конце (#x20), и не содержит последовательность из двух и более пробелов"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EDataType" name="time" instanceClassName="time">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Определенное время суток без указания временной зоны"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EDataType" name="date" instanceClassName="date">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Дата григорианского календаря в формате стандарта ISO 8601 «Data elements and interchange formats – Information interchange&#xD;&#xA;– Representation of dates and types»"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EDataType" name="dateTime" instanceClassName="dateTime">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Дата григорианского календаря и время в формате стандарта ISO 8601 «Data elements and interchange formats – Information&#xD;&#xA;interchange - Representation of dates and types»"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EDataType" name="string" instanceClassName="string">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Символьная строка конечной длины"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EDataType" name="boolean" instanceClassName="boolean">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Логическая величина, принимающая одно из двух значений: «true» (истина) или «false» (ложь)"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EDataType" name="duration" instanceClassName="duration">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Количество времени, обозначенное одним или более элементами, но не началом и концом"/>
+          </eAnnotations>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="BDT" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/BDT.ecore"
+          nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel.BDT">
+        <eClassifiers xsi:type="ecore:EClass" name="AmountType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Количество денежных единиц в заданной валюте"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CodeType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Точное значение, метод, или описание свойства в краткой или независимой от языка форме, которая является частью конечного списка допустимых значений"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DateTimeType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Дата и время суток для различных общих решений: год, месяц, день, час, минута, секунда и доля секунды"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DateType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Дата по Григорианскому календарю для различных общих решений: год, месяц, день"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="GraphicType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Информация, представленная в форме диаграмм, графов, математических кривых в двоичной нотации (октеты)"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IdentifierType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Строка символов для уникальной идентификации объекта в соответствии с общей идентификационной схемой, вместе с соответствующей дополнительной информацией"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IndicatorType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Список из двух взаимоисключающих логических значений, которые выражают только два возможных состояния свойства"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="MeasureType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Числовая величина, определенная в результате измерения объекта в каких-либо единицах измерения"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="NameType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Слово или фраза, обозначающая отличительную особенность человека, места, вещи или понятия"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="NumberType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Заданная математическая величина, не требующее подстановки количества, мер или валют"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PercentType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Сотая доля, выраженная в виде коэффициента"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PictureType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Визуальное представление человека, объекта или явления в двоичной нотации (октеты)"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="QuantityType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Счетная величина в не денежных единицах, возможно имеющая дробную часть"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RateType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Числовая величина чего-либо, пропорционально соответствующая определенной величине чего-либо другого"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SoundType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Информация, представленная в звуковой форме в цифровом виде в двоичной нотации (октеты)"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TextType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Символьная строка (т.е. конечный набор символов), как правило, в виде слов определенного языка"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TimeType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Время суток для различных общих решений: час, минута, секунда и доля секунды"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ValueType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Величина обозначенная алгебраическим выражением или числом"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="VideoType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Запись динамических визуальных образов в цифровом виде в двоичной нотации (октеты)"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="BinaryTextType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Тестовая информация, представленная в двоичной форме"/>
+          </eAnnotations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DurationType">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="documentation" value="Количество времени, обозначенное одним или более элементами, но не началом и концом"/>
+          </eAnnotations>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="CSDO" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/CSDO.ecore"
+          nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel.CSDO">
+        <eSubpackages name="CSDT" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/CSDO/CSDT.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel.CSDO.CSDT">
+          <eClassifiers xsi:type="ecore:EClass" name="DocKindCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Вид документа в соответствии со справочником «Виды документов»"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="LanguageCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Код языка для одного текстового элемента или их группы"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CountryCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Кодированное обозначение страны"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PostCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Условное обозначение почтового адреса, присваиваемое объекту почтовой связи"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CommunicationChannelCodeType"
+              eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Код вида контакта (телефон, факс, e-mail)"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CommunicationChannelIdType"
+              eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Значение контакта (указание телефона, факса, e-mail). Например, mail@example.com, +7(123)123-45-67"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PositiveIntegerType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/QuantityType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Положительное число"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BusinessEntityType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Юридическая форма, в которой осуществляется регистрация и деятельность юридического лица. Примерами организационно-правовой&#xD;&#xA;формы являются акционерное общество, открытое акционерное общество, закрытое акционерное общество, товарищество на вере,&#xD;&#xA;товарищество с ограниченной ответственностью, общество с ограниченной ответственностью, общество с дополнительной&#xD;&#xA;ответственностью, учреждение и т.д"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="OrganizationIdType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/NationalIdType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Уникальный идентификатор организации в национальном реестре юридических лиц"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="NationalIdType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Национальный идентификатор"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="countryCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/CountryCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Код страны"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TaxpayerIdType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Уникальный идентификатор организации в национальном реестре налогоплательщиков"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BankIdType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/NationalIdType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Уникальный идентификатор банка, используемый в платежных документах (платёжное поручение, аккредитив)"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BankAccountType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Счёт, открываемый банком юридическим или физическим лицам для их участия в безналичном денежном обороте и аккумулировании&#xD;&#xA;на счёте безналичных денежных средств для целевого использования"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentBudgetCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Код, указываемый в соответствии с группировкой доходов и расходов бюджета по однородным признакам"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TaxRegistrationReasonCodeType"
+              eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Код, идентифицирующий причину постановки организации на налоговый учет. Указывается в&#xD;&#xA;соответствии с Приказом Федеральной налоговой службы (ФНС России) от 29 июня 2012 г. № ММВ-7-6/435"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TerritoryCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Код, идентифицирующий объект административно-территориального деления"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="OrganizationCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/NationalCodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Классификационный код юридического лица, предназначенный для целей статистического учета"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="NationalCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Национальный код"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="countryCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/CountryCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Код страны"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="EDocStatusCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Код статуса электронного документа"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TransliterationType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/TextType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Точная передача знаков одной письменности знаками другой письменности, при которой каждый знак (или последовательность&#xD;&#xA;знаков) одной системы письма передаётся одним и тем же знаком (или последовательностью знаков) другой системы письма"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="sourceLanguage"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/LanguageCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Исходный язык"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="targetLanguage"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/LanguageCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Целевой язык"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentCodeType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/CodeType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Вид платежа в соответствии со справочником «Виды платежей»"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="Name300Type" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/NameType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Слово или фраза, обозначающая отличительную особенность человека, места, вещи или понятия"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="Name120Type" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/NameType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Слово или фраза, обозначающая отличительную особенность человека, места, вещи или понятия"/>
+            </eAnnotations>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BuildingNumberIdType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Номер дома, корпуса, строения"/>
+            </eAnnotations>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="CSDE" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/CSDO/CSDE.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel.CSDO.CSDE">
+          <eClassifiers xsi:type="ecore:EClass" name="DocKindCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocKindCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/DocKindCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Вид документа в соответствии со справочником «Виды документов»"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="StatusDateTime">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="StatusDateTime"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/DateTimeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Дата и время установки статуса"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="StatusNoteText">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="StatusNoteText"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/TextType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Примечание по статусу электронного документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="StreetName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="StreetName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/Name120Type"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Название улицы"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TaxpayerId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TaxpayerId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/TaxpayerIdType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Идентификатор организации в национальном реестре налогоплательщиков"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TaxRegistrationReasonCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TaxRegistrationReasonCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/TaxRegistrationReasonCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Код, идентифицирующий причину постановки организации на налоговый учет. Указывается в&#xD;&#xA;соответствии с Приказом Федеральной налоговой службы (ФНС России) от 29 июня 2012 г. № ММВ-7-6/435"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TerritoryCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TerritoryCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/TerritoryCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Код, идентифицирующий объект административно-территориального деления"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TransliterationText">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TransliterationText"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/TransliterationType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Транслитерированный текст"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaieeAccountId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaieeAccountId"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/BankAccountType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Идентификатор номера счета получателя платежа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaieeName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaieeName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/Name300Type"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Наименование получателя платежа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentBudgetCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentBudgetCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/PaymentBudgetCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Код, указываемый в соответствии с группировкой доходов и расходов бюджета по однородным признакам"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentInfoText">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentInfoText"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/TextType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Сведения о платежных реквизитах"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentPurposeText">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentPurposeText"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/TextType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Текстовое описание назначения платежа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PostCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PostCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/PostCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Условное обозначение почтового адреса, присваиваемое объекту почтовой связи"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PostOfficeBoxId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PostOfficeBoxId"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Номер абонентского ящика"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="RegionName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="RegionName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/Name120Type"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Первый уровень административно-территориального деления"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="RoomNumberId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="RoomNumberId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Номер офиса или квартиры"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="EDocStatusCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="EDocStatusCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/EDocStatusCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Код статуса электронного документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="DocNumberId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocNumberId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Номер документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="DocValidityDate">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocValidityDate"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/DateType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Дата окончания действия документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentAmount">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentAmount"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/AmountType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Величина суммы платежа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="EDocDateTime">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="EDocDateTime" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/DateTimeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Дата и время формирования экземпляра документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="EDocId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="EDocId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Уникальный идентификатор экземпляра электронного документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="EDocRefId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="EDocRefId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/IdentifierType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Ссылочный идентификатор&#xD;&#xA;экземпляра электронного документа, в ответ на который был сформирован данный документ"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="LanguageCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="LanguageCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/LanguageCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Код языка для одного текстового элемента или их группы"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="OrganizationCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="OrganizationCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/OrganizationCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Классификационный код юридического лица, предназначенный для целей статистического учета"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="OrganizationId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="OrganizationId"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/OrganizationIdType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Уникальный идентификатор организации в национальном реестре юридических лиц"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SubjectName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="SubjectName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/Name300Type"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Полное наименование юридического лица согласно учредительному документу или&#xD;&#xA;фамилия, имя и отчество физического лица"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PageQuantity">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PageQuantity" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/PositiveIntegerType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Количество листов в прилагаемых документах"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="AdditionalInfoText">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AdditionalInfoText"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/TextType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Дополнительная информация, относящаяся к описываемому объекту"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="AddresseeName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AddresseeName"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/NameType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Лицо или организация, для которых предназначено сообщение"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="AddressText">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AddressText" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/TextType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Набор элементов адреса, представленных в свободной форме в тексте"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="ApplicantName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ApplicantName"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/NameType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Наименование физического или юридического лица, которое подает заявление"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="ApprovalIndicator">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ApprovalIndicator"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/IndicatorType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Признак, принимающий одно из двух значений: принято или отклонено"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BankCorrAccountId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankCorrAccountId"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/BankAccountType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Счёт, открываемый кредитной организации (банку) в подразделении центрального банка или в иной кредитной организации"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BankId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/BankIdType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Уникальный идентификатор банка, используемый в платежных документах (платёжное поручение, аккредитив)"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BuildingNumberId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BuildingNumberId"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/BuildingNumberIdType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Номер дома, корпуса, строения"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BusinessEntityTypeCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BusinessEntityTypeCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/BusinessEntityType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Юридическая форма, в которой осуществляется регистрация и деятельность юридического лица. Примерами организационно-правовой&#xD;&#xA;формы являются акционерное общество, открытое акционерное общество, закрытое акционерное общество, товарищество на вере,&#xD;&#xA;товарищество с ограниченной ответственностью, общество с ограниченной ответственностью, общество с дополнительной&#xD;&#xA;ответственностью, учреждение и т.д"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CityName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CityName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/Name120Type"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Наименование города"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CommunicationChannelCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CommunicationChannelCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/CommunicationChannelCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Код вида контакта (телефон, факс, e-mail)"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CommunicationChannelId">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CommunicationChannelId"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/CommunicationChannelIdType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Значение контакта (указание телефона, факса, e-mail). Например, mail@example.com, +7(123)123-45-67"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CountryCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CountryCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/CountryCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Кодированное обозначение страны"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="DescriptionText">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DescriptionText"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/TextType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Общее текстовое описание объекта или явления"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="DistrictName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DistrictName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/Name120Type"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Наименование района в рамках регионального административного деления"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="DocCreationDate">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocCreationDate"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/DateType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Дата формирования документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentCode">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/PaymentCodeType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Вид платежа в соответствии со справочником «Виды платежей»"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BankName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/Name300Type"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Полное наименование банка согласно учредительному документу"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="DocValidityDuration">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocValidityDuration"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/BDT/DurationType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Продолжительность времени действия документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SettlementName">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="SettlementName"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDT/Name120Type"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Наименование населенного пункта"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+      <eSubpackages name="CCDO" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/CCDO.ecore"
+          nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel.CCDO">
+        <eSubpackages name="CCDT" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/CCDO/CCDT.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel.CCDO.CCDT">
+          <eClassifiers xsi:type="ecore:EClass" name="AgentDetailsType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/PersonBaseType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Сведения, содержащие фамилию, имя, отчество представителя, а также телефон, факс и адрес электронной почты"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="LetterOfAttorneyDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/LetterOfAttorneyDetails"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PersonBaseType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Перечень основных реквизитов физического лица"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PersonDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/PersonDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TaxpayerDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/TaxpayerDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AddressDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/AddressDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankingDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/BankingDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CommunicationDetails"
+                ordered="false" upperBound="-1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/CommunicationDetails"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="DocDetailsType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Описание реквизитов документа"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocKindCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/DocKindCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PageQuantity" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/PageQuantity"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocNumberId" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/DocNumberId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocCreationDate"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/DocCreationDate"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocValidityDate"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/DocValidityDate"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DocValidityDuration"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/DocValidityDuration"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="AddressDetailsType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Адрес местонахождения или места жительства"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CountryCode" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/CountryCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TerritoryCode"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/TerritoryCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PostCode" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/PostCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="RegionName" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/RegionName"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="DistrictName" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/DistrictName"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CityName" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/CityName"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="SettlementName"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/SettlementName"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="StreetName" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/StreetName"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BuildingNumberId"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/BuildingNumberId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="RoomNumberId" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/RoomNumberId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AddressText" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/AddressText"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BankingDetailsType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Перечень банковских реквизитов организации"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/BankId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/BankName"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankCorrAccountId"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/BankCorrAccountId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaieeAccountId"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/PaieeAccountId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaieeName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/PaieeName"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CommunicationDetailsType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Контактный реквизит средства связи"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CommunicationChannelCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/CommunicationChannelCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CommunicationChannelId"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/CommunicationChannelId"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="OrganizationDetailsType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Сведения об организации"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="SubjectName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/SubjectName"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CountryCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/CountryCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BusinessEntityTypeCode"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/BusinessEntityTypeCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="OrganizationId"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/OrganizationId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="OrganizationCode"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/OrganizationCode"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TaxpayerDetailsType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Сведения о налогоплательщике"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TaxpayerId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/TaxpayerId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TaxRegistrationReasonCode"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/TaxRegistrationReasonCode"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentDetailsType" eSuperTypes="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/BankingDetailsType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Перечень платежных реквизитов организации"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentCode" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/PaymentCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentBudgetCode"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/PaymentBudgetCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentPurposeText"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/PaymentPurposeText"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentInfoText"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/PaymentInfoText"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PersonDetailsType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Сведения о физическом лице"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="SubjectName" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/SubjectName"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CountryCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/CountryCode"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="OrganizationBaseType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Перечень основных реквизитов организации"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="OrganizationDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/OrganizationDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TaxpayerDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/TaxpayerDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AddressDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/AddressDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankingDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/BankingDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CommunicationDetails"
+                ordered="false" upperBound="-1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/CommunicationDetails"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="EDocBaseType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Перечень основных реквизитов электронного документа"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="LanguageCode" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/LanguageCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="EDocId" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/EDocId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="EDocRefId" ordered="false"
+                eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/EDocRefId"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="EDocDateTime" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/EDocDateTime"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="EDocStatusCode"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/EDocStatusCode"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="StatusDateTime"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/StatusDateTime"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="StatusNoteText"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CSDO/CSDE/StatusNoteText"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="SubjectBaseType">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="documentation" value="Перечень основных реквизитов субъекта"/>
+            </eAnnotations>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="OrganizationDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/OrganizationDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PersonDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/PersonDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TaxpayerDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/TaxpayerDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AddressDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/AddressDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankingDetails"
+                ordered="false" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/BankingDetails"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CommunicationDetails"
+                ordered="false" upperBound="-1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDE/CommunicationDetails"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="CCDE" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/CCDO/CCDE.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceDataModel.CCDO.CCDE">
+          <eClassifiers xsi:type="ecore:EClass" name="AgentDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AgentDetails" ordered="false"
+                lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/AgentDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Сведения, содержащие фамилию, имя, отчество представителя, а также телефон, факс и адрес электронной почты"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="LetterOfAttorneyDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="LetterOfAttorneyDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/DocDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Перечень реквизитов доверенности на предоставление сведений за правообладателя"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="AttachedDocDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AttachedDocDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/DocDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Описание реквизитов документа"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="AddressDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="AddressDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/AddressDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Адрес местонахождения или места жительства"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="BankingDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="BankingDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/BankingDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Перечень банковских реквизитов организации"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CommunicationDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="CommunicationDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/CommunicationDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Контактный реквизит электронного средства связи"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="OrganizationDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="OrganizationDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/OrganizationDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Перечень реквизитов предприятия (организации)"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="TaxpayerDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="TaxpayerDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/TaxpayerDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Перечень реквизитов налогоплательщика"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PaymentDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PaymentDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/PaymentDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Перечень платежных реквизитов организации"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PersonDetails">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="PersonDetails"
+                ordered="false" lowerBound="1" eType="#//EECReferenceModel/EECReferenceDataModel/CCDO/CCDT/PersonDetailsType"
+                containment="true">
+              <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="documentation" value="Перечень реквизитов физического лица"/>
+              </eAnnotations>
+            </eStructuralFeatures>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="EECReferenceCollaborationModel" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel.ecore"
+        nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel">
+      <eSubpackages name="EECReferenceRequirements" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceRequirements.ecore"
+          nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceRequirements">
+        <eSubpackages name="EECReferenceDomain" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceRequirements/EECReferenceDomain.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceRequirements.EECReferenceDomain">
+          <eSubpackages name="EECReferenceArea" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceRequirements/EECReferenceDomain/EECReferenceArea.ecore"
+              nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceRequirements.EECReferenceDomain.EECReferenceArea"/>
+        </eSubpackages>
+        <eSubpackages name="EECReferencePartners" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceRequirements/EECReferencePartners.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceRequirements.EECReferencePartners"/>
+        <eSubpackages name="EECReferenceEntity" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceRequirements/EECReferenceEntity.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceRequirements.EECReferenceEntity">
+          <eSubpackages name="EECReferenceData" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceRequirements/EECReferenceEntity/EECReferenceData.ecore"
+              nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceRequirements.EECReferenceEntity.EECReferenceData"/>
+        </eSubpackages>
+      </eSubpackages>
+      <eSubpackages name="EECReferenceChoreography" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceChoreography.ecore"
+          nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceChoreography">
+        <eSubpackages name="EECReferenceCollaboration" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceChoreography/EECReferenceCollaboration.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceChoreography.EECReferenceCollaboration"/>
+        <eSubpackages name="EECReferenceTransaction" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceChoreography/EECReferenceTransaction.ecore"
+            nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceChoreography.EECReferenceTransaction"/>
+      </eSubpackages>
+      <eSubpackages name="EECReferenceInformation" nsURI="http:///ReferenceModel/EECReferenceModel/EECReferenceCollaborationModel/EECReferenceInformation.ecore"
+          nsPrefix="ReferenceModel.EECReferenceModel.EECReferenceCollaborationModel.EECReferenceInformation"/>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
