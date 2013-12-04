@@ -12,7 +12,7 @@ main() {
 }
 
 mapping ExpressionInOCL::Root2Root() : Expr {
-    log("Transforming " + self.body->first());
+    log("  Transforming " + self.body->first());
     expr := self.bodyExpression.map OclToXpath();
 }
 

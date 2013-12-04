@@ -1,3 +1,8 @@
-(),
+age >= 0,
 fn:
-not(CountryCode = 'RU') or CountryCode = 'BY'
+not((driver)[fn:not(age >= 18)]),
+fn:
+count(driver) <= 2,
+fn:
+not(isForSale) or price > 0.0,
+(name) and fn: string-length(name) > 0

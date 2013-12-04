@@ -11,7 +11,7 @@ public class CustomURIConverter extends ExtensibleURIConverterImpl implements
     @Override
     public InputStream createInputStream(URI uri, Map<?, ?> options)
             throws IOException {
-        System.out.println(">>> " + uri);
+        System.out.println("  Loading " + uri);
         return super.createInputStream(uri, options);
     }
 }

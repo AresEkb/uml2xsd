@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
@@ -138,7 +140,7 @@ public class Main {
                     Type type = (Type) element;
                     oclHelper.setInstanceContext(type);
                     String expression = getOCLExpressionFromConstraint(constraint);
-                    System.out.println("Expression found: " + expression);
+                    System.out.println("  Found " + expression);
                     ExpressionInOCL expr = oclHelper.createInvariant(expression);
                     c.add(0, expr);
                 }
@@ -185,6 +187,7 @@ public class Main {
         TransformationExecutor executor = new TransformationExecutor(transformation);
         ExecutionContextImpl context = new ExecutionContextImpl();
         context.setConfigProperty("keepModeling", true);
+        context.setLog(new WriterLog(new OutputStreamWriter(System.out)));
         ModelExtent input = new BasicModelExtent(source);        
         ModelExtent output = new BasicModelExtent();
         ExecutionDiagnostic result = executor.execute(context, input, output);
