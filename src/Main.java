@@ -177,6 +177,7 @@ public class Main {
         final TreeIterator<EObject> iterator = bdt.eAllContents();
         while (iterator.hasNext()) {
             EObject obj = iterator.next();
+            System.out.println("  >>>>>>>>>> " + obj);
             if (obj instanceof Type) {
                 Type type = (Type)obj;
                 //System.out.println("  >>>>>>>>>> " + type.getName());

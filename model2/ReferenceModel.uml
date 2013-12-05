@@ -597,6 +597,11 @@ interchange - Representation of dates and types»</body>
                   <body>Набор элементов адреса, представленных в свободной форме в тексте</body>
                 </ownedComment>
               </ownedAttribute>
+              <ownedOperation xmi:id="_mJpxwF1nEeO6sIquXMwolQ" name="someOp">
+                <ownedParameter xmi:id="_nk6O0F1nEeO6sIquXMwolQ" name="Parameter1" direction="return">
+                  <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+                </ownedParameter>
+              </ownedOperation>
             </packagedElement>
             <packagedElement xmi:type="uml:Class" xmi:id="_XflU8PmZEeKss-fHD573_w" name="ApplicantName">
               <ownedAttribute xmi:id="_XfwUEPmZEeKss-fHD573_w" name="ApplicantName" visibility="public" type="_w5RGi6flEeKgb97SI2dJlw">
