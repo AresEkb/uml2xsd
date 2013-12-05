@@ -28,7 +28,10 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.OpaqueExpression;
+import org.eclipse.ocl.examples.pivot.Operation;
+import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.ParserException;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
@@ -40,15 +43,14 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.emftext.language.xpath2.Xpath2Package;
 import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2ResourceFactory;
 
-import ReferenceModel.EECReferenceModel.EECReferenceDataModel.BDT.BDTPackage;
-
 public class Main {
 
     public static void main(String[] args) {
         //final String input = "model/OclTest.uml";
         final String input = "model2/SMDataModel.uml";
         final String oclAST = "output/parsedOcl.ecore.oclas";
-        final String transform = "transforms/OclToXpath.qvto";
+        //final String transform = "transforms/OclToXpath.qvto";
+        final String transform = "transforms/Test.qvto";
         final String xpathAST = "output/result.ecore";
         final String output = "output/result.xpath2";
         
@@ -67,8 +69,8 @@ public class Main {
         Xpath2Package xpathPkg = Xpath2Package.eINSTANCE;
         rs.getPackageRegistry().put(xpathPkg.getNsURI(), xpathPkg);
 
-        BDTPackage bdtPkg = BDTPackage.eINSTANCE;
-        rs.getPackageRegistry().put(bdtPkg.getNsURI(), bdtPkg);
+        //BDTPackage bdtPkg = BDTPackage.eINSTANCE;
+        //rs.getPackageRegistry().put(bdtPkg.getNsURI(), bdtPkg);
         //rs.getPackageRegistry().put("file:/C:/Work/workspace/OclToXPath/model2/ReferenceModel.uml", bdtPkg);
 
         rs.getPackageRegistry().put(GenModelPackage.eINSTANCE.getNsURI(), GenModelPackage.eINSTANCE);
@@ -109,17 +111,55 @@ public class Main {
     private static EList<EObject> parseOcl(ResourceSet rs, URI source)
             throws ParserException, IOException {
         //String oclFile = "model2/NewOCLstdlibFile.oclstdlib";
-        //String oclFile = "model2/ReferenceModel.ocl";
+//        String oclFile = "model2/ReferenceModel.ocl";
         Resource resource = rs.getResource(source, true);
         MetaModelManager metaModelManager = PivotUtil.getMetaModelManager(resource);
-        //metaModelManager.setDefaultStandardLibraryURI(oclFile);
+//        metaModelManager.setDefaultStandardLibraryURI(oclFile);
         PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory(null, metaModelManager);
         PivotEnvironment environment = envFactory.createEnvironment();
+
+        // ???????
+        // metaModelManager.loadResource(resource, uri)
+
         OCL ocl = OCL.newInstance(environment);
         OCLHelper oclHelper = ocl.createOCLHelper();
 
-        //Resource rules = ocl.load(createFileURI(oclFile));
-        //System.out.println(rules);
+//        Resource ast = ocl.parse(createFileURI(oclFile));
+//        rs.getResources().add(ast);
+//        //metaModelManager.getLibraries().add();
+//        //ast.getAllContents().
+//        Resource rules = ocl.load(createFileURI(oclFile));
+//        rs.getResources().add(rules);
+//
+//        System.out.println(rules);
+//        System.out.println(ast);
+//        
+//        System.out.println(metaModelManager.getLibraries().get(0));
+//        Diagnostic result = ocl. getProblems();
+//        if(result.getSeverity() == Diagnostic.OK) {
+//            System.out.println(">>>>> Ok");
+//            //return output.getContents();
+//        } else {
+//            IStatus status = BasicDiagnostic.toIStatus(result);
+//            System.out.println(">>>>> " + status.getMessage());
+//            //throw new Exception(status.getMessage());
+//        }
+        
+//        final TreeIterator<EObject> iterator = rules.getAllContents();
+//        //EList<Constraint> constraints = new BasicEList<Constraint>();
+//        while (iterator.hasNext()) {
+//            EObject obj = iterator.next();
+//            System.out.println("  >> " + obj.getClass() + obj);
+//            if (obj instanceof Type) {
+//                Type type = (Type) obj;
+//                Iterable<Constraint> invs = metaModelManager.getAllInvariants(type);
+//                for (Constraint inv : invs) {
+//                    //constraints.add(inv);
+//                }
+//            }
+//        }
+        
+        //oclHelper.cre
 
 //        EList<EObject> list = rules.getContents();
 //        for (EObject item : list) {
@@ -130,6 +170,72 @@ public class Main {
 
         Root root = UML2Pivot.importFromUML(metaModelManager, null, resource);
 
+        Resource rmRes = rs.getResource(createFileURI("model2/ReferenceModel.uml"), true);
+        Root bdt = UML2Pivot.importFromUML(metaModelManager, null, rmRes);
+        //System.out.println("  >>>>> " + bdt);
+
+        final TreeIterator<EObject> iterator = bdt.eAllContents();
+        while (iterator.hasNext()) {
+            EObject obj = iterator.next();
+            if (obj instanceof Type) {
+                Type type = (Type)obj;
+                //System.out.println("  >>>>>>>>>> " + type.getName());
+                if (type.getName().equals("MeasureType")) {
+                    System.out.println("  Found operations for " + type.getName() + ": " + type.getOwnedOperation().size());
+//
+//                    System.out.println("  >>>>>>>>>> " + type);
+//                    {
+//                    Operation qwe = PivotFactory.eINSTANCE.createOperation();
+//                    qwe.setName("qwe");
+//                    qwe.setType(metaModelManager.getBooleanType());
+//                    System.out.println("  >>>>>>>>>> " + type.getOwnedOperation().size());
+//                    type.getOwnedOperation().add(qwe);
+//                    System.out.println("  >>>>>>>>>> " + type.getOwnedOperation().size());
+//                    }
+                    {
+                    Operation compareTo = PivotFactory.eINSTANCE.createOperation();
+                    compareTo.setName("<");
+                    compareTo.setType(metaModelManager.getBooleanType());
+                    Parameter param = PivotFactory.eINSTANCE.createParameter();
+                    param.setType(type);
+                    //param.setName("x");
+                    compareTo.getOwnedParameter().add(param);
+                    type.getOwnedOperation().add(compareTo);
+                    }
+                    {
+                    Operation compareTo = PivotFactory.eINSTANCE.createOperation();
+                    compareTo.setName(">");
+                    compareTo.setType(metaModelManager.getBooleanType());
+                    Parameter param = PivotFactory.eINSTANCE.createParameter();
+                    param.setType(metaModelManager.getRealType());
+                    //param.setName("x");
+                    compareTo.getOwnedParameter().add(param);
+                    type.getOwnedOperation().add(compareTo);
+                    }
+                    {
+                    Operation compareTo = PivotFactory.eINSTANCE.createOperation();
+                    compareTo.setName("<");
+                    compareTo.setType(metaModelManager.getBooleanType());
+                    Parameter param = PivotFactory.eINSTANCE.createParameter();
+                    param.setType(metaModelManager.getUnlimitedNaturalType());
+                    //param.setName("x");
+                    compareTo.getOwnedParameter().add(param);
+                    type.getOwnedOperation().add(compareTo);
+                    }
+                    {
+                    Operation compareTo = PivotFactory.eINSTANCE.createOperation();
+                    compareTo.setName(">");
+                    compareTo.setType(metaModelManager.getBooleanType());
+                    Parameter param = PivotFactory.eINSTANCE.createParameter();
+                    param.setType(metaModelManager.getUnlimitedNaturalType());
+                    //param.setName("x");
+                    compareTo.getOwnedParameter().add(param);
+                    type.getOwnedOperation().add(compareTo);
+                    }
+                }
+            }
+        }
+        
         //root.eResource().save(null);
 
         EList<Constraint> constraints = getAllConstraints(metaModelManager, root);

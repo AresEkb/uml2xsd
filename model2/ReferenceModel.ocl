@@ -1,10 +1,10 @@
-library 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib'
-
 import 'ReferenceModel.uml'
 
 package ReferenceModel
 
 context ReferenceModel::EECReferenceModel::EECReferenceDataModel::BDT::MeasureType
+def: qwe() : Boolean = true
+def: testOp() : Boolean = true
 def: compareTo(x : Real) : Integer =  0
 def: compareTo(x : UnlimitedNatural) : Integer = 0
 def: compareTo(x : ReferenceModel::EECReferenceModel::EECReferenceDataModel::BDT::MeasureType) : Integer = 0

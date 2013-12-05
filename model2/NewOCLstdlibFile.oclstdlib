@@ -7,10 +7,10 @@ import 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib';
 library lib : lib = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib' {
     type String : PrimitiveType {
     	-- define an additional operation accessed by my.strings.ExtraOperation.INSTANCE.evaluate
-    	operation extraOperation(elem : Boolean) : Boolean 
-    	{
-    	    body: not(elem);
-    	}
+    	operation extraOperation(elem : Boolean) : Boolean; 
+--    	{
+--    	    body: not(elem);
+--    	}
     }
     
     type MeasureType1 {
@@ -25,8 +25,9 @@ library lib : lib = 'http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib' {
         operation ">"(x : Real) : Boolean; 
     }
     
---    type ReferenceModel::EECReferenceModel::EECReferenceDataModel::BDT::MeasureType {
---        operation compareTo(x : Real) : Boolean; 
---        operation ">"(x : Real) : Boolean; 
---    }
+    type "ReferenceModel::EECReferenceModel::EECReferenceDataModel::BDT::MeasureType" {
+        operation compareTo(x : Real) : Boolean; 
+        operation ">"(x : Real) : Boolean; 
+        operation qwe() : Boolean; 
+    }
 }

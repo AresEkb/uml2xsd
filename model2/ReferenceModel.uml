@@ -118,6 +118,17 @@ interchange - Representation of dates and types»</body>
             <ownedComment xmi:id="_w5RGc6flEeKgb97SI2dJlw" annotatedElement="_w5RGcKflEeKgb97SI2dJlw">
               <body>Числовая величина, определенная в результате измерения объекта в каких-либо единицах измерения</body>
             </ownedComment>
+            <ownedOperation xmi:id="_ndN9UF1lEeO6sIquXMwolQ" name="&lt;">
+              <ownedParameter xmi:id="_pzZxkF1lEeO6sIquXMwolQ" name="Parameter1" type="_w5RGcKflEeKgb97SI2dJlw"/>
+              <ownedParameter xmi:id="_6gNGEF1lEeO6sIquXMwolQ" name="Parameter2" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_zwbbYF1lEeO6sIquXMwolQ" name="testOp">
+              <ownedParameter xmi:id="_4JUuQF1lEeO6sIquXMwolQ" name="Parameter1" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+              </ownedParameter>
+            </ownedOperation>
           </packagedElement>
           <packagedElement xmi:type="uml:DataType" xmi:id="_w5RGi6flEeKgb97SI2dJlw" name="NameType">
             <ownedComment xmi:id="_w5RGjqflEeKgb97SI2dJlw" annotatedElement="_w5RGi6flEeKgb97SI2dJlw">
@@ -1185,7 +1196,7 @@ interchange - Representation of dates and types»</body>
   <EECProfile:EECDataModel xmi:id="_8-76IPjPEeKJw6Ug-08zBg" businessName="" standardId="" standardName="" concept="" note="" analogue="" base_Classifier="_8-7TEPjPEeKJw6Ug-08zBg"/>
   <EECProfile:EECDataModel xmi:id="_8_J8kfjPEeKJw6Ug-08zBg" businessName="Контактный реквизит" standardId="RDM-CDE-00003" standardName="Контактный реквизит. Детали" concept="Контактный реквизит" representation="Детали" valueDomain="" analogue="UN/CEFACT: CCL: UN00000095" base_Property="_8_J8kPjPEeKJw6Ug-08zBg"/>
   <EECProfile:Namespace xmi:id="_VQzo8PjYEeKJw6Ug-08zBg" status="" version="0.7.0" base_Package="_9Zus8PTjEeKqa_aWeelEZg" name="urn:EEC:RDM:BaseDataTypes:v0.7.0" prefix="bdt"/>
-  <EECProfile:EECDataModel xmi:id="_duBeIPjeEeKss-fHD573_w" businessName="Код страны" example="RU" standardId="RDM-SDT-00001" standardName="Страна_ Код. alpha-2. Тип" concept="Код" representation="" valueDomain="Двухбуквенный код страны в соответствии со справочником ISO 3166-1 (alpha-2)" analogue="UN/CEFACT: CCL: UN02000003" base_Classifier="_duA3EPjeEeKss-fHD573_w"/>
+  <EECProfile:EECDataModel xmi:id="_duBeIPjeEeKss-fHD573_w" businessName="Код страны" example="RU" standardId="RDM-SDT-00001" standardName="Страна_ Код. Альфа-2. Тип" concept="Код" representation="" valueDomain="Двухбуквенный код страны в соответствии со справочником ISO 3166-1 (альфа-2)" analogue="UN/CEFACT: CCL: UN02000003" base_Classifier="_duA3EPjeEeKss-fHD573_w"/>
   <EECProfile:EECDataModel xmi:id="_vknsQPjeEeKss-fHD573_w" businessName="Почтовый индекс" example="123456" standardId="RDM-SDT-00006" standardName="Почтовый индекс_ Код. Тип" concept="Код" representation="" valueDomain="Нормализованная строка символов. От 3 до 9 символов. Одно значение кода, присваиваемое объекту почтовой связи" analogue="" base_Classifier="_vknFMPjeEeKss-fHD573_w"/>
   <EECProfile:EECDataModel xmi:id="_8SpeEPjeEeKss-fHD573_w" businessName="Вид связи" example="" standardId="RDM-SDT-00014" standardName="Вид связи_ Код. Тип" concept="Код" representation="" usage="" valueDomain="Нормализованная строка символов. Одно значение из перечисления" note="" analogue="" base_Classifier="_8So3APjeEeKss-fHD573_w"/>
   <EECProfile:EECDataModel xmi:id="_9nd78PjeEeKss-fHD573_w" businessName="Идентификатор канала связи" example="mail@example.com" standardId="RDM-SDT-00015" standardName="Канал связи_ Идентификатор. Тип" concept="Идентификатор" representation="" usage="" valueDomain="Нормализованная строка символов. До 254 символов" analogue="" base_Classifier="_9ndU4PjeEeKss-fHD573_w"/>
@@ -1467,7 +1478,7 @@ interchange - Representation of dates and types»</body>
   <Default:Documentation xmi:id="__fvQQA9HEeOj4cWjUxuokw" base_Comment="__fk4MA9HEeOj4cWjUxuokw"/>
   <EECProfile:EECDataModel xmi:id="_-XsBoA_MEeOpd_h_ueGfQQ" base_Property="_-XiQoA_MEeOpd_h_ueGfQQ"/>
   <EECProfile:EECDataModel xmi:id="_IA5XkQ_NEeOpd_h_ueGfQQ" base_Property="_IA5XkA_NEeOpd_h_ueGfQQ"/>
-  <EECProfile:EECDataModel xmi:id="_YLpyIA_REeOpd_h_ueGfQQ" businessName="Транслитерация" standardId="RDM-SDT-00003" standardName="Транслитерация_ Текст. Тип" concept="Текст" representation="" valueDomain="Строка символов конечной длины" note="" base_Classifier="_YLpLEA_REeOpd_h_ueGfQQ"/>
+  <EECProfile:EECDataModel xmi:id="_YLpyIA_REeOpd_h_ueGfQQ" businessName="Транслитерация" standardId="RDM-SDT-00003" standardName="Транслитерация_ Текст. Тип" concept="Текст" representation="" usage="Транслитерация должна осуществляться с использованием буквосочетаний согласно системе Б ГОСТ 7.79—2000" valueDomain="Строка символов конечной длины" note="" base_Classifier="_YLpLEA_REeOpd_h_ueGfQQ"/>
   <Default:Documentation xmi:id="_ojYOgA_REeOpd_h_ueGfQQ" base_Comment="_ojOdgA_REeOpd_h_ueGfQQ"/>
   <EECProfile:EECDataModel xmi:id="_Dk0mIA_TEeOpd_h_ueGfQQ" businessName="Исходный язык" standardName="Исходный язык. Код" concept="Исходный язык" representation="Код" analogue="" base_Property="_Dkz_EA_TEeOpd_h_ueGfQQ"/>
   <EECProfile:Attribute xmi:id="_DlAMUA_TEeOpd_h_ueGfQQ" base_Property="_Dkz_EA_TEeOpd_h_ueGfQQ"/>

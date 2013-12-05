@@ -130,9 +130,7 @@
                   <specification xmi:type="uml:OpaqueExpression" xmi:id="_MePdwFgoEeO1ItOIIAxKYQ">
                     <language>OCL</language>
                     <language>XPath</language>
-                    <body>--WeightMeasure.WeightMeasure.qwe() and
---WeightMeasure.WeightMeasure.extraOperation(false)
-(AnimalBreedName.AnimalBreedName = 'Утка'&#xD;
+                    <body>WeightMeasure.WeightMeasure.testOp() and (AnimalBreedName.AnimalBreedName = 'Утка'&#xD;
  implies&#xD;
  WeightMeasure.WeightMeasure &lt; WeightMeasure.WeightMeasure and WeightMeasure.WeightMeasure > 0.5 and WeightMeasure.WeightMeasure &lt; 10)&#xD;
 and&#xD;
