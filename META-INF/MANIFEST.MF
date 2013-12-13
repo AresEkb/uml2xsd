@@ -7,13 +7,14 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: ReferenceModel.EECReferenceModel.EECReferenceDataModel.BDT,
- ReferenceModel.EECReferenceModel.EECReferenceDataModel.BDT.impl,
- ReferenceModel.EECReferenceModel.EECReferenceDataModel.BDT.util
+Export-Package: org.w3._2001.xml.schema,
+ org.w3._2001.xml.schema.impl,
+ org.w3._2001.xml.schema.util
 Require-Bundle: org.eclipse.core.runtime,
  org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.emf.common,
  org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.ocl;bundle-version="3.4.0",
  org.eclipse.ocl.examples.pivot;bundle-version="3.4.0",
  org.eclipse.ocl.examples.xtext.completeocl;bundle-version="3.4.0",
@@ -21,7 +22,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.examples.xtext.oclstdlib;bundle-version="3.4.0",
  org.eclipse.m2m.qvt.oml;bundle-version="3.4.0",
  org.eclipse.m2m.qvt.oml.common;bundle-version="3.4.0",
- org.eclipse.m2m.qvt.oml.emf.util;bundle-version="3.4.0"
+ org.eclipse.m2m.qvt.oml.emf.util;bundle-version="3.4.0",
+ org.eclipse.xsd;bundle-version="2.10.0",
+ org.eclipse.core.runtime.compatibility
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.codegen.ecore.genmodel,
  org.emftext.language.xpath2,

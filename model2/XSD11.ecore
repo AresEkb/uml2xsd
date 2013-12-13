@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="XSD" nsURI="http://www.w3.org/XML/XMLSchema/v1.1" nsPrefix="xs">
+  <eClassifiers xsi:type="ecore:EClass" name="XSDSchema">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="ecore:EClass ../../org.emftext.language.xpath2/metamodel/xpath2.ecore#//Expr"/>
+  </eClassifiers>
+</ecore:EPackage>

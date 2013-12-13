@@ -1,9 +1,20 @@
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.RegistryFactory;
+import org.eclipse.core.runtime.spi.RegistryContributor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicEList;
@@ -12,9 +23,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
@@ -42,6 +55,7 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.emftext.language.xpath2.Xpath2Package;
 import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2ResourceFactory;
+import org.w3._2001.xml.schema.impl.SchemaPackageImpl;
 
 public class Main {
 
@@ -50,9 +64,11 @@ public class Main {
         final String input = "model2/SMDataModel.uml";
         final String oclAST = "output/parsedOcl.ecore.oclas";
         //final String transform = "transforms/OclToXpath.qvto";
-        final String transform = "transforms/Test.qvto";
+        //final String transform = "transforms/Test.qvto";
+        final String transform = "transforms/UmlToXsd11.qvto";
         final String xpathAST = "output/result.ecore";
-        final String output = "output/result.xpath2";
+        //final String output = "output/result.xpath2";
+        final String output = "output/result.xsd";
         
         ResourceSet rs = new ResourceSetImpl();
         rs.setURIConverter(new CustomURIConverter());
@@ -66,8 +82,16 @@ public class Main {
         org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup.doSetup();
         org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.getAdapter(rs);
 
-        Xpath2Package xpathPkg = Xpath2Package.eINSTANCE;
-        rs.getPackageRegistry().put(xpathPkg.getNsURI(), xpathPkg);
+        Xpath2Package.eINSTANCE.getEFactoryInstance();
+        //Xpath2Package xpathPkg = Xpath2Package.eINSTANCE;
+        //rs.getPackageRegistry().put(xpathPkg.getNsURI(), xpathPkg);
+
+        //XSDPackage.eINSTANCE.getEFactoryInstance();
+        //EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xsd/2002/XSD", org.eclipse.xsd.XSDPackage.eINSTANCE);
+        
+        //EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xsd/2002/XSD", org.eclipse.xsd.XSDPackage.eINSTANCE);
+        //EPackage.Registry.INSTANCE.put("http://www.w3.org/XML/XMLSchema/v1.1", SchemaPackageImpl.eINSTANCE);
+        EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xsd/2002/XSD", SchemaPackageImpl.eINSTANCE);
 
         //BDTPackage bdtPkg = BDTPackage.eINSTANCE;
         //rs.getPackageRegistry().put(bdtPkg.getNsURI(), bdtPkg);
@@ -77,6 +101,8 @@ public class Main {
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xpath2", new Xpath2ResourceFactory());
+        //rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xsd", new XSDResourceFactoryImpl());
+        //rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xsd", new EcoreResourceFactoryImpl());
 
         try {
             System.out.println("Parsing OCL rules from an input UML model " + input);
@@ -85,8 +111,8 @@ public class Main {
             saveModel(rs, ocl, createFileURI(oclAST));
             System.out.println("Transforming OCL rules by " + transform);
             List<EObject> xpath = transformModel(rs, createFileURI(transform), ocl);
-            System.out.println("Saving XPath AST into " + xpathAST);
-            saveModel(rs, xpath, createFileURI(xpathAST));
+            //System.out.println("Saving XPath AST into " + xpathAST);
+            //saveModel(rs, xpath, createFileURI(xpathAST));
             System.out.println("Printing XPath expressions into " + output);
             saveModel(rs, xpath, createFileURI(output));
             System.out.println("Done!");
@@ -102,9 +128,16 @@ public class Main {
     
     private static void saveModel(ResourceSet rs, Collection<? extends EObject> model, URI fileName) throws IOException
     {
+        //final ExtendedMetaData extendedMetaData = new BasicExtendedMetaData(rs.getPackageRegistry());
+        //rs.getLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
+        //rs. getSaveOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetaData);
+
         Resource res = rs.createResource(fileName);
         res.getContents().addAll(model);
-        res.save(null);
+        Map<Object, Object> options = new HashMap<Object, Object>();
+        //options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+        options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+        res.save(options);
         res.unload();
     }
 
@@ -177,62 +210,20 @@ public class Main {
         final TreeIterator<EObject> iterator = bdt.eAllContents();
         while (iterator.hasNext()) {
             EObject obj = iterator.next();
-            System.out.println("  >>>>>>>>>> " + obj);
+            //System.out.println("  >>>>>>>>>> " + obj);
             if (obj instanceof Type) {
                 Type type = (Type)obj;
                 //System.out.println("  >>>>>>>>>> " + type.getName());
                 if (type.getName().equals("MeasureType")) {
-                    System.out.println("  Found operations for " + type.getName() + ": " + type.getOwnedOperation().size());
-//
-//                    System.out.println("  >>>>>>>>>> " + type);
-//                    {
-//                    Operation qwe = PivotFactory.eINSTANCE.createOperation();
-//                    qwe.setName("qwe");
-//                    qwe.setType(metaModelManager.getBooleanType());
-//                    System.out.println("  >>>>>>>>>> " + type.getOwnedOperation().size());
-//                    type.getOwnedOperation().add(qwe);
-//                    System.out.println("  >>>>>>>>>> " + type.getOwnedOperation().size());
-//                    }
-                    {
-                    Operation compareTo = PivotFactory.eINSTANCE.createOperation();
-                    compareTo.setName("<");
-                    compareTo.setType(metaModelManager.getBooleanType());
-                    Parameter param = PivotFactory.eINSTANCE.createParameter();
-                    param.setType(type);
-                    //param.setName("x");
-                    compareTo.getOwnedParameter().add(param);
-                    type.getOwnedOperation().add(compareTo);
-                    }
-                    {
-                    Operation compareTo = PivotFactory.eINSTANCE.createOperation();
-                    compareTo.setName(">");
-                    compareTo.setType(metaModelManager.getBooleanType());
-                    Parameter param = PivotFactory.eINSTANCE.createParameter();
-                    param.setType(metaModelManager.getRealType());
-                    //param.setName("x");
-                    compareTo.getOwnedParameter().add(param);
-                    type.getOwnedOperation().add(compareTo);
-                    }
-                    {
-                    Operation compareTo = PivotFactory.eINSTANCE.createOperation();
-                    compareTo.setName("<");
-                    compareTo.setType(metaModelManager.getBooleanType());
-                    Parameter param = PivotFactory.eINSTANCE.createParameter();
-                    param.setType(metaModelManager.getUnlimitedNaturalType());
-                    //param.setName("x");
-                    compareTo.getOwnedParameter().add(param);
-                    type.getOwnedOperation().add(compareTo);
-                    }
-                    {
-                    Operation compareTo = PivotFactory.eINSTANCE.createOperation();
-                    compareTo.setName(">");
-                    compareTo.setType(metaModelManager.getBooleanType());
-                    Parameter param = PivotFactory.eINSTANCE.createParameter();
-                    param.setType(metaModelManager.getUnlimitedNaturalType());
-                    //param.setName("x");
-                    compareTo.getOwnedParameter().add(param);
-                    type.getOwnedOperation().add(compareTo);
-                    }
+                    //System.out.println("  Found operations for " + type.getName() + ": " + type.getOwnedOperation().size());
+                    createOperation(metaModelManager, type, "<", metaModelManager.getBooleanType(), type);
+                    createOperation(metaModelManager, type, ">", metaModelManager.getBooleanType(), type);
+                    createOperation(metaModelManager, type, "<", metaModelManager.getBooleanType(), metaModelManager.getRealType());
+                    createOperation(metaModelManager, type, ">", metaModelManager.getBooleanType(), metaModelManager.getRealType());
+//                    createOperation(metaModelManager, type, "<", metaModelManager.getBooleanType(), metaModelManager.getIntegerType());
+//                    createOperation(metaModelManager, type, ">", metaModelManager.getBooleanType(), metaModelManager.getIntegerType());
+//                    createOperation(metaModelManager, type, "<", metaModelManager.getBooleanType(), metaModelManager.getUnlimitedNaturalType());
+//                    createOperation(metaModelManager, type, ">", metaModelManager.getBooleanType(), metaModelManager.getUnlimitedNaturalType());
                 }
             }
         }
@@ -254,6 +245,17 @@ public class Main {
             }
         }
         return c;
+    }
+
+    private static void createOperation(MetaModelManager metaModelManager, Type type,
+            String name, Type returnType, Type param1Type) {
+        Operation compareTo = PivotFactory.eINSTANCE.createOperation();
+        compareTo.setName(name);
+        compareTo.setType(returnType);
+        Parameter param = PivotFactory.eINSTANCE.createParameter();
+        param.setType(param1Type);
+        compareTo.getOwnedParameter().add(param);
+        type.getOwnedOperation().add(compareTo);
     }
 
     private static EList<Constraint> getAllConstraints(MetaModelManager metaModelManager, Root root) {
@@ -291,11 +293,55 @@ public class Main {
     
     private static List<EObject> transformModel(ResourceSet rs, URI transformation, EList<EObject> source) throws Exception
     {
+        IExtensionRegistry ecliseRegistry = RegistryFactory.createRegistry(null, null, null);
+        FileInputStream is = new FileInputStream("plugin.xml");
+        RegistryContributor contributor = new RegistryContributor("1", "test", null, null);
+        ecliseRegistry.addContribution(is, contributor, false, null, null, null);
+        
+        for (IExtension ext : ecliseRegistry.getExtensions(contributor)) {
+            if (ext.getExtensionPointUniqueIdentifier().equals("org.eclipse.m2m.qvt.oml.javaBlackboxUnits")) {
+                for (IConfigurationElement config : ext.getConfigurationElements()) {
+                    // JavaBlackboxProvider jbp = new JavaBlackboxProvider();
+                    Class<?> providerClass = Class.forName("org.eclipse.m2m.internal.qvt.oml.blackbox.java.JavaBlackboxProvider"); 
+                    Object jbp = providerClass.newInstance();
+                    
+                    // JavaBlackboxProvider.Descriptor descriptor = jbp.createDescriptor(unit);
+                    Method createDescriptor = providerClass.getDeclaredMethod("createDescriptor", IConfigurationElement.class);
+                    createDescriptor.setAccessible(true);
+                    Object descriptor = createDescriptor.invoke(jbp, config);
+                    
+                    // jbp.fDescriptorMap = new HashMap<?,?>();
+                    Field fDescriptorMapField = providerClass.getDeclaredField("fDescriptorMap");
+                    fDescriptorMapField.setAccessible(true);
+                    fDescriptorMapField.set(jbp, HashMap.class.newInstance());
+
+                    // jbp.fDescriptorMap.put(id, descriptor);
+                    Object fDescriptorMap = fDescriptorMapField.get(jbp);
+                    Method putMethod = fDescriptorMapField.getType().getDeclaredMethod("put", Object.class, Object.class);
+                    putMethod.invoke(fDescriptorMap, "id", descriptor);
+
+                    // BlackboxRegistry.INSTANCE.fProviders.add(jbp);
+                    Class<?> registryClass = Class.forName("org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry"); 
+                    Field registryInstanceField = registryClass.getDeclaredField("INSTANCE");
+                    Object registryInstance = registryInstanceField.get(null);
+                    Field fProvidersField = registryClass.getDeclaredField("fProviders");
+                    fProvidersField.setAccessible(true);
+                    fProvidersField.set(registryInstance, LinkedList.class.newInstance());
+                    
+                    // BlackboxRegistry.INSTANCE.fProviders.add(jbp);
+                    Object fProviders = fProvidersField.get(registryInstance);
+                    Method addMethod = fProvidersField.getType().getDeclaredMethod("add", Object.class);
+                    addMethod.invoke(fProviders, jbp);
+                }
+            }
+        }
+        
         TransformationExecutor executor = new TransformationExecutor(transformation);
+
         ExecutionContextImpl context = new ExecutionContextImpl();
         context.setConfigProperty("keepModeling", true);
         context.setLog(new WriterLog(new OutputStreamWriter(System.out)));
-        ModelExtent input = new BasicModelExtent(source);        
+        ModelExtent input = new BasicModelExtent(source);
         ModelExtent output = new BasicModelExtent();
         ExecutionDiagnostic result = executor.execute(context, input, output);
         if(result.getSeverity() == Diagnostic.OK) {

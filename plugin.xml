@@ -7,11 +7,26 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated ReferenceModel -->
+      <!-- @generated xsd11 -->
       <package
-            uri="http:///ReferenceModel/EECReferenceModel/EECReferenceDataModel/BDT.ecore"
-            class="ReferenceModel.EECReferenceModel.EECReferenceDataModel.BDT.BDTPackage"
-            genModel="model2/ReferenceModel.genmodel"/>
+            uri="http://www.w3.org/2001/XMLSchema"
+            class="org.w3._2001.xml.schema.SchemaPackage"
+            genModel="metamodel/xsd11.genmodel"/>
    </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated xsd11 -->
+      <parser
+            type="schema"
+            class="org.w3._2001.xml.schema.util.SchemaResourceFactoryImpl"/>
+   </extension>
+
+    <extension point="org.eclipse.m2m.qvt.oml.javaBlackboxUnits" id="org.eclipse.m2m.qvt.oml.examples.blackbox.UtilitiesLibrary">
+        <unit name="ExampleJavaLib" namespace="m2m.qvt.oml">
+            <library name="UtilLib" class="org.eclipse.m2m.qvt.oml.examples.blackbox.UtilitiesLibrary">
+                <metamodel nsURI="http://www.eclipse.org/emf/2002/Ecore"/>
+            </library>
+        </unit>
+    </extension>
 
 </plugin>

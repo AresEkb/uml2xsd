@@ -84,7 +84,8 @@ ConsignerDetails.ConsignerDetails.AddressDetails.AddressDetails.CountryCode.Coun
   </pivot:ExpressionInOCL>
   <pivot:ExpressionInOCL isRequired="false">
     <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17"/>
-    <body>(AnimalBreedName.AnimalBreedName = '&#x423;&#x442;&#x43a;&#x430;'
+    <body>--WeightMeasure.WeightMeasure.testOp() and
+(AnimalBreedName.AnimalBreedName = '&#x423;&#x442;&#x43a;&#x430;'
  implies
  WeightMeasure.WeightMeasure &lt; WeightMeasure.WeightMeasure and WeightMeasure.WeightMeasure > 0.5 and WeightMeasure.WeightMeasure &lt; 10)
 and
@@ -160,7 +161,7 @@ and
               <argument xsi:type="pivot:RealLiteralExp" realSymbol="0.5">
                 <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.19"/>
               </argument>
-              <referredOperation href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.1/@ownedType.7/@ownedOperation.1"/>
+              <referredOperation href="../model2/ReferenceModel.uml.oclas#//@nestedPackage.0/@nestedPackage.0/@nestedPackage.0/@nestedPackage.1/@ownedType.7/@ownedOperation.3"/>
             </argument>
             <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.1/@ownedType.17/@ownedOperation.3"/>
           </source>

@@ -1,0 +1,56 @@
+import m2m.qvt.oml.ExampleJavaLib;
+
+modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
+modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
+//modeltype XSD uses "http://www.eclipse.org/xsd/2002/XSD";
+//modeltype XSD uses "http://www.w3.org/XML/XMLSchema/v1.1";
+modeltype XSD uses 'http://www.w3.org/2001/XMLSchema';
+modeltype ns uses 'http://www.w3.org/XML/1998/namespace';
+modeltype ecore uses 'http://www.eclipse.org/emf/2002/Ecore';
+
+transformation OclToXpath(in o : OCL, out x : XSD);
+
+main() {
+    var date : ecore::EDate := createDate('2008-10-31');
+    var isBefore := date.before(createDate('2008-11-01'));
+    log(date.toString());
+    
+    var eClass := object ecore::EClass {};
+    var qname := eClass.getQualifiedName();
+    log(qname);
+    
+    o.rootObjects()[ExpressionInOCL]->any(true).map Root2Root();
+}
+/*
+mapping ExpressionInOCL::Root2Root() : XSDSchema {
+    init {
+        var schemaTargetNamespace := 'DUMMY';
+        var schemaTargetPrefix := 'tns';
+
+        var schemaForSchemaNamespace := 'http://www.w3.org/2001/XMLSchema';
+        var schemaForSchemaPrefix := 'xsd';
+
+        result := object XSDSchema {
+            targetNamespace:= schemaTargetNamespace;
+        };
+    }
+
+    log("  Transforming " + self.body->first());
+}
+*/
+
+mapping ExpressionInOCL::Root2Root() : DocumentRoot {
+    schema := object SchemaType {
+        targetNamespace := 'urn:test';
+        complexType := object TopLevelComplexType {
+        	simpleContent := object SimpleContentType {
+        		restriction := object SimpleRestrictionType {
+        			//base := createQName('http://www.w3.org/2001/XMLSchema', 'token', 'xs');
+        		}
+        	};
+        };
+        element := object TopLevelElement {
+        }
+    };
+    log("  Transforming " + self.body->first());
+}

@@ -1,0 +1,3 @@
+(fn:not(AnimalBreedName/AnimalBreedName = 'Утка') or WeightMeasure/WeightMeasure < WeightMeasure/WeightMeasure and WeightMeasure/WeightMeasure > 0.5 and WeightMeasure/WeightMeasure < 10) and (fn:not(AnimalBreedName/AnimalBreedName = 'Лошадь') or WeightMeasure/WeightMeasure > 50 and WeightMeasure/WeightMeasure < 400),
+fn:
+not(CheckpointDetails/CheckpointDetails/AddressDetails/AddressDetails/CountryCode/CountryCode = 'RU') or ConsignerDetails/ConsignerDetails/AddressDetails/AddressDetails/CountryCode/CountryCode = 'BY'

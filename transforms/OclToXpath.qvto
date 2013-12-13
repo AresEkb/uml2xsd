@@ -1,7 +1,8 @@
-modeltype ocl 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
-modeltype xpath2 'strict' uses 'http://www.emftext.org/language/xpath2';
+modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
+modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
+modeltype XSD uses "http://www.eclipse.org/xsd/2002/XSD";
 
-transformation OclToXpath(in o : ocl, out x : xpath2);
+transformation OclToXpath(in o : OCL, out x : XPATH2);
 
 main() {
 //    o.rootObjects()[ExpressionInOCL].map Root2Root();
@@ -13,10 +14,10 @@ main() {
 
 mapping ExpressionInOCL::Root2Root() : Expr {
     log("  Transforming " + self.body->first());
-    expr := self.bodyExpression.map OclToXpath();
+    expr := self.bodyExpression.map toExprSingle();
 }
 
-mapping OCLExpression::OclToXpath() : ExprSingle
+mapping OCLExpression::toExprSingle() : ExprSingle
 disjuncts
     OperationCallExp::leftNotNull,
     OperationCallExp::rightNotNull,
@@ -28,7 +29,7 @@ disjuncts
 mapping OperationCallExp::toIfExpr() : OrExpr
 when { self.name = 'implies' }
 {
-    operand := self.source.xmap OclToXpath().notExpr();
+    operand := self.source.xmap toExprSingle().notExpr();
     operand += self.argument[OCLExpression].xmap toOrExprChild();
 }
 
@@ -73,7 +74,7 @@ mapping OperationCallExp::leftNotNull() : ExprSingle
 when { self.name = '<>' and self.argument->isNullLiteralExp() }
 {
     init {
-        result := self.source.xmap OclToXpath();
+        result := self.source.xmap toExprSingle();
     }
 }
 
@@ -81,7 +82,7 @@ mapping OperationCallExp::rightNotNull() : ExprSingle
 when { self.name = '<>' and self.source.isNullLiteralExp() }
 {
     init {
-        result := self.argument->first().xmap OclToXpath();
+        result := self.argument->first().xmap toExprSingle();
     }
 }
 
@@ -147,23 +148,33 @@ disjuncts
 
 mapping PropertyCallExp::toPath() : PathExpr
 {
-    step := object SelfStepExpr { step := object AxisStep { step := object AbbrevForwardStep {
-        kind := AbbrevForwardStepKind::child;
-        nodeTest := object QNameTest { name := object QName { name := self.referredProperty.name } } } } };
+    init {
+        result := self.source[PropertyCallExp]->collectOne(xmap toPath());
+    }
+    if (self.source[VariableExp]->one(referredVariable.name = 'self')) {
+        step := object SelfStepExpr { step := object AbbrevForwardStep {
+            kind := AbbrevForwardStepKind::child;
+            nodeTest := object QNameTest { name := object QName { name := self.referredProperty.name } } } };
+    }
+    else if (self.source[PropertyCallExp]->notEmpty()) {
+        step += object ChildStepExpr { step := object AbbrevForwardStep {
+            kind := AbbrevForwardStepKind::child;
+            nodeTest := object QNameTest { name := object QName { name := self.referredProperty.name } } } };
+    }
 }
 
 mapping OperationCallExp::count() : FunctionCall
 when { self.referredOperation.name = 'size' and self.referredOperation.owningType.name = 'Collection' }
 {
     name := object QName { prefix := 'fn'; name := 'count' };
-    arg := self.source.xmap OclToXpath();
+    arg := self.source.xmap toExprSingle();
 }
 
 mapping OperationCallExp::stringLength() : FunctionCall
 when { self.referredOperation.name = 'size' and self.referredOperation.owningType.name = 'String' }
 {
     name := object QName { prefix := 'fn'; name := 'string-length' };
-    arg := self.source.xmap OclToXpath();
+    arg := self.source.xmap toExprSingle();
 }
 
 mapping IteratorExp::exists() : FunctionCall
@@ -171,8 +182,8 @@ when { self.referredIteration.name = 'exists' }
 {
     init {
         result := object FilterExpr {
-            primaryExpr := object ParenthesizedExpr { expr := self.source.xmap OclToXpath() };
-            predicate := object Predicate { expr := self.body.xmap OclToXpath() };
+            primaryExpr := object ParenthesizedExpr { expr := self.source.xmap toExprSingle() };
+            predicate := object Predicate { expr := self.body.xmap toExprSingle() };
         }.booleanExpr();
     }
 }
@@ -182,8 +193,8 @@ when { self.referredIteration.name = 'forAll' }
 {
     init {
         result := object FilterExpr {
-            primaryExpr := object ParenthesizedExpr { expr := self.source.xmap OclToXpath() };
-            predicate := object Predicate { expr := self.body.xmap OclToXpath().notExpr() };
+            primaryExpr := object ParenthesizedExpr { expr := self.source.xmap toExprSingle() };
+            predicate := object Predicate { expr := self.body.xmap toExprSingle().notExpr() };
         }.notExpr();
     }
 }
@@ -191,7 +202,7 @@ when { self.referredIteration.name = 'forAll' }
 mapping OperationCallExp::forAll() : FunctionCall
 {
     name := object QName { prefix := 'fn'; name := 'forAll' };
-    arg := self.source.xmap OclToXpath();
+    arg := self.source.xmap toExprSingle();
 }
 
 mapping UnlimitedNaturalLiteralExp::toLiteral() : IntegerLiteral
@@ -217,7 +228,7 @@ mapping StringLiteralExp::toLiteral() : StringLiteral
 mapping OCLExpression::toParenthesizedExpr() : ParenthesizedExpr
 //when { self.xmap OclToXpath() <> null }
 {
-    expr := self.xmap OclToXpath()
+    expr := self.xmap toExprSingle()
 }
 
 mapping OCLExpression::toVarRef() : VarRef {
