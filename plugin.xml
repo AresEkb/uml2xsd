@@ -25,6 +25,7 @@
         <unit name="ExampleJavaLib" namespace="m2m.qvt.oml">
             <library name="UtilLib" class="org.eclipse.m2m.qvt.oml.examples.blackbox.UtilitiesLibrary">
                 <metamodel nsURI="http://www.eclipse.org/emf/2002/Ecore"/>
+                <metamodel nsURI="http://www.eclipse.org/emf/2003/XMLType"/>
             </library>
         </unit>
     </extension>

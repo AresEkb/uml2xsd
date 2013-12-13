@@ -7,6 +7,7 @@ modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 modeltype XSD uses 'http://www.w3.org/2001/XMLSchema';
 modeltype ns uses 'http://www.w3.org/XML/1998/namespace';
 modeltype ecore uses 'http://www.eclipse.org/emf/2002/Ecore';
+modeltype xmltype uses 'http://www.eclipse.org/emf/2003/XMLType';
 
 transformation OclToXpath(in o : OCL, out x : XSD);
 
@@ -45,7 +46,8 @@ mapping ExpressionInOCL::Root2Root() : DocumentRoot {
         complexType := object TopLevelComplexType {
         	simpleContent := object SimpleContentType {
         		restriction := object SimpleRestrictionType {
-        			//base := createQName('http://www.w3.org/2001/XMLSchema', 'token', 'xs');
+        		  //base := object xmltype::QName { };
+        		    base := createQName('http://www.w3.org/2001/XMLSchema', 'token', 'xs');
         		}
         	};
         };

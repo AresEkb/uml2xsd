@@ -297,7 +297,7 @@ public class Main {
         FileInputStream is = new FileInputStream("plugin.xml");
         RegistryContributor contributor = new RegistryContributor("1", "test", null, null);
         ecliseRegistry.addContribution(is, contributor, false, null, null, null);
-        
+
         for (IExtension ext : ecliseRegistry.getExtensions(contributor)) {
             if (ext.getExtensionPointUniqueIdentifier().equals("org.eclipse.m2m.qvt.oml.javaBlackboxUnits")) {
                 for (IConfigurationElement config : ext.getConfigurationElements()) {
@@ -318,9 +318,9 @@ public class Main {
                     // jbp.fDescriptorMap.put(id, descriptor);
                     Object fDescriptorMap = fDescriptorMapField.get(jbp);
                     Method putMethod = fDescriptorMapField.getType().getDeclaredMethod("put", Object.class, Object.class);
-                    putMethod.invoke(fDescriptorMap, "id", descriptor);
+                    putMethod.invoke(fDescriptorMap, "m2m.qvt.oml.ExampleJavaLib", descriptor);
 
-                    // BlackboxRegistry.INSTANCE.fProviders.add(jbp);
+                    // BlackboxRegistry.INSTANCE.fProviders = new LinkedList<?>()
                     Class<?> registryClass = Class.forName("org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry"); 
                     Field registryInstanceField = registryClass.getDeclaredField("INSTANCE");
                     Object registryInstance = registryInstanceField.get(null);
@@ -348,6 +348,9 @@ public class Main {
             return output.getContents();
         } else {
             IStatus status = BasicDiagnostic.toIStatus(result);
+            for (IStatus error : status.getChildren()) {
+                System.out.println("  " + error);
+            }
             throw new Exception(status.getMessage());
         }
     }

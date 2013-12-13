@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xs:schema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:test">
-  <xs:complexType>
-    <xs:simpleContent>
-      <xs:restriction/>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:element/>
-</xs:schema>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <ecore:EClass/>
+  <xs:schema targetNamespace="urn:test">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:restriction base="xs:token"/>
+      </xs:simpleContent>
+    </xs:complexType>
+    <xs:element/>
+  </xs:schema>
+</xmi:XMI>
