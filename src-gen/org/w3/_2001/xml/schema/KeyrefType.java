@@ -16,8 +16,8 @@ import javax.xml.namespace.QName;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getKeyrefType()
- * @model extendedMetaData="name='keyref_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getKeyrefType()
+ * @model extendedMetaData="name='keyref_._type' kind='mixed'"
  * @generated
  */
 public interface KeyrefType extends Keybase {
@@ -31,7 +31,7 @@ public interface KeyrefType extends Keybase {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Refer</em>' attribute.
      * @see #setRefer(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getKeyrefType_Refer()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getKeyrefType_Refer()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='refer'"
      * @generated

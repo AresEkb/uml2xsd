@@ -28,8 +28,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType()
- * @model extendedMetaData="name='override_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType()
+ * @model extendedMetaData="name='override_._type' kind='mixed'"
  * @generated
  */
 public interface OverrideType extends OpenAttrs {
@@ -42,8 +42,8 @@ public interface OverrideType extends OpenAttrs {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Annotation</em>' containment reference.
      * @see #setAnnotation(AnnotationType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_Annotation()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_Annotation()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace'"
      * @generated
      */
@@ -69,9 +69,9 @@ public interface OverrideType extends OpenAttrs {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Schema Top</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_SchemaTop()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='SchemaTop:2'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_SchemaTop()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='SchemaTop:3'"
      * @generated
      */
     FeatureMap getSchemaTop();
@@ -85,9 +85,9 @@ public interface OverrideType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_SimpleType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_SimpleType()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace' group='#SchemaTop:2'"
+     *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace' group='#SchemaTop:3'"
      * @generated
      */
     EList<TopLevelSimpleType> getSimpleType();
@@ -101,9 +101,9 @@ public interface OverrideType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Complex Type</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_ComplexType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_ComplexType()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace' group='#SchemaTop:2'"
+     *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace' group='#SchemaTop:3'"
      * @generated
      */
     EList<TopLevelComplexType> getComplexType();
@@ -117,9 +117,9 @@ public interface OverrideType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_Group()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_Group()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace' group='#SchemaTop:2'"
+     *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace' group='#SchemaTop:3'"
      * @generated
      */
     EList<NamedGroup> getGroup();
@@ -133,9 +133,9 @@ public interface OverrideType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Attribute Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_AttributeGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_AttributeGroup()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#SchemaTop:2'"
+     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#SchemaTop:3'"
      * @generated
      */
     EList<NamedAttributeGroup> getAttributeGroup();
@@ -149,9 +149,9 @@ public interface OverrideType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Element</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_Element()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_Element()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='element' namespace='##targetNamespace' group='#SchemaTop:2'"
+     *        extendedMetaData="kind='element' name='element' namespace='##targetNamespace' group='#SchemaTop:3'"
      * @generated
      */
     EList<TopLevelElement> getElement();
@@ -165,9 +165,9 @@ public interface OverrideType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Attribute</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_Attribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_Attribute()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#SchemaTop:2'"
+     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#SchemaTop:3'"
      * @generated
      */
     EList<TopLevelAttribute> getAttribute();
@@ -181,9 +181,9 @@ public interface OverrideType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Notation</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_Notation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_Notation()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='notation' namespace='##targetNamespace' group='#SchemaTop:2'"
+     *        extendedMetaData="kind='element' name='notation' namespace='##targetNamespace' group='#SchemaTop:3'"
      * @generated
      */
     EList<NotationType> getNotation();
@@ -198,7 +198,7 @@ public interface OverrideType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Schema Location</em>' attribute.
      * @see #setSchemaLocation(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_SchemaLocation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_SchemaLocation()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI" required="true"
      *        extendedMetaData="kind='attribute' name='schemaLocation'"
      * @generated
@@ -225,7 +225,7 @@ public interface OverrideType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Id</em>' attribute.
      * @see #setId(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOverrideType_Id()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOverrideType_Id()
      * @model id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
      *        extendedMetaData="kind='attribute' name='id'"
      * @generated

@@ -37,8 +37,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType()
- * @model extendedMetaData="name='restrictionType' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType()
+ * @model extendedMetaData="name='restrictionType' kind='mixed'"
  * @generated
  */
 public interface RestrictionType extends Annotated {
@@ -51,8 +51,8 @@ public interface RestrictionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Open Content</em>' containment reference.
      * @see #setOpenContent(OpenContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_OpenContent()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_OpenContent()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='openContent' namespace='##targetNamespace'"
      * @generated
      */
@@ -78,8 +78,8 @@ public interface RestrictionType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' containment reference.
      * @see #setGroup(GroupRef)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Group()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Group()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace'"
      * @generated
      */
@@ -104,8 +104,8 @@ public interface RestrictionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>All</em>' containment reference.
      * @see #setAll(All)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_All()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_All()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='all' namespace='##targetNamespace'"
      * @generated
      */
@@ -130,8 +130,8 @@ public interface RestrictionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Choice</em>' containment reference.
      * @see #setChoice(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Choice()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Choice()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='choice' namespace='##targetNamespace'"
      * @generated
      */
@@ -156,8 +156,8 @@ public interface RestrictionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Sequence</em>' containment reference.
      * @see #setSequence(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Sequence()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Sequence()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='sequence' namespace='##targetNamespace'"
      * @generated
      */
@@ -183,8 +183,8 @@ public interface RestrictionType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference.
      * @see #setSimpleType(LocalSimpleType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_SimpleType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_SimpleType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace'"
      * @generated
      */
@@ -210,9 +210,9 @@ public interface RestrictionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group1</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Group1()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:9'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Group1()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:10'"
      * @generated
      */
     FeatureMap getGroup1();
@@ -231,9 +231,9 @@ public interface RestrictionType extends Annotated {
      *       
      * <!-- end-model-doc -->
      * @return the value of the '<em>Facet Group</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_FacetGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_FacetGroup()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='group' name='facet:group' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='group' name='facet:group' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     FeatureMap getFacetGroup();
@@ -252,7 +252,7 @@ public interface RestrictionType extends Annotated {
      *       
      * <!-- end-model-doc -->
      * @return the value of the '<em>Facet</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Facet()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Facet()
      * @model containment="true" transient="true" changeable="false" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='facet' namespace='##targetNamespace' group='facet:group'"
      * @generated
@@ -269,9 +269,9 @@ public interface RestrictionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Any</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Any()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Any()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='elementWildcard' wildcards='##other' name=':12' processing='lax' group='#group:9'"
+     *        extendedMetaData="kind='elementWildcard' wildcards='##other' name=':13' processing='lax' group='#group:10'"
      * @generated
      */
     FeatureMap getAny();
@@ -286,9 +286,9 @@ public interface RestrictionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group2</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Group2()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:13'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Group2()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:14'"
      * @generated
      */
     FeatureMap getGroup2();
@@ -303,9 +303,9 @@ public interface RestrictionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Attribute</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Attribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Attribute()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:13'"
+     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:14'"
      * @generated
      */
     EList<Attribute> getAttribute();
@@ -320,9 +320,9 @@ public interface RestrictionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Attribute Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_AttributeGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_AttributeGroup()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:13'"
+     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:14'"
      * @generated
      */
     EList<AttributeGroupRef> getAttributeGroup();
@@ -336,8 +336,8 @@ public interface RestrictionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Any Attribute1</em>' containment reference.
      * @see #setAnyAttribute1(AnyAttributeType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_AnyAttribute1()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_AnyAttribute1()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='anyAttribute' namespace='##targetNamespace'"
      * @generated
      */
@@ -363,8 +363,8 @@ public interface RestrictionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Assert</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Assert()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Assert()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='assert' namespace='##targetNamespace'"
      * @generated
      */
@@ -380,7 +380,7 @@ public interface RestrictionType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Base</em>' attribute.
      * @see #setBase(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType_Base()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType_Base()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName" required="true"
      *        extendedMetaData="kind='attribute' name='base'"
      * @generated

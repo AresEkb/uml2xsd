@@ -14,8 +14,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-model-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAll()
- * @model extendedMetaData="name='all' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAll()
+ * @model extendedMetaData="name='all' kind='mixed'"
  * @generated
  */
 public interface All extends ExplicitGroup {

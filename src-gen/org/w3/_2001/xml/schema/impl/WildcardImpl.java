@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.ProcessContentsType;
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.Wildcard;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -115,7 +115,7 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.WILDCARD;
+        return XMLSchema11Package.Literals.WILDCARD;
     }
 
     /**
@@ -136,7 +136,7 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
         Object oldNamespace = namespace;
         namespace = newNamespace;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.WILDCARD__NAMESPACE, oldNamespace, namespace));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.WILDCARD__NAMESPACE, oldNamespace, namespace));
     }
 
     /**
@@ -157,7 +157,7 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
         List<Object> oldNotNamespace = notNamespace;
         notNamespace = newNotNamespace;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.WILDCARD__NOT_NAMESPACE, oldNotNamespace, notNamespace));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.WILDCARD__NOT_NAMESPACE, oldNotNamespace, notNamespace));
     }
 
     /**
@@ -180,7 +180,7 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
         boolean oldProcessContentsESet = processContentsESet;
         processContentsESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.WILDCARD__PROCESS_CONTENTS, oldProcessContents, processContents, !oldProcessContentsESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.WILDCARD__PROCESS_CONTENTS, oldProcessContents, processContents, !oldProcessContentsESet));
     }
 
     /**
@@ -194,7 +194,7 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
         processContents = PROCESS_CONTENTS_EDEFAULT;
         processContentsESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.WILDCARD__PROCESS_CONTENTS, oldProcessContents, PROCESS_CONTENTS_EDEFAULT, oldProcessContentsESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.WILDCARD__PROCESS_CONTENTS, oldProcessContents, PROCESS_CONTENTS_EDEFAULT, oldProcessContentsESet));
     }
 
     /**
@@ -214,11 +214,11 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.WILDCARD__NAMESPACE:
+            case XMLSchema11Package.WILDCARD__NAMESPACE:
                 return getNamespace();
-            case SchemaPackage.WILDCARD__NOT_NAMESPACE:
+            case XMLSchema11Package.WILDCARD__NOT_NAMESPACE:
                 return getNotNamespace();
-            case SchemaPackage.WILDCARD__PROCESS_CONTENTS:
+            case XMLSchema11Package.WILDCARD__PROCESS_CONTENTS:
                 return getProcessContents();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -233,13 +233,13 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.WILDCARD__NAMESPACE:
+            case XMLSchema11Package.WILDCARD__NAMESPACE:
                 setNamespace(newValue);
                 return;
-            case SchemaPackage.WILDCARD__NOT_NAMESPACE:
+            case XMLSchema11Package.WILDCARD__NOT_NAMESPACE:
                 setNotNamespace((List<Object>)newValue);
                 return;
-            case SchemaPackage.WILDCARD__PROCESS_CONTENTS:
+            case XMLSchema11Package.WILDCARD__PROCESS_CONTENTS:
                 setProcessContents((ProcessContentsType)newValue);
                 return;
         }
@@ -254,13 +254,13 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.WILDCARD__NAMESPACE:
+            case XMLSchema11Package.WILDCARD__NAMESPACE:
                 setNamespace(NAMESPACE_EDEFAULT);
                 return;
-            case SchemaPackage.WILDCARD__NOT_NAMESPACE:
+            case XMLSchema11Package.WILDCARD__NOT_NAMESPACE:
                 setNotNamespace(NOT_NAMESPACE_EDEFAULT);
                 return;
-            case SchemaPackage.WILDCARD__PROCESS_CONTENTS:
+            case XMLSchema11Package.WILDCARD__PROCESS_CONTENTS:
                 unsetProcessContents();
                 return;
         }
@@ -275,11 +275,11 @@ public class WildcardImpl extends AnnotatedImpl implements Wildcard {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.WILDCARD__NAMESPACE:
+            case XMLSchema11Package.WILDCARD__NAMESPACE:
                 return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
-            case SchemaPackage.WILDCARD__NOT_NAMESPACE:
+            case XMLSchema11Package.WILDCARD__NOT_NAMESPACE:
                 return NOT_NAMESPACE_EDEFAULT == null ? notNamespace != null : !NOT_NAMESPACE_EDEFAULT.equals(notNamespace);
-            case SchemaPackage.WILDCARD__PROCESS_CONTENTS:
+            case XMLSchema11Package.WILDCARD__PROCESS_CONTENTS:
                 return isSetProcessContents();
         }
         return super.eIsSet(featureID);

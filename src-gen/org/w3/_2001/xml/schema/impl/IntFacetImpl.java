@@ -5,7 +5,7 @@ package org.w3._2001.xml.schema.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.w3._2001.xml.schema.IntFacet;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class IntFacetImpl extends FacetImpl implements IntFacet {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.INT_FACET;
+        return XMLSchema11Package.Literals.INT_FACET;
     }
 
 } //IntFacetImpl

@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.NotationType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -103,7 +103,7 @@ public class NotationTypeImpl extends AnnotatedImpl implements NotationType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.NOTATION_TYPE;
+        return XMLSchema11Package.Literals.NOTATION_TYPE;
     }
 
     /**
@@ -124,7 +124,7 @@ public class NotationTypeImpl extends AnnotatedImpl implements NotationType {
         String oldName = name;
         name = newName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.NOTATION_TYPE__NAME, oldName, name));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.NOTATION_TYPE__NAME, oldName, name));
     }
 
     /**
@@ -145,7 +145,7 @@ public class NotationTypeImpl extends AnnotatedImpl implements NotationType {
         String oldPublic = public_;
         public_ = newPublic;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.NOTATION_TYPE__PUBLIC, oldPublic, public_));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.NOTATION_TYPE__PUBLIC, oldPublic, public_));
     }
 
     /**
@@ -166,7 +166,7 @@ public class NotationTypeImpl extends AnnotatedImpl implements NotationType {
         String oldSystem = system;
         system = newSystem;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.NOTATION_TYPE__SYSTEM, oldSystem, system));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.NOTATION_TYPE__SYSTEM, oldSystem, system));
     }
 
     /**
@@ -177,11 +177,11 @@ public class NotationTypeImpl extends AnnotatedImpl implements NotationType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.NOTATION_TYPE__NAME:
+            case XMLSchema11Package.NOTATION_TYPE__NAME:
                 return getName();
-            case SchemaPackage.NOTATION_TYPE__PUBLIC:
+            case XMLSchema11Package.NOTATION_TYPE__PUBLIC:
                 return getPublic();
-            case SchemaPackage.NOTATION_TYPE__SYSTEM:
+            case XMLSchema11Package.NOTATION_TYPE__SYSTEM:
                 return getSystem();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -195,13 +195,13 @@ public class NotationTypeImpl extends AnnotatedImpl implements NotationType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.NOTATION_TYPE__NAME:
+            case XMLSchema11Package.NOTATION_TYPE__NAME:
                 setName((String)newValue);
                 return;
-            case SchemaPackage.NOTATION_TYPE__PUBLIC:
+            case XMLSchema11Package.NOTATION_TYPE__PUBLIC:
                 setPublic((String)newValue);
                 return;
-            case SchemaPackage.NOTATION_TYPE__SYSTEM:
+            case XMLSchema11Package.NOTATION_TYPE__SYSTEM:
                 setSystem((String)newValue);
                 return;
         }
@@ -216,13 +216,13 @@ public class NotationTypeImpl extends AnnotatedImpl implements NotationType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.NOTATION_TYPE__NAME:
+            case XMLSchema11Package.NOTATION_TYPE__NAME:
                 setName(NAME_EDEFAULT);
                 return;
-            case SchemaPackage.NOTATION_TYPE__PUBLIC:
+            case XMLSchema11Package.NOTATION_TYPE__PUBLIC:
                 setPublic(PUBLIC_EDEFAULT);
                 return;
-            case SchemaPackage.NOTATION_TYPE__SYSTEM:
+            case XMLSchema11Package.NOTATION_TYPE__SYSTEM:
                 setSystem(SYSTEM_EDEFAULT);
                 return;
         }
@@ -237,11 +237,11 @@ public class NotationTypeImpl extends AnnotatedImpl implements NotationType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.NOTATION_TYPE__NAME:
+            case XMLSchema11Package.NOTATION_TYPE__NAME:
                 return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case SchemaPackage.NOTATION_TYPE__PUBLIC:
+            case XMLSchema11Package.NOTATION_TYPE__PUBLIC:
                 return PUBLIC_EDEFAULT == null ? public_ != null : !PUBLIC_EDEFAULT.equals(public_);
-            case SchemaPackage.NOTATION_TYPE__SYSTEM:
+            case XMLSchema11Package.NOTATION_TYPE__SYSTEM:
                 return SYSTEM_EDEFAULT == null ? system != null : !SYSTEM_EDEFAULT.equals(system);
         }
         return super.eIsSet(featureID);

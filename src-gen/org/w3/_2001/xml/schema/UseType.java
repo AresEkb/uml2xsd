@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Use Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.w3._2001.xml.schema.SchemaPackage#getUseType()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getUseType()
  * @model extendedMetaData="name='use_._type'"
  * @generated
  */

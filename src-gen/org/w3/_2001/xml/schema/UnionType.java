@@ -28,8 +28,8 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getUnionType()
- * @model extendedMetaData="name='union_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getUnionType()
+ * @model extendedMetaData="name='union_._type' kind='mixed'"
  * @generated
  */
 public interface UnionType extends Annotated {
@@ -43,8 +43,8 @@ public interface UnionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getUnionType_SimpleType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getUnionType_SimpleType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace'"
      * @generated
      */
@@ -60,7 +60,7 @@ public interface UnionType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Member Types</em>' attribute.
      * @see #setMemberTypes(List)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getUnionType_MemberTypes()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getUnionType_MemberTypes()
      * @model dataType="org.w3._2001.xml.schema.MemberTypesType" many="false"
      *        extendedMetaData="kind='attribute' name='memberTypes'"
      * @generated

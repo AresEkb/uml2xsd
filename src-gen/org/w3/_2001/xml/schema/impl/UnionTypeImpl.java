@@ -4,25 +4,14 @@ package org.w3._2001.xml.schema.impl;
 
 import java.util.Collection;
 import java.util.List;
-
 import javax.xml.namespace.QName;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.w3._2001.xml.schema.LocalSimpleType;
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.UnionType;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,16 +28,6 @@ import org.w3._2001.xml.schema.UnionType;
  * @generated
  */
 public class UnionTypeImpl extends AnnotatedImpl implements UnionType {
-    /**
-     * The cached value of the '{@link #getSimpleType() <em>Simple Type</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getSimpleType()
-     * @generated
-     * @ordered
-     */
-    protected EList<LocalSimpleType> simpleType;
-
     /**
      * The default value of the '{@link #getMemberTypes() <em>Member Types</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -85,7 +64,7 @@ public class UnionTypeImpl extends AnnotatedImpl implements UnionType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.UNION_TYPE;
+        return XMLSchema11Package.Literals.UNION_TYPE;
     }
 
     /**
@@ -94,10 +73,7 @@ public class UnionTypeImpl extends AnnotatedImpl implements UnionType {
      * @generated
      */
     public EList<LocalSimpleType> getSimpleType() {
-        if (simpleType == null) {
-            simpleType = new EObjectContainmentEList<LocalSimpleType>(LocalSimpleType.class, this, SchemaPackage.UNION_TYPE__SIMPLE_TYPE);
-        }
-        return simpleType;
+        return getMixed().list(XMLSchema11Package.Literals.UNION_TYPE__SIMPLE_TYPE);
     }
 
     /**
@@ -118,21 +94,7 @@ public class UnionTypeImpl extends AnnotatedImpl implements UnionType {
         List<QName> oldMemberTypes = memberTypes;
         memberTypes = newMemberTypes;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.UNION_TYPE__MEMBER_TYPES, oldMemberTypes, memberTypes));
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case SchemaPackage.UNION_TYPE__SIMPLE_TYPE:
-                return ((InternalEList<?>)getSimpleType()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.UNION_TYPE__MEMBER_TYPES, oldMemberTypes, memberTypes));
     }
 
     /**
@@ -143,9 +105,9 @@ public class UnionTypeImpl extends AnnotatedImpl implements UnionType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.UNION_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.UNION_TYPE__SIMPLE_TYPE:
                 return getSimpleType();
-            case SchemaPackage.UNION_TYPE__MEMBER_TYPES:
+            case XMLSchema11Package.UNION_TYPE__MEMBER_TYPES:
                 return getMemberTypes();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -160,11 +122,11 @@ public class UnionTypeImpl extends AnnotatedImpl implements UnionType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.UNION_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.UNION_TYPE__SIMPLE_TYPE:
                 getSimpleType().clear();
                 getSimpleType().addAll((Collection<? extends LocalSimpleType>)newValue);
                 return;
-            case SchemaPackage.UNION_TYPE__MEMBER_TYPES:
+            case XMLSchema11Package.UNION_TYPE__MEMBER_TYPES:
                 setMemberTypes((List<QName>)newValue);
                 return;
         }
@@ -179,10 +141,10 @@ public class UnionTypeImpl extends AnnotatedImpl implements UnionType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.UNION_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.UNION_TYPE__SIMPLE_TYPE:
                 getSimpleType().clear();
                 return;
-            case SchemaPackage.UNION_TYPE__MEMBER_TYPES:
+            case XMLSchema11Package.UNION_TYPE__MEMBER_TYPES:
                 setMemberTypes(MEMBER_TYPES_EDEFAULT);
                 return;
         }
@@ -197,9 +159,9 @@ public class UnionTypeImpl extends AnnotatedImpl implements UnionType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.UNION_TYPE__SIMPLE_TYPE:
-                return simpleType != null && !simpleType.isEmpty();
-            case SchemaPackage.UNION_TYPE__MEMBER_TYPES:
+            case XMLSchema11Package.UNION_TYPE__SIMPLE_TYPE:
+                return !getSimpleType().isEmpty();
+            case XMLSchema11Package.UNION_TYPE__MEMBER_TYPES:
                 return MEMBER_TYPES_EDEFAULT == null ? memberTypes != null : !MEMBER_TYPES_EDEFAULT.equals(memberTypes);
         }
         return super.eIsSet(featureID);

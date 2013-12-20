@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.AnyType;
-import org.w3._2001.xml.schema.SchemaFactory;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Factory;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
      * @generated
      * @ordered
      */
-    protected static final Object MAX_OCCURS_EDEFAULT = SchemaFactory.eINSTANCE.createFromString(SchemaPackage.eINSTANCE.getAllNNI(), "1");
+    protected static final Object MAX_OCCURS_EDEFAULT = XMLSchema11Factory.eINSTANCE.createFromString(XMLSchema11Package.eINSTANCE.getAllNNI(), "1");
 
     /**
      * The cached value of the '{@link #getMaxOccurs() <em>Max Occurs</em>}' attribute.
@@ -126,7 +126,7 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ANY_TYPE;
+        return XMLSchema11Package.Literals.ANY_TYPE;
     }
 
     /**
@@ -149,7 +149,7 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
         boolean oldMaxOccursESet = maxOccursESet;
         maxOccursESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ANY_TYPE__MAX_OCCURS, oldMaxOccurs, maxOccurs, !oldMaxOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ANY_TYPE__MAX_OCCURS, oldMaxOccurs, maxOccurs, !oldMaxOccursESet));
     }
 
     /**
@@ -163,7 +163,7 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
         maxOccurs = MAX_OCCURS_EDEFAULT;
         maxOccursESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ANY_TYPE__MAX_OCCURS, oldMaxOccurs, MAX_OCCURS_EDEFAULT, oldMaxOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ANY_TYPE__MAX_OCCURS, oldMaxOccurs, MAX_OCCURS_EDEFAULT, oldMaxOccursESet));
     }
 
     /**
@@ -195,7 +195,7 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
         boolean oldMinOccursESet = minOccursESet;
         minOccursESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ANY_TYPE__MIN_OCCURS, oldMinOccurs, minOccurs, !oldMinOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ANY_TYPE__MIN_OCCURS, oldMinOccurs, minOccurs, !oldMinOccursESet));
     }
 
     /**
@@ -209,7 +209,7 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
         minOccurs = MIN_OCCURS_EDEFAULT;
         minOccursESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ANY_TYPE__MIN_OCCURS, oldMinOccurs, MIN_OCCURS_EDEFAULT, oldMinOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ANY_TYPE__MIN_OCCURS, oldMinOccurs, MIN_OCCURS_EDEFAULT, oldMinOccursESet));
     }
 
     /**
@@ -239,7 +239,7 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
         List<Object> oldNotQName = notQName;
         notQName = newNotQName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ANY_TYPE__NOT_QNAME, oldNotQName, notQName));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ANY_TYPE__NOT_QNAME, oldNotQName, notQName));
     }
 
     /**
@@ -250,11 +250,11 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.ANY_TYPE__MAX_OCCURS:
+            case XMLSchema11Package.ANY_TYPE__MAX_OCCURS:
                 return getMaxOccurs();
-            case SchemaPackage.ANY_TYPE__MIN_OCCURS:
+            case XMLSchema11Package.ANY_TYPE__MIN_OCCURS:
                 return getMinOccurs();
-            case SchemaPackage.ANY_TYPE__NOT_QNAME:
+            case XMLSchema11Package.ANY_TYPE__NOT_QNAME:
                 return getNotQName();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -269,13 +269,13 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.ANY_TYPE__MAX_OCCURS:
+            case XMLSchema11Package.ANY_TYPE__MAX_OCCURS:
                 setMaxOccurs(newValue);
                 return;
-            case SchemaPackage.ANY_TYPE__MIN_OCCURS:
+            case XMLSchema11Package.ANY_TYPE__MIN_OCCURS:
                 setMinOccurs((BigInteger)newValue);
                 return;
-            case SchemaPackage.ANY_TYPE__NOT_QNAME:
+            case XMLSchema11Package.ANY_TYPE__NOT_QNAME:
                 setNotQName((List<Object>)newValue);
                 return;
         }
@@ -290,13 +290,13 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ANY_TYPE__MAX_OCCURS:
+            case XMLSchema11Package.ANY_TYPE__MAX_OCCURS:
                 unsetMaxOccurs();
                 return;
-            case SchemaPackage.ANY_TYPE__MIN_OCCURS:
+            case XMLSchema11Package.ANY_TYPE__MIN_OCCURS:
                 unsetMinOccurs();
                 return;
-            case SchemaPackage.ANY_TYPE__NOT_QNAME:
+            case XMLSchema11Package.ANY_TYPE__NOT_QNAME:
                 setNotQName(NOT_QNAME_EDEFAULT);
                 return;
         }
@@ -311,11 +311,11 @@ public class AnyTypeImpl extends WildcardImpl implements AnyType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ANY_TYPE__MAX_OCCURS:
+            case XMLSchema11Package.ANY_TYPE__MAX_OCCURS:
                 return isSetMaxOccurs();
-            case SchemaPackage.ANY_TYPE__MIN_OCCURS:
+            case XMLSchema11Package.ANY_TYPE__MIN_OCCURS:
                 return isSetMinOccurs();
-            case SchemaPackage.ANY_TYPE__NOT_QNAME:
+            case XMLSchema11Package.ANY_TYPE__NOT_QNAME:
                 return NOT_QNAME_EDEFAULT == null ? notQName != null : !NOT_QNAME_EDEFAULT.equals(notQName);
         }
         return super.eIsSet(featureID);

@@ -16,8 +16,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getImportType()
- * @model extendedMetaData="name='import_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getImportType()
+ * @model extendedMetaData="name='import_._type' kind='mixed'"
  * @generated
  */
 public interface ImportType extends Annotated {
@@ -31,7 +31,7 @@ public interface ImportType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Namespace</em>' attribute.
      * @see #setNamespace(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getImportType_Namespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getImportType_Namespace()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI"
      *        extendedMetaData="kind='attribute' name='namespace'"
      * @generated
@@ -58,7 +58,7 @@ public interface ImportType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Schema Location</em>' attribute.
      * @see #setSchemaLocation(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getImportType_SchemaLocation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getImportType_SchemaLocation()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI"
      *        extendedMetaData="kind='attribute' name='schemaLocation'"
      * @generated

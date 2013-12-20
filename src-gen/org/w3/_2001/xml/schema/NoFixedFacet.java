@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getNoFixedFacet()
- * @model extendedMetaData="name='noFixedFacet' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getNoFixedFacet()
+ * @model extendedMetaData="name='noFixedFacet' kind='mixed'"
  * @generated
  */
 public interface NoFixedFacet extends Facet {

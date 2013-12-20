@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bdt="urn:EEC:RDM:BaseDataTypes:v0.7.0" xmlns:csde="urn:EEC:RDM:SimpleDataObjects:v0.7.0" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" targetNamespace="urn:EEC:RDM:SimpleDataObjects:v0.7.0" version="0.7.0" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:import namespace="urn:EEC:RDM:BaseDataTypes:v0.7.0" schemaLocation="EEC_RDM_BaseDataTypes_v0.7.0.xsd"/>
+  <!-- RDM-SDE-00046: Иные сведения (Сведения. Текст) -->
+  <xs:element name="AdditionalInfoText" type="bdt:TextType">
+    <xs:annotation>
+      <xs:documentation>Дополнительная информация, относящаяся к описываемому объекту</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00005: Адрес в свободной форме (Адрес. Текст) -->
+  <xs:element name="AddressText" type="bdt:TextType">
+    <xs:annotation>
+      <xs:documentation>Набор элементов адреса, представленных в свободной форме в тексте</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00019: Наименование адресата (Адресат. Имя) -->
+  <xs:element name="AddresseeName" type="bdt:NameType">
+    <xs:annotation>
+      <xs:documentation>Имя физического лица или наименование юридического лица, для которого предназначено отправление</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00016: Наименование заявителя (Заявитель. Имя) -->
+  <xs:element name="ApplicantName" type="bdt:NameType">
+    <xs:annotation>
+      <xs:documentation>Имя физического лица или наименование юридического лица, подавшего заявление или заявку</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00049: Признак обработки (Признак обработки. Индикатор) -->
+  <xs:element name="ApprovalIndicator" type="bdt:IndicatorType">
+    <xs:annotation>
+      <xs:documentation>Признак, принимающий одно из двух значений: «принято» или «отклонено»</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDT-00027: Банковский счет (Банковский счет_ Идентификатор. Тип) -->
+  <xs:simpleType name="BankAccountType">
+    <xs:annotation>
+      <xs:documentation>Счёт, открываемый банком юридическим или физическим лицам для их участия в безналичном денежном обороте и аккумулировании на счёте безналичных денежных средств для целевого использования</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:IdentifierType"/>
+  </xs:simpleType>
+  <!-- RDM-SDE-00027: Корреспондентский счет (Корреспондентский счет. Идентификатор) -->
+  <xs:element name="BankCorrAccountId" type="csde:BankAccountType">
+    <xs:annotation>
+      <xs:documentation>Счёт, открываемый кредитной организации (банку) в подразделении центрального банка или в иной кредитной организации</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00026: Идентификатор банка (Банк. Идентификатор) -->
+  <xs:element name="BankId" type="csde:BankIdType">
+    <xs:annotation>
+      <xs:documentation>Уникальный идентификатор банка, используемый в платежных документах (платёжное поручение, аккредитив)</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDT-00026: Идентификатор банка (Банк_ Идентификатор. Тип) -->
+  <xs:complexType name="BankIdType">
+    <xs:annotation>
+      <xs:documentation>Уникальный идентификатор банка, используемый в платежных документах (платёжное поручение, аккредитив и др.)</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base="csde:NationalIdType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- RDM-SDE-00055: Наименование банка (Банк. Имя) -->
+  <xs:element name="BankName" type="csde:Name300Type">
+    <xs:annotation>
+      <xs:documentation>Полное наименование банка согласно учредительному документу</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00011: Номер дома (Номер дома. Идентификатор) -->
+  <xs:element name="BuildingNumberId" type="csde:BuildingNumberIdType"/>
+  <!-- RDM-SDT-00057: Номер дома (Номер дома. Тип) -->
+  <xs:simpleType name="BuildingNumberIdType">
+    <xs:annotation>
+      <xs:documentation>Номер дома, корпуса, строения</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:IdentifierType"/>
+  </xs:simpleType>
+  <!-- RDM-SDT-00023: Организационно-правовая форма предприятия (организации) (Организационно-правовая форма_ Код. Тип) -->
+  <xs:simpleType name="BusinessEntityType">
+    <xs:restriction base="bdt:CodeType"/>
+  </xs:simpleType>
+  <!-- RDM-SDE-00023: Организационно-правовая форма предприятия (организации) (Организационно-правовая форма. Код) -->
+  <xs:element name="BusinessEntityTypeCode" type="csde:BusinessEntityType">
+    <xs:annotation>
+      <xs:documentation>Юридическая форма, в которой осуществляется регистрация и деятельность юридического лица</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00009: Город (Город. Имя) -->
+  <xs:element name="CityName" type="csde:Name120Type">
+    <xs:annotation>
+      <xs:documentation>Наименование города</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00014: Вид связи (Вид связи. Код) -->
+  <xs:element name="CommunicationChannelCode" type="csde:CommunicationChannelCodeType"/>
+  <!-- RDM-SDT-00014: Вид связи (Вид связи_ Код. Тип) -->
+  <xs:simpleType name="CommunicationChannelCodeType">
+    <xs:annotation>
+      <xs:documentation>Кодированное обозначение вида средства (канала) связи (телефон, факс, электронная почта и пр.)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType"/>
+  </xs:simpleType>
+  <!-- RDM-SDE-00015: Идентификатор канала связи (Канал связи. Идентификатор) -->
+  <xs:element name="CommunicationChannelId" type="csde:CommunicationChannelIdType">
+    <xs:annotation>
+      <xs:documentation>Значение контакта (указание телефона, факса, e-mail). Например, mail@example.com, +7(123)123-45-67</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDT-00015: Идентификатор канала связи (Канал связи_ Идентификатор. Тип) -->
+  <xs:simpleType name="CommunicationChannelIdType">
+    <xs:annotation>
+      <xs:documentation>Последовательность символов идентифицирующая канал связи (указание номера телефона, факса, адреса электронной почты и пр.)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:IdentifierType"/>
+  </xs:simpleType>
+  <!-- RDM-SDE-00001: Код страны (Страна. Код) -->
+  <xs:element name="CountryCode" type="csde:CountryCodeType"/>
+  <!-- RDM-SDT-00001: Код страны (Страна_ Код. Альфа-2. Тип) -->
+  <xs:simpleType name="CountryCodeType">
+    <xs:annotation>
+      <xs:documentation>Кодированное обозначение страны</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType">
+      <xs:pattern value="[A-Z]{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- RDM-SDE-00002: Описание (Описание. Текст) -->
+  <xs:element name="DescriptionText" type="bdt:TextType">
+    <xs:annotation>
+      <xs:documentation>Текстовое представление объекта, явления или процесса в свободной форме</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00008: Район (Район. Имя) -->
+  <xs:element name="DistrictName" type="csde:Name120Type">
+    <xs:annotation>
+      <xs:documentation>Наименование единицы административно-территориального деления уровня, следующего за региональным</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00045: Дата документа (Документ. Дата) -->
+  <xs:element name="DocCreationDate" type="bdt:DateType">
+    <xs:annotation>
+      <xs:documentation>Дата, на которую приходится завершение создания документа</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00054: Вид документа (Вид документа. Код) -->
+  <xs:element name="DocKindCode" type="csde:DocKindCodeType"/>
+  <!-- RDM-SDT-00054: Вид документа (Вид документа_ Код. Тип) -->
+  <xs:simpleType name="DocKindCodeType">
+    <xs:annotation>
+      <xs:documentation>Вид документа в соответствии со справочником «Виды документов»</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType"/>
+  </xs:simpleType>
+  <!-- RDM-SDE-00044: Номер документа (Документ. Идентификатор) -->
+  <xs:element name="DocNumberId" type="bdt:IdentifierType">
+    <xs:annotation>
+      <xs:documentation>Цифровое или буквенно-цифровое обозначение, присваиваемое документу при его регистрации</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00052: Дата окончания действия документа (Окончание действия документа. Дата) -->
+  <xs:element name="DocValidityDate" type="bdt:DateType">
+    <xs:annotation>
+      <xs:documentation>Дата окончания срока, в течение которого документ имеет силу</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00056: Продолжительность действия документа (Продолжительность действия документа. Продолжительность) -->
+  <xs:element name="DocValidityDuration" type="bdt:DurationType">
+    <xs:annotation>
+      <xs:documentation>Продолжительность периода времени, в течение которого документ имеет силу</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00038: Дата и время электронного документа (Электронный документ. Дата и время) -->
+  <xs:element name="EDocDateTime" type="bdt:DateTimeType">
+    <xs:annotation>
+      <xs:documentation>Дата и время создания электронного документа</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00036: Идентификатор электронного документа (Электронный документ. Идентификатор) -->
+  <xs:element name="EDocId" type="bdt:IdentifierType">
+    <xs:annotation>
+      <xs:documentation>Строка символов, однозначно идентифицирующая электронный документ</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00037: Идентификатор исходного электронного документа (Исходный электронный документ. Идентификатор) -->
+  <xs:element name="EDocRefId" type="bdt:IdentifierType">
+    <xs:annotation>
+      <xs:documentation>Идентификатор электронного документа, в ответ на который был сформирован данный документ</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00040: Код статуса электронного документа (Статус электронного документа. Код) -->
+  <xs:element name="EDocStatusCode" type="csde:EDocStatusCodeType"/>
+  <!-- RDM-SDT-00040: Код статуса электронного документа (Статус электронного документа_ Код. Тип) -->
+  <xs:simpleType name="EDocStatusCodeType">
+    <xs:annotation>
+      <xs:documentation>Код статуса электронного документа</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType"/>
+  </xs:simpleType>
+  <!-- RDM-SDE-00051: Код языка (Язык. Код) -->
+  <xs:element name="LanguageCode" type="csde:LanguageCodeType">
+    <xs:annotation>
+      <xs:documentation>Кодированное обозначение естественного языка</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDT-00051: Код языка (Язык_ Код. Тип) -->
+  <xs:simpleType name="LanguageCodeType">
+    <xs:annotation>
+      <xs:documentation>Код языка для одного текстового элемента или их группы</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType">
+      <xs:pattern value="[a-z]{2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- RDM-SDT-00055: Имя до 120 символов (Имя. До 120 символов. Тип) -->
+  <xs:simpleType name="Name120Type">
+    <xs:annotation>
+      <xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 120 символов</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:NameType"/>
+  </xs:simpleType>
+  <!-- RDM-SDT-00056: Имя до 300 символов (Имя. До 300 символов. Тип) -->
+  <xs:simpleType name="Name300Type">
+    <xs:annotation>
+      <xs:documentation>Слово или фраза, обозначающая отличительную особенность объекта, явления или процесса, содержащая не более 300 символов</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:NameType"/>
+  </xs:simpleType>
+  <!-- RDM-SDT-00059: Национальный код (Национальный код. Тип) -->
+  <xs:complexType name="NationalCodeType">
+    <xs:annotation>
+      <xs:documentation>Код с учетом национальной специфики</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="bdt:CodeType">
+        <xs:attribute name="countryCode" type="csde:CountryCodeType" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- RDM-SDT-00058: Национальный идентификатор (Национальный идентификатор. Тип) -->
+  <xs:complexType name="NationalIdType">
+    <xs:annotation>
+      <xs:documentation>Идентификатор с учетом национальной специфики</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="bdt:IdentifierType">
+        <xs:attribute name="countryCode" type="csde:CountryCodeType" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- RDM-SDE-00032: Код организации (Организация. Код) -->
+  <xs:element name="OrganizationCode" type="csde:OrganizationCodeType"/>
+  <!-- RDM-SDT-00032: Вид организации (Организация_ Код. Тип) -->
+  <xs:complexType name="OrganizationCodeType">
+    <xs:annotation>
+      <xs:documentation>Классификационный код юридического лица, предназначенный для целей статистического учета</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base="csde:NationalCodeType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- RDM-SDE-00024: Идентификатор организации (Организация. Идентификатор) -->
+  <xs:element name="OrganizationId" type="csde:OrganizationIdType"/>
+  <!-- RDM-SDT-00024: Идентификатор организации (Организация_ Идентификатор. Тип) -->
+  <xs:complexType name="OrganizationIdType">
+    <xs:annotation>
+      <xs:documentation>Уникальный идентификатор организации в национальном реестре юридических лиц</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base="csde:NationalIdType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <!-- RDM-SDE-00018: Количество листов (Лист. Количество) -->
+  <xs:element name="PageQuantity" type="bdt:QuantityType">
+    <xs:annotation>
+      <xs:documentation>Общее количество листов в документе</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00028: Номер счета получателя платежа (Счет получателя платежа. Идентификатор) -->
+  <xs:element name="PaieeAccountId" type="csde:BankAccountType">
+    <xs:annotation>
+      <xs:documentation>Номер счета, на который производится зачисление денежной суммы</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00034: Наименование получателя платежа (Получатель платежа. Имя) -->
+  <xs:element name="PaieeName" type="csde:Name300Type">
+    <xs:annotation>
+      <xs:documentation>Имя физического лица или наименование юридического лица, получающего денежную сумму</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00035: Сумма платежа (Платеж. Сумма) -->
+  <xs:element name="PaymentAmount" type="bdt:AmountType">
+    <xs:annotation>
+      <xs:documentation>Величина денежной суммы, передаваемой (перечисляемой) плательщиком получателю платежа</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00029: Код бюджетной классификации платежа (Бюджетная классификация платежа. Код) -->
+  <xs:element name="PaymentBudgetCode" type="csde:PaymentBudgetCodeType"/>
+  <!-- RDM-SDT-00029: Код бюджетной классификации платежа (Бюджетная классификация платежа_ Код. Тип) -->
+  <xs:simpleType name="PaymentBudgetCodeType">
+    <xs:annotation>
+      <xs:documentation>Код, указываемый в соответствии с группировкой доходов и расходов бюджета по однородным признакам</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType">
+      <xs:pattern value="\d{6}|\d{20}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- RDM-SDE-00053: Вид платежа (Вид платежа. Код) -->
+  <xs:element name="PaymentCode" type="csde:PaymentCodeType"/>
+  <!-- RDM-SDT-00053: Вид платежа (Вид платежа_ Код. Тип) -->
+  <xs:simpleType name="PaymentCodeType">
+    <xs:annotation>
+      <xs:documentation>Вид платежа в соответствии со справочником «Виды платежей»</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType"/>
+  </xs:simpleType>
+  <!-- RDM-SDE-00050: Платежные реквизиты (Платежные реквизиты. Текст) -->
+  <xs:element name="PaymentInfoText" type="bdt:TextType">
+    <xs:annotation>
+      <xs:documentation>Сведения о платежных реквизитах в текстовой форме</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00033: Назначение платежа (Назначение платежа. Текст) -->
+  <xs:element name="PaymentPurposeText" type="bdt:TextType">
+    <xs:annotation>
+      <xs:documentation>Текстовое представление назначения платежа в платежном документе</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00006: Почтовый индекс (Почтовый индекс. Код) -->
+  <xs:element name="PostCode" type="csde:PostCodeType">
+    <xs:annotation>
+      <xs:documentation>Условное обозначение объекта почтовой связи</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDT-00006: Почтовый индекс (Почтовый индекс_ Код. Тип) -->
+  <xs:simpleType name="PostCodeType">
+    <xs:annotation>
+      <xs:documentation>Условное обозначение почтового адреса, присваиваемое объекту почтовой связи</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType">
+      <xs:minLength value="3"/>
+      <xs:maxLength value="9"/>
+      <xs:pattern value="[A-Z0-9][A-Z0-9 -]{1,7}[A-Z0-9]"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- RDM-SDE-00013: Номер абонентского ящика (Абонентский ящик. Идентификатор) -->
+  <xs:element name="PostOfficeBoxId" type="bdt:IdentifierType">
+    <xs:annotation>
+      <xs:documentation>Номер абонентского ящика на предприятии почтовой связи</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00007: Регион (Регион. Имя) -->
+  <xs:element name="RegionName" type="csde:Name120Type">
+    <xs:annotation>
+      <xs:documentation>Наименование единицы административно-территориального деления первого уровня</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00012: Номер офиса (Офис. Идентификатор) -->
+  <xs:element name="RoomNumberId" type="bdt:IdentifierType">
+    <xs:annotation>
+      <xs:documentation>Обозначение офиса или квартиры как части адреса юридического или физического лица</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00057: Населенный пункт (Населенный пункт. Имя) -->
+  <xs:element name="SettlementName" type="csde:Name120Type">
+    <xs:annotation>
+      <xs:documentation>Наименование населенного пункта</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00041: Дата и время установки статуса (Дата и время установки статуса. Дата и время) -->
+  <xs:element name="StatusDateTime" type="bdt:DateTimeType">
+    <xs:annotation>
+      <xs:documentation>Дата и время установки статуса</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00042: Примечание к статусу (Примечание к статусу. Текст) -->
+  <xs:element name="StatusNoteText" type="bdt:TextType">
+    <xs:annotation>
+      <xs:documentation>Примечание по статусу электронного документа</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00010: Улица (Улица. Имя) -->
+  <xs:element name="StreetName" type="csde:Name120Type">
+    <xs:annotation>
+      <xs:documentation>Наименование элемента улично-дорожной сети городской инфраструктуры</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00022: Наименование субъекта (Субъект. Имя) -->
+  <xs:element name="SubjectName" type="csde:Name300Type">
+    <xs:annotation>
+      <xs:documentation>Полное наименование юридического лица согласно учредительному документу или фамилия, имя и отчество физического лица</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDE-00030: Код причины постановки на учет (Причина постановки на учет. Код) -->
+  <xs:element name="TaxRegistrationReasonCode" type="csde:TaxRegistrationReasonCodeType"/>
+  <!-- RDM-SDT-00030: Код причины постановки на учет (Причина постановки на налоговый учет_ Код. Тип) -->
+  <xs:simpleType name="TaxRegistrationReasonCodeType">
+    <xs:annotation>
+      <xs:documentation>Код, идентифицирующий причину постановки организации на налоговый учет</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType">
+      <xs:pattern value="[0-9]{4}[A-Z0-9]{2}[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- RDM-SDE-00025: Идентификатор налогоплательщика (Налогоплательщик. Идентификатор) -->
+  <xs:element name="TaxpayerId" type="csde:TaxpayerIdType">
+    <xs:annotation>
+      <xs:documentation>Идентификатор юридического или физического лица в национальном реестре налогоплательщиков</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- RDM-SDT-00025: Идентификатор налогоплательщика (Налогоплательщик_ Идентификатор. Тип) -->
+  <xs:simpleType name="TaxpayerIdType">
+    <xs:annotation>
+      <xs:documentation>Уникальный идентификатор юридического или физического лица в национальном реестре налогоплательщиков</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:IdentifierType">
+      <xs:pattern value="\d{9,10}|\d{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- RDM-SDE-00031: Код территории (Территория. Код) -->
+  <xs:element name="TerritoryCode" type="csde:TerritoryCodeType"/>
+  <!-- RDM-SDT-00031: Код территории (Территория_ Код. Тип) -->
+  <xs:simpleType name="TerritoryCodeType">
+    <xs:annotation>
+      <xs:documentation>Код единицы административно-территориального деления</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="bdt:CodeType">
+      <xs:minLength value="5"/>
+      <xs:maxLength value="11"/>
+      <xs:pattern value="\d{5,11}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- RDM-SDE-00003: Транслитерация (Транслитерация. Текст) -->
+  <xs:element name="TransliterationText" type="csde:TransliterationType"/>
+  <!-- RDM-SDT-00003: Транслитерация (Транслитерация_ Текст. Тип) -->
+  <xs:complexType name="TransliterationType">
+    <xs:annotation>
+      <xs:documentation>Точная передача знаков одной письменности знаками другой письменности, при которой каждый знак (или последовательность знаков) одной системы письма передаётся одним и тем же знаком (или последовательностью знаков) другой системы письма</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="bdt:TextType">
+        <xs:attribute name="sourceLanguage" type="csde:LanguageCodeType" use="required"/>
+        <xs:attribute name="targetLanguage" type="csde:LanguageCodeType" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

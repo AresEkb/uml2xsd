@@ -16,8 +16,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getFieldType()
- * @model extendedMetaData="name='field_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getFieldType()
+ * @model extendedMetaData="name='field_._type' kind='mixed'"
  * @generated
  */
 public interface FieldType extends Annotated {
@@ -31,7 +31,7 @@ public interface FieldType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Xpath</em>' attribute.
      * @see #setXpath(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getFieldType_Xpath()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getFieldType_Xpath()
      * @model dataType="org.w3._2001.xml.schema.XpathType" required="true"
      *        extendedMetaData="kind='attribute' name='xpath'"
      * @generated
@@ -58,7 +58,7 @@ public interface FieldType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Xpath Default Namespace</em>' attribute.
      * @see #setXpathDefaultNamespace(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getFieldType_XpathDefaultNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getFieldType_XpathDefaultNamespace()
      * @model dataType="org.w3._2001.xml.schema.XpathDefaultNamespace"
      *        extendedMetaData="kind='attribute' name='xpathDefaultNamespace'"
      * @generated

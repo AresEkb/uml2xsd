@@ -5,7 +5,7 @@ package org.w3._2001.xml.schema.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.w3._2001.xml.schema.NoFixedFacet;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class NoFixedFacetImpl extends FacetImpl implements NoFixedFacet {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.NO_FIXED_FACET;
+        return XMLSchema11Package.Literals.NO_FIXED_FACET;
     }
 
 } //NoFixedFacetImpl

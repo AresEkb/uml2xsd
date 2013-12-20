@@ -3,18 +3,23 @@
 package org.w3._2001.xml.schema.impl;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.w3._2001.xml.schema.All;
 import org.w3._2001.xml.schema.AnnotationType;
 import org.w3._2001.xml.schema.AnyAttributeType;
@@ -44,7 +49,6 @@ import org.w3._2001.xml.schema.OverrideType;
 import org.w3._2001.xml.schema.PatternType;
 import org.w3._2001.xml.schema.RedefineType;
 import org.w3._2001.xml.schema.RestrictionType1;
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.SchemaType;
 import org.w3._2001.xml.schema.SelectorType;
 import org.w3._2001.xml.schema.SimpleContentType;
@@ -55,6 +59,7 @@ import org.w3._2001.xml.schema.TopLevelSimpleType;
 import org.w3._2001.xml.schema.TotalDigitsType;
 import org.w3._2001.xml.schema.UnionType;
 import org.w3._2001.xml.schema.WhiteSpaceType;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -165,7 +170,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.DOCUMENT_ROOT;
+        return XMLSchema11Package.Literals.DOCUMENT_ROOT;
     }
 
     /**
@@ -175,7 +180,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      */
     public FeatureMap getMixed() {
         if (mixed == null) {
-            mixed = new BasicFeatureMap(this, SchemaPackage.DOCUMENT_ROOT__MIXED);
+            mixed = new BasicFeatureMap(this, XMLSchema11Package.DOCUMENT_ROOT__MIXED);
         }
         return mixed;
     }
@@ -187,7 +192,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      */
     public EMap<String, String> getXMLNSPrefixMap() {
         if (xMLNSPrefixMap == null) {
-            xMLNSPrefixMap = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, SchemaPackage.DOCUMENT_ROOT__XMLNS_PREFIX_MAP);
+            xMLNSPrefixMap = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, XMLSchema11Package.DOCUMENT_ROOT__XMLNS_PREFIX_MAP);
         }
         return xMLNSPrefixMap;
     }
@@ -199,7 +204,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      */
     public EMap<String, String> getXSISchemaLocation() {
         if (xSISchemaLocation == null) {
-            xSISchemaLocation = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, SchemaPackage.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION);
+            xSISchemaLocation = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, XMLSchema11Package.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION);
         }
         return xSISchemaLocation;
     }
@@ -210,16 +215,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public All getAll() {
-        return (All)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ALL, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAll(All newAll, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ALL, newAll, msgs);
+        return (All)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ALL, true);
     }
 
     /**
@@ -228,7 +224,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setAll(All newAll) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ALL, newAll);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ALL, newAll);
     }
 
     /**
@@ -237,16 +233,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public AnnotationType getAnnotation() {
-        return (AnnotationType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ANNOTATION, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAnnotation(AnnotationType newAnnotation, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ANNOTATION, newAnnotation, msgs);
+        return (AnnotationType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ANNOTATION, true);
     }
 
     /**
@@ -255,7 +242,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setAnnotation(AnnotationType newAnnotation) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ANNOTATION, newAnnotation);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ANNOTATION, newAnnotation);
     }
 
     /**
@@ -264,16 +251,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public AnyType getAny() {
-        return (AnyType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ANY, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAny(AnyType newAny, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ANY, newAny, msgs);
+        return (AnyType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ANY, true);
     }
 
     /**
@@ -282,7 +260,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setAny(AnyType newAny) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ANY, newAny);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ANY, newAny);
     }
 
     /**
@@ -291,16 +269,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public AnyAttributeType getAnyAttribute() {
-        return (AnyAttributeType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ANY_ATTRIBUTE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAnyAttribute(AnyAttributeType newAnyAttribute, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ANY_ATTRIBUTE, newAnyAttribute, msgs);
+        return (AnyAttributeType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ANY_ATTRIBUTE, true);
     }
 
     /**
@@ -309,7 +278,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setAnyAttribute(AnyAttributeType newAnyAttribute) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ANY_ATTRIBUTE, newAnyAttribute);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ANY_ATTRIBUTE, newAnyAttribute);
     }
 
     /**
@@ -318,16 +287,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public AppinfoType getAppinfo() {
-        return (AppinfoType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__APPINFO, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAppinfo(AppinfoType newAppinfo, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__APPINFO, newAppinfo, msgs);
+        return (AppinfoType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__APPINFO, true);
     }
 
     /**
@@ -336,7 +296,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setAppinfo(AppinfoType newAppinfo) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__APPINFO, newAppinfo);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__APPINFO, newAppinfo);
     }
 
     /**
@@ -345,16 +305,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public Assertion getAssertion() {
-        return (Assertion)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ASSERTION, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAssertion(Assertion newAssertion, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ASSERTION, newAssertion, msgs);
+        return (Assertion)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ASSERTION, true);
     }
 
     /**
@@ -363,7 +314,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setAssertion(Assertion newAssertion) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ASSERTION, newAssertion);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ASSERTION, newAssertion);
     }
 
     /**
@@ -372,16 +323,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public EObject getFacet() {
-        return (EObject)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__FACET, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetFacet(EObject newFacet, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__FACET, newFacet, msgs);
+        return (EObject)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__FACET, true);
     }
 
     /**
@@ -390,16 +332,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public TopLevelAttribute getAttribute() {
-        return (TopLevelAttribute)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ATTRIBUTE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAttribute(TopLevelAttribute newAttribute, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ATTRIBUTE, newAttribute, msgs);
+        return (TopLevelAttribute)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ATTRIBUTE, true);
     }
 
     /**
@@ -408,7 +341,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setAttribute(TopLevelAttribute newAttribute) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ATTRIBUTE, newAttribute);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ATTRIBUTE, newAttribute);
     }
 
     /**
@@ -417,16 +350,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public NamedAttributeGroup getAttributeGroup() {
-        return (NamedAttributeGroup)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ATTRIBUTE_GROUP, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAttributeGroup(NamedAttributeGroup newAttributeGroup, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ATTRIBUTE_GROUP, newAttributeGroup, msgs);
+        return (NamedAttributeGroup)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ATTRIBUTE_GROUP, true);
     }
 
     /**
@@ -435,7 +359,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setAttributeGroup(NamedAttributeGroup newAttributeGroup) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ATTRIBUTE_GROUP, newAttributeGroup);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ATTRIBUTE_GROUP, newAttributeGroup);
     }
 
     /**
@@ -444,16 +368,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public ExplicitGroup getChoice() {
-        return (ExplicitGroup)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__CHOICE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetChoice(ExplicitGroup newChoice, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__CHOICE, newChoice, msgs);
+        return (ExplicitGroup)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__CHOICE, true);
     }
 
     /**
@@ -462,7 +377,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setChoice(ExplicitGroup newChoice) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__CHOICE, newChoice);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__CHOICE, newChoice);
     }
 
     /**
@@ -471,16 +386,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public ComplexContentType getComplexContent() {
-        return (ComplexContentType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__COMPLEX_CONTENT, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetComplexContent(ComplexContentType newComplexContent, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__COMPLEX_CONTENT, newComplexContent, msgs);
+        return (ComplexContentType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__COMPLEX_CONTENT, true);
     }
 
     /**
@@ -489,7 +395,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setComplexContent(ComplexContentType newComplexContent) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__COMPLEX_CONTENT, newComplexContent);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__COMPLEX_CONTENT, newComplexContent);
     }
 
     /**
@@ -498,16 +404,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public TopLevelComplexType getComplexType() {
-        return (TopLevelComplexType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__COMPLEX_TYPE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetComplexType(TopLevelComplexType newComplexType, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__COMPLEX_TYPE, newComplexType, msgs);
+        return (TopLevelComplexType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__COMPLEX_TYPE, true);
     }
 
     /**
@@ -516,7 +413,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setComplexType(TopLevelComplexType newComplexType) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__COMPLEX_TYPE, newComplexType);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__COMPLEX_TYPE, newComplexType);
     }
 
     /**
@@ -525,16 +422,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public DefaultOpenContentType getDefaultOpenContent() {
-        return (DefaultOpenContentType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetDefaultOpenContent(DefaultOpenContentType newDefaultOpenContent, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT, newDefaultOpenContent, msgs);
+        return (DefaultOpenContentType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT, true);
     }
 
     /**
@@ -543,7 +431,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setDefaultOpenContent(DefaultOpenContentType newDefaultOpenContent) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT, newDefaultOpenContent);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT, newDefaultOpenContent);
     }
 
     /**
@@ -552,16 +440,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public DocumentationType getDocumentation() {
-        return (DocumentationType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__DOCUMENTATION, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetDocumentation(DocumentationType newDocumentation, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__DOCUMENTATION, newDocumentation, msgs);
+        return (DocumentationType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__DOCUMENTATION, true);
     }
 
     /**
@@ -570,7 +449,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setDocumentation(DocumentationType newDocumentation) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__DOCUMENTATION, newDocumentation);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__DOCUMENTATION, newDocumentation);
     }
 
     /**
@@ -579,16 +458,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public TopLevelElement getElement() {
-        return (TopLevelElement)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ELEMENT, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetElement(TopLevelElement newElement, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ELEMENT, newElement, msgs);
+        return (TopLevelElement)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ELEMENT, true);
     }
 
     /**
@@ -597,7 +467,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setElement(TopLevelElement newElement) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ELEMENT, newElement);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ELEMENT, newElement);
     }
 
     /**
@@ -606,16 +476,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public NoFixedFacet getEnumeration() {
-        return (NoFixedFacet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__ENUMERATION, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetEnumeration(NoFixedFacet newEnumeration, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__ENUMERATION, newEnumeration, msgs);
+        return (NoFixedFacet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__ENUMERATION, true);
     }
 
     /**
@@ -624,7 +485,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setEnumeration(NoFixedFacet newEnumeration) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__ENUMERATION, newEnumeration);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__ENUMERATION, newEnumeration);
     }
 
     /**
@@ -633,16 +494,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public ExplicitTimezoneType getExplicitTimezone() {
-        return (ExplicitTimezoneType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__EXPLICIT_TIMEZONE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetExplicitTimezone(ExplicitTimezoneType newExplicitTimezone, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__EXPLICIT_TIMEZONE, newExplicitTimezone, msgs);
+        return (ExplicitTimezoneType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__EXPLICIT_TIMEZONE, true);
     }
 
     /**
@@ -651,7 +503,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setExplicitTimezone(ExplicitTimezoneType newExplicitTimezone) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__EXPLICIT_TIMEZONE, newExplicitTimezone);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__EXPLICIT_TIMEZONE, newExplicitTimezone);
     }
 
     /**
@@ -660,16 +512,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public FieldType getField() {
-        return (FieldType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__FIELD, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetField(FieldType newField, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__FIELD, newField, msgs);
+        return (FieldType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__FIELD, true);
     }
 
     /**
@@ -678,7 +521,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setField(FieldType newField) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__FIELD, newField);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__FIELD, newField);
     }
 
     /**
@@ -687,16 +530,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public NumFacet getFractionDigits() {
-        return (NumFacet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__FRACTION_DIGITS, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetFractionDigits(NumFacet newFractionDigits, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__FRACTION_DIGITS, newFractionDigits, msgs);
+        return (NumFacet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__FRACTION_DIGITS, true);
     }
 
     /**
@@ -705,7 +539,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setFractionDigits(NumFacet newFractionDigits) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__FRACTION_DIGITS, newFractionDigits);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__FRACTION_DIGITS, newFractionDigits);
     }
 
     /**
@@ -714,16 +548,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public NamedGroup getGroup() {
-        return (NamedGroup)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__GROUP, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetGroup(NamedGroup newGroup, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__GROUP, newGroup, msgs);
+        return (NamedGroup)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__GROUP, true);
     }
 
     /**
@@ -732,7 +557,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setGroup(NamedGroup newGroup) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__GROUP, newGroup);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__GROUP, newGroup);
     }
 
     /**
@@ -741,16 +566,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public ImportType getImport() {
-        return (ImportType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__IMPORT, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetImport(ImportType newImport, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__IMPORT, newImport, msgs);
+        return (ImportType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__IMPORT, true);
     }
 
     /**
@@ -759,7 +575,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setImport(ImportType newImport) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__IMPORT, newImport);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__IMPORT, newImport);
     }
 
     /**
@@ -768,16 +584,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public IncludeType getInclude() {
-        return (IncludeType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__INCLUDE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetInclude(IncludeType newInclude, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__INCLUDE, newInclude, msgs);
+        return (IncludeType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__INCLUDE, true);
     }
 
     /**
@@ -786,7 +593,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setInclude(IncludeType newInclude) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__INCLUDE, newInclude);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__INCLUDE, newInclude);
     }
 
     /**
@@ -795,16 +602,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public Keybase getKey() {
-        return (Keybase)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__KEY, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetKey(Keybase newKey, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__KEY, newKey, msgs);
+        return (Keybase)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__KEY, true);
     }
 
     /**
@@ -813,7 +611,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setKey(Keybase newKey) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__KEY, newKey);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__KEY, newKey);
     }
 
     /**
@@ -822,16 +620,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public KeyrefType getKeyref() {
-        return (KeyrefType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__KEYREF, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetKeyref(KeyrefType newKeyref, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__KEYREF, newKeyref, msgs);
+        return (KeyrefType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__KEYREF, true);
     }
 
     /**
@@ -840,7 +629,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setKeyref(KeyrefType newKeyref) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__KEYREF, newKeyref);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__KEYREF, newKeyref);
     }
 
     /**
@@ -849,16 +638,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public NumFacet getLength() {
-        return (NumFacet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__LENGTH, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetLength(NumFacet newLength, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__LENGTH, newLength, msgs);
+        return (NumFacet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__LENGTH, true);
     }
 
     /**
@@ -867,7 +647,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setLength(NumFacet newLength) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__LENGTH, newLength);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__LENGTH, newLength);
     }
 
     /**
@@ -876,16 +656,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public ListType getList() {
-        return (ListType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__LIST, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetList(ListType newList, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__LIST, newList, msgs);
+        return (ListType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__LIST, true);
     }
 
     /**
@@ -894,7 +665,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setList(ListType newList) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__LIST, newList);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__LIST, newList);
     }
 
     /**
@@ -903,16 +674,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public Facet getMaxExclusive() {
-        return (Facet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_EXCLUSIVE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetMaxExclusive(Facet newMaxExclusive, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_EXCLUSIVE, newMaxExclusive, msgs);
+        return (Facet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__MAX_EXCLUSIVE, true);
     }
 
     /**
@@ -921,7 +683,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setMaxExclusive(Facet newMaxExclusive) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_EXCLUSIVE, newMaxExclusive);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__MAX_EXCLUSIVE, newMaxExclusive);
     }
 
     /**
@@ -930,16 +692,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public Facet getMaxInclusive() {
-        return (Facet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_INCLUSIVE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetMaxInclusive(Facet newMaxInclusive, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_INCLUSIVE, newMaxInclusive, msgs);
+        return (Facet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__MAX_INCLUSIVE, true);
     }
 
     /**
@@ -948,7 +701,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setMaxInclusive(Facet newMaxInclusive) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_INCLUSIVE, newMaxInclusive);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__MAX_INCLUSIVE, newMaxInclusive);
     }
 
     /**
@@ -957,16 +710,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public NumFacet getMaxLength() {
-        return (NumFacet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_LENGTH, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetMaxLength(NumFacet newMaxLength, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_LENGTH, newMaxLength, msgs);
+        return (NumFacet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__MAX_LENGTH, true);
     }
 
     /**
@@ -975,7 +719,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setMaxLength(NumFacet newMaxLength) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__MAX_LENGTH, newMaxLength);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__MAX_LENGTH, newMaxLength);
     }
 
     /**
@@ -984,16 +728,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public Facet getMinExclusive() {
-        return (Facet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_EXCLUSIVE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetMinExclusive(Facet newMinExclusive, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_EXCLUSIVE, newMinExclusive, msgs);
+        return (Facet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__MIN_EXCLUSIVE, true);
     }
 
     /**
@@ -1002,7 +737,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setMinExclusive(Facet newMinExclusive) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_EXCLUSIVE, newMinExclusive);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__MIN_EXCLUSIVE, newMinExclusive);
     }
 
     /**
@@ -1011,16 +746,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public Facet getMinInclusive() {
-        return (Facet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_INCLUSIVE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetMinInclusive(Facet newMinInclusive, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_INCLUSIVE, newMinInclusive, msgs);
+        return (Facet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__MIN_INCLUSIVE, true);
     }
 
     /**
@@ -1029,7 +755,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setMinInclusive(Facet newMinInclusive) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_INCLUSIVE, newMinInclusive);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__MIN_INCLUSIVE, newMinInclusive);
     }
 
     /**
@@ -1038,16 +764,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public NumFacet getMinLength() {
-        return (NumFacet)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_LENGTH, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetMinLength(NumFacet newMinLength, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_LENGTH, newMinLength, msgs);
+        return (NumFacet)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__MIN_LENGTH, true);
     }
 
     /**
@@ -1056,7 +773,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setMinLength(NumFacet newMinLength) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__MIN_LENGTH, newMinLength);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__MIN_LENGTH, newMinLength);
     }
 
     /**
@@ -1065,16 +782,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public NotationType getNotation() {
-        return (NotationType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__NOTATION, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetNotation(NotationType newNotation, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__NOTATION, newNotation, msgs);
+        return (NotationType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__NOTATION, true);
     }
 
     /**
@@ -1083,7 +791,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setNotation(NotationType newNotation) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__NOTATION, newNotation);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__NOTATION, newNotation);
     }
 
     /**
@@ -1092,16 +800,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public OpenContentType getOpenContent() {
-        return (OpenContentType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__OPEN_CONTENT, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetOpenContent(OpenContentType newOpenContent, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__OPEN_CONTENT, newOpenContent, msgs);
+        return (OpenContentType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__OPEN_CONTENT, true);
     }
 
     /**
@@ -1110,7 +809,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setOpenContent(OpenContentType newOpenContent) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__OPEN_CONTENT, newOpenContent);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__OPEN_CONTENT, newOpenContent);
     }
 
     /**
@@ -1119,16 +818,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public OverrideType getOverride() {
-        return (OverrideType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__OVERRIDE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetOverride(OverrideType newOverride, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__OVERRIDE, newOverride, msgs);
+        return (OverrideType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__OVERRIDE, true);
     }
 
     /**
@@ -1137,7 +827,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setOverride(OverrideType newOverride) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__OVERRIDE, newOverride);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__OVERRIDE, newOverride);
     }
 
     /**
@@ -1146,16 +836,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public PatternType getPattern() {
-        return (PatternType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__PATTERN, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetPattern(PatternType newPattern, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__PATTERN, newPattern, msgs);
+        return (PatternType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__PATTERN, true);
     }
 
     /**
@@ -1164,7 +845,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setPattern(PatternType newPattern) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__PATTERN, newPattern);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__PATTERN, newPattern);
     }
 
     /**
@@ -1173,16 +854,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public RedefineType getRedefine() {
-        return (RedefineType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__REDEFINE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetRedefine(RedefineType newRedefine, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__REDEFINE, newRedefine, msgs);
+        return (RedefineType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__REDEFINE, true);
     }
 
     /**
@@ -1191,7 +863,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setRedefine(RedefineType newRedefine) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__REDEFINE, newRedefine);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__REDEFINE, newRedefine);
     }
 
     /**
@@ -1200,16 +872,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public RestrictionType1 getRestriction() {
-        return (RestrictionType1)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__RESTRICTION, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetRestriction(RestrictionType1 newRestriction, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__RESTRICTION, newRestriction, msgs);
+        return (RestrictionType1)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__RESTRICTION, true);
     }
 
     /**
@@ -1218,7 +881,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setRestriction(RestrictionType1 newRestriction) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__RESTRICTION, newRestriction);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__RESTRICTION, newRestriction);
     }
 
     /**
@@ -1227,16 +890,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public SchemaType getSchema() {
-        return (SchemaType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__SCHEMA, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSchema(SchemaType newSchema, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__SCHEMA, newSchema, msgs);
+        return (SchemaType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__SCHEMA, true);
     }
 
     /**
@@ -1245,7 +899,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setSchema(SchemaType newSchema) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__SCHEMA, newSchema);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__SCHEMA, newSchema);
     }
 
     /**
@@ -1254,16 +908,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public SelectorType getSelector() {
-        return (SelectorType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__SELECTOR, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSelector(SelectorType newSelector, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__SELECTOR, newSelector, msgs);
+        return (SelectorType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__SELECTOR, true);
     }
 
     /**
@@ -1272,7 +917,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setSelector(SelectorType newSelector) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__SELECTOR, newSelector);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__SELECTOR, newSelector);
     }
 
     /**
@@ -1281,16 +926,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public ExplicitGroup getSequence() {
-        return (ExplicitGroup)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__SEQUENCE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSequence(ExplicitGroup newSequence, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__SEQUENCE, newSequence, msgs);
+        return (ExplicitGroup)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__SEQUENCE, true);
     }
 
     /**
@@ -1299,7 +935,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setSequence(ExplicitGroup newSequence) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__SEQUENCE, newSequence);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__SEQUENCE, newSequence);
     }
 
     /**
@@ -1308,16 +944,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public SimpleContentType getSimpleContent() {
-        return (SimpleContentType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__SIMPLE_CONTENT, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSimpleContent(SimpleContentType newSimpleContent, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__SIMPLE_CONTENT, newSimpleContent, msgs);
+        return (SimpleContentType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__SIMPLE_CONTENT, true);
     }
 
     /**
@@ -1326,7 +953,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setSimpleContent(SimpleContentType newSimpleContent) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__SIMPLE_CONTENT, newSimpleContent);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__SIMPLE_CONTENT, newSimpleContent);
     }
 
     /**
@@ -1335,16 +962,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public TopLevelSimpleType getSimpleType() {
-        return (TopLevelSimpleType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__SIMPLE_TYPE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSimpleType(TopLevelSimpleType newSimpleType, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__SIMPLE_TYPE, newSimpleType, msgs);
+        return (TopLevelSimpleType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__SIMPLE_TYPE, true);
     }
 
     /**
@@ -1353,7 +971,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setSimpleType(TopLevelSimpleType newSimpleType) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__SIMPLE_TYPE, newSimpleType);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__SIMPLE_TYPE, newSimpleType);
     }
 
     /**
@@ -1362,16 +980,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public TotalDigitsType getTotalDigits() {
-        return (TotalDigitsType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__TOTAL_DIGITS, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetTotalDigits(TotalDigitsType newTotalDigits, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__TOTAL_DIGITS, newTotalDigits, msgs);
+        return (TotalDigitsType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__TOTAL_DIGITS, true);
     }
 
     /**
@@ -1380,7 +989,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setTotalDigits(TotalDigitsType newTotalDigits) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__TOTAL_DIGITS, newTotalDigits);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__TOTAL_DIGITS, newTotalDigits);
     }
 
     /**
@@ -1389,16 +998,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public UnionType getUnion() {
-        return (UnionType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__UNION, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetUnion(UnionType newUnion, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__UNION, newUnion, msgs);
+        return (UnionType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__UNION, true);
     }
 
     /**
@@ -1407,7 +1007,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setUnion(UnionType newUnion) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__UNION, newUnion);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__UNION, newUnion);
     }
 
     /**
@@ -1416,16 +1016,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public Keybase getUnique() {
-        return (Keybase)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__UNIQUE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetUnique(Keybase newUnique, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__UNIQUE, newUnique, msgs);
+        return (Keybase)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__UNIQUE, true);
     }
 
     /**
@@ -1434,7 +1025,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setUnique(Keybase newUnique) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__UNIQUE, newUnique);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__UNIQUE, newUnique);
     }
 
     /**
@@ -1443,16 +1034,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public WhiteSpaceType getWhiteSpace() {
-        return (WhiteSpaceType)getMixed().get(SchemaPackage.Literals.DOCUMENT_ROOT__WHITE_SPACE, true);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetWhiteSpace(WhiteSpaceType newWhiteSpace, NotificationChain msgs) {
-        return ((FeatureMap.Internal)getMixed()).basicAdd(SchemaPackage.Literals.DOCUMENT_ROOT__WHITE_SPACE, newWhiteSpace, msgs);
+        return (WhiteSpaceType)getMixed().get(XMLSchema11Package.Literals.DOCUMENT_ROOT__WHITE_SPACE, true);
     }
 
     /**
@@ -1461,7 +1043,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * @generated
      */
     public void setWhiteSpace(WhiteSpaceType newWhiteSpace) {
-        ((FeatureMap.Internal)getMixed()).set(SchemaPackage.Literals.DOCUMENT_ROOT__WHITE_SPACE, newWhiteSpace);
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DOCUMENT_ROOT__WHITE_SPACE, newWhiteSpace);
     }
 
     /**
@@ -1472,106 +1054,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENT_ROOT__MIXED:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIXED:
                 return ((InternalEList<?>)getMixed()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
-                return ((InternalEList<?>)getXMLNSPrefixMap()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
-                return ((InternalEList<?>)getXSISchemaLocation()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ALL:
-                return basicSetAll(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ANNOTATION:
-                return basicSetAnnotation(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ANY:
-                return basicSetAny(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ANY_ATTRIBUTE:
-                return basicSetAnyAttribute(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__APPINFO:
-                return basicSetAppinfo(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ASSERTION:
-                return basicSetAssertion(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__FACET:
-                return basicSetFacet(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE:
-                return basicSetAttribute(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
-                return basicSetAttributeGroup(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__CHOICE:
-                return basicSetChoice(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_CONTENT:
-                return basicSetComplexContent(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_TYPE:
-                return basicSetComplexType(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
-                return basicSetDefaultOpenContent(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__DOCUMENTATION:
-                return basicSetDocumentation(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ELEMENT:
-                return basicSetElement(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__ENUMERATION:
-                return basicSetEnumeration(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
-                return basicSetExplicitTimezone(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__FIELD:
-                return basicSetField(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__FRACTION_DIGITS:
-                return basicSetFractionDigits(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__GROUP:
-                return basicSetGroup(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__IMPORT:
-                return basicSetImport(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__INCLUDE:
-                return basicSetInclude(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__KEY:
-                return basicSetKey(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__KEYREF:
-                return basicSetKeyref(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__LENGTH:
-                return basicSetLength(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__LIST:
-                return basicSetList(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__MAX_EXCLUSIVE:
-                return basicSetMaxExclusive(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__MAX_INCLUSIVE:
-                return basicSetMaxInclusive(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__MAX_LENGTH:
-                return basicSetMaxLength(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__MIN_EXCLUSIVE:
-                return basicSetMinExclusive(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__MIN_INCLUSIVE:
-                return basicSetMinInclusive(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__MIN_LENGTH:
-                return basicSetMinLength(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__NOTATION:
-                return basicSetNotation(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__OPEN_CONTENT:
-                return basicSetOpenContent(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__OVERRIDE:
-                return basicSetOverride(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__PATTERN:
-                return basicSetPattern(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__REDEFINE:
-                return basicSetRedefine(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__RESTRICTION:
-                return basicSetRestriction(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__SCHEMA:
-                return basicSetSchema(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__SELECTOR:
-                return basicSetSelector(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__SEQUENCE:
-                return basicSetSequence(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_CONTENT:
-                return basicSetSimpleContent(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_TYPE:
-                return basicSetSimpleType(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__TOTAL_DIGITS:
-                return basicSetTotalDigits(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__UNION:
-                return basicSetUnion(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__UNIQUE:
-                return basicSetUnique(null, msgs);
-            case SchemaPackage.DOCUMENT_ROOT__WHITE_SPACE:
-                return basicSetWhiteSpace(null, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -1584,108 +1068,108 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENT_ROOT__MIXED:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIXED:
                 if (coreType) return getMixed();
                 return ((FeatureMap.Internal)getMixed()).getWrapper();
-            case SchemaPackage.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
+            case XMLSchema11Package.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
                 if (coreType) return getXMLNSPrefixMap();
                 else return getXMLNSPrefixMap().map();
-            case SchemaPackage.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
                 if (coreType) return getXSISchemaLocation();
                 else return getXSISchemaLocation().map();
-            case SchemaPackage.DOCUMENT_ROOT__ALL:
+            case XMLSchema11Package.DOCUMENT_ROOT__ALL:
                 return getAll();
-            case SchemaPackage.DOCUMENT_ROOT__ANNOTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANNOTATION:
                 return getAnnotation();
-            case SchemaPackage.DOCUMENT_ROOT__ANY:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANY:
                 return getAny();
-            case SchemaPackage.DOCUMENT_ROOT__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANY_ATTRIBUTE:
                 return getAnyAttribute();
-            case SchemaPackage.DOCUMENT_ROOT__APPINFO:
+            case XMLSchema11Package.DOCUMENT_ROOT__APPINFO:
                 return getAppinfo();
-            case SchemaPackage.DOCUMENT_ROOT__ASSERTION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ASSERTION:
                 return getAssertion();
-            case SchemaPackage.DOCUMENT_ROOT__FACET:
+            case XMLSchema11Package.DOCUMENT_ROOT__FACET:
                 return getFacet();
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENT_ROOT__ATTRIBUTE:
                 return getAttribute();
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
                 return getAttributeGroup();
-            case SchemaPackage.DOCUMENT_ROOT__CHOICE:
+            case XMLSchema11Package.DOCUMENT_ROOT__CHOICE:
                 return getChoice();
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__COMPLEX_CONTENT:
                 return getComplexContent();
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_TYPE:
+            case XMLSchema11Package.DOCUMENT_ROOT__COMPLEX_TYPE:
                 return getComplexType();
-            case SchemaPackage.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
                 return getDefaultOpenContent();
-            case SchemaPackage.DOCUMENT_ROOT__DOCUMENTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__DOCUMENTATION:
                 return getDocumentation();
-            case SchemaPackage.DOCUMENT_ROOT__ELEMENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__ELEMENT:
                 return getElement();
-            case SchemaPackage.DOCUMENT_ROOT__ENUMERATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ENUMERATION:
                 return getEnumeration();
-            case SchemaPackage.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
+            case XMLSchema11Package.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
                 return getExplicitTimezone();
-            case SchemaPackage.DOCUMENT_ROOT__FIELD:
+            case XMLSchema11Package.DOCUMENT_ROOT__FIELD:
                 return getField();
-            case SchemaPackage.DOCUMENT_ROOT__FRACTION_DIGITS:
+            case XMLSchema11Package.DOCUMENT_ROOT__FRACTION_DIGITS:
                 return getFractionDigits();
-            case SchemaPackage.DOCUMENT_ROOT__GROUP:
+            case XMLSchema11Package.DOCUMENT_ROOT__GROUP:
                 return getGroup();
-            case SchemaPackage.DOCUMENT_ROOT__IMPORT:
+            case XMLSchema11Package.DOCUMENT_ROOT__IMPORT:
                 return getImport();
-            case SchemaPackage.DOCUMENT_ROOT__INCLUDE:
+            case XMLSchema11Package.DOCUMENT_ROOT__INCLUDE:
                 return getInclude();
-            case SchemaPackage.DOCUMENT_ROOT__KEY:
+            case XMLSchema11Package.DOCUMENT_ROOT__KEY:
                 return getKey();
-            case SchemaPackage.DOCUMENT_ROOT__KEYREF:
+            case XMLSchema11Package.DOCUMENT_ROOT__KEYREF:
                 return getKeyref();
-            case SchemaPackage.DOCUMENT_ROOT__LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__LENGTH:
                 return getLength();
-            case SchemaPackage.DOCUMENT_ROOT__LIST:
+            case XMLSchema11Package.DOCUMENT_ROOT__LIST:
                 return getList();
-            case SchemaPackage.DOCUMENT_ROOT__MAX_EXCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_EXCLUSIVE:
                 return getMaxExclusive();
-            case SchemaPackage.DOCUMENT_ROOT__MAX_INCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_INCLUSIVE:
                 return getMaxInclusive();
-            case SchemaPackage.DOCUMENT_ROOT__MAX_LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_LENGTH:
                 return getMaxLength();
-            case SchemaPackage.DOCUMENT_ROOT__MIN_EXCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_EXCLUSIVE:
                 return getMinExclusive();
-            case SchemaPackage.DOCUMENT_ROOT__MIN_INCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_INCLUSIVE:
                 return getMinInclusive();
-            case SchemaPackage.DOCUMENT_ROOT__MIN_LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_LENGTH:
                 return getMinLength();
-            case SchemaPackage.DOCUMENT_ROOT__NOTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__NOTATION:
                 return getNotation();
-            case SchemaPackage.DOCUMENT_ROOT__OPEN_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__OPEN_CONTENT:
                 return getOpenContent();
-            case SchemaPackage.DOCUMENT_ROOT__OVERRIDE:
+            case XMLSchema11Package.DOCUMENT_ROOT__OVERRIDE:
                 return getOverride();
-            case SchemaPackage.DOCUMENT_ROOT__PATTERN:
+            case XMLSchema11Package.DOCUMENT_ROOT__PATTERN:
                 return getPattern();
-            case SchemaPackage.DOCUMENT_ROOT__REDEFINE:
+            case XMLSchema11Package.DOCUMENT_ROOT__REDEFINE:
                 return getRedefine();
-            case SchemaPackage.DOCUMENT_ROOT__RESTRICTION:
+            case XMLSchema11Package.DOCUMENT_ROOT__RESTRICTION:
                 return getRestriction();
-            case SchemaPackage.DOCUMENT_ROOT__SCHEMA:
+            case XMLSchema11Package.DOCUMENT_ROOT__SCHEMA:
                 return getSchema();
-            case SchemaPackage.DOCUMENT_ROOT__SELECTOR:
+            case XMLSchema11Package.DOCUMENT_ROOT__SELECTOR:
                 return getSelector();
-            case SchemaPackage.DOCUMENT_ROOT__SEQUENCE:
+            case XMLSchema11Package.DOCUMENT_ROOT__SEQUENCE:
                 return getSequence();
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__SIMPLE_CONTENT:
                 return getSimpleContent();
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_TYPE:
+            case XMLSchema11Package.DOCUMENT_ROOT__SIMPLE_TYPE:
                 return getSimpleType();
-            case SchemaPackage.DOCUMENT_ROOT__TOTAL_DIGITS:
+            case XMLSchema11Package.DOCUMENT_ROOT__TOTAL_DIGITS:
                 return getTotalDigits();
-            case SchemaPackage.DOCUMENT_ROOT__UNION:
+            case XMLSchema11Package.DOCUMENT_ROOT__UNION:
                 return getUnion();
-            case SchemaPackage.DOCUMENT_ROOT__UNIQUE:
+            case XMLSchema11Package.DOCUMENT_ROOT__UNIQUE:
                 return getUnique();
-            case SchemaPackage.DOCUMENT_ROOT__WHITE_SPACE:
+            case XMLSchema11Package.DOCUMENT_ROOT__WHITE_SPACE:
                 return getWhiteSpace();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -1696,155 +1180,154 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENT_ROOT__MIXED:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIXED:
                 ((FeatureMap.Internal)getMixed()).set(newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
+            case XMLSchema11Package.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
                 ((EStructuralFeature.Setting)getXMLNSPrefixMap()).set(newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
                 ((EStructuralFeature.Setting)getXSISchemaLocation()).set(newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ALL:
+            case XMLSchema11Package.DOCUMENT_ROOT__ALL:
                 setAll((All)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ANNOTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANNOTATION:
                 setAnnotation((AnnotationType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ANY:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANY:
                 setAny((AnyType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANY_ATTRIBUTE:
                 setAnyAttribute((AnyAttributeType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__APPINFO:
+            case XMLSchema11Package.DOCUMENT_ROOT__APPINFO:
                 setAppinfo((AppinfoType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ASSERTION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ASSERTION:
                 setAssertion((Assertion)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENT_ROOT__ATTRIBUTE:
                 setAttribute((TopLevelAttribute)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
                 setAttributeGroup((NamedAttributeGroup)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__CHOICE:
+            case XMLSchema11Package.DOCUMENT_ROOT__CHOICE:
                 setChoice((ExplicitGroup)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__COMPLEX_CONTENT:
                 setComplexContent((ComplexContentType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_TYPE:
+            case XMLSchema11Package.DOCUMENT_ROOT__COMPLEX_TYPE:
                 setComplexType((TopLevelComplexType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
                 setDefaultOpenContent((DefaultOpenContentType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__DOCUMENTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__DOCUMENTATION:
                 setDocumentation((DocumentationType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ELEMENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__ELEMENT:
                 setElement((TopLevelElement)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ENUMERATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ENUMERATION:
                 setEnumeration((NoFixedFacet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
+            case XMLSchema11Package.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
                 setExplicitTimezone((ExplicitTimezoneType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__FIELD:
+            case XMLSchema11Package.DOCUMENT_ROOT__FIELD:
                 setField((FieldType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__FRACTION_DIGITS:
+            case XMLSchema11Package.DOCUMENT_ROOT__FRACTION_DIGITS:
                 setFractionDigits((NumFacet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__GROUP:
+            case XMLSchema11Package.DOCUMENT_ROOT__GROUP:
                 setGroup((NamedGroup)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__IMPORT:
+            case XMLSchema11Package.DOCUMENT_ROOT__IMPORT:
                 setImport((ImportType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__INCLUDE:
+            case XMLSchema11Package.DOCUMENT_ROOT__INCLUDE:
                 setInclude((IncludeType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__KEY:
+            case XMLSchema11Package.DOCUMENT_ROOT__KEY:
                 setKey((Keybase)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__KEYREF:
+            case XMLSchema11Package.DOCUMENT_ROOT__KEYREF:
                 setKeyref((KeyrefType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__LENGTH:
                 setLength((NumFacet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__LIST:
+            case XMLSchema11Package.DOCUMENT_ROOT__LIST:
                 setList((ListType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_EXCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_EXCLUSIVE:
                 setMaxExclusive((Facet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_INCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_INCLUSIVE:
                 setMaxInclusive((Facet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_LENGTH:
                 setMaxLength((NumFacet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_EXCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_EXCLUSIVE:
                 setMinExclusive((Facet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_INCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_INCLUSIVE:
                 setMinInclusive((Facet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_LENGTH:
                 setMinLength((NumFacet)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__NOTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__NOTATION:
                 setNotation((NotationType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__OPEN_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__OPEN_CONTENT:
                 setOpenContent((OpenContentType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__OVERRIDE:
+            case XMLSchema11Package.DOCUMENT_ROOT__OVERRIDE:
                 setOverride((OverrideType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__PATTERN:
+            case XMLSchema11Package.DOCUMENT_ROOT__PATTERN:
                 setPattern((PatternType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__REDEFINE:
+            case XMLSchema11Package.DOCUMENT_ROOT__REDEFINE:
                 setRedefine((RedefineType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__RESTRICTION:
+            case XMLSchema11Package.DOCUMENT_ROOT__RESTRICTION:
                 setRestriction((RestrictionType1)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SCHEMA:
+            case XMLSchema11Package.DOCUMENT_ROOT__SCHEMA:
                 setSchema((SchemaType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SELECTOR:
+            case XMLSchema11Package.DOCUMENT_ROOT__SELECTOR:
                 setSelector((SelectorType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SEQUENCE:
+            case XMLSchema11Package.DOCUMENT_ROOT__SEQUENCE:
                 setSequence((ExplicitGroup)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__SIMPLE_CONTENT:
                 setSimpleContent((SimpleContentType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_TYPE:
+            case XMLSchema11Package.DOCUMENT_ROOT__SIMPLE_TYPE:
                 setSimpleType((TopLevelSimpleType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__TOTAL_DIGITS:
+            case XMLSchema11Package.DOCUMENT_ROOT__TOTAL_DIGITS:
                 setTotalDigits((TotalDigitsType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__UNION:
+            case XMLSchema11Package.DOCUMENT_ROOT__UNION:
                 setUnion((UnionType)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__UNIQUE:
+            case XMLSchema11Package.DOCUMENT_ROOT__UNIQUE:
                 setUnique((Keybase)newValue);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__WHITE_SPACE:
+            case XMLSchema11Package.DOCUMENT_ROOT__WHITE_SPACE:
                 setWhiteSpace((WhiteSpaceType)newValue);
                 return;
         }
@@ -1859,151 +1342,151 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENT_ROOT__MIXED:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIXED:
                 getMixed().clear();
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
+            case XMLSchema11Package.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
                 getXMLNSPrefixMap().clear();
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
                 getXSISchemaLocation().clear();
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ALL:
+            case XMLSchema11Package.DOCUMENT_ROOT__ALL:
                 setAll((All)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ANNOTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANNOTATION:
                 setAnnotation((AnnotationType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ANY:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANY:
                 setAny((AnyType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANY_ATTRIBUTE:
                 setAnyAttribute((AnyAttributeType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__APPINFO:
+            case XMLSchema11Package.DOCUMENT_ROOT__APPINFO:
                 setAppinfo((AppinfoType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ASSERTION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ASSERTION:
                 setAssertion((Assertion)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENT_ROOT__ATTRIBUTE:
                 setAttribute((TopLevelAttribute)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
                 setAttributeGroup((NamedAttributeGroup)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__CHOICE:
+            case XMLSchema11Package.DOCUMENT_ROOT__CHOICE:
                 setChoice((ExplicitGroup)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__COMPLEX_CONTENT:
                 setComplexContent((ComplexContentType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_TYPE:
+            case XMLSchema11Package.DOCUMENT_ROOT__COMPLEX_TYPE:
                 setComplexType((TopLevelComplexType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
                 setDefaultOpenContent((DefaultOpenContentType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__DOCUMENTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__DOCUMENTATION:
                 setDocumentation((DocumentationType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ELEMENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__ELEMENT:
                 setElement((TopLevelElement)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__ENUMERATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ENUMERATION:
                 setEnumeration((NoFixedFacet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
+            case XMLSchema11Package.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
                 setExplicitTimezone((ExplicitTimezoneType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__FIELD:
+            case XMLSchema11Package.DOCUMENT_ROOT__FIELD:
                 setField((FieldType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__FRACTION_DIGITS:
+            case XMLSchema11Package.DOCUMENT_ROOT__FRACTION_DIGITS:
                 setFractionDigits((NumFacet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__GROUP:
+            case XMLSchema11Package.DOCUMENT_ROOT__GROUP:
                 setGroup((NamedGroup)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__IMPORT:
+            case XMLSchema11Package.DOCUMENT_ROOT__IMPORT:
                 setImport((ImportType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__INCLUDE:
+            case XMLSchema11Package.DOCUMENT_ROOT__INCLUDE:
                 setInclude((IncludeType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__KEY:
+            case XMLSchema11Package.DOCUMENT_ROOT__KEY:
                 setKey((Keybase)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__KEYREF:
+            case XMLSchema11Package.DOCUMENT_ROOT__KEYREF:
                 setKeyref((KeyrefType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__LENGTH:
                 setLength((NumFacet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__LIST:
+            case XMLSchema11Package.DOCUMENT_ROOT__LIST:
                 setList((ListType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_EXCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_EXCLUSIVE:
                 setMaxExclusive((Facet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_INCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_INCLUSIVE:
                 setMaxInclusive((Facet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_LENGTH:
                 setMaxLength((NumFacet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_EXCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_EXCLUSIVE:
                 setMinExclusive((Facet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_INCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_INCLUSIVE:
                 setMinInclusive((Facet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_LENGTH:
                 setMinLength((NumFacet)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__NOTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__NOTATION:
                 setNotation((NotationType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__OPEN_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__OPEN_CONTENT:
                 setOpenContent((OpenContentType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__OVERRIDE:
+            case XMLSchema11Package.DOCUMENT_ROOT__OVERRIDE:
                 setOverride((OverrideType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__PATTERN:
+            case XMLSchema11Package.DOCUMENT_ROOT__PATTERN:
                 setPattern((PatternType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__REDEFINE:
+            case XMLSchema11Package.DOCUMENT_ROOT__REDEFINE:
                 setRedefine((RedefineType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__RESTRICTION:
+            case XMLSchema11Package.DOCUMENT_ROOT__RESTRICTION:
                 setRestriction((RestrictionType1)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SCHEMA:
+            case XMLSchema11Package.DOCUMENT_ROOT__SCHEMA:
                 setSchema((SchemaType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SELECTOR:
+            case XMLSchema11Package.DOCUMENT_ROOT__SELECTOR:
                 setSelector((SelectorType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SEQUENCE:
+            case XMLSchema11Package.DOCUMENT_ROOT__SEQUENCE:
                 setSequence((ExplicitGroup)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__SIMPLE_CONTENT:
                 setSimpleContent((SimpleContentType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_TYPE:
+            case XMLSchema11Package.DOCUMENT_ROOT__SIMPLE_TYPE:
                 setSimpleType((TopLevelSimpleType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__TOTAL_DIGITS:
+            case XMLSchema11Package.DOCUMENT_ROOT__TOTAL_DIGITS:
                 setTotalDigits((TotalDigitsType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__UNION:
+            case XMLSchema11Package.DOCUMENT_ROOT__UNION:
                 setUnion((UnionType)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__UNIQUE:
+            case XMLSchema11Package.DOCUMENT_ROOT__UNIQUE:
                 setUnique((Keybase)null);
                 return;
-            case SchemaPackage.DOCUMENT_ROOT__WHITE_SPACE:
+            case XMLSchema11Package.DOCUMENT_ROOT__WHITE_SPACE:
                 setWhiteSpace((WhiteSpaceType)null);
                 return;
         }
@@ -2018,105 +1501,105 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENT_ROOT__MIXED:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIXED:
                 return mixed != null && !mixed.isEmpty();
-            case SchemaPackage.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
+            case XMLSchema11Package.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
                 return xMLNSPrefixMap != null && !xMLNSPrefixMap.isEmpty();
-            case SchemaPackage.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
                 return xSISchemaLocation != null && !xSISchemaLocation.isEmpty();
-            case SchemaPackage.DOCUMENT_ROOT__ALL:
+            case XMLSchema11Package.DOCUMENT_ROOT__ALL:
                 return getAll() != null;
-            case SchemaPackage.DOCUMENT_ROOT__ANNOTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANNOTATION:
                 return getAnnotation() != null;
-            case SchemaPackage.DOCUMENT_ROOT__ANY:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANY:
                 return getAny() != null;
-            case SchemaPackage.DOCUMENT_ROOT__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENT_ROOT__ANY_ATTRIBUTE:
                 return getAnyAttribute() != null;
-            case SchemaPackage.DOCUMENT_ROOT__APPINFO:
+            case XMLSchema11Package.DOCUMENT_ROOT__APPINFO:
                 return getAppinfo() != null;
-            case SchemaPackage.DOCUMENT_ROOT__ASSERTION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ASSERTION:
                 return getAssertion() != null;
-            case SchemaPackage.DOCUMENT_ROOT__FACET:
+            case XMLSchema11Package.DOCUMENT_ROOT__FACET:
                 return getFacet() != null;
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENT_ROOT__ATTRIBUTE:
                 return getAttribute() != null;
-            case SchemaPackage.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.DOCUMENT_ROOT__ATTRIBUTE_GROUP:
                 return getAttributeGroup() != null;
-            case SchemaPackage.DOCUMENT_ROOT__CHOICE:
+            case XMLSchema11Package.DOCUMENT_ROOT__CHOICE:
                 return getChoice() != null;
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__COMPLEX_CONTENT:
                 return getComplexContent() != null;
-            case SchemaPackage.DOCUMENT_ROOT__COMPLEX_TYPE:
+            case XMLSchema11Package.DOCUMENT_ROOT__COMPLEX_TYPE:
                 return getComplexType() != null;
-            case SchemaPackage.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__DEFAULT_OPEN_CONTENT:
                 return getDefaultOpenContent() != null;
-            case SchemaPackage.DOCUMENT_ROOT__DOCUMENTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__DOCUMENTATION:
                 return getDocumentation() != null;
-            case SchemaPackage.DOCUMENT_ROOT__ELEMENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__ELEMENT:
                 return getElement() != null;
-            case SchemaPackage.DOCUMENT_ROOT__ENUMERATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__ENUMERATION:
                 return getEnumeration() != null;
-            case SchemaPackage.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
+            case XMLSchema11Package.DOCUMENT_ROOT__EXPLICIT_TIMEZONE:
                 return getExplicitTimezone() != null;
-            case SchemaPackage.DOCUMENT_ROOT__FIELD:
+            case XMLSchema11Package.DOCUMENT_ROOT__FIELD:
                 return getField() != null;
-            case SchemaPackage.DOCUMENT_ROOT__FRACTION_DIGITS:
+            case XMLSchema11Package.DOCUMENT_ROOT__FRACTION_DIGITS:
                 return getFractionDigits() != null;
-            case SchemaPackage.DOCUMENT_ROOT__GROUP:
+            case XMLSchema11Package.DOCUMENT_ROOT__GROUP:
                 return getGroup() != null;
-            case SchemaPackage.DOCUMENT_ROOT__IMPORT:
+            case XMLSchema11Package.DOCUMENT_ROOT__IMPORT:
                 return getImport() != null;
-            case SchemaPackage.DOCUMENT_ROOT__INCLUDE:
+            case XMLSchema11Package.DOCUMENT_ROOT__INCLUDE:
                 return getInclude() != null;
-            case SchemaPackage.DOCUMENT_ROOT__KEY:
+            case XMLSchema11Package.DOCUMENT_ROOT__KEY:
                 return getKey() != null;
-            case SchemaPackage.DOCUMENT_ROOT__KEYREF:
+            case XMLSchema11Package.DOCUMENT_ROOT__KEYREF:
                 return getKeyref() != null;
-            case SchemaPackage.DOCUMENT_ROOT__LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__LENGTH:
                 return getLength() != null;
-            case SchemaPackage.DOCUMENT_ROOT__LIST:
+            case XMLSchema11Package.DOCUMENT_ROOT__LIST:
                 return getList() != null;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_EXCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_EXCLUSIVE:
                 return getMaxExclusive() != null;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_INCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_INCLUSIVE:
                 return getMaxInclusive() != null;
-            case SchemaPackage.DOCUMENT_ROOT__MAX_LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__MAX_LENGTH:
                 return getMaxLength() != null;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_EXCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_EXCLUSIVE:
                 return getMinExclusive() != null;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_INCLUSIVE:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_INCLUSIVE:
                 return getMinInclusive() != null;
-            case SchemaPackage.DOCUMENT_ROOT__MIN_LENGTH:
+            case XMLSchema11Package.DOCUMENT_ROOT__MIN_LENGTH:
                 return getMinLength() != null;
-            case SchemaPackage.DOCUMENT_ROOT__NOTATION:
+            case XMLSchema11Package.DOCUMENT_ROOT__NOTATION:
                 return getNotation() != null;
-            case SchemaPackage.DOCUMENT_ROOT__OPEN_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__OPEN_CONTENT:
                 return getOpenContent() != null;
-            case SchemaPackage.DOCUMENT_ROOT__OVERRIDE:
+            case XMLSchema11Package.DOCUMENT_ROOT__OVERRIDE:
                 return getOverride() != null;
-            case SchemaPackage.DOCUMENT_ROOT__PATTERN:
+            case XMLSchema11Package.DOCUMENT_ROOT__PATTERN:
                 return getPattern() != null;
-            case SchemaPackage.DOCUMENT_ROOT__REDEFINE:
+            case XMLSchema11Package.DOCUMENT_ROOT__REDEFINE:
                 return getRedefine() != null;
-            case SchemaPackage.DOCUMENT_ROOT__RESTRICTION:
+            case XMLSchema11Package.DOCUMENT_ROOT__RESTRICTION:
                 return getRestriction() != null;
-            case SchemaPackage.DOCUMENT_ROOT__SCHEMA:
+            case XMLSchema11Package.DOCUMENT_ROOT__SCHEMA:
                 return getSchema() != null;
-            case SchemaPackage.DOCUMENT_ROOT__SELECTOR:
+            case XMLSchema11Package.DOCUMENT_ROOT__SELECTOR:
                 return getSelector() != null;
-            case SchemaPackage.DOCUMENT_ROOT__SEQUENCE:
+            case XMLSchema11Package.DOCUMENT_ROOT__SEQUENCE:
                 return getSequence() != null;
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_CONTENT:
+            case XMLSchema11Package.DOCUMENT_ROOT__SIMPLE_CONTENT:
                 return getSimpleContent() != null;
-            case SchemaPackage.DOCUMENT_ROOT__SIMPLE_TYPE:
+            case XMLSchema11Package.DOCUMENT_ROOT__SIMPLE_TYPE:
                 return getSimpleType() != null;
-            case SchemaPackage.DOCUMENT_ROOT__TOTAL_DIGITS:
+            case XMLSchema11Package.DOCUMENT_ROOT__TOTAL_DIGITS:
                 return getTotalDigits() != null;
-            case SchemaPackage.DOCUMENT_ROOT__UNION:
+            case XMLSchema11Package.DOCUMENT_ROOT__UNION:
                 return getUnion() != null;
-            case SchemaPackage.DOCUMENT_ROOT__UNIQUE:
+            case XMLSchema11Package.DOCUMENT_ROOT__UNIQUE:
                 return getUnique() != null;
-            case SchemaPackage.DOCUMENT_ROOT__WHITE_SPACE:
+            case XMLSchema11Package.DOCUMENT_ROOT__WHITE_SPACE:
                 return getWhiteSpace() != null;
         }
         return super.eIsSet(featureID);

@@ -5,16 +5,15 @@ package org.w3._2001.xml.schema.impl;
 import javax.xml.namespace.QName;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.w3._2001.xml.schema.ListType;
 import org.w3._2001.xml.schema.LocalSimpleType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,16 +30,6 @@ import org.w3._2001.xml.schema.SchemaPackage;
  * @generated
  */
 public class ListTypeImpl extends AnnotatedImpl implements ListType {
-    /**
-     * The cached value of the '{@link #getSimpleType() <em>Simple Type</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getSimpleType()
-     * @generated
-     * @ordered
-     */
-    protected LocalSimpleType simpleType;
-
     /**
      * The default value of the '{@link #getItemType() <em>Item Type</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -77,7 +66,7 @@ public class ListTypeImpl extends AnnotatedImpl implements ListType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.LIST_TYPE;
+        return XMLSchema11Package.Literals.LIST_TYPE;
     }
 
     /**
@@ -86,22 +75,7 @@ public class ListTypeImpl extends AnnotatedImpl implements ListType {
      * @generated
      */
     public LocalSimpleType getSimpleType() {
-        return simpleType;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSimpleType(LocalSimpleType newSimpleType, NotificationChain msgs) {
-        LocalSimpleType oldSimpleType = simpleType;
-        simpleType = newSimpleType;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.LIST_TYPE__SIMPLE_TYPE, oldSimpleType, newSimpleType);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (LocalSimpleType)getMixed().get(XMLSchema11Package.Literals.LIST_TYPE__SIMPLE_TYPE, true);
     }
 
     /**
@@ -110,17 +84,7 @@ public class ListTypeImpl extends AnnotatedImpl implements ListType {
      * @generated
      */
     public void setSimpleType(LocalSimpleType newSimpleType) {
-        if (newSimpleType != simpleType) {
-            NotificationChain msgs = null;
-            if (simpleType != null)
-                msgs = ((InternalEObject)simpleType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.LIST_TYPE__SIMPLE_TYPE, null, msgs);
-            if (newSimpleType != null)
-                msgs = ((InternalEObject)newSimpleType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.LIST_TYPE__SIMPLE_TYPE, null, msgs);
-            msgs = basicSetSimpleType(newSimpleType, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.LIST_TYPE__SIMPLE_TYPE, newSimpleType, newSimpleType));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.LIST_TYPE__SIMPLE_TYPE, newSimpleType);
     }
 
     /**
@@ -141,21 +105,7 @@ public class ListTypeImpl extends AnnotatedImpl implements ListType {
         QName oldItemType = itemType;
         itemType = newItemType;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.LIST_TYPE__ITEM_TYPE, oldItemType, itemType));
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case SchemaPackage.LIST_TYPE__SIMPLE_TYPE:
-                return basicSetSimpleType(null, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.LIST_TYPE__ITEM_TYPE, oldItemType, itemType));
     }
 
     /**
@@ -166,9 +116,9 @@ public class ListTypeImpl extends AnnotatedImpl implements ListType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.LIST_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.LIST_TYPE__SIMPLE_TYPE:
                 return getSimpleType();
-            case SchemaPackage.LIST_TYPE__ITEM_TYPE:
+            case XMLSchema11Package.LIST_TYPE__ITEM_TYPE:
                 return getItemType();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -182,10 +132,10 @@ public class ListTypeImpl extends AnnotatedImpl implements ListType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.LIST_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.LIST_TYPE__SIMPLE_TYPE:
                 setSimpleType((LocalSimpleType)newValue);
                 return;
-            case SchemaPackage.LIST_TYPE__ITEM_TYPE:
+            case XMLSchema11Package.LIST_TYPE__ITEM_TYPE:
                 setItemType((QName)newValue);
                 return;
         }
@@ -200,10 +150,10 @@ public class ListTypeImpl extends AnnotatedImpl implements ListType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.LIST_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.LIST_TYPE__SIMPLE_TYPE:
                 setSimpleType((LocalSimpleType)null);
                 return;
-            case SchemaPackage.LIST_TYPE__ITEM_TYPE:
+            case XMLSchema11Package.LIST_TYPE__ITEM_TYPE:
                 setItemType(ITEM_TYPE_EDEFAULT);
                 return;
         }
@@ -218,9 +168,9 @@ public class ListTypeImpl extends AnnotatedImpl implements ListType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.LIST_TYPE__SIMPLE_TYPE:
-                return simpleType != null;
-            case SchemaPackage.LIST_TYPE__ITEM_TYPE:
+            case XMLSchema11Package.LIST_TYPE__SIMPLE_TYPE:
+                return getSimpleType() != null;
+            case XMLSchema11Package.LIST_TYPE__ITEM_TYPE:
                 return ITEM_TYPE_EDEFAULT == null ? itemType != null : !ITEM_TYPE_EDEFAULT.equals(itemType);
         }
         return super.eIsSet(featureID);

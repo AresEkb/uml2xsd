@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Full Derivation Set Member0</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.w3._2001.xml.schema.SchemaPackage#getFullDerivationSetMember0()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getFullDerivationSetMember0()
  * @model extendedMetaData="name='fullDerivationSet_._member_._0'"
  * @generated
  */

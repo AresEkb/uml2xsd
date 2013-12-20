@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.w3._2001.xml.schema.AppinfoType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,7 +92,7 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.APPINFO_TYPE;
+        return XMLSchema11Package.Literals.APPINFO_TYPE;
     }
 
     /**
@@ -102,7 +102,7 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
      */
     public FeatureMap getMixed() {
         if (mixed == null) {
-            mixed = new BasicFeatureMap(this, SchemaPackage.APPINFO_TYPE__MIXED);
+            mixed = new BasicFeatureMap(this, XMLSchema11Package.APPINFO_TYPE__MIXED);
         }
         return mixed;
     }
@@ -113,7 +113,7 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
      * @generated
      */
     public FeatureMap getGroup() {
-        return (FeatureMap)getMixed().<FeatureMap.Entry>list(SchemaPackage.Literals.APPINFO_TYPE__GROUP);
+        return (FeatureMap)getMixed().<FeatureMap.Entry>list(XMLSchema11Package.Literals.APPINFO_TYPE__GROUP);
     }
 
     /**
@@ -122,7 +122,7 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
      * @generated
      */
     public FeatureMap getAny() {
-        return (FeatureMap)getGroup().<FeatureMap.Entry>list(SchemaPackage.Literals.APPINFO_TYPE__ANY);
+        return (FeatureMap)getGroup().<FeatureMap.Entry>list(XMLSchema11Package.Literals.APPINFO_TYPE__ANY);
     }
 
     /**
@@ -143,7 +143,7 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
         String oldSource = source;
         source = newSource;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.APPINFO_TYPE__SOURCE, oldSource, source));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.APPINFO_TYPE__SOURCE, oldSource, source));
     }
 
     /**
@@ -153,7 +153,7 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
      */
     public FeatureMap getAnyAttribute() {
         if (anyAttribute == null) {
-            anyAttribute = new BasicFeatureMap(this, SchemaPackage.APPINFO_TYPE__ANY_ATTRIBUTE);
+            anyAttribute = new BasicFeatureMap(this, XMLSchema11Package.APPINFO_TYPE__ANY_ATTRIBUTE);
         }
         return anyAttribute;
     }
@@ -166,13 +166,13 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case SchemaPackage.APPINFO_TYPE__MIXED:
+            case XMLSchema11Package.APPINFO_TYPE__MIXED:
                 return ((InternalEList<?>)getMixed()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.APPINFO_TYPE__GROUP:
+            case XMLSchema11Package.APPINFO_TYPE__GROUP:
                 return ((InternalEList<?>)getGroup()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.APPINFO_TYPE__ANY:
+            case XMLSchema11Package.APPINFO_TYPE__ANY:
                 return ((InternalEList<?>)getAny()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.APPINFO_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.APPINFO_TYPE__ANY_ATTRIBUTE:
                 return ((InternalEList<?>)getAnyAttribute()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -186,18 +186,18 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.APPINFO_TYPE__MIXED:
+            case XMLSchema11Package.APPINFO_TYPE__MIXED:
                 if (coreType) return getMixed();
                 return ((FeatureMap.Internal)getMixed()).getWrapper();
-            case SchemaPackage.APPINFO_TYPE__GROUP:
+            case XMLSchema11Package.APPINFO_TYPE__GROUP:
                 if (coreType) return getGroup();
                 return ((FeatureMap.Internal)getGroup()).getWrapper();
-            case SchemaPackage.APPINFO_TYPE__ANY:
+            case XMLSchema11Package.APPINFO_TYPE__ANY:
                 if (coreType) return getAny();
                 return ((FeatureMap.Internal)getAny()).getWrapper();
-            case SchemaPackage.APPINFO_TYPE__SOURCE:
+            case XMLSchema11Package.APPINFO_TYPE__SOURCE:
                 return getSource();
-            case SchemaPackage.APPINFO_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.APPINFO_TYPE__ANY_ATTRIBUTE:
                 if (coreType) return getAnyAttribute();
                 return ((FeatureMap.Internal)getAnyAttribute()).getWrapper();
         }
@@ -212,19 +212,19 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.APPINFO_TYPE__MIXED:
+            case XMLSchema11Package.APPINFO_TYPE__MIXED:
                 ((FeatureMap.Internal)getMixed()).set(newValue);
                 return;
-            case SchemaPackage.APPINFO_TYPE__GROUP:
+            case XMLSchema11Package.APPINFO_TYPE__GROUP:
                 ((FeatureMap.Internal)getGroup()).set(newValue);
                 return;
-            case SchemaPackage.APPINFO_TYPE__ANY:
+            case XMLSchema11Package.APPINFO_TYPE__ANY:
                 ((FeatureMap.Internal)getAny()).set(newValue);
                 return;
-            case SchemaPackage.APPINFO_TYPE__SOURCE:
+            case XMLSchema11Package.APPINFO_TYPE__SOURCE:
                 setSource((String)newValue);
                 return;
-            case SchemaPackage.APPINFO_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.APPINFO_TYPE__ANY_ATTRIBUTE:
                 ((FeatureMap.Internal)getAnyAttribute()).set(newValue);
                 return;
         }
@@ -239,19 +239,19 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.APPINFO_TYPE__MIXED:
+            case XMLSchema11Package.APPINFO_TYPE__MIXED:
                 getMixed().clear();
                 return;
-            case SchemaPackage.APPINFO_TYPE__GROUP:
+            case XMLSchema11Package.APPINFO_TYPE__GROUP:
                 getGroup().clear();
                 return;
-            case SchemaPackage.APPINFO_TYPE__ANY:
+            case XMLSchema11Package.APPINFO_TYPE__ANY:
                 getAny().clear();
                 return;
-            case SchemaPackage.APPINFO_TYPE__SOURCE:
+            case XMLSchema11Package.APPINFO_TYPE__SOURCE:
                 setSource(SOURCE_EDEFAULT);
                 return;
-            case SchemaPackage.APPINFO_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.APPINFO_TYPE__ANY_ATTRIBUTE:
                 getAnyAttribute().clear();
                 return;
         }
@@ -266,15 +266,15 @@ public class AppinfoTypeImpl extends MinimalEObjectImpl.Container implements App
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.APPINFO_TYPE__MIXED:
+            case XMLSchema11Package.APPINFO_TYPE__MIXED:
                 return mixed != null && !mixed.isEmpty();
-            case SchemaPackage.APPINFO_TYPE__GROUP:
+            case XMLSchema11Package.APPINFO_TYPE__GROUP:
                 return !getGroup().isEmpty();
-            case SchemaPackage.APPINFO_TYPE__ANY:
+            case XMLSchema11Package.APPINFO_TYPE__ANY:
                 return !getAny().isEmpty();
-            case SchemaPackage.APPINFO_TYPE__SOURCE:
+            case XMLSchema11Package.APPINFO_TYPE__SOURCE:
                 return SOURCE_EDEFAULT == null ? source != null : !SOURCE_EDEFAULT.equals(source);
-            case SchemaPackage.APPINFO_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.APPINFO_TYPE__ANY_ATTRIBUTE:
                 return anyAttribute != null && !anyAttribute.isEmpty();
         }
         return super.eIsSet(featureID);

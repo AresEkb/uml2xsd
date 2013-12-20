@@ -16,8 +16,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleContentType()
- * @model extendedMetaData="name='simpleContent_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleContentType()
+ * @model extendedMetaData="name='simpleContent_._type' kind='mixed'"
  * @generated
  */
 public interface SimpleContentType extends Annotated {
@@ -31,8 +31,8 @@ public interface SimpleContentType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Restriction</em>' containment reference.
      * @see #setRestriction(SimpleRestrictionType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleContentType_Restriction()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleContentType_Restriction()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='restriction' namespace='##targetNamespace'"
      * @generated
      */
@@ -58,8 +58,8 @@ public interface SimpleContentType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Extension</em>' containment reference.
      * @see #setExtension(SimpleExtensionType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleContentType_Extension()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleContentType_Extension()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='extension' namespace='##targetNamespace'"
      * @generated
      */

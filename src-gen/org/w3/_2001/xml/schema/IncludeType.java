@@ -15,8 +15,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getIncludeType()
- * @model extendedMetaData="name='include_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getIncludeType()
+ * @model extendedMetaData="name='include_._type' kind='mixed'"
  * @generated
  */
 public interface IncludeType extends Annotated {
@@ -30,7 +30,7 @@ public interface IncludeType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Schema Location</em>' attribute.
      * @see #setSchemaLocation(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getIncludeType_SchemaLocation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getIncludeType_SchemaLocation()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI" required="true"
      *        extendedMetaData="kind='attribute' name='schemaLocation'"
      * @generated

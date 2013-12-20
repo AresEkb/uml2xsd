@@ -24,8 +24,8 @@ import javax.xml.namespace.QName;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getListType()
- * @model extendedMetaData="name='list_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getListType()
+ * @model extendedMetaData="name='list_._type' kind='mixed'"
  * @generated
  */
 public interface ListType extends Annotated {
@@ -39,8 +39,8 @@ public interface ListType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference.
      * @see #setSimpleType(LocalSimpleType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getListType_SimpleType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getListType_SimpleType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace'"
      * @generated
      */
@@ -66,7 +66,7 @@ public interface ListType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Item Type</em>' attribute.
      * @see #setItemType(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getListType_ItemType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getListType_ItemType()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='itemType'"
      * @generated

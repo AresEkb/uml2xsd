@@ -21,8 +21,8 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getKeybase()
- * @model extendedMetaData="name='keybase' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getKeybase()
+ * @model extendedMetaData="name='keybase' kind='mixed'"
  * @generated
  */
 public interface Keybase extends Annotated {
@@ -35,8 +35,8 @@ public interface Keybase extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Selector</em>' containment reference.
      * @see #setSelector(SelectorType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getKeybase_Selector()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getKeybase_Selector()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='selector' namespace='##targetNamespace'"
      * @generated
      */
@@ -61,8 +61,8 @@ public interface Keybase extends Annotated {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Field</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getKeybase_Field()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getKeybase_Field()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='field' namespace='##targetNamespace'"
      * @generated
      */
@@ -78,7 +78,7 @@ public interface Keybase extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Name</em>' attribute.
      * @see #setName(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getKeybase_Name()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getKeybase_Name()
      * @model dataType="org.eclipse.emf.ecore.xml.type.NCName"
      *        extendedMetaData="kind='attribute' name='name'"
      * @generated
@@ -105,7 +105,7 @@ public interface Keybase extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Ref</em>' attribute.
      * @see #setRef(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getKeybase_Ref()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getKeybase_Ref()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='ref'"
      * @generated

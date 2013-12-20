@@ -54,6 +54,7 @@
         ]>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
            elementFormDefault="qualified" xml:lang="EN"
            targetNamespace="http://www.w3.org/2001/XMLSchema"
            version="1.0">
@@ -92,7 +93,7 @@
      </xs:documentation>
     </xs:annotation>
   </xs:import>
-  <xs:complexType name="openAttrs">
+  <xs:complexType name="openAttrs" ecore:mixed="true">
     <xs:annotation>
       <xs:documentation>
        This type is extended by almost all schema types

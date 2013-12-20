@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getLocalElement()
- * @model extendedMetaData="name='localElement' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getLocalElement()
+ * @model extendedMetaData="name='localElement' kind='mixed'"
  * @generated
  */
 public interface LocalElement extends Element {

@@ -4,8 +4,8 @@ package org.w3._2001.xml.schema.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.TopLevelComplexType;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class TopLevelComplexTypeImpl extends ComplexTypeImpl implements TopLevel
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.TOP_LEVEL_COMPLEX_TYPE;
+        return XMLSchema11Package.Literals.TOP_LEVEL_COMPLEX_TYPE;
     }
 
 } //TopLevelComplexTypeImpl

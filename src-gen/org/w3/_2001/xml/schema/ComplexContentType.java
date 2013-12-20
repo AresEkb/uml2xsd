@@ -13,12 +13,12 @@ package org.w3._2001.xml.schema;
  * <ul>
  *   <li>{@link org.w3._2001.xml.schema.ComplexContentType#getRestriction <em>Restriction</em>}</li>
  *   <li>{@link org.w3._2001.xml.schema.ComplexContentType#getExtension <em>Extension</em>}</li>
- *   <li>{@link org.w3._2001.xml.schema.ComplexContentType#isMixed <em>Mixed</em>}</li>
+ *   <li>{@link org.w3._2001.xml.schema.ComplexContentType#isMixed1 <em>Mixed1</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getComplexContentType()
- * @model extendedMetaData="name='complexContent_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexContentType()
+ * @model extendedMetaData="name='complexContent_._type' kind='mixed'"
  * @generated
  */
 public interface ComplexContentType extends Annotated {
@@ -32,8 +32,8 @@ public interface ComplexContentType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Restriction</em>' containment reference.
      * @see #setRestriction(ComplexRestrictionType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexContentType_Restriction()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexContentType_Restriction()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='restriction' namespace='##targetNamespace'"
      * @generated
      */
@@ -59,8 +59,8 @@ public interface ComplexContentType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Extension</em>' containment reference.
      * @see #setExtension(ExtensionType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexContentType_Extension()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexContentType_Extension()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='extension' namespace='##targetNamespace'"
      * @generated
      */
@@ -77,57 +77,57 @@ public interface ComplexContentType extends Annotated {
     void setExtension(ExtensionType value);
 
     /**
-     * Returns the value of the '<em><b>Mixed</b></em>' attribute.
+     * Returns the value of the '<em><b>Mixed1</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * <!-- begin-model-doc -->
      * 
      *        Overrides any setting on complexType parent.
      * <!-- end-model-doc -->
-     * @return the value of the '<em>Mixed</em>' attribute.
-     * @see #isSetMixed()
-     * @see #unsetMixed()
-     * @see #setMixed(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexContentType_Mixed()
+     * @return the value of the '<em>Mixed1</em>' attribute.
+     * @see #isSetMixed1()
+     * @see #unsetMixed1()
+     * @see #setMixed1(boolean)
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexContentType_Mixed1()
      * @model unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='mixed'"
      * @generated
      */
-    boolean isMixed();
+    boolean isMixed1();
 
     /**
-     * Sets the value of the '{@link org.w3._2001.xml.schema.ComplexContentType#isMixed <em>Mixed</em>}' attribute.
+     * Sets the value of the '{@link org.w3._2001.xml.schema.ComplexContentType#isMixed1 <em>Mixed1</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Mixed</em>' attribute.
-     * @see #isSetMixed()
-     * @see #unsetMixed()
-     * @see #isMixed()
+     * @param value the new value of the '<em>Mixed1</em>' attribute.
+     * @see #isSetMixed1()
+     * @see #unsetMixed1()
+     * @see #isMixed1()
      * @generated
      */
-    void setMixed(boolean value);
+    void setMixed1(boolean value);
 
     /**
-     * Unsets the value of the '{@link org.w3._2001.xml.schema.ComplexContentType#isMixed <em>Mixed</em>}' attribute.
+     * Unsets the value of the '{@link org.w3._2001.xml.schema.ComplexContentType#isMixed1 <em>Mixed1</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isSetMixed()
-     * @see #isMixed()
-     * @see #setMixed(boolean)
+     * @see #isSetMixed1()
+     * @see #isMixed1()
+     * @see #setMixed1(boolean)
      * @generated
      */
-    void unsetMixed();
+    void unsetMixed1();
 
     /**
-     * Returns whether the value of the '{@link org.w3._2001.xml.schema.ComplexContentType#isMixed <em>Mixed</em>}' attribute is set.
+     * Returns whether the value of the '{@link org.w3._2001.xml.schema.ComplexContentType#isMixed1 <em>Mixed1</em>}' attribute is set.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return whether the value of the '<em>Mixed</em>' attribute is set.
-     * @see #unsetMixed()
-     * @see #isMixed()
-     * @see #setMixed(boolean)
+     * @return whether the value of the '<em>Mixed1</em>' attribute is set.
+     * @see #unsetMixed1()
+     * @see #isMixed1()
+     * @see #setMixed1(boolean)
      * @generated
      */
-    boolean isSetMixed();
+    boolean isSetMixed1();
 
 } // ComplexContentType

@@ -3,26 +3,16 @@
 package org.w3._2001.xml.schema.impl;
 
 import java.util.Collection;
-
 import javax.xml.namespace.QName;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.w3._2001.xml.schema.FieldType;
 import org.w3._2001.xml.schema.Keybase;
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.SelectorType;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,26 +31,6 @@ import org.w3._2001.xml.schema.SelectorType;
  * @generated
  */
 public class KeybaseImpl extends AnnotatedImpl implements Keybase {
-    /**
-     * The cached value of the '{@link #getSelector() <em>Selector</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getSelector()
-     * @generated
-     * @ordered
-     */
-    protected SelectorType selector;
-
-    /**
-     * The cached value of the '{@link #getField() <em>Field</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getField()
-     * @generated
-     * @ordered
-     */
-    protected EList<FieldType> field;
-
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -117,7 +87,7 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.KEYBASE;
+        return XMLSchema11Package.Literals.KEYBASE;
     }
 
     /**
@@ -126,22 +96,7 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
      * @generated
      */
     public SelectorType getSelector() {
-        return selector;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSelector(SelectorType newSelector, NotificationChain msgs) {
-        SelectorType oldSelector = selector;
-        selector = newSelector;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.KEYBASE__SELECTOR, oldSelector, newSelector);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (SelectorType)getMixed().get(XMLSchema11Package.Literals.KEYBASE__SELECTOR, true);
     }
 
     /**
@@ -150,17 +105,7 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
      * @generated
      */
     public void setSelector(SelectorType newSelector) {
-        if (newSelector != selector) {
-            NotificationChain msgs = null;
-            if (selector != null)
-                msgs = ((InternalEObject)selector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.KEYBASE__SELECTOR, null, msgs);
-            if (newSelector != null)
-                msgs = ((InternalEObject)newSelector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.KEYBASE__SELECTOR, null, msgs);
-            msgs = basicSetSelector(newSelector, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.KEYBASE__SELECTOR, newSelector, newSelector));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.KEYBASE__SELECTOR, newSelector);
     }
 
     /**
@@ -169,10 +114,7 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
      * @generated
      */
     public EList<FieldType> getField() {
-        if (field == null) {
-            field = new EObjectContainmentEList<FieldType>(FieldType.class, this, SchemaPackage.KEYBASE__FIELD);
-        }
-        return field;
+        return getMixed().list(XMLSchema11Package.Literals.KEYBASE__FIELD);
     }
 
     /**
@@ -193,7 +135,7 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
         String oldName = name;
         name = newName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.KEYBASE__NAME, oldName, name));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.KEYBASE__NAME, oldName, name));
     }
 
     /**
@@ -214,23 +156,7 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
         QName oldRef = ref;
         ref = newRef;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.KEYBASE__REF, oldRef, ref));
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case SchemaPackage.KEYBASE__SELECTOR:
-                return basicSetSelector(null, msgs);
-            case SchemaPackage.KEYBASE__FIELD:
-                return ((InternalEList<?>)getField()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.KEYBASE__REF, oldRef, ref));
     }
 
     /**
@@ -241,13 +167,13 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.KEYBASE__SELECTOR:
+            case XMLSchema11Package.KEYBASE__SELECTOR:
                 return getSelector();
-            case SchemaPackage.KEYBASE__FIELD:
+            case XMLSchema11Package.KEYBASE__FIELD:
                 return getField();
-            case SchemaPackage.KEYBASE__NAME:
+            case XMLSchema11Package.KEYBASE__NAME:
                 return getName();
-            case SchemaPackage.KEYBASE__REF:
+            case XMLSchema11Package.KEYBASE__REF:
                 return getRef();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -262,17 +188,17 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.KEYBASE__SELECTOR:
+            case XMLSchema11Package.KEYBASE__SELECTOR:
                 setSelector((SelectorType)newValue);
                 return;
-            case SchemaPackage.KEYBASE__FIELD:
+            case XMLSchema11Package.KEYBASE__FIELD:
                 getField().clear();
                 getField().addAll((Collection<? extends FieldType>)newValue);
                 return;
-            case SchemaPackage.KEYBASE__NAME:
+            case XMLSchema11Package.KEYBASE__NAME:
                 setName((String)newValue);
                 return;
-            case SchemaPackage.KEYBASE__REF:
+            case XMLSchema11Package.KEYBASE__REF:
                 setRef((QName)newValue);
                 return;
         }
@@ -287,16 +213,16 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.KEYBASE__SELECTOR:
+            case XMLSchema11Package.KEYBASE__SELECTOR:
                 setSelector((SelectorType)null);
                 return;
-            case SchemaPackage.KEYBASE__FIELD:
+            case XMLSchema11Package.KEYBASE__FIELD:
                 getField().clear();
                 return;
-            case SchemaPackage.KEYBASE__NAME:
+            case XMLSchema11Package.KEYBASE__NAME:
                 setName(NAME_EDEFAULT);
                 return;
-            case SchemaPackage.KEYBASE__REF:
+            case XMLSchema11Package.KEYBASE__REF:
                 setRef(REF_EDEFAULT);
                 return;
         }
@@ -311,13 +237,13 @@ public class KeybaseImpl extends AnnotatedImpl implements Keybase {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.KEYBASE__SELECTOR:
-                return selector != null;
-            case SchemaPackage.KEYBASE__FIELD:
-                return field != null && !field.isEmpty();
-            case SchemaPackage.KEYBASE__NAME:
+            case XMLSchema11Package.KEYBASE__SELECTOR:
+                return getSelector() != null;
+            case XMLSchema11Package.KEYBASE__FIELD:
+                return !getField().isEmpty();
+            case XMLSchema11Package.KEYBASE__NAME:
                 return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case SchemaPackage.KEYBASE__REF:
+            case XMLSchema11Package.KEYBASE__REF:
                 return REF_EDEFAULT == null ? ref != null : !REF_EDEFAULT.equals(ref);
         }
         return super.eIsSet(featureID);

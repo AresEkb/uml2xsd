@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * 
  *    A utility type, not for public use
  * <!-- end-model-doc -->
- * @see org.w3._2001.xml.schema.SchemaPackage#getTypeDerivationControl()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getTypeDerivationControl()
  * @model extendedMetaData="name='typeDerivationControl'"
  * @generated
  */

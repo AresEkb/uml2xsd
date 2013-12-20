@@ -17,8 +17,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getDefaultOpenContentType()
- * @model extendedMetaData="name='defaultOpenContent_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getDefaultOpenContentType()
+ * @model extendedMetaData="name='defaultOpenContent_._type' kind='mixed'"
  * @generated
  */
 public interface DefaultOpenContentType extends Annotated {
@@ -32,8 +32,8 @@ public interface DefaultOpenContentType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Any</em>' containment reference.
      * @see #setAny(Wildcard)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDefaultOpenContentType_Any()
-     * @model containment="true" required="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDefaultOpenContentType_Any()
+     * @model containment="true" required="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='any' namespace='##targetNamespace'"
      * @generated
      */
@@ -62,7 +62,7 @@ public interface DefaultOpenContentType extends Annotated {
      * @see #isSetAppliesToEmpty()
      * @see #unsetAppliesToEmpty()
      * @see #setAppliesToEmpty(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDefaultOpenContentType_AppliesToEmpty()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDefaultOpenContentType_AppliesToEmpty()
      * @model default="false" unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='appliesToEmpty'"
      * @generated
@@ -119,7 +119,7 @@ public interface DefaultOpenContentType extends Annotated {
      * @see #isSetMode()
      * @see #unsetMode()
      * @see #setMode(ModeType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDefaultOpenContentType_Mode()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDefaultOpenContentType_Mode()
      * @model default="interleave" unsettable="true"
      *        extendedMetaData="kind='attribute' name='mode'"
      * @generated

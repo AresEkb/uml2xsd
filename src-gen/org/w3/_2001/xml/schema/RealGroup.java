@@ -17,8 +17,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getRealGroup()
- * @model extendedMetaData="name='realGroup' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getRealGroup()
+ * @model extendedMetaData="name='realGroup' kind='mixed'"
  * @generated
  */
 public interface RealGroup extends Group {
@@ -31,8 +31,8 @@ public interface RealGroup extends Group {
      * <!-- end-model-doc -->
      * @return the value of the '<em>All1</em>' containment reference.
      * @see #setAll1(All)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRealGroup_All1()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRealGroup_All1()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='all' namespace='##targetNamespace'"
      * @generated
      */
@@ -57,8 +57,8 @@ public interface RealGroup extends Group {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Choice1</em>' containment reference.
      * @see #setChoice1(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRealGroup_Choice1()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRealGroup_Choice1()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='choice' namespace='##targetNamespace'"
      * @generated
      */
@@ -83,8 +83,8 @@ public interface RealGroup extends Group {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Sequence1</em>' containment reference.
      * @see #setSequence1(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRealGroup_Sequence1()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRealGroup_Sequence1()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='sequence' namespace='##targetNamespace'"
      * @generated
      */

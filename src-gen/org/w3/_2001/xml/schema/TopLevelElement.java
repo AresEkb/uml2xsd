@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getTopLevelElement()
- * @model extendedMetaData="name='topLevelElement' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getTopLevelElement()
+ * @model extendedMetaData="name='topLevelElement' kind='mixed'"
  * @generated
  */
 public interface TopLevelElement extends Element {

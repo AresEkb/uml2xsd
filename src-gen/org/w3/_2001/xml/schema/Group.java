@@ -38,9 +38,9 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getGroup()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup()
  * @model abstract="true"
- *        extendedMetaData="name='group' kind='elementOnly'"
+ *        extendedMetaData="name='group' kind='mixed'"
  * @generated
  */
 public interface Group extends Annotated {
@@ -54,9 +54,9 @@ public interface Group extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Particle</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_Particle()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='Particle:3'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_Particle()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='Particle:4'"
      * @generated
      */
     FeatureMap getParticle();
@@ -71,9 +71,9 @@ public interface Group extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Element</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_Element()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_Element()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='element' namespace='##targetNamespace' group='#Particle:3'"
+     *        extendedMetaData="kind='element' name='element' namespace='##targetNamespace' group='#Particle:4'"
      * @generated
      */
     EList<LocalElement> getElement();
@@ -88,9 +88,9 @@ public interface Group extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_Group()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_Group()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace' group='#Particle:3'"
+     *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace' group='#Particle:4'"
      * @generated
      */
     EList<GroupRef> getGroup();
@@ -104,9 +104,9 @@ public interface Group extends Annotated {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>All</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_All()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_All()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='all' namespace='##targetNamespace' group='#Particle:3'"
+     *        extendedMetaData="kind='element' name='all' namespace='##targetNamespace' group='#Particle:4'"
      * @generated
      */
     EList<All> getAll();
@@ -120,9 +120,9 @@ public interface Group extends Annotated {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Choice</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_Choice()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_Choice()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='choice' namespace='##targetNamespace' group='#Particle:3'"
+     *        extendedMetaData="kind='element' name='choice' namespace='##targetNamespace' group='#Particle:4'"
      * @generated
      */
     EList<ExplicitGroup> getChoice();
@@ -136,9 +136,9 @@ public interface Group extends Annotated {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Sequence</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_Sequence()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_Sequence()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='sequence' namespace='##targetNamespace' group='#Particle:3'"
+     *        extendedMetaData="kind='element' name='sequence' namespace='##targetNamespace' group='#Particle:4'"
      * @generated
      */
     EList<ExplicitGroup> getSequence();
@@ -152,9 +152,9 @@ public interface Group extends Annotated {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Any</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_Any()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_Any()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='any' namespace='##targetNamespace' group='#Particle:3'"
+     *        extendedMetaData="kind='element' name='any' namespace='##targetNamespace' group='#Particle:4'"
      * @generated
      */
     EList<AnyType> getAny();
@@ -172,7 +172,7 @@ public interface Group extends Annotated {
      * @see #isSetMaxOccurs()
      * @see #unsetMaxOccurs()
      * @see #setMaxOccurs(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_MaxOccurs()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_MaxOccurs()
      * @model default="1" unsettable="true" dataType="org.w3._2001.xml.schema.AllNNI"
      *        extendedMetaData="kind='attribute' name='maxOccurs'"
      * @generated
@@ -227,7 +227,7 @@ public interface Group extends Annotated {
      * @see #isSetMinOccurs()
      * @see #unsetMinOccurs()
      * @see #setMinOccurs(BigInteger)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_MinOccurs()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_MinOccurs()
      * @model default="1" unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.NonNegativeInteger"
      *        extendedMetaData="kind='attribute' name='minOccurs'"
      * @generated
@@ -279,7 +279,7 @@ public interface Group extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Name</em>' attribute.
      * @see #setName(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_Name()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_Name()
      * @model dataType="org.eclipse.emf.ecore.xml.type.NCName"
      *        extendedMetaData="kind='attribute' name='name'"
      * @generated
@@ -306,7 +306,7 @@ public interface Group extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Ref</em>' attribute.
      * @see #setRef(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getGroup_Ref()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroup_Ref()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='ref'"
      * @generated

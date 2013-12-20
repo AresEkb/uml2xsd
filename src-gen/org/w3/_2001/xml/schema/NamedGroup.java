@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getNamedGroup()
- * @model extendedMetaData="name='namedGroup' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getNamedGroup()
+ * @model extendedMetaData="name='namedGroup' kind='mixed'"
  * @generated
  */
 public interface NamedGroup extends RealGroup {

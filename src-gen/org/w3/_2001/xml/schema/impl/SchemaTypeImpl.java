@@ -10,8 +10,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.BasicFeatureMap;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.w3._2001.xml.schema.AnnotationType;
@@ -24,17 +22,17 @@ import org.w3._2001.xml.schema.NamedGroup;
 import org.w3._2001.xml.schema.NotationType;
 import org.w3._2001.xml.schema.OverrideType;
 import org.w3._2001.xml.schema.RedefineType;
-import org.w3._2001.xml.schema.SchemaFactory;
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.SchemaType;
 import org.w3._2001.xml.schema.TopLevelAttribute;
 import org.w3._2001.xml.schema.TopLevelComplexType;
 import org.w3._2001.xml.schema.TopLevelElement;
 import org.w3._2001.xml.schema.TopLevelSimpleType;
+import org.w3._2001.xml.schema.XMLSchema11Factory;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type</b></em>'.
+ * An implementation of the model object '<em><b>Schema Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -72,46 +70,6 @@ import org.w3._2001.xml.schema.TopLevelSimpleType;
  * @generated
  */
 public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
-    /**
-     * The cached value of the '{@link #getComposition() <em>Composition</em>}' attribute list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getComposition()
-     * @generated
-     * @ordered
-     */
-    protected FeatureMap composition;
-
-    /**
-     * The cached value of the '{@link #getDefaultOpenContent() <em>Default Open Content</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getDefaultOpenContent()
-     * @generated
-     * @ordered
-     */
-    protected DefaultOpenContentType defaultOpenContent;
-
-    /**
-     * The cached value of the '{@link #getAnnotation1() <em>Annotation1</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAnnotation1()
-     * @generated
-     * @ordered
-     */
-    protected EList<AnnotationType> annotation1;
-
-    /**
-     * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getGroup()
-     * @generated
-     * @ordered
-     */
-    protected FeatureMap group;
-
     /**
      * The default value of the '{@link #getTargetNamespace() <em>Target Namespace</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -160,7 +118,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated NOT
      * @ordered
      */
-    protected static final Object FINAL_DEFAULT_EDEFAULT = null;// SchemaFactory.eINSTANCE.createFromString(SchemaPackage.eINSTANCE.getFullDerivationSet(), "");
+    protected static final Object FINAL_DEFAULT_EDEFAULT = null;//XMLSchema11Factory.eINSTANCE.createFromString(XMLSchema11Package.eINSTANCE.getFullDerivationSet(), "");
 
     /**
      * The cached value of the '{@link #getFinalDefault() <em>Final Default</em>}' attribute.
@@ -189,7 +147,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated NOT
      * @ordered
      */
-    protected static final Object BLOCK_DEFAULT_EDEFAULT = null;//SchemaFactory.eINSTANCE.createFromString(SchemaPackage.eINSTANCE.getBlockSet(), "");
+    protected static final Object BLOCK_DEFAULT_EDEFAULT = null;//XMLSchema11Factory.eINSTANCE.createFromString(XMLSchema11Package.eINSTANCE.getBlockSet(), "");
 
     /**
      * The cached value of the '{@link #getBlockDefault() <em>Block Default</em>}' attribute.
@@ -296,7 +254,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      * @ordered
      */
-    protected static final Object XPATH_DEFAULT_NAMESPACE_EDEFAULT = SchemaFactory.eINSTANCE.createFromString(SchemaPackage.eINSTANCE.getXpathDefaultNamespace(), "##local");
+    protected static final Object XPATH_DEFAULT_NAMESPACE_EDEFAULT = XMLSchema11Factory.eINSTANCE.createFromString(XMLSchema11Package.eINSTANCE.getXpathDefaultNamespace(), "##local");
 
     /**
      * The cached value of the '{@link #getXpathDefaultNamespace() <em>Xpath Default Namespace</em>}' attribute.
@@ -373,7 +331,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.SCHEMA_TYPE;
+        return XMLSchema11Package.Literals.SCHEMA_TYPE;
     }
 
     /**
@@ -382,10 +340,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public FeatureMap getComposition() {
-        if (composition == null) {
-            composition = new BasicFeatureMap(this, SchemaPackage.SCHEMA_TYPE__COMPOSITION);
-        }
-        return composition;
+        return (FeatureMap)getMixed().<FeatureMap.Entry>list(XMLSchema11Package.Literals.SCHEMA_TYPE__COMPOSITION);
     }
 
     /**
@@ -394,7 +349,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<IncludeType> getInclude() {
-        return getComposition().list(SchemaPackage.Literals.SCHEMA_TYPE__INCLUDE);
+        return getComposition().list(XMLSchema11Package.Literals.SCHEMA_TYPE__INCLUDE);
     }
 
     /**
@@ -403,7 +358,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<ImportType> getImport() {
-        return getComposition().list(SchemaPackage.Literals.SCHEMA_TYPE__IMPORT);
+        return getComposition().list(XMLSchema11Package.Literals.SCHEMA_TYPE__IMPORT);
     }
 
     /**
@@ -412,7 +367,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<RedefineType> getRedefine() {
-        return getComposition().list(SchemaPackage.Literals.SCHEMA_TYPE__REDEFINE);
+        return getComposition().list(XMLSchema11Package.Literals.SCHEMA_TYPE__REDEFINE);
     }
 
     /**
@@ -421,7 +376,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<OverrideType> getOverride() {
-        return getComposition().list(SchemaPackage.Literals.SCHEMA_TYPE__OVERRIDE);
+        return getComposition().list(XMLSchema11Package.Literals.SCHEMA_TYPE__OVERRIDE);
     }
 
     /**
@@ -430,7 +385,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<AnnotationType> getAnnotation() {
-        return getComposition().list(SchemaPackage.Literals.SCHEMA_TYPE__ANNOTATION);
+        return getComposition().list(XMLSchema11Package.Literals.SCHEMA_TYPE__ANNOTATION);
     }
 
     /**
@@ -439,22 +394,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public DefaultOpenContentType getDefaultOpenContent() {
-        return defaultOpenContent;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetDefaultOpenContent(DefaultOpenContentType newDefaultOpenContent, NotificationChain msgs) {
-        DefaultOpenContentType oldDefaultOpenContent = defaultOpenContent;
-        defaultOpenContent = newDefaultOpenContent;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT, oldDefaultOpenContent, newDefaultOpenContent);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (DefaultOpenContentType)getMixed().get(XMLSchema11Package.Literals.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT, true);
     }
 
     /**
@@ -463,17 +403,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public void setDefaultOpenContent(DefaultOpenContentType newDefaultOpenContent) {
-        if (newDefaultOpenContent != defaultOpenContent) {
-            NotificationChain msgs = null;
-            if (defaultOpenContent != null)
-                msgs = ((InternalEObject)defaultOpenContent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT, null, msgs);
-            if (newDefaultOpenContent != null)
-                msgs = ((InternalEObject)newDefaultOpenContent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT, null, msgs);
-            msgs = basicSetDefaultOpenContent(newDefaultOpenContent, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT, newDefaultOpenContent, newDefaultOpenContent));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT, newDefaultOpenContent);
     }
 
     /**
@@ -482,10 +412,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<AnnotationType> getAnnotation1() {
-        if (annotation1 == null) {
-            annotation1 = new EObjectContainmentEList<AnnotationType>(AnnotationType.class, this, SchemaPackage.SCHEMA_TYPE__ANNOTATION1);
-        }
-        return annotation1;
+        return getMixed().list(XMLSchema11Package.Literals.SCHEMA_TYPE__ANNOTATION1);
     }
 
     /**
@@ -494,10 +421,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public FeatureMap getGroup() {
-        if (group == null) {
-            group = new BasicFeatureMap(this, SchemaPackage.SCHEMA_TYPE__GROUP);
-        }
-        return group;
+        return (FeatureMap)getMixed().<FeatureMap.Entry>list(XMLSchema11Package.Literals.SCHEMA_TYPE__GROUP);
     }
 
     /**
@@ -506,7 +430,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<TopLevelSimpleType> getSimpleType() {
-        return getGroup().list(SchemaPackage.Literals.SCHEMA_TYPE__SIMPLE_TYPE);
+        return getGroup().list(XMLSchema11Package.Literals.SCHEMA_TYPE__SIMPLE_TYPE);
     }
 
     /**
@@ -515,7 +439,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<TopLevelComplexType> getComplexType() {
-        return getGroup().list(SchemaPackage.Literals.SCHEMA_TYPE__COMPLEX_TYPE);
+        return getGroup().list(XMLSchema11Package.Literals.SCHEMA_TYPE__COMPLEX_TYPE);
     }
 
     /**
@@ -524,7 +448,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<NamedGroup> getGroup1() {
-        return getGroup().list(SchemaPackage.Literals.SCHEMA_TYPE__GROUP1);
+        return getGroup().list(XMLSchema11Package.Literals.SCHEMA_TYPE__GROUP1);
     }
 
     /**
@@ -533,7 +457,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<NamedAttributeGroup> getAttributeGroup() {
-        return getGroup().list(SchemaPackage.Literals.SCHEMA_TYPE__ATTRIBUTE_GROUP);
+        return getGroup().list(XMLSchema11Package.Literals.SCHEMA_TYPE__ATTRIBUTE_GROUP);
     }
 
     /**
@@ -542,7 +466,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<TopLevelElement> getElement() {
-        return getGroup().list(SchemaPackage.Literals.SCHEMA_TYPE__ELEMENT);
+        return getGroup().list(XMLSchema11Package.Literals.SCHEMA_TYPE__ELEMENT);
     }
 
     /**
@@ -551,7 +475,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<TopLevelAttribute> getAttribute() {
-        return getGroup().list(SchemaPackage.Literals.SCHEMA_TYPE__ATTRIBUTE);
+        return getGroup().list(XMLSchema11Package.Literals.SCHEMA_TYPE__ATTRIBUTE);
     }
 
     /**
@@ -560,7 +484,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<NotationType> getNotation() {
-        return getGroup().list(SchemaPackage.Literals.SCHEMA_TYPE__NOTATION);
+        return getGroup().list(XMLSchema11Package.Literals.SCHEMA_TYPE__NOTATION);
     }
 
     /**
@@ -569,7 +493,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
      * @generated
      */
     public EList<AnnotationType> getAnnotation2() {
-        return getGroup().list(SchemaPackage.Literals.SCHEMA_TYPE__ANNOTATION2);
+        return getGroup().list(XMLSchema11Package.Literals.SCHEMA_TYPE__ANNOTATION2);
     }
 
     /**
@@ -590,7 +514,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         String oldTargetNamespace = targetNamespace;
         targetNamespace = newTargetNamespace;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__TARGET_NAMESPACE, oldTargetNamespace, targetNamespace));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__TARGET_NAMESPACE, oldTargetNamespace, targetNamespace));
     }
 
     /**
@@ -611,7 +535,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         String oldVersion = version;
         version = newVersion;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__VERSION, oldVersion, version));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__VERSION, oldVersion, version));
     }
 
     /**
@@ -634,7 +558,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         boolean oldFinalDefaultESet = finalDefaultESet;
         finalDefaultESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__FINAL_DEFAULT, oldFinalDefault, finalDefault, !oldFinalDefaultESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__FINAL_DEFAULT, oldFinalDefault, finalDefault, !oldFinalDefaultESet));
     }
 
     /**
@@ -648,7 +572,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         finalDefault = FINAL_DEFAULT_EDEFAULT;
         finalDefaultESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.SCHEMA_TYPE__FINAL_DEFAULT, oldFinalDefault, FINAL_DEFAULT_EDEFAULT, oldFinalDefaultESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.SCHEMA_TYPE__FINAL_DEFAULT, oldFinalDefault, FINAL_DEFAULT_EDEFAULT, oldFinalDefaultESet));
     }
 
     /**
@@ -680,7 +604,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         boolean oldBlockDefaultESet = blockDefaultESet;
         blockDefaultESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__BLOCK_DEFAULT, oldBlockDefault, blockDefault, !oldBlockDefaultESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__BLOCK_DEFAULT, oldBlockDefault, blockDefault, !oldBlockDefaultESet));
     }
 
     /**
@@ -694,7 +618,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         blockDefault = BLOCK_DEFAULT_EDEFAULT;
         blockDefaultESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.SCHEMA_TYPE__BLOCK_DEFAULT, oldBlockDefault, BLOCK_DEFAULT_EDEFAULT, oldBlockDefaultESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.SCHEMA_TYPE__BLOCK_DEFAULT, oldBlockDefault, BLOCK_DEFAULT_EDEFAULT, oldBlockDefaultESet));
     }
 
     /**
@@ -726,7 +650,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         boolean oldAttributeFormDefaultESet = attributeFormDefaultESet;
         attributeFormDefaultESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT, oldAttributeFormDefault, attributeFormDefault, !oldAttributeFormDefaultESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT, oldAttributeFormDefault, attributeFormDefault, !oldAttributeFormDefaultESet));
     }
 
     /**
@@ -740,7 +664,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         attributeFormDefault = ATTRIBUTE_FORM_DEFAULT_EDEFAULT;
         attributeFormDefaultESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT, oldAttributeFormDefault, ATTRIBUTE_FORM_DEFAULT_EDEFAULT, oldAttributeFormDefaultESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT, oldAttributeFormDefault, ATTRIBUTE_FORM_DEFAULT_EDEFAULT, oldAttributeFormDefaultESet));
     }
 
     /**
@@ -772,7 +696,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         boolean oldElementFormDefaultESet = elementFormDefaultESet;
         elementFormDefaultESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT, oldElementFormDefault, elementFormDefault, !oldElementFormDefaultESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT, oldElementFormDefault, elementFormDefault, !oldElementFormDefaultESet));
     }
 
     /**
@@ -786,7 +710,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         elementFormDefault = ELEMENT_FORM_DEFAULT_EDEFAULT;
         elementFormDefaultESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT, oldElementFormDefault, ELEMENT_FORM_DEFAULT_EDEFAULT, oldElementFormDefaultESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT, oldElementFormDefault, ELEMENT_FORM_DEFAULT_EDEFAULT, oldElementFormDefaultESet));
     }
 
     /**
@@ -816,7 +740,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         QName oldDefaultAttributes = defaultAttributes;
         defaultAttributes = newDefaultAttributes;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__DEFAULT_ATTRIBUTES, oldDefaultAttributes, defaultAttributes));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__DEFAULT_ATTRIBUTES, oldDefaultAttributes, defaultAttributes));
     }
 
     /**
@@ -839,7 +763,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         boolean oldXpathDefaultNamespaceESet = xpathDefaultNamespaceESet;
         xpathDefaultNamespaceESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE, oldXpathDefaultNamespace, xpathDefaultNamespace, !oldXpathDefaultNamespaceESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE, oldXpathDefaultNamespace, xpathDefaultNamespace, !oldXpathDefaultNamespaceESet));
     }
 
     /**
@@ -853,7 +777,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         xpathDefaultNamespace = XPATH_DEFAULT_NAMESPACE_EDEFAULT;
         xpathDefaultNamespaceESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE, oldXpathDefaultNamespace, XPATH_DEFAULT_NAMESPACE_EDEFAULT, oldXpathDefaultNamespaceESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE, oldXpathDefaultNamespace, XPATH_DEFAULT_NAMESPACE_EDEFAULT, oldXpathDefaultNamespaceESet));
     }
 
     /**
@@ -883,7 +807,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         String oldId = id;
         id = newId;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__ID, oldId, id));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__ID, oldId, id));
     }
 
     /**
@@ -904,7 +828,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         String oldLang = lang;
         lang = newLang;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SCHEMA_TYPE__LANG, oldLang, lang));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SCHEMA_TYPE__LANG, oldLang, lang));
     }
 
     /**
@@ -915,40 +839,10 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case SchemaPackage.SCHEMA_TYPE__COMPOSITION:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPOSITION:
                 return ((InternalEList<?>)getComposition()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__INCLUDE:
-                return ((InternalEList<?>)getInclude()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__IMPORT:
-                return ((InternalEList<?>)getImport()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__REDEFINE:
-                return ((InternalEList<?>)getRedefine()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__OVERRIDE:
-                return ((InternalEList<?>)getOverride()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION:
-                return ((InternalEList<?>)getAnnotation()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
-                return basicSetDefaultOpenContent(null, msgs);
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION1:
-                return ((InternalEList<?>)getAnnotation1()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__GROUP:
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP:
                 return ((InternalEList<?>)getGroup()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__SIMPLE_TYPE:
-                return ((InternalEList<?>)getSimpleType()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__COMPLEX_TYPE:
-                return ((InternalEList<?>)getComplexType()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__GROUP1:
-                return ((InternalEList<?>)getGroup1()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_GROUP:
-                return ((InternalEList<?>)getAttributeGroup()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT:
-                return ((InternalEList<?>)getElement()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE:
-                return ((InternalEList<?>)getAttribute()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__NOTATION:
-                return ((InternalEList<?>)getNotation()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION2:
-                return ((InternalEList<?>)getAnnotation2()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -961,61 +855,61 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.SCHEMA_TYPE__COMPOSITION:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPOSITION:
                 if (coreType) return getComposition();
                 return ((FeatureMap.Internal)getComposition()).getWrapper();
-            case SchemaPackage.SCHEMA_TYPE__INCLUDE:
+            case XMLSchema11Package.SCHEMA_TYPE__INCLUDE:
                 return getInclude();
-            case SchemaPackage.SCHEMA_TYPE__IMPORT:
+            case XMLSchema11Package.SCHEMA_TYPE__IMPORT:
                 return getImport();
-            case SchemaPackage.SCHEMA_TYPE__REDEFINE:
+            case XMLSchema11Package.SCHEMA_TYPE__REDEFINE:
                 return getRedefine();
-            case SchemaPackage.SCHEMA_TYPE__OVERRIDE:
+            case XMLSchema11Package.SCHEMA_TYPE__OVERRIDE:
                 return getOverride();
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION:
                 return getAnnotation();
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
+            case XMLSchema11Package.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
                 return getDefaultOpenContent();
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION1:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION1:
                 return getAnnotation1();
-            case SchemaPackage.SCHEMA_TYPE__GROUP:
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP:
                 if (coreType) return getGroup();
                 return ((FeatureMap.Internal)getGroup()).getWrapper();
-            case SchemaPackage.SCHEMA_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.SCHEMA_TYPE__SIMPLE_TYPE:
                 return getSimpleType();
-            case SchemaPackage.SCHEMA_TYPE__COMPLEX_TYPE:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPLEX_TYPE:
                 return getComplexType();
-            case SchemaPackage.SCHEMA_TYPE__GROUP1:
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP1:
                 return getGroup1();
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_GROUP:
                 return getAttributeGroup();
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT:
+            case XMLSchema11Package.SCHEMA_TYPE__ELEMENT:
                 return getElement();
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE:
                 return getAttribute();
-            case SchemaPackage.SCHEMA_TYPE__NOTATION:
+            case XMLSchema11Package.SCHEMA_TYPE__NOTATION:
                 return getNotation();
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION2:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION2:
                 return getAnnotation2();
-            case SchemaPackage.SCHEMA_TYPE__TARGET_NAMESPACE:
+            case XMLSchema11Package.SCHEMA_TYPE__TARGET_NAMESPACE:
                 return getTargetNamespace();
-            case SchemaPackage.SCHEMA_TYPE__VERSION:
+            case XMLSchema11Package.SCHEMA_TYPE__VERSION:
                 return getVersion();
-            case SchemaPackage.SCHEMA_TYPE__FINAL_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__FINAL_DEFAULT:
                 return getFinalDefault();
-            case SchemaPackage.SCHEMA_TYPE__BLOCK_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__BLOCK_DEFAULT:
                 return getBlockDefault();
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT:
                 return getAttributeFormDefault();
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT:
                 return getElementFormDefault();
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_ATTRIBUTES:
+            case XMLSchema11Package.SCHEMA_TYPE__DEFAULT_ATTRIBUTES:
                 return getDefaultAttributes();
-            case SchemaPackage.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE:
                 return getXpathDefaultNamespace();
-            case SchemaPackage.SCHEMA_TYPE__ID:
+            case XMLSchema11Package.SCHEMA_TYPE__ID:
                 return getId();
-            case SchemaPackage.SCHEMA_TYPE__LANG:
+            case XMLSchema11Package.SCHEMA_TYPE__LANG:
                 return getLang();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -1030,99 +924,99 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.SCHEMA_TYPE__COMPOSITION:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPOSITION:
                 ((FeatureMap.Internal)getComposition()).set(newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__INCLUDE:
+            case XMLSchema11Package.SCHEMA_TYPE__INCLUDE:
                 getInclude().clear();
                 getInclude().addAll((Collection<? extends IncludeType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__IMPORT:
+            case XMLSchema11Package.SCHEMA_TYPE__IMPORT:
                 getImport().clear();
                 getImport().addAll((Collection<? extends ImportType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__REDEFINE:
+            case XMLSchema11Package.SCHEMA_TYPE__REDEFINE:
                 getRedefine().clear();
                 getRedefine().addAll((Collection<? extends RedefineType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__OVERRIDE:
+            case XMLSchema11Package.SCHEMA_TYPE__OVERRIDE:
                 getOverride().clear();
                 getOverride().addAll((Collection<? extends OverrideType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION:
                 getAnnotation().clear();
                 getAnnotation().addAll((Collection<? extends AnnotationType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
+            case XMLSchema11Package.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
                 setDefaultOpenContent((DefaultOpenContentType)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION1:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION1:
                 getAnnotation1().clear();
                 getAnnotation1().addAll((Collection<? extends AnnotationType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__GROUP:
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP:
                 ((FeatureMap.Internal)getGroup()).set(newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.SCHEMA_TYPE__SIMPLE_TYPE:
                 getSimpleType().clear();
                 getSimpleType().addAll((Collection<? extends TopLevelSimpleType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__COMPLEX_TYPE:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPLEX_TYPE:
                 getComplexType().clear();
                 getComplexType().addAll((Collection<? extends TopLevelComplexType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__GROUP1:
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP1:
                 getGroup1().clear();
                 getGroup1().addAll((Collection<? extends NamedGroup>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_GROUP:
                 getAttributeGroup().clear();
                 getAttributeGroup().addAll((Collection<? extends NamedAttributeGroup>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT:
+            case XMLSchema11Package.SCHEMA_TYPE__ELEMENT:
                 getElement().clear();
                 getElement().addAll((Collection<? extends TopLevelElement>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE:
                 getAttribute().clear();
                 getAttribute().addAll((Collection<? extends TopLevelAttribute>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__NOTATION:
+            case XMLSchema11Package.SCHEMA_TYPE__NOTATION:
                 getNotation().clear();
                 getNotation().addAll((Collection<? extends NotationType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION2:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION2:
                 getAnnotation2().clear();
                 getAnnotation2().addAll((Collection<? extends AnnotationType>)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__TARGET_NAMESPACE:
+            case XMLSchema11Package.SCHEMA_TYPE__TARGET_NAMESPACE:
                 setTargetNamespace((String)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__VERSION:
+            case XMLSchema11Package.SCHEMA_TYPE__VERSION:
                 setVersion((String)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__FINAL_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__FINAL_DEFAULT:
                 setFinalDefault(newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__BLOCK_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__BLOCK_DEFAULT:
                 setBlockDefault(newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT:
                 setAttributeFormDefault((FormChoice)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT:
                 setElementFormDefault((FormChoice)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_ATTRIBUTES:
+            case XMLSchema11Package.SCHEMA_TYPE__DEFAULT_ATTRIBUTES:
                 setDefaultAttributes((QName)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE:
                 setXpathDefaultNamespace(newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ID:
+            case XMLSchema11Package.SCHEMA_TYPE__ID:
                 setId((String)newValue);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__LANG:
+            case XMLSchema11Package.SCHEMA_TYPE__LANG:
                 setLang((String)newValue);
                 return;
         }
@@ -1137,85 +1031,85 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.SCHEMA_TYPE__COMPOSITION:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPOSITION:
                 getComposition().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__INCLUDE:
+            case XMLSchema11Package.SCHEMA_TYPE__INCLUDE:
                 getInclude().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__IMPORT:
+            case XMLSchema11Package.SCHEMA_TYPE__IMPORT:
                 getImport().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__REDEFINE:
+            case XMLSchema11Package.SCHEMA_TYPE__REDEFINE:
                 getRedefine().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__OVERRIDE:
+            case XMLSchema11Package.SCHEMA_TYPE__OVERRIDE:
                 getOverride().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION:
                 getAnnotation().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
+            case XMLSchema11Package.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
                 setDefaultOpenContent((DefaultOpenContentType)null);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION1:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION1:
                 getAnnotation1().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__GROUP:
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP:
                 getGroup().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.SCHEMA_TYPE__SIMPLE_TYPE:
                 getSimpleType().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__COMPLEX_TYPE:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPLEX_TYPE:
                 getComplexType().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__GROUP1:
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP1:
                 getGroup1().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_GROUP:
                 getAttributeGroup().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT:
+            case XMLSchema11Package.SCHEMA_TYPE__ELEMENT:
                 getElement().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE:
                 getAttribute().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__NOTATION:
+            case XMLSchema11Package.SCHEMA_TYPE__NOTATION:
                 getNotation().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION2:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION2:
                 getAnnotation2().clear();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__TARGET_NAMESPACE:
+            case XMLSchema11Package.SCHEMA_TYPE__TARGET_NAMESPACE:
                 setTargetNamespace(TARGET_NAMESPACE_EDEFAULT);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__VERSION:
+            case XMLSchema11Package.SCHEMA_TYPE__VERSION:
                 setVersion(VERSION_EDEFAULT);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__FINAL_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__FINAL_DEFAULT:
                 unsetFinalDefault();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__BLOCK_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__BLOCK_DEFAULT:
                 unsetBlockDefault();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT:
                 unsetAttributeFormDefault();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT:
                 unsetElementFormDefault();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_ATTRIBUTES:
+            case XMLSchema11Package.SCHEMA_TYPE__DEFAULT_ATTRIBUTES:
                 setDefaultAttributes(DEFAULT_ATTRIBUTES_EDEFAULT);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE:
                 unsetXpathDefaultNamespace();
                 return;
-            case SchemaPackage.SCHEMA_TYPE__ID:
+            case XMLSchema11Package.SCHEMA_TYPE__ID:
                 setId(ID_EDEFAULT);
                 return;
-            case SchemaPackage.SCHEMA_TYPE__LANG:
+            case XMLSchema11Package.SCHEMA_TYPE__LANG:
                 setLang(LANG_EDEFAULT);
                 return;
         }
@@ -1230,59 +1124,59 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.SCHEMA_TYPE__COMPOSITION:
-                return composition != null && !composition.isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__INCLUDE:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPOSITION:
+                return !getComposition().isEmpty();
+            case XMLSchema11Package.SCHEMA_TYPE__INCLUDE:
                 return !getInclude().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__IMPORT:
+            case XMLSchema11Package.SCHEMA_TYPE__IMPORT:
                 return !getImport().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__REDEFINE:
+            case XMLSchema11Package.SCHEMA_TYPE__REDEFINE:
                 return !getRedefine().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__OVERRIDE:
+            case XMLSchema11Package.SCHEMA_TYPE__OVERRIDE:
                 return !getOverride().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION:
                 return !getAnnotation().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
-                return defaultOpenContent != null;
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION1:
-                return annotation1 != null && !annotation1.isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__GROUP:
-                return group != null && !group.isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__SIMPLE_TYPE:
+            case XMLSchema11Package.SCHEMA_TYPE__DEFAULT_OPEN_CONTENT:
+                return getDefaultOpenContent() != null;
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION1:
+                return !getAnnotation1().isEmpty();
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP:
+                return !getGroup().isEmpty();
+            case XMLSchema11Package.SCHEMA_TYPE__SIMPLE_TYPE:
                 return !getSimpleType().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__COMPLEX_TYPE:
+            case XMLSchema11Package.SCHEMA_TYPE__COMPLEX_TYPE:
                 return !getComplexType().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__GROUP1:
+            case XMLSchema11Package.SCHEMA_TYPE__GROUP1:
                 return !getGroup1().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_GROUP:
                 return !getAttributeGroup().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT:
+            case XMLSchema11Package.SCHEMA_TYPE__ELEMENT:
                 return !getElement().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE:
                 return !getAttribute().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__NOTATION:
+            case XMLSchema11Package.SCHEMA_TYPE__NOTATION:
                 return !getNotation().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__ANNOTATION2:
+            case XMLSchema11Package.SCHEMA_TYPE__ANNOTATION2:
                 return !getAnnotation2().isEmpty();
-            case SchemaPackage.SCHEMA_TYPE__TARGET_NAMESPACE:
+            case XMLSchema11Package.SCHEMA_TYPE__TARGET_NAMESPACE:
                 return TARGET_NAMESPACE_EDEFAULT == null ? targetNamespace != null : !TARGET_NAMESPACE_EDEFAULT.equals(targetNamespace);
-            case SchemaPackage.SCHEMA_TYPE__VERSION:
+            case XMLSchema11Package.SCHEMA_TYPE__VERSION:
                 return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-            case SchemaPackage.SCHEMA_TYPE__FINAL_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__FINAL_DEFAULT:
                 return isSetFinalDefault();
-            case SchemaPackage.SCHEMA_TYPE__BLOCK_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__BLOCK_DEFAULT:
                 return isSetBlockDefault();
-            case SchemaPackage.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__ATTRIBUTE_FORM_DEFAULT:
                 return isSetAttributeFormDefault();
-            case SchemaPackage.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT:
+            case XMLSchema11Package.SCHEMA_TYPE__ELEMENT_FORM_DEFAULT:
                 return isSetElementFormDefault();
-            case SchemaPackage.SCHEMA_TYPE__DEFAULT_ATTRIBUTES:
+            case XMLSchema11Package.SCHEMA_TYPE__DEFAULT_ATTRIBUTES:
                 return DEFAULT_ATTRIBUTES_EDEFAULT == null ? defaultAttributes != null : !DEFAULT_ATTRIBUTES_EDEFAULT.equals(defaultAttributes);
-            case SchemaPackage.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.SCHEMA_TYPE__XPATH_DEFAULT_NAMESPACE:
                 return isSetXpathDefaultNamespace();
-            case SchemaPackage.SCHEMA_TYPE__ID:
+            case XMLSchema11Package.SCHEMA_TYPE__ID:
                 return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-            case SchemaPackage.SCHEMA_TYPE__LANG:
+            case XMLSchema11Package.SCHEMA_TYPE__LANG:
                 return LANG_EDEFAULT == null ? lang != null : !LANG_EDEFAULT.equals(lang);
         }
         return super.eIsSet(featureID);
@@ -1298,11 +1192,7 @@ public class SchemaTypeImpl extends OpenAttrsImpl implements SchemaType {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (composition: ");
-        result.append(composition);
-        result.append(", group: ");
-        result.append(group);
-        result.append(", targetNamespace: ");
+        result.append(" (targetNamespace: ");
         result.append(targetNamespace);
         result.append(", version: ");
         result.append(version);

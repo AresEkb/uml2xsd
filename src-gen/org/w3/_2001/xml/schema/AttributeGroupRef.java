@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAttributeGroupRef()
- * @model extendedMetaData="name='attributeGroupRef' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttributeGroupRef()
+ * @model extendedMetaData="name='attributeGroupRef' kind='mixed'"
  * @generated
  */
 public interface AttributeGroupRef extends AttributeGroup {

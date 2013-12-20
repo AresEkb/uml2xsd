@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ccde="urn:EEC:RDM:ComplexDataObjects:v0.7.0" xmlns:csde="urn:EEC:RDM:SimpleDataObjects:v0.7.0" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:smcdo="urn:EEC:SMD:ComplexDataObjects:0.1.0" xmlns:smsdo="urn:EEC:SMD:SimpleDataObjects:v0.1.0" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" targetNamespace="urn:EEC:SMD:ComplexDataObjects:0.1.0" version="0.1.0" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:import namespace="urn:EEC:RDM:ComplexDataObjects:v0.7.0" schemaLocation="EEC_RDM_ComplexDataObjects_v0.7.0.xsd"/>
+  <xs:import namespace="urn:EEC:RDM:SimpleDataObjects:v0.7.0" schemaLocation="EEC_RDM_SimpleDataObjects_v0.7.0.xsd"/>
+  <xs:import namespace="urn:EEC:SMD:SimpleDataObjects:v0.1.0" schemaLocation="EEC_SMD_SimpleDataObjects_v0.1.0.xsd"/>
+  <!-- : Дополнительное лабораторное исследование (Дополнительное лабораторное исследование. Детали) -->
+  <xs:element name="AdditionalLaboratoryExaminationDetails" type="smcdo:LaboratoryExaminationDetailsType"/>
+  <!-- SMD-CDE-00001: Партия животных (Партия животных. Детали) -->
+  <xs:element name="AnimalConsignmentDetails" type="smcdo:AnimalConsignmentDetailsType"/>
+  <!-- SMD-CDT-00001: Партия животных (Партия животных. Тип) -->
+  <xs:complexType name="AnimalConsignmentDetailsType">
+    <xs:annotation>
+      <xs:documentation>Партия животных</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="smsdo:AnimalQuantity"/>
+      <xs:element ref="smsdo:WeightMeasure"/>
+      <xs:element ref="smsdo:AnimalIdKindCode"/>
+      <xs:element ref="smsdo:FarmId"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- SMD-CDE-00002: Идентификация животного (Идентификация животного. Детали) -->
+  <xs:element name="AnimalDetails" type="smcdo:AnimalDetailsType"/>
+  <!-- SMD-CDT-00002: Идентификация животного (Идентификация животного. Тип) -->
+  <xs:complexType name="AnimalDetailsType">
+    <xs:annotation>
+      <xs:documentation>Идентификация животного</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="smsdo:AnimalKindCode"/>
+      <xs:element ref="smsdo:SexCode"/>
+      <xs:element ref="smsdo:AnimalBreedName"/>
+      <xs:element ref="smsdo:AgeDuration"/>
+      <xs:element ref="smsdo:AnimalId"/>
+      <xs:element ref="smsdo:WeightMeasure"/>
+    </xs:sequence>
+    <xs:assert test="(fn:not(smsdo:AnimalBreedName = 'Утка') or smsdo:WeightMeasure &gt; 0.5 and smsdo:WeightMeasure &lt; 10 and smsdo:WeightMeasure/@ WeightUnitCode = 'kg') and (fn:not(smsdo:AnimalBreedName = 'Лошадь') or smsdo:WeightMeasure &gt; 50 and smsdo:WeightMeasure &lt; 400)"/>
+  </xs:complexType>
+  <!-- SMD-CDE-00003: Пункт пропуска товаров через таможенную границу (Пункт пропуска товаров через таможенную границу. Детали) -->
+  <xs:element name="CheckpointDetails" type="ccde:OrganizationBaseType">
+    <xs:annotation>
+      <xs:documentation>Пункт пропуска товаров через таможенную границу</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- SMD-CDE-00004: Грузополучатель (Грузополучатель. Детали) -->
+  <xs:element name="ConsigneeDetails" type="ccde:OrganizationBaseType">
+    <xs:annotation>
+      <xs:documentation>Грузополучатель</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- SMD-CDE-00005: Учреждение страны-экспортера, выдавшее сертификат (Учреждение страны-экспортера, выдавшее сертификат. Детали) -->
+  <xs:element name="ConsignerCertificateIssuerDetails" type="ccde:OrganizationBaseType">
+    <xs:annotation>
+      <xs:documentation>Учреждение страны-экспортера, выдавшее сертификат</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- SMD-CDE-00006: Компетентное ведомство страны-экспортера (Компетентное ведомство страны-экспортера. Детали) -->
+  <xs:element name="ConsignerCompetentAuthorityDetails" type="ccde:OrganizationBaseType">
+    <xs:annotation>
+      <xs:documentation>Компетентное ведомство страны-экспортера</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- SMD-CDE-00007: Грузоотправитель (Грузоотправитель. Детали) -->
+  <xs:element name="ConsignerDetails" type="ccde:OrganizationBaseType">
+    <xs:annotation>
+      <xs:documentation>Грузоотправитель</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- SMD-CDE-00009: Происхождение груза (Происхождение груза. Детали) -->
+  <xs:element name="ConsignmentOriginDetails" type="smcdo:ConsignmentOriginDetailsType"/>
+  <!-- SMD-CDT-00004: Происхождение груза (Происхождение груза. Тип) -->
+  <xs:complexType name="ConsignmentOriginDetailsType">
+    <xs:annotation>
+      <xs:documentation>Происхождение груза</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" ref="smcdo:ConsignmentOriginatorDetails"/>
+      <xs:element ref="ccde:AddressDetails"/>
+      <xs:element ref="smsdo:OriginDate"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- SMD-CDE-00008: Организация-производитель продукции (Организация-производитель продукции. Детали) -->
+  <xs:element name="ConsignmentOriginatorDetails" type="smcdo:ConsignmentOriginatorDetailsType"/>
+  <!-- SMD-CDT-00003: Организация-производитель продукции (Организация-производитель продукции. Тип) -->
+  <xs:complexType name="ConsignmentOriginatorDetailsType">
+    <xs:annotation>
+      <xs:documentation>Организация-производитель продукции</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ccde:OrganizationBaseType">
+        <xs:sequence>
+          <xs:element ref="smsdo:ConsignmentOriginatorKindCode"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- SMD-CDE-00010: Информация о быке-доноре (Бык-донор. Детали) -->
+  <xs:element name="DonorBullDetails" type="smcdo:DonorBullDetailsType"/>
+  <!-- SMD-CDT-00005: Информация о быке-доноре (Бык-донор. Тип) -->
+  <xs:complexType name="DonorBullDetailsType">
+    <xs:annotation>
+      <xs:documentation>Информация о быке-доноре</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="smsdo:AnimalName"/>
+      <xs:element ref="smsdo:AnimalId"/>
+      <xs:element ref="smsdo:BirthDate"/>
+      <xs:element ref="smsdo:AnimalBreedName"/>
+      <xs:element ref="smsdo:SemenCollectionDate"/>
+      <xs:element ref="smsdo:SemenTubeLabelId"/>
+      <xs:element ref="smsdo:SemenTubeDoseQuantity"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- :  () -->
+  <xs:complexType name="InspectionDetailsType">
+    <xs:sequence>
+      <xs:element ref="smsdo:EventEndDateTime"/>
+      <xs:element ref="smcdo:CheckpointDetails"/>
+      <xs:element ref="smcdo:OfficerDetails"/>
+      <xs:element ref="smsdo:PackageQunatity"/>
+      <xs:element ref="smsdo:WeightMeasure"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- SMD-CDE-00011: Лаборатория (Лаборатория. Детали) -->
+  <xs:element name="LaboratoryDetails" type="ccde:OrganizationBaseType">
+    <xs:annotation>
+      <xs:documentation>Лаборатория</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- SMD-CDE-00012: Лабораторное исследование (Лабораторное исследование. Детали) -->
+  <xs:element name="LaboratoryExaminationDetails" type="smcdo:LaboratoryExaminationDetailsType"/>
+  <!-- SMD-CDT-00006: Лабораторное исследование (Лабораторное исследование. Тип) -->
+  <xs:complexType name="LaboratoryExaminationDetailsType">
+    <xs:annotation>
+      <xs:documentation>Лабораторное исследование</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="smsdo:DiseaseName"/>
+      <xs:element ref="smcdo:LaboratoryDetails"/>
+      <xs:element ref="smsdo:ExaminationDate"/>
+      <xs:element ref="smsdo:ExaminationMethodName"/>
+      <xs:element ref="smsdo:ExaminationResultText"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- : Должностное лицо () -->
+  <xs:element name="OfficerDetails" type="ccde:PersonBaseType"/>
+  <!-- SMD-CDE-00013: Доэкспортный сертификат (Доэкспортный сертификат. Детали) -->
+  <xs:element name="PreExportCertificateDetails" type="smcdo:PreExportCertificateDetailsType"/>
+  <!-- SMD-CDT-00007: Доэкспортный сертификат (Доэкспортный сертификат. Тип) -->
+  <xs:complexType name="PreExportCertificateDetailsType">
+    <xs:annotation>
+      <xs:documentation>Доэкспортный сертификат</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="smsdo:CertificateIssueDate"/>
+      <xs:element ref="smsdo:CertificateId"/>
+      <xs:element ref="smsdo:OriginCountryCode"/>
+      <xs:element ref="smcdo:ConsignerCertificateIssuerDetails"/>
+      <xs:element ref="smsdo:ConsignmentName"/>
+      <xs:element ref="smsdo:WeightMeasure"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- SMD-CDT-00008: Ветеринарный сертификат (Ветеринарный сертификат. Тип) -->
+  <xs:complexType name="VeterinaryCertificateType">
+    <xs:annotation>
+      <xs:documentation>Ветеринарный сертификат</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ccde:EDocBaseType">
+        <xs:sequence>
+          <xs:element ref="smcdo:ConsignerDetails"/>
+          <xs:element ref="smcdo:ConsigneeDetails"/>
+          <xs:element ref="smsdo:PackageQunatity"/>
+          <xs:element ref="smsdo:SealLabelId"/>
+          <xs:element ref="smsdo:TransportDescriptionText"/>
+          <xs:element maxOccurs="unbounded" ref="smsdo:TransitCountryCode"/>
+          <xs:element ref="smsdo:CertificateId"/>
+          <xs:element ref="smsdo:OriginCountryCode"/>
+          <xs:element ref="smcdo:ConsignerCompetentAuthorityDetails"/>
+          <xs:element ref="smcdo:ConsignerCertificateIssuerDetails"/>
+          <xs:element ref="smcdo:CheckpointDetails"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="smcdo:LaboratoryExaminationDetails"/>
+        </xs:sequence>
+        <xs:assert test="fn:not(smcdo:CheckpointDetails = 'RU') or smcdo:ConsignerDetails/ccde:AddressDetails/csde:CountryCode = 'BY'"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- SMD-CDE-00014: Ветеринарная обработка (Ветеринарная обработка. Детали) -->
+  <xs:element name="VeterinaryTreatmentDetails" type="smcdo:VeterinaryTreatmentDetailsType"/>
+  <!-- SMD-CDT-00009: Ветеринарная обработка (Ветеринарная обработка. Тип) -->
+  <xs:complexType name="VeterinaryTreatmentDetailsType">
+    <xs:annotation>
+      <xs:documentation>Ветеринарная обработка</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="smsdo:DiseaseName"/>
+      <xs:element ref="smsdo:VeterinaryTreatmentMethodName"/>
+      <xs:element ref="smsdo:VeterinaryTreatmentDate"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

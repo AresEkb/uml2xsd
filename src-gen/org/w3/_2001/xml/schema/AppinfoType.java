@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAppinfoType()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAppinfoType()
  * @model extendedMetaData="name='appinfo_._type' kind='mixed'"
  * @generated
  */
@@ -37,7 +37,7 @@ public interface AppinfoType extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Mixed</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAppinfoType_Mixed()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAppinfoType_Mixed()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
      *        extendedMetaData="kind='elementWildcard' name=':mixed'"
      * @generated
@@ -54,7 +54,7 @@ public interface AppinfoType extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAppinfoType_Group()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAppinfoType_Group()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='group' name='group:1'"
      * @generated
@@ -71,7 +71,7 @@ public interface AppinfoType extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Any</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAppinfoType_Any()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAppinfoType_Any()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='elementWildcard' wildcards='##any' name=':2' processing='lax' group='#group:1'"
      * @generated
@@ -88,7 +88,7 @@ public interface AppinfoType extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Source</em>' attribute.
      * @see #setSource(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAppinfoType_Source()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAppinfoType_Source()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI"
      *        extendedMetaData="kind='attribute' name='source'"
      * @generated
@@ -115,7 +115,7 @@ public interface AppinfoType extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Any Attribute</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAppinfoType_AnyAttribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAppinfoType_AnyAttribute()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
      *        extendedMetaData="kind='attributeWildcard' wildcards='##other' name=':4' processing='lax'"
      * @generated

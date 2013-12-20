@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType()
- * @model extendedMetaData="name='extensionType' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType()
+ * @model extendedMetaData="name='extensionType' kind='mixed'"
  * @generated
  */
 public interface ExtensionType extends Annotated {
@@ -44,8 +44,8 @@ public interface ExtensionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Open Content</em>' containment reference.
      * @see #setOpenContent(OpenContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_OpenContent()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_OpenContent()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='openContent' namespace='##targetNamespace'"
      * @generated
      */
@@ -71,8 +71,8 @@ public interface ExtensionType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' containment reference.
      * @see #setGroup(GroupRef)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_Group()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_Group()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace'"
      * @generated
      */
@@ -97,8 +97,8 @@ public interface ExtensionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>All</em>' containment reference.
      * @see #setAll(All)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_All()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_All()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='all' namespace='##targetNamespace'"
      * @generated
      */
@@ -123,8 +123,8 @@ public interface ExtensionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Choice</em>' containment reference.
      * @see #setChoice(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_Choice()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_Choice()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='choice' namespace='##targetNamespace'"
      * @generated
      */
@@ -149,8 +149,8 @@ public interface ExtensionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Sequence</em>' containment reference.
      * @see #setSequence(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_Sequence()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_Sequence()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='sequence' namespace='##targetNamespace'"
      * @generated
      */
@@ -176,9 +176,9 @@ public interface ExtensionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group1</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_Group1()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:8'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_Group1()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:9'"
      * @generated
      */
     FeatureMap getGroup1();
@@ -193,9 +193,9 @@ public interface ExtensionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Attribute</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_Attribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_Attribute()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:8'"
+     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:9'"
      * @generated
      */
     EList<Attribute> getAttribute();
@@ -210,9 +210,9 @@ public interface ExtensionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Attribute Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_AttributeGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_AttributeGroup()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:8'"
+     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:9'"
      * @generated
      */
     EList<AttributeGroupRef> getAttributeGroup();
@@ -226,8 +226,8 @@ public interface ExtensionType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Any Attribute1</em>' containment reference.
      * @see #setAnyAttribute1(AnyAttributeType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_AnyAttribute1()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_AnyAttribute1()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='anyAttribute' namespace='##targetNamespace'"
      * @generated
      */
@@ -253,8 +253,8 @@ public interface ExtensionType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Assert</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_Assert()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_Assert()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='assert' namespace='##targetNamespace'"
      * @generated
      */
@@ -270,7 +270,7 @@ public interface ExtensionType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Base</em>' attribute.
      * @see #setBase(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getExtensionType_Base()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getExtensionType_Base()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName" required="true"
      *        extendedMetaData="kind='attribute' name='base'"
      * @generated

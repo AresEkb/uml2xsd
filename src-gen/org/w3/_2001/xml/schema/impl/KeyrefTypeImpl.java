@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.KeyrefType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class KeyrefTypeImpl extends KeybaseImpl implements KeyrefType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.KEYREF_TYPE;
+        return XMLSchema11Package.Literals.KEYREF_TYPE;
     }
 
     /**
@@ -84,7 +84,7 @@ public class KeyrefTypeImpl extends KeybaseImpl implements KeyrefType {
         QName oldRefer = refer;
         refer = newRefer;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.KEYREF_TYPE__REFER, oldRefer, refer));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.KEYREF_TYPE__REFER, oldRefer, refer));
     }
 
     /**
@@ -95,7 +95,7 @@ public class KeyrefTypeImpl extends KeybaseImpl implements KeyrefType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.KEYREF_TYPE__REFER:
+            case XMLSchema11Package.KEYREF_TYPE__REFER:
                 return getRefer();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -109,7 +109,7 @@ public class KeyrefTypeImpl extends KeybaseImpl implements KeyrefType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.KEYREF_TYPE__REFER:
+            case XMLSchema11Package.KEYREF_TYPE__REFER:
                 setRefer((QName)newValue);
                 return;
         }
@@ -124,7 +124,7 @@ public class KeyrefTypeImpl extends KeybaseImpl implements KeyrefType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.KEYREF_TYPE__REFER:
+            case XMLSchema11Package.KEYREF_TYPE__REFER:
                 setRefer(REFER_EDEFAULT);
                 return;
         }
@@ -139,7 +139,7 @@ public class KeyrefTypeImpl extends KeybaseImpl implements KeyrefType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.KEYREF_TYPE__REFER:
+            case XMLSchema11Package.KEYREF_TYPE__REFER:
                 return REFER_EDEFAULT == null ? refer != null : !REFER_EDEFAULT.equals(refer);
         }
         return super.eIsSet(featureID);

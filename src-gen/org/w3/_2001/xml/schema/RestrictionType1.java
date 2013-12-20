@@ -34,8 +34,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType1()
- * @model extendedMetaData="name='restriction_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType1()
+ * @model extendedMetaData="name='restriction_._type' kind='mixed'"
  * @generated
  */
 public interface RestrictionType1 extends Annotated {
@@ -49,8 +49,8 @@ public interface RestrictionType1 extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference.
      * @see #setSimpleType(LocalSimpleType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType1_SimpleType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType1_SimpleType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace'"
      * @generated
      */
@@ -76,9 +76,9 @@ public interface RestrictionType1 extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType1_Group()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:4'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType1_Group()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:5'"
      * @generated
      */
     FeatureMap getGroup();
@@ -97,9 +97,9 @@ public interface RestrictionType1 extends Annotated {
      *       
      * <!-- end-model-doc -->
      * @return the value of the '<em>Facet Group</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType1_FacetGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType1_FacetGroup()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='group' name='facet:group' namespace='##targetNamespace' group='#group:4'"
+     *        extendedMetaData="kind='group' name='facet:group' namespace='##targetNamespace' group='#group:5'"
      * @generated
      */
     FeatureMap getFacetGroup();
@@ -118,7 +118,7 @@ public interface RestrictionType1 extends Annotated {
      *       
      * <!-- end-model-doc -->
      * @return the value of the '<em>Facet</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType1_Facet()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType1_Facet()
      * @model containment="true" transient="true" changeable="false" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='facet' namespace='##targetNamespace' group='facet:group'"
      * @generated
@@ -135,9 +135,9 @@ public interface RestrictionType1 extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Any</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType1_Any()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType1_Any()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='elementWildcard' wildcards='##other' name=':7' processing='lax' group='#group:4'"
+     *        extendedMetaData="kind='elementWildcard' wildcards='##other' name=':8' processing='lax' group='#group:5'"
      * @generated
      */
     FeatureMap getAny();
@@ -152,7 +152,7 @@ public interface RestrictionType1 extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Base</em>' attribute.
      * @see #setBase(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRestrictionType1_Base()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRestrictionType1_Base()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='base'"
      * @generated

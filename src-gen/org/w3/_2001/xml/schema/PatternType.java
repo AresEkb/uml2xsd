@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getPatternType()
- * @model extendedMetaData="name='pattern_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getPatternType()
+ * @model extendedMetaData="name='pattern_._type' kind='mixed'"
  * @generated
  */
 public interface PatternType extends NoFixedFacet {

@@ -3,28 +3,20 @@
 package org.w3._2001.xml.schema.impl;
 
 import java.util.Collection;
-
 import javax.xml.namespace.QName;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.w3._2001.xml.schema.AnyAttributeType;
 import org.w3._2001.xml.schema.Attribute;
 import org.w3._2001.xml.schema.AttributeGroup;
 import org.w3._2001.xml.schema.AttributeGroupRef;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,26 +37,6 @@ import org.w3._2001.xml.schema.SchemaPackage;
  * @generated
  */
 public abstract class AttributeGroupImpl extends AnnotatedImpl implements AttributeGroup {
-    /**
-     * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getGroup()
-     * @generated
-     * @ordered
-     */
-    protected FeatureMap group;
-
-    /**
-     * The cached value of the '{@link #getAnyAttribute1() <em>Any Attribute1</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAnyAttribute1()
-     * @generated
-     * @ordered
-     */
-    protected AnyAttributeType anyAttribute1;
-
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -121,7 +93,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ATTRIBUTE_GROUP;
+        return XMLSchema11Package.Literals.ATTRIBUTE_GROUP;
     }
 
     /**
@@ -130,10 +102,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
      * @generated
      */
     public FeatureMap getGroup() {
-        if (group == null) {
-            group = new BasicFeatureMap(this, SchemaPackage.ATTRIBUTE_GROUP__GROUP);
-        }
-        return group;
+        return (FeatureMap)getMixed().<FeatureMap.Entry>list(XMLSchema11Package.Literals.ATTRIBUTE_GROUP__GROUP);
     }
 
     /**
@@ -142,7 +111,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
      * @generated
      */
     public EList<Attribute> getAttribute() {
-        return getGroup().list(SchemaPackage.Literals.ATTRIBUTE_GROUP__ATTRIBUTE);
+        return getGroup().list(XMLSchema11Package.Literals.ATTRIBUTE_GROUP__ATTRIBUTE);
     }
 
     /**
@@ -151,7 +120,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
      * @generated
      */
     public EList<AttributeGroupRef> getAttributeGroup() {
-        return getGroup().list(SchemaPackage.Literals.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP);
+        return getGroup().list(XMLSchema11Package.Literals.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP);
     }
 
     /**
@@ -160,22 +129,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
      * @generated
      */
     public AnyAttributeType getAnyAttribute1() {
-        return anyAttribute1;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAnyAttribute1(AnyAttributeType newAnyAttribute1, NotificationChain msgs) {
-        AnyAttributeType oldAnyAttribute1 = anyAttribute1;
-        anyAttribute1 = newAnyAttribute1;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1, oldAnyAttribute1, newAnyAttribute1);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (AnyAttributeType)getMixed().get(XMLSchema11Package.Literals.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1, true);
     }
 
     /**
@@ -184,17 +138,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
      * @generated
      */
     public void setAnyAttribute1(AnyAttributeType newAnyAttribute1) {
-        if (newAnyAttribute1 != anyAttribute1) {
-            NotificationChain msgs = null;
-            if (anyAttribute1 != null)
-                msgs = ((InternalEObject)anyAttribute1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1, null, msgs);
-            if (newAnyAttribute1 != null)
-                msgs = ((InternalEObject)newAnyAttribute1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1, null, msgs);
-            msgs = basicSetAnyAttribute1(newAnyAttribute1, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1, newAnyAttribute1, newAnyAttribute1));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1, newAnyAttribute1);
     }
 
     /**
@@ -215,7 +159,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
         String oldName = name;
         name = newName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE_GROUP__NAME, oldName, name));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE_GROUP__NAME, oldName, name));
     }
 
     /**
@@ -236,7 +180,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
         QName oldRef = ref;
         ref = newRef;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE_GROUP__REF, oldRef, ref));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE_GROUP__REF, oldRef, ref));
     }
 
     /**
@@ -247,14 +191,8 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE_GROUP__GROUP:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__GROUP:
                 return ((InternalEList<?>)getGroup()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE:
-                return ((InternalEList<?>)getAttribute()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
-                return ((InternalEList<?>)getAttributeGroup()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
-                return basicSetAnyAttribute1(null, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -267,18 +205,18 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE_GROUP__GROUP:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__GROUP:
                 if (coreType) return getGroup();
                 return ((FeatureMap.Internal)getGroup()).getWrapper();
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ATTRIBUTE:
                 return getAttribute();
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
                 return getAttributeGroup();
-            case SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
                 return getAnyAttribute1();
-            case SchemaPackage.ATTRIBUTE_GROUP__NAME:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__NAME:
                 return getName();
-            case SchemaPackage.ATTRIBUTE_GROUP__REF:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__REF:
                 return getRef();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -293,24 +231,24 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE_GROUP__GROUP:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__GROUP:
                 ((FeatureMap.Internal)getGroup()).set(newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ATTRIBUTE:
                 getAttribute().clear();
                 getAttribute().addAll((Collection<? extends Attribute>)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
                 getAttributeGroup().clear();
                 getAttributeGroup().addAll((Collection<? extends AttributeGroupRef>)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
                 setAnyAttribute1((AnyAttributeType)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__NAME:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__NAME:
                 setName((String)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__REF:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__REF:
                 setRef((QName)newValue);
                 return;
         }
@@ -325,22 +263,22 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE_GROUP__GROUP:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__GROUP:
                 getGroup().clear();
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ATTRIBUTE:
                 getAttribute().clear();
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
                 getAttributeGroup().clear();
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
                 setAnyAttribute1((AnyAttributeType)null);
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__NAME:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__NAME:
                 setName(NAME_EDEFAULT);
                 return;
-            case SchemaPackage.ATTRIBUTE_GROUP__REF:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__REF:
                 setRef(REF_EDEFAULT);
                 return;
         }
@@ -355,17 +293,17 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE_GROUP__GROUP:
-                return group != null && !group.isEmpty();
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__GROUP:
+                return !getGroup().isEmpty();
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ATTRIBUTE:
                 return !getAttribute().isEmpty();
-            case SchemaPackage.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ATTRIBUTE_GROUP:
                 return !getAttributeGroup().isEmpty();
-            case SchemaPackage.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
-                return anyAttribute1 != null;
-            case SchemaPackage.ATTRIBUTE_GROUP__NAME:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__ANY_ATTRIBUTE1:
+                return getAnyAttribute1() != null;
+            case XMLSchema11Package.ATTRIBUTE_GROUP__NAME:
                 return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case SchemaPackage.ATTRIBUTE_GROUP__REF:
+            case XMLSchema11Package.ATTRIBUTE_GROUP__REF:
                 return REF_EDEFAULT == null ? ref != null : !REF_EDEFAULT.equals(ref);
         }
         return super.eIsSet(featureID);
@@ -381,9 +319,7 @@ public abstract class AttributeGroupImpl extends AnnotatedImpl implements Attrib
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (group: ");
-        result.append(group);
-        result.append(", name: ");
+        result.append(" (name: ");
         result.append(name);
         result.append(", ref: ");
         result.append(ref);

@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getGroupRef()
- * @model extendedMetaData="name='groupRef' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getGroupRef()
+ * @model extendedMetaData="name='groupRef' kind='mixed'"
  * @generated
  */
 public interface GroupRef extends RealGroup {

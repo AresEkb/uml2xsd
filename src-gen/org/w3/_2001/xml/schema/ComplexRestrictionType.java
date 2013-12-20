@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getComplexRestrictionType()
- * @model extendedMetaData="name='complexRestrictionType' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexRestrictionType()
+ * @model extendedMetaData="name='complexRestrictionType' kind='mixed'"
  * @generated
  */
 public interface ComplexRestrictionType extends RestrictionType {

@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.Facet;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -91,7 +91,7 @@ public class FacetImpl extends AnnotatedImpl implements Facet {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.FACET;
+        return XMLSchema11Package.Literals.FACET;
     }
 
     /**
@@ -112,7 +112,7 @@ public class FacetImpl extends AnnotatedImpl implements Facet {
         Object oldValue = value;
         value = newValue;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.FACET__VALUE, oldValue, value));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.FACET__VALUE, oldValue, value));
     }
 
     /**
@@ -135,7 +135,7 @@ public class FacetImpl extends AnnotatedImpl implements Facet {
         boolean oldFixedESet = fixedESet;
         fixedESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.FACET__FIXED, oldFixed, fixed, !oldFixedESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.FACET__FIXED, oldFixed, fixed, !oldFixedESet));
     }
 
     /**
@@ -149,7 +149,7 @@ public class FacetImpl extends AnnotatedImpl implements Facet {
         fixed = FIXED_EDEFAULT;
         fixedESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.FACET__FIXED, oldFixed, FIXED_EDEFAULT, oldFixedESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.FACET__FIXED, oldFixed, FIXED_EDEFAULT, oldFixedESet));
     }
 
     /**
@@ -169,9 +169,9 @@ public class FacetImpl extends AnnotatedImpl implements Facet {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.FACET__VALUE:
+            case XMLSchema11Package.FACET__VALUE:
                 return getValue();
-            case SchemaPackage.FACET__FIXED:
+            case XMLSchema11Package.FACET__FIXED:
                 return isFixed();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -185,10 +185,10 @@ public class FacetImpl extends AnnotatedImpl implements Facet {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.FACET__VALUE:
+            case XMLSchema11Package.FACET__VALUE:
                 setValue(newValue);
                 return;
-            case SchemaPackage.FACET__FIXED:
+            case XMLSchema11Package.FACET__FIXED:
                 setFixed((Boolean)newValue);
                 return;
         }
@@ -203,10 +203,10 @@ public class FacetImpl extends AnnotatedImpl implements Facet {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.FACET__VALUE:
+            case XMLSchema11Package.FACET__VALUE:
                 setValue(VALUE_EDEFAULT);
                 return;
-            case SchemaPackage.FACET__FIXED:
+            case XMLSchema11Package.FACET__FIXED:
                 unsetFixed();
                 return;
         }
@@ -221,9 +221,9 @@ public class FacetImpl extends AnnotatedImpl implements Facet {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.FACET__VALUE:
+            case XMLSchema11Package.FACET__VALUE:
                 return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-            case SchemaPackage.FACET__FIXED:
+            case XMLSchema11Package.FACET__FIXED:
                 return isSetFixed();
         }
         return super.eIsSet(featureID);

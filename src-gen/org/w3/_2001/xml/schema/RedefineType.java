@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType()
- * @model extendedMetaData="name='redefine_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType()
+ * @model extendedMetaData="name='redefine_._type' kind='mixed'"
  * @generated
  */
 public interface RedefineType extends OpenAttrs {
@@ -40,9 +40,9 @@ public interface RedefineType extends OpenAttrs {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType_Group()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:1'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType_Group()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:2'"
      * @generated
      */
     FeatureMap getGroup();
@@ -56,9 +56,9 @@ public interface RedefineType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Annotation</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType_Annotation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType_Annotation()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace' group='#group:1'"
+     *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace' group='#group:2'"
      * @generated
      */
     EList<AnnotationType> getAnnotation();
@@ -72,9 +72,9 @@ public interface RedefineType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType_SimpleType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType_SimpleType()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace' group='#group:1'"
+     *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace' group='#group:2'"
      * @generated
      */
     EList<TopLevelSimpleType> getSimpleType();
@@ -88,9 +88,9 @@ public interface RedefineType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Complex Type</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType_ComplexType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType_ComplexType()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace' group='#group:1'"
+     *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace' group='#group:2'"
      * @generated
      */
     EList<TopLevelComplexType> getComplexType();
@@ -104,9 +104,9 @@ public interface RedefineType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Group1</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType_Group1()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType_Group1()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace' group='#group:1'"
+     *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace' group='#group:2'"
      * @generated
      */
     EList<NamedGroup> getGroup1();
@@ -120,9 +120,9 @@ public interface RedefineType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Attribute Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType_AttributeGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType_AttributeGroup()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:1'"
+     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:2'"
      * @generated
      */
     EList<NamedAttributeGroup> getAttributeGroup();
@@ -137,7 +137,7 @@ public interface RedefineType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Schema Location</em>' attribute.
      * @see #setSchemaLocation(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType_SchemaLocation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType_SchemaLocation()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI" required="true"
      *        extendedMetaData="kind='attribute' name='schemaLocation'"
      * @generated
@@ -164,7 +164,7 @@ public interface RedefineType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Id</em>' attribute.
      * @see #setId(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getRedefineType_Id()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getRedefineType_Id()
      * @model id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
      *        extendedMetaData="kind='attribute' name='id'"
      * @generated

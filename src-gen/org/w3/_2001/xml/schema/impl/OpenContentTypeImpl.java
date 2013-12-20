@@ -3,17 +3,16 @@
 package org.w3._2001.xml.schema.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.w3._2001.xml.schema.ModeType1;
 import org.w3._2001.xml.schema.OpenContentType;
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.Wildcard;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,16 +29,6 @@ import org.w3._2001.xml.schema.Wildcard;
  * @generated
  */
 public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentType {
-    /**
-     * The cached value of the '{@link #getAny() <em>Any</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAny()
-     * @generated
-     * @ordered
-     */
-    protected Wildcard any;
-
     /**
      * The default value of the '{@link #getMode() <em>Mode</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -85,7 +74,7 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.OPEN_CONTENT_TYPE;
+        return XMLSchema11Package.Literals.OPEN_CONTENT_TYPE;
     }
 
     /**
@@ -94,22 +83,7 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
      * @generated
      */
     public Wildcard getAny() {
-        return any;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAny(Wildcard newAny, NotificationChain msgs) {
-        Wildcard oldAny = any;
-        any = newAny;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.OPEN_CONTENT_TYPE__ANY, oldAny, newAny);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (Wildcard)getMixed().get(XMLSchema11Package.Literals.OPEN_CONTENT_TYPE__ANY, true);
     }
 
     /**
@@ -118,17 +92,7 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
      * @generated
      */
     public void setAny(Wildcard newAny) {
-        if (newAny != any) {
-            NotificationChain msgs = null;
-            if (any != null)
-                msgs = ((InternalEObject)any).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.OPEN_CONTENT_TYPE__ANY, null, msgs);
-            if (newAny != null)
-                msgs = ((InternalEObject)newAny).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.OPEN_CONTENT_TYPE__ANY, null, msgs);
-            msgs = basicSetAny(newAny, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.OPEN_CONTENT_TYPE__ANY, newAny, newAny));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.OPEN_CONTENT_TYPE__ANY, newAny);
     }
 
     /**
@@ -151,7 +115,7 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
         boolean oldModeESet = modeESet;
         modeESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.OPEN_CONTENT_TYPE__MODE, oldMode, mode, !oldModeESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.OPEN_CONTENT_TYPE__MODE, oldMode, mode, !oldModeESet));
     }
 
     /**
@@ -165,7 +129,7 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
         mode = MODE_EDEFAULT;
         modeESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.OPEN_CONTENT_TYPE__MODE, oldMode, MODE_EDEFAULT, oldModeESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.OPEN_CONTENT_TYPE__MODE, oldMode, MODE_EDEFAULT, oldModeESet));
     }
 
     /**
@@ -183,25 +147,11 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
      * @generated
      */
     @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case SchemaPackage.OPEN_CONTENT_TYPE__ANY:
-                return basicSetAny(null, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.OPEN_CONTENT_TYPE__ANY:
+            case XMLSchema11Package.OPEN_CONTENT_TYPE__ANY:
                 return getAny();
-            case SchemaPackage.OPEN_CONTENT_TYPE__MODE:
+            case XMLSchema11Package.OPEN_CONTENT_TYPE__MODE:
                 return getMode();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -215,10 +165,10 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.OPEN_CONTENT_TYPE__ANY:
+            case XMLSchema11Package.OPEN_CONTENT_TYPE__ANY:
                 setAny((Wildcard)newValue);
                 return;
-            case SchemaPackage.OPEN_CONTENT_TYPE__MODE:
+            case XMLSchema11Package.OPEN_CONTENT_TYPE__MODE:
                 setMode((ModeType1)newValue);
                 return;
         }
@@ -233,10 +183,10 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.OPEN_CONTENT_TYPE__ANY:
+            case XMLSchema11Package.OPEN_CONTENT_TYPE__ANY:
                 setAny((Wildcard)null);
                 return;
-            case SchemaPackage.OPEN_CONTENT_TYPE__MODE:
+            case XMLSchema11Package.OPEN_CONTENT_TYPE__MODE:
                 unsetMode();
                 return;
         }
@@ -251,9 +201,9 @@ public class OpenContentTypeImpl extends AnnotatedImpl implements OpenContentTyp
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.OPEN_CONTENT_TYPE__ANY:
-                return any != null;
-            case SchemaPackage.OPEN_CONTENT_TYPE__MODE:
+            case XMLSchema11Package.OPEN_CONTENT_TYPE__ANY:
+                return getAny() != null;
+            case XMLSchema11Package.OPEN_CONTENT_TYPE__MODE:
                 return isSetMode();
         }
         return super.eIsSet(featureID);

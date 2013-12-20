@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getNamedAttributeGroup()
- * @model extendedMetaData="name='namedAttributeGroup' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getNamedAttributeGroup()
+ * @model extendedMetaData="name='namedAttributeGroup' kind='mixed'"
  * @generated
  */
 public interface NamedAttributeGroup extends AttributeGroup {

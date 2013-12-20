@@ -25,8 +25,8 @@ import javax.xml.namespace.QName;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute()
- * @model extendedMetaData="name='attribute' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute()
+ * @model extendedMetaData="name='attribute' kind='mixed'"
  * @generated
  */
 public interface Attribute extends Annotated {
@@ -40,8 +40,8 @@ public interface Attribute extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference.
      * @see #setSimpleType(LocalSimpleType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_SimpleType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_SimpleType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace'"
      * @generated
      */
@@ -67,7 +67,7 @@ public interface Attribute extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Name</em>' attribute.
      * @see #setName(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_Name()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_Name()
      * @model dataType="org.eclipse.emf.ecore.xml.type.NCName"
      *        extendedMetaData="kind='attribute' name='name'"
      * @generated
@@ -94,7 +94,7 @@ public interface Attribute extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Ref</em>' attribute.
      * @see #setRef(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_Ref()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_Ref()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='ref'"
      * @generated
@@ -121,7 +121,7 @@ public interface Attribute extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Type</em>' attribute.
      * @see #setType(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_Type()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_Type()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='type'"
      * @generated
@@ -153,7 +153,7 @@ public interface Attribute extends Annotated {
      * @see #isSetUse()
      * @see #unsetUse()
      * @see #setUse(UseType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_Use()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_Use()
      * @model default="optional" unsettable="true"
      *        extendedMetaData="kind='attribute' name='use'"
      * @generated
@@ -206,7 +206,7 @@ public interface Attribute extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Default</em>' attribute.
      * @see #setDefault(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_Default()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_Default()
      * @model dataType="org.eclipse.emf.ecore.xml.type.String"
      *        extendedMetaData="kind='attribute' name='default'"
      * @generated
@@ -233,7 +233,7 @@ public interface Attribute extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Fixed</em>' attribute.
      * @see #setFixed(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_Fixed()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_Fixed()
      * @model dataType="org.eclipse.emf.ecore.xml.type.String"
      *        extendedMetaData="kind='attribute' name='fixed'"
      * @generated
@@ -264,7 +264,7 @@ public interface Attribute extends Annotated {
      * @see #isSetForm()
      * @see #unsetForm()
      * @see #setForm(FormChoice)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_Form()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_Form()
      * @model unsettable="true"
      *        extendedMetaData="kind='attribute' name='form'"
      * @generated
@@ -317,7 +317,7 @@ public interface Attribute extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Target Namespace</em>' attribute.
      * @see #setTargetNamespace(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_TargetNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_TargetNamespace()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI"
      *        extendedMetaData="kind='attribute' name='targetNamespace'"
      * @generated
@@ -346,7 +346,7 @@ public interface Attribute extends Annotated {
      * @see #isSetInheritable()
      * @see #unsetInheritable()
      * @see #setInheritable(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttribute_Inheritable()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttribute_Inheritable()
      * @model unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='inheritable'"
      * @generated

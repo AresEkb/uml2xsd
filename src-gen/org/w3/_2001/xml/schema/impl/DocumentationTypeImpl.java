@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.w3._2001.xml.schema.DocumentationType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -113,7 +113,7 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.DOCUMENTATION_TYPE;
+        return XMLSchema11Package.Literals.DOCUMENTATION_TYPE;
     }
 
     /**
@@ -123,7 +123,7 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
      */
     public FeatureMap getMixed() {
         if (mixed == null) {
-            mixed = new BasicFeatureMap(this, SchemaPackage.DOCUMENTATION_TYPE__MIXED);
+            mixed = new BasicFeatureMap(this, XMLSchema11Package.DOCUMENTATION_TYPE__MIXED);
         }
         return mixed;
     }
@@ -134,7 +134,7 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
      * @generated
      */
     public FeatureMap getGroup() {
-        return (FeatureMap)getMixed().<FeatureMap.Entry>list(SchemaPackage.Literals.DOCUMENTATION_TYPE__GROUP);
+        return (FeatureMap)getMixed().<FeatureMap.Entry>list(XMLSchema11Package.Literals.DOCUMENTATION_TYPE__GROUP);
     }
 
     /**
@@ -143,7 +143,7 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
      * @generated
      */
     public FeatureMap getAny() {
-        return (FeatureMap)getGroup().<FeatureMap.Entry>list(SchemaPackage.Literals.DOCUMENTATION_TYPE__ANY);
+        return (FeatureMap)getGroup().<FeatureMap.Entry>list(XMLSchema11Package.Literals.DOCUMENTATION_TYPE__ANY);
     }
 
     /**
@@ -164,7 +164,7 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
         String oldSource = source;
         source = newSource;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.DOCUMENTATION_TYPE__SOURCE, oldSource, source));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.DOCUMENTATION_TYPE__SOURCE, oldSource, source));
     }
 
     /**
@@ -185,7 +185,7 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
         String oldLang = lang;
         lang = newLang;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.DOCUMENTATION_TYPE__LANG, oldLang, lang));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.DOCUMENTATION_TYPE__LANG, oldLang, lang));
     }
 
     /**
@@ -195,7 +195,7 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
      */
     public FeatureMap getAnyAttribute() {
         if (anyAttribute == null) {
-            anyAttribute = new BasicFeatureMap(this, SchemaPackage.DOCUMENTATION_TYPE__ANY_ATTRIBUTE);
+            anyAttribute = new BasicFeatureMap(this, XMLSchema11Package.DOCUMENTATION_TYPE__ANY_ATTRIBUTE);
         }
         return anyAttribute;
     }
@@ -208,13 +208,13 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENTATION_TYPE__MIXED:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__MIXED:
                 return ((InternalEList<?>)getMixed()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.DOCUMENTATION_TYPE__GROUP:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__GROUP:
                 return ((InternalEList<?>)getGroup()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY:
                 return ((InternalEList<?>)getAny()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
                 return ((InternalEList<?>)getAnyAttribute()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -228,20 +228,20 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENTATION_TYPE__MIXED:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__MIXED:
                 if (coreType) return getMixed();
                 return ((FeatureMap.Internal)getMixed()).getWrapper();
-            case SchemaPackage.DOCUMENTATION_TYPE__GROUP:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__GROUP:
                 if (coreType) return getGroup();
                 return ((FeatureMap.Internal)getGroup()).getWrapper();
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY:
                 if (coreType) return getAny();
                 return ((FeatureMap.Internal)getAny()).getWrapper();
-            case SchemaPackage.DOCUMENTATION_TYPE__SOURCE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__SOURCE:
                 return getSource();
-            case SchemaPackage.DOCUMENTATION_TYPE__LANG:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__LANG:
                 return getLang();
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
                 if (coreType) return getAnyAttribute();
                 return ((FeatureMap.Internal)getAnyAttribute()).getWrapper();
         }
@@ -256,22 +256,22 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENTATION_TYPE__MIXED:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__MIXED:
                 ((FeatureMap.Internal)getMixed()).set(newValue);
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__GROUP:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__GROUP:
                 ((FeatureMap.Internal)getGroup()).set(newValue);
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY:
                 ((FeatureMap.Internal)getAny()).set(newValue);
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__SOURCE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__SOURCE:
                 setSource((String)newValue);
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__LANG:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__LANG:
                 setLang((String)newValue);
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
                 ((FeatureMap.Internal)getAnyAttribute()).set(newValue);
                 return;
         }
@@ -286,22 +286,22 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENTATION_TYPE__MIXED:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__MIXED:
                 getMixed().clear();
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__GROUP:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__GROUP:
                 getGroup().clear();
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY:
                 getAny().clear();
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__SOURCE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__SOURCE:
                 setSource(SOURCE_EDEFAULT);
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__LANG:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__LANG:
                 setLang(LANG_EDEFAULT);
                 return;
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
                 getAnyAttribute().clear();
                 return;
         }
@@ -316,17 +316,17 @@ public class DocumentationTypeImpl extends MinimalEObjectImpl.Container implemen
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.DOCUMENTATION_TYPE__MIXED:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__MIXED:
                 return mixed != null && !mixed.isEmpty();
-            case SchemaPackage.DOCUMENTATION_TYPE__GROUP:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__GROUP:
                 return !getGroup().isEmpty();
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY:
                 return !getAny().isEmpty();
-            case SchemaPackage.DOCUMENTATION_TYPE__SOURCE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__SOURCE:
                 return SOURCE_EDEFAULT == null ? source != null : !SOURCE_EDEFAULT.equals(source);
-            case SchemaPackage.DOCUMENTATION_TYPE__LANG:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__LANG:
                 return LANG_EDEFAULT == null ? lang != null : !LANG_EDEFAULT.equals(lang);
-            case SchemaPackage.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
+            case XMLSchema11Package.DOCUMENTATION_TYPE__ANY_ATTRIBUTE:
                 return anyAttribute != null && !anyAttribute.isEmpty();
         }
         return super.eIsSet(featureID);

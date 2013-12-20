@@ -16,8 +16,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getSelectorType()
- * @model extendedMetaData="name='selector_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getSelectorType()
+ * @model extendedMetaData="name='selector_._type' kind='mixed'"
  * @generated
  */
 public interface SelectorType extends Annotated {
@@ -31,7 +31,7 @@ public interface SelectorType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Xpath</em>' attribute.
      * @see #setXpath(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSelectorType_Xpath()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSelectorType_Xpath()
      * @model dataType="org.w3._2001.xml.schema.XpathType1" required="true"
      *        extendedMetaData="kind='attribute' name='xpath'"
      * @generated
@@ -58,7 +58,7 @@ public interface SelectorType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Xpath Default Namespace</em>' attribute.
      * @see #setXpathDefaultNamespace(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSelectorType_XpathDefaultNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSelectorType_XpathDefaultNamespace()
      * @model dataType="org.w3._2001.xml.schema.XpathDefaultNamespace"
      *        extendedMetaData="kind='attribute' name='xpathDefaultNamespace'"
      * @generated

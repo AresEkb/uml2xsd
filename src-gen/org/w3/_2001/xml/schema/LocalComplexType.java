@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getLocalComplexType()
- * @model extendedMetaData="name='localComplexType' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getLocalComplexType()
+ * @model extendedMetaData="name='localComplexType' kind='mixed'"
  * @generated
  */
 public interface LocalComplexType extends ComplexType {

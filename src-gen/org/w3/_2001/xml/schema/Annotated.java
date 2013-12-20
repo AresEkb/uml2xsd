@@ -23,8 +23,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAnnotated()
- * @model extendedMetaData="name='annotated' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnnotated()
+ * @model extendedMetaData="name='annotated' kind='mixed'"
  * @generated
  */
 public interface Annotated extends OpenAttrs {
@@ -37,8 +37,8 @@ public interface Annotated extends OpenAttrs {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Annotation</em>' containment reference.
      * @see #setAnnotation(AnnotationType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnnotated_Annotation()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnnotated_Annotation()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace'"
      * @generated
      */
@@ -64,7 +64,7 @@ public interface Annotated extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Id</em>' attribute.
      * @see #setId(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnnotated_Id()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnnotated_Id()
      * @model id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
      *        extendedMetaData="kind='attribute' name='id'"
      * @generated

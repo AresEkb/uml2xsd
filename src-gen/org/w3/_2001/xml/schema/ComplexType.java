@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.w3._2001.xml.schema.ComplexType#getAnyAttribute1 <em>Any Attribute1</em>}</li>
  *   <li>{@link org.w3._2001.xml.schema.ComplexType#getAssert <em>Assert</em>}</li>
  *   <li>{@link org.w3._2001.xml.schema.ComplexType#getName <em>Name</em>}</li>
- *   <li>{@link org.w3._2001.xml.schema.ComplexType#isMixed <em>Mixed</em>}</li>
+ *   <li>{@link org.w3._2001.xml.schema.ComplexType#isMixed1 <em>Mixed1</em>}</li>
  *   <li>{@link org.w3._2001.xml.schema.ComplexType#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.w3._2001.xml.schema.ComplexType#getFinal <em>Final</em>}</li>
  *   <li>{@link org.w3._2001.xml.schema.ComplexType#getBlock <em>Block</em>}</li>
@@ -35,9 +35,9 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType()
  * @model abstract="true"
- *        extendedMetaData="name='complexType' kind='elementOnly'"
+ *        extendedMetaData="name='complexType' kind='mixed'"
  * @generated
  */
 public interface ComplexType extends Annotated {
@@ -50,8 +50,8 @@ public interface ComplexType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Simple Content</em>' containment reference.
      * @see #setSimpleContent(SimpleContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_SimpleContent()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_SimpleContent()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleContent' namespace='##targetNamespace'"
      * @generated
      */
@@ -76,8 +76,8 @@ public interface ComplexType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Complex Content</em>' containment reference.
      * @see #setComplexContent(ComplexContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_ComplexContent()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_ComplexContent()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='complexContent' namespace='##targetNamespace'"
      * @generated
      */
@@ -102,8 +102,8 @@ public interface ComplexType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Open Content</em>' containment reference.
      * @see #setOpenContent(OpenContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_OpenContent()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_OpenContent()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='openContent' namespace='##targetNamespace'"
      * @generated
      */
@@ -129,8 +129,8 @@ public interface ComplexType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' containment reference.
      * @see #setGroup(GroupRef)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Group()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Group()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace'"
      * @generated
      */
@@ -155,8 +155,8 @@ public interface ComplexType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>All</em>' containment reference.
      * @see #setAll(All)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_All()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_All()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='all' namespace='##targetNamespace'"
      * @generated
      */
@@ -181,8 +181,8 @@ public interface ComplexType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Choice</em>' containment reference.
      * @see #setChoice(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Choice()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Choice()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='choice' namespace='##targetNamespace'"
      * @generated
      */
@@ -207,8 +207,8 @@ public interface ComplexType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Sequence</em>' containment reference.
      * @see #setSequence(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Sequence()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Sequence()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='sequence' namespace='##targetNamespace'"
      * @generated
      */
@@ -234,9 +234,9 @@ public interface ComplexType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group1</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Group1()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:10'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Group1()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:11'"
      * @generated
      */
     FeatureMap getGroup1();
@@ -251,9 +251,9 @@ public interface ComplexType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Attribute</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Attribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Attribute()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:10'"
+     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:11'"
      * @generated
      */
     EList<Attribute> getAttribute();
@@ -268,9 +268,9 @@ public interface ComplexType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Attribute Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_AttributeGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_AttributeGroup()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:10'"
+     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:11'"
      * @generated
      */
     EList<AttributeGroupRef> getAttributeGroup();
@@ -284,8 +284,8 @@ public interface ComplexType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Any Attribute1</em>' containment reference.
      * @see #setAnyAttribute1(AnyAttributeType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_AnyAttribute1()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_AnyAttribute1()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='anyAttribute' namespace='##targetNamespace'"
      * @generated
      */
@@ -311,8 +311,8 @@ public interface ComplexType extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Assert</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Assert()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Assert()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='assert' namespace='##targetNamespace'"
      * @generated
      */
@@ -328,7 +328,7 @@ public interface ComplexType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Name</em>' attribute.
      * @see #setName(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Name()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Name()
      * @model dataType="org.eclipse.emf.ecore.xml.type.NCName"
      *        extendedMetaData="kind='attribute' name='name'"
      * @generated
@@ -346,7 +346,7 @@ public interface ComplexType extends Annotated {
     void setName(String value);
 
     /**
-     * Returns the value of the '<em><b>Mixed</b></em>' attribute.
+     * Returns the value of the '<em><b>Mixed1</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * <!-- begin-model-doc -->
@@ -354,51 +354,51 @@ public interface ComplexType extends Annotated {
      *       Not allowed if simpleContent child is chosen.
      *       May be overridden by setting on complexContent child.
      * <!-- end-model-doc -->
-     * @return the value of the '<em>Mixed</em>' attribute.
-     * @see #isSetMixed()
-     * @see #unsetMixed()
-     * @see #setMixed(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Mixed()
+     * @return the value of the '<em>Mixed1</em>' attribute.
+     * @see #isSetMixed1()
+     * @see #unsetMixed1()
+     * @see #setMixed1(boolean)
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Mixed1()
      * @model unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='mixed'"
      * @generated
      */
-    boolean isMixed();
+    boolean isMixed1();
 
     /**
-     * Sets the value of the '{@link org.w3._2001.xml.schema.ComplexType#isMixed <em>Mixed</em>}' attribute.
+     * Sets the value of the '{@link org.w3._2001.xml.schema.ComplexType#isMixed1 <em>Mixed1</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Mixed</em>' attribute.
-     * @see #isSetMixed()
-     * @see #unsetMixed()
-     * @see #isMixed()
+     * @param value the new value of the '<em>Mixed1</em>' attribute.
+     * @see #isSetMixed1()
+     * @see #unsetMixed1()
+     * @see #isMixed1()
      * @generated
      */
-    void setMixed(boolean value);
+    void setMixed1(boolean value);
 
     /**
-     * Unsets the value of the '{@link org.w3._2001.xml.schema.ComplexType#isMixed <em>Mixed</em>}' attribute.
+     * Unsets the value of the '{@link org.w3._2001.xml.schema.ComplexType#isMixed1 <em>Mixed1</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isSetMixed()
-     * @see #isMixed()
-     * @see #setMixed(boolean)
+     * @see #isSetMixed1()
+     * @see #isMixed1()
+     * @see #setMixed1(boolean)
      * @generated
      */
-    void unsetMixed();
+    void unsetMixed1();
 
     /**
-     * Returns whether the value of the '{@link org.w3._2001.xml.schema.ComplexType#isMixed <em>Mixed</em>}' attribute is set.
+     * Returns whether the value of the '{@link org.w3._2001.xml.schema.ComplexType#isMixed1 <em>Mixed1</em>}' attribute is set.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return whether the value of the '<em>Mixed</em>' attribute is set.
-     * @see #unsetMixed()
-     * @see #isMixed()
-     * @see #setMixed(boolean)
+     * @return whether the value of the '<em>Mixed1</em>' attribute is set.
+     * @see #unsetMixed1()
+     * @see #isMixed1()
+     * @see #setMixed1(boolean)
      * @generated
      */
-    boolean isSetMixed();
+    boolean isSetMixed1();
 
     /**
      * Returns the value of the '<em><b>Abstract</b></em>' attribute.
@@ -413,7 +413,7 @@ public interface ComplexType extends Annotated {
      * @see #isSetAbstract()
      * @see #unsetAbstract()
      * @see #setAbstract(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Abstract()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Abstract()
      * @model default="false" unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='abstract'"
      * @generated
@@ -465,7 +465,7 @@ public interface ComplexType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Final</em>' attribute.
      * @see #setFinal(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Final()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Final()
      * @model dataType="org.w3._2001.xml.schema.DerivationSet"
      *        extendedMetaData="kind='attribute' name='final'"
      * @generated
@@ -492,7 +492,7 @@ public interface ComplexType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Block</em>' attribute.
      * @see #setBlock(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_Block()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_Block()
      * @model dataType="org.w3._2001.xml.schema.DerivationSet"
      *        extendedMetaData="kind='attribute' name='block'"
      * @generated
@@ -522,7 +522,7 @@ public interface ComplexType extends Annotated {
      * @see #isSetDefaultAttributesApply()
      * @see #unsetDefaultAttributesApply()
      * @see #setDefaultAttributesApply(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getComplexType_DefaultAttributesApply()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getComplexType_DefaultAttributesApply()
      * @model default="true" unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='defaultAttributesApply'"
      * @generated

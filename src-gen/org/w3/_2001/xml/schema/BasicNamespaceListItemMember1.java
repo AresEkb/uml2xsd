@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Basic Namespace List Item Member1</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.w3._2001.xml.schema.SchemaPackage#getBasicNamespaceListItemMember1()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getBasicNamespaceListItemMember1()
  * @model extendedMetaData="name='basicNamespaceList_._item_._member_._1'"
  * @generated
  */

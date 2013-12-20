@@ -16,8 +16,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAssertion()
- * @model extendedMetaData="name='assertion' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAssertion()
+ * @model extendedMetaData="name='assertion' kind='mixed'"
  * @generated
  */
 public interface Assertion extends Annotated {
@@ -31,7 +31,7 @@ public interface Assertion extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Test</em>' attribute.
      * @see #setTest(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAssertion_Test()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAssertion_Test()
      * @model dataType="org.eclipse.emf.ecore.xml.type.String"
      *        extendedMetaData="kind='attribute' name='test'"
      * @generated
@@ -58,7 +58,7 @@ public interface Assertion extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Xpath Default Namespace</em>' attribute.
      * @see #setXpathDefaultNamespace(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAssertion_XpathDefaultNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAssertion_XpathDefaultNamespace()
      * @model dataType="org.w3._2001.xml.schema.XpathDefaultNamespace"
      *        extendedMetaData="kind='attribute' name='xpathDefaultNamespace'"
      * @generated

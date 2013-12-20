@@ -26,8 +26,8 @@ import javax.xml.namespace.QName;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAltType()
- * @model extendedMetaData="name='altType' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAltType()
+ * @model extendedMetaData="name='altType' kind='mixed'"
  * @generated
  */
 public interface AltType extends Annotated {
@@ -41,8 +41,8 @@ public interface AltType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference.
      * @see #setSimpleType(LocalSimpleType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAltType_SimpleType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAltType_SimpleType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace'"
      * @generated
      */
@@ -68,8 +68,8 @@ public interface AltType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Complex Type</em>' containment reference.
      * @see #setComplexType(LocalComplexType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAltType_ComplexType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAltType_ComplexType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace'"
      * @generated
      */
@@ -95,7 +95,7 @@ public interface AltType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Test</em>' attribute.
      * @see #setTest(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAltType_Test()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAltType_Test()
      * @model dataType="org.eclipse.emf.ecore.xml.type.String"
      *        extendedMetaData="kind='attribute' name='test'"
      * @generated
@@ -122,7 +122,7 @@ public interface AltType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Type</em>' attribute.
      * @see #setType(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAltType_Type()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAltType_Type()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='type'"
      * @generated
@@ -149,7 +149,7 @@ public interface AltType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Xpath Default Namespace</em>' attribute.
      * @see #setXpathDefaultNamespace(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAltType_XpathDefaultNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAltType_XpathDefaultNamespace()
      * @model dataType="org.w3._2001.xml.schema.XpathDefaultNamespace"
      *        extendedMetaData="kind='attribute' name='xpathDefaultNamespace'"
      * @generated

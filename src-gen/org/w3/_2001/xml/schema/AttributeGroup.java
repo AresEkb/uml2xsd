@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAttributeGroup()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttributeGroup()
  * @model abstract="true"
- *        extendedMetaData="name='attributeGroup' kind='elementOnly'"
+ *        extendedMetaData="name='attributeGroup' kind='mixed'"
  * @generated
  */
 public interface AttributeGroup extends Annotated {
@@ -41,9 +41,9 @@ public interface AttributeGroup extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttributeGroup_Group()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:3'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttributeGroup_Group()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:4'"
      * @generated
      */
     FeatureMap getGroup();
@@ -58,9 +58,9 @@ public interface AttributeGroup extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Attribute</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttributeGroup_Attribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttributeGroup_Attribute()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:3'"
+     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:4'"
      * @generated
      */
     EList<Attribute> getAttribute();
@@ -75,9 +75,9 @@ public interface AttributeGroup extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Attribute Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttributeGroup_AttributeGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttributeGroup_AttributeGroup()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:3'"
+     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:4'"
      * @generated
      */
     EList<AttributeGroupRef> getAttributeGroup();
@@ -91,8 +91,8 @@ public interface AttributeGroup extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Any Attribute1</em>' containment reference.
      * @see #setAnyAttribute1(AnyAttributeType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttributeGroup_AnyAttribute1()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttributeGroup_AnyAttribute1()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='anyAttribute' namespace='##targetNamespace'"
      * @generated
      */
@@ -118,7 +118,7 @@ public interface AttributeGroup extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Name</em>' attribute.
      * @see #setName(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttributeGroup_Name()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttributeGroup_Name()
      * @model dataType="org.eclipse.emf.ecore.xml.type.NCName"
      *        extendedMetaData="kind='attribute' name='name'"
      * @generated
@@ -145,7 +145,7 @@ public interface AttributeGroup extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Ref</em>' attribute.
      * @see #setRef(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAttributeGroup_Ref()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAttributeGroup_Ref()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='ref'"
      * @generated

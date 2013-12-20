@@ -3,17 +3,16 @@
 package org.w3._2001.xml.schema.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.w3._2001.xml.schema.DefaultOpenContentType;
 import org.w3._2001.xml.schema.ModeType;
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.Wildcard;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,16 +30,6 @@ import org.w3._2001.xml.schema.Wildcard;
  * @generated
  */
 public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements DefaultOpenContentType {
-    /**
-     * The cached value of the '{@link #getAny() <em>Any</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAny()
-     * @generated
-     * @ordered
-     */
-    protected Wildcard any;
-
     /**
      * The default value of the '{@link #isAppliesToEmpty() <em>Applies To Empty</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -115,7 +104,7 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.DEFAULT_OPEN_CONTENT_TYPE;
+        return XMLSchema11Package.Literals.DEFAULT_OPEN_CONTENT_TYPE;
     }
 
     /**
@@ -124,22 +113,7 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
      * @generated
      */
     public Wildcard getAny() {
-        return any;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAny(Wildcard newAny, NotificationChain msgs) {
-        Wildcard oldAny = any;
-        any = newAny;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY, oldAny, newAny);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (Wildcard)getMixed().get(XMLSchema11Package.Literals.DEFAULT_OPEN_CONTENT_TYPE__ANY, true);
     }
 
     /**
@@ -148,17 +122,7 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
      * @generated
      */
     public void setAny(Wildcard newAny) {
-        if (newAny != any) {
-            NotificationChain msgs = null;
-            if (any != null)
-                msgs = ((InternalEObject)any).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY, null, msgs);
-            if (newAny != null)
-                msgs = ((InternalEObject)newAny).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY, null, msgs);
-            msgs = basicSetAny(newAny, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY, newAny, newAny));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.DEFAULT_OPEN_CONTENT_TYPE__ANY, newAny);
     }
 
     /**
@@ -181,7 +145,7 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
         boolean oldAppliesToEmptyESet = appliesToEmptyESet;
         appliesToEmptyESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY, oldAppliesToEmpty, appliesToEmpty, !oldAppliesToEmptyESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY, oldAppliesToEmpty, appliesToEmpty, !oldAppliesToEmptyESet));
     }
 
     /**
@@ -195,7 +159,7 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
         appliesToEmpty = APPLIES_TO_EMPTY_EDEFAULT;
         appliesToEmptyESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY, oldAppliesToEmpty, APPLIES_TO_EMPTY_EDEFAULT, oldAppliesToEmptyESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY, oldAppliesToEmpty, APPLIES_TO_EMPTY_EDEFAULT, oldAppliesToEmptyESet));
     }
 
     /**
@@ -227,7 +191,7 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
         boolean oldModeESet = modeESet;
         modeESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__MODE, oldMode, mode, !oldModeESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__MODE, oldMode, mode, !oldModeESet));
     }
 
     /**
@@ -241,7 +205,7 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
         mode = MODE_EDEFAULT;
         modeESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__MODE, oldMode, MODE_EDEFAULT, oldModeESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__MODE, oldMode, MODE_EDEFAULT, oldModeESet));
     }
 
     /**
@@ -259,27 +223,13 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
      * @generated
      */
     @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY:
-                return basicSetAny(null, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__ANY:
                 return getAny();
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY:
                 return isAppliesToEmpty();
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__MODE:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__MODE:
                 return getMode();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -293,13 +243,13 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__ANY:
                 setAny((Wildcard)newValue);
                 return;
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY:
                 setAppliesToEmpty((Boolean)newValue);
                 return;
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__MODE:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__MODE:
                 setMode((ModeType)newValue);
                 return;
         }
@@ -314,13 +264,13 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__ANY:
                 setAny((Wildcard)null);
                 return;
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY:
                 unsetAppliesToEmpty();
                 return;
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__MODE:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__MODE:
                 unsetMode();
                 return;
         }
@@ -335,11 +285,11 @@ public class DefaultOpenContentTypeImpl extends AnnotatedImpl implements Default
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__ANY:
-                return any != null;
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__ANY:
+                return getAny() != null;
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__APPLIES_TO_EMPTY:
                 return isSetAppliesToEmpty();
-            case SchemaPackage.DEFAULT_OPEN_CONTENT_TYPE__MODE:
+            case XMLSchema11Package.DEFAULT_OPEN_CONTENT_TYPE__MODE:
                 return isSetMode();
         }
         return super.eIsSet(featureID);

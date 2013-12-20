@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAnnotationType()
- * @model extendedMetaData="name='annotation_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnnotationType()
+ * @model extendedMetaData="name='annotation_._type' kind='mixed'"
  * @generated
  */
 public interface AnnotationType extends OpenAttrs {
@@ -36,9 +36,9 @@ public interface AnnotationType extends OpenAttrs {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnnotationType_Group()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:1'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnnotationType_Group()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:2'"
      * @generated
      */
     FeatureMap getGroup();
@@ -52,9 +52,9 @@ public interface AnnotationType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Appinfo</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnnotationType_Appinfo()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnnotationType_Appinfo()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='appinfo' namespace='##targetNamespace' group='#group:1'"
+     *        extendedMetaData="kind='element' name='appinfo' namespace='##targetNamespace' group='#group:2'"
      * @generated
      */
     EList<AppinfoType> getAppinfo();
@@ -68,9 +68,9 @@ public interface AnnotationType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Documentation</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnnotationType_Documentation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnnotationType_Documentation()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='documentation' namespace='##targetNamespace' group='#group:1'"
+     *        extendedMetaData="kind='element' name='documentation' namespace='##targetNamespace' group='#group:2'"
      * @generated
      */
     EList<DocumentationType> getDocumentation();
@@ -85,7 +85,7 @@ public interface AnnotationType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Id</em>' attribute.
      * @see #setId(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnnotationType_Id()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnnotationType_Id()
      * @model id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
      *        extendedMetaData="kind='attribute' name='id'"
      * @generated

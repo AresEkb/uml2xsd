@@ -14,8 +14,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-model-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getExplicitGroup()
- * @model extendedMetaData="name='explicitGroup' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getExplicitGroup()
+ * @model extendedMetaData="name='explicitGroup' kind='mixed'"
  * @generated
  */
 public interface ExplicitGroup extends Group {

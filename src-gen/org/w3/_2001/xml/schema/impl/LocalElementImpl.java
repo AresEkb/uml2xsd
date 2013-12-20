@@ -5,7 +5,7 @@ package org.w3._2001.xml.schema.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.w3._2001.xml.schema.LocalElement;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class LocalElementImpl extends ElementImpl implements LocalElement {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.LOCAL_ELEMENT;
+        return XMLSchema11Package.Literals.LOCAL_ELEMENT;
     }
 
 } //LocalElementImpl

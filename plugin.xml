@@ -21,13 +21,43 @@
             class="org.w3._2001.xml.schema.util.SchemaResourceFactoryImpl"/>
    </extension>
 
-    <extension point="org.eclipse.m2m.qvt.oml.javaBlackboxUnits" id="org.eclipse.m2m.qvt.oml.examples.blackbox.UtilitiesLibrary">
-        <unit name="ExampleJavaLib" namespace="m2m.qvt.oml">
-            <library name="UtilLib" class="org.eclipse.m2m.qvt.oml.examples.blackbox.UtilitiesLibrary">
-                <metamodel nsURI="http://www.eclipse.org/emf/2002/Ecore"/>
-                <metamodel nsURI="http://www.eclipse.org/emf/2003/XMLType"/>
-            </library>
-        </unit>
+    <extension point="org.eclipse.m2m.qvt.oml.javaBlackboxUnits" id="uml2xsd.UtilitiesLibrary">
+        <library name="UtilLib" class="uml2xsd.UtilitiesLibrary">
+            <metamodel nsURI="http://www.eclipse.org/emf/2002/Ecore"/>
+            <metamodel nsURI="http://www.eclipse.org/emf/2003/XMLType"/>
+            <metamodel nsURI="http://www.w3.org/2001/XMLSchema"/>
+            <metamodel nsURI="http://www.eclipse.org/ocl/3.1.0/Pivot"/>
+            <metamodel nsURI="http://www.emftext.org/language/xpath2"/>
+            <metamodel nsURI="http://www.eclipse.org/uml2/2.1.0/UML"/>
+        </library>
     </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated XMLSchema-versioning -->
+      <package
+            uri="http://www.w3.org/2007/XMLSchema-versioning"
+            class="org.w3._2007.xml.schema.versioning.XMLSchemaVersioningPackage"
+            genModel="metamodel/XMLSchema-versioning.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated XMLSchema-versioning -->
+      <parser
+            type="xmlschemaversioning"
+            class="org.w3._2007.xml.schema.versioning.util.XMLSchemaVersioningResourceFactoryImpl"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated XMLSchema11 -->
+      <package
+            uri="http://www.w3.org/2001/XMLSchema"
+            class="org.w3._2001.xml.schema.XMLSchema11Package"
+            genModel="metamodel/XMLSchema11.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated XMLSchema11 -->
+      <parser
+            type="xsd"
+            class="org.w3._2001.xml.schema.util.XMLSchema11ResourceFactoryImpl"/>
+   </extension>
 </plugin>

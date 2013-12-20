@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleRestrictionType()
- * @model extendedMetaData="name='simpleRestrictionType' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleRestrictionType()
+ * @model extendedMetaData="name='simpleRestrictionType' kind='mixed'"
  * @generated
  */
 public interface SimpleRestrictionType extends RestrictionType {

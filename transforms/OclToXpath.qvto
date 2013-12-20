@@ -1,19 +1,15 @@
+import uml2xsd.UtilLib;
+import Helpers;
+
 modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
 modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
-modeltype XSD uses "http://www.eclipse.org/xsd/2002/XSD";
+modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
-transformation OclToXpath(in o : OCL, out x : XPATH2);
+library OCLtoXPath;
 
-main() {
-//    o.rootObjects()[ExpressionInOCL].map Root2Root();
-    var res := object Expr {};
-    o.rootObjects()[ExpressionInOCL]->sortedBy(body->first()).map Root2Root()->forEach(e) {
-        res.expr += e.expr;
-    };
-}
-
-mapping ExpressionInOCL::Root2Root() : Expr {
-    log("  Transforming " + self.body->first());
+mapping ExpressionInOCL::toXPath() : Expr
+{
+    log("  Transforming OCL expression\n    " + self.body->first().replaceAll('\n', '\n    '));
     expr := self.bodyExpression.map toExprSingle();
 }
 
@@ -152,28 +148,72 @@ mapping PropertyCallExp::toPath() : PathExpr
         result := self.source[PropertyCallExp]->collectOne(xmap toPath());
     }
     if (self.source[VariableExp]->one(referredVariable.name = 'self')) {
-        step := object SelfStepExpr { step := object AbbrevForwardStep {
-            kind := AbbrevForwardStepKind::child;
-            nodeTest := object QNameTest { name := object QName { name := self.referredProperty.name } } } };
+        assert fatal (self.referredProperty.owningType.oclIsKindOf(DataType))
+            with log('Constraint could not be defined for a Data Element \'' +
+                self.referredProperty.owningType.name + '\'. Please define the constraint for a Data Type \'' +
+                self.referredProperty.type.name + '\'');
+        if (self.referredProperty.getETarget().getAppliedStereotype('EECProfile::Attribute') = null) {
+            step := object SelfStepExpr { step := object AbbrevForwardStep {
+                kind := AbbrevForwardStepKind::child;
+                nodeTest := object QNameTest { name := self.referredProperty.type.getQName() } } };
+        }
+        else {
+            step := object SelfStepExpr { step := object AbbrevForwardStep {
+                kind := AbbrevForwardStepKind::attribute;
+                nodeTest := object QNameTest { name := self.referredProperty.type.getUnprefixedQName() } } };
+        }
     }
     else if (self.source[PropertyCallExp]->notEmpty()) {
-        step += object ChildStepExpr { step := object AbbrevForwardStep {
-            kind := AbbrevForwardStepKind::child;
-            nodeTest := object QNameTest { name := object QName { name := self.referredProperty.name } } } };
+        if (self.referredProperty.owningType.oclIsKindOf(DataType)) {
+            if (self.referredProperty.type.oclIsKindOf(DataType)) {
+                step += self.referredProperty.xmap toChildStepExpr();
+            }
+            else {
+                step += self.referredProperty.type.xmap toChildStepExpr();
+            }
+        }
+        else {
+            assert fatal (self.referredProperty.type.oclIsKindOf(DataType))
+                with log('Data Element \'' + self.referredProperty.owningType.name + '\' must have a Data Type');
+        }
+    }
+}
+
+mapping NamedElement::toChildStepExpr() : ChildStepExpr
+disjuncts
+    NamedElement::toChildStepExprFromElement,
+    NamedElement::toChildStepExprFromAttribute
+{}
+
+mapping NamedElement::toChildStepExprFromElement() : ChildStepExpr
+when { self.getETarget().getAppliedStereotype('EECProfile::Attribute') = null }
+{
+    step := object AbbrevForwardStep {
+       kind := AbbrevForwardStepKind::child;
+       nodeTest := object QNameTest { name := self.getQName() }
+    }
+}
+
+mapping NamedElement::toChildStepExprFromAttribute() : ChildStepExpr
+when { self.getETarget().getAppliedStereotype('EECProfile::Attribute') <> null }
+{
+    step := object AbbrevForwardStep {
+       kind := AbbrevForwardStepKind::attribute;
+       nodeTest := object QNameTest { name := self.getUnprefixedQName() }
     }
 }
 
 mapping OperationCallExp::count() : FunctionCall
 when { self.referredOperation.name = 'size' and self.referredOperation.owningType.name = 'Collection' }
 {
-    name := object QName { prefix := 'fn'; name := 'count' };
+    name := createQName('http://www.w3.org/2005/xpath-functions', 'count', 'fn');
     arg := self.source.xmap toExprSingle();
 }
 
 mapping OperationCallExp::stringLength() : FunctionCall
 when { self.referredOperation.name = 'size' and self.referredOperation.owningType.name = 'String' }
 {
-    name := object QName { prefix := 'fn'; name := 'string-length' };
+    name := createQName('http://www.w3.org/2005/xpath-functions', 'string-length', 'fn');
     arg := self.source.xmap toExprSingle();
 }
 
@@ -201,7 +241,7 @@ when { self.referredIteration.name = 'forAll' }
 
 mapping OperationCallExp::forAll() : FunctionCall
 {
-    name := object QName { prefix := 'fn'; name := 'forAll' };
+    name := createQName('http://www.w3.org/2005/xpath-functions', 'forAll', 'fn');
     arg := self.source.xmap toExprSingle();
 }
 
@@ -232,26 +272,32 @@ mapping OCLExpression::toParenthesizedExpr() : ParenthesizedExpr
 }
 
 mapping OCLExpression::toVarRef() : VarRef {
-    object VarRef { varName := object VarName { name := self.name } }
+    object VarRef { varName := createQName(self.name) }
 }
 
-
+///////////////////////////////////////////////////////////////////////////////
 // Helpers
+
+query NamedElement::getQName() : QName = self.getETarget().getQName();
+
+query NamedElement::getUnprefixedQName() : QName = self.getETarget().getUnprefixedQName();
 
 query String::quote() : String = '\'' + self.replaceAll('\'', '\'\'') + '\'';
 
-query trueExpr() : FunctionCall = object FunctionCall { name := object QName { prefix := 'fn'; name := 'true' } };
+query trueExpr() : FunctionCall = object FunctionCall {
+    name := createQName('http://www.w3.org/2005/xpath-functions', 'true', 'fn') };
 
-query falseExpr() : FunctionCall = object FunctionCall { name := object QName { prefix := 'fn'; name := 'false' } };
+query falseExpr() : FunctionCall = object FunctionCall {
+    name := createQName('http://www.w3.org/2005/xpath-functions', 'false', 'fn') };
 
 query ExprSingle::notExpr() : FunctionCall =
     object FunctionCall {
-        name := object QName { prefix := 'fn'; name := 'not' };
+        name := createQName('http://www.w3.org/2005/xpath-functions', 'not', 'fn');
         arg := self; };
 
 query ExprSingle::booleanExpr() : FunctionCall =
     object FunctionCall {
-        name := object QName { prefix := 'fn'; name := 'boolean' };
+        name := createQName('http://www.w3.org/2005/xpath-functions', 'boolean', 'fn');
         arg := self; };
 
 query OCLExpression::isNullLiteralExp() : Boolean = self.oclIsKindOf(NullLiteralExp);

@@ -4,8 +4,8 @@ package org.w3._2001.xml.schema.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.WhiteSpaceType;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class WhiteSpaceTypeImpl extends FacetImpl implements WhiteSpaceType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.WHITE_SPACE_TYPE;
+        return XMLSchema11Package.Literals.WHITE_SPACE_TYPE;
     }
 
 } //WhiteSpaceTypeImpl

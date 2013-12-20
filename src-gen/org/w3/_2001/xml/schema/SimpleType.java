@@ -19,9 +19,9 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleType()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleType()
  * @model abstract="true"
- *        extendedMetaData="name='simpleType' kind='elementOnly'"
+ *        extendedMetaData="name='simpleType' kind='mixed'"
  * @generated
  */
 public interface SimpleType extends Annotated {
@@ -35,8 +35,8 @@ public interface SimpleType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Restriction</em>' containment reference.
      * @see #setRestriction(RestrictionType1)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleType_Restriction()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleType_Restriction()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='restriction' namespace='##targetNamespace'"
      * @generated
      */
@@ -62,8 +62,8 @@ public interface SimpleType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>List</em>' containment reference.
      * @see #setList(ListType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleType_List()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleType_List()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='list' namespace='##targetNamespace'"
      * @generated
      */
@@ -89,8 +89,8 @@ public interface SimpleType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Union</em>' containment reference.
      * @see #setUnion(UnionType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleType_Union()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleType_Union()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='union' namespace='##targetNamespace'"
      * @generated
      */
@@ -116,7 +116,7 @@ public interface SimpleType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Final</em>' attribute.
      * @see #setFinal(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleType_Final()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleType_Final()
      * @model dataType="org.w3._2001.xml.schema.SimpleDerivationSet"
      *        extendedMetaData="kind='attribute' name='final'"
      * @generated
@@ -144,7 +144,7 @@ public interface SimpleType extends Annotated {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Name</em>' attribute.
      * @see #setName(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleType_Name()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleType_Name()
      * @model dataType="org.eclipse.emf.ecore.xml.type.NCName"
      *        extendedMetaData="kind='attribute' name='name'"
      * @generated

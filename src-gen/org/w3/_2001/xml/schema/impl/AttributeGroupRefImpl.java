@@ -5,7 +5,7 @@ package org.w3._2001.xml.schema.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.w3._2001.xml.schema.AttributeGroupRef;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class AttributeGroupRefImpl extends AttributeGroupImpl implements Attribu
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ATTRIBUTE_GROUP_REF;
+        return XMLSchema11Package.Literals.ATTRIBUTE_GROUP_REF;
     }
 
 } //AttributeGroupRefImpl

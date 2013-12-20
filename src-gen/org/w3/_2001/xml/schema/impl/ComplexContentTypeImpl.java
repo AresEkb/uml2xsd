@@ -3,17 +3,16 @@
 package org.w3._2001.xml.schema.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.w3._2001.xml.schema.ComplexContentType;
 import org.w3._2001.xml.schema.ComplexRestrictionType;
 import org.w3._2001.xml.schema.ExtensionType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +23,7 @@ import org.w3._2001.xml.schema.SchemaPackage;
  * <ul>
  *   <li>{@link org.w3._2001.xml.schema.impl.ComplexContentTypeImpl#getRestriction <em>Restriction</em>}</li>
  *   <li>{@link org.w3._2001.xml.schema.impl.ComplexContentTypeImpl#getExtension <em>Extension</em>}</li>
- *   <li>{@link org.w3._2001.xml.schema.impl.ComplexContentTypeImpl#isMixed <em>Mixed</em>}</li>
+ *   <li>{@link org.w3._2001.xml.schema.impl.ComplexContentTypeImpl#isMixed1 <em>Mixed1</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,53 +31,33 @@ import org.w3._2001.xml.schema.SchemaPackage;
  */
 public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexContentType {
     /**
-     * The cached value of the '{@link #getRestriction() <em>Restriction</em>}' containment reference.
+     * The default value of the '{@link #isMixed1() <em>Mixed1</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getRestriction()
+     * @see #isMixed1()
      * @generated
      * @ordered
      */
-    protected ComplexRestrictionType restriction;
+    protected static final boolean MIXED1_EDEFAULT = false;
 
     /**
-     * The cached value of the '{@link #getExtension() <em>Extension</em>}' containment reference.
+     * The cached value of the '{@link #isMixed1() <em>Mixed1</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getExtension()
+     * @see #isMixed1()
      * @generated
      * @ordered
      */
-    protected ExtensionType extension;
+    protected boolean mixed1 = MIXED1_EDEFAULT;
 
     /**
-     * The default value of the '{@link #isMixed() <em>Mixed</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #isMixed()
-     * @generated
-     * @ordered
-     */
-    protected static final boolean MIXED_EDEFAULT = false;
-
-    /**
-     * The cached value of the '{@link #isMixed() <em>Mixed</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #isMixed()
-     * @generated
-     * @ordered
-     */
-    protected boolean mixed = MIXED_EDEFAULT;
-
-    /**
-     * This is true if the Mixed attribute has been set.
+     * This is true if the Mixed1 attribute has been set.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    protected boolean mixedESet;
+    protected boolean mixed1ESet;
 
     /**
      * <!-- begin-user-doc -->
@@ -96,7 +75,7 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.COMPLEX_CONTENT_TYPE;
+        return XMLSchema11Package.Literals.COMPLEX_CONTENT_TYPE;
     }
 
     /**
@@ -105,22 +84,7 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      * @generated
      */
     public ComplexRestrictionType getRestriction() {
-        return restriction;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetRestriction(ComplexRestrictionType newRestriction, NotificationChain msgs) {
-        ComplexRestrictionType oldRestriction = restriction;
-        restriction = newRestriction;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION, oldRestriction, newRestriction);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (ComplexRestrictionType)getMixed().get(XMLSchema11Package.Literals.COMPLEX_CONTENT_TYPE__RESTRICTION, true);
     }
 
     /**
@@ -129,17 +93,7 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      * @generated
      */
     public void setRestriction(ComplexRestrictionType newRestriction) {
-        if (newRestriction != restriction) {
-            NotificationChain msgs = null;
-            if (restriction != null)
-                msgs = ((InternalEObject)restriction).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION, null, msgs);
-            if (newRestriction != null)
-                msgs = ((InternalEObject)newRestriction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION, null, msgs);
-            msgs = basicSetRestriction(newRestriction, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION, newRestriction, newRestriction));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.COMPLEX_CONTENT_TYPE__RESTRICTION, newRestriction);
     }
 
     /**
@@ -148,22 +102,7 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      * @generated
      */
     public ExtensionType getExtension() {
-        return extension;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetExtension(ExtensionType newExtension, NotificationChain msgs) {
-        ExtensionType oldExtension = extension;
-        extension = newExtension;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION, oldExtension, newExtension);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (ExtensionType)getMixed().get(XMLSchema11Package.Literals.COMPLEX_CONTENT_TYPE__EXTENSION, true);
     }
 
     /**
@@ -172,17 +111,7 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      * @generated
      */
     public void setExtension(ExtensionType newExtension) {
-        if (newExtension != extension) {
-            NotificationChain msgs = null;
-            if (extension != null)
-                msgs = ((InternalEObject)extension).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION, null, msgs);
-            if (newExtension != null)
-                msgs = ((InternalEObject)newExtension).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION, null, msgs);
-            msgs = basicSetExtension(newExtension, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION, newExtension, newExtension));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.COMPLEX_CONTENT_TYPE__EXTENSION, newExtension);
     }
 
     /**
@@ -190,8 +119,8 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      * <!-- end-user-doc -->
      * @generated
      */
-    public boolean isMixed() {
-        return mixed;
+    public boolean isMixed1() {
+        return mixed1;
     }
 
     /**
@@ -199,13 +128,13 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setMixed(boolean newMixed) {
-        boolean oldMixed = mixed;
-        mixed = newMixed;
-        boolean oldMixedESet = mixedESet;
-        mixedESet = true;
+    public void setMixed1(boolean newMixed1) {
+        boolean oldMixed1 = mixed1;
+        mixed1 = newMixed1;
+        boolean oldMixed1ESet = mixed1ESet;
+        mixed1ESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.COMPLEX_CONTENT_TYPE__MIXED, oldMixed, mixed, !oldMixedESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.COMPLEX_CONTENT_TYPE__MIXED1, oldMixed1, mixed1, !oldMixed1ESet));
     }
 
     /**
@@ -213,13 +142,13 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      * <!-- end-user-doc -->
      * @generated
      */
-    public void unsetMixed() {
-        boolean oldMixed = mixed;
-        boolean oldMixedESet = mixedESet;
-        mixed = MIXED_EDEFAULT;
-        mixedESet = false;
+    public void unsetMixed1() {
+        boolean oldMixed1 = mixed1;
+        boolean oldMixed1ESet = mixed1ESet;
+        mixed1 = MIXED1_EDEFAULT;
+        mixed1ESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.COMPLEX_CONTENT_TYPE__MIXED, oldMixed, MIXED_EDEFAULT, oldMixedESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.COMPLEX_CONTENT_TYPE__MIXED1, oldMixed1, MIXED1_EDEFAULT, oldMixed1ESet));
     }
 
     /**
@@ -227,24 +156,8 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
      * <!-- end-user-doc -->
      * @generated
      */
-    public boolean isSetMixed() {
-        return mixedESet;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION:
-                return basicSetRestriction(null, msgs);
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION:
-                return basicSetExtension(null, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
+    public boolean isSetMixed1() {
+        return mixed1ESet;
     }
 
     /**
@@ -255,12 +168,12 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION:
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__RESTRICTION:
                 return getRestriction();
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION:
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__EXTENSION:
                 return getExtension();
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__MIXED:
-                return isMixed();
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__MIXED1:
+                return isMixed1();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -273,14 +186,14 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION:
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__RESTRICTION:
                 setRestriction((ComplexRestrictionType)newValue);
                 return;
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION:
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__EXTENSION:
                 setExtension((ExtensionType)newValue);
                 return;
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__MIXED:
-                setMixed((Boolean)newValue);
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__MIXED1:
+                setMixed1((Boolean)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -294,14 +207,14 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION:
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__RESTRICTION:
                 setRestriction((ComplexRestrictionType)null);
                 return;
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION:
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__EXTENSION:
                 setExtension((ExtensionType)null);
                 return;
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__MIXED:
-                unsetMixed();
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__MIXED1:
+                unsetMixed1();
                 return;
         }
         super.eUnset(featureID);
@@ -315,12 +228,12 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__RESTRICTION:
-                return restriction != null;
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__EXTENSION:
-                return extension != null;
-            case SchemaPackage.COMPLEX_CONTENT_TYPE__MIXED:
-                return isSetMixed();
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__RESTRICTION:
+                return getRestriction() != null;
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__EXTENSION:
+                return getExtension() != null;
+            case XMLSchema11Package.COMPLEX_CONTENT_TYPE__MIXED1:
+                return isSetMixed1();
         }
         return super.eIsSet(featureID);
     }
@@ -335,8 +248,8 @@ public class ComplexContentTypeImpl extends AnnotatedImpl implements ComplexCont
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (mixed: ");
-        if (mixedESet) result.append(mixed); else result.append("<unset>");
+        result.append(" (mixed1: ");
+        if (mixed1ESet) result.append(mixed1); else result.append("<unset>");
         result.append(')');
         return result.toString();
     }

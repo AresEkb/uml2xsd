@@ -3,25 +3,18 @@
 package org.w3._2001.xml.schema.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.w3._2001.xml.schema.AnnotationType;
 import org.w3._2001.xml.schema.AppinfoType;
 import org.w3._2001.xml.schema.DocumentationType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,16 +33,6 @@ import org.w3._2001.xml.schema.SchemaPackage;
  * @generated
  */
 public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType {
-    /**
-     * The cached value of the '{@link #getGroup() <em>Group</em>}' attribute list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getGroup()
-     * @generated
-     * @ordered
-     */
-    protected FeatureMap group;
-
     /**
      * The default value of the '{@link #getId() <em>Id</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -86,7 +69,7 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ANNOTATION_TYPE;
+        return XMLSchema11Package.Literals.ANNOTATION_TYPE;
     }
 
     /**
@@ -95,10 +78,7 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
      * @generated
      */
     public FeatureMap getGroup() {
-        if (group == null) {
-            group = new BasicFeatureMap(this, SchemaPackage.ANNOTATION_TYPE__GROUP);
-        }
-        return group;
+        return (FeatureMap)getMixed().<FeatureMap.Entry>list(XMLSchema11Package.Literals.ANNOTATION_TYPE__GROUP);
     }
 
     /**
@@ -107,7 +87,7 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
      * @generated
      */
     public EList<AppinfoType> getAppinfo() {
-        return getGroup().list(SchemaPackage.Literals.ANNOTATION_TYPE__APPINFO);
+        return getGroup().list(XMLSchema11Package.Literals.ANNOTATION_TYPE__APPINFO);
     }
 
     /**
@@ -116,7 +96,7 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
      * @generated
      */
     public EList<DocumentationType> getDocumentation() {
-        return getGroup().list(SchemaPackage.Literals.ANNOTATION_TYPE__DOCUMENTATION);
+        return getGroup().list(XMLSchema11Package.Literals.ANNOTATION_TYPE__DOCUMENTATION);
     }
 
     /**
@@ -137,7 +117,7 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
         String oldId = id;
         id = newId;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ANNOTATION_TYPE__ID, oldId, id));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ANNOTATION_TYPE__ID, oldId, id));
     }
 
     /**
@@ -148,12 +128,8 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATION_TYPE__GROUP:
+            case XMLSchema11Package.ANNOTATION_TYPE__GROUP:
                 return ((InternalEList<?>)getGroup()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ANNOTATION_TYPE__APPINFO:
-                return ((InternalEList<?>)getAppinfo()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ANNOTATION_TYPE__DOCUMENTATION:
-                return ((InternalEList<?>)getDocumentation()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -166,14 +142,14 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATION_TYPE__GROUP:
+            case XMLSchema11Package.ANNOTATION_TYPE__GROUP:
                 if (coreType) return getGroup();
                 return ((FeatureMap.Internal)getGroup()).getWrapper();
-            case SchemaPackage.ANNOTATION_TYPE__APPINFO:
+            case XMLSchema11Package.ANNOTATION_TYPE__APPINFO:
                 return getAppinfo();
-            case SchemaPackage.ANNOTATION_TYPE__DOCUMENTATION:
+            case XMLSchema11Package.ANNOTATION_TYPE__DOCUMENTATION:
                 return getDocumentation();
-            case SchemaPackage.ANNOTATION_TYPE__ID:
+            case XMLSchema11Package.ANNOTATION_TYPE__ID:
                 return getId();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -188,18 +164,18 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATION_TYPE__GROUP:
+            case XMLSchema11Package.ANNOTATION_TYPE__GROUP:
                 ((FeatureMap.Internal)getGroup()).set(newValue);
                 return;
-            case SchemaPackage.ANNOTATION_TYPE__APPINFO:
+            case XMLSchema11Package.ANNOTATION_TYPE__APPINFO:
                 getAppinfo().clear();
                 getAppinfo().addAll((Collection<? extends AppinfoType>)newValue);
                 return;
-            case SchemaPackage.ANNOTATION_TYPE__DOCUMENTATION:
+            case XMLSchema11Package.ANNOTATION_TYPE__DOCUMENTATION:
                 getDocumentation().clear();
                 getDocumentation().addAll((Collection<? extends DocumentationType>)newValue);
                 return;
-            case SchemaPackage.ANNOTATION_TYPE__ID:
+            case XMLSchema11Package.ANNOTATION_TYPE__ID:
                 setId((String)newValue);
                 return;
         }
@@ -214,16 +190,16 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATION_TYPE__GROUP:
+            case XMLSchema11Package.ANNOTATION_TYPE__GROUP:
                 getGroup().clear();
                 return;
-            case SchemaPackage.ANNOTATION_TYPE__APPINFO:
+            case XMLSchema11Package.ANNOTATION_TYPE__APPINFO:
                 getAppinfo().clear();
                 return;
-            case SchemaPackage.ANNOTATION_TYPE__DOCUMENTATION:
+            case XMLSchema11Package.ANNOTATION_TYPE__DOCUMENTATION:
                 getDocumentation().clear();
                 return;
-            case SchemaPackage.ANNOTATION_TYPE__ID:
+            case XMLSchema11Package.ANNOTATION_TYPE__ID:
                 setId(ID_EDEFAULT);
                 return;
         }
@@ -238,13 +214,13 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATION_TYPE__GROUP:
-                return group != null && !group.isEmpty();
-            case SchemaPackage.ANNOTATION_TYPE__APPINFO:
+            case XMLSchema11Package.ANNOTATION_TYPE__GROUP:
+                return !getGroup().isEmpty();
+            case XMLSchema11Package.ANNOTATION_TYPE__APPINFO:
                 return !getAppinfo().isEmpty();
-            case SchemaPackage.ANNOTATION_TYPE__DOCUMENTATION:
+            case XMLSchema11Package.ANNOTATION_TYPE__DOCUMENTATION:
                 return !getDocumentation().isEmpty();
-            case SchemaPackage.ANNOTATION_TYPE__ID:
+            case XMLSchema11Package.ANNOTATION_TYPE__ID:
                 return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
         }
         return super.eIsSet(featureID);
@@ -260,9 +236,7 @@ public class AnnotationTypeImpl extends OpenAttrsImpl implements AnnotationType 
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (group: ");
-        result.append(group);
-        result.append(", id: ");
+        result.append(" (id: ");
         result.append(id);
         result.append(')');
         return result.toString();

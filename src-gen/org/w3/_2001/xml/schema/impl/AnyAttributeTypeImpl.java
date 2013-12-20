@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.AnyAttributeType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class AnyAttributeTypeImpl extends WildcardImpl implements AnyAttributeTy
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ANY_ATTRIBUTE_TYPE;
+        return XMLSchema11Package.Literals.ANY_ATTRIBUTE_TYPE;
     }
 
     /**
@@ -84,7 +84,7 @@ public class AnyAttributeTypeImpl extends WildcardImpl implements AnyAttributeTy
         List<Object> oldNotQName = notQName;
         notQName = newNotQName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ANY_ATTRIBUTE_TYPE__NOT_QNAME, oldNotQName, notQName));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ANY_ATTRIBUTE_TYPE__NOT_QNAME, oldNotQName, notQName));
     }
 
     /**
@@ -95,7 +95,7 @@ public class AnyAttributeTypeImpl extends WildcardImpl implements AnyAttributeTy
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.ANY_ATTRIBUTE_TYPE__NOT_QNAME:
+            case XMLSchema11Package.ANY_ATTRIBUTE_TYPE__NOT_QNAME:
                 return getNotQName();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -110,7 +110,7 @@ public class AnyAttributeTypeImpl extends WildcardImpl implements AnyAttributeTy
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.ANY_ATTRIBUTE_TYPE__NOT_QNAME:
+            case XMLSchema11Package.ANY_ATTRIBUTE_TYPE__NOT_QNAME:
                 setNotQName((List<Object>)newValue);
                 return;
         }
@@ -125,7 +125,7 @@ public class AnyAttributeTypeImpl extends WildcardImpl implements AnyAttributeTy
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ANY_ATTRIBUTE_TYPE__NOT_QNAME:
+            case XMLSchema11Package.ANY_ATTRIBUTE_TYPE__NOT_QNAME:
                 setNotQName(NOT_QNAME_EDEFAULT);
                 return;
         }
@@ -140,7 +140,7 @@ public class AnyAttributeTypeImpl extends WildcardImpl implements AnyAttributeTy
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ANY_ATTRIBUTE_TYPE__NOT_QNAME:
+            case XMLSchema11Package.ANY_ATTRIBUTE_TYPE__NOT_QNAME:
                 return NOT_QNAME_EDEFAULT == null ? notQName != null : !NOT_QNAME_EDEFAULT.equals(notQName);
         }
         return super.eIsSet(featureID);

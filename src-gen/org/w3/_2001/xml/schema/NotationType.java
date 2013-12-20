@@ -17,8 +17,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getNotationType()
- * @model extendedMetaData="name='notation_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getNotationType()
+ * @model extendedMetaData="name='notation_._type' kind='mixed'"
  * @generated
  */
 public interface NotationType extends Annotated {
@@ -32,7 +32,7 @@ public interface NotationType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Name</em>' attribute.
      * @see #setName(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getNotationType_Name()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getNotationType_Name()
      * @model dataType="org.eclipse.emf.ecore.xml.type.NCName" required="true"
      *        extendedMetaData="kind='attribute' name='name'"
      * @generated
@@ -59,7 +59,7 @@ public interface NotationType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Public</em>' attribute.
      * @see #setPublic(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getNotationType_Public()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getNotationType_Public()
      * @model dataType="org.w3._2001.xml.schema.Public"
      *        extendedMetaData="kind='attribute' name='public'"
      * @generated
@@ -86,7 +86,7 @@ public interface NotationType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>System</em>' attribute.
      * @see #setSystem(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getNotationType_System()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getNotationType_System()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI"
      *        extendedMetaData="kind='attribute' name='system'"
      * @generated

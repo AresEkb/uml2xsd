@@ -1,0 +1,48 @@
+import uml2xsd.UtilLib;
+
+library Helpers;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
+modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
+
+query coalesce(arg1 : String, arg2 : String) : String =
+    if arg1 <> null and not(arg1.oclIsInvalid()) and arg1.size() > 0 then arg1 else arg2 endif;
+
+query Element::getValue(stereotypeQName : String, propertyName : String) : String =
+  let stereotype : Stereotype = self.getAppliedStereotypes()->any(qualifiedName = stereotypeQName) in  
+  if stereotype = null then null else
+    let value : String = self.getValue(stereotype, propertyName).oclAsType(String) in
+    if value.size() > 0 then value else null endif
+    endif;
+
+query Element::getNS() : Package = self.getNearestPackage().getNS();
+
+query Package::getNS() : Package =
+    if self.getAppliedStereotype("EECProfile::Namespace") <> null then self
+    elif self.owner <> null then self.owner.getNS() else null endif;
+
+query Package::getTargetNS() : String = self.getValue('EECProfile::Namespace', 'name');
+query Package::getTargetNSPrefix() : String = self.getValue('EECProfile::Namespace', 'prefix');
+query Package::getTargetNSVersion() : String = self.getValue('EECProfile::Namespace', 'version');
+
+query NamedElement::getNSWithGuards() : Package
+{
+    assert fatal (self.getQualifiedName() <> null)
+        with log('Unable to resolve element \'' + self.toString() + '\'');
+    var ns := self.getNS();
+    assert fatal (ns <> null)
+        with log('Namespace of a \'' + self.getQualifiedName() + '\' not found');
+    return ns;
+}
+
+query NamedElement::getQName() : QName
+{
+    var ns := self.getNSWithGuards();
+    return createQName(ns.getTargetNS(), self.name, ns.getTargetNSPrefix()).oclAsType(QName);
+}
+
+query NamedElement::getUnprefixedQName() : QName
+{
+    var ns := self.getNSWithGuards();
+    return createQName(self.name).oclAsType(QName);
+}

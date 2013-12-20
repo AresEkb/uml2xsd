@@ -5,18 +5,17 @@ package org.w3._2001.xml.schema.impl;
 import javax.xml.namespace.QName;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.w3._2001.xml.schema.Attribute;
 import org.w3._2001.xml.schema.FormChoice;
 import org.w3._2001.xml.schema.LocalSimpleType;
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.UseType;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,16 +40,6 @@ import org.w3._2001.xml.schema.UseType;
  * @generated
  */
 public class AttributeImpl extends AnnotatedImpl implements Attribute {
-    /**
-     * The cached value of the '{@link #getSimpleType() <em>Simple Type</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getSimpleType()
-     * @generated
-     * @ordered
-     */
-    protected LocalSimpleType simpleType;
-
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -274,7 +263,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ATTRIBUTE;
+        return XMLSchema11Package.Literals.ATTRIBUTE;
     }
 
     /**
@@ -283,22 +272,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
      * @generated
      */
     public LocalSimpleType getSimpleType() {
-        return simpleType;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSimpleType(LocalSimpleType newSimpleType, NotificationChain msgs) {
-        LocalSimpleType oldSimpleType = simpleType;
-        simpleType = newSimpleType;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__SIMPLE_TYPE, oldSimpleType, newSimpleType);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (LocalSimpleType)getMixed().get(XMLSchema11Package.Literals.ATTRIBUTE__SIMPLE_TYPE, true);
     }
 
     /**
@@ -307,17 +281,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
      * @generated
      */
     public void setSimpleType(LocalSimpleType newSimpleType) {
-        if (newSimpleType != simpleType) {
-            NotificationChain msgs = null;
-            if (simpleType != null)
-                msgs = ((InternalEObject)simpleType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ATTRIBUTE__SIMPLE_TYPE, null, msgs);
-            if (newSimpleType != null)
-                msgs = ((InternalEObject)newSimpleType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ATTRIBUTE__SIMPLE_TYPE, null, msgs);
-            msgs = basicSetSimpleType(newSimpleType, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__SIMPLE_TYPE, newSimpleType, newSimpleType));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.ATTRIBUTE__SIMPLE_TYPE, newSimpleType);
     }
 
     /**
@@ -338,7 +302,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         String oldName = name;
         name = newName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__NAME, oldName, name));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__NAME, oldName, name));
     }
 
     /**
@@ -359,7 +323,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         QName oldRef = ref;
         ref = newRef;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__REF, oldRef, ref));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__REF, oldRef, ref));
     }
 
     /**
@@ -380,7 +344,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         QName oldType = type;
         type = newType;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__TYPE, oldType, type));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__TYPE, oldType, type));
     }
 
     /**
@@ -403,7 +367,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         boolean oldUseESet = useESet;
         useESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__USE, oldUse, use, !oldUseESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__USE, oldUse, use, !oldUseESet));
     }
 
     /**
@@ -417,7 +381,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         use = USE_EDEFAULT;
         useESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ATTRIBUTE__USE, oldUse, USE_EDEFAULT, oldUseESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ATTRIBUTE__USE, oldUse, USE_EDEFAULT, oldUseESet));
     }
 
     /**
@@ -447,7 +411,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         String oldDefault = default_;
         default_ = newDefault;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__DEFAULT, oldDefault, default_));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__DEFAULT, oldDefault, default_));
     }
 
     /**
@@ -468,7 +432,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         String oldFixed = fixed;
         fixed = newFixed;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__FIXED, oldFixed, fixed));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__FIXED, oldFixed, fixed));
     }
 
     /**
@@ -491,7 +455,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         boolean oldFormESet = formESet;
         formESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__FORM, oldForm, form, !oldFormESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__FORM, oldForm, form, !oldFormESet));
     }
 
     /**
@@ -505,7 +469,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         form = FORM_EDEFAULT;
         formESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ATTRIBUTE__FORM, oldForm, FORM_EDEFAULT, oldFormESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ATTRIBUTE__FORM, oldForm, FORM_EDEFAULT, oldFormESet));
     }
 
     /**
@@ -535,7 +499,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         String oldTargetNamespace = targetNamespace;
         targetNamespace = newTargetNamespace;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__TARGET_NAMESPACE, oldTargetNamespace, targetNamespace));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__TARGET_NAMESPACE, oldTargetNamespace, targetNamespace));
     }
 
     /**
@@ -558,7 +522,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         boolean oldInheritableESet = inheritableESet;
         inheritableESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ATTRIBUTE__INHERITABLE, oldInheritable, inheritable, !oldInheritableESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ATTRIBUTE__INHERITABLE, oldInheritable, inheritable, !oldInheritableESet));
     }
 
     /**
@@ -572,7 +536,7 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
         inheritable = INHERITABLE_EDEFAULT;
         inheritableESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ATTRIBUTE__INHERITABLE, oldInheritable, INHERITABLE_EDEFAULT, oldInheritableESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ATTRIBUTE__INHERITABLE, oldInheritable, INHERITABLE_EDEFAULT, oldInheritableESet));
     }
 
     /**
@@ -590,41 +554,27 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
      * @generated
      */
     @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case SchemaPackage.ATTRIBUTE__SIMPLE_TYPE:
-                return basicSetSimpleType(null, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE__SIMPLE_TYPE:
+            case XMLSchema11Package.ATTRIBUTE__SIMPLE_TYPE:
                 return getSimpleType();
-            case SchemaPackage.ATTRIBUTE__NAME:
+            case XMLSchema11Package.ATTRIBUTE__NAME:
                 return getName();
-            case SchemaPackage.ATTRIBUTE__REF:
+            case XMLSchema11Package.ATTRIBUTE__REF:
                 return getRef();
-            case SchemaPackage.ATTRIBUTE__TYPE:
+            case XMLSchema11Package.ATTRIBUTE__TYPE:
                 return getType();
-            case SchemaPackage.ATTRIBUTE__USE:
+            case XMLSchema11Package.ATTRIBUTE__USE:
                 return getUse();
-            case SchemaPackage.ATTRIBUTE__DEFAULT:
+            case XMLSchema11Package.ATTRIBUTE__DEFAULT:
                 return getDefault();
-            case SchemaPackage.ATTRIBUTE__FIXED:
+            case XMLSchema11Package.ATTRIBUTE__FIXED:
                 return getFixed();
-            case SchemaPackage.ATTRIBUTE__FORM:
+            case XMLSchema11Package.ATTRIBUTE__FORM:
                 return getForm();
-            case SchemaPackage.ATTRIBUTE__TARGET_NAMESPACE:
+            case XMLSchema11Package.ATTRIBUTE__TARGET_NAMESPACE:
                 return getTargetNamespace();
-            case SchemaPackage.ATTRIBUTE__INHERITABLE:
+            case XMLSchema11Package.ATTRIBUTE__INHERITABLE:
                 return isInheritable();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -638,34 +588,34 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE__SIMPLE_TYPE:
+            case XMLSchema11Package.ATTRIBUTE__SIMPLE_TYPE:
                 setSimpleType((LocalSimpleType)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__NAME:
+            case XMLSchema11Package.ATTRIBUTE__NAME:
                 setName((String)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__REF:
+            case XMLSchema11Package.ATTRIBUTE__REF:
                 setRef((QName)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__TYPE:
+            case XMLSchema11Package.ATTRIBUTE__TYPE:
                 setType((QName)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__USE:
+            case XMLSchema11Package.ATTRIBUTE__USE:
                 setUse((UseType)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__DEFAULT:
+            case XMLSchema11Package.ATTRIBUTE__DEFAULT:
                 setDefault((String)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__FIXED:
+            case XMLSchema11Package.ATTRIBUTE__FIXED:
                 setFixed((String)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__FORM:
+            case XMLSchema11Package.ATTRIBUTE__FORM:
                 setForm((FormChoice)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__TARGET_NAMESPACE:
+            case XMLSchema11Package.ATTRIBUTE__TARGET_NAMESPACE:
                 setTargetNamespace((String)newValue);
                 return;
-            case SchemaPackage.ATTRIBUTE__INHERITABLE:
+            case XMLSchema11Package.ATTRIBUTE__INHERITABLE:
                 setInheritable((Boolean)newValue);
                 return;
         }
@@ -680,34 +630,34 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE__SIMPLE_TYPE:
+            case XMLSchema11Package.ATTRIBUTE__SIMPLE_TYPE:
                 setSimpleType((LocalSimpleType)null);
                 return;
-            case SchemaPackage.ATTRIBUTE__NAME:
+            case XMLSchema11Package.ATTRIBUTE__NAME:
                 setName(NAME_EDEFAULT);
                 return;
-            case SchemaPackage.ATTRIBUTE__REF:
+            case XMLSchema11Package.ATTRIBUTE__REF:
                 setRef(REF_EDEFAULT);
                 return;
-            case SchemaPackage.ATTRIBUTE__TYPE:
+            case XMLSchema11Package.ATTRIBUTE__TYPE:
                 setType(TYPE_EDEFAULT);
                 return;
-            case SchemaPackage.ATTRIBUTE__USE:
+            case XMLSchema11Package.ATTRIBUTE__USE:
                 unsetUse();
                 return;
-            case SchemaPackage.ATTRIBUTE__DEFAULT:
+            case XMLSchema11Package.ATTRIBUTE__DEFAULT:
                 setDefault(DEFAULT_EDEFAULT);
                 return;
-            case SchemaPackage.ATTRIBUTE__FIXED:
+            case XMLSchema11Package.ATTRIBUTE__FIXED:
                 setFixed(FIXED_EDEFAULT);
                 return;
-            case SchemaPackage.ATTRIBUTE__FORM:
+            case XMLSchema11Package.ATTRIBUTE__FORM:
                 unsetForm();
                 return;
-            case SchemaPackage.ATTRIBUTE__TARGET_NAMESPACE:
+            case XMLSchema11Package.ATTRIBUTE__TARGET_NAMESPACE:
                 setTargetNamespace(TARGET_NAMESPACE_EDEFAULT);
                 return;
-            case SchemaPackage.ATTRIBUTE__INHERITABLE:
+            case XMLSchema11Package.ATTRIBUTE__INHERITABLE:
                 unsetInheritable();
                 return;
         }
@@ -722,25 +672,25 @@ public class AttributeImpl extends AnnotatedImpl implements Attribute {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ATTRIBUTE__SIMPLE_TYPE:
-                return simpleType != null;
-            case SchemaPackage.ATTRIBUTE__NAME:
+            case XMLSchema11Package.ATTRIBUTE__SIMPLE_TYPE:
+                return getSimpleType() != null;
+            case XMLSchema11Package.ATTRIBUTE__NAME:
                 return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case SchemaPackage.ATTRIBUTE__REF:
+            case XMLSchema11Package.ATTRIBUTE__REF:
                 return REF_EDEFAULT == null ? ref != null : !REF_EDEFAULT.equals(ref);
-            case SchemaPackage.ATTRIBUTE__TYPE:
+            case XMLSchema11Package.ATTRIBUTE__TYPE:
                 return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-            case SchemaPackage.ATTRIBUTE__USE:
+            case XMLSchema11Package.ATTRIBUTE__USE:
                 return isSetUse();
-            case SchemaPackage.ATTRIBUTE__DEFAULT:
+            case XMLSchema11Package.ATTRIBUTE__DEFAULT:
                 return DEFAULT_EDEFAULT == null ? default_ != null : !DEFAULT_EDEFAULT.equals(default_);
-            case SchemaPackage.ATTRIBUTE__FIXED:
+            case XMLSchema11Package.ATTRIBUTE__FIXED:
                 return FIXED_EDEFAULT == null ? fixed != null : !FIXED_EDEFAULT.equals(fixed);
-            case SchemaPackage.ATTRIBUTE__FORM:
+            case XMLSchema11Package.ATTRIBUTE__FORM:
                 return isSetForm();
-            case SchemaPackage.ATTRIBUTE__TARGET_NAMESPACE:
+            case XMLSchema11Package.ATTRIBUTE__TARGET_NAMESPACE:
                 return TARGET_NAMESPACE_EDEFAULT == null ? targetNamespace != null : !TARGET_NAMESPACE_EDEFAULT.equals(targetNamespace);
-            case SchemaPackage.ATTRIBUTE__INHERITABLE:
+            case XMLSchema11Package.ATTRIBUTE__INHERITABLE:
                 return isSetInheritable();
         }
         return super.eIsSet(featureID);

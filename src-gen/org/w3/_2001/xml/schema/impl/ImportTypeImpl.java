@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.ImportType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,7 +82,7 @@ public class ImportTypeImpl extends AnnotatedImpl implements ImportType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.IMPORT_TYPE;
+        return XMLSchema11Package.Literals.IMPORT_TYPE;
     }
 
     /**
@@ -103,7 +103,7 @@ public class ImportTypeImpl extends AnnotatedImpl implements ImportType {
         String oldNamespace = namespace;
         namespace = newNamespace;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.IMPORT_TYPE__NAMESPACE, oldNamespace, namespace));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.IMPORT_TYPE__NAMESPACE, oldNamespace, namespace));
     }
 
     /**
@@ -124,7 +124,7 @@ public class ImportTypeImpl extends AnnotatedImpl implements ImportType {
         String oldSchemaLocation = schemaLocation;
         schemaLocation = newSchemaLocation;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.IMPORT_TYPE__SCHEMA_LOCATION, oldSchemaLocation, schemaLocation));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.IMPORT_TYPE__SCHEMA_LOCATION, oldSchemaLocation, schemaLocation));
     }
 
     /**
@@ -135,9 +135,9 @@ public class ImportTypeImpl extends AnnotatedImpl implements ImportType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.IMPORT_TYPE__NAMESPACE:
+            case XMLSchema11Package.IMPORT_TYPE__NAMESPACE:
                 return getNamespace();
-            case SchemaPackage.IMPORT_TYPE__SCHEMA_LOCATION:
+            case XMLSchema11Package.IMPORT_TYPE__SCHEMA_LOCATION:
                 return getSchemaLocation();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -151,10 +151,10 @@ public class ImportTypeImpl extends AnnotatedImpl implements ImportType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.IMPORT_TYPE__NAMESPACE:
+            case XMLSchema11Package.IMPORT_TYPE__NAMESPACE:
                 setNamespace((String)newValue);
                 return;
-            case SchemaPackage.IMPORT_TYPE__SCHEMA_LOCATION:
+            case XMLSchema11Package.IMPORT_TYPE__SCHEMA_LOCATION:
                 setSchemaLocation((String)newValue);
                 return;
         }
@@ -169,10 +169,10 @@ public class ImportTypeImpl extends AnnotatedImpl implements ImportType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.IMPORT_TYPE__NAMESPACE:
+            case XMLSchema11Package.IMPORT_TYPE__NAMESPACE:
                 setNamespace(NAMESPACE_EDEFAULT);
                 return;
-            case SchemaPackage.IMPORT_TYPE__SCHEMA_LOCATION:
+            case XMLSchema11Package.IMPORT_TYPE__SCHEMA_LOCATION:
                 setSchemaLocation(SCHEMA_LOCATION_EDEFAULT);
                 return;
         }
@@ -187,9 +187,9 @@ public class ImportTypeImpl extends AnnotatedImpl implements ImportType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.IMPORT_TYPE__NAMESPACE:
+            case XMLSchema11Package.IMPORT_TYPE__NAMESPACE:
                 return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
-            case SchemaPackage.IMPORT_TYPE__SCHEMA_LOCATION:
+            case XMLSchema11Package.IMPORT_TYPE__SCHEMA_LOCATION:
                 return SCHEMA_LOCATION_EDEFAULT == null ? schemaLocation != null : !SCHEMA_LOCATION_EDEFAULT.equals(schemaLocation);
         }
         return super.eIsSet(featureID);

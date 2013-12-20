@@ -3,33 +3,24 @@
 package org.w3._2001.xml.schema.impl;
 
 import java.math.BigInteger;
-
 import java.util.Collection;
-
 import javax.xml.namespace.QName;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.w3._2001.xml.schema.All;
 import org.w3._2001.xml.schema.AnyType;
 import org.w3._2001.xml.schema.ExplicitGroup;
 import org.w3._2001.xml.schema.Group;
 import org.w3._2001.xml.schema.GroupRef;
 import org.w3._2001.xml.schema.LocalElement;
-import org.w3._2001.xml.schema.SchemaFactory;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Factory;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,16 +47,6 @@ import org.w3._2001.xml.schema.SchemaPackage;
  */
 public abstract class GroupImpl extends AnnotatedImpl implements Group {
     /**
-     * The cached value of the '{@link #getParticle() <em>Particle</em>}' attribute list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getParticle()
-     * @generated
-     * @ordered
-     */
-    protected FeatureMap particle;
-
-    /**
      * The default value of the '{@link #getMaxOccurs() <em>Max Occurs</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -73,7 +54,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      * @generated
      * @ordered
      */
-    protected static final Object MAX_OCCURS_EDEFAULT = SchemaFactory.eINSTANCE.createFromString(SchemaPackage.eINSTANCE.getAllNNI(), "1");
+    protected static final Object MAX_OCCURS_EDEFAULT = XMLSchema11Factory.eINSTANCE.createFromString(XMLSchema11Package.eINSTANCE.getAllNNI(), "1");
 
     /**
      * The cached value of the '{@link #getMaxOccurs() <em>Max Occurs</em>}' attribute.
@@ -179,7 +160,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.GROUP;
+        return XMLSchema11Package.Literals.GROUP;
     }
 
     /**
@@ -188,10 +169,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      * @generated
      */
     public FeatureMap getParticle() {
-        if (particle == null) {
-            particle = new BasicFeatureMap(this, SchemaPackage.GROUP__PARTICLE);
-        }
-        return particle;
+        return (FeatureMap)getMixed().<FeatureMap.Entry>list(XMLSchema11Package.Literals.GROUP__PARTICLE);
     }
 
     /**
@@ -200,7 +178,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      * @generated
      */
     public EList<LocalElement> getElement() {
-        return getParticle().list(SchemaPackage.Literals.GROUP__ELEMENT);
+        return getParticle().list(XMLSchema11Package.Literals.GROUP__ELEMENT);
     }
 
     /**
@@ -209,7 +187,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      * @generated
      */
     public EList<GroupRef> getGroup() {
-        return getParticle().list(SchemaPackage.Literals.GROUP__GROUP);
+        return getParticle().list(XMLSchema11Package.Literals.GROUP__GROUP);
     }
 
     /**
@@ -218,7 +196,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      * @generated
      */
     public EList<All> getAll() {
-        return getParticle().list(SchemaPackage.Literals.GROUP__ALL);
+        return getParticle().list(XMLSchema11Package.Literals.GROUP__ALL);
     }
 
     /**
@@ -227,7 +205,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      * @generated
      */
     public EList<ExplicitGroup> getChoice() {
-        return getParticle().list(SchemaPackage.Literals.GROUP__CHOICE);
+        return getParticle().list(XMLSchema11Package.Literals.GROUP__CHOICE);
     }
 
     /**
@@ -236,7 +214,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      * @generated
      */
     public EList<ExplicitGroup> getSequence() {
-        return getParticle().list(SchemaPackage.Literals.GROUP__SEQUENCE);
+        return getParticle().list(XMLSchema11Package.Literals.GROUP__SEQUENCE);
     }
 
     /**
@@ -245,7 +223,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
      * @generated
      */
     public EList<AnyType> getAny() {
-        return getParticle().list(SchemaPackage.Literals.GROUP__ANY);
+        return getParticle().list(XMLSchema11Package.Literals.GROUP__ANY);
     }
 
     /**
@@ -268,7 +246,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
         boolean oldMaxOccursESet = maxOccursESet;
         maxOccursESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.GROUP__MAX_OCCURS, oldMaxOccurs, maxOccurs, !oldMaxOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.GROUP__MAX_OCCURS, oldMaxOccurs, maxOccurs, !oldMaxOccursESet));
     }
 
     /**
@@ -282,7 +260,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
         maxOccurs = MAX_OCCURS_EDEFAULT;
         maxOccursESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.GROUP__MAX_OCCURS, oldMaxOccurs, MAX_OCCURS_EDEFAULT, oldMaxOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.GROUP__MAX_OCCURS, oldMaxOccurs, MAX_OCCURS_EDEFAULT, oldMaxOccursESet));
     }
 
     /**
@@ -314,7 +292,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
         boolean oldMinOccursESet = minOccursESet;
         minOccursESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.GROUP__MIN_OCCURS, oldMinOccurs, minOccurs, !oldMinOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.GROUP__MIN_OCCURS, oldMinOccurs, minOccurs, !oldMinOccursESet));
     }
 
     /**
@@ -328,7 +306,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
         minOccurs = MIN_OCCURS_EDEFAULT;
         minOccursESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.GROUP__MIN_OCCURS, oldMinOccurs, MIN_OCCURS_EDEFAULT, oldMinOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.GROUP__MIN_OCCURS, oldMinOccurs, MIN_OCCURS_EDEFAULT, oldMinOccursESet));
     }
 
     /**
@@ -358,7 +336,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
         String oldName = name;
         name = newName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.GROUP__NAME, oldName, name));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.GROUP__NAME, oldName, name));
     }
 
     /**
@@ -379,7 +357,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
         QName oldRef = ref;
         ref = newRef;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.GROUP__REF, oldRef, ref));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.GROUP__REF, oldRef, ref));
     }
 
     /**
@@ -390,20 +368,8 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case SchemaPackage.GROUP__PARTICLE:
+            case XMLSchema11Package.GROUP__PARTICLE:
                 return ((InternalEList<?>)getParticle()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.GROUP__ELEMENT:
-                return ((InternalEList<?>)getElement()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.GROUP__GROUP:
-                return ((InternalEList<?>)getGroup()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.GROUP__ALL:
-                return ((InternalEList<?>)getAll()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.GROUP__CHOICE:
-                return ((InternalEList<?>)getChoice()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.GROUP__SEQUENCE:
-                return ((InternalEList<?>)getSequence()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.GROUP__ANY:
-                return ((InternalEList<?>)getAny()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -416,28 +382,28 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.GROUP__PARTICLE:
+            case XMLSchema11Package.GROUP__PARTICLE:
                 if (coreType) return getParticle();
                 return ((FeatureMap.Internal)getParticle()).getWrapper();
-            case SchemaPackage.GROUP__ELEMENT:
+            case XMLSchema11Package.GROUP__ELEMENT:
                 return getElement();
-            case SchemaPackage.GROUP__GROUP:
+            case XMLSchema11Package.GROUP__GROUP:
                 return getGroup();
-            case SchemaPackage.GROUP__ALL:
+            case XMLSchema11Package.GROUP__ALL:
                 return getAll();
-            case SchemaPackage.GROUP__CHOICE:
+            case XMLSchema11Package.GROUP__CHOICE:
                 return getChoice();
-            case SchemaPackage.GROUP__SEQUENCE:
+            case XMLSchema11Package.GROUP__SEQUENCE:
                 return getSequence();
-            case SchemaPackage.GROUP__ANY:
+            case XMLSchema11Package.GROUP__ANY:
                 return getAny();
-            case SchemaPackage.GROUP__MAX_OCCURS:
+            case XMLSchema11Package.GROUP__MAX_OCCURS:
                 return getMaxOccurs();
-            case SchemaPackage.GROUP__MIN_OCCURS:
+            case XMLSchema11Package.GROUP__MIN_OCCURS:
                 return getMinOccurs();
-            case SchemaPackage.GROUP__NAME:
+            case XMLSchema11Package.GROUP__NAME:
                 return getName();
-            case SchemaPackage.GROUP__REF:
+            case XMLSchema11Package.GROUP__REF:
                 return getRef();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -452,43 +418,43 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.GROUP__PARTICLE:
+            case XMLSchema11Package.GROUP__PARTICLE:
                 ((FeatureMap.Internal)getParticle()).set(newValue);
                 return;
-            case SchemaPackage.GROUP__ELEMENT:
+            case XMLSchema11Package.GROUP__ELEMENT:
                 getElement().clear();
                 getElement().addAll((Collection<? extends LocalElement>)newValue);
                 return;
-            case SchemaPackage.GROUP__GROUP:
+            case XMLSchema11Package.GROUP__GROUP:
                 getGroup().clear();
                 getGroup().addAll((Collection<? extends GroupRef>)newValue);
                 return;
-            case SchemaPackage.GROUP__ALL:
+            case XMLSchema11Package.GROUP__ALL:
                 getAll().clear();
                 getAll().addAll((Collection<? extends All>)newValue);
                 return;
-            case SchemaPackage.GROUP__CHOICE:
+            case XMLSchema11Package.GROUP__CHOICE:
                 getChoice().clear();
                 getChoice().addAll((Collection<? extends ExplicitGroup>)newValue);
                 return;
-            case SchemaPackage.GROUP__SEQUENCE:
+            case XMLSchema11Package.GROUP__SEQUENCE:
                 getSequence().clear();
                 getSequence().addAll((Collection<? extends ExplicitGroup>)newValue);
                 return;
-            case SchemaPackage.GROUP__ANY:
+            case XMLSchema11Package.GROUP__ANY:
                 getAny().clear();
                 getAny().addAll((Collection<? extends AnyType>)newValue);
                 return;
-            case SchemaPackage.GROUP__MAX_OCCURS:
+            case XMLSchema11Package.GROUP__MAX_OCCURS:
                 setMaxOccurs(newValue);
                 return;
-            case SchemaPackage.GROUP__MIN_OCCURS:
+            case XMLSchema11Package.GROUP__MIN_OCCURS:
                 setMinOccurs((BigInteger)newValue);
                 return;
-            case SchemaPackage.GROUP__NAME:
+            case XMLSchema11Package.GROUP__NAME:
                 setName((String)newValue);
                 return;
-            case SchemaPackage.GROUP__REF:
+            case XMLSchema11Package.GROUP__REF:
                 setRef((QName)newValue);
                 return;
         }
@@ -503,37 +469,37 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.GROUP__PARTICLE:
+            case XMLSchema11Package.GROUP__PARTICLE:
                 getParticle().clear();
                 return;
-            case SchemaPackage.GROUP__ELEMENT:
+            case XMLSchema11Package.GROUP__ELEMENT:
                 getElement().clear();
                 return;
-            case SchemaPackage.GROUP__GROUP:
+            case XMLSchema11Package.GROUP__GROUP:
                 getGroup().clear();
                 return;
-            case SchemaPackage.GROUP__ALL:
+            case XMLSchema11Package.GROUP__ALL:
                 getAll().clear();
                 return;
-            case SchemaPackage.GROUP__CHOICE:
+            case XMLSchema11Package.GROUP__CHOICE:
                 getChoice().clear();
                 return;
-            case SchemaPackage.GROUP__SEQUENCE:
+            case XMLSchema11Package.GROUP__SEQUENCE:
                 getSequence().clear();
                 return;
-            case SchemaPackage.GROUP__ANY:
+            case XMLSchema11Package.GROUP__ANY:
                 getAny().clear();
                 return;
-            case SchemaPackage.GROUP__MAX_OCCURS:
+            case XMLSchema11Package.GROUP__MAX_OCCURS:
                 unsetMaxOccurs();
                 return;
-            case SchemaPackage.GROUP__MIN_OCCURS:
+            case XMLSchema11Package.GROUP__MIN_OCCURS:
                 unsetMinOccurs();
                 return;
-            case SchemaPackage.GROUP__NAME:
+            case XMLSchema11Package.GROUP__NAME:
                 setName(NAME_EDEFAULT);
                 return;
-            case SchemaPackage.GROUP__REF:
+            case XMLSchema11Package.GROUP__REF:
                 setRef(REF_EDEFAULT);
                 return;
         }
@@ -548,27 +514,27 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.GROUP__PARTICLE:
-                return particle != null && !particle.isEmpty();
-            case SchemaPackage.GROUP__ELEMENT:
+            case XMLSchema11Package.GROUP__PARTICLE:
+                return !getParticle().isEmpty();
+            case XMLSchema11Package.GROUP__ELEMENT:
                 return !getElement().isEmpty();
-            case SchemaPackage.GROUP__GROUP:
+            case XMLSchema11Package.GROUP__GROUP:
                 return !getGroup().isEmpty();
-            case SchemaPackage.GROUP__ALL:
+            case XMLSchema11Package.GROUP__ALL:
                 return !getAll().isEmpty();
-            case SchemaPackage.GROUP__CHOICE:
+            case XMLSchema11Package.GROUP__CHOICE:
                 return !getChoice().isEmpty();
-            case SchemaPackage.GROUP__SEQUENCE:
+            case XMLSchema11Package.GROUP__SEQUENCE:
                 return !getSequence().isEmpty();
-            case SchemaPackage.GROUP__ANY:
+            case XMLSchema11Package.GROUP__ANY:
                 return !getAny().isEmpty();
-            case SchemaPackage.GROUP__MAX_OCCURS:
+            case XMLSchema11Package.GROUP__MAX_OCCURS:
                 return isSetMaxOccurs();
-            case SchemaPackage.GROUP__MIN_OCCURS:
+            case XMLSchema11Package.GROUP__MIN_OCCURS:
                 return isSetMinOccurs();
-            case SchemaPackage.GROUP__NAME:
+            case XMLSchema11Package.GROUP__NAME:
                 return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case SchemaPackage.GROUP__REF:
+            case XMLSchema11Package.GROUP__REF:
                 return REF_EDEFAULT == null ? ref != null : !REF_EDEFAULT.equals(ref);
         }
         return super.eIsSet(featureID);
@@ -584,9 +550,7 @@ public abstract class GroupImpl extends AnnotatedImpl implements Group {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (particle: ");
-        result.append(particle);
-        result.append(", maxOccurs: ");
+        result.append(" (maxOccurs: ");
         if (maxOccursESet) result.append(maxOccurs); else result.append("<unset>");
         result.append(", minOccurs: ");
         if (minOccursESet) result.append(minOccurs); else result.append("<unset>");

@@ -69,7 +69,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot()
  * @model extendedMetaData="name='' kind='mixed'"
  * @generated
  */
@@ -84,7 +84,7 @@ public interface DocumentRoot extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Mixed</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Mixed()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Mixed()
      * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
      *        extendedMetaData="kind='elementWildcard' name=':mixed'"
      * @generated
@@ -102,7 +102,7 @@ public interface DocumentRoot extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>XMLNS Prefix Map</em>' map.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_XMLNSPrefixMap()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_XMLNSPrefixMap()
      * @model mapType="org.eclipse.emf.ecore.EStringToStringMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>" transient="true"
      *        extendedMetaData="kind='attribute' name='xmlns:prefix'"
      * @generated
@@ -120,7 +120,7 @@ public interface DocumentRoot extends EObject {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>XSI Schema Location</em>' map.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_XSISchemaLocation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_XSISchemaLocation()
      * @model mapType="org.eclipse.emf.ecore.EStringToStringMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>" transient="true"
      *        extendedMetaData="kind='attribute' name='xsi:schemaLocation'"
      * @generated
@@ -136,7 +136,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>All</em>' containment reference.
      * @see #setAll(All)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_All()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_All()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='all' namespace='##targetNamespace'"
      * @generated
@@ -162,7 +162,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Annotation</em>' containment reference.
      * @see #setAnnotation(AnnotationType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Annotation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Annotation()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace'"
      * @generated
@@ -188,7 +188,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Any</em>' containment reference.
      * @see #setAny(AnyType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Any()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Any()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='any' namespace='##targetNamespace'"
      * @generated
@@ -214,7 +214,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Any Attribute</em>' containment reference.
      * @see #setAnyAttribute(AnyAttributeType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_AnyAttribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_AnyAttribute()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='anyAttribute' namespace='##targetNamespace'"
      * @generated
@@ -240,7 +240,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Appinfo</em>' containment reference.
      * @see #setAppinfo(AppinfoType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Appinfo()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Appinfo()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='appinfo' namespace='##targetNamespace'"
      * @generated
@@ -266,7 +266,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Assertion</em>' containment reference.
      * @see #setAssertion(Assertion)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Assertion()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Assertion()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='assertion' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -296,7 +296,7 @@ public interface DocumentRoot extends EObject {
      *       
      * <!-- end-model-doc -->
      * @return the value of the '<em>Facet</em>' containment reference.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Facet()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Facet()
      * @model containment="true" upper="-2" transient="true" changeable="false" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='facet' namespace='##targetNamespace'"
      * @generated
@@ -312,7 +312,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Attribute</em>' containment reference.
      * @see #setAttribute(TopLevelAttribute)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Attribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Attribute()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace'"
      * @generated
@@ -338,7 +338,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Attribute Group</em>' containment reference.
      * @see #setAttributeGroup(NamedAttributeGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_AttributeGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_AttributeGroup()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace'"
      * @generated
@@ -364,7 +364,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Choice</em>' containment reference.
      * @see #setChoice(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Choice()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Choice()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='choice' namespace='##targetNamespace'"
      * @generated
@@ -390,7 +390,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Complex Content</em>' containment reference.
      * @see #setComplexContent(ComplexContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_ComplexContent()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_ComplexContent()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='complexContent' namespace='##targetNamespace'"
      * @generated
@@ -416,7 +416,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Complex Type</em>' containment reference.
      * @see #setComplexType(TopLevelComplexType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_ComplexType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_ComplexType()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace'"
      * @generated
@@ -442,7 +442,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Default Open Content</em>' containment reference.
      * @see #setDefaultOpenContent(DefaultOpenContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_DefaultOpenContent()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_DefaultOpenContent()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='defaultOpenContent' namespace='##targetNamespace'"
      * @generated
@@ -468,7 +468,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Documentation</em>' containment reference.
      * @see #setDocumentation(DocumentationType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Documentation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Documentation()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='documentation' namespace='##targetNamespace'"
      * @generated
@@ -494,7 +494,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Element</em>' containment reference.
      * @see #setElement(TopLevelElement)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Element()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Element()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='element' namespace='##targetNamespace'"
      * @generated
@@ -520,7 +520,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Enumeration</em>' containment reference.
      * @see #setEnumeration(NoFixedFacet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Enumeration()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Enumeration()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='enumeration' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -546,7 +546,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Explicit Timezone</em>' containment reference.
      * @see #setExplicitTimezone(ExplicitTimezoneType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_ExplicitTimezone()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_ExplicitTimezone()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='explicitTimezone' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -572,7 +572,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Field</em>' containment reference.
      * @see #setField(FieldType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Field()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Field()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='field' namespace='##targetNamespace'"
      * @generated
@@ -598,7 +598,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Fraction Digits</em>' containment reference.
      * @see #setFractionDigits(NumFacet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_FractionDigits()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_FractionDigits()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='fractionDigits' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -624,7 +624,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Group</em>' containment reference.
      * @see #setGroup(NamedGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Group()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Group()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace'"
      * @generated
@@ -650,7 +650,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Import</em>' containment reference.
      * @see #setImport(ImportType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Import()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Import()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='import' namespace='##targetNamespace'"
      * @generated
@@ -676,7 +676,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Include</em>' containment reference.
      * @see #setInclude(IncludeType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Include()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Include()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='include' namespace='##targetNamespace'"
      * @generated
@@ -702,7 +702,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Key</em>' containment reference.
      * @see #setKey(Keybase)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Key()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Key()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='key' namespace='##targetNamespace'"
      * @generated
@@ -728,7 +728,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Keyref</em>' containment reference.
      * @see #setKeyref(KeyrefType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Keyref()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Keyref()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='keyref' namespace='##targetNamespace'"
      * @generated
@@ -754,7 +754,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Length</em>' containment reference.
      * @see #setLength(NumFacet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Length()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Length()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='length' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -781,7 +781,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>List</em>' containment reference.
      * @see #setList(ListType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_List()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_List()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='list' namespace='##targetNamespace'"
      * @generated
@@ -807,7 +807,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Max Exclusive</em>' containment reference.
      * @see #setMaxExclusive(Facet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_MaxExclusive()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_MaxExclusive()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='maxExclusive' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -833,7 +833,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Max Inclusive</em>' containment reference.
      * @see #setMaxInclusive(Facet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_MaxInclusive()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_MaxInclusive()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='maxInclusive' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -859,7 +859,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Max Length</em>' containment reference.
      * @see #setMaxLength(NumFacet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_MaxLength()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_MaxLength()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='maxLength' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -885,7 +885,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Min Exclusive</em>' containment reference.
      * @see #setMinExclusive(Facet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_MinExclusive()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_MinExclusive()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='minExclusive' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -911,7 +911,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Min Inclusive</em>' containment reference.
      * @see #setMinInclusive(Facet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_MinInclusive()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_MinInclusive()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='minInclusive' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -937,7 +937,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Min Length</em>' containment reference.
      * @see #setMinLength(NumFacet)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_MinLength()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_MinLength()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='minLength' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -963,7 +963,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Notation</em>' containment reference.
      * @see #setNotation(NotationType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Notation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Notation()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='notation' namespace='##targetNamespace'"
      * @generated
@@ -989,7 +989,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Open Content</em>' containment reference.
      * @see #setOpenContent(OpenContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_OpenContent()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_OpenContent()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='openContent' namespace='##targetNamespace'"
      * @generated
@@ -1015,7 +1015,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Override</em>' containment reference.
      * @see #setOverride(OverrideType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Override()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Override()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='override' namespace='##targetNamespace'"
      * @generated
@@ -1041,7 +1041,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Pattern</em>' containment reference.
      * @see #setPattern(PatternType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Pattern()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Pattern()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='pattern' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -1067,7 +1067,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Redefine</em>' containment reference.
      * @see #setRedefine(RedefineType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Redefine()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Redefine()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='redefine' namespace='##targetNamespace'"
      * @generated
@@ -1094,7 +1094,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Restriction</em>' containment reference.
      * @see #setRestriction(RestrictionType1)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Restriction()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Restriction()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='restriction' namespace='##targetNamespace'"
      * @generated
@@ -1120,7 +1120,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Schema</em>' containment reference.
      * @see #setSchema(SchemaType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Schema()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Schema()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='schema' namespace='##targetNamespace'"
      * @generated
@@ -1146,7 +1146,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Selector</em>' containment reference.
      * @see #setSelector(SelectorType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Selector()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Selector()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='selector' namespace='##targetNamespace'"
      * @generated
@@ -1172,7 +1172,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Sequence</em>' containment reference.
      * @see #setSequence(ExplicitGroup)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Sequence()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Sequence()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='sequence' namespace='##targetNamespace'"
      * @generated
@@ -1198,7 +1198,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Simple Content</em>' containment reference.
      * @see #setSimpleContent(SimpleContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_SimpleContent()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_SimpleContent()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleContent' namespace='##targetNamespace'"
      * @generated
@@ -1224,7 +1224,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference.
      * @see #setSimpleType(TopLevelSimpleType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_SimpleType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_SimpleType()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace'"
      * @generated
@@ -1250,7 +1250,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Total Digits</em>' containment reference.
      * @see #setTotalDigits(TotalDigitsType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_TotalDigits()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_TotalDigits()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='totalDigits' namespace='##targetNamespace' affiliation='facet'"
      * @generated
@@ -1277,7 +1277,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Union</em>' containment reference.
      * @see #setUnion(UnionType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Union()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Union()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='union' namespace='##targetNamespace'"
      * @generated
@@ -1303,7 +1303,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Unique</em>' containment reference.
      * @see #setUnique(Keybase)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_Unique()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_Unique()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='unique' namespace='##targetNamespace'"
      * @generated
@@ -1329,7 +1329,7 @@ public interface DocumentRoot extends EObject {
      * <!-- end-model-doc -->
      * @return the value of the '<em>White Space</em>' containment reference.
      * @see #setWhiteSpace(WhiteSpaceType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getDocumentRoot_WhiteSpace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getDocumentRoot_WhiteSpace()
      * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='whiteSpace' namespace='##targetNamespace' affiliation='facet'"
      * @generated

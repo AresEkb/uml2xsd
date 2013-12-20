@@ -3,27 +3,17 @@
 package org.w3._2001.xml.schema.impl;
 
 import java.math.BigInteger;
-
 import java.util.Collection;
 import java.util.List;
-
 import javax.xml.namespace.QName;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.BasicFeatureMap;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.w3._2001.xml.schema.AltType;
 import org.w3._2001.xml.schema.Element;
 import org.w3._2001.xml.schema.FormChoice;
@@ -31,8 +21,8 @@ import org.w3._2001.xml.schema.Keybase;
 import org.w3._2001.xml.schema.KeyrefType;
 import org.w3._2001.xml.schema.LocalComplexType;
 import org.w3._2001.xml.schema.LocalSimpleType;
-import org.w3._2001.xml.schema.SchemaFactory;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Factory;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,46 +59,6 @@ import org.w3._2001.xml.schema.SchemaPackage;
  */
 public abstract class ElementImpl extends AnnotatedImpl implements Element {
     /**
-     * The cached value of the '{@link #getSimpleType() <em>Simple Type</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getSimpleType()
-     * @generated
-     * @ordered
-     */
-    protected LocalSimpleType simpleType;
-
-    /**
-     * The cached value of the '{@link #getComplexType() <em>Complex Type</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getComplexType()
-     * @generated
-     * @ordered
-     */
-    protected LocalComplexType complexType;
-
-    /**
-     * The cached value of the '{@link #getAlternative() <em>Alternative</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAlternative()
-     * @generated
-     * @ordered
-     */
-    protected EList<AltType> alternative;
-
-    /**
-     * The cached value of the '{@link #getIdentityConstraint() <em>Identity Constraint</em>}' attribute list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getIdentityConstraint()
-     * @generated
-     * @ordered
-     */
-    protected FeatureMap identityConstraint;
-
-    /**
      * The default value of the '{@link #getMaxOccurs() <em>Max Occurs</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -116,7 +66,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      * @ordered
      */
-    protected static final Object MAX_OCCURS_EDEFAULT = SchemaFactory.eINSTANCE.createFromString(SchemaPackage.eINSTANCE.getAllNNI(), "1");
+    protected static final Object MAX_OCCURS_EDEFAULT = XMLSchema11Factory.eINSTANCE.createFromString(XMLSchema11Package.eINSTANCE.getAllNNI(), "1");
 
     /**
      * The cached value of the '{@link #getMaxOccurs() <em>Max Occurs</em>}' attribute.
@@ -449,7 +399,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ELEMENT;
+        return XMLSchema11Package.Literals.ELEMENT;
     }
 
     /**
@@ -458,22 +408,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public LocalSimpleType getSimpleType() {
-        return simpleType;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetSimpleType(LocalSimpleType newSimpleType, NotificationChain msgs) {
-        LocalSimpleType oldSimpleType = simpleType;
-        simpleType = newSimpleType;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__SIMPLE_TYPE, oldSimpleType, newSimpleType);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (LocalSimpleType)getMixed().get(XMLSchema11Package.Literals.ELEMENT__SIMPLE_TYPE, true);
     }
 
     /**
@@ -482,17 +417,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public void setSimpleType(LocalSimpleType newSimpleType) {
-        if (newSimpleType != simpleType) {
-            NotificationChain msgs = null;
-            if (simpleType != null)
-                msgs = ((InternalEObject)simpleType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ELEMENT__SIMPLE_TYPE, null, msgs);
-            if (newSimpleType != null)
-                msgs = ((InternalEObject)newSimpleType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ELEMENT__SIMPLE_TYPE, null, msgs);
-            msgs = basicSetSimpleType(newSimpleType, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__SIMPLE_TYPE, newSimpleType, newSimpleType));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.ELEMENT__SIMPLE_TYPE, newSimpleType);
     }
 
     /**
@@ -501,22 +426,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public LocalComplexType getComplexType() {
-        return complexType;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetComplexType(LocalComplexType newComplexType, NotificationChain msgs) {
-        LocalComplexType oldComplexType = complexType;
-        complexType = newComplexType;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__COMPLEX_TYPE, oldComplexType, newComplexType);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (LocalComplexType)getMixed().get(XMLSchema11Package.Literals.ELEMENT__COMPLEX_TYPE, true);
     }
 
     /**
@@ -525,17 +435,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public void setComplexType(LocalComplexType newComplexType) {
-        if (newComplexType != complexType) {
-            NotificationChain msgs = null;
-            if (complexType != null)
-                msgs = ((InternalEObject)complexType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ELEMENT__COMPLEX_TYPE, null, msgs);
-            if (newComplexType != null)
-                msgs = ((InternalEObject)newComplexType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ELEMENT__COMPLEX_TYPE, null, msgs);
-            msgs = basicSetComplexType(newComplexType, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__COMPLEX_TYPE, newComplexType, newComplexType));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.ELEMENT__COMPLEX_TYPE, newComplexType);
     }
 
     /**
@@ -544,10 +444,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public EList<AltType> getAlternative() {
-        if (alternative == null) {
-            alternative = new EObjectContainmentEList<AltType>(AltType.class, this, SchemaPackage.ELEMENT__ALTERNATIVE);
-        }
-        return alternative;
+        return getMixed().list(XMLSchema11Package.Literals.ELEMENT__ALTERNATIVE);
     }
 
     /**
@@ -556,10 +453,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public FeatureMap getIdentityConstraint() {
-        if (identityConstraint == null) {
-            identityConstraint = new BasicFeatureMap(this, SchemaPackage.ELEMENT__IDENTITY_CONSTRAINT);
-        }
-        return identityConstraint;
+        return (FeatureMap)getMixed().<FeatureMap.Entry>list(XMLSchema11Package.Literals.ELEMENT__IDENTITY_CONSTRAINT);
     }
 
     /**
@@ -568,7 +462,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public EList<Keybase> getUnique() {
-        return getIdentityConstraint().list(SchemaPackage.Literals.ELEMENT__UNIQUE);
+        return getIdentityConstraint().list(XMLSchema11Package.Literals.ELEMENT__UNIQUE);
     }
 
     /**
@@ -577,7 +471,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public EList<Keybase> getKey() {
-        return getIdentityConstraint().list(SchemaPackage.Literals.ELEMENT__KEY);
+        return getIdentityConstraint().list(XMLSchema11Package.Literals.ELEMENT__KEY);
     }
 
     /**
@@ -586,7 +480,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
      * @generated
      */
     public EList<KeyrefType> getKeyref() {
-        return getIdentityConstraint().list(SchemaPackage.Literals.ELEMENT__KEYREF);
+        return getIdentityConstraint().list(XMLSchema11Package.Literals.ELEMENT__KEYREF);
     }
 
     /**
@@ -609,7 +503,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         boolean oldMaxOccursESet = maxOccursESet;
         maxOccursESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__MAX_OCCURS, oldMaxOccurs, maxOccurs, !oldMaxOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__MAX_OCCURS, oldMaxOccurs, maxOccurs, !oldMaxOccursESet));
     }
 
     /**
@@ -623,7 +517,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         maxOccurs = MAX_OCCURS_EDEFAULT;
         maxOccursESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ELEMENT__MAX_OCCURS, oldMaxOccurs, MAX_OCCURS_EDEFAULT, oldMaxOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ELEMENT__MAX_OCCURS, oldMaxOccurs, MAX_OCCURS_EDEFAULT, oldMaxOccursESet));
     }
 
     /**
@@ -655,7 +549,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         boolean oldMinOccursESet = minOccursESet;
         minOccursESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__MIN_OCCURS, oldMinOccurs, minOccurs, !oldMinOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__MIN_OCCURS, oldMinOccurs, minOccurs, !oldMinOccursESet));
     }
 
     /**
@@ -669,7 +563,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         minOccurs = MIN_OCCURS_EDEFAULT;
         minOccursESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ELEMENT__MIN_OCCURS, oldMinOccurs, MIN_OCCURS_EDEFAULT, oldMinOccursESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ELEMENT__MIN_OCCURS, oldMinOccurs, MIN_OCCURS_EDEFAULT, oldMinOccursESet));
     }
 
     /**
@@ -699,7 +593,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         String oldName = name;
         name = newName;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__NAME, oldName, name));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__NAME, oldName, name));
     }
 
     /**
@@ -720,7 +614,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         QName oldRef = ref;
         ref = newRef;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__REF, oldRef, ref));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__REF, oldRef, ref));
     }
 
     /**
@@ -741,7 +635,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         QName oldType = type;
         type = newType;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__TYPE, oldType, type));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__TYPE, oldType, type));
     }
 
     /**
@@ -762,7 +656,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         List<QName> oldSubstitutionGroup = substitutionGroup;
         substitutionGroup = newSubstitutionGroup;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__SUBSTITUTION_GROUP, oldSubstitutionGroup, substitutionGroup));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__SUBSTITUTION_GROUP, oldSubstitutionGroup, substitutionGroup));
     }
 
     /**
@@ -783,7 +677,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         String oldDefault = default_;
         default_ = newDefault;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__DEFAULT, oldDefault, default_));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__DEFAULT, oldDefault, default_));
     }
 
     /**
@@ -804,7 +698,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         String oldFixed = fixed;
         fixed = newFixed;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__FIXED, oldFixed, fixed));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__FIXED, oldFixed, fixed));
     }
 
     /**
@@ -827,7 +721,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         boolean oldNillableESet = nillableESet;
         nillableESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__NILLABLE, oldNillable, nillable, !oldNillableESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__NILLABLE, oldNillable, nillable, !oldNillableESet));
     }
 
     /**
@@ -841,7 +735,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         nillable = NILLABLE_EDEFAULT;
         nillableESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ELEMENT__NILLABLE, oldNillable, NILLABLE_EDEFAULT, oldNillableESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ELEMENT__NILLABLE, oldNillable, NILLABLE_EDEFAULT, oldNillableESet));
     }
 
     /**
@@ -873,7 +767,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         boolean oldAbstractESet = abstractESet;
         abstractESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__ABSTRACT, oldAbstract, abstract_, !oldAbstractESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__ABSTRACT, oldAbstract, abstract_, !oldAbstractESet));
     }
 
     /**
@@ -887,7 +781,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         abstract_ = ABSTRACT_EDEFAULT;
         abstractESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ELEMENT__ABSTRACT, oldAbstract, ABSTRACT_EDEFAULT, oldAbstractESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ELEMENT__ABSTRACT, oldAbstract, ABSTRACT_EDEFAULT, oldAbstractESet));
     }
 
     /**
@@ -917,7 +811,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         Object oldFinal = final_;
         final_ = newFinal;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__FINAL, oldFinal, final_));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__FINAL, oldFinal, final_));
     }
 
     /**
@@ -938,7 +832,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         Object oldBlock = block;
         block = newBlock;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__BLOCK, oldBlock, block));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__BLOCK, oldBlock, block));
     }
 
     /**
@@ -961,7 +855,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         boolean oldFormESet = formESet;
         formESet = true;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__FORM, oldForm, form, !oldFormESet));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__FORM, oldForm, form, !oldFormESet));
     }
 
     /**
@@ -975,7 +869,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         form = FORM_EDEFAULT;
         formESet = false;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, SchemaPackage.ELEMENT__FORM, oldForm, FORM_EDEFAULT, oldFormESet));
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XMLSchema11Package.ELEMENT__FORM, oldForm, FORM_EDEFAULT, oldFormESet));
     }
 
     /**
@@ -1005,7 +899,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         String oldTargetNamespace = targetNamespace;
         targetNamespace = newTargetNamespace;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ELEMENT__TARGET_NAMESPACE, oldTargetNamespace, targetNamespace));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ELEMENT__TARGET_NAMESPACE, oldTargetNamespace, targetNamespace));
     }
 
     /**
@@ -1016,20 +910,8 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case SchemaPackage.ELEMENT__SIMPLE_TYPE:
-                return basicSetSimpleType(null, msgs);
-            case SchemaPackage.ELEMENT__COMPLEX_TYPE:
-                return basicSetComplexType(null, msgs);
-            case SchemaPackage.ELEMENT__ALTERNATIVE:
-                return ((InternalEList<?>)getAlternative()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ELEMENT__IDENTITY_CONSTRAINT:
+            case XMLSchema11Package.ELEMENT__IDENTITY_CONSTRAINT:
                 return ((InternalEList<?>)getIdentityConstraint()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ELEMENT__UNIQUE:
-                return ((InternalEList<?>)getUnique()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ELEMENT__KEY:
-                return ((InternalEList<?>)getKey()).basicRemove(otherEnd, msgs);
-            case SchemaPackage.ELEMENT__KEYREF:
-                return ((InternalEList<?>)getKeyref()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -1042,48 +924,48 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.ELEMENT__SIMPLE_TYPE:
+            case XMLSchema11Package.ELEMENT__SIMPLE_TYPE:
                 return getSimpleType();
-            case SchemaPackage.ELEMENT__COMPLEX_TYPE:
+            case XMLSchema11Package.ELEMENT__COMPLEX_TYPE:
                 return getComplexType();
-            case SchemaPackage.ELEMENT__ALTERNATIVE:
+            case XMLSchema11Package.ELEMENT__ALTERNATIVE:
                 return getAlternative();
-            case SchemaPackage.ELEMENT__IDENTITY_CONSTRAINT:
+            case XMLSchema11Package.ELEMENT__IDENTITY_CONSTRAINT:
                 if (coreType) return getIdentityConstraint();
                 return ((FeatureMap.Internal)getIdentityConstraint()).getWrapper();
-            case SchemaPackage.ELEMENT__UNIQUE:
+            case XMLSchema11Package.ELEMENT__UNIQUE:
                 return getUnique();
-            case SchemaPackage.ELEMENT__KEY:
+            case XMLSchema11Package.ELEMENT__KEY:
                 return getKey();
-            case SchemaPackage.ELEMENT__KEYREF:
+            case XMLSchema11Package.ELEMENT__KEYREF:
                 return getKeyref();
-            case SchemaPackage.ELEMENT__MAX_OCCURS:
+            case XMLSchema11Package.ELEMENT__MAX_OCCURS:
                 return getMaxOccurs();
-            case SchemaPackage.ELEMENT__MIN_OCCURS:
+            case XMLSchema11Package.ELEMENT__MIN_OCCURS:
                 return getMinOccurs();
-            case SchemaPackage.ELEMENT__NAME:
+            case XMLSchema11Package.ELEMENT__NAME:
                 return getName();
-            case SchemaPackage.ELEMENT__REF:
+            case XMLSchema11Package.ELEMENT__REF:
                 return getRef();
-            case SchemaPackage.ELEMENT__TYPE:
+            case XMLSchema11Package.ELEMENT__TYPE:
                 return getType();
-            case SchemaPackage.ELEMENT__SUBSTITUTION_GROUP:
+            case XMLSchema11Package.ELEMENT__SUBSTITUTION_GROUP:
                 return getSubstitutionGroup();
-            case SchemaPackage.ELEMENT__DEFAULT:
+            case XMLSchema11Package.ELEMENT__DEFAULT:
                 return getDefault();
-            case SchemaPackage.ELEMENT__FIXED:
+            case XMLSchema11Package.ELEMENT__FIXED:
                 return getFixed();
-            case SchemaPackage.ELEMENT__NILLABLE:
+            case XMLSchema11Package.ELEMENT__NILLABLE:
                 return isNillable();
-            case SchemaPackage.ELEMENT__ABSTRACT:
+            case XMLSchema11Package.ELEMENT__ABSTRACT:
                 return isAbstract();
-            case SchemaPackage.ELEMENT__FINAL:
+            case XMLSchema11Package.ELEMENT__FINAL:
                 return getFinal();
-            case SchemaPackage.ELEMENT__BLOCK:
+            case XMLSchema11Package.ELEMENT__BLOCK:
                 return getBlock();
-            case SchemaPackage.ELEMENT__FORM:
+            case XMLSchema11Package.ELEMENT__FORM:
                 return getForm();
-            case SchemaPackage.ELEMENT__TARGET_NAMESPACE:
+            case XMLSchema11Package.ELEMENT__TARGET_NAMESPACE:
                 return getTargetNamespace();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -1098,71 +980,71 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.ELEMENT__SIMPLE_TYPE:
+            case XMLSchema11Package.ELEMENT__SIMPLE_TYPE:
                 setSimpleType((LocalSimpleType)newValue);
                 return;
-            case SchemaPackage.ELEMENT__COMPLEX_TYPE:
+            case XMLSchema11Package.ELEMENT__COMPLEX_TYPE:
                 setComplexType((LocalComplexType)newValue);
                 return;
-            case SchemaPackage.ELEMENT__ALTERNATIVE:
+            case XMLSchema11Package.ELEMENT__ALTERNATIVE:
                 getAlternative().clear();
                 getAlternative().addAll((Collection<? extends AltType>)newValue);
                 return;
-            case SchemaPackage.ELEMENT__IDENTITY_CONSTRAINT:
+            case XMLSchema11Package.ELEMENT__IDENTITY_CONSTRAINT:
                 ((FeatureMap.Internal)getIdentityConstraint()).set(newValue);
                 return;
-            case SchemaPackage.ELEMENT__UNIQUE:
+            case XMLSchema11Package.ELEMENT__UNIQUE:
                 getUnique().clear();
                 getUnique().addAll((Collection<? extends Keybase>)newValue);
                 return;
-            case SchemaPackage.ELEMENT__KEY:
+            case XMLSchema11Package.ELEMENT__KEY:
                 getKey().clear();
                 getKey().addAll((Collection<? extends Keybase>)newValue);
                 return;
-            case SchemaPackage.ELEMENT__KEYREF:
+            case XMLSchema11Package.ELEMENT__KEYREF:
                 getKeyref().clear();
                 getKeyref().addAll((Collection<? extends KeyrefType>)newValue);
                 return;
-            case SchemaPackage.ELEMENT__MAX_OCCURS:
+            case XMLSchema11Package.ELEMENT__MAX_OCCURS:
                 setMaxOccurs(newValue);
                 return;
-            case SchemaPackage.ELEMENT__MIN_OCCURS:
+            case XMLSchema11Package.ELEMENT__MIN_OCCURS:
                 setMinOccurs((BigInteger)newValue);
                 return;
-            case SchemaPackage.ELEMENT__NAME:
+            case XMLSchema11Package.ELEMENT__NAME:
                 setName((String)newValue);
                 return;
-            case SchemaPackage.ELEMENT__REF:
+            case XMLSchema11Package.ELEMENT__REF:
                 setRef((QName)newValue);
                 return;
-            case SchemaPackage.ELEMENT__TYPE:
+            case XMLSchema11Package.ELEMENT__TYPE:
                 setType((QName)newValue);
                 return;
-            case SchemaPackage.ELEMENT__SUBSTITUTION_GROUP:
+            case XMLSchema11Package.ELEMENT__SUBSTITUTION_GROUP:
                 setSubstitutionGroup((List<QName>)newValue);
                 return;
-            case SchemaPackage.ELEMENT__DEFAULT:
+            case XMLSchema11Package.ELEMENT__DEFAULT:
                 setDefault((String)newValue);
                 return;
-            case SchemaPackage.ELEMENT__FIXED:
+            case XMLSchema11Package.ELEMENT__FIXED:
                 setFixed((String)newValue);
                 return;
-            case SchemaPackage.ELEMENT__NILLABLE:
+            case XMLSchema11Package.ELEMENT__NILLABLE:
                 setNillable((Boolean)newValue);
                 return;
-            case SchemaPackage.ELEMENT__ABSTRACT:
+            case XMLSchema11Package.ELEMENT__ABSTRACT:
                 setAbstract((Boolean)newValue);
                 return;
-            case SchemaPackage.ELEMENT__FINAL:
+            case XMLSchema11Package.ELEMENT__FINAL:
                 setFinal(newValue);
                 return;
-            case SchemaPackage.ELEMENT__BLOCK:
+            case XMLSchema11Package.ELEMENT__BLOCK:
                 setBlock(newValue);
                 return;
-            case SchemaPackage.ELEMENT__FORM:
+            case XMLSchema11Package.ELEMENT__FORM:
                 setForm((FormChoice)newValue);
                 return;
-            case SchemaPackage.ELEMENT__TARGET_NAMESPACE:
+            case XMLSchema11Package.ELEMENT__TARGET_NAMESPACE:
                 setTargetNamespace((String)newValue);
                 return;
         }
@@ -1177,67 +1059,67 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ELEMENT__SIMPLE_TYPE:
+            case XMLSchema11Package.ELEMENT__SIMPLE_TYPE:
                 setSimpleType((LocalSimpleType)null);
                 return;
-            case SchemaPackage.ELEMENT__COMPLEX_TYPE:
+            case XMLSchema11Package.ELEMENT__COMPLEX_TYPE:
                 setComplexType((LocalComplexType)null);
                 return;
-            case SchemaPackage.ELEMENT__ALTERNATIVE:
+            case XMLSchema11Package.ELEMENT__ALTERNATIVE:
                 getAlternative().clear();
                 return;
-            case SchemaPackage.ELEMENT__IDENTITY_CONSTRAINT:
+            case XMLSchema11Package.ELEMENT__IDENTITY_CONSTRAINT:
                 getIdentityConstraint().clear();
                 return;
-            case SchemaPackage.ELEMENT__UNIQUE:
+            case XMLSchema11Package.ELEMENT__UNIQUE:
                 getUnique().clear();
                 return;
-            case SchemaPackage.ELEMENT__KEY:
+            case XMLSchema11Package.ELEMENT__KEY:
                 getKey().clear();
                 return;
-            case SchemaPackage.ELEMENT__KEYREF:
+            case XMLSchema11Package.ELEMENT__KEYREF:
                 getKeyref().clear();
                 return;
-            case SchemaPackage.ELEMENT__MAX_OCCURS:
+            case XMLSchema11Package.ELEMENT__MAX_OCCURS:
                 unsetMaxOccurs();
                 return;
-            case SchemaPackage.ELEMENT__MIN_OCCURS:
+            case XMLSchema11Package.ELEMENT__MIN_OCCURS:
                 unsetMinOccurs();
                 return;
-            case SchemaPackage.ELEMENT__NAME:
+            case XMLSchema11Package.ELEMENT__NAME:
                 setName(NAME_EDEFAULT);
                 return;
-            case SchemaPackage.ELEMENT__REF:
+            case XMLSchema11Package.ELEMENT__REF:
                 setRef(REF_EDEFAULT);
                 return;
-            case SchemaPackage.ELEMENT__TYPE:
+            case XMLSchema11Package.ELEMENT__TYPE:
                 setType(TYPE_EDEFAULT);
                 return;
-            case SchemaPackage.ELEMENT__SUBSTITUTION_GROUP:
+            case XMLSchema11Package.ELEMENT__SUBSTITUTION_GROUP:
                 setSubstitutionGroup(SUBSTITUTION_GROUP_EDEFAULT);
                 return;
-            case SchemaPackage.ELEMENT__DEFAULT:
+            case XMLSchema11Package.ELEMENT__DEFAULT:
                 setDefault(DEFAULT_EDEFAULT);
                 return;
-            case SchemaPackage.ELEMENT__FIXED:
+            case XMLSchema11Package.ELEMENT__FIXED:
                 setFixed(FIXED_EDEFAULT);
                 return;
-            case SchemaPackage.ELEMENT__NILLABLE:
+            case XMLSchema11Package.ELEMENT__NILLABLE:
                 unsetNillable();
                 return;
-            case SchemaPackage.ELEMENT__ABSTRACT:
+            case XMLSchema11Package.ELEMENT__ABSTRACT:
                 unsetAbstract();
                 return;
-            case SchemaPackage.ELEMENT__FINAL:
+            case XMLSchema11Package.ELEMENT__FINAL:
                 setFinal(FINAL_EDEFAULT);
                 return;
-            case SchemaPackage.ELEMENT__BLOCK:
+            case XMLSchema11Package.ELEMENT__BLOCK:
                 setBlock(BLOCK_EDEFAULT);
                 return;
-            case SchemaPackage.ELEMENT__FORM:
+            case XMLSchema11Package.ELEMENT__FORM:
                 unsetForm();
                 return;
-            case SchemaPackage.ELEMENT__TARGET_NAMESPACE:
+            case XMLSchema11Package.ELEMENT__TARGET_NAMESPACE:
                 setTargetNamespace(TARGET_NAMESPACE_EDEFAULT);
                 return;
         }
@@ -1252,47 +1134,47 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ELEMENT__SIMPLE_TYPE:
-                return simpleType != null;
-            case SchemaPackage.ELEMENT__COMPLEX_TYPE:
-                return complexType != null;
-            case SchemaPackage.ELEMENT__ALTERNATIVE:
-                return alternative != null && !alternative.isEmpty();
-            case SchemaPackage.ELEMENT__IDENTITY_CONSTRAINT:
-                return identityConstraint != null && !identityConstraint.isEmpty();
-            case SchemaPackage.ELEMENT__UNIQUE:
+            case XMLSchema11Package.ELEMENT__SIMPLE_TYPE:
+                return getSimpleType() != null;
+            case XMLSchema11Package.ELEMENT__COMPLEX_TYPE:
+                return getComplexType() != null;
+            case XMLSchema11Package.ELEMENT__ALTERNATIVE:
+                return !getAlternative().isEmpty();
+            case XMLSchema11Package.ELEMENT__IDENTITY_CONSTRAINT:
+                return !getIdentityConstraint().isEmpty();
+            case XMLSchema11Package.ELEMENT__UNIQUE:
                 return !getUnique().isEmpty();
-            case SchemaPackage.ELEMENT__KEY:
+            case XMLSchema11Package.ELEMENT__KEY:
                 return !getKey().isEmpty();
-            case SchemaPackage.ELEMENT__KEYREF:
+            case XMLSchema11Package.ELEMENT__KEYREF:
                 return !getKeyref().isEmpty();
-            case SchemaPackage.ELEMENT__MAX_OCCURS:
+            case XMLSchema11Package.ELEMENT__MAX_OCCURS:
                 return isSetMaxOccurs();
-            case SchemaPackage.ELEMENT__MIN_OCCURS:
+            case XMLSchema11Package.ELEMENT__MIN_OCCURS:
                 return isSetMinOccurs();
-            case SchemaPackage.ELEMENT__NAME:
+            case XMLSchema11Package.ELEMENT__NAME:
                 return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case SchemaPackage.ELEMENT__REF:
+            case XMLSchema11Package.ELEMENT__REF:
                 return REF_EDEFAULT == null ? ref != null : !REF_EDEFAULT.equals(ref);
-            case SchemaPackage.ELEMENT__TYPE:
+            case XMLSchema11Package.ELEMENT__TYPE:
                 return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-            case SchemaPackage.ELEMENT__SUBSTITUTION_GROUP:
+            case XMLSchema11Package.ELEMENT__SUBSTITUTION_GROUP:
                 return SUBSTITUTION_GROUP_EDEFAULT == null ? substitutionGroup != null : !SUBSTITUTION_GROUP_EDEFAULT.equals(substitutionGroup);
-            case SchemaPackage.ELEMENT__DEFAULT:
+            case XMLSchema11Package.ELEMENT__DEFAULT:
                 return DEFAULT_EDEFAULT == null ? default_ != null : !DEFAULT_EDEFAULT.equals(default_);
-            case SchemaPackage.ELEMENT__FIXED:
+            case XMLSchema11Package.ELEMENT__FIXED:
                 return FIXED_EDEFAULT == null ? fixed != null : !FIXED_EDEFAULT.equals(fixed);
-            case SchemaPackage.ELEMENT__NILLABLE:
+            case XMLSchema11Package.ELEMENT__NILLABLE:
                 return isSetNillable();
-            case SchemaPackage.ELEMENT__ABSTRACT:
+            case XMLSchema11Package.ELEMENT__ABSTRACT:
                 return isSetAbstract();
-            case SchemaPackage.ELEMENT__FINAL:
+            case XMLSchema11Package.ELEMENT__FINAL:
                 return FINAL_EDEFAULT == null ? final_ != null : !FINAL_EDEFAULT.equals(final_);
-            case SchemaPackage.ELEMENT__BLOCK:
+            case XMLSchema11Package.ELEMENT__BLOCK:
                 return BLOCK_EDEFAULT == null ? block != null : !BLOCK_EDEFAULT.equals(block);
-            case SchemaPackage.ELEMENT__FORM:
+            case XMLSchema11Package.ELEMENT__FORM:
                 return isSetForm();
-            case SchemaPackage.ELEMENT__TARGET_NAMESPACE:
+            case XMLSchema11Package.ELEMENT__TARGET_NAMESPACE:
                 return TARGET_NAMESPACE_EDEFAULT == null ? targetNamespace != null : !TARGET_NAMESPACE_EDEFAULT.equals(targetNamespace);
         }
         return super.eIsSet(featureID);
@@ -1308,9 +1190,7 @@ public abstract class ElementImpl extends AnnotatedImpl implements Element {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (identityConstraint: ");
-        result.append(identityConstraint);
-        result.append(", maxOccurs: ");
+        result.append(" (maxOccurs: ");
         if (maxOccursESet) result.append(maxOccurs); else result.append("<unset>");
         result.append(", minOccurs: ");
         if (minOccursESet) result.append(minOccurs); else result.append("<unset>");

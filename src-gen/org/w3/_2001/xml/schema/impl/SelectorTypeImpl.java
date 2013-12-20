@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.SelectorType;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,7 +82,7 @@ public class SelectorTypeImpl extends AnnotatedImpl implements SelectorType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.SELECTOR_TYPE;
+        return XMLSchema11Package.Literals.SELECTOR_TYPE;
     }
 
     /**
@@ -103,7 +103,7 @@ public class SelectorTypeImpl extends AnnotatedImpl implements SelectorType {
         String oldXpath = xpath;
         xpath = newXpath;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SELECTOR_TYPE__XPATH, oldXpath, xpath));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SELECTOR_TYPE__XPATH, oldXpath, xpath));
     }
 
     /**
@@ -124,7 +124,7 @@ public class SelectorTypeImpl extends AnnotatedImpl implements SelectorType {
         Object oldXpathDefaultNamespace = xpathDefaultNamespace;
         xpathDefaultNamespace = newXpathDefaultNamespace;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE, oldXpathDefaultNamespace, xpathDefaultNamespace));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE, oldXpathDefaultNamespace, xpathDefaultNamespace));
     }
 
     /**
@@ -135,9 +135,9 @@ public class SelectorTypeImpl extends AnnotatedImpl implements SelectorType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.SELECTOR_TYPE__XPATH:
+            case XMLSchema11Package.SELECTOR_TYPE__XPATH:
                 return getXpath();
-            case SchemaPackage.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE:
                 return getXpathDefaultNamespace();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -151,10 +151,10 @@ public class SelectorTypeImpl extends AnnotatedImpl implements SelectorType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.SELECTOR_TYPE__XPATH:
+            case XMLSchema11Package.SELECTOR_TYPE__XPATH:
                 setXpath((String)newValue);
                 return;
-            case SchemaPackage.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE:
                 setXpathDefaultNamespace(newValue);
                 return;
         }
@@ -169,10 +169,10 @@ public class SelectorTypeImpl extends AnnotatedImpl implements SelectorType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.SELECTOR_TYPE__XPATH:
+            case XMLSchema11Package.SELECTOR_TYPE__XPATH:
                 setXpath(XPATH_EDEFAULT);
                 return;
-            case SchemaPackage.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE:
                 setXpathDefaultNamespace(XPATH_DEFAULT_NAMESPACE_EDEFAULT);
                 return;
         }
@@ -187,9 +187,9 @@ public class SelectorTypeImpl extends AnnotatedImpl implements SelectorType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.SELECTOR_TYPE__XPATH:
+            case XMLSchema11Package.SELECTOR_TYPE__XPATH:
                 return XPATH_EDEFAULT == null ? xpath != null : !XPATH_EDEFAULT.equals(xpath);
-            case SchemaPackage.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.SELECTOR_TYPE__XPATH_DEFAULT_NAMESPACE:
                 return XPATH_DEFAULT_NAMESPACE_EDEFAULT == null ? xpathDefaultNamespace != null : !XPATH_DEFAULT_NAMESPACE_EDEFAULT.equals(xpathDefaultNamespace);
         }
         return super.eIsSet(featureID);

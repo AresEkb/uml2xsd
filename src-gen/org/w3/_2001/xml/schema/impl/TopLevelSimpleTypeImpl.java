@@ -4,8 +4,8 @@ package org.w3._2001.xml.schema.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.w3._2001.xml.schema.SchemaPackage;
 import org.w3._2001.xml.schema.TopLevelSimpleType;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class TopLevelSimpleTypeImpl extends SimpleTypeImpl implements TopLevelSi
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.TOP_LEVEL_SIMPLE_TYPE;
+        return XMLSchema11Package.Literals.TOP_LEVEL_SIMPLE_TYPE;
     }
 
 } //TopLevelSimpleTypeImpl

@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getTopLevelSimpleType()
- * @model extendedMetaData="name='topLevelSimpleType' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getTopLevelSimpleType()
+ * @model extendedMetaData="name='topLevelSimpleType' kind='mixed'"
  * @generated
  */
 public interface TopLevelSimpleType extends SimpleType {

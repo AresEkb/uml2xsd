@@ -3,16 +3,15 @@
 package org.w3._2001.xml.schema.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.w3._2001.xml.schema.Annotated;
 import org.w3._2001.xml.schema.AnnotationType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,16 +28,6 @@ import org.w3._2001.xml.schema.SchemaPackage;
  * @generated
  */
 public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
-    /**
-     * The cached value of the '{@link #getAnnotation() <em>Annotation</em>}' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAnnotation()
-     * @generated
-     * @ordered
-     */
-    protected AnnotationType annotation;
-
     /**
      * The default value of the '{@link #getId() <em>Id</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -75,7 +64,7 @@ public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ANNOTATED;
+        return XMLSchema11Package.Literals.ANNOTATED;
     }
 
     /**
@@ -84,22 +73,7 @@ public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
      * @generated
      */
     public AnnotationType getAnnotation() {
-        return annotation;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public NotificationChain basicSetAnnotation(AnnotationType newAnnotation, NotificationChain msgs) {
-        AnnotationType oldAnnotation = annotation;
-        annotation = newAnnotation;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SchemaPackage.ANNOTATED__ANNOTATION, oldAnnotation, newAnnotation);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
+        return (AnnotationType)getMixed().get(XMLSchema11Package.Literals.ANNOTATED__ANNOTATION, true);
     }
 
     /**
@@ -108,17 +82,7 @@ public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
      * @generated
      */
     public void setAnnotation(AnnotationType newAnnotation) {
-        if (newAnnotation != annotation) {
-            NotificationChain msgs = null;
-            if (annotation != null)
-                msgs = ((InternalEObject)annotation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ANNOTATED__ANNOTATION, null, msgs);
-            if (newAnnotation != null)
-                msgs = ((InternalEObject)newAnnotation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SchemaPackage.ANNOTATED__ANNOTATION, null, msgs);
-            msgs = basicSetAnnotation(newAnnotation, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ANNOTATED__ANNOTATION, newAnnotation, newAnnotation));
+        ((FeatureMap.Internal)getMixed()).set(XMLSchema11Package.Literals.ANNOTATED__ANNOTATION, newAnnotation);
     }
 
     /**
@@ -139,21 +103,7 @@ public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
         String oldId = id;
         id = newId;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ANNOTATED__ID, oldId, id));
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case SchemaPackage.ANNOTATED__ANNOTATION:
-                return basicSetAnnotation(null, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ANNOTATED__ID, oldId, id));
     }
 
     /**
@@ -164,9 +114,9 @@ public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATED__ANNOTATION:
+            case XMLSchema11Package.ANNOTATED__ANNOTATION:
                 return getAnnotation();
-            case SchemaPackage.ANNOTATED__ID:
+            case XMLSchema11Package.ANNOTATED__ID:
                 return getId();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -180,10 +130,10 @@ public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATED__ANNOTATION:
+            case XMLSchema11Package.ANNOTATED__ANNOTATION:
                 setAnnotation((AnnotationType)newValue);
                 return;
-            case SchemaPackage.ANNOTATED__ID:
+            case XMLSchema11Package.ANNOTATED__ID:
                 setId((String)newValue);
                 return;
         }
@@ -198,10 +148,10 @@ public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATED__ANNOTATION:
+            case XMLSchema11Package.ANNOTATED__ANNOTATION:
                 setAnnotation((AnnotationType)null);
                 return;
-            case SchemaPackage.ANNOTATED__ID:
+            case XMLSchema11Package.ANNOTATED__ID:
                 setId(ID_EDEFAULT);
                 return;
         }
@@ -216,9 +166,9 @@ public class AnnotatedImpl extends OpenAttrsImpl implements Annotated {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ANNOTATED__ANNOTATION:
-                return annotation != null;
-            case SchemaPackage.ANNOTATED__ID:
+            case XMLSchema11Package.ANNOTATED__ANNOTATION:
+                return getAnnotation() != null;
+            case XMLSchema11Package.ANNOTATED__ID:
                 return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
         }
         return super.eIsSet(featureID);

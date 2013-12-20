@@ -18,8 +18,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getWildcard()
- * @model extendedMetaData="name='wildcard' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getWildcard()
+ * @model extendedMetaData="name='wildcard' kind='mixed'"
  * @generated
  */
 public interface Wildcard extends Annotated {
@@ -33,7 +33,7 @@ public interface Wildcard extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Namespace</em>' attribute.
      * @see #setNamespace(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getWildcard_Namespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getWildcard_Namespace()
      * @model dataType="org.w3._2001.xml.schema.NamespaceList"
      *        extendedMetaData="kind='attribute' name='namespace'"
      * @generated
@@ -60,7 +60,7 @@ public interface Wildcard extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Not Namespace</em>' attribute.
      * @see #setNotNamespace(List)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getWildcard_NotNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getWildcard_NotNamespace()
      * @model dataType="org.w3._2001.xml.schema.NotNamespaceType" many="false"
      *        extendedMetaData="kind='attribute' name='notNamespace'"
      * @generated
@@ -92,7 +92,7 @@ public interface Wildcard extends Annotated {
      * @see #isSetProcessContents()
      * @see #unsetProcessContents()
      * @see #setProcessContents(ProcessContentsType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getWildcard_ProcessContents()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getWildcard_ProcessContents()
      * @model default="strict" unsettable="true"
      *        extendedMetaData="kind='attribute' name='processContents'"
      * @generated

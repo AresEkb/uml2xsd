@@ -16,8 +16,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAnyAttributeType()
- * @model extendedMetaData="name='anyAttribute_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnyAttributeType()
+ * @model extendedMetaData="name='anyAttribute_._type' kind='mixed'"
  * @generated
  */
 public interface AnyAttributeType extends Wildcard {
@@ -31,7 +31,7 @@ public interface AnyAttributeType extends Wildcard {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Not QName</em>' attribute.
      * @see #setNotQName(List)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnyAttributeType_NotQName()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnyAttributeType_NotQName()
      * @model dataType="org.w3._2001.xml.schema.QnameListA" many="false"
      *        extendedMetaData="kind='attribute' name='notQName'"
      * @generated

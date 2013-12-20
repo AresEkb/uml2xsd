@@ -5,7 +5,7 @@ package org.w3._2001.xml.schema.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.w3._2001.xml.schema.All;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class AllImpl extends ExplicitGroupImpl implements All {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ALL;
+        return XMLSchema11Package.Literals.ALL;
     }
 
 } //AllImpl

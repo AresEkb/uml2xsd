@@ -16,8 +16,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getFacet()
- * @model extendedMetaData="name='facet' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getFacet()
+ * @model extendedMetaData="name='facet' kind='mixed'"
  * @generated
  */
 public interface Facet extends Annotated {
@@ -31,7 +31,7 @@ public interface Facet extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Value</em>' attribute.
      * @see #setValue(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getFacet_Value()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getFacet_Value()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnySimpleType" required="true"
      *        extendedMetaData="kind='attribute' name='value'"
      * @generated
@@ -61,7 +61,7 @@ public interface Facet extends Annotated {
      * @see #isSetFixed()
      * @see #unsetFixed()
      * @see #setFixed(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getFacet_Fixed()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getFacet_Fixed()
      * @model default="false" unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='fixed'"
      * @generated

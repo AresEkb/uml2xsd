@@ -5,7 +5,7 @@ package org.w3._2001.xml.schema.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.w3._2001.xml.schema.ExplicitTimezoneType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public class ExplicitTimezoneTypeImpl extends FacetImpl implements ExplicitTimez
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.EXPLICIT_TIMEZONE_TYPE;
+        return XMLSchema11Package.Literals.EXPLICIT_TIMEZONE_TYPE;
     }
 
 } //ExplicitTimezoneTypeImpl

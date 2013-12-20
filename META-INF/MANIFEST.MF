@@ -9,7 +9,10 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.w3._2001.xml.schema,
  org.w3._2001.xml.schema.impl,
- org.w3._2001.xml.schema.util
+ org.w3._2001.xml.schema.util,
+ org.w3._2007.xml.schema.versioning,
+ org.w3._2007.xml.schema.versioning.impl,
+ org.w3._2007.xml.schema.versioning.util
 Require-Bundle: org.eclipse.core.runtime,
  org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.emf.common,
@@ -28,4 +31,5 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.codegen.ecore.genmodel,
  org.emftext.language.xpath2,
+ org.emftext.language.xpath2.resource.xpath2,
  org.emftext.language.xpath2.resource.xpath2.mopp

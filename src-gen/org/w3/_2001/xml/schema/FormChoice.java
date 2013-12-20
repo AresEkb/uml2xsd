@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * 
  *    A utility type, not for public use
  * <!-- end-model-doc -->
- * @see org.w3._2001.xml.schema.SchemaPackage#getFormChoice()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getFormChoice()
  * @model extendedMetaData="name='formChoice'"
  * @generated
  */

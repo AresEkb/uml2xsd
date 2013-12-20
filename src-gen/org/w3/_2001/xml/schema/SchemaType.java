@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Type</b></em>'.
+ * A representation of the model object '<em><b>Schema Type</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -46,8 +46,8 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType()
- * @model extendedMetaData="name='schema_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType()
+ * @model extendedMetaData="name='schema_._type' kind='mixed'"
  * @generated
  */
 public interface SchemaType extends OpenAttrs {
@@ -61,9 +61,9 @@ public interface SchemaType extends OpenAttrs {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Composition</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Composition()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='Composition:1'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Composition()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='Composition:2'"
      * @generated
      */
     FeatureMap getComposition();
@@ -77,9 +77,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Include</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Include()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Include()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='include' namespace='##targetNamespace' group='#Composition:1'"
+     *        extendedMetaData="kind='element' name='include' namespace='##targetNamespace' group='#Composition:2'"
      * @generated
      */
     EList<IncludeType> getInclude();
@@ -93,9 +93,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Import</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Import()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Import()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='import' namespace='##targetNamespace' group='#Composition:1'"
+     *        extendedMetaData="kind='element' name='import' namespace='##targetNamespace' group='#Composition:2'"
      * @generated
      */
     EList<ImportType> getImport();
@@ -109,9 +109,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Redefine</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Redefine()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Redefine()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='redefine' namespace='##targetNamespace' group='#Composition:1'"
+     *        extendedMetaData="kind='element' name='redefine' namespace='##targetNamespace' group='#Composition:2'"
      * @generated
      */
     EList<RedefineType> getRedefine();
@@ -125,9 +125,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Override</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Override()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Override()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='override' namespace='##targetNamespace' group='#Composition:1'"
+     *        extendedMetaData="kind='element' name='override' namespace='##targetNamespace' group='#Composition:2'"
      * @generated
      */
     EList<OverrideType> getOverride();
@@ -141,9 +141,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Annotation</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Annotation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Annotation()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace' group='#Composition:1'"
+     *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace' group='#Composition:2'"
      * @generated
      */
     EList<AnnotationType> getAnnotation();
@@ -157,8 +157,8 @@ public interface SchemaType extends OpenAttrs {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Default Open Content</em>' containment reference.
      * @see #setDefaultOpenContent(DefaultOpenContentType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_DefaultOpenContent()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_DefaultOpenContent()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='defaultOpenContent' namespace='##targetNamespace'"
      * @generated
      */
@@ -183,8 +183,8 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Annotation1</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Annotation1()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Annotation1()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace'"
      * @generated
      */
@@ -200,9 +200,9 @@ public interface SchemaType extends OpenAttrs {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Group</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Group()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='group:9'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Group()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='group:10'"
      * @generated
      */
     FeatureMap getGroup();
@@ -216,9 +216,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_SimpleType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_SimpleType()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     EList<TopLevelSimpleType> getSimpleType();
@@ -232,9 +232,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Complex Type</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_ComplexType()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_ComplexType()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     EList<TopLevelComplexType> getComplexType();
@@ -248,9 +248,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Group1</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Group1()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Group1()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='element' name='group' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     EList<NamedGroup> getGroup1();
@@ -264,9 +264,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Attribute Group</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_AttributeGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_AttributeGroup()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='element' name='attributeGroup' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     EList<NamedAttributeGroup> getAttributeGroup();
@@ -280,9 +280,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Element</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Element()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Element()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='element' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='element' name='element' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     EList<TopLevelElement> getElement();
@@ -296,9 +296,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Attribute</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Attribute()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Attribute()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='element' name='attribute' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     EList<TopLevelAttribute> getAttribute();
@@ -312,9 +312,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Notation</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Notation()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Notation()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='notation' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='element' name='notation' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     EList<NotationType> getNotation();
@@ -328,9 +328,9 @@ public interface SchemaType extends OpenAttrs {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Annotation2</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Annotation2()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Annotation2()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace' group='#group:9'"
+     *        extendedMetaData="kind='element' name='annotation' namespace='##targetNamespace' group='#group:10'"
      * @generated
      */
     EList<AnnotationType> getAnnotation2();
@@ -345,7 +345,7 @@ public interface SchemaType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Target Namespace</em>' attribute.
      * @see #setTargetNamespace(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_TargetNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_TargetNamespace()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI"
      *        extendedMetaData="kind='attribute' name='targetNamespace'"
      * @generated
@@ -372,7 +372,7 @@ public interface SchemaType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Version</em>' attribute.
      * @see #setVersion(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Version()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Version()
      * @model dataType="org.eclipse.emf.ecore.xml.type.Token"
      *        extendedMetaData="kind='attribute' name='version'"
      * @generated
@@ -402,7 +402,7 @@ public interface SchemaType extends OpenAttrs {
      * @see #isSetFinalDefault()
      * @see #unsetFinalDefault()
      * @see #setFinalDefault(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_FinalDefault()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_FinalDefault()
      * @model default="" unsettable="true" dataType="org.w3._2001.xml.schema.FullDerivationSet"
      *        extendedMetaData="kind='attribute' name='finalDefault'"
      * @generated
@@ -457,7 +457,7 @@ public interface SchemaType extends OpenAttrs {
      * @see #isSetBlockDefault()
      * @see #unsetBlockDefault()
      * @see #setBlockDefault(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_BlockDefault()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_BlockDefault()
      * @model default="" unsettable="true" dataType="org.w3._2001.xml.schema.BlockSet"
      *        extendedMetaData="kind='attribute' name='blockDefault'"
      * @generated
@@ -514,7 +514,7 @@ public interface SchemaType extends OpenAttrs {
      * @see #isSetAttributeFormDefault()
      * @see #unsetAttributeFormDefault()
      * @see #setAttributeFormDefault(FormChoice)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_AttributeFormDefault()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_AttributeFormDefault()
      * @model default="unqualified" unsettable="true"
      *        extendedMetaData="kind='attribute' name='attributeFormDefault'"
      * @generated
@@ -572,7 +572,7 @@ public interface SchemaType extends OpenAttrs {
      * @see #isSetElementFormDefault()
      * @see #unsetElementFormDefault()
      * @see #setElementFormDefault(FormChoice)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_ElementFormDefault()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_ElementFormDefault()
      * @model default="unqualified" unsettable="true"
      *        extendedMetaData="kind='attribute' name='elementFormDefault'"
      * @generated
@@ -625,7 +625,7 @@ public interface SchemaType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Default Attributes</em>' attribute.
      * @see #setDefaultAttributes(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_DefaultAttributes()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_DefaultAttributes()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='defaultAttributes'"
      * @generated
@@ -655,7 +655,7 @@ public interface SchemaType extends OpenAttrs {
      * @see #isSetXpathDefaultNamespace()
      * @see #unsetXpathDefaultNamespace()
      * @see #setXpathDefaultNamespace(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_XpathDefaultNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_XpathDefaultNamespace()
      * @model default="##local" unsettable="true" dataType="org.w3._2001.xml.schema.XpathDefaultNamespace"
      *        extendedMetaData="kind='attribute' name='xpathDefaultNamespace'"
      * @generated
@@ -707,7 +707,7 @@ public interface SchemaType extends OpenAttrs {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Id</em>' attribute.
      * @see #setId(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Id()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Id()
      * @model id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
      *        extendedMetaData="kind='attribute' name='id'"
      * @generated
@@ -764,7 +764,7 @@ public interface SchemaType extends OpenAttrs {
      * <!-- end-model-doc -->
      * @return the value of the '<em>Lang</em>' attribute.
      * @see #setLang(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getSchemaType_Lang()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getSchemaType_Lang()
      * @model dataType="org.eclipse.emf.ecore.xml.namespace.LangType"
      *        extendedMetaData="kind='attribute' name='lang' namespace='http://www.w3.org/XML/1998/namespace'"
      * @generated

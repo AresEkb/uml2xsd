@@ -9,8 +9,8 @@ package org.w3._2001.xml.schema;
  * <!-- end-user-doc -->
  *
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getSimpleExtensionType()
- * @model extendedMetaData="name='simpleExtensionType' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getSimpleExtensionType()
+ * @model extendedMetaData="name='simpleExtensionType' kind='mixed'"
  * @generated
  */
 public interface SimpleExtensionType extends ExtensionType {

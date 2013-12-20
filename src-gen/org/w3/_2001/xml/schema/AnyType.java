@@ -20,8 +20,8 @@ import java.util.List;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getAnyType()
- * @model extendedMetaData="name='any_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnyType()
+ * @model extendedMetaData="name='any_._type' kind='mixed'"
  * @generated
  */
 public interface AnyType extends Wildcard {
@@ -38,7 +38,7 @@ public interface AnyType extends Wildcard {
      * @see #isSetMaxOccurs()
      * @see #unsetMaxOccurs()
      * @see #setMaxOccurs(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnyType_MaxOccurs()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnyType_MaxOccurs()
      * @model default="1" unsettable="true" dataType="org.w3._2001.xml.schema.AllNNI"
      *        extendedMetaData="kind='attribute' name='maxOccurs'"
      * @generated
@@ -93,7 +93,7 @@ public interface AnyType extends Wildcard {
      * @see #isSetMinOccurs()
      * @see #unsetMinOccurs()
      * @see #setMinOccurs(BigInteger)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnyType_MinOccurs()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnyType_MinOccurs()
      * @model default="1" unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.NonNegativeInteger"
      *        extendedMetaData="kind='attribute' name='minOccurs'"
      * @generated
@@ -145,7 +145,7 @@ public interface AnyType extends Wildcard {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Not QName</em>' attribute.
      * @see #setNotQName(List)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getAnyType_NotQName()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getAnyType_NotQName()
      * @model dataType="org.w3._2001.xml.schema.QnameList" many="false"
      *        extendedMetaData="kind='attribute' name='notQName'"
      * @generated

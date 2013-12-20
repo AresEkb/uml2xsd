@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.Assertion;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,7 +82,7 @@ public class AssertionImpl extends AnnotatedImpl implements Assertion {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.ASSERTION;
+        return XMLSchema11Package.Literals.ASSERTION;
     }
 
     /**
@@ -103,7 +103,7 @@ public class AssertionImpl extends AnnotatedImpl implements Assertion {
         String oldTest = test;
         test = newTest;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ASSERTION__TEST, oldTest, test));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ASSERTION__TEST, oldTest, test));
     }
 
     /**
@@ -124,7 +124,7 @@ public class AssertionImpl extends AnnotatedImpl implements Assertion {
         Object oldXpathDefaultNamespace = xpathDefaultNamespace;
         xpathDefaultNamespace = newXpathDefaultNamespace;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.ASSERTION__XPATH_DEFAULT_NAMESPACE, oldXpathDefaultNamespace, xpathDefaultNamespace));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.ASSERTION__XPATH_DEFAULT_NAMESPACE, oldXpathDefaultNamespace, xpathDefaultNamespace));
     }
 
     /**
@@ -135,9 +135,9 @@ public class AssertionImpl extends AnnotatedImpl implements Assertion {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.ASSERTION__TEST:
+            case XMLSchema11Package.ASSERTION__TEST:
                 return getTest();
-            case SchemaPackage.ASSERTION__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.ASSERTION__XPATH_DEFAULT_NAMESPACE:
                 return getXpathDefaultNamespace();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -151,10 +151,10 @@ public class AssertionImpl extends AnnotatedImpl implements Assertion {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.ASSERTION__TEST:
+            case XMLSchema11Package.ASSERTION__TEST:
                 setTest((String)newValue);
                 return;
-            case SchemaPackage.ASSERTION__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.ASSERTION__XPATH_DEFAULT_NAMESPACE:
                 setXpathDefaultNamespace(newValue);
                 return;
         }
@@ -169,10 +169,10 @@ public class AssertionImpl extends AnnotatedImpl implements Assertion {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ASSERTION__TEST:
+            case XMLSchema11Package.ASSERTION__TEST:
                 setTest(TEST_EDEFAULT);
                 return;
-            case SchemaPackage.ASSERTION__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.ASSERTION__XPATH_DEFAULT_NAMESPACE:
                 setXpathDefaultNamespace(XPATH_DEFAULT_NAMESPACE_EDEFAULT);
                 return;
         }
@@ -187,9 +187,9 @@ public class AssertionImpl extends AnnotatedImpl implements Assertion {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.ASSERTION__TEST:
+            case XMLSchema11Package.ASSERTION__TEST:
                 return TEST_EDEFAULT == null ? test != null : !TEST_EDEFAULT.equals(test);
-            case SchemaPackage.ASSERTION__XPATH_DEFAULT_NAMESPACE:
+            case XMLSchema11Package.ASSERTION__XPATH_DEFAULT_NAMESPACE:
                 return XPATH_DEFAULT_NAMESPACE_EDEFAULT == null ? xpathDefaultNamespace != null : !XPATH_DEFAULT_NAMESPACE_EDEFAULT.equals(xpathDefaultNamespace);
         }
         return super.eIsSet(featureID);

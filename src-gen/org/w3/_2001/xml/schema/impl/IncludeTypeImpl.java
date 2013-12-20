@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.w3._2001.xml.schema.IncludeType;
-import org.w3._2001.xml.schema.SchemaPackage;
+import org.w3._2001.xml.schema.XMLSchema11Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,7 +61,7 @@ public class IncludeTypeImpl extends AnnotatedImpl implements IncludeType {
      */
     @Override
     protected EClass eStaticClass() {
-        return SchemaPackage.Literals.INCLUDE_TYPE;
+        return XMLSchema11Package.Literals.INCLUDE_TYPE;
     }
 
     /**
@@ -82,7 +82,7 @@ public class IncludeTypeImpl extends AnnotatedImpl implements IncludeType {
         String oldSchemaLocation = schemaLocation;
         schemaLocation = newSchemaLocation;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, SchemaPackage.INCLUDE_TYPE__SCHEMA_LOCATION, oldSchemaLocation, schemaLocation));
+            eNotify(new ENotificationImpl(this, Notification.SET, XMLSchema11Package.INCLUDE_TYPE__SCHEMA_LOCATION, oldSchemaLocation, schemaLocation));
     }
 
     /**
@@ -93,7 +93,7 @@ public class IncludeTypeImpl extends AnnotatedImpl implements IncludeType {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case SchemaPackage.INCLUDE_TYPE__SCHEMA_LOCATION:
+            case XMLSchema11Package.INCLUDE_TYPE__SCHEMA_LOCATION:
                 return getSchemaLocation();
         }
         return super.eGet(featureID, resolve, coreType);
@@ -107,7 +107,7 @@ public class IncludeTypeImpl extends AnnotatedImpl implements IncludeType {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case SchemaPackage.INCLUDE_TYPE__SCHEMA_LOCATION:
+            case XMLSchema11Package.INCLUDE_TYPE__SCHEMA_LOCATION:
                 setSchemaLocation((String)newValue);
                 return;
         }
@@ -122,7 +122,7 @@ public class IncludeTypeImpl extends AnnotatedImpl implements IncludeType {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case SchemaPackage.INCLUDE_TYPE__SCHEMA_LOCATION:
+            case XMLSchema11Package.INCLUDE_TYPE__SCHEMA_LOCATION:
                 setSchemaLocation(SCHEMA_LOCATION_EDEFAULT);
                 return;
         }
@@ -137,7 +137,7 @@ public class IncludeTypeImpl extends AnnotatedImpl implements IncludeType {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case SchemaPackage.INCLUDE_TYPE__SCHEMA_LOCATION:
+            case XMLSchema11Package.INCLUDE_TYPE__SCHEMA_LOCATION:
                 return SCHEMA_LOCATION_EDEFAULT == null ? schemaLocation != null : !SCHEMA_LOCATION_EDEFAULT.equals(schemaLocation);
         }
         return super.eIsSet(featureID);

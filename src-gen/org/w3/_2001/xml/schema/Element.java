@@ -53,9 +53,9 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getElement()
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement()
  * @model abstract="true"
- *        extendedMetaData="name='element' kind='elementOnly'"
+ *        extendedMetaData="name='element' kind='mixed'"
  * @generated
  */
 public interface Element extends Annotated {
@@ -69,8 +69,8 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Simple Type</em>' containment reference.
      * @see #setSimpleType(LocalSimpleType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_SimpleType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_SimpleType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='simpleType' namespace='##targetNamespace'"
      * @generated
      */
@@ -96,8 +96,8 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Complex Type</em>' containment reference.
      * @see #setComplexType(LocalComplexType)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_ComplexType()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_ComplexType()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='complexType' namespace='##targetNamespace'"
      * @generated
      */
@@ -123,8 +123,8 @@ public interface Element extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Alternative</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Alternative()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Alternative()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='alternative' namespace='##targetNamespace'"
      * @generated
      */
@@ -140,9 +140,9 @@ public interface Element extends Annotated {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Identity Constraint</em>' attribute list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_IdentityConstraint()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-     *        extendedMetaData="kind='group' name='IdentityConstraint:6'"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_IdentityConstraint()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true" transient="true" volatile="true" derived="true"
+     *        extendedMetaData="kind='group' name='IdentityConstraint:7'"
      * @generated
      */
     FeatureMap getIdentityConstraint();
@@ -156,9 +156,9 @@ public interface Element extends Annotated {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Unique</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Unique()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Unique()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='unique' namespace='##targetNamespace' group='#IdentityConstraint:6'"
+     *        extendedMetaData="kind='element' name='unique' namespace='##targetNamespace' group='#IdentityConstraint:7'"
      * @generated
      */
     EList<Keybase> getUnique();
@@ -172,9 +172,9 @@ public interface Element extends Annotated {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Key</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Key()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Key()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='key' namespace='##targetNamespace' group='#IdentityConstraint:6'"
+     *        extendedMetaData="kind='element' name='key' namespace='##targetNamespace' group='#IdentityConstraint:7'"
      * @generated
      */
     EList<Keybase> getKey();
@@ -188,9 +188,9 @@ public interface Element extends Annotated {
      * 
      * <!-- end-model-doc -->
      * @return the value of the '<em>Keyref</em>' containment reference list.
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Keyref()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Keyref()
      * @model containment="true" transient="true" volatile="true" derived="true"
-     *        extendedMetaData="kind='element' name='keyref' namespace='##targetNamespace' group='#IdentityConstraint:6'"
+     *        extendedMetaData="kind='element' name='keyref' namespace='##targetNamespace' group='#IdentityConstraint:7'"
      * @generated
      */
     EList<KeyrefType> getKeyref();
@@ -208,7 +208,7 @@ public interface Element extends Annotated {
      * @see #isSetMaxOccurs()
      * @see #unsetMaxOccurs()
      * @see #setMaxOccurs(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_MaxOccurs()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_MaxOccurs()
      * @model default="1" unsettable="true" dataType="org.w3._2001.xml.schema.AllNNI"
      *        extendedMetaData="kind='attribute' name='maxOccurs'"
      * @generated
@@ -263,7 +263,7 @@ public interface Element extends Annotated {
      * @see #isSetMinOccurs()
      * @see #unsetMinOccurs()
      * @see #setMinOccurs(BigInteger)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_MinOccurs()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_MinOccurs()
      * @model default="1" unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.NonNegativeInteger"
      *        extendedMetaData="kind='attribute' name='minOccurs'"
      * @generated
@@ -315,7 +315,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Name</em>' attribute.
      * @see #setName(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Name()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Name()
      * @model dataType="org.eclipse.emf.ecore.xml.type.NCName"
      *        extendedMetaData="kind='attribute' name='name'"
      * @generated
@@ -342,7 +342,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Ref</em>' attribute.
      * @see #setRef(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Ref()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Ref()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='ref'"
      * @generated
@@ -369,7 +369,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Type</em>' attribute.
      * @see #setType(QName)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Type()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Type()
      * @model dataType="org.eclipse.emf.ecore.xml.type.QName"
      *        extendedMetaData="kind='attribute' name='type'"
      * @generated
@@ -396,7 +396,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Substitution Group</em>' attribute.
      * @see #setSubstitutionGroup(List)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_SubstitutionGroup()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_SubstitutionGroup()
      * @model dataType="org.w3._2001.xml.schema.SubstitutionGroupType" many="false"
      *        extendedMetaData="kind='attribute' name='substitutionGroup'"
      * @generated
@@ -423,7 +423,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Default</em>' attribute.
      * @see #setDefault(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Default()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Default()
      * @model dataType="org.eclipse.emf.ecore.xml.type.String"
      *        extendedMetaData="kind='attribute' name='default'"
      * @generated
@@ -450,7 +450,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Fixed</em>' attribute.
      * @see #setFixed(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Fixed()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Fixed()
      * @model dataType="org.eclipse.emf.ecore.xml.type.String"
      *        extendedMetaData="kind='attribute' name='fixed'"
      * @generated
@@ -479,7 +479,7 @@ public interface Element extends Annotated {
      * @see #isSetNillable()
      * @see #unsetNillable()
      * @see #setNillable(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Nillable()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Nillable()
      * @model unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='nillable'"
      * @generated
@@ -534,7 +534,7 @@ public interface Element extends Annotated {
      * @see #isSetAbstract()
      * @see #unsetAbstract()
      * @see #setAbstract(boolean)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Abstract()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Abstract()
      * @model default="false" unsettable="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
      *        extendedMetaData="kind='attribute' name='abstract'"
      * @generated
@@ -586,7 +586,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Final</em>' attribute.
      * @see #setFinal(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Final()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Final()
      * @model dataType="org.w3._2001.xml.schema.DerivationSet"
      *        extendedMetaData="kind='attribute' name='final'"
      * @generated
@@ -613,7 +613,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Block</em>' attribute.
      * @see #setBlock(Object)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Block()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Block()
      * @model dataType="org.w3._2001.xml.schema.BlockSet"
      *        extendedMetaData="kind='attribute' name='block'"
      * @generated
@@ -644,7 +644,7 @@ public interface Element extends Annotated {
      * @see #isSetForm()
      * @see #unsetForm()
      * @see #setForm(FormChoice)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_Form()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_Form()
      * @model unsettable="true"
      *        extendedMetaData="kind='attribute' name='form'"
      * @generated
@@ -697,7 +697,7 @@ public interface Element extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Target Namespace</em>' attribute.
      * @see #setTargetNamespace(String)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getElement_TargetNamespace()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getElement_TargetNamespace()
      * @model dataType="org.eclipse.emf.ecore.xml.type.AnyURI"
      *        extendedMetaData="kind='attribute' name='targetNamespace'"
      * @generated

@@ -16,8 +16,8 @@ package org.w3._2001.xml.schema;
  * </ul>
  * </p>
  *
- * @see org.w3._2001.xml.schema.SchemaPackage#getOpenContentType()
- * @model extendedMetaData="name='openContent_._type' kind='elementOnly'"
+ * @see org.w3._2001.xml.schema.XMLSchema11Package#getOpenContentType()
+ * @model extendedMetaData="name='openContent_._type' kind='mixed'"
  * @generated
  */
 public interface OpenContentType extends Annotated {
@@ -31,8 +31,8 @@ public interface OpenContentType extends Annotated {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Any</em>' containment reference.
      * @see #setAny(Wildcard)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOpenContentType_Any()
-     * @model containment="true"
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOpenContentType_Any()
+     * @model containment="true" transient="true" volatile="true" derived="true"
      *        extendedMetaData="kind='element' name='any' namespace='##targetNamespace'"
      * @generated
      */
@@ -63,7 +63,7 @@ public interface OpenContentType extends Annotated {
      * @see #isSetMode()
      * @see #unsetMode()
      * @see #setMode(ModeType1)
-     * @see org.w3._2001.xml.schema.SchemaPackage#getOpenContentType_Mode()
+     * @see org.w3._2001.xml.schema.XMLSchema11Package#getOpenContentType_Mode()
      * @model default="interleave" unsettable="true"
      *        extendedMetaData="kind='attribute' name='mode'"
      * @generated
