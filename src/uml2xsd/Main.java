@@ -1,10 +1,10 @@
 /**
- * Copyright (c) 2013 Denis Nikiforov.
+ * Copyright (c) 2013, 2014 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    Denis Nikiforov - initial API and implementation
  */
@@ -75,9 +75,11 @@ import org.w3._2007.xml.schema.versioning.XMLSchemaVersioningPackage;
 public class Main {
 
     public static void main(String[] args) {
-        final String input = "model2/ReferenceModel.uml";
-        //final String input = "model2/SMDataModel.uml";
+//        final String input = "model/ReferenceModel.uml";
+//        final String input = "model/SMDataModel.uml";
+        final String input = "model/TTDataModel.uml";
         final String transform = "transforms/UMLtoXSD11.qvto";
+//        final String transform = "transforms/GetXPath.qvto";
         final String output = "output/";
 
         System.out.println("Initialization");
@@ -114,6 +116,7 @@ public class Main {
             System.out.println("Transforming model by " + transform);
             List<EObject> schemas = transformModel(rs, createFileURI(transform), uml);
 
+//            int i = 0;
             for (EObject obj : schemas) {
                 if (obj instanceof DocumentRoot) {
                     DocumentRoot root = (DocumentRoot)obj;
@@ -124,6 +127,13 @@ public class Main {
                         saveModel(rs, root, createFileURI(schemaLocation));
                     }
                 }
+                // For debug purposes
+//                else {
+//                    String schemaLocation = output + "result" + i + ".xmi";
+//                    System.out.println("Saving result model into " + schemaLocation);
+//                    saveModel(rs, obj, createFileURI(schemaLocation));
+//                    i++;
+//                }
             }
 
             System.out.println("Done!");

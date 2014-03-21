@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2013, 2014 Denis Nikiforov.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    Denis Nikiforov - initial API and implementation
+ */
+
 import uml2xsd.UtilLib;
 import OCLtoXPath;
 
@@ -98,7 +109,7 @@ when { self.getAllAttributes()->notEmpty() }
     if (self.generalization->isEmpty()) {
         attribute := self.getOwnedAttributes()->toAttribute();
         sequence := self.map toExplicitGroup();
-        _assert := self.ownedOCLRule()->toAssertion(schema);
+        _assert := self.ownedRule.xmap toAssertion(schema);
     }
     elif (self.generalization->size() = 1) {
         var generalization := self.generalization->any(true);
@@ -110,7 +121,7 @@ when { self.getAllAttributes()->notEmpty() }
                         base := baseType.getQName();
                         attribute := self.getOwnedAttributes()->toAttribute();
                         sequence := self.map toExplicitGroup();
-                        _assert := self.ownedOCLRule()->toAssertion(schema);
+                        _assert := self.ownedRule.xmap toAssertion(schema);
                     }
                 }
                 else {
@@ -118,7 +129,7 @@ when { self.getAllAttributes()->notEmpty() }
                         base := baseType.getQName();
                         attribute := self.getOwnedAttributes()->toAttribute();
                         sequence := self.map toExplicitGroup();
-                        _assert := self.ownedOCLRule()->toAssertion(schema);
+                        _assert := self.ownedRule.xmap toAssertion(schema);
                     }
                 }
             }
@@ -130,7 +141,7 @@ when { self.getAllAttributes()->notEmpty() }
                         base := baseType.getQName();
                         attribute := self.getOwnedAttributes()->toAttribute();
                         sequence := self.map toExplicitGroup();
-                        _assert := self.ownedOCLRule()->toAssertion(schema);
+                        _assert := self.ownedRule.xmap toAssertion(schema);
                     }
                 }
                 else {
@@ -138,7 +149,7 @@ when { self.getAllAttributes()->notEmpty() }
                         base := baseType.getQName();
                         attribute := self.getOwnedAttributes()->toAttribute();
                         sequence := self.map toExplicitGroup();
-                        _assert := self.ownedOCLRule()->toAssertion(schema);
+                        _assert := self.ownedRule.xmap toAssertion(schema);
                     }
                 }
             }
@@ -149,7 +160,7 @@ when { self.getAllAttributes()->notEmpty() }
 mapping Class::toElement() : TopLevelElement
 {
     name := self.name;
-    // TODO: Annotation willbe contained in element itself in a new model version
+    // TODO: Annotation will be contained in element itself in a new model version
     annotation := self.attribute->any(true).getAnnotation();
     // TODO: Property will be named 'value' in a new model version
     var dataType := self.attribute->any(true/*name = 'value'*/).type;
@@ -188,11 +199,12 @@ mapping Property::toLocalElement() : LocalElement
     };
 }
 
-mapping ExpressionInOCL::toAssertion(schema : SchemaType) : Assertion
+mapping Constraint::toAssertion(schema : SchemaType) : Assertion
 {
-    var xpath := self.xmap toXPath();
+    var xpath := self.toExpressionInOCL().xmap toXPath();
     xpath.xmap findQNames(schema);
     test := xpath.toString();
+    annotation := self.getAnnotation();
 }
 
 intermediate class SchemaQNames { schema : SchemaType; qnames : Set(QName); };
@@ -225,14 +237,14 @@ query Package::isXMLPT() : Boolean =
     self.getTargetNS() = 'http://www.w3.org/2001/XMLSchema';
 
 query Classifier::getOwnedAttributes() : Sequence(Property) =
-  self.getAttributes()->select(getAppliedStereotype('EECProfile::Attribute') <> null);
+    self.getAttributes()->select(getAppliedStereotype('EECProfile::Attribute') <> null);
 
 query Classifier::getOwnedElements() : Sequence(Property) =
-  self.getAttributes()->select(getAppliedStereotype('EECProfile::Attribute') = null);
+    self.getAttributes()->select(getAppliedStereotype('EECProfile::Attribute') = null);
 
 query Classifier::hasComplexContent() : Boolean =
-  if self.getOwnedElements()->notEmpty() then true
-  else self.general->hasComplexContent()->exists(b|b=true) endif;
+    if self.getOwnedElements()->notEmpty() then true
+    else self.general->hasComplexContent()->exists(b|b=true) endif;
 
 query Package::isNamespace() : Boolean =
     self.getAppliedStereotype('EECProfile::Namespace') <> null;

@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2013, 2014 Denis Nikiforov.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    Denis Nikiforov - initial API and implementation
+ */
+
 import uml2xsd.UtilLib;
 
 library Helpers;
@@ -18,8 +29,10 @@ query Element::getValue(stereotypeQName : String, propertyName : String) : Strin
 query Element::getNS() : Package = self.getNearestPackage().getNS();
 
 query Package::getNS() : Package =
-    if self.getAppliedStereotype("EECProfile::Namespace") <> null then self
-    elif self.owner <> null then self.owner.getNS() else null endif;
+      if self.getAppliedStereotype('EECProfile::Namespace') <> null then self
+    elif self.owner <> null then self.owner.getNS()
+    else null
+    endif;
 
 query Package::getTargetNS() : String = self.getValue('EECProfile::Namespace', 'name');
 query Package::getTargetNSPrefix() : String = self.getValue('EECProfile::Namespace', 'prefix');
@@ -38,6 +51,11 @@ query NamedElement::getNSWithGuards() : Package
 query NamedElement::getQName() : QName
 {
     var ns := self.getNSWithGuards();
+    // HACK
+    // var ns := self.getNS();
+    // if (ns = null) {
+    //     return createQName('unknown', self.name, 'un').oclAsType(QName); 
+    // };
     return createQName(ns.getTargetNS(), self.name, ns.getTargetNSPrefix()).oclAsType(QName);
 }
 

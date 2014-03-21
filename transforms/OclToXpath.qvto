@@ -1,3 +1,20 @@
+/**
+ * Copyright (c) 2013, 2014 Denis Nikiforov.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    Denis Nikiforov - initial API and implementation
+ */
+
+// There are some XPath AST simplifications in the code.
+// It would be great to separate them from the transformation,
+// but the problem is that simplification mapping should traverse
+// whole AST and therefore it will be even more complex than an
+// OCL to XPath transformation itself.
+
 import uml2xsd.UtilLib;
 import Helpers;
 
@@ -15,56 +32,166 @@ mapping ExpressionInOCL::toXPath() : Expr
 
 mapping OCLExpression::toExprSingle() : ExprSingle
 disjuncts
+    // Logic
+    OperationCallExp::toOrExpr,
+    OperationCallExp::andExpr,
+    OperationCallExp::implication,
+    IteratorExp::exists,
+    IteratorExp::forAll,
+    // Comparision
     OperationCallExp::leftNotNull,
     OperationCallExp::rightNotNull,
-    OperationCallExp::toIfExpr,
-    OperationCallExp::toOrExpr,
-    OCLExpression::toOrExprChild
-{}
-
-mapping OperationCallExp::toIfExpr() : OrExpr
-when { self.name = 'implies' }
-{
-    operand := self.source.xmap toExprSingle().notExpr();
-    operand += self.argument[OCLExpression].xmap toOrExprChild();
-}
-
-mapping OperationCallExp::toOrExpr() : OrExpr
-when { self.name = 'or' }
-{
-    init {
-        // It's not necessary, but it's better to flatten a left recursion.
-        result := self.source[OperationCallExp]->collectOne(map toOrExpr());
-    }
-    if (operand->isEmpty()) {
-        operand := self.source.xmap toOrExprChild();
-    } endif;
-    operand += self.argument->toOrExprChild();
-}
-
-mapping OCLExpression::toOrExprChild() : OrExprChild
-disjuncts
-    OperationCallExp::toAndExpr,
-    OCLExpression::toAndExprChild
-{}
-
-mapping OperationCallExp::toAndExpr() : AndExpr
-when { self.name = 'and' }
-{
-    init {
-        result := self.source[OperationCallExp]->collectOne(map toAndExpr());
-    }
-    if (operand->isEmpty()) {
-        operand := self.source.xmap toAndExprChild();
-    } endif;
-    operand += self.argument->toAndExprChild();
-}
-
-mapping OCLExpression::toAndExprChild() : AndExprChild
-disjuncts
     OperationCallExp::toComparisonExpr,
-    OCLExpression::toComparisonExprChild
+    // Arithmetic
+    OperationCallExp::toAdditiveExpr,
+    OperationCallExp::toMultiplicativeExpr,
+    // Path
+    PropertyCallExp::toPath,
+    // Functions
+    OperationCallExp::asSet,
+    OperationCallExp::count,
+    OperationCallExp::stringLength,
+    OperationCallExp::isEmpty,
+    OperationCallExp::notEmpty,
+    // Literals
+    UnlimitedNaturalLiteralExp::toLiteral,
+    RealLiteralExp::toLiteral,
+    StringLiteralExp::toLiteral,
+    BooleanLiteralExp::toLiteral
 {}
+
+//////////////////////////////////////////////////////////////////////////////
+// Logic
+
+mapping OperationCallExp::toOrExpr() : ExprSingle
+when { self.referredOperation.isBoolean('or') }
+{
+    init {
+        result := self.source.xmap toExprSingle().orExpr(
+            self.argument->first().xmap toExprSingle());
+    }
+}
+
+mapping OperationCallExp::andExpr() : AndExpr
+when { self.referredOperation.isBoolean('and') }
+{
+    operand := self.source.xmap toExprSingle().andExprOperand();
+    operand += self.argument->first().xmap toExprSingle().andExprOperand();
+}
+
+mapping OperationCallExp::implication() : ExprSingle
+when { self.referredOperation.isBoolean('implies') }
+{
+    init {
+        result := self.source.xmap toExprSingle().notExpr().orExpr(
+            self.argument->first().xmap toExprSingle());
+    }
+}
+
+mapping IteratorExp::exists() : FunctionCall
+when { self.referredIteration.name = 'exists' }
+{
+    init {
+        var path := self.source.oclAsType(PropertyCallExp).xmap toPath();
+        path.getLastAxisStep().predicate := self.body.xmap toExprSingle().predicate();
+        result := path.booleanExpr();
+    }
+}
+
+mapping IteratorExp::forAll() : ExprSingle
+when { self.referredIteration.name = 'forAll' }
+{
+    init {
+        var path := self.source.oclAsType(PropertyCallExp).xmap toPath();
+        path.getLastAxisStep().predicate := self.body.xmap toExprSingle().notExpr().predicate();
+        result := path.notExpr();
+    }
+}
+
+property fn_not : QName = createQName('http://www.w3.org/2005/xpath-functions', 'not', 'fn');
+property fn_boolean : QName = createQName('http://www.w3.org/2005/xpath-functions', 'boolean', 'fn');
+
+query ExprSingle::booleanExpr() : FunctionCall = object FunctionCall { name := fn_boolean; arg := self; };
+
+query ExprSingle::notExpr() : ExprSingle =
+    // Simplification: fn:not(fn:not(...)) = fn:boolean(...)
+    if self.isFunctionCall(fn_not) then
+        self.oclAsType(FunctionCall).arg->collectOne(booleanExpr())
+    // Simplification: fn:not(fn:not(...) and fn:not(...) and ...) = (... or ... or ...)
+    elif self.oclIsKindOf(AndExpr) and self.oclAsType(AndExpr).operand->forAll(isFunctionCall(fn_not)) then
+        object OrExpr { operand :=
+            self.oclAsType(AndExpr).operand->collect(
+                oclAsType(FunctionCall).arg->first().orExprOperand()) }
+    // Simplification: fn:not(fn:not(...) or fn:not(...) or ...) = (... and ... and ...)
+    elif self.oclIsKindOf(OrExpr) and self.oclAsType(OrExpr).operand->forAll(isFunctionCall(fn_not)) then
+        object AndExpr { operand :=
+            self.oclAsType(OrExpr).operand->collect(
+                oclAsType(FunctionCall).arg->first().andExprOperand()) }
+    else
+        object FunctionCall { name := fn_not; arg := self; }
+    endif;
+
+query ExprSingle::orExpr(rhs : ExprSingle) : ExprSingle {
+    var operands := self.orExprOperand();
+    operands += rhs.orExprOperand();
+    return 
+    // Simplification: fn:not(...) or fn:not(...) = fn:not(... and ...)
+    if operands->forAll(isFunctionCall(fn_not)) then
+        object AndExpr { operand :=
+            operands->collect(
+                oclAsType(FunctionCall).arg->first().andExprOperand()) }.notExpr()
+    else
+        object OrExpr { operand := operands }
+    endif;
+}
+
+query ExprSingle::orExprOperand() : OrderedSet(OrExprChild) =
+    // Simplification: (... or ...) or ... = ... or ... or ...
+    if self.oclIsKindOf(OrExpr) then
+        self.oclAsType(OrExpr).operand
+    // Simplification: (...) or ... = ... or ...
+    elif self.oclIsKindOf(OrExprChild) then
+        self.oclAsType(OrExprChild)->asOrderedSet()
+    else
+        object ParenthesizedExpr { expr := self }->asOrderedSet()
+    endif;
+
+query ExprSingle::andExprOperand() : OrderedSet(AndExprChild) =
+    // Simplification: (... and ...) and ... = ... and ... and ...
+    if self.oclIsKindOf(AndExpr) then
+        self.oclAsType(AndExpr).operand
+    // Simplification: (...) and ... = ... and ...
+    elif self.oclIsKindOf(AndExprChild) then
+        self.oclAsType(AndExprChild)->asOrderedSet()
+    else
+        object ParenthesizedExpr { expr := self }->asOrderedSet()
+    endif;
+
+query PathExpr::getLastAxisStep() : AxisStep
+{
+    var lastStep = self.step->last();
+    var axisStep : AxisStep;
+    if (lastStep.oclIsKindOf(SelfStepExpr)) {
+        axisStep := lastStep.oclAsType(SelfStepExpr).step.oclAsType(AxisStep);
+    }
+    elif (lastStep.oclIsKindOf(ChildStepExpr)) {
+        axisStep := lastStep.oclAsType(ChildStepExpr).step.oclAsType(AxisStep);
+    };
+    assert fatal (axisStep <> null) with log('Last AxisStep not found');
+    return axisStep;
+} 
+
+query ExprSingle::predicate() : Predicate =
+    object Predicate { expr :=
+        // Simplification: ...[fn:boolean(...)] = ...[...]
+        if self.isFunctionCall(fn_boolean) then
+            self.oclAsType(FunctionCall).arg->first()
+        else
+            self
+        endif };
+
+//////////////////////////////////////////////////////////////////////////////
+// Comparision
 
 mapping OperationCallExp::leftNotNull() : ExprSingle
 when { self.name = '<>' and self.argument->isNullLiteralExp() }
@@ -82,124 +209,158 @@ when { self.name = '<>' and self.source.isNullLiteralExp() }
     }
 }
 
-
 mapping OperationCallExp::toComparisonExpr() : ComparisonExpr
 when { self.name.toGeneralComp() <> null and not(self.source.isNullLiteralExp() or self.argument->isNullLiteralExp()) }
 {
-    left := self.source.xmap toComparisonExprChild();
+    left := self.source.xmap toExprSingle().comparisonExprChild();
     operator := object GeneralComp { operator := self.name.toGeneralComp() };
-    right := self.argument->first().xmap toComparisonExprChild();
+    right := self.argument->first().xmap toExprSingle().comparisonExprChild();
 }
 
-mapping OCLExpression::toComparisonExprChild() : ComparisonExprChild
-disjuncts
-    OperationCallExp::toAdditiveExpr,
-    OCLExpression::toAdditiveExprChild
-{}
+query ExprSingle::comparisonExprChild() : ComparisonExprChild =
+    // Simplification: (...) <> (...) = ... <> ...
+    if self.oclIsKindOf(ComparisonExprChild) then
+        self.oclAsType(ComparisonExprChild)
+    else
+        object ParenthesizedExpr { expr := self }
+    endif;
+
+query OCLExpression::isNullLiteralExp() : Boolean = self.oclIsKindOf(NullLiteralExp);
+
+query OrderedSet(OCLExpression)::isNullLiteralExp() : Boolean =
+    self->size() = 1 and self->first().oclIsKindOf(NullLiteralExp);
+
+query String::toGeneralComp() : GeneralCompKind =
+      if (self = "=")  then GeneralCompKind::eq
+    elif (self = "<>") then GeneralCompKind::ne
+    elif (self = "<")  then GeneralCompKind::lt
+    elif (self = "<=") then GeneralCompKind::le
+    elif (self = ">")  then GeneralCompKind::gt
+    elif (self = ">=") then GeneralCompKind::ge
+    endif;
+
+//////////////////////////////////////////////////////////////////////////////
+// Arithmetic
 
 mapping OperationCallExp::toAdditiveExpr() : AdditiveExpr
 when { self.name.toAdditiveOp() <> null }
 {
-    init {
-        result := self.source[OperationCallExp]->collectOne(map toAdditiveExpr());
-    }
-    if (operand->isEmpty()) {
-        operand := self.source.xmap toAdditiveExprChild();
-    } endif;
-    operand += self.argument->toAdditiveExprChild();
+    var lhs := self.source.xmap toExprSingle().additiveExprOperand();
+    var rhs := self.argument->first().xmap toExprSingle().additiveExprOperand();
+    operand := lhs.operand;
+    operand += rhs.operand;
+    operator := lhs.operator;
     operator += self.name.toAdditiveOp();
+    operator += rhs.operator;
 }
-
-mapping OCLExpression::toAdditiveExprChild() : AdditiveExprChild
-disjuncts
-    OperationCallExp::toMultiplicativeExpr,
-    OCLExpression::toMultiplicativeExprChild
-{}
 
 mapping OperationCallExp::toMultiplicativeExpr() : MultiplicativeExpr
 when { self.name.toMultiplicativeOp() <> null }
 {
-    init {
-        result := self.source[OperationCallExp]->collectOne(map toMultiplicativeExpr());
-    }
-    if (operand->isEmpty()) {
-        operand := self.source.xmap toMultiplicativeExprChild();
-    } endif;
-    operand += self.argument->toMultiplicativeExprChild();
+    var lhs := self.source.xmap toExprSingle().multiplicativeExprOperand();
+    var rhs := self.argument->first().xmap toExprSingle().multiplicativeExprOperand();
+    operand := lhs.operand;
+    operand += rhs.operand;
+    operator := lhs.operator;
     operator += self.name.toMultiplicativeOp();
+    operator += rhs.operator;
 }
 
-mapping OCLExpression::toMultiplicativeExprChild() : MultiplicativeExprChild
-disjuncts
-    PropertyCallExp::toPath,
-    OperationCallExp::count,
-    OperationCallExp::stringLength,
-    IteratorExp::exists,
-    IteratorExp::forAll,
-    UnlimitedNaturalLiteralExp::toLiteral,
-    RealLiteralExp::toLiteral,
-    StringLiteralExp::toLiteral,
-    OCLExpression::toParenthesizedExpr
-{}
+query ExprSingle::additiveExprOperand() : AdditiveExpr =
+    // Simplification: (... + ...) - ... = ... + ... - ...
+    if self.oclIsKindOf(AdditiveExpr) then
+        self.oclAsType(AdditiveExpr)
+    // Simplification: (...) + ... = ... + ...
+    elif self.oclIsKindOf(AdditiveExprChild) then
+        object AdditiveExpr { operand := self.oclAsType(AdditiveExprChild); }
+    else
+        object AdditiveExpr { operand := object ParenthesizedExpr { expr := self } }
+    endif;
+
+query ExprSingle::multiplicativeExprOperand() : MultiplicativeExpr =
+    // Simplification: (... * ...) / ... = ... * ... / ...
+    if self.oclIsKindOf(MultiplicativeExpr) then
+        self.oclAsType(MultiplicativeExpr)
+    // Simplification: (...) * ... = ... * ...
+    elif self.oclIsKindOf(MultiplicativeExprChild) then
+        object MultiplicativeExpr { operand := self.oclAsType(MultiplicativeExprChild); }
+    else
+        object MultiplicativeExpr { operand := object ParenthesizedExpr { expr := self } }
+    endif;
+
+query String::toAdditiveOp() : AdditiveOpKind =
+      if (self = "+") then AdditiveOpKind::addition
+    elif (self = "-") then AdditiveOpKind::subtraction
+    endif;
+
+query String::toMultiplicativeOp() : MultiplicativeOpKind =
+      if (self = "*")   then MultiplicativeOpKind::multiplication
+    elif (self = "/")   then MultiplicativeOpKind::div
+    elif (self = "div") then MultiplicativeOpKind::idiv
+    elif (self = "mod") then MultiplicativeOpKind::mod
+    endif;
+
+//////////////////////////////////////////////////////////////////////////////
+// Path
 
 mapping PropertyCallExp::toPath() : PathExpr
 {
     init {
+        // PropertyCallExp tree must be flattened.
+        // VariableExp (self or iterator variable) is the innermost
+        // component in an input tree, but it should be a first step
+        // in an output path.
         result := self.source[PropertyCallExp]->collectOne(xmap toPath());
     }
-    if (self.source[VariableExp]->one(referredVariable.name = 'self')) {
-        assert fatal (self.referredProperty.owningType.oclIsKindOf(DataType))
-            with log('Constraint could not be defined for a Data Element \'' +
-                self.referredProperty.owningType.name + '\'. Please define the constraint for a Data Type \'' +
-                self.referredProperty.type.name + '\'');
-        if (self.referredProperty.getETarget().getAppliedStereotype('EECProfile::Attribute') = null) {
-            step := object SelfStepExpr { step := object AbbrevForwardStep {
-                kind := AbbrevForwardStepKind::child;
-                nodeTest := object QNameTest { name := self.referredProperty.type.getQName() } } };
+    // Steps must be created only for Data Types. Data Elements must be skipped
+    if (self.referredProperty.owningType.isDataType()) {
+        // Type can be a Set(T)
+        var type := self.referredProperty.type.unwrap();
+        
+        var element : NamedElement;
+        // Property is local
+        if (type.isDataType()) {
+            element := self.referredProperty;
+        }
+        // Property is a reference to a global element or attribute
+        elif (type.isDataElement()) {
+            element := type;
         }
         else {
-            step := object SelfStepExpr { step := object AbbrevForwardStep {
+            assert fatal (true) with log('Something is wrong');
+        };
+
+        var stepItem : AbbrevForwardStep;
+        if (self.referredProperty.isAttribute()) {
+            stepItem := object AbbrevForwardStep {
                 kind := AbbrevForwardStepKind::attribute;
-                nodeTest := object QNameTest { name := self.referredProperty.type.getUnprefixedQName() } } };
-        }
-    }
-    else if (self.source[PropertyCallExp]->notEmpty()) {
-        if (self.referredProperty.owningType.oclIsKindOf(DataType)) {
-            if (self.referredProperty.type.oclIsKindOf(DataType)) {
-                step += self.referredProperty.xmap toChildStepExpr();
-            }
-            else {
-                step += self.referredProperty.type.xmap toChildStepExpr();
-            }
+                nodeTest := object QNameTest { name := element.getUnprefixedQName() };
+            };
         }
         else {
-            assert fatal (self.referredProperty.type.oclIsKindOf(DataType))
-                with log('Data Element \'' + self.referredProperty.owningType.name + '\' must have a Data Type');
+            stepItem := object AbbrevForwardStep {
+                kind := AbbrevForwardStepKind::child;
+                nodeTest := object QNameTest { name := element.getQName() };
+            };
+        };
+        
+        if (step->isEmpty()) {
+            step := object SelfStepExpr { step := stepItem };
+        }
+        else {
+            step += object ChildStepExpr { step := stepItem };
         }
     }
 }
 
-mapping NamedElement::toChildStepExpr() : ChildStepExpr
-disjuncts
-    NamedElement::toChildStepExprFromElement,
-    NamedElement::toChildStepExprFromAttribute
-{}
+//////////////////////////////////////////////////////////////////////////////
+// Functions
 
-mapping NamedElement::toChildStepExprFromElement() : ChildStepExpr
-when { self.getETarget().getAppliedStereotype('EECProfile::Attribute') = null }
+mapping OperationCallExp::asSet() : ExprSingle
+when { self.referredOperation.name = 'oclAsSet' }
 {
-    step := object AbbrevForwardStep {
-       kind := AbbrevForwardStepKind::child;
-       nodeTest := object QNameTest { name := self.getQName() }
-    }
-}
-
-mapping NamedElement::toChildStepExprFromAttribute() : ChildStepExpr
-when { self.getETarget().getAppliedStereotype('EECProfile::Attribute') <> null }
-{
-    step := object AbbrevForwardStep {
-       kind := AbbrevForwardStepKind::attribute;
-       nodeTest := object QNameTest { name := self.getUnprefixedQName() }
+    init {
+        result := self.source.xmap toExprSingle();
     }
 }
 
@@ -217,33 +378,24 @@ when { self.referredOperation.name = 'size' and self.referredOperation.owningTyp
     arg := self.source.xmap toExprSingle();
 }
 
-mapping IteratorExp::exists() : FunctionCall
-when { self.referredIteration.name = 'exists' }
+mapping OperationCallExp::isEmpty() : ExprSingle
+when { self.referredOperation.name = 'isEmpty' }
 {
     init {
-        result := object FilterExpr {
-            primaryExpr := object ParenthesizedExpr { expr := self.source.xmap toExprSingle() };
-            predicate := object Predicate { expr := self.body.xmap toExprSingle() };
-        }.booleanExpr();
+    	result := self.source.xmap toExprSingle().notExpr();
     }
 }
 
-mapping IteratorExp::forAll() : FunctionCall
-when { self.referredIteration.name = 'forAll' }
+mapping OperationCallExp::notEmpty() : FunctionCall
+when { self.referredOperation.name = 'notEmpty' }
 {
     init {
-        result := object FilterExpr {
-            primaryExpr := object ParenthesizedExpr { expr := self.source.xmap toExprSingle() };
-            predicate := object Predicate { expr := self.body.xmap toExprSingle().notExpr() };
-        }.notExpr();
+        result := self.source.xmap toExprSingle().booleanExpr();
     }
 }
 
-mapping OperationCallExp::forAll() : FunctionCall
-{
-    name := createQName('http://www.w3.org/2005/xpath-functions', 'forAll', 'fn');
-    arg := self.source.xmap toExprSingle();
-}
+//////////////////////////////////////////////////////////////////////////////
+// Literals
 
 mapping UnlimitedNaturalLiteralExp::toLiteral() : IntegerLiteral
 {
@@ -265,63 +417,34 @@ mapping StringLiteralExp::toLiteral() : StringLiteral
     value := self.stringSymbol.quote();
 }
 
-mapping OCLExpression::toParenthesizedExpr() : ParenthesizedExpr
-//when { self.xmap OclToXpath() <> null }
+mapping BooleanLiteralExp::toLiteral() : FunctionCall
 {
-    expr := self.xmap toExprSingle()
+    name := createQName('http://www.w3.org/2005/xpath-functions',
+        if self.booleanSymbol then 'true' else 'false' endif, 'fn');
 }
 
-mapping OCLExpression::toVarRef() : VarRef {
-    object VarRef { varName := createQName(self.name) }
-}
-
-///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 // Helpers
+
+query String::quote() : String = '\'' + self.replaceAll('\'', '\'\'') + '\'';
+
+query NamedElement::unwrap() : NamedElement =
+    if self.oclIsKindOf(SetType) then self.oclAsType(SetType).elementType else self endif;
 
 query NamedElement::getQName() : QName = self.getETarget().getQName();
 
 query NamedElement::getUnprefixedQName() : QName = self.getETarget().getUnprefixedQName();
 
-query String::quote() : String = '\'' + self.replaceAll('\'', '\'\'') + '\'';
+query NamedElement::isDataType() : Boolean = self.oclIsKindOf(DataType);
 
-query trueExpr() : FunctionCall = object FunctionCall {
-    name := createQName('http://www.w3.org/2005/xpath-functions', 'true', 'fn') };
+query NamedElement::isDataElement() : Boolean = self.oclIsKindOf(Class);
 
-query falseExpr() : FunctionCall = object FunctionCall {
-    name := createQName('http://www.w3.org/2005/xpath-functions', 'false', 'fn') };
+query Property::isAttribute() : Boolean = self.getETarget().getAppliedStereotype('EECProfile::Attribute') <> null;
 
-query ExprSingle::notExpr() : FunctionCall =
-    object FunctionCall {
-        name := createQName('http://www.w3.org/2005/xpath-functions', 'not', 'fn');
-        arg := self; };
+query Operation::isBoolean(name : String) : Boolean = 
+    self.owningType.oclIsKindOf(PrimitiveType) and
+    self.owningType.name = 'Boolean' and
+    self.name = name;
 
-query ExprSingle::booleanExpr() : FunctionCall =
-    object FunctionCall {
-        name := createQName('http://www.w3.org/2005/xpath-functions', 'boolean', 'fn');
-        arg := self; };
-
-query OCLExpression::isNullLiteralExp() : Boolean = self.oclIsKindOf(NullLiteralExp);
-
-query OrderedSet(OCLExpression)::isNullLiteralExp() : Boolean =
-    self->size() = 1 and self->first().oclIsKindOf(NullLiteralExp);
-
-query String::toGeneralComp() : GeneralCompKind =
-  if (self = "=")  then GeneralCompKind::eq
-elif (self = "<>") then GeneralCompKind::ne
-elif (self = "<")  then GeneralCompKind::lt
-elif (self = "<=") then GeneralCompKind::le
-elif (self = ">")  then GeneralCompKind::gt
-elif (self = ">=") then GeneralCompKind::ge
-endif;
-
-query String::toAdditiveOp() : AdditiveOpKind =
-  if (self = "+") then AdditiveOpKind::addition
-elif (self = "-") then AdditiveOpKind::subtraction
-endif;
-
-query String::toMultiplicativeOp() : MultiplicativeOpKind =
-  if (self = "*")    then MultiplicativeOpKind::multiplication
-elif (self = "div")  then MultiplicativeOpKind::div
-elif (self = "idiv") then MultiplicativeOpKind::idiv
-elif (self = "mod")  then MultiplicativeOpKind::mod
-endif;
+query ExprSingle::isFunctionCall(name : QName) : Boolean =
+    self.oclIsKindOf(FunctionCall) and self.oclAsType(FunctionCall).name = name;

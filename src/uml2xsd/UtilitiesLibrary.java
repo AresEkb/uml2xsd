@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Denis Nikiforov.
+ * Copyright (c) 2013, 2014 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -129,19 +129,6 @@ public class UtilitiesLibrary {
         return FeatureMapUtil.createEntry(feature, value);
     }
 
-    //    @Operation(contextual=true)
-    //    public static String getFacetStringValue(FeatureMap.Entry featureMapEntry)
-    //    {
-    //        EClassifier type = featureMapEntry.getEStructuralFeature().getEType();
-    //        if (!(type instanceof Facet)) {
-    //            return null;
-    //        }
-    //        Object value = ((Facet)type).getValue();
-    //
-    //        return ((Facet)type). ge .getValue();
-    //        return EcoreUtil.convertToString((EDataType)type, ((Facet)type).getValue());
-    //    }
-
     private static EClass findDocumentRoot(EPackage pckg)
     {
         for (EObject obj : pckg.eContents()) {
@@ -158,24 +145,21 @@ public class UtilitiesLibrary {
     }
 
     @Operation(contextual=true)
-    public static EList<ExpressionInOCL> ownedOCLRule(Namespace context) throws ParserException
+    public static ExpressionInOCL toExpressionInOCL(Constraint constraint) throws ParserException
     {
+        Namespace context = constraint.getContext();
         MetaModelManager mm = PivotUtil.findMetaModelManager(context);
         org.eclipse.ocl.examples.pivot.Element type = UML2Pivot.importFromUML(mm, null, context);
         oclHelper.setInstanceContext(type);
-        EList<ExpressionInOCL> c = new BasicEList<ExpressionInOCL>();
-        for (Constraint constraint : context.getOwnedRules()) {
-            if (constraint.getSpecification() instanceof OpaqueExpression) {
-                OpaqueExpression opaqueExpression = (OpaqueExpression)constraint.getSpecification();
-                int indexOfOCLBody = opaqueExpression.getLanguages().indexOf("OCL");
-                if (indexOfOCLBody != -1) {
-                    String body = opaqueExpression.getBodies().get(indexOfOCLBody);
-                    ExpressionInOCL expr = oclHelper.createInvariant(body);
-                    c.add(0, expr);
-                }
+        if (constraint.getSpecification() instanceof OpaqueExpression) {
+            OpaqueExpression opaqueExpression = (OpaqueExpression)constraint.getSpecification();
+            int indexOfOCLBody = opaqueExpression.getLanguages().indexOf("OCL");
+            if (indexOfOCLBody != -1) {
+                String body = opaqueExpression.getBodies().get(indexOfOCLBody);
+                return oclHelper.createInvariant(body);
             }
         }
-        return c;
+        return null;
     }
 
     @Operation(contextual=true)

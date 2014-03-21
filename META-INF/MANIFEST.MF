@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: OclToXPath;singleton:=true
+Bundle-SymbolicName: uml2xsd;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
@@ -27,7 +27,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.m2m.qvt.oml.common;bundle-version="3.4.0",
  org.eclipse.m2m.qvt.oml.emf.util;bundle-version="3.4.0",
  org.eclipse.xsd;bundle-version="2.10.0",
- org.eclipse.core.runtime.compatibility
+ org.eclipse.core.runtime.compatibility,
+ org.eclipse.uml2.uml;bundle-version="5.0.0",
+ org.eclipse.uml2.uml.resources;bundle-version="5.0.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.codegen.ecore.genmodel,
  org.emftext.language.xpath2,
