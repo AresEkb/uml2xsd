@@ -10,6 +10,7 @@
  */
 package uml2xsd;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,6 +22,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,11 +47,13 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter.WriteableOutputStream;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
@@ -57,15 +61,32 @@ import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
+import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.Comment;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
+import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.OpaqueExpression;
+import org.eclipse.uml2.uml.Profile;
+import org.eclipse.uml2.uml.Stereotype;
+import org.eclipse.uml2.uml.UMLPackage;
+import org.eclipse.uml2.uml.resource.XMI212UMLResource;
+import org.eclipse.uml2.uml.resource.XMI242UMLResource;
+import org.eclipse.uml2.uml.resource.XMI2UMLExtendedMetaData;
+import org.eclipse.uml2.uml.resource.XMI2UMLResource;
+import org.eclipse.uml2.uml.util.UMLUtil;
 import org.emftext.language.xpath2.Xpath2Package;
 import org.w3._2001.xml.schema.DocumentRoot;
 import org.w3._2001.xml.schema.SchemaType;
@@ -77,7 +98,7 @@ public class Main {
     public static void main(String[] args) {
 //        final String input = "model/ReferenceModel.uml";
 //        final String input = "model/SMDataModel.uml";
-        final String input = "model/TTDataModel.uml";
+        final String input = "model/TTDataModel.xmi";
         final String transform = "transforms/UMLtoXSD11.qvto";
 //        final String transform = "transforms/GetXPath.qvto";
         final String output = "output/";
@@ -86,15 +107,19 @@ public class Main {
         ResourceSet rs = new ResourceSetImpl();
         rs.setURIConverter(new CustomURIConverter());
 
+        System.out.println("  UML");
+        UMLUtil.init(rs);
+        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
+        
         System.out.println("  OCL");
-        org.eclipse.ocl.examples.pivot.OCL.initialize(rs);
-        org.eclipse.ocl.examples.pivot.uml.UML2Pivot.initialize(rs);
-        org.eclipse.ocl.examples.pivot.model.OCLstdlib.install();
-        org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain.initialize(rs);
-        org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup.doSetup();
-        org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup.doSetup();
+//        org.eclipse.ocl.examples.pivot.OCL.initialize(rs);
+//        org.eclipse.ocl.examples.pivot.uml.UML2Pivot.initialize(rs);
+//        org.eclipse.ocl.examples.pivot.model.OCLstdlib.install();
+//        org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain.initialize(rs);
+//        org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup.doSetup();
+//        org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup.doSetup();
         org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup.doSetup();
-        org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.getAdapter(rs);
+//        org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap.getAdapter(rs);
 
         System.out.println("  Ecore packages");
         Xpath2Package.eINSTANCE.getEFactoryInstance();
@@ -106,12 +131,49 @@ public class Main {
             registerBlackboxUnits();
 
             System.out.println("Loading UML model " + input);
+            
+            // load the profile (test purpose)
+//            URI profilePath = createFileURI("model/EECProfile.profile.xmi");
+//            Resource profileResource = rs.getResource(profilePath, true);
+//            Profile umlProfile = (Profile) EcoreUtil.getObjectByType(
+//                    profileResource.getContents(), UMLPackage.eINSTANCE.getProfile());
+//            System.out.println("Profile: " + umlProfile);
+            // end loading the profile
+            
+//            URI baseURI = createFileURI(input).trimSegments(1); 
+//            rs.getURIConverter().getURIMap().put(URI.createURI("Default.profile.uml"), baseURI.appendSegment("Default.profile.uml"));
+//            rs.getURIConverter().getURIMap().put(URI.createURI("Deployment.profile.uml"), baseURI.appendSegment("Deployment.profile.uml"));
+//            rs.getURIConverter().getURIMap().put(URI.createURI("Default.profile.xmi"), baseURI.appendSegment("Default.profile.xmi"));
+//            rs.getURIConverter().getURIMap().put(URI.createURI("Deployment.profile.xmi"), baseURI.appendSegment("Deployment.profile.xmi"));
+//            
+//            rs.getURIConverter().getURIMap().put(URI.createURI("http:///schemas/EECProfile/_KVknALVwEeODU4nEV69bGw/427"), createFileURI("model/EECProfile.profile.xmi#_KVnDQLVwEeODU4nEV69bGw"));
+//            rs.getPackageRegistry().put("http://schema.omg.org/spec/UML/2.1.1/uml.xml", UMLPackage.eINSTANCE);
+//            rs.getPackageRegistry().put("http://schema.omg.org/spec/UML/2.1.1/", UMLPackage.eINSTANCE);
+//            rs.getPackageRegistry().put("http://schema.omg.org/spec/UML/2.1.1/uml.xml#_0", UMLPackage.eINSTANCE);
             Resource resource = rs.getResource(createFileURI(input), true);
-            EObject uml = resource.getContents().get(0);
-            MetaModelManager mm = PivotUtil.getMetaModelManager(resource);
+//            Resource resource = rs.createResource(createFileURI(input));
+//            Resource resource = rs.createResource(createFileURI(input), XMI2UMLResource.UML_CONTENT_TYPE_IDENTIFIER); 
+//            EObject uml = resource.getContents().get(0);
+            System.out.println("Root: " + resource.getContents().get(0).getClass());
+            Model uml = (Model)EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.eINSTANCE.getModel());
+            for (Profile profile : uml.getAllAppliedProfiles()) {
+                System.out.println(profile);
+//                for (Element el : profile.allOwnedElements()) {
+//                    System.out.println(el);
+//                }
+            }
+            for (Stereotype stereotype : uml.getAppliedStereotypes()) {
+                System.out.println(stereotype);
+            }
+//            saveModel(rs, uml, createFileURI("output/test.uml"));
 
-            System.out.println("Adding data type operations");
-            addDataTypeOperations(rs, mm, uml);
+//            System.out.println("Validating UML model " + input);
+//            if (!validateModel(uml)) {
+//                return;
+//            }
+
+//            System.out.println("Adding data type operations");
+//            addDataTypeOperations(rs, mm, uml);
 
             System.out.println("Transforming model by " + transform);
             List<EObject> schemas = transformModel(rs, createFileURI(transform), uml);
@@ -141,10 +203,91 @@ public class Main {
             e.printStackTrace();
         }
     }
+    
+    private static boolean validateModel(EObject uml) throws ParserException {
+        PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory();
+        PivotEnvironment environment = envFactory.createEnvironment();
+        OCL ocl = OCL.newInstance(environment);
+        OCLHelper oclHelper = ocl.createOCLHelper();
+        
+        boolean noErrorsFound = true;
+
+        final TreeIterator<EObject> iterator = uml.eAllContents();
+        DoubleHashMap<Stereotype, EClass, List<ExpressionInOCL>> rulesCache = new DoubleHashMap<Stereotype, EClass, List<ExpressionInOCL>>();
+        while (iterator.hasNext()) {
+            EObject obj = iterator.next();
+            if (obj instanceof org.eclipse.uml2.uml.NamedElement) {
+                org.eclipse.uml2.uml.NamedElement element = (org.eclipse.uml2.uml.NamedElement)obj;
+                EClass eClass = element.eClass();
+                for (Stereotype stereotype : element.getAppliedStereotypes()) {
+                    List<ExpressionInOCL> rules = rulesCache.get(stereotype, eClass);
+                    if (rules == null) {
+                        rules = new ArrayList<ExpressionInOCL>();
+                        for (org.eclipse.uml2.uml.Constraint constraint : stereotype.getOwnedRules()) {
+                            oclHelper.setContext(eClass);
+                            ExpressionInOCL expr = oclHelper.createQuery(
+                                    getOCLExpressionFromConstraint(constraint));
+                            expr.setName(constraint.getName());
+                            for (org.eclipse.uml2.uml.Comment comment : constraint.getOwnedComments()) {
+                                Comment pivotComment = PivotFactory.eINSTANCE.createComment();
+                                pivotComment.setBody(comment.getBody());
+                                expr.getOwnedComment().add(pivotComment);
+                            }
+                            rules.add(expr);
+                        }
+                        rulesCache.put(stereotype, eClass, rules);
+                    }
+                    for (ExpressionInOCL rule : rules) {
+                        if (!ocl.check(element, rule)) {
+                            noErrorsFound = false;
+                            System.out.println("  Error " + rule.getName() + " at " + element.getQualifiedName());
+                            if (!rule.getOwnedComment().isEmpty()) {
+                                System.out.println("  " + rule.getOwnedComment().get(0).getBody());
+                            }
+                            System.out.println();
+                        }
+//                        Object q = ocl.evaluate(element, rule);
+//                        if (!(q instanceof Boolean) || !(Boolean)q) {
+//                            System.out.println("  Error " + rule.getName() + " at " + element.getQualifiedName());
+//                            System.out.println(q);
+//                            System.out.println();
+//                        }
+                    }
+                }
+            }
+        }
+        return noErrorsFound;
+    }
+
+    private static String getOCLExpressionFromConstraint(org.eclipse.uml2.uml.Constraint constraint)
+    {
+        if (constraint.getSpecification() instanceof OpaqueExpression) {
+                OpaqueExpression opaqueExpression = ((OpaqueExpression) constraint.getSpecification());
+
+                // Find the body named OCL
+                int indexOfOCLBody = -1;
+                for (int i = 0; i < opaqueExpression.getLanguages().size() && indexOfOCLBody == -1; i++) {
+                    if (opaqueExpression.getLanguages().get(i).equals("OCL")) {
+                        indexOfOCLBody = i;
+                    }
+                }
+                                                     
+                // If the body was found, continue the check
+                if (indexOfOCLBody != -1) {
+                    String body = opaqueExpression.getBodies().get(indexOfOCLBody);
+                    // HACK
+                    body = body.replace("oclAsType(Package).extension_EECDataModel.standardId",
+                            "getValue(getAppliedStereotype('EECProfile::EECDataModel'), 'standardId').oclAsType(String)");
+                    return body;
+                }
+            }   
+        return null;//there was no proper OCL to be found
+    }
 
     private static URI createFileURI(String relativePath)
     {
-        return URI.createURI(relativePath).resolve(URI.createFileURI(System.getProperty("user.dir") + "/"));
+        return URI.createFileURI(new File(relativePath).getAbsolutePath());
+        // return URI.createURI(relativePath).resolve(URI.createFileURI(System.getProperty("user.dir") + "/"));
     }
 
     private static String getSchemaLocation(String targetNamespace)
@@ -233,8 +376,9 @@ public class Main {
         }
     }
 
-    private static void addDataTypeOperations(ResourceSet rs, MetaModelManager mm, EObject model)
+    private static void addDataTypeOperations(ResourceSet rs, EObject model)
             throws ParserException, IOException {
+        MetaModelManager mm = PivotUtil.getMetaModelManager(model.eResource());
         // TODO: All needed DataType operations must be registered here
         Root bdt = UML2Pivot.importFromUML(mm, null, model.eResource());
         final TreeIterator<EObject> iterator = bdt.eAllContents();
