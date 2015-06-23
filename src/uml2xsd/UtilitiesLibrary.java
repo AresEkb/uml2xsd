@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2014 Denis Nikiforov.
+ * Copyright (c) 2013, 2015 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -27,20 +27,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.OCL;
-import org.eclipse.ocl.examples.pivot.ParserException;
-import org.eclipse.ocl.examples.pivot.helper.OCLHelper;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.uml.UML2Pivot;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.NamedElement;
-import org.eclipse.uml2.uml.Namespace;
-import org.eclipse.uml2.uml.OpaqueExpression;
 import org.eclipse.uml2.uml.Property;
 import org.emftext.language.xpath2.Expr;
 import org.emftext.language.xpath2.resource.xpath2.IXpath2TextPrinter;
@@ -54,10 +46,7 @@ public class UtilitiesLibrary {
         super();
     }
 
-    final static PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory();
-    final static PivotEnvironment environment = envFactory.createEnvironment();
-    final static OCL ocl = OCL.newInstance(environment);
-    final static OCLHelper oclHelper = ocl.createOCLHelper();
+    final static OCL ocl = OCL.newInstance();
 
     final static String DOCUMENT_ROOT = "DocumentRoot";
 
@@ -68,9 +57,9 @@ public class UtilitiesLibrary {
     }
 
     @Operation(contextual=true)
-    public static NamedElement getETarget(org.eclipse.ocl.examples.pivot.NamedElement el)
+    public static NamedElement getETarget(org.eclipse.ocl.pivot.NamedElement el)
     {
-        return (NamedElement)el.getETarget();
+        return (NamedElement)el.getESObject();
     }
 
     public static QName createQName(String localPart)
@@ -146,19 +135,8 @@ public class UtilitiesLibrary {
     @Operation(contextual=true)
     public static ExpressionInOCL toExpressionInOCL(Constraint constraint) throws ParserException
     {
-        Namespace context = constraint.getContext();
-        MetaModelManager mm = PivotUtil.findMetaModelManager(context);
-        org.eclipse.ocl.examples.pivot.Element type = UML2Pivot.importFromUML(mm, null, context);
-        oclHelper.setInstanceContext(type);
-        if (constraint.getSpecification() instanceof OpaqueExpression) {
-            OpaqueExpression opaqueExpression = (OpaqueExpression)constraint.getSpecification();
-            int indexOfOCLBody = opaqueExpression.getLanguages().indexOf("OCL");
-            if (indexOfOCLBody != -1) {
-                String body = opaqueExpression.getBodies().get(indexOfOCLBody);
-                return oclHelper.createInvariant(body);
-            }
-        }
-        return null;
+        org.eclipse.ocl.pivot.Constraint asConstraint = ocl.getMetamodelManager().getASOf(org.eclipse.ocl.pivot.Constraint.class, constraint);
+        return ocl.getSpecification(asConstraint);
     }
 
     @Operation(contextual=true)

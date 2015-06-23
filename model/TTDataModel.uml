@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Default="http:///schemas/Default/1" xmlns:EECProfile="http:///schemas/EECProfile/_f-1pgKm_EeONEcnlT49dfw/419" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Default/1 Default.profile.uml#_IN8k8MmBEdqBcN1R6EvWUw http:///schemas/EECProfile/_f-1pgKm_EeONEcnlT49dfw/419 EECProfile.profile.uml#_f-4FwKm_EeONEcnlT49dfw">
-  <uml:Model xmi:id="_jAllUFEBEeOTEaxXgV0mpg" name="TTDataModel">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Default="http:///schemas/Default/1" xmlns:EECProfile="http:///schemas/EECProfile/_KVknALVwEeODU4nEV69bGw/427" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Default/1 Default.profile.uml#_IN8k8MmBEdqBcN1R6EvWUw http:///schemas/EECProfile/_KVknALVwEeODU4nEV69bGw/427 EECProfile.profile.uml#_KVnDQLVwEeODU4nEV69bGw">
+  <uml:Model xmi:id="_jAllUFEBEeOTEaxXgV0mpg" name="EECModel">
+    <eAnnotations xmi:id="_vZ2OILV0EeODU4nEV69bGw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <details xmi:id="_vZ21MLV0EeODU4nEV69bGw" key="TTDataModel"/>
+    </eAnnotations>
     <packageImport xmi:id="_jAllUlEBEeOTEaxXgV0mpg">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
@@ -1032,7 +1035,7 @@
     </profileApplication>
     <profileApplication xmi:id="_k8vI8FEBEeOTEaxXgV0mpg">
       <eAnnotations xmi:id="_k8yMQFEBEeOTEaxXgV0mpg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="EECProfile.profile.uml#_f-4FwKm_EeONEcnlT49dfw"/>
+        <references xmi:type="ecore:EPackage" href="EECProfile.profile.uml#_KVnDQLVwEeODU4nEV69bGw"/>
       </eAnnotations>
       <appliedProfile href="EECProfile.profile.uml#_iHjpsIAKEeKTpKWv4S5WIQ"/>
     </profileApplication>
@@ -1047,20 +1050,19 @@
   <EECProfile:DataModel xmi:id="__uYmgFEBEeOTEaxXgV0mpg" base_Package="_8vEVsFEBEeOTEaxXgV0mpg" version="0.1.0"/>
   <EECProfile:EECDataModel xmi:id="_BouMQFECEeOTEaxXgV0mpg" base_Package="_BotlMFECEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_C6R6wFECEeOTEaxXgV0mpg" base_Package="_C6RTsFECEeOTEaxXgV0mpg"/>
-  <EECProfile:Namespace xmi:id="_E5CtgFECEeOTEaxXgV0mpg" base_Package="_BotlMFECEeOTEaxXgV0mpg" version="0.1.0" name="urn:EEC:TTD:ComplexDataObjects:v0.1.0" prefix="ttcdo"/>
-  <EECProfile:Namespace xmi:id="_E5CtgVECEeOTEaxXgV0mpg" base_Package="_C6RTsFECEeOTEaxXgV0mpg" version="0.1.0" name="urn:EEC:TTD:SimpleDataObjects:v0.1.0" prefix="ttsdo"/>
-  <EECProfile:EECDataModel xmi:id="_GiOR0FECEeOTEaxXgV0mpg" standardId="ПСЭД" base_Package="_GiNqwFECEeOTEaxXgV0mpg"/>
-  <EECProfile:EECDataModel xmi:id="_Hj_34FECEeOTEaxXgV0mpg" standardId="ПСТД" base_Package="_Hj_Q0FECEeOTEaxXgV0mpg"/>
-  <EECProfile:EECDataModel xmi:id="_I2fagFECEeOTEaxXgV0mpg" standardId="ППЭД" base_Package="_I2eMYFECEeOTEaxXgV0mpg"/>
-  <EECProfile:EECDataModel xmi:id="_J48WAFECEeOTEaxXgV0mpg" standardId="ППТД" standardName="" base_Package="_J47u8FECEeOTEaxXgV0mpg"/>
-  <EECProfile:AggregateElements xmi:id="_LkD0AFECEeOTEaxXgV0mpg" base_Package="_GiNqwFECEeOTEaxXgV0mpg"/>
-  <EECProfile:AggregateTypes xmi:id="_MCOWsFECEeOTEaxXgV0mpg" base_Package="_Hj_Q0FECEeOTEaxXgV0mpg"/>
-  <EECProfile:LeafElements xmi:id="_NA0F4FECEeOTEaxXgV0mpg" base_Package="_I2eMYFECEeOTEaxXgV0mpg"/>
-  <EECProfile:LeafTypes xmi:id="_NhuakFECEeOTEaxXgV0mpg" base_Package="_J47u8FECEeOTEaxXgV0mpg"/>
+  <EECProfile:Namespace xmi:id="_E5CtgFECEeOTEaxXgV0mpg" base_Package="_BotlMFECEeOTEaxXgV0mpg" version="0.1.0" uri="urn:EEC:TTD:ComplexDataObjects:v0.1.0" name="urn:EEC:TTD:ComplexDataObjects:v0.1.0" prefix="ttcdo"/>
+  <EECProfile:Namespace xmi:id="_E5CtgVECEeOTEaxXgV0mpg" base_Package="_C6RTsFECEeOTEaxXgV0mpg" version="0.1.0" uri="urn:EEC:TTD:SimpleDataObjects:v0.1.0" name="urn:EEC:TTD:SimpleDataObjects:v0.1.0" prefix="ttsdo"/>
+  <EECProfile:EECDataModel xmi:id="_GiOR0FECEeOTEaxXgV0mpg" standardId="TTD-CDE" standardName="ПСЭД" base_Package="_GiNqwFECEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_Hj_34FECEeOTEaxXgV0mpg" standardId="TTD-CDT" standardName="ПСТД" base_Package="_Hj_Q0FECEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_I2fagFECEeOTEaxXgV0mpg" standardId="TTD-SDE" standardName="ППЭД" base_Package="_I2eMYFECEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_J48WAFECEeOTEaxXgV0mpg" standardId="TTD-SDT" standardName="ППТД" base_Package="_J47u8FECEeOTEaxXgV0mpg"/>
+  <EECProfile:NamespaceSubset xmi:id="_LkD0AFECEeOTEaxXgV0mpg" order="5" base_Package="_GiNqwFECEeOTEaxXgV0mpg"/>
+  <EECProfile:NamespaceSubset xmi:id="_MCOWsFECEeOTEaxXgV0mpg" order="4" base_Package="_Hj_Q0FECEeOTEaxXgV0mpg"/>
+  <EECProfile:NamespaceSubset xmi:id="_NA0F4FECEeOTEaxXgV0mpg" order="3" base_Package="_I2eMYFECEeOTEaxXgV0mpg"/>
+  <EECProfile:NamespaceSubset xmi:id="_NhuakFECEeOTEaxXgV0mpg" order="2" base_Package="_J47u8FECEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_m-eFQVEDEeOTEaxXgV0mpg" businessName="Дата и время проведения контроля" example="2014-02-28" standardId="TTD-SDE-00009" standardName="Контроль. Дата и время" concept="Контроль" representation="Дата и время" base_Classifier="_m-eFQFEDEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_qiiB4VEDEeOTEaxXgV0mpg" base_Property="_qiiB4FEDEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_mbFkAFEGEeOTEaxXgV0mpg" businessName="Вид поездки" example="" standardId="TTD-SDT-00001" standardName="Вид поездки_ Код. Тип" concept="Вид поездки_ Код" representation="" usage="" note="Предназначен для определения характера перемещения в зависимости от направления (въезд, выезд, транзитный въезд и др.)" analogue="" base_Classifier="_mbDHwFEGEeOTEaxXgV0mpg"/>
-  <EECProfile:ValueDomain xmi:id="_mbFkAVEGEeOTEaxXgV0mpg" base_DataType="_mbDHwFEGEeOTEaxXgV0mpg" description="Значение кода из классификатора «Виды поездки» (С.ТТ.002)" fractionDigits=""/>
   <EECProfile:restriction xmi:id="_mbFkA1EGEeOTEaxXgV0mpg" base_Generalization="_mbDHwlEGEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_ohZwQFEGEeOTEaxXgV0mpg" businessName="Вид поездки" standardId="TTD-SDE-00022" standardName="Вид поездки. Код" concept="Вид поездки" representation="Код" usage="Указывается в соответствии с классификатором «Виды поездки» (С.ТТ.002)" note="" analogue="UN/CEFACT: CCL: UN00002043" base_Classifier="_ohZJMFEGEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_pa8AUFEGEeOTEaxXgV0mpg" base_Property="_pa7ZQFEGEeOTEaxXgV0mpg"/>
@@ -1073,11 +1075,9 @@
   <EECProfile:EECDataModel xmi:id="_mg7bYFEIEeOTEaxXgV0mpg" businessName="Регистрационный номер прицепа (полуприцепа)" example="ВР627177" standardId="TTD-SDE-00021" standardName="Регистрационный номер прицепа (полуприцепа). Код" concept="Регистрационный номер прицепа (полуприцепа)" representation="Код" note="" analogue="UN/CEFACT: CCL: UN00001983" base_Classifier="_mg60UFEIEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_oeabwFEIEeOTEaxXgV0mpg" base_Property="_oeZ0sFEIEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_TDXvIFELEeOTEaxXgV0mpg" businessName="Тип транспортного средства" example="" standardId="TTD-SDT-00005" standardName="Тип транспортного средства_ Код. Тип" concept="Тип транспортного средства_ Код" usage="" note="" base_Classifier="_TDXIEFELEeOTEaxXgV0mpg"/>
-  <EECProfile:ValueDomain xmi:id="_YhDf0FELEeOTEaxXgV0mpg" base_DataType="_TDXIEFELEeOTEaxXgV0mpg" description="Значение кода из классификатора «Типы транспортных средств» (С.ТТ.001)" pattern=""/>
   <EECProfile:EECDataModel xmi:id="_kT24IFEOEeOTEaxXgV0mpg" businessName="Регулярность перевозки пассажиров" example="true" standardId="TTD-SDE-00020" standardName="Регулярная перевозка пассажиров. Индикатор" concept="Регулярная перевозка пассажиров" representation="Индикатор" usage="Указывается только для типа транспортного средства «Автобус»" base_Classifier="_kT2REFEOEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_wbBaEFEVEeOTEaxXgV0mpg" businessName="Масса груза" example="15" standardId="TTD-SDE-00004" standardName="Масса груза. Измерение" concept="Масса груза" representation="Измерение" note="" analogue="UN/CEFACT: CCL: UN00003025" base_Classifier="_wbAzAFEVEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_pUHMUFEWEeOTEaxXgV0mpg" businessName="Код груза" example="0901" standardId="TTD-SDT-00004" standardName="Груз_ Код. Тип" concept="Груз_ Код" note="Например, код «0901» обозначает груз «Кофе, жареный или нежареный, с кофеином или без кофеина; кофейная шелуха и оболочки зерен кофе; заменители кофе, содержащие кофе в любой пропорции»" base_Classifier="_pUGlQFEWEeOTEaxXgV0mpg"/>
-  <EECProfile:ValueDomain xmi:id="_sqM-YFEWEeOTEaxXgV0mpg" base_DataType="_pUGlQFEWEeOTEaxXgV0mpg" description="4 первых цифры кода в соответствии со справочником ТН ВЭД ТС (С.005)" pattern="[0-9]{4}"/>
   <EECProfile:EECDataModel xmi:id="_4xAYIFEWEeOTEaxXgV0mpg" businessName="Общая масса" example="2.108" standardId="TTD-SDE-00026" standardName="Полная масса транспортного средства. Измерение" concept="Полная масса транспортного средства" representation="Измерение" usage="" analogue="UN/CEFACT: CCL: UN00002030" base_Classifier="_4w_xEFEWEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_83hPoFEYEeOTEaxXgV0mpg" businessName="Сведения об оси" example="" standardId="TTD-CDT-00001" standardName="Колесная ось_ Детали. Тип" concept="Колесная ось_ Детали" base_Classifier="_83gokFEYEeOTEaxXgV0mpg"/>
   <EECProfile:EECDataModel xmi:id="_It6O0FEZEeOTEaxXgV0mpg" businessName="Номер оси" example="2" standardId="TTD-SDE-00003" standardName="Номер оси. Порядковый номер" concept="Номер оси" representation="Порядковый номер" base_Classifier="_It5nwFEZEeOTEaxXgV0mpg"/>
@@ -1141,10 +1141,7 @@
   <EECProfile:EECDataModel xmi:id="_5S8y4FGrEeOuyKm2YW1K1g" businessName="Информация об оси" example="" standardId="TTD-CDE-00001" standardName="Колесная ось. Детали" concept="Колесная ось" representation="" base_Classifier="_5S8L0FGrEeOuyKm2YW1K1g"/>
   <EECProfile:EECDataModel xmi:id="_6Prg4FGrEeOuyKm2YW1K1g" base_Property="_6Pq50FGrEeOuyKm2YW1K1g"/>
   <EECProfile:EECDataModel xmi:id="_9D4PYFHCEeOuyKm2YW1K1g" businessName="Номер учетного талона или уведомления" example="RUS1234567820111312345" standardId="TTD-SDT-00003" standardName="Учетный талон или уведомление_ Идентификатор. Тип" concept="Учетный талон или уведомление_ Идентификатор" note="" base_Classifier="_9D3oUFHCEeOuyKm2YW1K1g"/>
-  <EECProfile:ValueDomain xmi:id="_bFFZMFHDEeOuyKm2YW1K1g" base_DataType="_9D3oUFHCEeOuyKm2YW1K1g" description="Структура: символы 1–3 – трехбуквенный код страны в соответствии с классификатором «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001); символы 4–11 – код таможенного поста в соответствии с классификатором ЕЭК «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006); символы 12–17 – день, месяц, две последние цифры текущего года; символы 18–22 – порядковый номер бланка" pattern="[A-Z]{3}[0-9]{8}(0[1-9]|[12][0-9]|30|31)(0[1-9]|1[012])[0-9]{2}[0-9]{5}" fractionDigits=""/>
-  <EECProfile:ValueDomain xmi:id="_bFGnUFHDEeOuyKm2YW1K1g" base_DataType="_F51NYFEIEeOTEaxXgV0mpg" description="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)" minLength="" maxLength="" maxInclusive=""/>
   <EECProfile:EECDataModel xmi:id="_SyGZ4FHEEeOuyKm2YW1K1g" businessName="Вид разрешения на поездку" example="" standardId="TTD-SDT-00002" standardName="Вид разрешения на поездку_ Код. Тип" concept="Вид разрешения на поездку_ Код" representation="" usage="" note="" analogue="" base_Classifier="_SyFLwFHEEeOuyKm2YW1K1g"/>
-  <EECProfile:ValueDomain xmi:id="_SyHA8FHEEeOuyKm2YW1K1g" base_DataType="_SyFLwFHEEeOuyKm2YW1K1g" description="Значение кода из классификатора «Виды разрешений на поездку» (С.ТТ.003)" fractionDigits=""/>
   <EECProfile:restriction xmi:id="_SyHA8VHEEeOuyKm2YW1K1g" base_Generalization="_SyFLwVHEEeOuyKm2YW1K1g"/>
   <EECProfile:restriction xmi:id="_My7QQFHFEeOuyKm2YW1K1g" base_Generalization="_LwAasFHFEeOuyKm2YW1K1g"/>
   <EECProfile:restriction xmi:id="_NjRvIFHFEeOuyKm2YW1K1g" base_Generalization="_NjRIEFHFEeOuyKm2YW1K1g"/>
@@ -1201,10 +1198,10 @@
   <EECProfile:EECDataModel xmi:id="_jlLU4IyxEeO5QKVbQiY0wg" businessName="Запрос сведений о результатах транспортного контроля" standardId="R.TT.DSI.003" base_Classifier="_jlKt0IyxEeO5QKVbQiY0wg"/>
   <EECProfile:EECDataModel xmi:id="_pFDd8YyxEeO5QKVbQiY0wg" base_Package="_pFDd8IyxEeO5QKVbQiY0wg"/>
   <EECProfile:EECDataModel xmi:id="_rnWbkIyxEeO5QKVbQiY0wg" businessName="Сведения о разрешениях перевозчика" standardId="R.TT.DSI.004" base_Classifier="_rnV0gIyxEeO5QKVbQiY0wg"/>
-  <EECProfile:Namespace xmi:id="_UC-84IyyEeO5QKVbQiY0wg" base_Package="_pFDd8IyxEeO5QKVbQiY0wg" version="0.1.0" name="urn:EEC:TT:ED:CarrierPermissionDetails:v0.1.0" prefix="doc"/>
-  <EECProfile:Namespace xmi:id="_UC-84YyyEeO5QKVbQiY0wg" base_Package="_TMjgoIyxEeO5QKVbQiY0wg" version="0.1.0" name="urn:EEC:TT:ED:CarrierPermissionRequestDetails:v0.1.0" prefix="doc"/>
-  <EECProfile:Namespace xmi:id="_UDAyEIyyEeO5QKVbQiY0wg" base_Package="_C7fF4IyxEeO5QKVbQiY0wg" version="0.1.0" name="urn:EEC:TT:ED:TransportControlResultDetails:v0.1.0" prefix="doc"/>
-  <EECProfile:Namespace xmi:id="_UDAyEYyyEeO5QKVbQiY0wg" base_Package="_glbmQIyxEeO5QKVbQiY0wg" version="0.1.0" name="urn:EEC:TT:ED:TransportControlResultRequestDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_UC-84IyyEeO5QKVbQiY0wg" base_Package="_pFDd8IyxEeO5QKVbQiY0wg" version="0.1.0" uri="urn:EEC:TT:ED:CarrierPermissionDetails:v0.1.0" name="urn:EEC:TT:ED:CarrierPermissionDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_UC-84YyyEeO5QKVbQiY0wg" base_Package="_TMjgoIyxEeO5QKVbQiY0wg" version="0.1.0" uri="urn:EEC:TT:ED:CarrierPermissionRequestDetails:v0.1.0" name="urn:EEC:TT:ED:CarrierPermissionRequestDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_UDAyEIyyEeO5QKVbQiY0wg" base_Package="_C7fF4IyxEeO5QKVbQiY0wg" version="0.1.0" uri="urn:EEC:TT:ED:TransportControlResultDetails:v0.1.0" name="urn:EEC:TT:ED:TransportControlResultDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_UDAyEYyyEeO5QKVbQiY0wg" base_Package="_glbmQIyxEeO5QKVbQiY0wg" version="0.1.0" uri="urn:EEC:TT:ED:TransportControlResultRequestDetails:v0.1.0" name="urn:EEC:TT:ED:TransportControlResultRequestDetails:v0.1.0" prefix="doc"/>
   <EECProfile:EECDataModel xmi:id="_zEbJwIy0EeO5QKVbQiY0wg" base_Property="_zEaisIy0EeO5QKVbQiY0wg"/>
   <EECProfile:EECDataModel xmi:id="_zGdxIYy0EeO5QKVbQiY0wg" base_Property="_zGdxIIy0EeO5QKVbQiY0wg"/>
   <EECProfile:EECDataModel xmi:id="_lcALQYy_EeO5QKVbQiY0wg" businessName="Номер специального разрешения" standardId="TTD-SDE-00044" standardName="Специальное разрешение. Идентификатор" concept="Специальное разрешение" representation="Идентификатор" analogue="UN/CEFACT: CCL: UN00004520" base_Classifier="_lcALQIy_EeO5QKVbQiY0wg"/>
@@ -1224,11 +1221,9 @@
   <EECProfile:restriction xmi:id="_r-tucI18EeO5QKVbQiY0wg" base_Generalization="_r-sgUI18EeO5QKVbQiY0wg"/>
   <EECProfile:EECDataModel xmi:id="_tUOI0I18EeO5QKVbQiY0wg" base_Property="_tUNhwI18EeO5QKVbQiY0wg"/>
   <Default:Documentation xmi:id="_05Av8I18EeO5QKVbQiY0wg" base_Comment="_049FkI18EeO5QKVbQiY0wg"/>
-  <EECProfile:ValueDomain xmi:id="_LhAJII2AEeO5QKVbQiY0wg" base_DataType="_qrbhoI18EeO5QKVbQiY0wg" description="Значение кода из классификатора «Виды решений о пропуске» (С.ТТ.008)"/>
   <EECProfile:EECDataModel xmi:id="_XZdk4I2AEeO5QKVbQiY0wg" base_Property="_XZc90I2AEeO5QKVbQiY0wg"/>
   <EECProfile:EECDataModel xmi:id="_aYHuYI2AEeO5QKVbQiY0wg" businessName="Тип специального разрешения" standardId="TTD-SDT-00009" standardName="Специальное разрешение_ Код. Тип" concept="Специальное разрешение_ Код" representation="" base_Classifier="_aYHHUI2AEeO5QKVbQiY0wg"/>
   <EECProfile:restriction xmi:id="_b6GegI2AEeO5QKVbQiY0wg" base_Generalization="_b6F3cI2AEeO5QKVbQiY0wg"/>
-  <EECProfile:ValueDomain xmi:id="_c2enMI2AEeO5QKVbQiY0wg" base_DataType="_aYHHUI2AEeO5QKVbQiY0wg" description="Значение кода из классификатора «Типы специальных разрешений» (С.ТТ.007)"/>
   <EECProfile:EECDataModel xmi:id="_eVPrQI2AEeO5QKVbQiY0wg" base_Property="_eVPEMI2AEeO5QKVbQiY0wg"/>
   <Default:Documentation xmi:id="_tYJX0I2CEeO5QKVbQiY0wg" base_Comment="_tYGUgI2CEeO5QKVbQiY0wg"/>
   <Default:Documentation xmi:id="_6WtgAI2CEeO5QKVbQiY0wg" base_Comment="_6Wp1oI2CEeO5QKVbQiY0wg"/>
@@ -1396,7 +1391,6 @@
   <EECProfile:EECDataModel xmi:id="_OjfJwJPCEeOau5lQkkgj3A" businessName="Код контрольного пункта" example="" standardId="TTD-SDE-00053" standardName="Контрольный пункт. Идентификатор" concept="Контрольный пункт" representation="Идентификатор" usage="Указывается в соответствии с классификатором «Контрольные пункты транспортного контроля» (С.ТТ.005)" base_Classifier="_OjeisJPCEeOau5lQkkgj3A"/>
   <Default:Documentation xmi:id="_TNn9oJPCEeOau5lQkkgj3A" base_Comment="_TNkTQJPCEeOau5lQkkgj3A"/>
   <EECProfile:EECDataModel xmi:id="_bL2YcJPCEeOau5lQkkgj3A" businessName="Контрольный пункт" example="" standardId="TTD-SDT-00010" standardName="Контрольный пункт_ Идентификатор. Тип" concept="Контрольный пункт_ Идентификатор" base_Classifier="_bL1xYJPCEeOau5lQkkgj3A"/>
-  <EECProfile:ValueDomain xmi:id="_fBcxAJPCEeOau5lQkkgj3A" base_DataType="_bL1xYJPCEeOau5lQkkgj3A" description="Значение кода из классификатора «Контрольные пункты транспортного контроля» (С.ТТ.005)"/>
   <Default:Documentation xmi:id="_msVZEJPCEeOau5lQkkgj3A" base_Comment="_msSVwJPCEeOau5lQkkgj3A"/>
   <EECProfile:EECDataModel xmi:id="_tDwOIZPCEeOau5lQkkgj3A" base_Property="_tDwOIJPCEeOau5lQkkgj3A"/>
   <Default:Documentation xmi:id="_2tr80JPCEeOau5lQkkgj3A" base_Comment="_2toScJPCEeOau5lQkkgj3A"/>
@@ -1407,7 +1401,6 @@
   <EECProfile:EECDataModel xmi:id="_gS01IJPJEeOau5lQkkgj3A" base_Property="_gSy_8JPJEeOau5lQkkgj3A"/>
   <Default:Documentation xmi:id="_mejXkJPJEeOau5lQkkgj3A" base_Comment="_megUQJPJEeOau5lQkkgj3A"/>
   <EECProfile:EECDataModel xmi:id="_ds0p8JPOEeOau5lQkkgj3A" businessName="Код страны" example="BLR" standardId="TTD-SDT-00011" standardName="Страна_ Код. Альфа-3. Тип" concept="Код" representation="" note="Например, код «BLR» обозначает страну «Республика Беларусь»" analogue="UN/CEFACT: CCL: UN02000003" base_Classifier="_dszb0JPOEeOau5lQkkgj3A"/>
-  <EECProfile:ValueDomain xmi:id="_ds0p8ZPOEeOau5lQkkgj3A" base_DataType="_dszb0JPOEeOau5lQkkgj3A" description="Значение кода из классификатора «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)" length="" pattern="[A-Z]{3}" maxInclusive="" maxExclusive=""/>
   <Default:Documentation xmi:id="_ds0p8pPOEeOau5lQkkgj3A" base_Comment="_dszb0ZPOEeOau5lQkkgj3A"/>
   <EECProfile:restriction xmi:id="_ds0p85POEeOau5lQkkgj3A" base_Generalization="_dszb0pPOEeOau5lQkkgj3A"/>
   <EECProfile:restriction xmi:id="_6ixhkJPOEeOau5lQkkgj3A" base_Generalization="_5ebIoJPOEeOau5lQkkgj3A"/>
@@ -1441,7 +1434,6 @@
   <EECProfile:EECDataModel xmi:id="_iDljYZ0lEeO_Ctfl2sHrgw" base_Property="_iDigEp0lEeO_Ctfl2sHrgw"/>
   <Default:Documentation xmi:id="_iDljYJ0lEeO_Ctfl2sHrgw" base_Comment="_iDigEZ0lEeO_Ctfl2sHrgw"/>
   <EECProfile:EECDataModel xmi:id="_KMJiQJ0nEeO_Ctfl2sHrgw" businessName="Пункт пропуска" example="" standardId="TTD-SDT-00012" standardName="Пункт пропуска_ Идентификатор. Тип" concept="Пункт пропуска_ Идентификатор" base_Classifier="_KMHtEJ0nEeO_Ctfl2sHrgw"/>
-  <EECProfile:ValueDomain xmi:id="_KMJiQZ0nEeO_Ctfl2sHrgw" base_DataType="_KMHtEJ0nEeO_Ctfl2sHrgw" description="Значение кода из классификатора «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006)"/>
   <Default:Documentation xmi:id="_KMKJUJ0nEeO_Ctfl2sHrgw" base_Comment="_KMHtEZ0nEeO_Ctfl2sHrgw"/>
   <EECProfile:restriction xmi:id="_KMKJUZ0nEeO_Ctfl2sHrgw" base_Generalization="_KMHtEp0nEeO_Ctfl2sHrgw"/>
   <EECProfile:EECDataModel xmi:id="_hSxfkJ0nEeO_Ctfl2sHrgw" businessName="Сведения о пункте пропуска" standardId="TTD-CDT-00018" standardName="Пункт пропуска_ Детали. Тип" concept="Пункт пропуска_ Детали" representation="" analogue="UN/CEFACT: CCL: UN00003553" base_Classifier="_hSvDUJ0nEeO_Ctfl2sHrgw"/>
@@ -1458,4 +1450,103 @@
   <Default:Documentation xmi:id="_0eN5YJ0qEeO_Ctfl2sHrgw" base_Comment="_0eEvcJ0qEeO_Ctfl2sHrgw"/>
   <Default:Documentation xmi:id="_iIBd0LC1EeOzLtY2xKTFzg" base_Comment="_h2HOcLC1EeOzLtY2xKTFzg"/>
   <Default:Documentation xmi:id="_lqTRwLC1EeOzLtY2xKTFzg" base_Comment="_lqLV8LC1EeOzLtY2xKTFzg"/>
+  <EECProfile:SimpleType xmi:id="_mbDHwFEGEeOTEaxXgV0mpgst" base_DataType="_mbDHwFEGEeOTEaxXgV0mpg" valueDomain="Значение кода из классификатора «Виды поездки» (С.ТТ.002)" fractionDigits=""/>
+  <EECProfile:SimpleType xmi:id="_F51NYFEIEeOTEaxXgV0mpgst" base_DataType="_F51NYFEIEeOTEaxXgV0mpg" valueDomain="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)" minLength="" maxLength="" maxInclusive=""/>
+  <EECProfile:SimpleType xmi:id="_TDXIEFELEeOTEaxXgV0mpgst" base_DataType="_TDXIEFELEeOTEaxXgV0mpg" valueDomain="Значение кода из классификатора «Типы транспортных средств» (С.ТТ.001)" pattern=""/>
+  <EECProfile:SimpleType xmi:id="_pUGlQFEWEeOTEaxXgV0mpgst" base_DataType="_pUGlQFEWEeOTEaxXgV0mpg" valueDomain="4 первых цифры кода в соответствии со справочником ТН ВЭД ТС (С.005)" pattern="[0-9]{4}"/>
+  <EECProfile:SimpleType xmi:id="_9D3oUFHCEeOuyKm2YW1K1gst" base_DataType="_9D3oUFHCEeOuyKm2YW1K1g" valueDomain="Структура: символы 1–3 – трехбуквенный код страны в соответствии с классификатором «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001); символы 4–11 – код таможенного поста в соответствии с классификатором ЕЭК «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006); символы 12–17 – день, месяц, две последние цифры текущего года; символы 18–22 – порядковый номер бланка" pattern="[A-Z]{3}[0-9]{8}(0[1-9]|[12][0-9]|30|31)(0[1-9]|1[012])[0-9]{2}[0-9]{5}" fractionDigits=""/>
+  <EECProfile:SimpleType xmi:id="_SyFLwFHEEeOuyKm2YW1K1gst" base_DataType="_SyFLwFHEEeOuyKm2YW1K1g" valueDomain="Значение кода из классификатора «Виды разрешений на поездку» (С.ТТ.003)" fractionDigits=""/>
+  <EECProfile:SimpleType xmi:id="_qrbhoI18EeO5QKVbQiY0wgst" base_DataType="_qrbhoI18EeO5QKVbQiY0wg" valueDomain="Значение кода из классификатора «Виды решений о пропуске» (С.ТТ.008)"/>
+  <EECProfile:SimpleType xmi:id="_aYHHUI2AEeO5QKVbQiY0wgst" base_DataType="_aYHHUI2AEeO5QKVbQiY0wg" valueDomain="Значение кода из классификатора «Типы специальных разрешений» (С.ТТ.007)"/>
+  <EECProfile:SimpleType xmi:id="_bL1xYJPCEeOau5lQkkgj3Ast" base_DataType="_bL1xYJPCEeOau5lQkkgj3A" valueDomain="Значение кода из классификатора «Контрольные пункты транспортного контроля» (С.ТТ.005)"/>
+  <EECProfile:SimpleType xmi:id="_dszb0JPOEeOau5lQkkgj3Ast" base_DataType="_dszb0JPOEeOau5lQkkgj3A" valueDomain="Значение кода из классификатора «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)" length="" pattern="[A-Z]{3}" maxInclusive="" maxExclusive=""/>
+  <EECProfile:SimpleType xmi:id="_KMHtEJ0nEeO_Ctfl2sHrgwst" base_DataType="_KMHtEJ0nEeO_Ctfl2sHrgw" valueDomain="Значение кода из классификатора «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006)"/>
+  <EECProfile:ComplexType xmi:id="_cQdtoFEHEeOTEaxXgV0mpgst" base_DataType="_cQdtoFEHEeOTEaxXgV0mpg"/>
+  <EECProfile:ComplexType xmi:id="_83gokFEYEeOTEaxXgV0mpgst" base_DataType="_83gokFEYEeOTEaxXgV0mpg"/>
+  <EECProfile:ComplexType xmi:id="_tS4mMFGeEeOuyKm2YW1K1gst" base_DataType="_tS4mMFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexType xmi:id="_uGftEFGhEeOuyKm2YW1K1gst" base_DataType="_uGftEFGhEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexType xmi:id="_yRHAAIzAEeO5QKVbQiY0wgst" base_DataType="_yRHAAIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_RDvVwI18EeO5QKVbQiY0wgst" base_DataType="_RDvVwI18EeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_eCo1II18EeO5QKVbQiY0wgst" base_DataType="_eCo1II18EeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_psTn4I41EeOt3sz48gBxVQst" base_DataType="_psTn4I41EeOt3sz48gBxVQ"/>
+  <EECProfile:ComplexType xmi:id="_gxaMoI45EeOt3sz48gBxVQst" base_DataType="_gxaMoI45EeOt3sz48gBxVQ"/>
+  <EECProfile:ComplexType xmi:id="_9zZ2wI7qEeOCdpZuhK3cCAst" base_DataType="_9zZ2wI7qEeOCdpZuhK3cCA"/>
+  <EECProfile:ComplexType xmi:id="_OgI40I72EeOk8_uL5KcaCgst" base_DataType="_OgI40I72EeOk8_uL5KcaCg"/>
+  <EECProfile:ComplexType xmi:id="_3Mvs0JPBEeOau5lQkkgj3Ast" base_DataType="_3Mvs0JPBEeOau5lQkkgj3A"/>
+  <EECProfile:ComplexType xmi:id="_CY4PQJPcEeOau5lQkkgj3Ast" base_DataType="_CY4PQJPcEeOau5lQkkgj3A"/>
+  <EECProfile:ComplexType xmi:id="_hSvDUJ0nEeO_Ctfl2sHrgwst" base_DataType="_hSvDUJ0nEeO_Ctfl2sHrgw"/>
+  <EECProfile:SimpleElement xmi:id="_m-eFQFEDEeOTEaxXgV0mpgst" base_Class="_m-eFQFEDEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_ohZJMFEGEeOTEaxXgV0mpgst" base_Class="_ohZJMFEGEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_I-ClQFEIEeOTEaxXgV0mpgst" base_Class="_I-ClQFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_mg60UFEIEeOTEaxXgV0mpgst" base_Class="_mg60UFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_kT2REFEOEeOTEaxXgV0mpgst" base_Class="_kT2REFEOEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_wbAzAFEVEeOTEaxXgV0mpgst" base_Class="_wbAzAFEVEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_4w_xEFEWEeOTEaxXgV0mpgst" base_Class="_4w_xEFEWEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_It5nwFEZEeOTEaxXgV0mpgst" base_Class="_It5nwFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_V5nbIFEZEeOTEaxXgV0mpgst" base_Class="_V5nbIFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_nEoVoFEZEeOTEaxXgV0mpgst" base_Class="_nEoVoFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_-fzmoFEZEeOTEaxXgV0mpgst" base_Class="_-fzmoFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_SGJ2gFGbEeOuyKm2YW1K1gst" base_Class="_SGJ2gFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_dVigEFGbEeOuyKm2YW1K1gst" base_Class="_dVigEFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_OjOF0FGcEeOuyKm2YW1K1gst" base_Class="_OjOF0FGcEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_lJgWMFGcEeOuyKm2YW1K1gst" base_Class="_lJgWMFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_sUCqQFGcEeOuyKm2YW1K1gst" base_Class="_sUCqQFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_7YKUQFGdEeOuyKm2YW1K1gst" base_Class="_7YKUQFGdEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_BfgF8FGeEeOuyKm2YW1K1gst" base_Class="_BfgF8FGeEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_XLIE4FGeEeOuyKm2YW1K1gst" base_Class="_XLIE4FGeEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_v1DoAFGeEeOuyKm2YW1K1gst" base_Class="_v1DoAFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_xb6REFGeEeOuyKm2YW1K1gst" base_Class="_xb6REFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="__g1u8FGfEeOuyKm2YW1K1gst" base_Class="__g1u8FGfEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_7yh0sFGgEeOuyKm2YW1K1gst" base_Class="_7yh0sFGgEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_sgplEFGrEeOuyKm2YW1K1gst" base_Class="_sgplEFGrEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_lcALQIy_EeO5QKVbQiY0wgst" base_Class="_lcALQIy_EeO5QKVbQiY0wg"/>
+  <EECProfile:SimpleElement xmi:id="_vH_6AIzAEeO5QKVbQiY0wgst" base_Class="_vH_6AIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:SimpleElement xmi:id="_pC_kMI18EeO5QKVbQiY0wgst" base_Class="_pC_kMI18EeO5QKVbQiY0wg"/>
+  <EECProfile:SimpleElement xmi:id="_zX7kcI2MEeOQQexDOjgnqgst" base_Class="_zX7kcI2MEeOQQexDOjgnqg"/>
+  <EECProfile:SimpleElement xmi:id="_D326kI2NEeOQQexDOjgnqgst" base_Class="_D326kI2NEeOQQexDOjgnqg"/>
+  <EECProfile:SimpleElement xmi:id="_o0oIUI2NEeOQQexDOjgnqgst" base_Class="_o0oIUI2NEeOQQexDOjgnqg"/>
+  <EECProfile:SimpleElement xmi:id="_9w8xQI2NEeOQQexDOjgnqgst" base_Class="_9w8xQI2NEeOQQexDOjgnqg"/>
+  <EECProfile:SimpleElement xmi:id="_UVzZ0I40EeOt3sz48gBxVQst" base_Class="_UVzZ0I40EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_wIGKII42EeOt3sz48gBxVQst" base_Class="_wIGKII42EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_CI6rQI43EeOt3sz48gBxVQst" base_Class="_CI6rQI43EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_RYNf8I43EeOt3sz48gBxVQst" base_Class="_RYNf8I43EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_EtK7QI44EeOt3sz48gBxVQst" base_Class="_EtK7QI44EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_Zn2I8I45EeOt3sz48gBxVQst" base_Class="_Zn2I8I45EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_Zn3-II45EeOt3sz48gBxVQst" base_Class="_Zn3-II45EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_OGGpMI7rEeOCdpZuhK3cCAst" base_Class="_OGGpMI7rEeOCdpZuhK3cCA"/>
+  <EECProfile:SimpleElement xmi:id="_WSPkMI7rEeOCdpZuhK3cCAst" base_Class="_WSPkMI7rEeOCdpZuhK3cCA"/>
+  <EECProfile:SimpleElement xmi:id="_kqqsMI70EeOk8_uL5KcaCgst" base_Class="_kqqsMI70EeOk8_uL5KcaCg"/>
+  <EECProfile:SimpleElement xmi:id="_1JOwYI70EeOk8_uL5KcaCgst" base_Class="_1JOwYI70EeOk8_uL5KcaCg"/>
+  <EECProfile:SimpleElement xmi:id="_OjeisJPCEeOau5lQkkgj3Ast" base_Class="_OjeisJPCEeOau5lQkkgj3A"/>
+  <EECProfile:SimpleElement xmi:id="_RzLKIJPIEeOau5lQkkgj3Ast" base_Class="_RzLKIJPIEeOau5lQkkgj3A"/>
+  <EECProfile:SimpleElement xmi:id="_BrepoJPPEeOau5lQkkgj3Ast" base_Class="_BrepoJPPEeOau5lQkkgj3A"/>
+  <EECProfile:SimpleElement xmi:id="_2vap0JSAEeOcbd1HrAmu5wst" base_Class="_2vap0JSAEeOcbd1HrAmu5w"/>
+  <EECProfile:SimpleElement xmi:id="_eaTIgJ0lEeO_Ctfl2sHrgwst" base_Class="_eaTIgJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:SimpleElement xmi:id="_gTZYIJ0lEeO_Ctfl2sHrgwst" base_Class="_gTZYIJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:SimpleElement xmi:id="_iDigEJ0lEeO_Ctfl2sHrgwst" base_Class="_iDigEJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:ComplexElement xmi:id="_BX3UQFGbEeOuyKm2YW1K1gst" base_Class="_BX3UQFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_fPgRoFEHEeOTEaxXgV0mpgst" base_Class="_fPgRoFEHEeOTEaxXgV0mpg"/>
+  <EECProfile:ComplexElement xmi:id="_09B5UFGcEeOuyKm2YW1K1gst" base_Class="_09B5UFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_lXhSIFGeEeOuyKm2YW1K1gst" base_Class="_lXhSIFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_QZEr0FGqEeOuyKm2YW1K1gst" base_Class="_QZEr0FGqEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_5S8L0FGrEeOuyKm2YW1K1gst" base_Class="_5S8L0FGrEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_0MqGsIzAEeO5QKVbQiY0wgst" base_Class="_0MqGsIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_O8f8cI18EeO5QKVbQiY0wgst" base_Class="_O8f8cI18EeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_cAVmMI18EeO5QKVbQiY0wgst" base_Class="_cAVmMI18EeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_CWrQ4I4rEeOt3sz48gBxVQst" base_Class="_CWrQ4I4rEeOt3sz48gBxVQ"/>
+  <EECProfile:ComplexElement xmi:id="_ExFc0I42EeOt3sz48gBxVQst" base_Class="_ExFc0I42EeOt3sz48gBxVQ"/>
+  <EECProfile:ComplexElement xmi:id="_I5yYwI5QEeOCdpZuhK3cCAst" base_Class="_I5yYwI5QEeOCdpZuhK3cCA"/>
+  <EECProfile:ComplexElement xmi:id="_grzYAI72EeOk8_uL5KcaCgst" base_Class="_grzYAI72EeOk8_uL5KcaCg"/>
+  <EECProfile:ComplexElement xmi:id="_HPybMI73EeOk8_uL5KcaCgst" base_Class="_HPybMI73EeOk8_uL5KcaCg"/>
+  <EECProfile:ComplexElement xmi:id="_e4gzQJPJEeOau5lQkkgj3Ast" base_Class="_e4gzQJPJEeOau5lQkkgj3A"/>
+  <EECProfile:ComplexElement xmi:id="_p5Zc0JSEEeOcbd1HrAmu5wst" base_Class="_p5Zc0JSEEeOcbd1HrAmu5w"/>
+  <EECProfile:ComplexElement xmi:id="_m3RNcJ0oEeO_Ctfl2sHrgwst" base_Class="_m3RNcJ0oEeO_Ctfl2sHrgw"/>
+  <EECProfile:ComplexElement xmi:id="_pIeyEI2FEeO5QKVbQiY0wgst" base_Class="_pIeyEI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_gzgrMI2FEeO5QKVbQiY0wgst" base_Class="_gzgrMI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_toG_EI2FEeO5QKVbQiY0wgst" base_Class="_toG_EI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_dN52cI2FEeO5QKVbQiY0wgst" base_Class="_dN52cI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_HFiEcIyxEeO5QKVbQiY0wgst" base_DataType="_HFiEcIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_YXOOsIyxEeO5QKVbQiY0wgst" base_DataType="_YXOOsIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_jlKt0IyxEeO5QKVbQiY0wgst" base_DataType="_jlKt0IyxEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_rnV0gIyxEeO5QKVbQiY0wgst" base_DataType="_rnV0gIyxEeO5QKVbQiY0wg"/>
 </xmi:XMI>

@@ -12,14 +12,14 @@
       <xs:element ref="ccdo:EDocHeader"/>
       <xs:element maxOccurs="unbounded" ref="ttcdo:InspectionDetails"/>
     </xs:sequence>
-    <xs:assert test="fn:not(ccdo:EDocHeader/csdo:DataSetStateCode = 'Учтено для въезда' and ttcdo:InspectionDetails[ttcdo:ViolationDetails or ttcdo:TollPaymentDetails or ttsdo:PaidStayDuration])">
-      <xs:annotation>
-        <xs:documentation>Если набор данных в состоянии «Учтено для въезда», то в сведениях о результатах транспортного контроля не должны указываться сведения о нарушениях, об оплате пошлины, оплаченных днях пребывания</xs:documentation>
-      </xs:annotation>
-    </xs:assert>
     <xs:assert test="fn:not((ccdo:EDocHeader/csdo:DataSetStateCode = 'Учтено для въезда' or ccdo:EDocHeader/csdo:DataSetStateCode = 'Учтено для выезда') and ttcdo:InspectionDetails[ttsdo:PermitDecisionCode])">
       <xs:annotation>
         <xs:documentation>Если набор данных в состоянии «Учтено для въезда» или «Учтено для выезда», то в сведениях о результатах транспортного контроля не должно указываться решение о пропуске</xs:documentation>
+      </xs:annotation>
+    </xs:assert>
+    <xs:assert test="fn:not(ccdo:EDocHeader/csdo:DataSetStateCode = 'Учтено для въезда' and ttcdo:InspectionDetails[ttcdo:ViolationDetails or ttcdo:TollPaymentDetails or ttsdo:PaidStayDuration])">
+      <xs:annotation>
+        <xs:documentation>Если набор данных в состоянии «Учтено для въезда», то в сведениях о результатах транспортного контроля не должны указываться сведения о нарушениях, об оплате пошлины, оплаченных днях пребывания</xs:documentation>
       </xs:annotation>
     </xs:assert>
   </xs:complexType>

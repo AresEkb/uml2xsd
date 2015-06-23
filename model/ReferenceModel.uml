@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Default="http:///schemas/Default/1" xmlns:EECProfile="http:///schemas/EECProfile/_f-1pgKm_EeONEcnlT49dfw/419" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Default/1 Default.profile.uml#_IN8k8MmBEdqBcN1R6EvWUw http:///schemas/EECProfile/_f-1pgKm_EeONEcnlT49dfw/419 EECProfile.profile.uml#_f-4FwKm_EeONEcnlT49dfw">
-  <uml:Model xmi:id="_TzDPwCHQEeO4BvjbH5b18A" name="ReferenceModel">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Default="http:///schemas/Default/1" xmlns:EECProfile="http:///schemas/EECProfile/_KVknALVwEeODU4nEV69bGw/427" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Default/1 Default.profile.uml#_IN8k8MmBEdqBcN1R6EvWUw http:///schemas/EECProfile/_KVknALVwEeODU4nEV69bGw/427 EECProfile.profile.uml#_KVnDQLVwEeODU4nEV69bGw">
+  <uml:Model xmi:id="_TzDPwCHQEeO4BvjbH5b18A" name="EECModel">
+    <eAnnotations xmi:id="_rV1mILV0EeODU4nEV69bGw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <details xmi:id="_rV2NMLV0EeODU4nEV69bGw" key="ReferenceModel"/>
+    </eAnnotations>
     <packageImport xmi:id="_TzDPwiHQEeO4BvjbH5b18A">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
@@ -85,6 +88,36 @@
           </packagedElement>
           <packagedElement xmi:type="uml:Realization" xmi:id="_v56v4F5BEeOgdNELZqEKyw" supplier="_w5RGeaflEeKgb97SI2dJlw" client="_TKEgQF5BEeOgdNELZqEKyw"/>
           <packagedElement xmi:type="uml:Realization" xmi:id="_yVc-MF5BEeOgdNELZqEKyw" supplier="_BNdJsF5BEeOgdNELZqEKyw" client="_c0A2AF5BEeOgdNELZqEKyw"/>
+          <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_6IaHILNGEeO5pdTFKaHiVw" name="gYear" clientDependency="_jkPEsLNIEeO5pdTFKaHiVw">
+            <ownedComment xmi:id="_WXlhILPgEeO5pdTFKaHiVw" annotatedElement="_6IaHILNGEeO5pdTFKaHiVw">
+              <body>год григорианского календаря в соответствии со стандартом ГОСТ ИСО 8601–2001</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_86AsELNGEeO5pdTFKaHiVw" name="gYearMonth" clientDependency="_kQu-ULNIEeO5pdTFKaHiVw">
+            <ownedComment xmi:id="_Xds0oLPgEeO5pdTFKaHiVw" annotatedElement="_86AsELNGEeO5pdTFKaHiVw">
+              <body>месяц года григорианского календаря в соответствии со стандартом ГОСТ ИСО 8601–2001</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_-vuQgLNGEeO5pdTFKaHiVw" name="gMonthDay" clientDependency="_j-zg0LNIEeO5pdTFKaHiVw">
+            <ownedComment xmi:id="_VkKgILPgEeO5pdTFKaHiVw" annotatedElement="_-vuQgLNGEeO5pdTFKaHiVw">
+              <body>день месяца григорианского календаря в соответствии со стандартом ГОСТ ИСО 8601–2001</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_AHswELNHEeO5pdTFKaHiVw" name="gDay" clientDependency="_izMCQLNIEeO5pdTFKaHiVw">
+            <ownedComment xmi:id="_TS5BELPgEeO5pdTFKaHiVw" annotatedElement="_AHswELNHEeO5pdTFKaHiVw">
+              <body>день григорианского календаря в соответствии со стандартом ГОСТ ИСО 8601–2001</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_Be07ELNHEeO5pdTFKaHiVw" name="gMonth" clientDependency="_jRUIsLNIEeO5pdTFKaHiVw">
+            <ownedComment xmi:id="_UQxloLPgEeO5pdTFKaHiVw" annotatedElement="_Be07ELNHEeO5pdTFKaHiVw">
+              <body>месяц григорианского календаря в соответствии со стандартом ГОСТ ИСО 8601–2001</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_izMCQLNIEeO5pdTFKaHiVw" supplier="_fqg2kLNHEeO5pdTFKaHiVw" client="_AHswELNHEeO5pdTFKaHiVw"/>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_jRUIsLNIEeO5pdTFKaHiVw" supplier="_iB4WkLNHEeO5pdTFKaHiVw" client="_Be07ELNHEeO5pdTFKaHiVw"/>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_jkPEsLNIEeO5pdTFKaHiVw" supplier="_mTcSYLNHEeO5pdTFKaHiVw" client="_6IaHILNGEeO5pdTFKaHiVw"/>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_j-zg0LNIEeO5pdTFKaHiVw" supplier="_kVq-ILNHEeO5pdTFKaHiVw" client="_-vuQgLNGEeO5pdTFKaHiVw"/>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_kQu-ULNIEeO5pdTFKaHiVw" supplier="_nni-kLNHEeO5pdTFKaHiVw" client="_86AsELNGEeO5pdTFKaHiVw"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_9Zus8PTjEeKqa_aWeelEZg" name="BDT">
           <ownedComment xmi:id="_Ax35EK2iEeOFsZCn5jPbpQ" annotatedElement="_9Zus8PTjEeKqa_aWeelEZg">
@@ -216,6 +249,31 @@
               <body>Целочисленная величина, установленная в результате упорядочения множества объектов</body>
             </ownedComment>
           </packagedElement>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_fqg2kLNHEeO5pdTFKaHiVw" name="DayType">
+            <ownedComment xmi:id="_bezhULPaEeO5pdTFKaHiVw" annotatedElement="_fqg2kLNHEeO5pdTFKaHiVw">
+              <body>День произвольного месяца и года по григорианскому календарю</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_iB4WkLNHEeO5pdTFKaHiVw" name="MonthType">
+            <ownedComment xmi:id="_RIJvMLPdEeO5pdTFKaHiVw" annotatedElement="_iB4WkLNHEeO5pdTFKaHiVw">
+              <body>Месяц произвольного года по григорианскому календарю</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_kVq-ILNHEeO5pdTFKaHiVw" name="MonthDayType">
+            <ownedComment xmi:id="_W2PI0LPcEeO5pdTFKaHiVw" annotatedElement="_kVq-ILNHEeO5pdTFKaHiVw">
+              <body>День определенного месяца и произвольного года по григорианскому календарю</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_mTcSYLNHEeO5pdTFKaHiVw" name="YearType">
+            <ownedComment xmi:id="_K6onkLPeEeO5pdTFKaHiVw" annotatedElement="_mTcSYLNHEeO5pdTFKaHiVw">
+              <body>Год по григорианскому календарю</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_nni-kLNHEeO5pdTFKaHiVw" name="YearMonthType">
+            <ownedComment xmi:id="_IqRugLPeEeO5pdTFKaHiVw" annotatedElement="_nni-kLNHEeO5pdTFKaHiVw">
+              <body>Месяц определенного года по григорианскому календарю</body>
+            </ownedComment>
+          </packagedElement>
         </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_63KpkPTjEeKqa_aWeelEZg_sde" name="CSDO">
           <packageImport xmi:id="_dFhoQDV6EeOaDopNUEY7Sg" importedPackage="_9Zus8PTjEeKqa_aWeelEZg"/>
@@ -223,6 +281,22 @@
             <ownedComment xmi:id="_E5Nh4K2iEeOFsZCn5jPbpQ" annotatedElement="__Aq1kPTjEeKqa_aWeelEZg">
               <body>В настоящем разделе описываются простые типы данных, общие для всех предметных областей в рамках ТС и ЕЭП</body>
             </ownedComment>
+            <packagedElement xmi:type="uml:Enumeration" xmi:id="_m6EfcLNFEeO5pdTFKaHiVw" name="SexCodeType">
+              <ownedComment xmi:id="_m6EfcbNFEeO5pdTFKaHiVw" annotatedElement="_m6EfcLNFEeO5pdTFKaHiVw">
+                <body>Кодовое обозначение пола в соответствии с классификатором</body>
+              </ownedComment>
+              <generalization xmi:id="_m6EfcrNFEeO5pdTFKaHiVw" general="_w5QflKflEeKgb97SI2dJlw"/>
+              <ownedLiteral xmi:id="_m6Efc7NFEeO5pdTFKaHiVw" name="F" classifier="_m6EfcLNFEeO5pdTFKaHiVw">
+                <specification xmi:type="uml:OpaqueExpression" xmi:id="_m6EfdLNFEeO5pdTFKaHiVw">
+                  <body>женский</body>
+                </specification>
+              </ownedLiteral>
+              <ownedLiteral xmi:id="_m6EfdbNFEeO5pdTFKaHiVw" name="M" classifier="_m6EfcLNFEeO5pdTFKaHiVw">
+                <specification xmi:type="uml:OpaqueExpression" xmi:id="_m6EfdrNFEeO5pdTFKaHiVw">
+                  <body>мужской</body>
+                </specification>
+              </ownedLiteral>
+            </packagedElement>
             <packagedElement xmi:type="uml:DataType" xmi:id="_2hsloAlREeO4ePBwGYyLtA" name="DocKindCodeType">
               <ownedComment xmi:id="_OdR6YA5HEeOI0ZvdkewPXA" annotatedElement="_2hsloAlREeO4ePBwGYyLtA">
                 <body>Вид документа в соответствии со справочником «Виды документов»</body>
@@ -802,6 +876,44 @@
               </ownedComment>
               <ownedAttribute xmi:id="_7JsFwJMMEeOau5lQkkgj3A" name="value" visibility="public" type="_ql_p8JMMEeOau5lQkkgj3A"/>
             </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_iVaBcLNFEeO5pdTFKaHiVw" name="WeightMeasure">
+              <ownedComment xmi:id="_iVaBcbNFEeO5pdTFKaHiVw" annotatedElement="_iVaBcLNFEeO5pdTFKaHiVw">
+                <body>Сила воздействия тела на опору (или подвес или другой вид крепления), препятствующую падению, возникающая в поле сил&#xD;
+тяжести</body>
+              </ownedComment>
+              <ownedAttribute xmi:id="_iVaBcrNFEeO5pdTFKaHiVw" name="value" visibility="public" type="_w5RGcKflEeKgb97SI2dJlw"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_iVb2oLNFEeO5pdTFKaHiVw" name="StartDate">
+              <ownedComment xmi:id="_iVb2obNFEeO5pdTFKaHiVw" annotatedElement="_iVb2oLNFEeO5pdTFKaHiVw">
+                <body>Начальная дата периода времени с указанием дня, месяца и года</body>
+              </ownedComment>
+              <ownedAttribute xmi:id="_iVb2orNFEeO5pdTFKaHiVw" name="value" visibility="public" type="_w5P4J6flEeKgb97SI2dJlw"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_iVdr0LNFEeO5pdTFKaHiVw" name="EndDate">
+              <ownedComment xmi:id="_iVdr0bNFEeO5pdTFKaHiVw" annotatedElement="_iVdr0LNFEeO5pdTFKaHiVw">
+                <body>Конечная дата периода времени с указанием дня, месяца и года</body>
+              </ownedComment>
+              <ownedAttribute xmi:id="_iVdr0rNFEeO5pdTFKaHiVw" name="value" visibility="public" type="_w5P4J6flEeKgb97SI2dJlw"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_iVe58LNFEeO5pdTFKaHiVw" name="BirthDate">
+              <ownedComment xmi:id="_iVe58bNFEeO5pdTFKaHiVw" annotatedElement="_iVe58LNFEeO5pdTFKaHiVw">
+                <body>Дата, в которую родилось то или иное живое существо</body>
+              </ownedComment>
+              <ownedAttribute xmi:id="_iVe58rNFEeO5pdTFKaHiVw" name="value" visibility="public" type="_w5P4J6flEeKgb97SI2dJlw"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_m6FGgLNFEeO5pdTFKaHiVw" name="SexCode">
+              <ownedComment xmi:id="_m6FGgbNFEeO5pdTFKaHiVw" annotatedElement="_m6FGgLNFEeO5pdTFKaHiVw">
+                <body>Совокупность морфологических и физиологических особенностей организма, совокупность генетически детерминированных признаков&#xD;
+особи, определяющих её роль в процессе оплодотворения</body>
+              </ownedComment>
+              <ownedAttribute xmi:id="_m6FGgrNFEeO5pdTFKaHiVw" name="value" visibility="public" type="_m6EfcLNFEeO5pdTFKaHiVw"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_zm5-cLNFEeO5pdTFKaHiVw" name="AgeDuration">
+              <ownedComment xmi:id="_zm5-cbNFEeO5pdTFKaHiVw" annotatedElement="_zm5-cLNFEeO5pdTFKaHiVw">
+                <body>Период от рождения до момента исчисления</body>
+              </ownedComment>
+              <ownedAttribute xmi:id="_zm5-crNFEeO5pdTFKaHiVw" name="value" visibility="public" type="_pry5YDJSEeOygNYiTfyZgg"/>
+            </packagedElement>
           </packagedElement>
         </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_63KpkPTjEeKqa_aWeelEZg_cde" name="CCDO">
@@ -1139,6 +1251,13 @@
                 <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OB4ysIi4EeOPSK0F-UNoSA"/>
               </ownedAttribute>
             </packagedElement>
+            <packagedElement xmi:type="uml:DataType" xmi:id="_6te_kLNFEeO5pdTFKaHiVw" name="DateIntervalDetailsType">
+              <ownedComment xmi:id="_6te_kbNFEeO5pdTFKaHiVw" annotatedElement="_6te_kLNFEeO5pdTFKaHiVw">
+                <body>Компоненты, представляющие промежуток времени с указанием начальной и конечной дат</body>
+              </ownedComment>
+              <ownedAttribute xmi:id="_6te_krNFEeO5pdTFKaHiVw" name="StartDate" visibility="public" type="_iVb2oLNFEeO5pdTFKaHiVw"/>
+              <ownedAttribute xmi:id="_6te_k7NFEeO5pdTFKaHiVw" name="EndDate" visibility="public" type="_iVdr0LNFEeO5pdTFKaHiVw"/>
+            </packagedElement>
           </packagedElement>
           <packagedElement xmi:type="uml:Package" xmi:id="_CRpSABuPEeOFZLRdrHA81A" name="CCDE">
             <ownedComment xmi:id="_brWc8K2iEeOFsZCn5jPbpQ" annotatedElement="_CRpSABuPEeOFZLRdrHA81A">
@@ -1290,7 +1409,7 @@
     </profileApplication>
     <profileApplication xmi:id="_aX3noCHQEeO4BvjbH5b18A">
       <eAnnotations xmi:id="_aX4OsCHQEeO4BvjbH5b18A" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="EECProfile.profile.uml#_f-4FwKm_EeONEcnlT49dfw"/>
+        <references xmi:type="ecore:EPackage" href="EECProfile.profile.uml#_KVnDQLVwEeODU4nEV69bGw"/>
       </eAnnotations>
       <appliedProfile href="EECProfile.profile.uml#_iHjpsIAKEeKTpKWv4S5WIQ"/>
     </profileApplication>
@@ -1300,8 +1419,8 @@
   <EECProfile:EECDataModel xmi:id="_i5g_IDWFEeOA_vsBCHyqtg" base_Package="_63KpkPTjEeKqa_aWeelEZg_cde"/>
   <EECProfile:EECDataModel xmi:id="_i5fxADWFEeOA_vsBCHyqtg" base_Package="_63KpkPTjEeKqa_aWeelEZg_sde"/>
   <Default:Documentation xmi:id="_QUJjUDWBEeOA_vsBCHyqtg" base_Comment="_QUC1oDWBEeOA_vsBCHyqtg"/>
-  <EECProfile:Namespace xmi:id="_ahsZkTV6EeOaDopNUEY7Sg" base_Package="_63KpkPTjEeKqa_aWeelEZg_cde" version="0.7.0" name="urn:EEC:RDM:ComplexDataObjects:v0.7.0" prefix="ccdo"/>
-  <EECProfile:Namespace xmi:id="_ahsZkDV6EeOaDopNUEY7Sg" base_Package="_63KpkPTjEeKqa_aWeelEZg_sde" version="0.7.0" name="urn:EEC:RDM:SimpleDataObjects:v0.7.0" prefix="csdo"/>
+  <EECProfile:Namespace xmi:id="_ahsZkTV6EeOaDopNUEY7Sg" base_Package="_63KpkPTjEeKqa_aWeelEZg_cde" version="0.7.0" uri="urn:EEC:RDM:ComplexDataObjects:v0.7.0" name="urn:EEC:RDM:ComplexDataObjects:v0.7.0" prefix="ccdo"/>
+  <EECProfile:Namespace xmi:id="_ahsZkDV6EeOaDopNUEY7Sg" base_Package="_63KpkPTjEeKqa_aWeelEZg_sde" version="0.7.0" uri="urn:EEC:RDM:SimpleDataObjects:v0.7.0" name="urn:EEC:RDM:SimpleDataObjects:v0.7.0" prefix="csdo"/>
   <EECProfile:EECDataModel xmi:id="_yhWv0CWkEeOcW_rPOtRfPQ" businessName="" standardId="" standardName="Логическая величина" analogue="UN/CEFACT: CCDT: Boolean" base_Classifier="_YstGACWkEeOcW_rPOtRfPQ"/>
   <EECProfile:EECDataModel xmi:id="_yhWIxSWkEeOcW_rPOtRfPQ" businessName="" example="" standardId="" standardName="Дата и время" representation="" note="комбинация обозначений номера года, месяца, дня, количеств часов, минут, секунд и долей секунды с опциональным указанием временной зоны в соответствии со стандартом ГОСТ ИСО 8601–2001. Шаблон: «YYYY-MM-DDT hh:mm:ss.sss[Shh:mm]», где символ «S» обозначает знак «+» или «-» при опережении или отставании местного от Всемирного времени" analogue="UN/CEFACT: CCDT: TimePoint" base_Classifier="_K_5XwCWkEeOcW_rPOtRfPQ"/>
   <EECProfile:EECDataModel xmi:id="_yhWIxCWkEeOcW_rPOtRfPQ" businessName="" example="" standardName="Дата" representation="" note="комбинация обозначений номера года, месяца и дня в соответствии со стандартом ГОСТ ИСО 8601–2001. Шаблон: «YYYY-MM-DD»" analogue="UN/CEFACT: CCDT: TimePoint" base_Classifier="___jPwCWjEeOcW_rPOtRfPQ"/>
@@ -1309,8 +1428,8 @@
   <EECProfile:EECDataModel xmi:id="_yhWIwiWkEeOcW_rPOtRfPQ" businessName="" standardId="" standardName="Токен" usage="" analogue="UN/CEFACT: CCDT: Token" base_Classifier="_8hIoICWjEeOcW_rPOtRfPQ"/>
   <EECProfile:EECDataModel xmi:id="_yhWIwSWkEeOcW_rPOtRfPQ" businessName="" standardName="Двоичные данные" note="" analogue="UN/CEFACT: CCDT: Binary" base_Classifier="_w3tt8CWjEeOcW_rPOtRfPQ"/>
   <EECProfile:EECDataModel xmi:id="_yhWIwCWkEeOcW_rPOtRfPQ" businessName="" standardName="Десятичное число" representation="" analogue="UN/CEFACT: CCDT: Decimal" base_Classifier="_WiZAACWjEeOcW_rPOtRfPQ"/>
-  <EECProfile:Namespace xmi:id="_bUjugCWjEeOcW_rPOtRfPQ" base_Package="_GadTICWjEeOcW_rPOtRfPQ" version="1.0" name="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
-  <EECProfile:EECDataModel xmi:id="_Gad6MCWjEeOcW_rPOtRfPQ" businessName="Примитивные типы" standardId="ПТ" base_Package="_GadTICWjEeOcW_rPOtRfPQ"/>
+  <EECProfile:Namespace xmi:id="_bUjugCWjEeOcW_rPOtRfPQ" base_Package="_GadTICWjEeOcW_rPOtRfPQ" version="1.0" uri="http://www.w3.org/2001/XMLSchema" name="http://www.w3.org/2001/XMLSchema" prefix="xs"/>
+  <EECProfile:EECDataModel xmi:id="_Gad6MCWjEeOcW_rPOtRfPQ" businessName="Примитивные типы" standardId="ПТ" standardName="ПТ" base_Package="_GadTICWjEeOcW_rPOtRfPQ"/>
   <Default:Documentation xmi:id="_tCSLQCQ0EeONcOnDXGx7ug" base_Comment="_tCOg4CQ0EeONcOnDXGx7ug"/>
   <Default:Documentation xmi:id="_sIp0kCQ0EeONcOnDXGx7ug" base_Comment="_sIh4wCQ0EeONcOnDXGx7ug"/>
   <Default:Documentation xmi:id="_w5zRwKflEeKgb97SI2dJlw" base_Comment="_w5P4JaflEeKgb97SI2dJlw"/>
@@ -1331,7 +1450,7 @@
   <Default:Documentation xmi:id="_w54KRaflEeKgb97SI2dJlw" base_Comment="_w5RGfKflEeKgb97SI2dJlw"/>
   <Default:Documentation xmi:id="_w54KR6flEeKgb97SI2dJlw" base_Comment="_w5RGhaflEeKgb97SI2dJlw"/>
   <Default:Documentation xmi:id="_w54xUKflEeKgb97SI2dJlw" base_Comment="_w5RGjqflEeKgb97SI2dJlw"/>
-  <EECProfile:rModel xmi:id="_Lra-sM85EeKylq6AqFSRsQ" base_Package="_HfX1AM85EeKylq6AqFSRsQ" status="" version="0.7.0"/>
+  <EECProfile:rModel xmi:id="_Lra-sM85EeKylq6AqFSRsQ" base_Package="_HfX1AM85EeKylq6AqFSRsQ" status="" version="0.8.0"/>
   <EECProfile:rCollModel xmi:id="_U6c6EM85EeKylq6AqFSRsQ" base_Package="_Nc6KcM85EeKylq6AqFSRsQ"/>
   <EECProfile:bRequirementsV xmi:id="_oCZbUM85EeKylq6AqFSRsQ" base_Package="_mhC9UM85EeKylq6AqFSRsQ" status="" version="1.0"/>
   <EECProfile:bChoreographyV xmi:id="_zg9wYM85EeKylq6AqFSRsQ" base_Package="_tDpusM85EeKylq6AqFSRsQ" version="1.0"/>
@@ -1369,7 +1488,7 @@
   <EECProfile:EECDataModel xmi:id="_6iUGsPjPEeKJw6Ug-08zBg" businessName="Контактный реквизит" example="" standardId="RDM-CDT-00003" standardName="Контактный реквизит_ Детали. Тип" concept="Контактный реквизит_ Детали" representation="" note="" analogue="" base_Classifier="_6iTfoPjPEeKJw6Ug-08zBg"/>
   <EECProfile:EECDataModel xmi:id="_8-76IPjPEeKJw6Ug-08zBg" businessName="Контактный реквизит" standardId="RDM-CDE-00003" standardName="Контактный реквизит. Детали" concept="Контактный реквизит" representation="" note="" analogue="UN/CEFACT: CCL: UN00000095" base_Classifier="_8-7TEPjPEeKJw6Ug-08zBg"/>
   <EECProfile:EECDataModel xmi:id="_8_J8kfjPEeKJw6Ug-08zBg" base_Property="_8_J8kPjPEeKJw6Ug-08zBg"/>
-  <EECProfile:Namespace xmi:id="_VQzo8PjYEeKJw6Ug-08zBg" base_Package="_9Zus8PTjEeKqa_aWeelEZg" status="" version="0.7.0" name="urn:EEC:RDM:BaseDataTypes:v0.7.0" prefix="bdt"/>
+  <EECProfile:Namespace xmi:id="_VQzo8PjYEeKJw6Ug-08zBg" base_Package="_9Zus8PTjEeKqa_aWeelEZg" status="" version="0.7.0" uri="urn:EEC:RDM:BaseDataTypes:v0.7.0" name="urn:EEC:RDM:BaseDataTypes:v0.7.0" prefix="bdt"/>
   <EECProfile:EECDataModel xmi:id="_duBeIPjeEeKss-fHD573_w" businessName="Код страны" example="RU" standardId="RDM-SDT-00001" standardName="Страна_ Код. Альфа-2. Тип" concept="Код" representation="" analogue="UN/CEFACT: CCL: UN02000003" base_Classifier="_duA3EPjeEeKss-fHD573_w"/>
   <EECProfile:EECDataModel xmi:id="_vknsQPjeEeKss-fHD573_w" businessName="Почтовый индекс" example="123456" standardId="RDM-SDT-00006" standardName="Почтовый индекс_ Код. Тип" concept="Код" representation="" note="" analogue="" base_Classifier="_vknFMPjeEeKss-fHD573_w"/>
   <EECProfile:EECDataModel xmi:id="_8SpeEPjeEeKss-fHD573_w" businessName="Вид связи" example="" standardId="RDM-SDT-00014" standardName="Вид связи_ Код. Тип" concept="Код" representation="" usage="" note="" analogue="" base_Classifier="_8So3APjeEeKss-fHD573_w"/>
@@ -1513,13 +1632,7 @@
   <EECProfile:EECDataModel xmi:id="_LNQd4APwEeOOH_kc715Zjw" base_Property="_LNP20APwEeOOH_kc715Zjw"/>
   <EECProfile:EECDataModel xmi:id="_OSGH4APwEeOOH_kc715Zjw" base_Property="_OSFg0APwEeOOH_kc715Zjw"/>
   <EECProfile:EECDataModel xmi:id="_T7A4MAPwEeOOH_kc715Zjw" base_Property="_T6_qEAPwEeOOH_kc715Zjw"/>
-  <EECProfile:BaseTypes xmi:id="_9zdVwAPwEeOOH_kc715Zjw" base_Package="_9Zus8PTjEeKqa_aWeelEZg"/>
-  <EECProfile:ValueDomain xmi:id="_0XQmMASiEeOOH_kc715Zjw" base_DataType="_w5P4J6flEeKgb97SI2dJlw" description="Обозначение даты в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
-  <EECProfile:ValueDomain xmi:id="_0XRNQQSiEeOOH_kc715Zjw" base_DataType="_w5P4MaflEeKgb97SI2dJlw" description="Одно из двух значений: «true» (истина) или «false» (ложь)"/>
-  <EECProfile:ValueDomain xmi:id="_0XSbYASiEeOOH_kc715Zjw" base_DataType="_w5P4NqflEeKgb97SI2dJlw" description="Число в десятичной системе счисления" fractionDigits=""/>
-  <EECProfile:ValueDomain xmi:id="_0XSbYQSiEeOOH_kc715Zjw" base_DataType="_w5P4QKflEeKgb97SI2dJlw" description="Число в десятичной системе счисления"/>
-  <EECProfile:ValueDomain xmi:id="_0XUQkASiEeOOH_kc715Zjw" base_DataType="_w5P4LKflEeKgb97SI2dJlw" description="Обозначение времени в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
-  <EECProfile:ValueDomain xmi:id="_0XUQkQSiEeOOH_kc715Zjw" base_DataType="_w5P4O6flEeKgb97SI2dJlw" description="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)"/>
+  <EECProfile:NamespaceSubset xmi:id="_9zdVwAPwEeOOH_kc715Zjw" order="1" base_Package="_9Zus8PTjEeKqa_aWeelEZg"/>
   <EECProfile:EECDataModel xmi:id="_hXa2wAiBEeO53p5NlydRJQ" businessName="Код языка" example="ru" standardId="RDM-SDE-00051" standardName="Язык. Код" concept="Язык" representation="Код" note="" base_Classifier="_hXaPsAiBEeO53p5NlydRJQ"/>
   <EECProfile:EECDataModel xmi:id="_heGGgAiBEeO53p5NlydRJQ" base_Property="_heFfcAiBEeO53p5NlydRJQ"/>
   <Default:Documentation xmi:id="_KWus4AiCEeO53p5NlydRJQ" base_Comment="_KWqbcAiCEeO53p5NlydRJQ"/>
@@ -1540,9 +1653,9 @@
   <EECProfile:EECDataModel xmi:id="_UBic8AiQEeO53p5NlydRJQ" base_Property="_UBh14AiQEeO53p5NlydRJQ"/>
   <EECProfile:EECDataModel xmi:id="_0oInwQioEeO4ePBwGYyLtA" base_Package="_HfX1AM85EeKylq6AqFSRsQ"/>
   <EECProfile:EECDataModel xmi:id="_0oInwgioEeO4ePBwGYyLtA" base_Package="_63KpkPTjEeKqa_aWeelEZg"/>
-  <EECProfile:EECDataModel xmi:id="_0oInwwioEeO4ePBwGYyLtA" businessName="Базовые типы данных" standardId="БТД" base_Package="_9Zus8PTjEeKqa_aWeelEZg"/>
-  <EECProfile:EECDataModel xmi:id="_0oKc8AioEeO4ePBwGYyLtA" businessName="Общие простые типы данных" standardId="ОПТД" base_Package="__Aq1kPTjEeKqa_aWeelEZg"/>
-  <EECProfile:EECDataModel xmi:id="_0oMSIAioEeO4ePBwGYyLtA" businessName="Общие составные типы данных" standardId="ОСТД" base_Package="_Zb44YPjPEeKJw6Ug-08zBg"/>
+  <EECProfile:EECDataModel xmi:id="_0oInwwioEeO4ePBwGYyLtA" businessName="Базовые типы данных" standardId="BDD-BDT" standardName="БТД" base_Package="_9Zus8PTjEeKqa_aWeelEZg"/>
+  <EECProfile:EECDataModel xmi:id="_0oKc8AioEeO4ePBwGYyLtA" businessName="Общие простые типы данных" standardId="CSD-SDT" standardName="ОПТД" base_Package="__Aq1kPTjEeKqa_aWeelEZg"/>
+  <EECProfile:EECDataModel xmi:id="_0oMSIAioEeO4ePBwGYyLtA" businessName="Общие составные типы данных" standardId="CCD-CDT" standardName="ОСТД" base_Package="_Zb44YPjPEeKJw6Ug-08zBg"/>
   <EECProfile:EECDataModel xmi:id="_0oNgQAioEeO4ePBwGYyLtA" base_Package="_Nc6KcM85EeKylq6AqFSRsQ"/>
   <EECProfile:EECDataModel xmi:id="_0oNgQQioEeO4ePBwGYyLtA" base_Package="_mhC9UM85EeKylq6AqFSRsQ"/>
   <EECProfile:EECDataModel xmi:id="_0oNgQgioEeO4ePBwGYyLtA" base_Package="_ICgFgM9gEeKylq6AqFSRsQ"/>
@@ -1564,26 +1677,6 @@
   <EECProfile:restriction xmi:id="_fwHN8AmCEeOjNdCZj4v7vQ" base_Generalization="_fwBuYAmCEeOjNdCZj4v7vQ"/>
   <Default:Documentation xmi:id="_yo8mEAmLEeOjNdCZj4v7vQ" base_Comment="_yoxm8AmLEeOjNdCZj4v7vQ"/>
   <EECProfile:EECDataModel xmi:id="_1OYIgAmREeOjNdCZj4v7vQ" businessName="Банковские реквизиты" example="" standardId="RDM-CDT-00011" standardName="Банковские реквизиты_ Детали. Тип" concept="Банковские реквизиты_ Детали" representation="" base_Classifier="_1OXhcAmREeOjNdCZj4v7vQ"/>
-  <EECProfile:ValueDomain xmi:id="_vX7EsQpQEeOzN8_TFapFIQ" base_DataType="_f2AiAAPZEeOOH_kc715Zjw" description="Нормализованная строка символов" maxLength="34"/>
-  <EECProfile:ValueDomain xmi:id="_vX7EtgpQEeOzN8_TFapFIQ" base_DataType="_8So3APjeEeKss-fHD573_w" description="Нормализованная строка символов. Одно значение из перечисления" minLength="1" maxLength="36"/>
-  <EECProfile:ValueDomain xmi:id="_vX7EtwpQEeOzN8_TFapFIQ" base_DataType="_9ndU4PjeEeKss-fHD573_w" description="Нормализованная строка символов" maxLength="254"/>
-  <EECProfile:ValueDomain xmi:id="_vX7EuApQEeOzN8_TFapFIQ" base_DataType="_duA3EPjeEeKss-fHD573_w" description="Значение кода из классификатора «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)" length="" pattern="[A-Z]{2}" maxInclusive="" maxExclusive=""/>
-  <EECProfile:ValueDomain xmi:id="_2hkA4QpQEeOzN8_TFapFIQ" base_DataType="_Cp2bwAPXEeOOH_kc715Zjw" description="Нормализованная строка символов. Указывается в соответствии со справочником «Организационно-правовая форма предприятия (организации)»" minLength="1" maxLength="36" totalDigits=""/>
-  <EECProfile:ValueDomain xmi:id="_2hkA4wpQEeOzN8_TFapFIQ" base_DataType="_KyEYsAPaEeOOH_kc715Zjw" description="Нормализованная строка символов" length="9" pattern="[0-9]{4}[A-Z0-9]{2}[0-9]{3}"/>
-  <EECProfile:ValueDomain xmi:id="_2hkA5ApQEeOzN8_TFapFIQ" base_DataType="_trHtIAPYEeOOH_kc715Zjw" description="Строка десятичных цифр. Длина: 9, 10 или 12 символов" length="" maxLength="" pattern="\d{9,10}|\d{12}"/>
-  <EECProfile:ValueDomain xmi:id="_2hkA5QpQEeOzN8_TFapFIQ" base_DataType="_bn_M8APaEeOOH_kc715Zjw" description="Строка десятичных цифр" minLength="5" maxLength="11" pattern="\d{5,11}"/>
-  <EECProfile:ValueDomain xmi:id="_2hkA6ApQEeOzN8_TFapFIQ" base_DataType="_9SdY8APZEeOOH_kc715Zjw" description="Строка десятичных цифр. Длина: 6 или 20 символов" minLength="" maxLength="" pattern="\d{6}|\d{20}"/>
-  <EECProfile:ValueDomain xmi:id="_2hkA6wpQEeOzN8_TFapFIQ" base_DataType="_vknFMPjeEeKss-fHD573_w" description="Нормализованная строка символов" minLength="3" maxLength="9" pattern="[A-Z0-9][A-Z0-9 -]{1,7}[A-Z0-9]"/>
-  <EECProfile:ValueDomain xmi:id="_2hkA8QpQEeOzN8_TFapFIQ" base_DataType="_Gm3B4APtEeOOH_kc715Zjw" description="Нормализованная строка символов. Одно значение кода из справочника «Статусы электронных документов»" minLength="1" maxLength="36" fractionDigits=""/>
-  <EECProfile:ValueDomain xmi:id="_OrFRcAsIEeOI0ZvdkewPXA" base_DataType="_w5QflKflEeKgb97SI2dJlw" description="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)"/>
-  <EECProfile:ValueDomain xmi:id="_OrFRcQsIEeOI0ZvdkewPXA" base_DataType="_w5P4IqflEeKgb97SI2dJlw" description="Обозначение даты и времени в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
-  <EECProfile:ValueDomain xmi:id="_OrF4gAsIEeOI0ZvdkewPXA" base_DataType="_w5RGT6flEeKgb97SI2dJlw" description="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)"/>
-  <EECProfile:ValueDomain xmi:id="_OrGfkAsIEeOI0ZvdkewPXA" base_DataType="_w5RGcKflEeKgb97SI2dJlw" description="Число в десятичной системе счисления"/>
-  <EECProfile:ValueDomain xmi:id="_OrGfkQsIEeOI0ZvdkewPXA" base_DataType="_w5RGi6flEeKgb97SI2dJlw" description="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)"/>
-  <EECProfile:ValueDomain xmi:id="_OrHGoAsIEeOI0ZvdkewPXA" base_DataType="_w5RGeaflEeKgb97SI2dJlw" description="Целое неотрицательное число в десятичной системе счисления"/>
-  <EECProfile:ValueDomain xmi:id="_OrHGoQsIEeOI0ZvdkewPXA" base_DataType="_w5P4RaflEeKgb97SI2dJlw" description="Число в десятичной системе счисления"/>
-  <EECProfile:ValueDomain xmi:id="_OrHtsAsIEeOI0ZvdkewPXA" base_DataType="_w5RGgqflEeKgb97SI2dJlw" description="Строка символов конечной длины"/>
-  <EECProfile:ValueDomain xmi:id="_TuXlIAsIEeOI0ZvdkewPXA" base_DataType="_w5P4SqflEeKgb97SI2dJlw" description="Число в десятичной системе счисления"/>
   <Default:Documentation xmi:id="_ol2gMA4PEeOI0ZvdkewPXA" base_Comment="_olrhEA4PEeOI0ZvdkewPXA"/>
   <Default:Documentation xmi:id="_fECEUA4SEeOI0ZvdkewPXA" base_Comment="_fD4TUA4SEeOI0ZvdkewPXA"/>
   <Default:Documentation xmi:id="_xKbpAA4SEeOI0ZvdkewPXA" base_Comment="_xKSfEA4SEeOI0ZvdkewPXA"/>
@@ -1620,11 +1713,6 @@
   <Default:Documentation xmi:id="_IkatwA5AEeOI0ZvdkewPXA" base_Comment="_IkWcUA5AEeOI0ZvdkewPXA"/>
   <Default:Documentation xmi:id="_RdMFQA5AEeOI0ZvdkewPXA" base_Comment="_RdBGIA5AEeOI0ZvdkewPXA"/>
   <Default:Documentation xmi:id="_Zqk9cA5AEeOI0ZvdkewPXA" base_Comment="_ZqZ-UA5AEeOI0ZvdkewPXA"/>
-  <EECProfile:ValueDomain xmi:id="_hZrhsA5BEeOI0ZvdkewPXA" base_DataType="_8YazUPqpEeKp_LhlDPJP6w" description="Конечная последовательность двоичных октетов (байтов)"/>
-  <EECProfile:ValueDomain xmi:id="_hZsIwA5BEeOI0ZvdkewPXA" base_DataType="_w5QfMqflEeKgb97SI2dJlw" description="Конечная последовательность двоичных цифр (битов)"/>
-  <EECProfile:ValueDomain xmi:id="_hZsv0A5BEeOI0ZvdkewPXA" base_DataType="_w5QfS6flEeKgb97SI2dJlw" description="Конечная последовательность двоичных цифр (битов)"/>
-  <EECProfile:ValueDomain xmi:id="_hZsv0Q5BEeOI0ZvdkewPXA" base_DataType="_w5QfYqflEeKgb97SI2dJlw" description="Конечная последовательность двоичных цифр (битов)"/>
-  <EECProfile:ValueDomain xmi:id="_hZtW4A5BEeOI0ZvdkewPXA" base_DataType="_w5Qfe6flEeKgb97SI2dJlw" description="Конечная последовательность двоичных цифр (битов)"/>
   <Default:Documentation xmi:id="_uFz2EA5BEeOI0ZvdkewPXA" base_Comment="_uFpeAA5BEeOI0ZvdkewPXA"/>
   <Default:Documentation xmi:id="_-YYQMA5CEeOI0ZvdkewPXA" base_Comment="_-YT-wA5CEeOI0ZvdkewPXA"/>
   <EECProfile:EECDataModel xmi:id="_F066QA5DEeOI0ZvdkewPXA" base_Property="_F06TMA5DEeOI0ZvdkewPXA"/>
@@ -1663,23 +1751,20 @@
   <EECProfile:EECDataModel xmi:id="_OD3CkRSOEeObnOpEr-AhnA" base_Property="_OD3CkBSOEeObnOpEr-AhnA"/>
   <EECProfile:EECDataModel xmi:id="_QMp7EBSOEeObnOpEr-AhnA" base_Property="_QMpUABSOEeObnOpEr-AhnA"/>
   <EECProfile:EECDataModel xmi:id="_b3vsYRSSEeObnOpEr-AhnA" base_Property="_b3vsYBSSEeObnOpEr-AhnA"/>
-  <EECProfile:EECDataModel xmi:id="_A1D_QBuPEeOFZLRdrHA81A" businessName="Общие простые элементы данных" standardId="ОПЭД" base_Package="_A1DYMBuPEeOFZLRdrHA81A"/>
-  <EECProfile:EECDataModel xmi:id="_CRqgIBuPEeOFZLRdrHA81A" businessName="Общие составные элементы данных" standardId="ОСЭД" standardName="" base_Package="_CRpSABuPEeOFZLRdrHA81A"/>
-  <EECProfile:AggregateElements xmi:id="_SrJQABuPEeOFZLRdrHA81A" base_Package="_CRpSABuPEeOFZLRdrHA81A"/>
-  <EECProfile:LeafElements xmi:id="_USZhsBuPEeOFZLRdrHA81A" base_Package="_A1DYMBuPEeOFZLRdrHA81A"/>
-  <EECProfile:AggregateTypes xmi:id="_ZCGLABuPEeOFZLRdrHA81A" base_Package="_Zb44YPjPEeKJw6Ug-08zBg"/>
-  <EECProfile:LeafTypes xmi:id="_aqxZABuPEeOFZLRdrHA81A" base_Package="__Aq1kPTjEeKqa_aWeelEZg"/>
+  <EECProfile:EECDataModel xmi:id="_A1D_QBuPEeOFZLRdrHA81A" businessName="Общие простые элементы данных" standardId="CSD-SDE" standardName="ОПЭД" base_Package="_A1DYMBuPEeOFZLRdrHA81A"/>
+  <EECProfile:EECDataModel xmi:id="_CRqgIBuPEeOFZLRdrHA81A" businessName="Общие составные элементы данных" standardId="CCD-CDE" standardName="ОСЭД" base_Package="_CRpSABuPEeOFZLRdrHA81A"/>
+  <EECProfile:NamespaceSubset xmi:id="_SrJQABuPEeOFZLRdrHA81A" order="5" base_Package="_CRpSABuPEeOFZLRdrHA81A"/>
+  <EECProfile:NamespaceSubset xmi:id="_USZhsBuPEeOFZLRdrHA81A" order="3" base_Package="_A1DYMBuPEeOFZLRdrHA81A"/>
+  <EECProfile:NamespaceSubset xmi:id="_ZCGLABuPEeOFZLRdrHA81A" order="4" base_Package="_Zb44YPjPEeKJw6Ug-08zBg"/>
+  <EECProfile:NamespaceSubset xmi:id="_aqxZABuPEeOFZLRdrHA81A" order="2" base_Package="__Aq1kPTjEeKqa_aWeelEZg"/>
   <EECProfile:EECDataModel xmi:id="_o3vmEBw0EeOFZLRdrHA81A" businessName="Вид платежа" example="aa" standardId="RDM-SDT-00053" standardName="Вид платежа_ Код. Тип" concept="Код" base_Classifier="_o3uX8Bw0EeOFZLRdrHA81A"/>
-  <EECProfile:ValueDomain xmi:id="_6jJQ0Bw0EeOFZLRdrHA81A" base_DataType="_o3uX8Bw0EeOFZLRdrHA81A" description="Двухбуквенный код. Одно значение кода из справочника видов платежей" length="2"/>
   <EECProfile:restriction xmi:id="_QaGWABw1EeOFZLRdrHA81A" base_Generalization="_IfczoBw1EeOFZLRdrHA81A"/>
   <Default:Documentation xmi:id="_qJDngBw1EeOFZLRdrHA81A" base_Comment="_qI-vABw1EeOFZLRdrHA81A"/>
   <EECProfile:EECDataModel xmi:id="_sf6NUBw5EeOFZLRdrHA81A" businessName="Вид платежа" standardId="RDM-SDE-00053" standardName="Вид платежа. Код" concept="Вид платежа" representation="Код" analogue="UN/CEFACT: CCL: UN00000790" base_Classifier="_sf4_MBw5EeOFZLRdrHA81A"/>
   <EECProfile:EECDataModel xmi:id="_t9N40Bw5EeOFZLRdrHA81A" base_Property="_t9NRwBw5EeOFZLRdrHA81A"/>
   <Default:Documentation xmi:id="_Ddp7cBw6EeOFZLRdrHA81A" base_Comment="_DdfjYBw6EeOFZLRdrHA81A"/>
-  <EECProfile:ValueDomain xmi:id="_7JxO8B6EEeOjWum01rvk-A" base_DataType="_2hsloAlREeO4ePBwGYyLtA" description="Нормализованная строка символов. Одно значение кода из справочника «Виды документов»" minLength="1" maxLength="36"/>
   <EECProfile:EECDataModel xmi:id="_okXdQR6IEeOjWum01rvk-A" base_Property="_okXdQB6IEeOjWum01rvk-A"/>
   <EECProfile:EECDataModel xmi:id="_yTbRrx6KEeOjWum01rvk-A" base_Property="_yTRgxB6KEeOjWum01rvk-A"/>
-  <EECProfile:ValueDomain xmi:id="_YgDHcB68EeO1nJCT2Ka3OQ" base_DataType="_bZLOQAlTEeO4ePBwGYyLtA" description="Двухбуквенный код языка в соответствии со стандартом ISO 639-1" length="" pattern="[a-z]{2}"/>
   <EECProfile:EECDataModel xmi:id="_TldtoB-JEeO4S8Pwff_OSA" base_Property="_TlcfgB-JEeO4S8Pwff_OSA"/>
   <EECProfile:EECDataModel xmi:id="_zfH5gCAbEeOeQPM7Z3-lxg" businessName="Реквизиты юридического лица" standardId="RDM-CDT-00015" standardName="Реквизиты юридического лица_ Детали. Тип" concept="Реквизиты юридического лица_ Детали" representation="" base_Classifier="_zfGEUCAbEeOeQPM7Z3-lxg"/>
   <EECProfile:EECDataModel xmi:id="_584nICAbEeOeQPM7Z3-lxg" base_Property="_580VsCAbEeOeQPM7Z3-lxg"/>
@@ -1720,15 +1805,13 @@
   <EECProfile:EECDataModel xmi:id="__a114CAhEeOeQPM7Z3-lxg" base_Property="__a0AsCAhEeOeQPM7Z3-lxg"/>
   <EECProfile:EECDataModel xmi:id="_oS5MoCBSEeO2fZVvCODbLQ" base_Property="_oS3XcCBSEeO2fZVvCODbLQ"/>
   <EECProfile:EECDataModel xmi:id="_t0EWMCBSEeO2fZVvCODbLQ" base_Property="_t0ChACBSEeO2fZVvCODbLQ"/>
-  <EECProfile:rDataModel xmi:id="_CFy0YCZxEeOk68dR-Oii7Q" base_Package="_63KpkPTjEeKqa_aWeelEZg" status="" version="0.7.0"/>
+  <EECProfile:rDataModel xmi:id="_CFy0YCZxEeOk68dR-Oii7Q" base_Package="_63KpkPTjEeKqa_aWeelEZg" status="" version="0.8.0"/>
   <EECProfile:EECDataModel xmi:id="_bwbKJSqQEeO-L5BBQBqUsA" standardName="Строковый" analogue="UN/CEFACT: CCDT: String" base_Classifier="_VWO5cCWkEeOcW_rPOtRfPQ"/>
-  <EECProfile:PrimitiveTypes xmi:id="_dJvkoDC-EeORtYFSx-HEQA" base_Package="_GadTICWjEeOcW_rPOtRfPQ"/>
+  <EECProfile:NamespaceSubset xmi:id="_dJvkoDC-EeORtYFSx-HEQA" base_Package="_GadTICWjEeOcW_rPOtRfPQ"/>
   <EECProfile:EECDataModel xmi:id="_q8L3MDF2EeORtYFSx-HEQA" businessName="Имя до 300 символов" standardId="RDM-SDT-00056" standardName="Имя. До 300 символов. Тип" concept="Имя" representation="" base_Classifier="_q8LQIDF2EeORtYFSx-HEQA"/>
-  <EECProfile:ValueDomain xmi:id="_q8TL8DF2EeORtYFSx-HEQA" base_DataType="_q8LQIDF2EeORtYFSx-HEQA" description="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)" minLength="1" maxLength="300"/>
   <EECProfile:restriction xmi:id="_0NqCkDF2EeORtYFSx-HEQA" base_Generalization="_0NlxIDF2EeORtYFSx-HEQA"/>
   <Default:Documentation xmi:id="_Gl3I8DF3EeORtYFSx-HEQA" base_Comment="_GlvNIDF3EeORtYFSx-HEQA"/>
   <EECProfile:EECDataModel xmi:id="_ItN3ADF3EeORtYFSx-HEQA" businessName="Имя до 120 символов" example="" standardId="RDM-SDT-00055" standardName="Имя. До 120 символов. Тип" concept="Имя" representation="" base_Classifier="_ItMo4DF3EeORtYFSx-HEQA"/>
-  <EECProfile:ValueDomain xmi:id="_ItOeEDF3EeORtYFSx-HEQA" base_DataType="_ItMo4DF3EeORtYFSx-HEQA" description="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)" minLength="1" maxLength="120"/>
   <Default:Documentation xmi:id="_ItOeETF3EeORtYFSx-HEQA" base_Comment="_ItMo4TF3EeORtYFSx-HEQA"/>
   <EECProfile:restriction xmi:id="_ItOeEjF3EeORtYFSx-HEQA" base_Generalization="_ItMo4jF3EeORtYFSx-HEQA"/>
   <EECProfile:EECDataModel xmi:id="_BkdCUDIsEeOygNYiTfyZgg" businessName="Платежные реквизиты" example="" standardId="RDM-CDT-00022" standardName="Платежные реквизиты_ Детали. Тип" concept="Платежные реквизиты_ Детали" representation="" base_Classifier="_BkZ_ADIsEeOygNYiTfyZgg"/>
@@ -1745,7 +1828,6 @@
   <Default:Documentation xmi:id="_hpJXwDI1EeOygNYiTfyZgg" base_Comment="_hpAN0DI1EeOygNYiTfyZgg"/>
   <EECProfile:EECDataModel xmi:id="_HPxKEDJSEeOygNYiTfyZgg" standardId="" standardName="Продолжительность" note="выражается в виде количества единиц времени григорианского календаря (год, месяц, неделя, день, час, минута, секунда), но не в виде указания начала и конца периода" analogue="UN/CEFACT: CCDT: TimeDuration" base_Classifier="_HPv78DJSEeOygNYiTfyZgg"/>
   <EECProfile:EECDataModel xmi:id="_przgcDJSEeOygNYiTfyZgg" businessName="Продолжительность времени" example="P1Y2M3D" standardId="RDM-BDT-00021" standardName="Продолжительность. Тип" concept="Продолжительность" representation="" usage="" analogue="UN/CEFACT: CCL: UN02000026" base_Classifier="_pry5YDJSEeOygNYiTfyZgg"/>
-  <EECProfile:ValueDomain xmi:id="_pr-fkDJSEeOygNYiTfyZgg" base_DataType="_pry5YDJSEeOygNYiTfyZgg" description="Обозначение продолжительности времени в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
   <Default:Documentation xmi:id="_THmW4DJWEeOygNYiTfyZgg" base_Comment="_THisgDJWEeOygNYiTfyZgg"/>
   <EECProfile:EECDataModel xmi:id="_EMFnkDJbEeOygNYiTfyZgg" businessName="Продолжительность действия документа" example="P1Y2M3D" standardId="RDM-SDE-00056" standardName="Продолжительность действия документа. Продолжительность" concept="Продолжительность действия документа" representation="Продолжительность времени" usage="" note="" base_Classifier="_EMFAgDJbEeOygNYiTfyZgg"/>
   <EECProfile:EECDataModel xmi:id="_EMR00TJbEeOygNYiTfyZgg" base_Property="_EMR00DJbEeOygNYiTfyZgg"/>
@@ -1756,7 +1838,6 @@
   <EECProfile:EECDataModel xmi:id="_dfrqkEYWEeO2putRExeoJA" base_Property="_dfrDgEYWEeO2putRExeoJA"/>
   <Default:Documentation xmi:id="_HUBrQEYXEeO2putRExeoJA" base_Comment="_HT2sIEYXEeO2putRExeoJA"/>
   <EECProfile:EECDataModel xmi:id="_bey7cEYXEeO2putRExeoJA" businessName="Номер дома" standardId="RDM-SDT-00057" standardName="Номер дома. Тип" concept="Номер дома" representation="" usage="Указывается номер дома с возможным указанием буквенного или цифрового обозначения строения, корпуса. Например, «85», «221б», «220-2», «51/2»" base_Classifier="_beyUYEYXEeO2putRExeoJA"/>
-  <EECProfile:ValueDomain xmi:id="_dSRrQEYXEeO2putRExeoJA" base_DataType="_beyUYEYXEeO2putRExeoJA" description="Нормализованная строка символов" minLength="1" maxLength="20"/>
   <EECProfile:restriction xmi:id="_iG9iQEYXEeO2putRExeoJA" base_Generalization="_ggmBYEYXEeO2putRExeoJA"/>
   <Default:Documentation xmi:id="_m2ksAEYXEeO2putRExeoJA" base_Comment="_m2fzgEYXEeO2putRExeoJA"/>
   <EECProfile:EECDataModel xmi:id="_fcH3MEYYEeO2putRExeoJA" base_Property="_fcHQIEYYEeO2putRExeoJA"/>
@@ -1766,14 +1847,11 @@
   <Default:Documentation xmi:id="_9cGlkkdjEeOgOZzxgLTMPg" base_Comment="_9cFXcUdjEeOgOZzxgLTMPg"/>
   <Default:Documentation xmi:id="_wVsTgEdkEeOgOZzxgLTMPg" base_Comment="_wVoCEEdkEeOgOZzxgLTMPg"/>
   <EECProfile:restriction xmi:id="_rPAboEdmEeOgOZzxgLTMPg" base_Generalization="_Hv3BYAPZEeOOH_kc715Zjw"/>
-  <EECProfile:ValueDomain xmi:id="_sbigMEdmEeOgOZzxgLTMPg" base_DataType="_FBVloAPZEeOOH_kc715Zjw" description="Нормализованная строка символов. Длина: 8, 9 или 11 символов" pattern="[0-9]{9}|[A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5}"/>
-  <EECProfile:ValueDomain xmi:id="_bM4mYEdnEeOgOZzxgLTMPg" base_DataType="_MD4QwAPYEeOOH_kc715Zjw" description="Нормализованная строка символов" minLength="1" maxLength="20"/>
   <EECProfile:EECDataModel xmi:id="_oXuQAEdnEeOgOZzxgLTMPg" businessName="Национальный код" example="" standardId="RDM-SDT-00059" standardName="Национальный код. Тип" concept="Национальный код" usage="" base_Classifier="_oXltIEdnEeOgOZzxgLTMPg"/>
   <EECProfile:EECDataModel xmi:id="_oXu3EEdnEeOgOZzxgLTMPg" businessName="Код страны" standardName="Страна. Код" concept="Страна" representation="" base_Property="_oXltI0dnEeOgOZzxgLTMPg"/>
   <Default:Documentation xmi:id="_oXuQAUdnEeOgOZzxgLTMPg" base_Comment="_oXltIUdnEeOgOZzxgLTMPg"/>
   <EECProfile:Attribute xmi:id="_oXu3EUdnEeOgOZzxgLTMPg" base_Property="_oXltI0dnEeOgOZzxgLTMPg"/>
   <Default:Documentation xmi:id="_oXveIEdnEeOgOZzxgLTMPg" base_Comment="_oXltJEdnEeOgOZzxgLTMPg"/>
-  <EECProfile:ValueDomain xmi:id="_8glbsEdnEeOgOZzxgLTMPg" base_DataType="_tmOUIAPaEeOOH_kc715Zjw" description="Строка десятичных цифр. Длина: 8 или 10 символов" pattern="\d{8}|\d{10}" fractionDigits=""/>
   <Default:Documentation xmi:id="_bchBAEdrEeOgOZzxgLTMPg" base_Comment="_bcdWoEdrEeOgOZzxgLTMPg"/>
   <Default:Documentation xmi:id="_hTI2IEdrEeOgOZzxgLTMPg" base_Comment="_hTFLwEdrEeOgOZzxgLTMPg"/>
   <Default:Documentation xmi:id="_nR7v0EdrEeOgOZzxgLTMPg" base_Comment="_nR4FcEdrEeOgOZzxgLTMPg"/>
@@ -1783,7 +1861,6 @@
   <Default:Documentation xmi:id="_0_PNUEdrEeOgOZzxgLTMPg" base_Comment="_0_K74EdrEeOgOZzxgLTMPg"/>
   <Default:Documentation xmi:id="_3B-hIEdrEeOgOZzxgLTMPg" base_Comment="_3B62wEdrEeOgOZzxgLTMPg"/>
   <EECProfile:EECDataModel xmi:id="_BNeX0F5BEeOgdNELZqEKyw" businessName="Порядковый номер" example="7" standardId="RDM-BDT-00022" standardName="Порядковый номер. Тип" concept="Порядковый номер" representation="" usage="БТД «Порядковый номер. Тип» используется для представления результатов упорядочения множества объектов" base_Classifier="_BNdJsF5BEeOgdNELZqEKyw"/>
-  <EECProfile:ValueDomain xmi:id="_EEdMAF5BEeOgdNELZqEKyw" base_DataType="_BNdJsF5BEeOgdNELZqEKyw" description="Целое положительное число в десятичной системе счисления"/>
   <EECProfile:EECDataModel xmi:id="_TKFHUF5BEeOgdNELZqEKyw" standardId="" standardName="Неотрицательное целое число" base_Classifier="_TKEgQF5BEeOgdNELZqEKyw"/>
   <EECProfile:EECDataModel xmi:id="_c0DSQF5BEeOgdNELZqEKyw" standardId="" standardName="Положительное целое число" base_Classifier="_c0A2AF5BEeOgdNELZqEKyw"/>
   <Default:Documentation xmi:id="_VI-gIF5FEeOgdNELZqEKyw" base_Comment="_VI61wF5FEeOgdNELZqEKyw"/>
@@ -1792,7 +1869,6 @@
   <EECProfile:EECDataModel xmi:id="_F2BNcIMmEeOnX6jkTUE6Yw" businessName="Сумма платежа" example="1000" standardId="RDM-SDT-00061" standardName="Платеж_ Сумма. Тип" concept="Сумма" base_Classifier="_F2AmYIMmEeOnX6jkTUE6Yw"/>
   <EECProfile:EECDataModel xmi:id="_IWu2sIMmEeOnX6jkTUE6Yw" businessName="Код валюты" standardName="Валюта. Код" concept="Валюта" representation="" base_Property="_IWuPoIMmEeOnX6jkTUE6Yw"/>
   <EECProfile:EECDataModel xmi:id="_MiV7gIMmEeOnX6jkTUE6Yw" businessName="Код валюты" example="RUB" standardId="RDM-SDT-00060" standardName="Валюта_ Код. Тип" concept="Код" usage="" base_Classifier="_MiVUcIMmEeOnX6jkTUE6Yw"/>
-  <EECProfile:ValueDomain xmi:id="_RCjXUIMmEeOnX6jkTUE6Yw" base_DataType="_MiVUcIMmEeOnX6jkTUE6Yw" description="Трехбуквенный код валюты в соответствии со справочником ISO 4217" pattern="[A-Z]{3}"/>
   <EECProfile:restriction xmi:id="_SATZAIMmEeOnX6jkTUE6Yw" base_Generalization="_P2fM0IMmEeOnX6jkTUE6Yw"/>
   <EECProfile:Attribute xmi:id="_rXYWAIMmEeOnX6jkTUE6Yw" base_Property="_IWuPoIMmEeOnX6jkTUE6Yw"/>
   <Default:Documentation xmi:id="_x6J0wINNEeO7pdZFbb67iQ" base_Comment="_x6DHEINNEeO7pdZFbb67iQ"/>
@@ -1831,7 +1907,6 @@
   <EECProfile:EECDataModel xmi:id="_JzVP8IiqEeOPSK0F-UNoSA" businessName="Код ошибки контроля электронного документа" example="" standardId="RDM-SDT-00062" standardName="Ошибка контроля электронного документа_ Код. Тип" concept="Ошибка контроля электронного документа_ Код" base_Classifier="_JzUo4IiqEeOPSK0F-UNoSA"/>
   <Default:Documentation xmi:id="_X4mhgIiqEeOPSK0F-UNoSA" base_Comment="_X4jeMIiqEeOPSK0F-UNoSA"/>
   <EECProfile:restriction xmi:id="_a-0EgIiqEeOPSK0F-UNoSA" base_Generalization="_ZicNIIiqEeOPSK0F-UNoSA"/>
-  <EECProfile:ValueDomain xmi:id="_heT3gIiqEeOPSK0F-UNoSA" base_DataType="_JzUo4IiqEeOPSK0F-UNoSA" description="Значение кода из справочника ЕЭК «Коды ошибок контроля электронного документа»"/>
   <Default:Documentation xmi:id="_BVaasIilEeOPSK0F-UNoSA" base_Comment="_BVXXYIilEeOPSK0F-UNoSA"/>
   <EECProfile:EECDataModel xmi:id="_tD6QYIikEeOPSK0F-UNoSA" base_Property="_tD5pUIikEeOPSK0F-UNoSA"/>
   <EECProfile:EECDataModel xmi:id="_8kQ1UIijEeOPSK0F-UNoSA" businessName="Ошибка контроля электронного документа" example="" standardId="RDM-CDT-00024" standardName="Ошибка контроля электронного документа_ Детали. Тип" concept="Ошибка контроля электронного документа_ Детали" analogue="" base_Classifier="_8kQOQIijEeOPSK0F-UNoSA"/>
@@ -1862,7 +1937,6 @@
   <EECProfile:EECDataModel xmi:id="_nSeqwJMMEeOau5lQkkgj3A" base_Property="_nSeDsJMMEeOau5lQkkgj3A"/>
   <EECProfile:EECDataModel xmi:id="_ql_p8ZMMEeOau5lQkkgj3A" businessName="Страна уполномоченного органа" standardId="RDM-SDT-00063" standardName="Страна уполномоченного органа_ Код. Тип" concept="Страна уполномоченного органа_ Код" representation="" base_Classifier="_ql_p8JMMEeOau5lQkkgj3A"/>
   <EECProfile:restriction xmi:id="_vV-AEJMMEeOau5lQkkgj3A" base_Generalization="_t05O4JMMEeOau5lQkkgj3A"/>
-  <EECProfile:ValueDomain xmi:id="_wBOjkJMMEeOau5lQkkgj3A" base_DataType="_ql_p8JMMEeOau5lQkkgj3A" description="Значение кода из классификатора «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)"/>
   <EECProfile:EECDataModel xmi:id="_7Jss0JMMEeOau5lQkkgj3A" base_Property="_7JsFwJMMEeOau5lQkkgj3A"/>
   <Default:Documentation xmi:id="_FszfMJMNEeOau5lQkkgj3A" base_Comment="_Fsv00JMNEeOau5lQkkgj3A"/>
   <Default:Documentation xmi:id="_S6E8UJMOEeOau5lQkkgj3A" base_Comment="_S6BR8JMOEeOau5lQkkgj3A"/>
@@ -1882,8 +1956,8 @@
   <EECProfile:EECDataModel xmi:id="_JLTtQIgTEeOPSK0F-UNoSA" base_Property="_JLTGMIgTEeOPSK0F-UNoSA"/>
   <EECProfile:EECDataModel xmi:id="_IASroIgTEeOPSK0F-UNoSA" businessName="Уведомление о принятии в обработку" standardId="R.001" base_Classifier="_IASEkIgTEeOPSK0F-UNoSA"/>
   <EECProfile:EECDataModel xmi:id="_G6-pYYgTEeOPSK0F-UNoSA" base_Classifier="_G6-pYIgTEeOPSK0F-UNoSA"/>
-  <EECProfile:Namespace xmi:id="_FRotAIgTEeOPSK0F-UNoSA" base_Package="_50bC0IgSEeOPSK0F-UNoSA" version="0.1.0" name="urn:EEC:TT:ED:ErrorAckDetails:v0.1.0" prefix="doc"/>
-  <EECProfile:Namespace xmi:id="_FRoF8IgTEeOPSK0F-UNoSA" base_Package="_0E9loIgSEeOPSK0F-UNoSA" version="0.1.0" name="urn:EEC:TT:ED:AcceptanceAckDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_FRotAIgTEeOPSK0F-UNoSA" base_Package="_50bC0IgSEeOPSK0F-UNoSA" version="0.1.0" uri="urn:EEC:TT:ED:ErrorAckDetails:v0.1.0" name="urn:EEC:TT:ED:ErrorAckDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_FRoF8IgTEeOPSK0F-UNoSA" base_Package="_0E9loIgSEeOPSK0F-UNoSA" version="0.1.0" uri="urn:EEC:TT:ED:AcceptanceAckDetails:v0.1.0" name="urn:EEC:TT:ED:AcceptanceAckDetails:v0.1.0" prefix="doc"/>
   <EECProfile:EECDataModel xmi:id="_50bp4IgSEeOPSK0F-UNoSA" base_Package="_50bC0IgSEeOPSK0F-UNoSA"/>
   <EECProfile:EECDataModel xmi:id="_0E-MsIgSEeOPSK0F-UNoSA" base_Package="_0E9loIgSEeOPSK0F-UNoSA"/>
   <Default:Documentation xmi:id="_AyBDAK2iEeOFsZCn5jPbpQ" base_Comment="_Ax35EK2iEeOFsZCn5jPbpQ"/>
@@ -1891,4 +1965,215 @@
   <Default:Documentation xmi:id="_ONg-0K2iEeOFsZCn5jPbpQ" base_Comment="_ONWmwK2iEeOFsZCn5jPbpQ"/>
   <Default:Documentation xmi:id="_XOl9wK2iEeOFsZCn5jPbpQ" base_Comment="_XOda4K2iEeOFsZCn5jPbpQ"/>
   <Default:Documentation xmi:id="_brfm4K2iEeOFsZCn5jPbpQ" base_Comment="_brWc8K2iEeOFsZCn5jPbpQ"/>
+  <EECProfile:EECDataModel xmi:id="_iVkZgLNFEeO5pdTFKaHiVw" businessName="Вес" example="75" standardId="RDM-SDE-00072" standardName="Вес. Измерение" concept="Вес" representation="Измерение" note="" base_Classifier="_iVaBcLNFEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_iVkZgbNFEeO5pdTFKaHiVw" base_Comment="_iVaBcbNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_iVlnoLNFEeO5pdTFKaHiVw" base_Property="_iVaBcrNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_iVm1wLNFEeO5pdTFKaHiVw" businessName="Начальная дата" example="2014-03-18" standardId="RDM-SDE-00073" standardName="Начальная дата. Дата" concept="Начальная дата" representation="Дата" analogue="UN/CEFACT: CCL: UN00000120" base_Classifier="_iVb2oLNFEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_iVm1wbNFEeO5pdTFKaHiVw" base_Comment="_iVb2obNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_iVoD4LNFEeO5pdTFKaHiVw" base_Property="_iVb2orNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_iVpSALNFEeO5pdTFKaHiVw" businessName="Конечная дата" example="2014-03-19" standardId="RDM-SDE-00074" standardName="Конечная дата. Дата" concept="Конечная дата" representation="Дата" analogue="UN/CEFACT: CCL: UN00000121" base_Classifier="_iVdr0LNFEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_iVp5ELNFEeO5pdTFKaHiVw" base_Comment="_iVdr0bNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_iVrHMLNFEeO5pdTFKaHiVw" base_Property="_iVdr0rNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_iVsVULNFEeO5pdTFKaHiVw" businessName="Дата рождения" standardId="RDM-SDE-00070" standardName="Дата рождения. Дата" concept="Дата рождения" representation="Дата" base_Classifier="_iVe58LNFEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_iVsVUbNFEeO5pdTFKaHiVw" base_Comment="_iVe58bNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_iVtjcLNFEeO5pdTFKaHiVw" base_Property="_iVe58rNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_m6GUoLNFEeO5pdTFKaHiVw" businessName="Пол" example="F" standardId="RDM-SDT-00064" standardName="Пол_ Код. Тип" concept="Пол_ Код" base_Classifier="_m6EfcLNFEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_m6GUorNFEeO5pdTFKaHiVw" base_Comment="_m6EfcbNFEeO5pdTFKaHiVw"/>
+  <EECProfile:restriction xmi:id="_m6GUo7NFEeO5pdTFKaHiVw" base_Generalization="_m6EfcrNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_m6G7sLNFEeO5pdTFKaHiVw" businessName="Пол" example="M" standardId="RDM-SDE-00071" standardName="Пол. Код" concept="Пол" representation="Код" base_Classifier="_m6FGgLNFEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_m6G7sbNFEeO5pdTFKaHiVw" base_Comment="_m6FGgbNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_m6HiwLNFEeO5pdTFKaHiVw" base_Property="_m6FGgrNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_zm9BwLNFEeO5pdTFKaHiVw" businessName="Возраст" standardId="RDM-SDE-00069" standardName="Возраст. Продолжительность" concept="Возраст" representation="Продолжительность" note="" base_Classifier="_zm5-cLNFEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_zm9BwbNFEeO5pdTFKaHiVw" base_Comment="_zm5-cbNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_zm-P4LNFEeO5pdTFKaHiVw" base_Property="_zm5-crNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_6tiC4LNFEeO5pdTFKaHiVw" businessName="Интервал дат" standardId="RDM-CDT-00026" standardName="Интервал дат_ Детали. Тип" concept="Интервал дат_ Детали" analogue="UN/CEFACT: CCL: UN00000116" base_Classifier="_6te_kLNFEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_6tiC4bNFEeO5pdTFKaHiVw" base_Comment="_6te_kbNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_6tjRALNFEeO5pdTFKaHiVw" base_Property="_6te_krNFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_6tkfILNFEeO5pdTFKaHiVw" base_Property="_6te_k7NFEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_6IauMLNGEeO5pdTFKaHiVw" standardName="Год" base_Classifier="_6IaHILNGEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_86BTILNGEeO5pdTFKaHiVw" standardName="Месяц года" base_Classifier="_86AsELNGEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_-vu3kLNGEeO5pdTFKaHiVw" standardName="День месяца" base_Classifier="_-vuQgLNGEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_AHtXILNHEeO5pdTFKaHiVw" standardName="День" analogue="" base_Classifier="_AHswELNHEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_Be1iILNHEeO5pdTFKaHiVw" standardName="Месяц" base_Classifier="_Be07ELNHEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_fqhdoLNHEeO5pdTFKaHiVw" businessName="День" example="---27" standardId="RDM-BDT-00023" standardName="День. Тип" concept="День" usage="БТД «День. Тип» используется, когда необходимо указать день ежемесячного события. Используется только григорианский календарь. Использование дней с 29 по 31 допустимо. При этом, если в месяце меньшее количество дней, то считается, что указан последний день месяца. Например, число 31 означает 31-ое января, 28-ое февраля в невисокосном году, 30-ое апреля и т.д." note="Например, БТД «День. Тип» может использоваться для представления дня зарплаты сотрудника" base_Classifier="_fqg2kLNHEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_iB49oLNHEeO5pdTFKaHiVw" businessName="Месяц" example="--02--" standardId="RDM-BDT-00024" standardName="Месяц. Тип" concept="Месяц" usage="БТД «Месяц. Тип» используется, когда необходимо указать месяц ежегодного события. Используется только григорианский календарь" note="Например, БТД «Месяц. Тип» может использоваться для представления месяца, в котором лучше всего отдыхать в Крыму" base_Classifier="_iB4WkLNHEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_kVrlMLNHEeO5pdTFKaHiVw" businessName="День месяца" example="--02-27" standardId="RDM-BDT-00026" standardName="День месяца. Тип" concept="День месяца" usage="БТД «День месяца. Тип» используется, когда необходимо указать день и месяц ежегодного события. Используется только григорианский календарь. Для невисокосных лет 29 февраля считается эквивалентным 28 февраля" note="Например, БТД «День месяца. Тип» может использоваться для представления дня рождения" base_Classifier="_kVq-ILNHEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_mTcSYbNHEeO5pdTFKaHiVw" businessName="Год" example="2014" standardId="RDM-BDT-00025" standardName="Год. Тип" concept="Год" usage="БТД «Год. Тип» используется, когда необходимо указать год определенного события. Используется только григорианский календарь" note="Например, БТД «Год. Тип» может использоваться для представления года окончания учебного заведения" base_Classifier="_mTcSYLNHEeO5pdTFKaHiVw"/>
+  <EECProfile:EECDataModel xmi:id="_nnjloLNHEeO5pdTFKaHiVw" businessName="Месяц года" example="2014-03" standardId="RDM-BDT-00027" standardName="Месяц года. Тип" concept="Месяц года" usage="БТД «Месяц года. Тип» используется, когда необходимо указать месяц ежегодного события. Используется только григорианский календарь" note="Например, БТД «Месяц года. Тип» может использоваться для представления месяца, за который сотруднику начислена заработная плата" base_Classifier="_nni-kLNHEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_be9SULPaEeO5pdTFKaHiVw" base_Comment="_bezhULPaEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_W2YSwLPcEeO5pdTFKaHiVw" base_Comment="_W2PI0LPcEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_RIS5ILPdEeO5pdTFKaHiVw" base_Comment="_RIJvMLPdEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_IqaRYLPeEeO5pdTFKaHiVw" base_Comment="_IqRugLPeEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_K6xKcLPeEeO5pdTFKaHiVw" base_Comment="_K6onkLPeEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_TTCLALPgEeO5pdTFKaHiVw" base_Comment="_TS5BELPgEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_UQ7WoLPgEeO5pdTFKaHiVw" base_Comment="_UQxloLPgEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_VkURILPgEeO5pdTFKaHiVw" base_Comment="_VkKgILPgEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_WXxHULPgEeO5pdTFKaHiVw" base_Comment="_WXlhILPgEeO5pdTFKaHiVw"/>
+  <Default:Documentation xmi:id="_Xd2loLPgEeO5pdTFKaHiVw" base_Comment="_Xds0oLPgEeO5pdTFKaHiVw"/>
+  <EECProfile:PrimitiveType xmi:id="_WiZAACWjEeOcW_rPOtRfPQst" base_PrimitiveType="_WiZAACWjEeOcW_rPOtRfPQ"/>
+  <EECProfile:PrimitiveType xmi:id="_w3tt8CWjEeOcW_rPOtRfPQst" base_PrimitiveType="_w3tt8CWjEeOcW_rPOtRfPQ"/>
+  <EECProfile:PrimitiveType xmi:id="_8hIoICWjEeOcW_rPOtRfPQst" base_PrimitiveType="_8hIoICWjEeOcW_rPOtRfPQ"/>
+  <EECProfile:PrimitiveType xmi:id="_-6uVsCWjEeOcW_rPOtRfPQst" base_PrimitiveType="_-6uVsCWjEeOcW_rPOtRfPQ"/>
+  <EECProfile:PrimitiveType xmi:id="___jPwCWjEeOcW_rPOtRfPQst" base_PrimitiveType="___jPwCWjEeOcW_rPOtRfPQ"/>
+  <EECProfile:PrimitiveType xmi:id="_K_5XwCWkEeOcW_rPOtRfPQst" base_PrimitiveType="_K_5XwCWkEeOcW_rPOtRfPQ"/>
+  <EECProfile:PrimitiveType xmi:id="_VWO5cCWkEeOcW_rPOtRfPQst" base_PrimitiveType="_VWO5cCWkEeOcW_rPOtRfPQ"/>
+  <EECProfile:PrimitiveType xmi:id="_YstGACWkEeOcW_rPOtRfPQst" base_PrimitiveType="_YstGACWkEeOcW_rPOtRfPQ"/>
+  <EECProfile:PrimitiveType xmi:id="_HPv78DJSEeOygNYiTfyZggst" base_PrimitiveType="_HPv78DJSEeOygNYiTfyZgg"/>
+  <EECProfile:PrimitiveType xmi:id="_TKEgQF5BEeOgdNELZqEKywst" base_PrimitiveType="_TKEgQF5BEeOgdNELZqEKyw"/>
+  <EECProfile:PrimitiveType xmi:id="_c0A2AF5BEeOgdNELZqEKywst" base_PrimitiveType="_c0A2AF5BEeOgdNELZqEKyw"/>
+  <EECProfile:PrimitiveType xmi:id="_6IaHILNGEeO5pdTFKaHiVwst" base_PrimitiveType="_6IaHILNGEeO5pdTFKaHiVw"/>
+  <EECProfile:PrimitiveType xmi:id="_86AsELNGEeO5pdTFKaHiVwst" base_PrimitiveType="_86AsELNGEeO5pdTFKaHiVw"/>
+  <EECProfile:PrimitiveType xmi:id="_-vuQgLNGEeO5pdTFKaHiVwst" base_PrimitiveType="_-vuQgLNGEeO5pdTFKaHiVw"/>
+  <EECProfile:PrimitiveType xmi:id="_AHswELNHEeO5pdTFKaHiVwst" base_PrimitiveType="_AHswELNHEeO5pdTFKaHiVw"/>
+  <EECProfile:PrimitiveType xmi:id="_Be07ELNHEeO5pdTFKaHiVwst" base_PrimitiveType="_Be07ELNHEeO5pdTFKaHiVw"/>
+  <EECProfile:BaseType xmi:id="_w5P4SqflEeKgb97SI2dJlwst" base_DataType="_w5P4SqflEeKgb97SI2dJlw" valueDomain="Число в десятичной системе счисления"/>
+  <EECProfile:BaseType xmi:id="_w5QflKflEeKgb97SI2dJlwst" base_DataType="_w5QflKflEeKgb97SI2dJlw" valueDomain="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)"/>
+  <EECProfile:BaseType xmi:id="_w5P4IqflEeKgb97SI2dJlwst" base_DataType="_w5P4IqflEeKgb97SI2dJlw" valueDomain="Обозначение даты и времени в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:BaseType xmi:id="_w5P4J6flEeKgb97SI2dJlwst" base_DataType="_w5P4J6flEeKgb97SI2dJlw" valueDomain="Обозначение даты в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:BaseType xmi:id="_w5QfMqflEeKgb97SI2dJlwst" base_DataType="_w5QfMqflEeKgb97SI2dJlw" valueDomain="Конечная последовательность двоичных цифр (битов)"/>
+  <EECProfile:BaseType xmi:id="_w5RGT6flEeKgb97SI2dJlwst" base_DataType="_w5RGT6flEeKgb97SI2dJlw" valueDomain="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)"/>
+  <EECProfile:BaseType xmi:id="_w5P4MaflEeKgb97SI2dJlwst" base_DataType="_w5P4MaflEeKgb97SI2dJlw" valueDomain="Одно из двух значений: «true» (истина) или «false» (ложь)"/>
+  <EECProfile:BaseType xmi:id="_w5RGcKflEeKgb97SI2dJlwst" base_DataType="_w5RGcKflEeKgb97SI2dJlw" valueDomain="Число в десятичной системе счисления"/>
+  <EECProfile:BaseType xmi:id="_w5RGi6flEeKgb97SI2dJlwst" base_DataType="_w5RGi6flEeKgb97SI2dJlw" valueDomain="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)"/>
+  <EECProfile:BaseType xmi:id="_w5P4NqflEeKgb97SI2dJlwst" base_DataType="_w5P4NqflEeKgb97SI2dJlw" valueDomain="Число в десятичной системе счисления" fractionDigits=""/>
+  <EECProfile:BaseType xmi:id="_w5P4QKflEeKgb97SI2dJlwst" base_DataType="_w5P4QKflEeKgb97SI2dJlw" valueDomain="Число в десятичной системе счисления"/>
+  <EECProfile:BaseType xmi:id="_w5QfS6flEeKgb97SI2dJlwst" base_DataType="_w5QfS6flEeKgb97SI2dJlw" valueDomain="Конечная последовательность двоичных цифр (битов)"/>
+  <EECProfile:BaseType xmi:id="_w5RGeaflEeKgb97SI2dJlwst" base_DataType="_w5RGeaflEeKgb97SI2dJlw" valueDomain="Целое неотрицательное число в десятичной системе счисления"/>
+  <EECProfile:BaseType xmi:id="_w5P4RaflEeKgb97SI2dJlwst" base_DataType="_w5P4RaflEeKgb97SI2dJlw" valueDomain="Число в десятичной системе счисления"/>
+  <EECProfile:BaseType xmi:id="_w5QfYqflEeKgb97SI2dJlwst" base_DataType="_w5QfYqflEeKgb97SI2dJlw" valueDomain="Конечная последовательность двоичных цифр (битов)"/>
+  <EECProfile:BaseType xmi:id="_w5RGgqflEeKgb97SI2dJlwst" base_DataType="_w5RGgqflEeKgb97SI2dJlw" valueDomain="Строка символов конечной длины"/>
+  <EECProfile:BaseType xmi:id="_w5P4LKflEeKgb97SI2dJlwst" base_DataType="_w5P4LKflEeKgb97SI2dJlw" valueDomain="Обозначение времени в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:BaseType xmi:id="_w5P4O6flEeKgb97SI2dJlwst" base_DataType="_w5P4O6flEeKgb97SI2dJlw" valueDomain="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)"/>
+  <EECProfile:BaseType xmi:id="_w5Qfe6flEeKgb97SI2dJlwst" base_DataType="_w5Qfe6flEeKgb97SI2dJlw" valueDomain="Конечная последовательность двоичных цифр (битов)"/>
+  <EECProfile:BaseType xmi:id="_8YazUPqpEeKp_LhlDPJP6wst" base_DataType="_8YazUPqpEeKp_LhlDPJP6w" valueDomain="Конечная последовательность двоичных октетов (байтов)"/>
+  <EECProfile:BaseType xmi:id="_pry5YDJSEeOygNYiTfyZggst" base_DataType="_pry5YDJSEeOygNYiTfyZgg" valueDomain="Обозначение продолжительности времени в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:BaseType xmi:id="_BNdJsF5BEeOgdNELZqEKywst" base_DataType="_BNdJsF5BEeOgdNELZqEKyw" valueDomain="Целое положительное число в десятичной системе счисления"/>
+  <EECProfile:BaseType xmi:id="_fqg2kLNHEeO5pdTFKaHiVwst" base_DataType="_fqg2kLNHEeO5pdTFKaHiVw" valueDomain="Обозначение дня в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:BaseType xmi:id="_iB4WkLNHEeO5pdTFKaHiVwst" base_DataType="_iB4WkLNHEeO5pdTFKaHiVw" valueDomain="Обозначение месяца в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:BaseType xmi:id="_kVq-ILNHEeO5pdTFKaHiVwst" base_DataType="_kVq-ILNHEeO5pdTFKaHiVw" valueDomain="Обозначение дня месяца в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:BaseType xmi:id="_mTcSYLNHEeO5pdTFKaHiVwst" base_DataType="_mTcSYLNHEeO5pdTFKaHiVw" valueDomain="Обозначение года в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:BaseType xmi:id="_nni-kLNHEeO5pdTFKaHiVwst" base_DataType="_nni-kLNHEeO5pdTFKaHiVw" valueDomain="Обозначение месяца года в соответствии со стандартом ГОСТ ИСО 8601–2001"/>
+  <EECProfile:SimpleType xmi:id="_m6EfcLNFEeO5pdTFKaHiVwst" base_DataType="_m6EfcLNFEeO5pdTFKaHiVw" valueDomain="Значение кода из классификатора «Пол»"/>
+  <EECProfile:SimpleType xmi:id="_2hsloAlREeO4ePBwGYyLtAst" base_DataType="_2hsloAlREeO4ePBwGYyLtA" valueDomain="Нормализованная строка символов. Одно значение кода из справочника «Виды документов»" minLength="1" maxLength="36"/>
+  <EECProfile:SimpleType xmi:id="_bZLOQAlTEeO4ePBwGYyLtAst" base_DataType="_bZLOQAlTEeO4ePBwGYyLtA" valueDomain="Двухбуквенный код языка в соответствии со стандартом ISO 639-1" length="" pattern="[a-z]{2}"/>
+  <EECProfile:SimpleType xmi:id="_duA3EPjeEeKss-fHD573_wst" base_DataType="_duA3EPjeEeKss-fHD573_w" valueDomain="Значение кода из классификатора «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)" length="" pattern="[A-Z]{2}" maxInclusive="" maxExclusive=""/>
+  <EECProfile:SimpleType xmi:id="_vknFMPjeEeKss-fHD573_wst" base_DataType="_vknFMPjeEeKss-fHD573_w" valueDomain="Нормализованная строка символов" minLength="3" maxLength="9" pattern="[A-Z0-9][A-Z0-9 -]{1,7}[A-Z0-9]"/>
+  <EECProfile:SimpleType xmi:id="_8So3APjeEeKss-fHD573_wst" base_DataType="_8So3APjeEeKss-fHD573_w" valueDomain="Нормализованная строка символов. Одно значение из перечисления" minLength="1" maxLength="36"/>
+  <EECProfile:SimpleType xmi:id="_9ndU4PjeEeKss-fHD573_wst" base_DataType="_9ndU4PjeEeKss-fHD573_w" valueDomain="Нормализованная строка символов" maxLength="254"/>
+  <EECProfile:SimpleType xmi:id="_Cp2bwAPXEeOOH_kc715Zjwst" base_DataType="_Cp2bwAPXEeOOH_kc715Zjw" valueDomain="Нормализованная строка символов. Указывается в соответствии со справочником «Организационно-правовая форма предприятия (организации)»" minLength="1" maxLength="36" totalDigits=""/>
+  <EECProfile:SimpleType xmi:id="_MD4QwAPYEeOOH_kc715Zjwst" base_DataType="_MD4QwAPYEeOOH_kc715Zjw" valueDomain="Нормализованная строка символов" minLength="1" maxLength="20"/>
+  <EECProfile:SimpleType xmi:id="_trHtIAPYEeOOH_kc715Zjwst" base_DataType="_trHtIAPYEeOOH_kc715Zjw" valueDomain="Строка десятичных цифр. Длина: 9, 10 или 12 символов" length="" maxLength="" pattern="\d{9,10}|\d{12}"/>
+  <EECProfile:SimpleType xmi:id="_FBVloAPZEeOOH_kc715Zjwst" base_DataType="_FBVloAPZEeOOH_kc715Zjw" valueDomain="Нормализованная строка символов. Длина: 8, 9 или 11 символов" pattern="[0-9]{9}|[A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5}"/>
+  <EECProfile:SimpleType xmi:id="_f2AiAAPZEeOOH_kc715Zjwst" base_DataType="_f2AiAAPZEeOOH_kc715Zjw" valueDomain="Нормализованная строка символов" maxLength="34"/>
+  <EECProfile:SimpleType xmi:id="_9SdY8APZEeOOH_kc715Zjwst" base_DataType="_9SdY8APZEeOOH_kc715Zjw" valueDomain="Строка десятичных цифр. Длина: 6 или 20 символов" minLength="" maxLength="" pattern="\d{6}|\d{20}"/>
+  <EECProfile:SimpleType xmi:id="_KyEYsAPaEeOOH_kc715Zjwst" base_DataType="_KyEYsAPaEeOOH_kc715Zjw" valueDomain="Нормализованная строка символов" length="9" pattern="[0-9]{4}[A-Z0-9]{2}[0-9]{3}"/>
+  <EECProfile:SimpleType xmi:id="_bn_M8APaEeOOH_kc715Zjwst" base_DataType="_bn_M8APaEeOOH_kc715Zjw" valueDomain="Строка десятичных цифр" minLength="5" maxLength="11" pattern="\d{5,11}"/>
+  <EECProfile:SimpleType xmi:id="_tmOUIAPaEeOOH_kc715Zjwst" base_DataType="_tmOUIAPaEeOOH_kc715Zjw" valueDomain="Строка десятичных цифр. Длина: 8 или 10 символов" pattern="\d{8}|\d{10}" fractionDigits=""/>
+  <EECProfile:SimpleType xmi:id="_Gm3B4APtEeOOH_kc715Zjwst" base_DataType="_Gm3B4APtEeOOH_kc715Zjw" valueDomain="Нормализованная строка символов. Одно значение кода из справочника «Статусы электронных документов»" minLength="1" maxLength="36" fractionDigits=""/>
+  <EECProfile:SimpleType xmi:id="_YLpLEA_REeOpd_h_ueGfQQst" base_DataType="_YLpLEA_REeOpd_h_ueGfQQ"/>
+  <EECProfile:SimpleType xmi:id="_o3uX8Bw0EeOFZLRdrHA81Ast" base_DataType="_o3uX8Bw0EeOFZLRdrHA81A" valueDomain="Двухбуквенный код. Одно значение кода из справочника видов платежей" length="2"/>
+  <EECProfile:SimpleType xmi:id="_q8LQIDF2EeORtYFSx-HEQAst" base_DataType="_q8LQIDF2EeORtYFSx-HEQA" valueDomain="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)" minLength="1" maxLength="300"/>
+  <EECProfile:SimpleType xmi:id="_ItMo4DF3EeORtYFSx-HEQAst" base_DataType="_ItMo4DF3EeORtYFSx-HEQA" valueDomain="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)" minLength="1" maxLength="120"/>
+  <EECProfile:SimpleType xmi:id="_beyUYEYXEeO2putRExeoJAst" base_DataType="_beyUYEYXEeO2putRExeoJA" valueDomain="Нормализованная строка символов" minLength="1" maxLength="20"/>
+  <EECProfile:SimpleType xmi:id="_6iXYUEdjEeOgOZzxgLTMPgst" base_DataType="_6iXYUEdjEeOgOZzxgLTMPg"/>
+  <EECProfile:SimpleType xmi:id="_oXltIEdnEeOgOZzxgLTMPgst" base_DataType="_oXltIEdnEeOgOZzxgLTMPg"/>
+  <EECProfile:SimpleType xmi:id="_F2AmYIMmEeOnX6jkTUE6Ywst" base_DataType="_F2AmYIMmEeOnX6jkTUE6Yw"/>
+  <EECProfile:SimpleType xmi:id="_MiVUcIMmEeOnX6jkTUE6Ywst" base_DataType="_MiVUcIMmEeOnX6jkTUE6Yw" valueDomain="Трехбуквенный код валюты в соответствии со справочником ISO 4217" pattern="[A-Z]{3}"/>
+  <EECProfile:SimpleType xmi:id="_JzUo4IiqEeOPSK0F-UNoSAst" base_DataType="_JzUo4IiqEeOPSK0F-UNoSA" valueDomain="Значение кода из справочника ЕЭК «Коды ошибок контроля электронного документа»"/>
+  <EECProfile:SimpleType xmi:id="_ql_p8JMMEeOau5lQkkgj3Ast" base_DataType="_ql_p8JMMEeOau5lQkkgj3A" valueDomain="Значение кода из классификатора «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)"/>
+  <EECProfile:ComplexType xmi:id="_F-N5QIzAEeO5QKVbQiY0wgst" base_DataType="_F-N5QIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_8kQOQIijEeOPSK0F-UNoSAst" base_DataType="_8kQOQIijEeOPSK0F-UNoSA"/>
+  <EECProfile:ComplexType xmi:id="_Wmi-APhCEeKJw6Ug-08zBgst" base_DataType="_Wmi-APhCEeKJw6Ug-08zBg"/>
+  <EECProfile:ComplexType xmi:id="_7QHmwPpiEeKUDuk0Dc9ZZQst" base_DataType="_7QHmwPpiEeKUDuk0Dc9ZZQ"/>
+  <EECProfile:ComplexType xmi:id="_wuT2APjPEeKJw6Ug-08zBgst" base_DataType="_wuT2APjPEeKJw6Ug-08zBg"/>
+  <EECProfile:ComplexType xmi:id="_6iTfoPjPEeKJw6Ug-08zBgst" base_DataType="_6iTfoPjPEeKJw6Ug-08zBg"/>
+  <EECProfile:ComplexType xmi:id="_dA-pEAPuEeOOH_kc715Zjwst" base_DataType="_dA-pEAPuEeOOH_kc715Zjw"/>
+  <EECProfile:ComplexType xmi:id="_vFPqUAPvEeOOH_kc715Zjwst" base_DataType="_vFPqUAPvEeOOH_kc715Zjw"/>
+  <EECProfile:ComplexType xmi:id="_1OXhcAmREeOjNdCZj4v7vQst" base_DataType="_1OXhcAmREeOjNdCZj4v7vQ"/>
+  <EECProfile:ComplexType xmi:id="_zfGEUCAbEeOeQPM7Z3-lxgst" base_DataType="_zfGEUCAbEeOeQPM7Z3-lxg"/>
+  <EECProfile:ComplexType xmi:id="_EdgGMCAcEeOeQPM7Z3-lxgst" base_DataType="_EdgGMCAcEeOeQPM7Z3-lxg"/>
+  <EECProfile:ComplexType xmi:id="_d7UH4CAdEeOeQPM7Z3-lxgst" base_DataType="_d7UH4CAdEeOeQPM7Z3-lxg"/>
+  <EECProfile:ComplexType xmi:id="_iNl1YCAdEeOeQPM7Z3-lxgst" base_DataType="_iNl1YCAdEeOeQPM7Z3-lxg"/>
+  <EECProfile:ComplexType xmi:id="_uni0oCAdEeOeQPM7Z3-lxgst" base_DataType="_uni0oCAdEeOeQPM7Z3-lxg"/>
+  <EECProfile:ComplexType xmi:id="_BkZ_ADIsEeOygNYiTfyZggst" base_DataType="_BkZ_ADIsEeOygNYiTfyZgg"/>
+  <EECProfile:ComplexType xmi:id="_kuz58IP_EeO7pdZFbb67iQst" base_DataType="_kuz58IP_EeO7pdZFbb67iQ"/>
+  <EECProfile:ComplexType xmi:id="_6te_kLNFEeO5pdTFKaHiVwst" base_DataType="_6te_kLNFEeO5pdTFKaHiVw"/>
+  <EECProfile:SimpleElement xmi:id="_YwrvII2DEeO5QKVbQiY0wgst" base_Class="_YwrvII2DEeO5QKVbQiY0wg"/>
+  <EECProfile:SimpleElement xmi:id="_zWmz8IiYEeOPSK0F-UNoSAst" base_Class="_zWmz8IiYEeOPSK0F-UNoSA"/>
+  <EECProfile:SimpleElement xmi:id="_x9iIMIiYEeOPSK0F-UNoSAst" base_Class="_x9iIMIiYEeOPSK0F-UNoSA"/>
+  <EECProfile:SimpleElement xmi:id="_iQnF4IikEeOPSK0F-UNoSAst" base_Class="_iQnF4IikEeOPSK0F-UNoSA"/>
+  <EECProfile:SimpleElement xmi:id="_V4yBAP2QEeKl_94VX9fxlAst" base_Class="_V4yBAP2QEeKl_94VX9fxlA"/>
+  <EECProfile:SimpleElement xmi:id="_pSYlwAPtEeOOH_kc715Zjwst" base_Class="_pSYlwAPtEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_5nhBIAPtEeOOH_kc715Zjwst" base_Class="_5nhBIAPtEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_SFrTMPmoEeKbgZsEEYks1gst" base_Class="_SFrTMPmoEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_yF_9AAPYEeOOH_kc715Zjwst" base_Class="_yF_9AAPYEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_OVpNIAPaEeOOH_kc715Zjwst" base_Class="_OVpNIAPaEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_c2gOgAPaEeOOH_kc715Zjwst" base_Class="_c2gOgAPaEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_Uv76APmoEeKbgZsEEYks1gst" base_Class="_Uv76APmoEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_5DTQ4APZEeOOH_kc715Zjwst" base_Class="_5DTQ4APZEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_foZ48APbEeOOH_kc715Zjwst" base_Class="_foZ48APbEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_-VI98APZEeOOH_kc715Zjwst" base_Class="_-VI98APZEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_V50_0AiGEeO53p5NlydRJQst" base_Class="_V50_0AiGEeO53p5NlydRJQ"/>
+  <EECProfile:SimpleElement xmi:id="_PmIIIAPbEeOOH_kc715Zjwst" base_Class="_PmIIIAPbEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="__PKgMPmnEeKbgZsEEYks1gst" base_Class="__PKgMPmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_CGMXsPmoEeKbgZsEEYks1gst" base_Class="_CGMXsPmoEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_ExkY0PmoEeKbgZsEEYks1gst" base_Class="_ExkY0PmoEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_HktO0PmoEeKbgZsEEYks1gst" base_Class="_HktO0PmoEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_IEKtYAPtEeOOH_kc715Zjwst" base_Class="_IEKtYAPtEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_lNB5kAiFEeO53p5NlydRJQst" base_Class="_lNB5kAiFEeO53p5NlydRJQ"/>
+  <EECProfile:SimpleElement xmi:id="_MnvdQBCFEeOz-JdjxZvS4Qst" base_Class="_MnvdQBCFEeOz-JdjxZvS4Q"/>
+  <EECProfile:SimpleElement xmi:id="_bBA6QAPfEeOOH_kc715Zjwst" base_Class="_bBA6QAPfEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_v07XoAPrEeOOH_kc715Zjwst" base_Class="_v07XoAPrEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_nnAKYAPfEeOOH_kc715Zjwst" base_Class="_nnAKYAPfEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_0kbqIAPfEeOOH_kc715Zjwst" base_Class="_0kbqIAPfEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_hXaPsAiBEeO53p5NlydRJQst" base_Class="_hXaPsAiBEeO53p5NlydRJQ"/>
+  <EECProfile:SimpleElement xmi:id="_uilOsAPaEeOOH_kc715Zjwst" base_Class="_uilOsAPaEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_Wo2rYAPYEeOOH_kc715Zjwst" base_Class="_Wo2rYAPYEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_7RoRAAPWEeOOH_kc715Zjwst" base_Class="_7RoRAAPWEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_7KJyoPmnEeKbgZsEEYks1gst" base_Class="_7KJyoPmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_xfzSwAiFEeO53p5NlydRJQst" base_Class="_xfzSwAiFEeO53p5NlydRJQ"/>
+  <EECProfile:SimpleElement xmi:id="_ONKHUPmZEeKss-fHD573_wst" base_Class="_ONKHUPmZEeKss-fHD573_w"/>
+  <EECProfile:SimpleElement xmi:id="_RX4W4PmZEeKss-fHD573_wst" base_Class="_RX4W4PmZEeKss-fHD573_w"/>
+  <EECProfile:SimpleElement xmi:id="_XflU8PmZEeKss-fHD573_wst" base_Class="_XflU8PmZEeKss-fHD573_w"/>
+  <EECProfile:SimpleElement xmi:id="_QTPx0AiGEeO53p5NlydRJQst" base_Class="_QTPx0AiGEeO53p5NlydRJQ"/>
+  <EECProfile:SimpleElement xmi:id="_i-_sMAPZEeOOH_kc715Zjwst" base_Class="_i-_sMAPZEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_JF9RoAPZEeOOH_kc715Zjwst" base_Class="_JF9RoAPZEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_f0S0wPmnEeKbgZsEEYks1gst" base_Class="_f0S0wPmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_HruaMAPXEeOOH_kc715Zjwst" base_Class="_HruaMAPXEeOOH_kc715Zjw"/>
+  <EECProfile:SimpleElement xmi:id="_k63F8PmnEeKbgZsEEYks1gst" base_Class="_k63F8PmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_rXDtUPmnEeKbgZsEEYks1gst" base_Class="_rXDtUPmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_um0N4PmnEeKbgZsEEYks1gst" base_Class="_um0N4PmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_xdAX4PmnEeKbgZsEEYks1gst" base_Class="_xdAX4PmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_zzGskPmnEeKbgZsEEYks1gst" base_Class="_zzGskPmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_3SzGkPmnEeKbgZsEEYks1gst" base_Class="_3SzGkPmnEeKbgZsEEYks1g"/>
+  <EECProfile:SimpleElement xmi:id="_pJkAkAiFEeO53p5NlydRJQst" base_Class="_pJkAkAiFEeO53p5NlydRJQ"/>
+  <EECProfile:SimpleElement xmi:id="_sf4_MBw5EeOFZLRdrHA81Ast" base_Class="_sf4_MBw5EeOFZLRdrHA81A"/>
+  <EECProfile:SimpleElement xmi:id="_bGCQEDI1EeOygNYiTfyZggst" base_Class="_bGCQEDI1EeOygNYiTfyZgg"/>
+  <EECProfile:SimpleElement xmi:id="_EMFAgDJbEeOygNYiTfyZggst" base_Class="_EMFAgDJbEeOygNYiTfyZgg"/>
+  <EECProfile:SimpleElement xmi:id="_bcCX0EYWEeO2putRExeoJAst" base_Class="_bcCX0EYWEeO2putRExeoJA"/>
+  <EECProfile:SimpleElement xmi:id="_v-p2gIP_EeO7pdZFbb67iQst" base_Class="_v-p2gIP_EeO7pdZFbb67iQ"/>
+  <EECProfile:SimpleElement xmi:id="_0miAkIP_EeO7pdZFbb67iQst" base_Class="_0miAkIP_EeO7pdZFbb67iQ"/>
+  <EECProfile:SimpleElement xmi:id="_8AVfsIP_EeO7pdZFbb67iQst" base_Class="_8AVfsIP_EeO7pdZFbb67iQ"/>
+  <EECProfile:SimpleElement xmi:id="_JQGDMIiuEeOPSK0F-UNoSAst" base_Class="_JQGDMIiuEeOPSK0F-UNoSA"/>
+  <EECProfile:SimpleElement xmi:id="_dQeL0IivEeOPSK0F-UNoSAst" base_Class="_dQeL0IivEeOPSK0F-UNoSA"/>
+  <EECProfile:SimpleElement xmi:id="_V21lMJMKEeOau5lQkkgj3Ast" base_Class="_V21lMJMKEeOau5lQkkgj3A"/>
+  <EECProfile:SimpleElement xmi:id="_lCHxsJMMEeOau5lQkkgj3Ast" base_Class="_lCHxsJMMEeOau5lQkkgj3A"/>
+  <EECProfile:SimpleElement xmi:id="_iVaBcLNFEeO5pdTFKaHiVwst" base_Class="_iVaBcLNFEeO5pdTFKaHiVw"/>
+  <EECProfile:SimpleElement xmi:id="_iVb2oLNFEeO5pdTFKaHiVwst" base_Class="_iVb2oLNFEeO5pdTFKaHiVw"/>
+  <EECProfile:SimpleElement xmi:id="_iVdr0LNFEeO5pdTFKaHiVwst" base_Class="_iVdr0LNFEeO5pdTFKaHiVw"/>
+  <EECProfile:SimpleElement xmi:id="_iVe58LNFEeO5pdTFKaHiVwst" base_Class="_iVe58LNFEeO5pdTFKaHiVw"/>
+  <EECProfile:SimpleElement xmi:id="_m6FGgLNFEeO5pdTFKaHiVwst" base_Class="_m6FGgLNFEeO5pdTFKaHiVw"/>
+  <EECProfile:SimpleElement xmi:id="_zm5-cLNFEeO5pdTFKaHiVwst" base_Class="_zm5-cLNFEeO5pdTFKaHiVw"/>
+  <EECProfile:ComplexElement xmi:id="_xzrnoIijEeOPSK0F-UNoSAst" base_Class="_xzrnoIijEeOPSK0F-UNoSA"/>
+  <EECProfile:ComplexElement xmi:id="_BDV74PpeEeK10IsMeitcPAst" base_Class="_BDV74PpeEeK10IsMeitcPA"/>
+  <EECProfile:ComplexElement xmi:id="_Jlc1YAiMEeO53p5NlydRJQst" base_Class="_Jlc1YAiMEeO53p5NlydRJQ"/>
+  <EECProfile:ComplexElement xmi:id="_9JQ5sPpiEeKUDuk0Dc9ZZQst" base_Class="_9JQ5sPpiEeKUDuk0Dc9ZZQ"/>
+  <EECProfile:ComplexElement xmi:id="_yRGecPjPEeKJw6Ug-08zBgst" base_Class="_yRGecPjPEeKJw6Ug-08zBg"/>
+  <EECProfile:ComplexElement xmi:id="_rS-usAiGEeO53p5NlydRJQst" base_Class="_rS-usAiGEeO53p5NlydRJQ"/>
+  <EECProfile:ComplexElement xmi:id="_8-7TEPjPEeKJw6Ug-08zBgst" base_Class="_8-7TEPjPEeKJw6Ug-08zBg"/>
+  <EECProfile:ComplexElement xmi:id="_WNZPYCAcEeOeQPM7Z3-lxgst" base_Class="_WNZPYCAcEeOeQPM7Z3-lxg"/>
+  <EECProfile:ComplexElement xmi:id="_ahgI4CAcEeOeQPM7Z3-lxgst" base_Class="_ahgI4CAcEeOeQPM7Z3-lxg"/>
+  <EECProfile:ComplexElement xmi:id="_w20voCAdEeOeQPM7Z3-lxgst" base_Class="_w20voCAdEeOeQPM7Z3-lxg"/>
+  <EECProfile:ComplexElement xmi:id="_IrtG8DIuEeOygNYiTfyZggst" base_Class="_IrtG8DIuEeOygNYiTfyZgg"/>
+  <EECProfile:ComplexElement xmi:id="_RMPcwIQAEeO7pdZFbb67iQst" base_Class="_RMPcwIQAEeO7pdZFbb67iQ"/>
 </xmi:XMI>

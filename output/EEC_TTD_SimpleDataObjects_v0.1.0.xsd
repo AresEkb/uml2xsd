@@ -9,18 +9,14 @@
     <xs:annotation>
       <xs:documentation>Строка символов, идентифицирующая учетный талон или уведомление</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="bdt:IdentifierType">
-      <xs:pattern value="[A-Z]{3}[0-9]{8}(0[1-9]|[12][0-9]|30|31)(0[1-9]|1[012])[0-9]{2}[0-9]{5}"/>
-    </xs:restriction>
+    <xs:restriction base="bdt:IdentifierType"/>
   </xs:simpleType>
   <!-- TTD-SDT-00011: Код страны (Страна_ Код. Альфа-3. Тип) -->
   <xs:simpleType name="Alpha3CountryCodeType">
     <xs:annotation>
       <xs:documentation>Трехбуквенное кодовое обозначение страны в соответствии с классификатором «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран»</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="bdt:CodeType">
-      <xs:pattern value="[A-Z]{3}"/>
-    </xs:restriction>
+    <xs:restriction base="bdt:CodeType"/>
   </xs:simpleType>
   <!-- :  () -->
   <xs:element name="AxleLoadMeasure" type="bdt:MeasureType"/>
@@ -46,9 +42,7 @@
     <xs:annotation>
       <xs:documentation>Кодовое обозначение груза в соответсвии с «Товарной номенклатурой внешнеэкономической деятельности Таможенного союза»</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="bdt:CodeType">
-      <xs:pattern value="[0-9]{4}"/>
-    </xs:restriction>
+    <xs:restriction base="bdt:CodeType"/>
   </xs:simpleType>
   <!-- :  () -->
   <xs:element name="CargoGrossWeightMeasure" type="bdt:MeasureType"/>

@@ -1,0 +1,1562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Default="http:///schemas/Default/1" xmlns:EECProfile="http:///schemas/EECProfile/_KVknALVwEeODU4nEV69bGw/427" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://schema.omg.org/spec/UML/2.1.1" xsi:schemaLocation="http:///schemas/Default/1 Default.profile.xmi#_IN8k8MmBEdqBcN1R6EvWUw http:///schemas/EECProfile/_KVknALVwEeODU4nEV69bGw/427 EECProfile.profile.xmi#_KVnDQLVwEeODU4nEV69bGw http://schema.omg.org/spec/UML/2.1.1 http://www.eclipse.org/uml2/2.1.0/UML">
+  <uml:Model xmi:id="_jAllUFEBEeOTEaxXgV0mpg" name="EECModel">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_vZ2OILV0EeODU4nEV69bGw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_vZ21MLV0EeODU4nEV69bGw" key="TTDataModel"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_jAllUlEBEeOTEaxXgV0mpg">
+      <importedPackage xmi:type="uml:Model" href="http://schema.omg.org/spec/UML/2.1.1/uml.xml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_pKdtoFEBEeOTEaxXgV0mpg" name="BusinessAreas">
+      <packagedElement xmi:type="uml:Package" xmi:id="_13NGAFEBEeOTEaxXgV0mpg" name="TransportAndTransportation">
+        <packagedElement xmi:type="uml:Package" xmi:id="_8vEVsFEBEeOTEaxXgV0mpg" name="TTDataModel">
+          <packagedElement xmi:type="uml:Package" xmi:id="_BotlMFECEeOTEaxXgV0mpg" name="TTCDO">
+            <packageImport xmi:type="uml:PackageImport" xmi:id="_Rk3f4FECEeOTEaxXgV0mpg">
+              <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_sde"/>
+            </packageImport>
+            <packageImport xmi:type="uml:PackageImport" xmi:id="_Rk4G8FECEeOTEaxXgV0mpg">
+              <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_cde"/>
+            </packageImport>
+            <packageImport xmi:type="uml:PackageImport" xmi:id="_X0TdoFECEeOTEaxXgV0mpg" importedPackage="_C6RTsFECEeOTEaxXgV0mpg"/>
+            <packagedElement xmi:type="uml:Package" xmi:id="_GiNqwFECEeOTEaxXgV0mpg" name="TTCDE">
+              <packagedElement xmi:type="uml:Class" xmi:id="_BX3UQFGbEeOuyKm2YW1K1g" name="TransportPermissionDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_HvevEFHGEeOuyKm2YW1K1g" annotatedElement="_BX3UQFGbEeOuyKm2YW1K1g">
+                  <body>Сведения о разрешении на поездку</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_1Z83IFGiEeOuyKm2YW1K1g" name="value" visibility="public" type="_uGftEFGhEeOuyKm2YW1K1g"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_fPgRoFEHEeOTEaxXgV0mpg" name="VehicleDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_IXQgwFHGEeOuyKm2YW1K1g" annotatedElement="_fPgRoFEHEeOTEaxXgV0mpg">
+                  <body>Информация о транспортном средстве</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_gUC30FEHEeOTEaxXgV0mpg" name="value" visibility="public" type="_cQdtoFEHEeOTEaxXgV0mpg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_09B5UFGcEeOuyKm2YW1K1g" name="CheckpointDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_DjLGsFHGEeOuyKm2YW1K1g" annotatedElement="_09B5UFGcEeOuyKm2YW1K1g">
+                  <body>Сведения о контрольном пункте, в котором проводился транспортный (автомобильный) контроль</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_OYJBwFGdEeOuyKm2YW1K1g" name="value" visibility="public" type="_3Mvs0JPBEeOau5lQkkgj3A"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_lXhSIFGeEeOuyKm2YW1K1g" name="TollPaymentDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_F_3yoFHGEeOuyKm2YW1K1g" annotatedElement="_lXhSIFGeEeOuyKm2YW1K1g">
+                  <body>Сведения об оплате сборов за использование автомобильных дорог общего пользования государств-членов ТС и ЕЭП</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_sRW3wFGeEeOuyKm2YW1K1g" name="value" visibility="public" type="_tS4mMFGeEeOuyKm2YW1K1g"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_QZEr0FGqEeOuyKm2YW1K1g" name="CarrierDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_C8zDMFHGEeOuyKm2YW1K1g" annotatedElement="_QZEr0FGqEeOuyKm2YW1K1g">
+                  <body>Компоненты, представляющие детализированную информацию о перевозчике</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_RDzq4FGqEeOuyKm2YW1K1g" name="value" visibility="public" type="_CY4PQJPcEeOau5lQkkgj3A"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_5S8L0FGrEeOuyKm2YW1K1g" name="AxleDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_CPLIMFHGEeOuyKm2YW1K1g" annotatedElement="_5S8L0FGrEeOuyKm2YW1K1g">
+                  <body>Параметры оси транспортного средства</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6Pq50FGrEeOuyKm2YW1K1g" name="value" visibility="public" type="_83gokFEYEeOTEaxXgV0mpg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_0MqGsIzAEeO5QKVbQiY0wg" name="SpecialTransportPermissionDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_-uLMQI5CEeOt3sz48gBxVQ" annotatedElement="_0MqGsIzAEeO5QKVbQiY0wg">
+                  <body>Сведения о специальных разрешениях на перевозку тяжеловесных, крупногабаритных, опасных грузов</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_1MWpIIzAEeO5QKVbQiY0wg" name="value" visibility="public" type="_yRHAAIzAEeO5QKVbQiY0wg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_O8f8cI18EeO5QKVbQiY0wg" name="InconsistencyAckDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_U6_7MI18EeO5QKVbQiY0wg" annotatedElement="_O8f8cI18EeO5QKVbQiY0wg">
+                  <body>Сведения об уведомлениях о предоставлении недостающих документов и подтверждения устранения контролируемых параметров</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_PyCdUI18EeO5QKVbQiY0wg" name="value" visibility="public" type="_RDvVwI18EeO5QKVbQiY0wg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_cAVmMI18EeO5QKVbQiY0wg" name="ViolationDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_XfhmAI5DEeOt3sz48gBxVQ" annotatedElement="_cAVmMI18EeO5QKVbQiY0wg">
+                  <body>Компоненты, представляющие детализированную информацию о выявленных несоответствиях контролируемых параметров установленным требованиям и необходимости предоставления документов</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_c3w9cI18EeO5QKVbQiY0wg" name="value" visibility="public" type="_eCo1II18EeO5QKVbQiY0wg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_CWrQ4I4rEeOt3sz48gBxVQ" name="IssuingAuthorityDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_0ibJ8I5CEeOt3sz48gBxVQ" annotatedElement="_CWrQ4I4rEeOt3sz48gBxVQ">
+                  <body>Сведения об уполномоченном органе, выдавшем разрешение (специальное&#xD;
+разрешение) на поездку</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_EpIbsI4rEeOt3sz48gBxVQ" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_F-N5QIzAEeO5QKVbQiY0wg"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_ExFc0I42EeOt3sz48gBxVQ" name="VehicleOverallDimensionDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_TRvC0I42EeOt3sz48gBxVQ" annotatedElement="_ExFc0I42EeOt3sz48gBxVQ">
+                  <body>Габаритные размеры транспортного средства, измеренные с грузом в метрах</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Mz8gAI42EeOt3sz48gBxVQ" name="value" visibility="public" type="_psTn4I41EeOt3sz48gBxVQ"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_I5yYwI5QEeOCdpZuhK3cCA" name="InspectionDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_08A28I74EeOk8_uL5KcaCg" annotatedElement="_I5yYwI5QEeOCdpZuhK3cCA">
+                  <body>Результаты транспортного (автомобильного) контроля транспортного средства</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4Wpx0I74EeOk8_uL5KcaCg" name="value" visibility="public" type="_9zZ2wI7qEeOCdpZuhK3cCA"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_grzYAI72EeOk8_uL5KcaCg" name="PenaltyDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_ojOAMI72EeOk8_uL5KcaCg" annotatedElement="_grzYAI72EeOk8_uL5KcaCg">
+                  <body>Сведения о наложении штрафа на перевозчика органами транспортного (автомобильного) контроля государств-членов ТС и ЕЭП и&#xD;
+его оплате</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_heVBII72EeOk8_uL5KcaCg" name="value" visibility="public" type="_OgI40I72EeOk8_uL5KcaCg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_HPybMI73EeOk8_uL5KcaCg" name="PenaltyPaymentDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_NrRQ4I73EeOk8_uL5KcaCg" annotatedElement="_HPybMI73EeOk8_uL5KcaCg">
+                  <body>Сведения об оплате штрафа, наложенного на перевозчика органами транспортного (автомобильного) контроля государств-членов ТС&#xD;
+и ЕЭП</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_ITYmMI73EeOk8_uL5KcaCg" name="value" visibility="public" type="_tS4mMFGeEeOuyKm2YW1K1g"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_e4gzQJPJEeOau5lQkkgj3A" name="ExecutionCheckpointDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_megUQJPJEeOau5lQkkgj3A" annotatedElement="_e4gzQJPJEeOau5lQkkgj3A">
+                  <body>Сведения о контрольном пункте, в который перевозчик должен прибыть для устранения несоответствий и предоставления&#xD;
+недостающих документов</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_gSy_8JPJEeOau5lQkkgj3A" name="value" visibility="public" type="_3Mvs0JPBEeOau5lQkkgj3A"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_p5Zc0JSEEeOcbd1HrAmu5w" name="DocValidityPeriodDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_3nHxEJSEEeOcbd1HrAmu5w" annotatedElement="_p5Zc0JSEEeOcbd1HrAmu5w">
+                  <body>Дата начала и дата окончания периода, в течение которого действет документ</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_uu_SwJSEEeOcbd1HrAmu5w" name="value" visibility="public" type="_gxaMoI45EeOt3sz48gBxVQ"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_m3RNcJ0oEeO_Ctfl2sHrgw" name="BorderCheckpointDetails">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_m3RNcZ0oEeO_Ctfl2sHrgw" annotatedElement="_m3RNcJ0oEeO_Ctfl2sHrgw">
+                  <body>Сведения о пункте пропуска</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_m3RNcp0oEeO_Ctfl2sHrgw" name="value" visibility="public" type="_hSvDUJ0nEeO_Ctfl2sHrgw"/>
+              </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Package" xmi:id="_Hj_Q0FECEeOTEaxXgV0mpg" name="TTCDT">
+              <packagedElement xmi:type="uml:DataType" xmi:id="_cQdtoFEHEeOTEaxXgV0mpg" name="VehicleDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_1GwjoFHJEeOuyKm2YW1K1g" annotatedElement="_cQdtoFEHEeOTEaxXgV0mpg">
+                  <body>Компоненты, представляющие детализированную информацию о транспортном средстве</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_WWqQIFGgEeOuyKm2YW1K1g" name="VehicleRegId" visibility="public" type="_I-ClQFEIEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_majKkJU4EeOcbd1HrAmu5w" name="VehicleRegCountryCode" visibility="public" type="_BrepoJPPEeOau5lQkkgj3A"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_fJrk8FGgEeOuyKm2YW1K1g" name="TrailerRegId" visibility="public" type="_mg60UFEIEeOTEaxXgV0mpg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_o9g2kJU4EeOcbd1HrAmu5w" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_o9focJU4EeOcbd1HrAmu5w"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9xnXkFGgEeOuyKm2YW1K1g" name="VehicleKindCode" visibility="public" type="_7yh0sFGgEeOuyKm2YW1K1g"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_83gokFEYEeOTEaxXgV0mpg" name="AxleDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_rs3cEFHJEeOuyKm2YW1K1g" annotatedElement="_83gokFEYEeOTEaxXgV0mpg">
+                  <body>Компоненты, представляющие детализированную информацию о колесной оси транспортного средства</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_gs9gIFGhEeOuyKm2YW1K1g" name="AxleOrdinal" visibility="public" type="_It5nwFEZEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_j5g7sFGhEeOuyKm2YW1K1g" name="AxleLoadMeasure" visibility="public" type="_V5nbIFEZEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_kIsAIFGhEeOuyKm2YW1K1g" name="NextAxleDistanceMeasure" visibility="public" type="_nEoVoFEZEeOTEaxXgV0mpg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_tS4mMFGeEeOuyKm2YW1K1g" name="PaymentInfoDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_wkwYEFHJEeOuyKm2YW1K1g" annotatedElement="_tS4mMFGeEeOuyKm2YW1K1g">
+                  <body>Компоненты, представляющие детализированную информацию об оплате</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_fpL5gFGiEeOuyKm2YW1K1g" name="PaymentId" visibility="public" type="_7YKUQFGdEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_fw1ZoFGiEeOuyKm2YW1K1g" name="PaymentDate" visibility="public" type="_BfgF8FGeEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_fzgTIFGiEeOuyKm2YW1K1g" name="PaymentAmount" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_bBA6QAPfEeOOH_kc715Zjw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_uGftEFGhEeOuyKm2YW1K1g" name="TransportPermissionDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_z-giIFHJEeOuyKm2YW1K1g" annotatedElement="_uGftEFGhEeOuyKm2YW1K1g">
+                  <body>Компоненты, представляющие детализированную информацию о разрешении на поездку</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_xA1-UFGhEeOuyKm2YW1K1g" name="TransportPermissionCode" visibility="public" type="_SGJ2gFGbEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jDjVgFHMEeOuyKm2YW1K1g" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jDiucFHMEeOuyKm2YW1K1g" value="1"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_xNEccFGhEeOuyKm2YW1K1g" name="TransportPermissionId" visibility="public" type="_dVigEFGbEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_HweAEI4rEeOt3sz48gBxVQ" name="IssuingAuthorityDetails" visibility="public" type="_CWrQ4I4rEeOt3sz48gBxVQ">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_AbKOEJPLEeOau5lQkkgj3A" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_AbJnAJPLEeOau5lQkkgj3A"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_nkiBwJSFEeOcbd1HrAmu5w" name="DocIssueDate" visibility="public" type="_2vap0JSAEeOcbd1HrAmu5w">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yHoNEJSFEeOcbd1HrAmu5w" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yHnmAJSFEeOcbd1HrAmu5w"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_nt7OUJSFEeOcbd1HrAmu5w" name="DocValidityPeriodDetails" visibility="public" type="_p5Zc0JSEEeOcbd1HrAmu5w">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ygupkJSFEeOcbd1HrAmu5w" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yguCgJSFEeOcbd1HrAmu5w"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_yRHAAIzAEeO5QKVbQiY0wg" name="SpecialTransportPermissionDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_W4--8I2JEeO5QKVbQiY0wg" annotatedElement="_yRHAAIzAEeO5QKVbQiY0wg">
+                  <body>Компоненты, представляющие детализированную информацию о специальном разрешении на перевозку тяжеловесных, крупногабаритных или опасных грузов</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_z70DsI2DEeO5QKVbQiY0wg" name="SpecialTransportPermissionCode" visibility="public" type="_vH_6AIzAEeO5QKVbQiY0wg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_0BiRMI2DEeO5QKVbQiY0wg" name="SpecialTransportPermissionId" visibility="public" type="_lcALQIy_EeO5QKVbQiY0wg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_KQ25MI4rEeOt3sz48gBxVQ" name="IssuingAuthorityDetails" visibility="public" type="_CWrQ4I4rEeOt3sz48gBxVQ">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BVBOQZPLEeOau5lQkkgj3A" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BVBOQJPLEeOau5lQkkgj3A"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_30wvAJSFEeOcbd1HrAmu5w" name="DocIssueDate" visibility="public" type="_2vap0JSAEeOcbd1HrAmu5w">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_30wvAZSFEeOcbd1HrAmu5w" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_30wvApSFEeOcbd1HrAmu5w"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_30x9IJSFEeOcbd1HrAmu5w" name="DocValidityPeriodDetails" visibility="public" type="_p5Zc0JSEEeOcbd1HrAmu5w">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_30x9IZSFEeOcbd1HrAmu5w" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_30x9IpSFEeOcbd1HrAmu5w"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_RDvVwI18EeO5QKVbQiY0wg" name="InconsistencyAckDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_Z4YS0I2KEeO5QKVbQiY0wg" annotatedElement="_RDvVwI18EeO5QKVbQiY0wg">
+                  <body>Компоненты, представляющие детализированную информацию об уведомлении о предоставлении недостающих документов и подтверждения устранения контролируемых параметров</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_tk92YI2DEeO5QKVbQiY0wg" name="NotificationId" visibility="public" type="_sUCqQFGcEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_NgMt0I2NEeOQQexDOjgnqg" name="ExecutionCheckpointDetails" visibility="public" type="_e4gzQJPJEeOau5lQkkgj3A"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_eCo1II18EeO5QKVbQiY0wg" name="ViolationDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_Ynt9II5DEeOt3sz48gBxVQ" annotatedElement="_eCo1II18EeO5QKVbQiY0wg">
+                  <body>Компоненты, представляющие детализированную информацию о выявленных несоответствиях контролируемых параметров установленным требованиям и необходимости предоставления документов</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_aXXjoI2EEeO5QKVbQiY0wg" name="ViolationText" visibility="public" type="_OjOF0FGcEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Y2QnII2NEeOQQexDOjgnqg" name="LegalRequirementText" visibility="public" type="_o0oIUI2NEeOQQexDOjgnqg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Y_usMI2NEeOQQexDOjgnqg" name="ViolationDescriptionText" visibility="public" type="_9w8xQI2NEeOQQexDOjgnqg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_D_ZasI-2EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_D_YzoI-2EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_cma1II2EEeO5QKVbQiY0wg" name="ViolationRemovalText" visibility="public" type="__g1u8FGfEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FOV6EI-2EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FOVTAI-2EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_vKLGEI72EeOk8_uL5KcaCg" name="PenaltyDetails" visibility="public" type="_grzYAI72EeOk8_uL5KcaCg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_x9UjII72EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_x9T8EI72EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5M9kMI73EeOk8_uL5KcaCg" name="PenaltyPaymentDetails" visibility="public" type="_HPybMI73EeOk8_uL5KcaCg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7Z1rcI73EeOk8_uL5KcaCg" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7Z1EYI73EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_psTn4I41EeOt3sz48gBxVQ" name="OverallDimensionDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6CM4QI41EeOt3sz48gBxVQ" annotatedElement="_psTn4I41EeOt3sz48gBxVQ">
+                  <body>Компоненты, представляющие линейные размеры предмета (длина, ширина и высота)</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_b079gI43EeOt3sz48gBxVQ" name="LengthMeasure" visibility="public" type="_wIGKII42EeOt3sz48gBxVQ">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_zQY0UJ0qEeO_Ctfl2sHrgw" annotatedElement="_b079gI43EeOt3sz48gBxVQ">
+                    <body>Линейный размер предмета в продольном направлении (обычно это направление наибольшего размера), то есть расстояние между его двумя наиболее удалёнными точками, измеренное горизонтально</body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_b8McEI43EeOt3sz48gBxVQ" name="WidthMeasure" visibility="public" type="_CI6rQI43EeOt3sz48gBxVQ">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_0eEvcJ0qEeO_Ctfl2sHrgw" annotatedElement="_b8McEI43EeOt3sz48gBxVQ">
+                    <body>Линейный размер предмета в поперечном направлении, то есть расстояние между его двумя наиболее удалёнными точками, измеренное горизонтально под прямым углом к длине</body>
+                  </ownedComment>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_b9juAI43EeOt3sz48gBxVQ" name="HeightMeasure" visibility="public" type="_RYNf8I43EeOt3sz48gBxVQ">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_xtEAYJ0qEeO_Ctfl2sHrgw" annotatedElement="_b9juAI43EeOt3sz48gBxVQ">
+                    <body>Линейный размер предмета (расстояние между его двумя наиболее удалёнными точками) в вертикальном направлении</body>
+                  </ownedComment>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_gxaMoI45EeOt3sz48gBxVQ" name="DateIntervalDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_lQntcI46EeOt3sz48gBxVQ" annotatedElement="_gxaMoI45EeOt3sz48gBxVQ">
+                  <body>Компоненты, представляющие промежуток времени с указанием начальной и конечной дат</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_lz5PEI45EeOt3sz48gBxVQ" name="StartDate" visibility="public" type="_Zn2I8I45EeOt3sz48gBxVQ"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_l8DskI45EeOt3sz48gBxVQ" name="EndDate" visibility="public" type="_Zn3-II45EeOt3sz48gBxVQ"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_9zZ2wI7qEeOCdpZuhK3cCA" name="InspectionDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_zpwk4I74EeOk8_uL5KcaCg" annotatedElement="_9zZ2wI7qEeOCdpZuhK3cCA">
+                  <body>Компоненты, представляющие результаты транспортного (автомобильного) контроля транспортного средства</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2wo7qEeOCdpZuhK3cCA" name="InspectionDateTime" visibility="public" type="_m-eFQFEDEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2w47qEeOCdpZuhK3cCA" name="CheckpointDetails" visibility="public" type="_09B5UFGcEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M_ZbEJ0pEeO_Ctfl2sHrgw" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M_Y0AJ0pEeO_Ctfl2sHrgw"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_LMIGoJ0pEeO_Ctfl2sHrgw" name="BorderCheckpointDetails" visibility="public" type="_m3RNcJ0oEeO_Ctfl2sHrgw">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NSL0MJ0pEeO_Ctfl2sHrgw" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NSLNIJ0pEeO_Ctfl2sHrgw"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2xI7qEeOCdpZuhK3cCA" name="TransportCode" visibility="public" type="_ohZJMFEGEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2xY7qEeOCdpZuhK3cCA" name="VehicleDetails" visibility="public" type="_fPgRoFEHEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2yo7qEeOCdpZuhK3cCA" name="CarrierDetails" visibility="public" type="_QZEr0FGqEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2y47qEeOCdpZuhK3cCA" name="RegularTransportIndicator" visibility="public" type="_kT2REFEOEeOTEaxXgV0mpg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QeSzEI-wEeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QeSMAI-wEeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2zI7qEeOCdpZuhK3cCA" name="DriverName" visibility="public" type="_RzLKIJPIEeOau5lQkkgj3A"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2zY7qEeOCdpZuhK3cCA" name="SendingCountryCode" visibility="public" type="_OGGpMI7rEeOCdpZuhK3cCA"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2zo7qEeOCdpZuhK3cCA" name="DestinationCountryCode" visibility="public" type="_WSPkMI7rEeOCdpZuhK3cCA"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_EVA-EI71EeOk8_uL5KcaCg" name="SendingRegionName" visibility="public" type="_1JOwYI70EeOk8_uL5KcaCg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LJDdsY71EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LJDdsI71EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_EiwfII71EeOk8_uL5KcaCg" name="DestinationRegionName" visibility="public" type="_kqqsMI70EeOk8_uL5KcaCg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LZftcI71EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LZefUI71EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2z47qEeOCdpZuhK3cCA" name="CargoGrossWeightMeasure" visibility="public" type="_wbAzAFEVEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ20I7qEeOCdpZuhK3cCA" name="CargoCode" visibility="public" type="_sgplEFGrEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ20Y7qEeOCdpZuhK3cCA" name="VehicleGrossWeightMeasure" visibility="public" type="_4w_xEFEWEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ20o7qEeOCdpZuhK3cCA" name="AxleDetails" visibility="public" type="_5S8L0FGrEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qVqSUI-zEeOk8_uL5KcaCg" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qVprQI-zEeOk8_uL5KcaCg" value="1"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2047qEeOCdpZuhK3cCA" name="PassengerQuantity" visibility="public" type="_-fzmoFEZEeOTEaxXgV0mpg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_roN1gJPIEeOau5lQkkgj3A" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_roNOcJPIEeOau5lQkkgj3A"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_jUQdcI71EeOk8_uL5KcaCg" name="TransportPermissionDetails" visibility="public" type="_BX3UQFGbEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zWuDII-zEeOk8_uL5KcaCg" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zWtcEI-zEeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_m_uCkI71EeOk8_uL5KcaCg" name="SpecialTransportPermissionDetails" visibility="public" type="_0MqGsIzAEeO5QKVbQiY0wg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3AJn8I-zEeOk8_uL5KcaCg" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3AJA4I-zEeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ21I7qEeOCdpZuhK3cCA" name="AccountingTicketId" visibility="public" type="_lJgWMFGcEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9zZ21Y7qEeOCdpZuhK3cCA" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9zZ21o7qEeOCdpZuhK3cCA"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2147qEeOCdpZuhK3cCA" name="InconsistencyAckDetails" visibility="public" type="_O8f8cI18EeO5QKVbQiY0wg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9zZ22I7qEeOCdpZuhK3cCA" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9zZ22Y7qEeOCdpZuhK3cCA"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ22o7qEeOCdpZuhK3cCA" name="ViolationDetails" visibility="public" type="_cAVmMI18EeO5QKVbQiY0wg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9zZ2247qEeOCdpZuhK3cCA" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9zZ23I7qEeOCdpZuhK3cCA"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ23Y7qEeOCdpZuhK3cCA" name="TollPaymentDetails" visibility="public" type="_lXhSIFGeEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9zZ23o7qEeOCdpZuhK3cCA" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9zZ2347qEeOCdpZuhK3cCA"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ24I7qEeOCdpZuhK3cCA" name="PaidStayDuration" visibility="public" type="_XLIE4FGeEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9zZ24Y7qEeOCdpZuhK3cCA" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9zZ24o7qEeOCdpZuhK3cCA"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_9zZ2447qEeOCdpZuhK3cCA" name="PermitDecisionCode" visibility="public" type="_pC_kMI18EeO5QKVbQiY0wg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9zZ25I7qEeOCdpZuhK3cCA" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9zZ25Y7qEeOCdpZuhK3cCA"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_OgI40I72EeOk8_uL5KcaCg" name="PenaltyDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_qUcGMI72EeOk8_uL5KcaCg" annotatedElement="_OgI40I72EeOk8_uL5KcaCg">
+                  <body>Компоненты, представляющие детализированную информацию о штрафе, наложенном на перевозчика органами транспортного (автомобильного) контроля государств-членов ТС и ЕЭП, а также его оплате</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_VjPIII72EeOk8_uL5KcaCg" name="PenaltyId" visibility="public" type="_v1DoAFGeEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_VsVZwI72EeOk8_uL5KcaCg" name="PenaltyDate" visibility="public" type="_xb6REFGeEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Vt1OkI72EeOk8_uL5KcaCg" name="PaymentAmount" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_bBA6QAPfEeOOH_kc715Zjw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_3Mvs0JPBEeOau5lQkkgj3A" name="CheckpointDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_2toScJPCEeOau5lQkkgj3A" annotatedElement="_3Mvs0JPBEeOau5lQkkgj3A">
+                  <body>Компоненты, представляющие детализированную информацию о контрольном пункте, в котором проводился транспортный (автомобильный) контроль</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5KMQ8JPBEeOau5lQkkgj3A" name="CheckpointId" visibility="public" type="_OjeisJPCEeOau5lQkkgj3A">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NRG74JPCEeOau5lQkkgj3A" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NRGU0JPCEeOau5lQkkgj3A"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5TmEkJPBEeOau5lQkkgj3A" name="CheckpointName" visibility="public" type="_zX7kcI2MEeOQQexDOjgnqg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5VXmMJPBEeOau5lQkkgj3A" name="CheckpointLocationText" visibility="public" type="_D326kI2NEeOQQexDOjgnqg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_CY4PQJPcEeOau5lQkkgj3A" name="CarrierDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_v6wxUJPfEeOau5lQkkgj3A" annotatedElement="_CY4PQJPcEeOau5lQkkgj3A">
+                  <body>Компоненты, представляющие детализированную информацию о перевозчике</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_D9L6oJPcEeOau5lQkkgj3A" name="OrganizationDetails" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_WNZPYCAcEeOeQPM7Z3-lxg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_HAcQQJPcEeOau5lQkkgj3A" name="AddressDetails" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_yRGecPjPEeKJw6Ug-08zBg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_HCNK0JPcEeOau5lQkkgj3A" name="CommunicationDetails" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_8-7TEPjPEeKJw6Ug-08zBg"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_hSvDUJ0nEeO_Ctfl2sHrgw" name="BorderCheckpointDetailsType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_hSvDUZ0nEeO_Ctfl2sHrgw" annotatedElement="_hSvDUJ0nEeO_Ctfl2sHrgw">
+                  <body>Компоненты, представляющие детализированную информацию о пункте пропуска</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_hSvDUp0nEeO_Ctfl2sHrgw" name="BorderCheckpointId" visibility="public" type="_eaTIgJ0lEeO_Ctfl2sHrgw">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hSvDU50nEeO_Ctfl2sHrgw" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hSvDVJ0nEeO_Ctfl2sHrgw"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_hSvDVZ0nEeO_Ctfl2sHrgw" name="BorderCheckpointName" visibility="public" type="_iDigEJ0lEeO_Ctfl2sHrgw"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_hSvDVp0nEeO_Ctfl2sHrgw" name="BorderCheckpointLocationText" visibility="public" type="_gTZYIJ0lEeO_Ctfl2sHrgw"/>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_C6RTsFECEeOTEaxXgV0mpg" name="TTSDO">
+            <packageImport xmi:type="uml:PackageImport" xmi:id="_Qbn_4FECEeOTEaxXgV0mpg">
+              <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_9Zus8PTjEeKqa_aWeelEZg"/>
+            </packageImport>
+            <packageImport xmi:type="uml:PackageImport" xmi:id="_Qbom8FECEeOTEaxXgV0mpg">
+              <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_sde"/>
+            </packageImport>
+            <packagedElement xmi:type="uml:Package" xmi:id="_I2eMYFECEeOTEaxXgV0mpg" name="TTSDE">
+              <packagedElement xmi:type="uml:Class" xmi:id="_m-eFQFEDEeOTEaxXgV0mpg" name="InspectionDateTime">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_sPfk0FHFEeOuyKm2YW1K1g" annotatedElement="_m-eFQFEDEeOTEaxXgV0mpg">
+                  <body>Дата и время проведения транспортного (автомобильного) контроля</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_qiiB4FEDEeOTEaxXgV0mpg" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5P4IqflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_ohZJMFEGEeOTEaxXgV0mpg" name="TransportCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_40ad8FHFEeOuyKm2YW1K1g" annotatedElement="_ohZJMFEGEeOTEaxXgV0mpg">
+                  <body>Характеристика поездки, определяемая ее направлением</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_pa7ZQFEGEeOTEaxXgV0mpg" name="value" visibility="public" type="_mbDHwFEGEeOTEaxXgV0mpg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_I-ClQFEIEeOTEaxXgV0mpg" name="VehicleRegId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_82_ikFHFEeOuyKm2YW1K1g" annotatedElement="_I-ClQFEIEeOTEaxXgV0mpg">
+                  <body>Индивидуальное буквенно-цифровое обозначение, присваиваемое регистрирующим органом грузовому автомобилю/тягачу или автобусу</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_JuZrMFEIEeOTEaxXgV0mpg" name="value" visibility="public" type="_F51NYFEIEeOTEaxXgV0mpg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_mg60UFEIEeOTEaxXgV0mpg" name="TrailerRegId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_4PpkAFHFEeOuyKm2YW1K1g" annotatedElement="_mg60UFEIEeOTEaxXgV0mpg">
+                  <body>Индивидуальное буквенно-цифровое обозначение, присваиваемое регистрирующим органом прицепу, полуприцепу</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_oeZ0sFEIEeOTEaxXgV0mpg" name="value" visibility="public" type="_F51NYFEIEeOTEaxXgV0mpg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_kT2REFEOEeOTEaxXgV0mpg" name="RegularTransportIndicator">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_3rzQEFHFEeOuyKm2YW1K1g" annotatedElement="_kT2REFEOEeOTEaxXgV0mpg">
+                  <body>Признак, определяющий системность перевозки, осуществляемой автобусом (регулярная или нерегулярная)</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_z_c9IFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5P4MaflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_wbAzAFEVEeOTEaxXgV0mpg" name="CargoGrossWeightMeasure">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_oNaPcFHFEeOuyKm2YW1K1g" annotatedElement="_wbAzAFEVEeOTEaxXgV0mpg">
+                  <body>Общая масса груза (брутто) в тоннах</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_h-9MIFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGcKflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_4w_xEFEWEeOTEaxXgV0mpg" name="VehicleGrossWeightMeasure">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_7afvYFHFEeOuyKm2YW1K1g" annotatedElement="_4w_xEFEWEeOTEaxXgV0mpg">
+                  <body>Полная масса транспортного средства с грузом в тоннах</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4cphMFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGcKflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_It5nwFEZEeOTEaxXgV0mpg" name="AxleOrdinal">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_ngF2cFHFEeOuyKm2YW1K1g" annotatedElement="_It5nwFEZEeOTEaxXgV0mpg">
+                  <body>Порядковый номер оси транспортного средства</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_hCFUMFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_BNdJsF5BEeOgdNELZqEKyw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_V5nbIFEZEeOTEaxXgV0mpg" name="AxleLoadMeasure">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_m26WkFHFEeOuyKm2YW1K1g" annotatedElement="_V5nbIFEZEeOTEaxXgV0mpg">
+                  <body>Нагрузка от массы транспортного средства, передаваемая на дорожную поверхность колесами одной оси в тоннах</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_gKJmoFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGcKflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_nEoVoFEZEeOTEaxXgV0mpg" name="NextAxleDistanceMeasure">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_rdYLYFHFEeOuyKm2YW1K1g" annotatedElement="_nEoVoFEZEeOTEaxXgV0mpg">
+                  <body>Расстояние до следующей по порядку оси транспортного средства в метрах</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_mI75QFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGcKflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_-fzmoFEZEeOTEaxXgV0mpg" name="PassengerQuantity">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_wH9rMFHFEeOuyKm2YW1K1g" annotatedElement="_-fzmoFEZEeOTEaxXgV0mpg">
+                  <body>Количество человек, которые не являются членами экипажа и которые перевозятся транспортным средством в соответствии с гласным или негласным договором перевозки</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_tLO3UFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGeaflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_SGJ2gFGbEeOuyKm2YW1K1g" name="TransportPermissionCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6J8GcFHFEeOuyKm2YW1K1g" annotatedElement="_SGJ2gFGbEeOuyKm2YW1K1g">
+                  <body>Краткое условное обозначение вида разрешения на поездку в зависимости от типа транспортного средства и условий проезда</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_26r_MFGkEeOuyKm2YW1K1g" name="value" visibility="public" type="_SyFLwFHEEeOuyKm2YW1K1g"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_dVigEFGbEeOuyKm2YW1K1g" name="TransportPermissionId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5Z9bAFHFEeOuyKm2YW1K1g" annotatedElement="_dVigEFGbEeOuyKm2YW1K1g">
+                  <body>Реквизит, идентифицирующий разрешение на поездку</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_158T4FGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGT6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_OjOF0FGcEeOuyKm2YW1K1g" name="ViolationText">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_9_DW0FHFEeOuyKm2YW1K1g" annotatedElement="_OjOF0FGcEeOuyKm2YW1K1g">
+                  <body>Текстовое описание несоответствия и необходимости предоставления документа</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_6XnZEFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGgqflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_lJgWMFGcEeOuyKm2YW1K1g" name="AccountingTicketId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_mLBg8FHFEeOuyKm2YW1K1g" annotatedElement="_lJgWMFGcEeOuyKm2YW1K1g">
+                  <body>Реквизит, идентифицирующий учетный талон, присвоенный при выдаче перевозчику в результате осуществлении транспортного (автомобильного) контроля</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_fGLoMFGkEeOuyKm2YW1K1g" name="value" visibility="public" type="_9D3oUFHCEeOuyKm2YW1K1g"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_sUCqQFGcEeOuyKm2YW1K1g" name="NotificationId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_tkSNgFHFEeOuyKm2YW1K1g" annotatedElement="_sUCqQFGcEeOuyKm2YW1K1g">
+                  <body>Реквизит, идентифицирующий уведомление о несоответствии, присвоенный при выдаче перевозчику в результате осуществления транспортного (автомобильного) контроля</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_oDTUMFGkEeOuyKm2YW1K1g" name="value" visibility="public" type="_9D3oUFHCEeOuyKm2YW1K1g"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_7YKUQFGdEeOuyKm2YW1K1g" name="PaymentId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_05sU0FHFEeOuyKm2YW1K1g" annotatedElement="_7YKUQFGdEeOuyKm2YW1K1g">
+                  <body>Реквизит, идентифицирующий квитанцию о перечислении денежной суммы плательщиком получателю платежа</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_wDF1QFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGT6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_BfgF8FGeEeOuyKm2YW1K1g" name="PaymentDate">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_0OoloFHFEeOuyKm2YW1K1g" annotatedElement="_BfgF8FGeEeOuyKm2YW1K1g">
+                  <body>Дата перечисления денежной суммы плательщиком получателю платежа</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_uLASQFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5P4J6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_XLIE4FGeEeOuyKm2YW1K1g" name="PaidStayDuration">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_vY-eQFHFEeOuyKm2YW1K1g" annotatedElement="_XLIE4FGeEeOuyKm2YW1K1g">
+                  <body>Количество дней пребывания на территории Российской Федерации, подтвержденное квитанцией об оплате сбора за использование автомобильных дорог общего пользования</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_ZVRBMFGeEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_pry5YDJSEeOygNYiTfyZgg"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_v1DoAFGeEeOuyKm2YW1K1g" name="PenaltyId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_3HlvwFHFEeOuyKm2YW1K1g" annotatedElement="_v1DoAFGeEeOuyKm2YW1K1g">
+                  <body>Реквизит, идентифицирующий постановление, предписывающее оплату штрафа, наложенного на перевозчика органами транспортного (автомобильного) контроля государств-членов ТС и ЕЭП</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_zEH9UFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGT6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_xb6REFGeEeOuyKm2YW1K1g" name="PenaltyDate">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_2XrVwFHFEeOuyKm2YW1K1g" annotatedElement="_xb6REFGeEeOuyKm2YW1K1g">
+                  <body>Дата выдачи постановления, предписывающего оплату штрафа, наложенного на перевозчика органами транспортного (автомобильного) контроля государств-членов ТС и ЕЭП</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_w6xEIFGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5P4J6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="__g1u8FGfEeOuyKm2YW1K1g" name="ViolationRemovalText">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_-qF34FHFEeOuyKm2YW1K1g" annotatedElement="__g1u8FGfEeOuyKm2YW1K1g">
+                  <body>Сведения о предоставлении документа, устранении несоответствия или о том, что документ не требуется</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_7bLu4FGkEeOuyKm2YW1K1g" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGgqflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_7yh0sFGgEeOuyKm2YW1K1g" name="VehicleKindCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_8EUvgFHFEeOuyKm2YW1K1g" annotatedElement="_7yh0sFGgEeOuyKm2YW1K1g">
+                  <body>Краткое условное обозначение типа транспортного средства в зависимости от его конструкторских особенностей и назначения</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_5Mm-gFGkEeOuyKm2YW1K1g" name="value" visibility="public" type="_TDXIEFELEeOTEaxXgV0mpg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_sgplEFGrEeOuyKm2YW1K1g" name="CargoCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_qO3w4FHFEeOuyKm2YW1K1g" annotatedElement="_sgplEFGrEeOuyKm2YW1K1g">
+                  <body>Код основного по массе (брутто) груза в соответсвии со справочником ТН ВЭД ТС</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_tv_tEFGrEeOuyKm2YW1K1g" name="value" visibility="public" type="_pUGlQFEWEeOTEaxXgV0mpg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_lcALQIy_EeO5QKVbQiY0wg" name="SpecialTransportPermissionId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_84anwI2CEeO5QKVbQiY0wg" annotatedElement="_lcALQIy_EeO5QKVbQiY0wg">
+                  <body>Реквизит, идентифицирующий специальное разрешение</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_XZc90I2AEeO5QKVbQiY0wg" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGT6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_vH_6AIzAEeO5QKVbQiY0wg" name="SpecialTransportPermissionCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_6Wp1oI2CEeO5QKVbQiY0wg" annotatedElement="_vH_6AIzAEeO5QKVbQiY0wg">
+                  <body>Краткое условное обозначение типа специального разрешения</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_eVPEMI2AEeO5QKVbQiY0wg" name="value" visibility="public" type="_aYHHUI2AEeO5QKVbQiY0wg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_pC_kMI18EeO5QKVbQiY0wg" name="PermitDecisionCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_049FkI18EeO5QKVbQiY0wg" annotatedElement="_pC_kMI18EeO5QKVbQiY0wg">
+                  <body>Краткое условное обозначение вида принятого решения по результатам осуществления транспортного (автомобильного) контроля</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_tUNhwI18EeO5QKVbQiY0wg" name="value" visibility="public" type="_qrbhoI18EeO5QKVbQiY0wg"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_zX7kcI2MEeOQQexDOjgnqg" name="CheckpointName">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_9Nt90I2MEeOQQexDOjgnqg" annotatedElement="_zX7kcI2MEeOQQexDOjgnqg">
+                  <body>Наименование контрольного пункта</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4e4QII2MEeOQQexDOjgnqg" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGi6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_D326kI2NEeOQQexDOjgnqg" name="CheckpointLocationText">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_J9qbMI2NEeOQQexDOjgnqg" annotatedElement="_D326kI2NEeOQQexDOjgnqg">
+                  <body>Местонахождение контрольного пункта</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4N2VEI2NEeOQQexDOjgnqg" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGgqflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_o0oIUI2NEeOQQexDOjgnqg" name="LegalRequirementText">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_s7pBAI2NEeOQQexDOjgnqg" annotatedElement="_o0oIUI2NEeOQQexDOjgnqg">
+                  <body>Требование нормативно-правового акта, несоответствие которому выявлено в ходе проверки</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_1zt08I2NEeOQQexDOjgnqg" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGgqflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_9w8xQI2NEeOQQexDOjgnqg" name="ViolationDescriptionText">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_GXwPAI2OEeOQQexDOjgnqg" annotatedElement="_9w8xQI2NEeOQQexDOjgnqg">
+                  <body>Уточняющий текст, конкретизирующий нарушение</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="__PsnMI2NEeOQQexDOjgnqg" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGgqflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_UVzZ0I40EeOt3sz48gBxVQ" name="TransportRouteText">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_a27kgI40EeOt3sz48gBxVQ" annotatedElement="_UVzZ0I40EeOt3sz48gBxVQ">
+                  <body>Текстовое описание маршрута движения транспортного средства</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_W2RygI40EeOt3sz48gBxVQ" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGgqflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_wIGKII42EeOt3sz48gBxVQ" name="LengthMeasure">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_9R0ZcI42EeOt3sz48gBxVQ" annotatedElement="_wIGKII42EeOt3sz48gBxVQ">
+                  <body>Протяженность линии или линейный размер предмета в продольном направлении (обычно это направление наибольшего размера), то есть расстояние между его двумя наиболее удалёнными точками, измеренное горизонтально</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_a39icI44EeOt3sz48gBxVQ" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGcKflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_CI6rQI43EeOt3sz48gBxVQ" name="WidthMeasure">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_KHtt0I43EeOt3sz48gBxVQ" annotatedElement="_CI6rQI43EeOt3sz48gBxVQ">
+                  <body>Линейный размер предмета в поперечном направлении, то есть расстояние между его двумя наиболее удалёнными точками, измеренное горизонтально под прямым углом к длине</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_dHswcI44EeOt3sz48gBxVQ" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGcKflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_RYNf8I43EeOt3sz48gBxVQ" name="HeightMeasure">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_Y3Ly8I43EeOt3sz48gBxVQ" annotatedElement="_RYNf8I43EeOt3sz48gBxVQ">
+                  <body>Линейный размер предмета (расстояние между его двумя наиболее удалёнными точками) или его местоположение, измеренные в вертикальном направлении</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_bxkrAI44EeOt3sz48gBxVQ" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGcKflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_EtK7QI44EeOt3sz48gBxVQ" name="TransportQuantity">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_KymocI44EeOt3sz48gBxVQ" annotatedElement="_EtK7QI44EeOt3sz48gBxVQ">
+                  <body>Количество разрешенных поездок для перевозки опасных грузов</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_HxdysI44EeOt3sz48gBxVQ" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGeaflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_Zn2I8I45EeOt3sz48gBxVQ" name="StartDate">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_Zn2I8Y45EeOt3sz48gBxVQ" annotatedElement="_Zn2I8I45EeOt3sz48gBxVQ">
+                  <body>Начальная дата периода времени с указанием дня, месяца и года</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Zn2I8o45EeOt3sz48gBxVQ" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5P4J6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_Zn3-II45EeOt3sz48gBxVQ" name="EndDate">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_Zn3-IY45EeOt3sz48gBxVQ" annotatedElement="_Zn3-II45EeOt3sz48gBxVQ">
+                  <body>Конечная дата периода времени с указанием дня, месяца и года</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Zn3-Io45EeOt3sz48gBxVQ" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5P4J6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_OGGpMI7rEeOCdpZuhK3cCA" name="SendingCountryCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_UFIzcI7rEeOCdpZuhK3cCA" annotatedElement="_OGGpMI7rEeOCdpZuhK3cCA">
+                  <body>Трехбуквенный код страны отправки или погрузки</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_xyf6kI7zEeOk8_uL5KcaCg" name="value" visibility="public" type="_dszb0JPOEeOau5lQkkgj3A"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_WSPkMI7rEeOCdpZuhK3cCA" name="DestinationCountryCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_b1a44I7rEeOCdpZuhK3cCA" annotatedElement="_WSPkMI7rEeOCdpZuhK3cCA">
+                  <body>Трехбуквенный код страны назначения</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_tyqn8I7zEeOk8_uL5KcaCg" name="value" visibility="public" type="_dszb0JPOEeOau5lQkkgj3A"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_kqqsMI70EeOk8_uL5KcaCg" name="DestinationRegionName">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_yllu8I70EeOk8_uL5KcaCg" annotatedElement="_kqqsMI70EeOk8_uL5KcaCg">
+                  <body>Наименование единицы административно-территориального деления первого уровня страны назначения</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_tSsR8I70EeOk8_uL5KcaCg" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_ItMo4DF3EeORtYFSx-HEQA"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_1JOwYI70EeOk8_uL5KcaCg" name="SendingRegionName">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_9_dKMI70EeOk8_uL5KcaCg" annotatedElement="_1JOwYI70EeOk8_uL5KcaCg">
+                  <body>Наименование единицы административно-территориального деления первого уровня страны отправки</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_4Hn0II70EeOk8_uL5KcaCg" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_ItMo4DF3EeORtYFSx-HEQA"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_OjeisJPCEeOau5lQkkgj3A" name="CheckpointId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_TNkTQJPCEeOau5lQkkgj3A" annotatedElement="_OjeisJPCEeOau5lQkkgj3A">
+                  <body>Реквизит, идентифицирующий контрольный пункт</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_tDwOIJPCEeOau5lQkkgj3A" name="value" visibility="public" type="_bL1xYJPCEeOau5lQkkgj3A"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_RzLKIJPIEeOau5lQkkgj3A" name="DriverName">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_YNoFEJPIEeOau5lQkkgj3A" annotatedElement="_RzLKIJPIEeOau5lQkkgj3A">
+                  <body>Фамилия, имя, отчество водителя</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Tk5mcJPIEeOau5lQkkgj3A" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_q8LQIDF2EeORtYFSx-HEQA"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_BrepoJPPEeOau5lQkkgj3A" name="VehicleRegCountryCode">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_mUvIsJPTEeOau5lQkkgj3A" annotatedElement="_BrepoJPPEeOau5lQkkgj3A">
+                  <body>Трехбуквенный код страны регистрации транспортного средства</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_EeT9oJPPEeOau5lQkkgj3A" name="value" visibility="public" type="_dszb0JPOEeOau5lQkkgj3A"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_2vap0JSAEeOcbd1HrAmu5w" name="DocIssueDate">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_92pLMJSAEeOcbd1HrAmu5w" annotatedElement="_2vap0JSAEeOcbd1HrAmu5w">
+                  <body>Дата выдачи документа с указанием дня, месяца и года</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_VpTnwJSEEeOcbd1HrAmu5w" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5P4J6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_eaTIgJ0lEeO_Ctfl2sHrgw" name="BorderCheckpointId">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_eaTIgZ0lEeO_Ctfl2sHrgw" annotatedElement="_eaTIgJ0lEeO_Ctfl2sHrgw">
+                  <body>Реквизит, идентифицирующий пункт пропуска</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_eaTIgp0lEeO_Ctfl2sHrgw" name="value" visibility="public" type="_KMHtEJ0nEeO_Ctfl2sHrgw"/>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_gTZYIJ0lEeO_Ctfl2sHrgw" name="BorderCheckpointLocationText">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_gTZYIZ0lEeO_Ctfl2sHrgw" annotatedElement="_gTZYIJ0lEeO_Ctfl2sHrgw">
+                  <body>Местонахождение пункта пропуска</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_gTZYIp0lEeO_Ctfl2sHrgw" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGgqflEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_iDigEJ0lEeO_Ctfl2sHrgw" name="BorderCheckpointName">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_iDigEZ0lEeO_Ctfl2sHrgw" annotatedElement="_iDigEJ0lEeO_Ctfl2sHrgw">
+                  <body>Наименование пункта пропуска</body>
+                </ownedComment>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_iDigEp0lEeO_Ctfl2sHrgw" name="value" visibility="public">
+                  <type xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGi6flEeKgb97SI2dJlw"/>
+                </ownedAttribute>
+              </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Package" xmi:id="_J47u8FECEeOTEaxXgV0mpg" name="TTSDT">
+              <packagedElement xmi:type="uml:DataType" xmi:id="_mbDHwFEGEeOTEaxXgV0mpg" name="TransportCodeType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_UGdgkFHLEeOuyKm2YW1K1g" annotatedElement="_mbDHwFEGEeOTEaxXgV0mpg">
+                  <body>Кодовое обозначение направления поездки</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_mbDHwlEGEeOTEaxXgV0mpg">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5QflKflEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_F51NYFEIEeOTEaxXgV0mpg" name="VehicleRegIdType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_7k7EcFHKEeOuyKm2YW1K1g" annotatedElement="_F51NYFEIEeOTEaxXgV0mpg">
+                  <body>Строка символов, идентифицирующая транспортное средство в соответствии с национальным законодательством</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_5ebIoJPOEeOau5lQkkgj3A">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGT6flEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_TDXIEFELEeOTEaxXgV0mpg" name="VehicleKindCodeType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_5gbdIFHKEeOuyKm2YW1K1g" annotatedElement="_TDXIEFELEeOTEaxXgV0mpg">
+                  <body>Кодовое обозначение типа транспортного средства в зависимости от его конструкторских особенностей и назначения в соответствии с классификатором</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_OWq68FHFEeOuyKm2YW1K1g">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5QflKflEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_pUGlQFEWEeOTEaxXgV0mpg" name="CargoCodeType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_wISpEFHKEeOuyKm2YW1K1g" annotatedElement="_pUGlQFEWEeOTEaxXgV0mpg">
+                  <body>Кодовое обозначение груза в соответсвии с «Товарной номенклатурой внешнеэкономической деятельности Таможенного союза»</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_NjRIEFHFEeOuyKm2YW1K1g">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5QflKflEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_9D3oUFHCEeOuyKm2YW1K1g" name="AccountingTicketIdType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_tDrBgFHKEeOuyKm2YW1K1g" annotatedElement="_9D3oUFHCEeOuyKm2YW1K1g">
+                  <body>Строка символов, идентифицирующая учетный талон или уведомление</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_LwAasFHFEeOuyKm2YW1K1g">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGT6flEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_SyFLwFHEEeOuyKm2YW1K1g" name="TransportPermissionCodeType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_izEUYFHKEeOuyKm2YW1K1g" annotatedElement="_SyFLwFHEEeOuyKm2YW1K1g">
+                  <body>Кодовое обозначение вида разрешения на поездку в зависимости от типа транспортного средства и условий проезда</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_SyFLwVHEEeOuyKm2YW1K1g">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5QflKflEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_qrbhoI18EeO5QKVbQiY0wg" name="PermitDecisionCodeType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_wxtYwI4_EeOt3sz48gBxVQ" annotatedElement="_qrbhoI18EeO5QKVbQiY0wg">
+                  <body>Кодовое обозначение решения по результатам осуществления транспортного (автомобильного) контроля в соответствии со справочником</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_r-sgUI18EeO5QKVbQiY0wg">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5QflKflEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_aYHHUI2AEeO5QKVbQiY0wg" name="SpecialTransportPermissionCodeType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_tYGUgI2CEeO5QKVbQiY0wg" annotatedElement="_aYHHUI2AEeO5QKVbQiY0wg">
+                  <body>Кодовое обозначение типа специального разрешения в соответствии с классификатором</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_b6F3cI2AEeO5QKVbQiY0wg">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5QflKflEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_bL1xYJPCEeOau5lQkkgj3A" name="CheckpointIdType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_msSVwJPCEeOau5lQkkgj3A" annotatedElement="_bL1xYJPCEeOau5lQkkgj3A">
+                  <body>Кодовое обозначение контрольного пункта</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_mP63wJryEeOH99ingNivxA">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGT6flEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_dszb0JPOEeOau5lQkkgj3A" name="Alpha3CountryCodeType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_dszb0ZPOEeOau5lQkkgj3A" annotatedElement="_dszb0JPOEeOau5lQkkgj3A">
+                  <body>Трехбуквенное кодовое обозначение страны в соответствии с классификатором «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран»</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_dszb0pPOEeOau5lQkkgj3A">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5QflKflEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_KMHtEJ0nEeO_Ctfl2sHrgw" name="BorderCheckpointIdType">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_KMHtEZ0nEeO_Ctfl2sHrgw" annotatedElement="_KMHtEJ0nEeO_Ctfl2sHrgw">
+                  <body>Кодовое обозначение пункта пропуска</body>
+                </ownedComment>
+                <generalization xmi:type="uml:Generalization" xmi:id="_KMHtEp0nEeO_Ctfl2sHrgw">
+                  <general xmi:type="uml:DataType" href="ReferenceModel.xmi#_w5RGT6flEeKgb97SI2dJlw"/>
+                </generalization>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_VQ40cIgSEeOPSK0F-UNoSA" name="TTCollModel">
+          <packagedElement xmi:type="uml:Package" xmi:id="_XpH3IIgSEeOPSK0F-UNoSA" name="TTDocuments">
+            <packagedElement xmi:type="uml:Package" xmi:id="_C7fF4IyxEeO5QKVbQiY0wg" name="TransportInspectionResultDetails">
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_H3E1EI2AEeO5QKVbQiY0wg" importedPackage="_BotlMFECEeOTEaxXgV0mpg"/>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_H3FcII2AEeO5QKVbQiY0wg">
+                <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_sde"/>
+              </packageImport>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_H3GDMI2AEeO5QKVbQiY0wg" importedPackage="_C6RTsFECEeOTEaxXgV0mpg"/>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_H3GqQI2AEeO5QKVbQiY0wg">
+                <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_cde"/>
+              </packageImport>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_HFiEcIyxEeO5QKVbQiY0wg" name="TransportInspectionResultDetailsType">
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_mfZkoK2-EeOFsZCn5jPbpQ" name="Entry" constrainedElement="_HFiEcIyxEeO5QKVbQiY0wg">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_h2HOcLC1EeOzLtY2xKTFzg" annotatedElement="_mfZkoK2-EeOFsZCn5jPbpQ">
+                    <body>Если набор данных в состоянии «Учтено для въезда», то в сведениях о результатах транспортного контроля не должны указываться сведения о нарушениях, об оплате пошлины, оплаченных днях пребывания</body>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression" xmi:id="_mfaywK2-EeOFsZCn5jPbpQ">
+                    <language>OCL</language>
+                    <body>EDocHeader.value.DataSetStateCode.value = 'Учтено для въезда'&#xD;&#xA;implies&#xD;&#xA;InspectionDetails->forAll(&#xD;&#xA; value.ViolationDetails->isEmpty() and&#xD;&#xA; value.TollPaymentDetails->isEmpty() and&#xD;&#xA; value.PaidStayDuration->isEmpty())</body>
+                  </specification>
+                </ownedRule>
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_qZOgcK2_EeOFsZCn5jPbpQ" name="EntryExit" constrainedElement="_HFiEcIyxEeO5QKVbQiY0wg">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="_lqLV8LC1EeOzLtY2xKTFzg" annotatedElement="_qZOgcK2_EeOFsZCn5jPbpQ">
+                    <body>Если набор данных в состоянии «Учтено для въезда» или «Учтено для выезда», то в сведениях о результатах транспортного контроля не должно указываться решение о пропуске</body>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression" xmi:id="_qZPukK2_EeOFsZCn5jPbpQ">
+                    <language>OCL</language>
+                    <body>EDocHeader.value.DataSetStateCode.value = 'Учтено для въезда' or&#xD;&#xA;EDocHeader.value.DataSetStateCode.value = 'Учтено для выезда'&#xD;&#xA;implies&#xD;&#xA;InspectionDetails->forAll(value.PermitDecisionCode->isEmpty())</body>
+                  </specification>
+                </ownedRule>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_Fc8GMI2GEeO5QKVbQiY0wg" name="EDocHeader" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_RMPcwIQAEeO7pdZFbb67iQ"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_pvc34I74EeOk8_uL5KcaCg" name="InspectionDetails" visibility="public" type="_I5yYwI5QEeOCdpZuhK3cCA">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rOzKwI74EeOk8_uL5KcaCg" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rOyjsI74EeOk8_uL5KcaCg" value="1"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_pIeyEI2FEeO5QKVbQiY0wg" name="TransportInspectionResultDetails">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_puQ_sI2FEeO5QKVbQiY0wg" name="value" visibility="public" type="_HFiEcIyxEeO5QKVbQiY0wg"/>
+              </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Package" xmi:id="_TMjgoIyxEeO5QKVbQiY0wg" name="CarrierPermissionRequestDetails">
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_GK0uoI2AEeO5QKVbQiY0wg" importedPackage="_BotlMFECEeOTEaxXgV0mpg"/>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_GK1VsI2AEeO5QKVbQiY0wg">
+                <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_sde"/>
+              </packageImport>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_GK18wI2AEeO5QKVbQiY0wg" importedPackage="_C6RTsFECEeOTEaxXgV0mpg"/>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_GK2j0I2AEeO5QKVbQiY0wg">
+                <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_cde"/>
+              </packageImport>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_YXOOsIyxEeO5QKVbQiY0wg" name="CarrierPermissionRequestDetailsType">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_KbC-8I2GEeO5QKVbQiY0wg" name="EDocHeader" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_RMPcwIQAEeO7pdZFbb67iQ"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_qC-ccI4qEeOt3sz48gBxVQ" name="VehicleDetails" visibility="public" type="_fPgRoFEHEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_t_pGUI4qEeOt3sz48gBxVQ" name="CarrierDetails" visibility="public" type="_QZEr0FGqEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_vxVGYI4qEeOt3sz48gBxVQ" name="RegularTransportIndicator" visibility="public" type="_kT2REFEOEeOTEaxXgV0mpg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0zA6oI-2EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0zATkI-2EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_xU05cI4qEeOt3sz48gBxVQ" name="SendingCountryCode" visibility="public" type="_OGGpMI7rEeOCdpZuhK3cCA"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_x1FG0I4qEeOt3sz48gBxVQ" name="DestinationCountryCode" visibility="public" type="_WSPkMI7rEeOCdpZuhK3cCA"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_2dL6YI4qEeOt3sz48gBxVQ" name="TransportPermissionDetails" visibility="public" type="_BX3UQFGbEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2dL6YY4qEeOt3sz48gBxVQ" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2dL6Yo4qEeOt3sz48gBxVQ"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_3Ny38I4qEeOt3sz48gBxVQ" name="SpecialTransportPermissionDetails" visibility="public" type="_0MqGsIzAEeO5QKVbQiY0wg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3Ny38Y4qEeOt3sz48gBxVQ" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3Ny38o4qEeOt3sz48gBxVQ"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_gzgrMI2FEeO5QKVbQiY0wg" name="CarrierPermissionRequestDetails">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_hS_cgI2FEeO5QKVbQiY0wg" name="value" visibility="public" type="_YXOOsIyxEeO5QKVbQiY0wg"/>
+              </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Package" xmi:id="_glbmQIyxEeO5QKVbQiY0wg" name="TransportInspectionResultRequestDetails">
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_Ixpm8I2AEeO5QKVbQiY0wg" importedPackage="_BotlMFECEeOTEaxXgV0mpg"/>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_IxqOAI2AEeO5QKVbQiY0wg">
+                <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_sde"/>
+              </packageImport>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_Ixq1EI2AEeO5QKVbQiY0wg" importedPackage="_C6RTsFECEeOTEaxXgV0mpg"/>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_Ixq1EY2AEeO5QKVbQiY0wg">
+                <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_cde"/>
+              </packageImport>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_jlKt0IyxEeO5QKVbQiY0wg" name="TransportInspectionResultRequestDetailsType">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_L6VAYI2GEeO5QKVbQiY0wg" name="EDocHeader" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_RMPcwIQAEeO7pdZFbb67iQ"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_A19vII-3EeOk8_uL5KcaCg" name="TransportCode" visibility="public" type="_ohZJMFEGEeOTEaxXgV0mpg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_D9AYkI-3EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_D8_xgI-3EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_hwEVoI4rEeOt3sz48gBxVQ" name="VehicleDetails" visibility="public" type="_fPgRoFEHEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_nmv1II4rEeOt3sz48gBxVQ" name="CarrierDetails" visibility="public" type="_QZEr0FGqEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_H25bQI-3EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_H240MI-3EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_qFg9oI4rEeOt3sz48gBxVQ" name="RegularTransportIndicator" visibility="public" type="_kT2REFEOEeOTEaxXgV0mpg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Kn1R0Y-3EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Kn1R0I-3EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_r1EPsI4rEeOt3sz48gBxVQ" name="SendingCountryCode" visibility="public" type="_OGGpMI7rEeOCdpZuhK3cCA"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_sPilMI4rEeOt3sz48gBxVQ" name="DestinationCountryCode" visibility="public" type="_WSPkMI7rEeOCdpZuhK3cCA"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_uUPn4I4rEeOt3sz48gBxVQ" name="AccountingTicketId" visibility="public" type="_lJgWMFGcEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uUPn4Y4rEeOt3sz48gBxVQ" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_uUPn4o4rEeOt3sz48gBxVQ"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_wJy0QI4rEeOt3sz48gBxVQ" name="NotificationId" visibility="public" type="_sUCqQFGcEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wJy0QY4rEeOt3sz48gBxVQ" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wJy0Qo4rEeOt3sz48gBxVQ"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_toG_EI2FEeO5QKVbQiY0wg" name="TransportInspectionResultRequestDetails">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_uJhDAI2FEeO5QKVbQiY0wg" name="value" visibility="public" type="_jlKt0IyxEeO5QKVbQiY0wg"/>
+              </packagedElement>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Package" xmi:id="_pFDd8IyxEeO5QKVbQiY0wg" name="CarrierPermissionDetails">
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_F7LJEI2AEeO5QKVbQiY0wg" importedPackage="_BotlMFECEeOTEaxXgV0mpg"/>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_F7LwII2AEeO5QKVbQiY0wg">
+                <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_sde"/>
+              </packageImport>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_F7MXMI2AEeO5QKVbQiY0wg" importedPackage="_C6RTsFECEeOTEaxXgV0mpg"/>
+              <packageImport xmi:type="uml:PackageImport" xmi:id="_F7M-QI2AEeO5QKVbQiY0wg">
+                <importedPackage xmi:type="uml:Package" href="ReferenceModel.xmi#_63KpkPTjEeKqa_aWeelEZg_cde"/>
+              </packageImport>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_rnV0gIyxEeO5QKVbQiY0wg" name="CarrierPermissionDetailsType">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_J9gHUI2GEeO5QKVbQiY0wg" name="EDocHeader" visibility="public">
+                  <type xmi:type="uml:Class" href="ReferenceModel.xmi#_RMPcwIQAEeO7pdZFbb67iQ"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_ELcksI4sEeOt3sz48gBxVQ" name="VehicleDetails" visibility="public" type="_fPgRoFEHEeOTEaxXgV0mpg"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_zo-eoI4wEeOt3sz48gBxVQ" name="CarrierDetails" visibility="public" type="_QZEr0FGqEeOuyKm2YW1K1g"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_IqiM4I4xEeOt3sz48gBxVQ" name="RegularTransportIndicator" visibility="public" type="_kT2REFEOEeOTEaxXgV0mpg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2daKcY-3EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2daKcI-3EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_KEaJ4I4xEeOt3sz48gBxVQ" name="SendingCountryCode" visibility="public" type="_OGGpMI7rEeOCdpZuhK3cCA"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_KbraYI4xEeOt3sz48gBxVQ" name="DestinationCountryCode" visibility="public" type="_WSPkMI7rEeOCdpZuhK3cCA"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_zEaisIy0EeO5QKVbQiY0wg" name="TransportPermissionDetails" visibility="public" type="_BX3UQFGbEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_e4mnQY2REeOQQexDOjgnqg" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_e4mnQI2REeOQQexDOjgnqg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_zGdxIIy0EeO5QKVbQiY0wg" name="SpecialTransportPermissionDetails" visibility="public" type="_0MqGsIzAEeO5QKVbQiY0wg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_g2sroY2REeOQQexDOjgnqg" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_g2sroI2REeOQQexDOjgnqg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_b7cDkI42EeOt3sz48gBxVQ" name="TransportRouteText" visibility="public" type="_UVzZ0I40EeOt3sz48gBxVQ"/>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_cG3QcI42EeOt3sz48gBxVQ" name="VehicleOverallDimensionDetails" visibility="public" type="_ExFc0I42EeOt3sz48gBxVQ">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_egRX0I42EeOt3sz48gBxVQ" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_egQwwI42EeOt3sz48gBxVQ"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_xWKDQI43EeOt3sz48gBxVQ" name="VehicleGrossWeightMeasure" visibility="public" type="_4w_xEFEWEeOTEaxXgV0mpg">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9duWEI-4EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9dtvAI-4EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_ypPbwI43EeOt3sz48gBxVQ" name="AxleDetails" visibility="public" type="_5S8L0FGrEeOuyKm2YW1K1g">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6BMgsI77EeOk8_uL5KcaCg" value="*"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6BL5oI77EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_XaFtYI44EeOt3sz48gBxVQ" name="TransportQuantity" visibility="public" type="_EtK7QI44EeOt3sz48gBxVQ">
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_CFgZgI-5EeOk8_uL5KcaCg" value="1"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_CFfycI-5EeOk8_uL5KcaCg"/>
+                </ownedAttribute>
+              </packagedElement>
+              <packagedElement xmi:type="uml:Class" xmi:id="_dN52cI2FEeO5QKVbQiY0wg" name="CarrierPermissionDetails">
+                <ownedAttribute xmi:type="uml:Property" xmi:id="_dxUFgI2FEeO5QKVbQiY0wg" name="value" visibility="public" type="_rnV0gIyxEeO5QKVbQiY0wg"/>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_jAllU1EBEeOTEaxXgV0mpg">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_jAllVFEBEeOTEaxXgV0mpg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="http://schema.omg.org/spec/UML/2.1.1/StandardProfileL2.xmi#_yzU58YinEdqtvbnfB2L_5w"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <appliedProfile xmi:type="uml:Profile" href="http://schema.omg.org/spec/UML/2.1.1/StandardProfileL2.xmi#_0"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_jAllVVEBEeOTEaxXgV0mpg">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_jAllVlEBEeOTEaxXgV0mpg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="Default.profile.xmi#_IN8k8MmBEdqBcN1R6EvWUw"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <appliedProfile xmi:type="uml:Profile" href="Default.profile.xmi#_a_S3wNWLEdiy4IqP8whjFA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_jAllV1EBEeOTEaxXgV0mpg">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_jAllWFEBEeOTEaxXgV0mpg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="Deployment.profile.xmi#_IrdAUMmBEdqBcN1R6EvWUw"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <appliedProfile xmi:type="uml:Profile" href="Deployment.profile.xmi#_vjbuwOvHEdiDX5bji0iVSA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_k8vI8FEBEeOTEaxXgV0mpg">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_k8yMQFEBEeOTEaxXgV0mpg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <references xmi:type="ecore:EPackage" href="EECProfile.profile.xmi#_KVnDQLVwEeODU4nEV69bGw"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <appliedProfile xmi:type="uml:Profile" href="EECProfile.profile.xmi#_iHjpsIAKEeKTpKWv4S5WIQ"/>
+    </profileApplication>
+  </uml:Model>
+  <EECProfile:EECDataModel xmi:id="_k8yzUFEBEeOTEaxXgV0mpg" base_Package="_jAllUFEBEeOTEaxXgV0mpg"/>
+  <EECProfile:EECModel xmi:id="_m_JFkFEBEeOTEaxXgV0mpg" base_Package="_jAllUFEBEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_pKeUsFEBEeOTEaxXgV0mpg" base_Package="_pKdtoFEBEeOTEaxXgV0mpg"/>
+  <EECProfile:Domains xmi:id="_rwFFAFEBEeOTEaxXgV0mpg" base_Package="_pKdtoFEBEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_13NtEFEBEeOTEaxXgV0mpg" businessName="Транспорт и перевозки" standardId="" standardName="Транспорт и перевозки" base_Package="_13NGAFEBEeOTEaxXgV0mpg"/>
+  <EECProfile:Domain xmi:id="_3mf5YFEBEeOTEaxXgV0mpg" base_Package="_13NGAFEBEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_8vFj0FEBEeOTEaxXgV0mpg" standardId="TT.DDM" base_Package="_8vEVsFEBEeOTEaxXgV0mpg"/>
+  <EECProfile:DataModel xmi:id="__uYmgFEBEeOTEaxXgV0mpg" base_Package="_8vEVsFEBEeOTEaxXgV0mpg" version="0.1.0"/>
+  <EECProfile:EECDataModel xmi:id="_BouMQFECEeOTEaxXgV0mpg" base_Package="_BotlMFECEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_C6R6wFECEeOTEaxXgV0mpg" base_Package="_C6RTsFECEeOTEaxXgV0mpg"/>
+  <EECProfile:Namespace xmi:id="_E5CtgFECEeOTEaxXgV0mpg" base_Package="_BotlMFECEeOTEaxXgV0mpg" version="0.1.0" uri="urn:EEC:TTD:ComplexDataObjects:v0.1.0" name="urn:EEC:TTD:ComplexDataObjects:v0.1.0" prefix="ttcdo"/>
+  <EECProfile:Namespace xmi:id="_E5CtgVECEeOTEaxXgV0mpg" base_Package="_C6RTsFECEeOTEaxXgV0mpg" version="0.1.0" uri="urn:EEC:TTD:SimpleDataObjects:v0.1.0" name="urn:EEC:TTD:SimpleDataObjects:v0.1.0" prefix="ttsdo"/>
+  <EECProfile:EECDataModel xmi:id="_GiOR0FECEeOTEaxXgV0mpg" standardId="TTD-CDE" standardName="ПСЭД" base_Package="_GiNqwFECEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_Hj_34FECEeOTEaxXgV0mpg" standardId="TTD-CDT" standardName="ПСТД" base_Package="_Hj_Q0FECEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_I2fagFECEeOTEaxXgV0mpg" standardId="TTD-SDE" standardName="ППЭД" base_Package="_I2eMYFECEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_J48WAFECEeOTEaxXgV0mpg" standardId="TTD-SDT" standardName="ППТД" base_Package="_J47u8FECEeOTEaxXgV0mpg"/>
+  <EECProfile:NamespaceSubset xmi:id="_LkD0AFECEeOTEaxXgV0mpg" order="5" base_Package="_GiNqwFECEeOTEaxXgV0mpg"/>
+  <EECProfile:NamespaceSubset xmi:id="_MCOWsFECEeOTEaxXgV0mpg" order="4" base_Package="_Hj_Q0FECEeOTEaxXgV0mpg"/>
+  <EECProfile:NamespaceSubset xmi:id="_NA0F4FECEeOTEaxXgV0mpg" order="3" base_Package="_I2eMYFECEeOTEaxXgV0mpg"/>
+  <EECProfile:NamespaceSubset xmi:id="_NhuakFECEeOTEaxXgV0mpg" order="2" base_Package="_J47u8FECEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_m-eFQVEDEeOTEaxXgV0mpg" businessName="Дата и время проведения контроля" example="2014-02-28" standardId="TTD-SDE-00009" standardName="Контроль. Дата и время" concept="Контроль" representation="Дата и время" base_Classifier="_m-eFQFEDEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_qiiB4VEDEeOTEaxXgV0mpg" base_Property="_qiiB4FEDEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_mbFkAFEGEeOTEaxXgV0mpg" businessName="Вид поездки" example="" standardId="TTD-SDT-00001" standardName="Вид поездки_ Код. Тип" concept="Вид поездки_ Код" representation="" usage="" note="Предназначен для определения характера перемещения в зависимости от направления (въезд, выезд, транзитный въезд и др.)" analogue="" base_Classifier="_mbDHwFEGEeOTEaxXgV0mpg"/>
+  <EECProfile:restriction xmi:id="_mbFkA1EGEeOTEaxXgV0mpg" base_Generalization="_mbDHwlEGEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_ohZwQFEGEeOTEaxXgV0mpg" businessName="Вид поездки" standardId="TTD-SDE-00022" standardName="Вид поездки. Код" concept="Вид поездки" representation="Код" usage="Указывается в соответствии с классификатором «Виды поездки» (С.ТТ.002)" note="" analogue="UN/CEFACT: CCL: UN00002043" base_Classifier="_ohZJMFEGEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_pa8AUFEGEeOTEaxXgV0mpg" base_Property="_pa7ZQFEGEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_cQeUsFEHEeOTEaxXgV0mpg" businessName="Сведения о транспортном средстве" standardId="TTD-CDT-00006" standardName="Транспортное средство_ Детали. Тип" concept="Транспортное средство_ Детали" analogue="UN/CEFACT: CCL: UN00001323" base_Classifier="_cQdtoFEHEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_fPg4sFEHEeOTEaxXgV0mpg" businessName="Информация о транспортном средстве" standardId="TTD-CDE-00011" standardName="Транспортное средство. Детали" concept="Транспортное средство" representation="" analogue="" base_Classifier="_fPgRoFEHEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_gUDe4FEHEeOTEaxXgV0mpg" base_Property="_gUC30FEHEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_F51NYVEIEeOTEaxXgV0mpg" businessName="Регистрационный номер транспортного средства" example="А123ВЕ96" standardId="TTD-SDT-00006" standardName="Регистрационный номер транспортного средства_ Идентификатор. Тип" concept="Регистрационный номер транспортного средства_ Идентификатор" note="" base_Classifier="_F51NYFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_I-DMUFEIEeOTEaxXgV0mpg" businessName="Регистрационный номер транспортного средства" example="А123ВЕ96" standardId="TTD-SDE-00028" standardName="Регистрационный номер транспортного средства. Идентификатор" concept="Регистрационный номер транспортного средства" representation="Идентификатор" usage="" analogue="UN/CEFACT: CCL: UN00001326" base_Classifier="_I-ClQFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_JuaSQFEIEeOTEaxXgV0mpg" base_Property="_JuZrMFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_mg7bYFEIEeOTEaxXgV0mpg" businessName="Регистрационный номер прицепа (полуприцепа)" example="ВР627177" standardId="TTD-SDE-00021" standardName="Регистрационный номер прицепа (полуприцепа). Код" concept="Регистрационный номер прицепа (полуприцепа)" representation="Код" note="" analogue="UN/CEFACT: CCL: UN00001983" base_Classifier="_mg60UFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_oeabwFEIEeOTEaxXgV0mpg" base_Property="_oeZ0sFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_TDXvIFELEeOTEaxXgV0mpg" businessName="Тип транспортного средства" example="" standardId="TTD-SDT-00005" standardName="Тип транспортного средства_ Код. Тип" concept="Тип транспортного средства_ Код" usage="" note="" base_Classifier="_TDXIEFELEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_kT24IFEOEeOTEaxXgV0mpg" businessName="Регулярность перевозки пассажиров" example="true" standardId="TTD-SDE-00020" standardName="Регулярная перевозка пассажиров. Индикатор" concept="Регулярная перевозка пассажиров" representation="Индикатор" usage="Указывается только для типа транспортного средства «Автобус»" base_Classifier="_kT2REFEOEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_wbBaEFEVEeOTEaxXgV0mpg" businessName="Масса груза" example="15" standardId="TTD-SDE-00004" standardName="Масса груза. Измерение" concept="Масса груза" representation="Измерение" note="" analogue="UN/CEFACT: CCL: UN00003025" base_Classifier="_wbAzAFEVEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_pUHMUFEWEeOTEaxXgV0mpg" businessName="Код груза" example="0901" standardId="TTD-SDT-00004" standardName="Груз_ Код. Тип" concept="Груз_ Код" note="Например, код «0901» обозначает груз «Кофе, жареный или нежареный, с кофеином или без кофеина; кофейная шелуха и оболочки зерен кофе; заменители кофе, содержащие кофе в любой пропорции»" base_Classifier="_pUGlQFEWEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_4xAYIFEWEeOTEaxXgV0mpg" businessName="Общая масса" example="2.108" standardId="TTD-SDE-00026" standardName="Полная масса транспортного средства. Измерение" concept="Полная масса транспортного средства" representation="Измерение" usage="" analogue="UN/CEFACT: CCL: UN00002030" base_Classifier="_4w_xEFEWEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_83hPoFEYEeOTEaxXgV0mpg" businessName="Сведения об оси" example="" standardId="TTD-CDT-00001" standardName="Колесная ось_ Детали. Тип" concept="Колесная ось_ Детали" base_Classifier="_83gokFEYEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_It6O0FEZEeOTEaxXgV0mpg" businessName="Номер оси" example="2" standardId="TTD-SDE-00003" standardName="Номер оси. Порядковый номер" concept="Номер оси" representation="Порядковый номер" base_Classifier="_It5nwFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_V5oCMFEZEeOTEaxXgV0mpg" businessName="Нагрузка на ось" example="6.3" standardId="TTD-SDE-00002" standardName="Нагрузка на ось. Измерение" concept="Нагрузка на ось" representation="Измерение" base_Classifier="_V5nbIFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_nEo8sFEZEeOTEaxXgV0mpg" businessName="Расстояние до следующей оси" example="" standardId="TTD-SDE-00008" standardName="Расстояние до следующей оси. Измерение" concept="Расстояние до следующей оси" representation="Измерение" base_Classifier="_nEoVoFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_-f0NsFEZEeOTEaxXgV0mpg" businessName="Количество пассажиров" example="35" standardId="TTD-SDE-00015" standardName="Пассажир. Количество" concept="Пассажир" representation="Количество" usage="Указывается для типа транспортного средства «Автобус»" analogue="UN/CEFACT: CCL: UN00003026" base_Classifier="_-fzmoFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:EECDataModel xmi:id="_Bde0EFGbEeOuyKm2YW1K1g" businessName="Разрешение на поездку" standardId="TTD-CDE-00010" standardName="Разрешение на поездку. Детали" concept="Разрешение на поездку" representation="" base_Classifier="_BX3UQFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_SGLEoFGbEeOuyKm2YW1K1g" businessName="Вид разрешения на поездку" example="" standardId="TTD-SDE-00024" standardName="Разрешение на поездку. Код" concept="Разрешение на поездку" representation="Код" usage="Указывается в соответствии с классификатором «Виды разрешений на поездку» (С.ТТ.003)" base_Classifier="_SGJ2gFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_dVjuMFGbEeOuyKm2YW1K1g" businessName="Номер разрешения на поездку" standardId="TTD-SDE-00023" standardName="Разрешение на поездку. Идентификатор" concept="Разрешение на поездку" representation="Идентификатор" note="" analogue="UN/CEFACT: CCL: UN00004520" base_Classifier="_dVigEFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_OjOs4FGcEeOuyKm2YW1K1g" businessName="Описание нарушения" example="" standardId="TTD-SDE-00030" standardName="Нарушение. Текст" concept="Нарушение" representation="Текст" usage="Указывается с использованием классификатора «Типы нарушений» (С.ТТ.004)" base_Classifier="_OjOF0FGcEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_lJg9QFGcEeOuyKm2YW1K1g" businessName="Номер учетного талона" standardId="TTD-SDE-00001" standardName="Учетный талон. Идентификатор" concept="Учетный талон" representation="Идентификатор" note="" base_Classifier="_lJgWMFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_sUDRUFGcEeOuyKm2YW1K1g" businessName="Номер уведомления" standardId="TTD-SDE-00011" standardName="Уведомление. Идентификатор" concept="Уведомление" representation="Идентификатор" note="" base_Classifier="_sUCqQFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_09CgYFGcEeOuyKm2YW1K1g" businessName="Контрольный пункт" standardId="TTD-CDE-00003" standardName="Контрольный пункт. Детали" concept="Контрольный пункт" representation="" analogue="" base_Classifier="_09B5UFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_OYJo0FGdEeOuyKm2YW1K1g" base_Property="_OYJBwFGdEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_7YK7UFGdEeOuyKm2YW1K1g" businessName="Номер квитанции" example="" standardId="TTD-SDE-00017" standardName="Квитанция. Идентификатор" concept="Квитанция" representation="Идентификатор" usage="" analogue="UN/CEFACT: CCL: UN00006051" base_Classifier="_7YKUQFGdEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_BfgtAFGeEeOuyKm2YW1K1g" businessName="Дата оплаты" example="2014-02-20" standardId="TTD-SDE-00016" standardName="Оплата. Дата" concept="Оплата" representation="Дата" analogue="UN/CEFACT: CCL: UN00000785" base_Classifier="_BfgF8FGeEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_XLIr8FGeEeOuyKm2YW1K1g" businessName="Оплаченное количество дней пребывания на территории РФ" example="P20D" standardId="TTD-SDE-00014" standardName="Оплаченное пребывание. Продолжительность" concept="Оплаченное пребывание" representation="Продолжительность" base_Classifier="_XLIE4FGeEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_ZVRoQFGeEeOuyKm2YW1K1g" base_Property="_ZVRBMFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_lXh5MFGeEeOuyKm2YW1K1g" businessName="Информация об оплате сборов" standardId="TTD-CDE-00007" standardName="Оплата сборов. Детали" concept="Оплата сборов" representation="" analogue="" base_Classifier="_lXhSIFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_sRbwQFGeEeOuyKm2YW1K1g" base_Property="_sRW3wFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_tS5NQFGeEeOuyKm2YW1K1g" businessName="Сведения об оплате" standardId="TTD-CDT-00003" standardName="Оплата_ Детали. Тип" concept="Оплата_ Детали" representation="" analogue="UN/CEFACT: CCL: UN00000410" base_Classifier="_tS4mMFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_v1EPEFGeEeOuyKm2YW1K1g" businessName="Номер постановления" example="" standardId="TTD-SDE-00019" standardName="Постановление. Идентификатор" concept="Постановление" representation="Идентификатор" usage="" note="" base_Classifier="_v1DoAFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_xb64IFGeEeOuyKm2YW1K1g" businessName="Дата постановления" example="2014-02-21" standardId="TTD-SDE-00018" standardName="Постановление. Дата" concept="Постановление" representation="Дата" usage="" note="" base_Classifier="_xb6REFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="__g2WAFGfEeOuyKm2YW1K1g" businessName="Отметка об устранении нарушения" example="" standardId="TTD-SDE-00031" standardName="Отметка об устранении нарушений. Текст" concept="Отметка об устранении нарушений" representation="Текст" base_Classifier="__g1u8FGfEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_WWq3MFGgEeOuyKm2YW1K1g" base_Property="_WWqQIFGgEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_fJsMAFGgEeOuyKm2YW1K1g" base_Property="_fJrk8FGgEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_7yibwFGgEeOuyKm2YW1K1g" businessName="Тип транспортного средства" standardId="TTD-SDE-00027" standardName="Тип транспортного средства. Код" concept="Тип транспортного средства" representation="Код" usage="Указывается в соответствии с классификатором «Типы транспортных средств» (С.ТТ.001)" note="" analogue="UN/CEFACT: CCL: UN00001324" base_Classifier="_7yh0sFGgEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_9xn-oFGgEeOuyKm2YW1K1g" base_Property="_9xnXkFGgEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_gs-HMFGhEeOuyKm2YW1K1g" base_Property="_gs9gIFGhEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_j5hiwFGhEeOuyKm2YW1K1g" base_Property="_j5g7sFGhEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_kIsnMFGhEeOuyKm2YW1K1g" base_Property="_kIsAIFGhEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_uGgUIFGhEeOuyKm2YW1K1g" businessName="Сведения о разрешении на поездку" example="" standardId="TTD-CDT-00005" standardName="Разрешение на поездку_ Детали. Тип" concept="Разрешение на поездку_ Детали" analogue="UN/CEFACT: CCL: UN00003355" base_Classifier="_uGftEFGhEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_xA1-UVGhEeOuyKm2YW1K1g" base_Property="_xA1-UFGhEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_xNFDgFGhEeOuyKm2YW1K1g" base_Property="_xNEccFGhEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_fpMgkFGiEeOuyKm2YW1K1g" base_Property="_fpL5gFGiEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_fw2AsFGiEeOuyKm2YW1K1g" base_Property="_fw1ZoFGiEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_fzg6MFGiEeOuyKm2YW1K1g" base_Property="_fzgTIFGiEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_1Z9eMFGiEeOuyKm2YW1K1g" base_Property="_1Z83IFGiEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_fGMPQFGkEeOuyKm2YW1K1g" base_Property="_fGLoMFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_gKKNsFGkEeOuyKm2YW1K1g" base_Property="_gKJmoFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_hCF7QFGkEeOuyKm2YW1K1g" base_Property="_hCFUMFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_h-9zMFGkEeOuyKm2YW1K1g" base_Property="_h-9MIFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_mI8gUFGkEeOuyKm2YW1K1g" base_Property="_mI75QFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_oDT7QFGkEeOuyKm2YW1K1g" base_Property="_oDTUMFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_tLPeYFGkEeOuyKm2YW1K1g" base_Property="_tLO3UFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_uLA5UFGkEeOuyKm2YW1K1g" base_Property="_uLASQFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_wDGcUFGkEeOuyKm2YW1K1g" base_Property="_wDF1QFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_w6xEIVGkEeOuyKm2YW1K1g" base_Property="_w6xEIFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_zEIkYFGkEeOuyKm2YW1K1g" base_Property="_zEH9UFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_z_dkMFGkEeOuyKm2YW1K1g" base_Property="_z_c9IFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_158T4VGkEeOuyKm2YW1K1g" base_Property="_158T4FGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_26smQFGkEeOuyKm2YW1K1g" base_Property="_26r_MFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_4cphMVGkEeOuyKm2YW1K1g" base_Property="_4cphMFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_5MnlkFGkEeOuyKm2YW1K1g" base_Property="_5Mm-gFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_6XonMFGkEeOuyKm2YW1K1g" base_Property="_6XnZEFGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_7bLu4VGkEeOuyKm2YW1K1g" base_Property="_7bLu4FGkEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_QZFS4FGqEeOuyKm2YW1K1g" businessName="Перевозчик" standardId="TTD-CDE-00002" standardName="Перевозчик. Детали" concept="Перевозчик" representation="" analogue="UN/CEFACT: CCL: UN00003030" base_Classifier="_QZEr0FGqEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_RD0R8FGqEeOuyKm2YW1K1g" base_Property="_RDzq4FGqEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_sgqMIFGrEeOuyKm2YW1K1g" businessName="Код груза" example="0901" standardId="TTD-SDE-00006" standardName="Груз. Код" concept="Груз" representation="Код" usage="Указывается 4 первых цифры кода из справочника ТН ВЭД ТС (С.005)" note="Например, код «0901» обозначает груз «Кофе, жареный или нежареный, с кофеином или без кофеина; кофейная шелуха и оболочки зерен кофе; заменители кофе, содержащие кофе в любой пропорции»" base_Classifier="_sgplEFGrEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_twAUIFGrEeOuyKm2YW1K1g" base_Property="_tv_tEFGrEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_5S8y4FGrEeOuyKm2YW1K1g" businessName="Информация об оси" example="" standardId="TTD-CDE-00001" standardName="Колесная ось. Детали" concept="Колесная ось" representation="" base_Classifier="_5S8L0FGrEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_6Prg4FGrEeOuyKm2YW1K1g" base_Property="_6Pq50FGrEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_9D4PYFHCEeOuyKm2YW1K1g" businessName="Номер учетного талона или уведомления" example="RUS1234567820111312345" standardId="TTD-SDT-00003" standardName="Учетный талон или уведомление_ Идентификатор. Тип" concept="Учетный талон или уведомление_ Идентификатор" note="" base_Classifier="_9D3oUFHCEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_SyGZ4FHEEeOuyKm2YW1K1g" businessName="Вид разрешения на поездку" example="" standardId="TTD-SDT-00002" standardName="Вид разрешения на поездку_ Код. Тип" concept="Вид разрешения на поездку_ Код" representation="" usage="" note="" analogue="" base_Classifier="_SyFLwFHEEeOuyKm2YW1K1g"/>
+  <EECProfile:restriction xmi:id="_SyHA8VHEEeOuyKm2YW1K1g" base_Generalization="_SyFLwVHEEeOuyKm2YW1K1g"/>
+  <EECProfile:restriction xmi:id="_My7QQFHFEeOuyKm2YW1K1g" base_Generalization="_LwAasFHFEeOuyKm2YW1K1g"/>
+  <EECProfile:restriction xmi:id="_NjRvIFHFEeOuyKm2YW1K1g" base_Generalization="_NjRIEFHFEeOuyKm2YW1K1g"/>
+  <EECProfile:restriction xmi:id="_OWsJEFHFEeOuyKm2YW1K1g" base_Generalization="_OWq68FHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_mLKq4FHFEeOuyKm2YW1K1g" base_Comment="_mLBg8FHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_m3DggFHFEeOuyKm2YW1K1g" base_Comment="_m26WkFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_ngNyQFHFEeOuyKm2YW1K1g" base_Comment="_ngF2cFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_oNjZYFHFEeOuyKm2YW1K1g" base_Comment="_oNaPcFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_qPATwFHFEeOuyKm2YW1K1g" base_Comment="_qO3w4FHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_rdzCIFHFEeOuyKm2YW1K1g" base_Comment="_rdYLYFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_sPpV0FHFEeOuyKm2YW1K1g" base_Comment="_sPfk0FHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_tkVQ0FHFEeOuyKm2YW1K1g" base_Comment="_tkSNgFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_vZHoMFHFEeOuyKm2YW1K1g" base_Comment="_vY-eQFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_wIG1IFHFEeOuyKm2YW1K1g" base_Comment="_wH9rMFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_0OxIgFHFEeOuyKm2YW1K1g" base_Comment="_0OoloFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_05vYIFHFEeOuyKm2YW1K1g" base_Comment="_05sU0FHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_2XvAIFHFEeOuyKm2YW1K1g" base_Comment="_2XrVwFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_3Hwu4FHFEeOuyKm2YW1K1g" base_Comment="_3HlvwFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_3r7y8FHFEeOuyKm2YW1K1g" base_Comment="_3rzQEFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_4PyG4FHFEeOuyKm2YW1K1g" base_Comment="_4PpkAFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_40jn4FHFEeOuyKm2YW1K1g" base_Comment="_40ad8FHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_5aGk8FHFEeOuyKm2YW1K1g" base_Comment="_5Z9bAFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_6KEpUFHFEeOuyKm2YW1K1g" base_Comment="_6J8GcFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_7ao5UFHFEeOuyKm2YW1K1g" base_Comment="_7afvYFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_8EYZ4FHFEeOuyKm2YW1K1g" base_Comment="_8EUvgFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_83DM8FHFEeOuyKm2YW1K1g" base_Comment="_82_ikFHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_9_LSoFHFEeOuyKm2YW1K1g" base_Comment="_9_DW0FHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_-qPB0FHFEeOuyKm2YW1K1g" base_Comment="_-qF34FHFEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_CPTrEFHGEeOuyKm2YW1K1g" base_Comment="_CPLIMFHGEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_C88NIFHGEeOuyKm2YW1K1g" base_Comment="_C8zDMFHGEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_DjUQoFHGEeOuyKm2YW1K1g" base_Comment="_DjLGsFHGEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_GAA8kFHGEeOuyKm2YW1K1g" base_Comment="_F_3yoFHGEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_Hvn5AFHGEeOuyKm2YW1K1g" base_Comment="_HvevEFHGEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_IXTkEFHGEeOuyKm2YW1K1g" base_Comment="_IXQgwFHGEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_rs7GcFHJEeOuyKm2YW1K1g" base_Comment="_rs3cEFHJEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_wk5iAFHJEeOuyKm2YW1K1g" base_Comment="_wkwYEFHJEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_z-psEFHJEeOuyKm2YW1K1g" base_Comment="_z-giIFHJEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_1G5GgFHJEeOuyKm2YW1K1g" base_Comment="_1GwjoFHJEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_izH-wFHKEeOuyKm2YW1K1g" base_Comment="_izEUYFHKEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_tDuE0FHKEeOuyKm2YW1K1g" base_Comment="_tDrBgFHKEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_wIbL8FHKEeOuyKm2YW1K1g" base_Comment="_wISpEFHKEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_5gknEFHKEeOuyKm2YW1K1g" base_Comment="_5gbdIFHKEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_7k-u0FHKEeOuyKm2YW1K1g" base_Comment="_7k7EcFHKEeOuyKm2YW1K1g"/>
+  <Default:Documentation xmi:id="_UGhK8FHLEeOuyKm2YW1K1g" base_Comment="_UGdgkFHLEeOuyKm2YW1K1g"/>
+  <EECProfile:EECDataModel xmi:id="_VQ5bgIgSEeOPSK0F-UNoSA" standardName="Транспорт" base_Package="_VQ40cIgSEeOPSK0F-UNoSA"/>
+  <EECProfile:EECDataModel xmi:id="_XpIeMIgSEeOPSK0F-UNoSA" base_Package="_XpH3IIgSEeOPSK0F-UNoSA"/>
+  <EECProfile:bCollModel xmi:id="_aUBXIIgSEeOPSK0F-UNoSA" base_Package="_VQ40cIgSEeOPSK0F-UNoSA" version="0.1.0"/>
+  <EECProfile:bInformationV xmi:id="_a4yREIgSEeOPSK0F-UNoSA" base_Package="_XpH3IIgSEeOPSK0F-UNoSA"/>
+  <EECProfile:EECDataModel xmi:id="_C7fs8IyxEeO5QKVbQiY0wg" base_Package="_C7fF4IyxEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_HFirgIyxEeO5QKVbQiY0wg" businessName="Сведения о результатах транспортного контроля" standardId="R.TT.DSI.001" base_Classifier="_HFiEcIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_TMkHsIyxEeO5QKVbQiY0wg" base_Package="_TMjgoIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_YXOOsYyxEeO5QKVbQiY0wg" businessName="Запрос сведений о разрешениях перевозчика" standardId="R.TT.DSI.002" base_Classifier="_YXOOsIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_glcNUIyxEeO5QKVbQiY0wg" base_Package="_glbmQIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_jlLU4IyxEeO5QKVbQiY0wg" businessName="Запрос сведений о результатах транспортного контроля" standardId="R.TT.DSI.003" base_Classifier="_jlKt0IyxEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_pFDd8YyxEeO5QKVbQiY0wg" base_Package="_pFDd8IyxEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_rnWbkIyxEeO5QKVbQiY0wg" businessName="Сведения о разрешениях перевозчика" standardId="R.TT.DSI.004" base_Classifier="_rnV0gIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:Namespace xmi:id="_UC-84IyyEeO5QKVbQiY0wg" base_Package="_pFDd8IyxEeO5QKVbQiY0wg" version="0.1.0" uri="urn:EEC:TT:ED:CarrierPermissionDetails:v0.1.0" name="urn:EEC:TT:ED:CarrierPermissionDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_UC-84YyyEeO5QKVbQiY0wg" base_Package="_TMjgoIyxEeO5QKVbQiY0wg" version="0.1.0" uri="urn:EEC:TT:ED:CarrierPermissionRequestDetails:v0.1.0" name="urn:EEC:TT:ED:CarrierPermissionRequestDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_UDAyEIyyEeO5QKVbQiY0wg" base_Package="_C7fF4IyxEeO5QKVbQiY0wg" version="0.1.0" uri="urn:EEC:TT:ED:TransportControlResultDetails:v0.1.0" name="urn:EEC:TT:ED:TransportControlResultDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:Namespace xmi:id="_UDAyEYyyEeO5QKVbQiY0wg" base_Package="_glbmQIyxEeO5QKVbQiY0wg" version="0.1.0" uri="urn:EEC:TT:ED:TransportControlResultRequestDetails:v0.1.0" name="urn:EEC:TT:ED:TransportControlResultRequestDetails:v0.1.0" prefix="doc"/>
+  <EECProfile:EECDataModel xmi:id="_zEbJwIy0EeO5QKVbQiY0wg" base_Property="_zEaisIy0EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_zGdxIYy0EeO5QKVbQiY0wg" base_Property="_zGdxIIy0EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_lcALQYy_EeO5QKVbQiY0wg" businessName="Номер специального разрешения" standardId="TTD-SDE-00044" standardName="Специальное разрешение. Идентификатор" concept="Специальное разрешение" representation="Идентификатор" analogue="UN/CEFACT: CCL: UN00004520" base_Classifier="_lcALQIy_EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_vIBIIIzAEeO5QKVbQiY0wg" businessName="Тип специального разрешения" standardId="TTD-SDE-00043" standardName="Специальное разрешение. Код" concept="Специальное разрешение" representation="Код" usage="Указывается в соответствии с классификатором «Типы специальных разрешений» (С.ТТ.007)" note="" base_Classifier="_vH_6AIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_yRHnEIzAEeO5QKVbQiY0wg" businessName="Сведения о специальном разрешении" standardId="TTD-CDT-00011" standardName="Специальное разрешение на поездку_ Детали. Тип" concept="Специальное разрешение на поездку_ Детали" representation="" analogue="UN/CEFACT: CCL: UN00003355" base_Classifier="_yRHAAIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_0MrU0IzAEeO5QKVbQiY0wg" businessName="Специальное разрешение" standardId="TTD-CDE-00016" standardName="Специальное разрешение на поездку. Детали" concept="Специальное разрешение на поездку" representation="" base_Classifier="_0MqGsIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_1MXQMIzAEeO5QKVbQiY0wg" base_Property="_1MWpIIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_O8gjgI18EeO5QKVbQiY0wg" businessName="Уведомление о несоответствии" standardId="TTD-CDE-00013" standardName="Уведомление о несоответствии. Детали" concept="Уведомление о несоответствии" base_Classifier="_O8f8cI18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_PyDEYI18EeO5QKVbQiY0wg" base_Property="_PyCdUI18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_RDv80I18EeO5QKVbQiY0wg" businessName="Уведомление о несоответствии" standardId="TTD-CDT-00009" standardName="Уведомление о несоответствии_ Детали. Тип" concept="Уведомление о несоответствии_ Детали" base_Classifier="_RDvVwI18EeO5QKVbQiY0wg"/>
+  <Default:Documentation xmi:id="_U7EMoI18EeO5QKVbQiY0wg" base_Comment="_U6_7MI18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_cAWNQI18EeO5QKVbQiY0wg" businessName="Нарушение" standardId="TTD-CDE-00018" standardName="Нарушение. Детали" concept="Нарушение" representation="" base_Classifier="_cAVmMI18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_c3xkgI18EeO5QKVbQiY0wg" base_Property="_c3w9cI18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_eCpcMI18EeO5QKVbQiY0wg" businessName="Сведения о нарушении" standardId="TTD-CDT-00012" standardName="Нарушение_ Детали. Тип" concept="Нарушение_ Детали" base_Classifier="_eCo1II18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_pDALQI18EeO5QKVbQiY0wg" businessName="Решение о пропуске" example="" standardId="TTD-SDE-00042" standardName="Решение о пропуске. Код" concept="Решение о пропуске" representation="Код" usage="Указывается в соответствии с классификатором «Виды решений о пропуске» (С.ТТ.008)" note="" analogue="UN/CEFACT: CCL: UN00004521" base_Classifier="_pC_kMI18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_qrbhoY18EeO5QKVbQiY0wg" businessName="Решение о пропуске" standardId="TTD-SDT-00008" standardName="Решение о пропуске_ Код. Тип" concept="Решение о пропуске_ Код" usage="" base_Classifier="_qrbhoI18EeO5QKVbQiY0wg"/>
+  <EECProfile:restriction xmi:id="_r-tucI18EeO5QKVbQiY0wg" base_Generalization="_r-sgUI18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_tUOI0I18EeO5QKVbQiY0wg" base_Property="_tUNhwI18EeO5QKVbQiY0wg"/>
+  <Default:Documentation xmi:id="_05Av8I18EeO5QKVbQiY0wg" base_Comment="_049FkI18EeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_XZdk4I2AEeO5QKVbQiY0wg" base_Property="_XZc90I2AEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_aYHuYI2AEeO5QKVbQiY0wg" businessName="Тип специального разрешения" standardId="TTD-SDT-00009" standardName="Специальное разрешение_ Код. Тип" concept="Специальное разрешение_ Код" representation="" base_Classifier="_aYHHUI2AEeO5QKVbQiY0wg"/>
+  <EECProfile:restriction xmi:id="_b6GegI2AEeO5QKVbQiY0wg" base_Generalization="_b6F3cI2AEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_eVPrQI2AEeO5QKVbQiY0wg" base_Property="_eVPEMI2AEeO5QKVbQiY0wg"/>
+  <Default:Documentation xmi:id="_tYJX0I2CEeO5QKVbQiY0wg" base_Comment="_tYGUgI2CEeO5QKVbQiY0wg"/>
+  <Default:Documentation xmi:id="_6WtgAI2CEeO5QKVbQiY0wg" base_Comment="_6Wp1oI2CEeO5QKVbQiY0wg"/>
+  <Default:Documentation xmi:id="_84drEI2CEeO5QKVbQiY0wg" base_Comment="_84anwI2CEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_tk-dcI2DEeO5QKVbQiY0wg" base_Property="_tk92YI2DEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_z70qwI2DEeO5QKVbQiY0wg" base_Property="_z70DsI2DEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_0BjfUI2DEeO5QKVbQiY0wg" base_Property="_0BiRMI2DEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_aXYKsI2EEeO5QKVbQiY0wg" base_Property="_aXXjoI2EEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_cmbcMI2EEeO5QKVbQiY0wg" base_Property="_cma1II2EEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_dN6dgI2FEeO5QKVbQiY0wg" base_Classifier="_dN52cI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_dxUskI2FEeO5QKVbQiY0wg" base_Property="_dxUFgI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_gzhSQI2FEeO5QKVbQiY0wg" base_Classifier="_gzgrMI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_hS_cgY2FEeO5QKVbQiY0wg" base_Property="_hS_cgI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_pIfZII2FEeO5QKVbQiY0wg" base_Classifier="_pIeyEI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_puRmwI2FEeO5QKVbQiY0wg" base_Property="_puQ_sI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_toHmII2FEeO5QKVbQiY0wg" base_Classifier="_toG_EI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_uJhqEI2FEeO5QKVbQiY0wg" base_Property="_uJhDAI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_Fc8GMY2GEeO5QKVbQiY0wg" base_Property="_Fc8GMI2GEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_J9ijkI2GEeO5QKVbQiY0wg" base_Property="_J9gHUI2GEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_KbE0II2GEeO5QKVbQiY0wg" base_Property="_KbC-8I2GEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_L6W1kI2GEeO5QKVbQiY0wg" base_Property="_L6VAYI2GEeO5QKVbQiY0wg"/>
+  <Default:Documentation xmi:id="_W5Hh0I2JEeO5QKVbQiY0wg" base_Comment="_W4--8I2JEeO5QKVbQiY0wg"/>
+  <Default:Documentation xmi:id="_Z4b9MI2KEeO5QKVbQiY0wg" base_Comment="_Z4YS0I2KEeO5QKVbQiY0wg"/>
+  <EECProfile:EECDataModel xmi:id="_zX8ykI2MEeOQQexDOjgnqg" businessName="Наименование контрольного пункта" example="" standardId="TTD-SDE-00034" standardName="Контрольный пункт. Имя" concept="Контрольный пункт" representation="Имя" usage="Указывается в соответствии с классификатором «Контрольные пункты транспортного контроля» (С.ТТ.005)" note="" analogue="" base_Classifier="_zX7kcI2MEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_4e4QIY2MEeOQQexDOjgnqg" base_Property="_4e4QII2MEeOQQexDOjgnqg"/>
+  <Default:Documentation xmi:id="_9NxoMI2MEeOQQexDOjgnqg" base_Comment="_9Nt90I2MEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_D33hoI2NEeOQQexDOjgnqg" businessName="Местонахождение контрольного пункта" example="" standardId="TTD-SDE-00033" standardName="Местонахождение контрольного пункта. Текст" concept="Местонахождение контрольного пункта" representation="Текст" usage="Указывается в соответствии с классификатором «Контрольные пункты транспортного контроля» (С.ТТ.005)" note="" base_Classifier="_D326kI2NEeOQQexDOjgnqg"/>
+  <Default:Documentation xmi:id="_J9usoI2NEeOQQexDOjgnqg" base_Comment="_J9qbMI2NEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_NgNU4I2NEeOQQexDOjgnqg" base_Property="_NgMt0I2NEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_Y2ROMI2NEeOQQexDOjgnqg" base_Property="_Y2QnII2NEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_Y_vTQI2NEeOQQexDOjgnqg" base_Property="_Y_usMI2NEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_o0ovYI2NEeOQQexDOjgnqg" businessName="Требование законодательства" standardId="TTD-SDE-00038" standardName="Требование законодательства. Текст" concept="Требование законодательства" representation="Текст" usage="Указывается в соответствии с классификатором «Законодательство в области транспортного (автомобильного) контроля» (С.ТТ.010)" note="" base_Classifier="_o0oIUI2NEeOQQexDOjgnqg"/>
+  <Default:Documentation xmi:id="_s7tScI2NEeOQQexDOjgnqg" base_Comment="_s7pBAI2NEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_1zucAI2NEeOQQexDOjgnqg" base_Property="_1zt08I2NEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_4N8bsI2NEeOQQexDOjgnqg" base_Property="_4N2VEI2NEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_9w9YUI2NEeOQQexDOjgnqg" businessName="Уточнение нарушения" example="" standardId="TTD-SDE-00040" standardName="Уточнение нарушения. Текст" concept="Уточнение нарушения" representation="Текст" note="" base_Classifier="_9w8xQI2NEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="__Pt1UI2NEeOQQexDOjgnqg" base_Property="__PsnMI2NEeOQQexDOjgnqg"/>
+  <Default:Documentation xmi:id="_GXz5YI2OEeOQQexDOjgnqg" base_Comment="_GXwPAI2OEeOQQexDOjgnqg"/>
+  <EECProfile:EECDataModel xmi:id="_qDCt4I4qEeOt3sz48gBxVQ" base_Property="_qC-ccI4qEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_t_qUcI4qEeOt3sz48gBxVQ" base_Property="_t_pGUI4qEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_vxVtcY4qEeOt3sz48gBxVQ" base_Property="_vxVGYI4qEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_xU1ggI4qEeOt3sz48gBxVQ" base_Property="_xU05cI4qEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_x1G8AI4qEeOt3sz48gBxVQ" base_Property="_x1FG0I4qEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_2dNvkI4qEeOt3sz48gBxVQ" base_Property="_2dL6YI4qEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_3N0tII4qEeOt3sz48gBxVQ" base_Property="_3Ny38I4qEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_CWr38I4rEeOt3sz48gBxVQ" businessName="Орган выдачи разрешения на поездку" standardId="TTD-CDE-00014" standardName="Орган выдачи разрешения на поездку. Детали" concept="Орган выдачи разрешения на поездку" analogue="UN/CEFACT: CCL: UN00003361" base_Classifier="_CWrQ4I4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_EpMGEI4rEeOt3sz48gBxVQ" base_Property="_EpIbsI4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_HwenII4rEeOt3sz48gBxVQ" base_Property="_HweAEI4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_KQ4HUI4rEeOt3sz48gBxVQ" base_Property="_KQ25MI4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_hwE8sI4rEeOt3sz48gBxVQ" base_Property="_hwEVoI4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_nmxDQI4rEeOt3sz48gBxVQ" base_Property="_nmv1II4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_qFiy0I4rEeOt3sz48gBxVQ" base_Property="_qFg9oI4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_r1GE4I4rEeOt3sz48gBxVQ" base_Property="_r1EPsI4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_sPjzUI4rEeOt3sz48gBxVQ" base_Property="_sPilMI4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_uUQO8I4rEeOt3sz48gBxVQ" base_Property="_uUPn4I4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_wJ0CYI4rEeOt3sz48gBxVQ" base_Property="_wJy0QI4rEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_ELdLwI4sEeOt3sz48gBxVQ" base_Property="_ELcksI4sEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_zo_swI4wEeOt3sz48gBxVQ" base_Property="_zo-eoI4wEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_IqjbAI4xEeOt3sz48gBxVQ" base_Property="_IqiM4I4xEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_KEb_EI4xEeOt3sz48gBxVQ" base_Property="_KEaJ4I4xEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_KbsogI4xEeOt3sz48gBxVQ" base_Property="_KbraYI4xEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_UV0A4I40EeOt3sz48gBxVQ" businessName="Маршрут перевозки" example="Минск (Минский р-н ул. Монтажников, 55 –Островец (Островецкий р-н) БелАЭС по ад:М-9 км (30,7-34,6); М-6 Е28 км (10,6-57,8); М-7 Е28 км (57,8-131,2)" standardId="TTD-SDE-00047" standardName="Маршрут перевозки. Текст" concept="Маршрут перевозки" representation="Текст" usage="Указывается для всех типов специальных разрешений" analogue="UN/CEFACT: CCL: UN00000739" base_Classifier="_UVzZ0I40EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_W2TAoI40EeOt3sz48gBxVQ" base_Property="_W2RygI40EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_a2-n0I40EeOt3sz48gBxVQ" base_Comment="_a27kgI40EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_sSLd8I41EeOt3sz48gBxVQ" businessName="Габарнитные размеры" standardId="TTD-CDT-00010" standardName="Габарнитные размеры_ Детали. Тип" concept="Габарнитные размеры_ Детали" representation="" note="" analogue="UN/CEFACT: CCL: UN00000173" base_Classifier="_psTn4I41EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_6CQioI41EeOt3sz48gBxVQ" base_Comment="_6CM4QI41EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_ExGD4I42EeOt3sz48gBxVQ" businessName="Габаритные размеры транспортного средства" standardId="TTD-CDE-00017" standardName="Габаритные размеры транспортного средства. Детали" concept="Габаритные размеры транспортного средства" representation="" usage="Указывается для типа специального разрешения «Специальное разрешение на перевозку крупногабаритных грузов" analogue="UN/CEFACT: CCL: UN00005658" base_Classifier="_ExFc0I42EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_Mz8gAY42EeOt3sz48gBxVQ" base_Property="_Mz8gAI42EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_TR4MwI42EeOt3sz48gBxVQ" base_Comment="_TRvC0I42EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_b7cqoI42EeOt3sz48gBxVQ" base_Property="_b7cDkI42EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_cG33gI42EeOt3sz48gBxVQ" base_Property="_cG3QcI42EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_wIGxMI42EeOt3sz48gBxVQ" businessName="Длина" example="4.976" standardId="TTD-SDE-00039" standardName="Длина. Измерение" concept="Длина" representation="Длина" usage="" note="Единицы измерения определяются контекстом использования" base_Classifier="_wIGKII42EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_9R4D0I42EeOt3sz48gBxVQ" base_Comment="_9R0ZcI42EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_CI7SUI43EeOt3sz48gBxVQ" businessName="Ширина" example="1.963" standardId="TTD-SDE-00048" standardName="Ширина. Измерение" concept="Ширина" representation="Измерение" usage="" note="Единицы измерения определяются контекстом использования" analogue="UN/CEFACT: CCL: UN00000513" base_Classifier="_CI6rQI43EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_KHwxII43EeOt3sz48gBxVQ" base_Comment="_KHtt0I43EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_RYOHAI43EeOt3sz48gBxVQ" businessName="Высота" example="1.435" standardId="TTD-SDE-00036" standardName="Высота. Измерение" concept="Высота" representation="Измерение" usage="" note="Единицы измерения определяются контекстом использования" base_Classifier="_RYNf8I43EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_Y3O2QI43EeOt3sz48gBxVQ" base_Comment="_Y3Ly8I43EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_b08kkI43EeOt3sz48gBxVQ" analogue="UN/CEFACT: CCL: UN00000514" base_Property="_b079gI43EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_b8NDII43EeOt3sz48gBxVQ" analogue="UN/CEFACT: CCL: UN00000513" base_Property="_b8McEI43EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_b9juAY43EeOt3sz48gBxVQ" analogue="UN/CEFACT: CCL: UN00000515" base_Property="_b9juAI43EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_xWLRYI43EeOt3sz48gBxVQ" base_Property="_xWKDQI43EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_ypRQ8I43EeOt3sz48gBxVQ" base_Property="_ypPbwI43EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_EtLiUI44EeOt3sz48gBxVQ" businessName="Количество поездок" example="1" standardId="TTD-SDE-00046" standardName="Поездка. Количество" concept="Поездка" representation="Количество" usage="Указывается для типа специального разрешения «Специальное разрешение на перевозку опасных грузов»" base_Classifier="_EtK7QI44EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_HxfA0I44EeOt3sz48gBxVQ" base_Property="_HxdysI44EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_KyprwI44EeOt3sz48gBxVQ" base_Comment="_KymocI44EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_XaFtYY44EeOt3sz48gBxVQ" base_Property="_XaFtYI44EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_a3_XoI44EeOt3sz48gBxVQ" base_Property="_a39icI44EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_bxl5II44EeOt3sz48gBxVQ" base_Property="_bxkrAI44EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_dHuloI44EeOt3sz48gBxVQ" base_Property="_dHswcI44EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_Zn6aYI45EeOt3sz48gBxVQ" businessName="Начальная дата" example="2014-03-18" standardId="TTD-SDE-00045" standardName="Начальная дата. Дата" concept="Начальная дата" representation="Дата" analogue="UN/CEFACT: CCL: UN00000120" base_Classifier="_Zn2I8I45EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_Zn6aYY45EeOt3sz48gBxVQ" base_Comment="_Zn2I8Y45EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_Zn7ogI45EeOt3sz48gBxVQ" base_Property="_Zn2I8o45EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_Zn-EwI45EeOt3sz48gBxVQ" businessName="Конечная дата" example="2014-03-19" standardId="TTD-SDE-00035" standardName="Конечная дата. Дата" concept="Конечная дата" representation="Дата" analogue="UN/CEFACT: CCL: UN00000121" base_Classifier="_Zn3-II45EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_Zn-EwY45EeOt3sz48gBxVQ" base_Comment="_Zn3-IY45EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_Zn-r0I45EeOt3sz48gBxVQ" base_Property="_Zn3-Io45EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_gxazsI45EeOt3sz48gBxVQ" businessName="Интервал дат" standardId="TTD-CDT-00008" standardName="Интервал дат_ Детали. Тип" concept="Интервал дат_ Детали" analogue="UN/CEFACT: CCL: UN00000116" base_Classifier="_gxaMoI45EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_lz52II45EeOt3sz48gBxVQ" base_Property="_lz5PEI45EeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_l8EToI45EeOt3sz48gBxVQ" base_Property="_l8DskI45EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_lQqwwI46EeOt3sz48gBxVQ" base_Comment="_lQntcI46EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_wxxDII4_EeOt3sz48gBxVQ" base_Comment="_wxtYwI4_EeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_0ieNQI5CEeOt3sz48gBxVQ" base_Comment="_0ibJ8I5CEeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_-uVkUI5CEeOt3sz48gBxVQ" base_Comment="_-uLMQI5CEeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_XflQYI5DEeOt3sz48gBxVQ" base_Comment="_XfhmAI5DEeOt3sz48gBxVQ"/>
+  <Default:Documentation xmi:id="_YnxngI5DEeOt3sz48gBxVQ" base_Comment="_Ynt9II5DEeOt3sz48gBxVQ"/>
+  <EECProfile:EECDataModel xmi:id="_I90kMI5QEeOCdpZuhK3cCA" businessName="Информация о транспортном контроле" standardId="TTD-CDE-00019" standardName="Контроль транспортного средства. Детали" concept="Контроль транспортного средства" base_Classifier="_I5yYwI5QEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zkO0I7qEeOCdpZuhK3cCA" businessName="Сведения о контроле транспортного средства" standardId="TTD-CDT-00013" standardName="Контроль транспортного средства_ Детали. Тип" concept="Контроль транспортного средства_ Детали" base_Classifier="_9zZ2wI7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zmEAI7qEeOCdpZuhK3cCA" businessName="" standardName="" concept="" representation="" base_Property="_9zZ2wo7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zmrEI7qEeOCdpZuhK3cCA" businessName="" standardName="" concept="" base_Property="_9zZ2w47qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9znSII7qEeOCdpZuhK3cCA" base_Property="_9zZ2xI7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zn5MI7qEeOCdpZuhK3cCA" base_Property="_9zZ2xY7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zpuYI7qEeOCdpZuhK3cCA" base_Property="_9zZ2yo7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zqVcI7qEeOCdpZuhK3cCA" base_Property="_9zZ2y47qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zq8gI7qEeOCdpZuhK3cCA" base_Property="_9zZ2zI7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zrjkI7qEeOCdpZuhK3cCA" base_Property="_9zZ2zY7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zrjkY7qEeOCdpZuhK3cCA" base_Property="_9zZ2zo7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zsKoI7qEeOCdpZuhK3cCA" base_Property="_9zZ2z47qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zsxsI7qEeOCdpZuhK3cCA" base_Property="_9zZ20I7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9ztYwI7qEeOCdpZuhK3cCA" base_Property="_9zZ20Y7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9ztYwY7qEeOCdpZuhK3cCA" base_Property="_9zZ20o7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zt_0I7qEeOCdpZuhK3cCA" base_Property="_9zZ2047qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zum4I7qEeOCdpZuhK3cCA" base_Property="_9zZ21I7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zvN8I7qEeOCdpZuhK3cCA" base_Property="_9zZ2147qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zvN8Y7qEeOCdpZuhK3cCA" base_Property="_9zZ22o7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zv1AI7qEeOCdpZuhK3cCA" base_Property="_9zZ23Y7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zwcEI7qEeOCdpZuhK3cCA" base_Property="_9zZ24I7qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_9zwcEY7qEeOCdpZuhK3cCA" base_Property="_9zZ2447qEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_OGHQQI7rEeOCdpZuhK3cCA" businessName="Страна отправки или погрузки" example="KAZ" standardId="TTD-SDE-00051" standardName="Страна отправки или погрузки. Код" concept="Страна отправки или погрузки" representation="Код" usage="Указывается в соответствии с классификатором «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)" base_Classifier="_OGGpMI7rEeOCdpZuhK3cCA"/>
+  <Default:Documentation xmi:id="_UFQvQI7rEeOCdpZuhK3cCA" base_Comment="_UFIzcI7rEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_WSQLQI7rEeOCdpZuhK3cCA" businessName="Страна назначения" example="RUS" standardId="TTD-SDE-00049" standardName="Страна назначения. Код" concept="Страна назначения" representation="Код" usage="Указывается в соответствии с классификатором «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)" base_Classifier="_WSPkMI7rEeOCdpZuhK3cCA"/>
+  <Default:Documentation xmi:id="_b1d8MI7rEeOCdpZuhK3cCA" base_Comment="_b1a44I7rEeOCdpZuhK3cCA"/>
+  <EECProfile:EECDataModel xmi:id="_tyr2EI7zEeOk8_uL5KcaCg" base_Property="_tyqn8I7zEeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_xyi94I7zEeOk8_uL5KcaCg" base_Property="_xyf6kI7zEeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_kqr6UI70EeOk8_uL5KcaCg" businessName="Регион назначения" standardId="TTD-SDE-00050" standardName="Регион назначения. Имя" concept="Регион назначения" representation="Имя" base_Classifier="_kqqsMI70EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_tSvVQI70EeOk8_uL5KcaCg" base_Property="_tSsR8I70EeOk8_uL5KcaCg"/>
+  <Default:Documentation xmi:id="_ylpZUI70EeOk8_uL5KcaCg" base_Comment="_yllu8I70EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_1JPXcI70EeOk8_uL5KcaCg" businessName="Регион отправки" standardId="TTD-SDE-00052" standardName="Регион отправки. Имя" concept="Регион отправки" representation="Имя" base_Classifier="_1JOwYI70EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_4HqQYI70EeOk8_uL5KcaCg" base_Property="_4Hn0II70EeOk8_uL5KcaCg"/>
+  <Default:Documentation xmi:id="_9_g0kI70EeOk8_uL5KcaCg" base_Comment="_9_dKMI70EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_EVA-EY71EeOk8_uL5KcaCg" base_Property="_EVA-EI71EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_EiwfIY71EeOk8_uL5KcaCg" base_Property="_EiwfII71EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_jUREgI71EeOk8_uL5KcaCg" base_Property="_jUQdcI71EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_m_upoI71EeOk8_uL5KcaCg" base_Property="_m_uCkI71EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_OgJf4I72EeOk8_uL5KcaCg" businessName="Сведения о штрафе" standardId="TTD-CDT-00014" standardName="Штраф_ Детали. Тип" concept="Штраф_ Детали" note="" analogue="" base_Classifier="_OgI40I72EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_VjPvMI72EeOk8_uL5KcaCg" base_Property="_VjPIII72EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_VsWA0I72EeOk8_uL5KcaCg" base_Property="_VsVZwI72EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_Vt1OkY72EeOk8_uL5KcaCg" base_Property="_Vt1OkI72EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_grz_EI72EeOk8_uL5KcaCg" businessName="Информация о штрафе" standardId="TTD-CDE-00020" standardName="Штраф. Детали" concept="Штраф" base_Classifier="_grzYAI72EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_heVoMI72EeOk8_uL5KcaCg" base_Property="_heVBII72EeOk8_uL5KcaCg"/>
+  <Default:Documentation xmi:id="_ojRqkI72EeOk8_uL5KcaCg" base_Comment="_ojOAMI72EeOk8_uL5KcaCg"/>
+  <Default:Documentation xmi:id="_qUfJgI72EeOk8_uL5KcaCg" base_Comment="_qUcGMI72EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_vKLtII72EeOk8_uL5KcaCg" base_Property="_vKLGEI72EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_HPybMY73EeOk8_uL5KcaCg" businessName="Информация об оплате штрафа" standardId="TTD-CDE-00021" standardName="Оплата штрафа. Детали" concept="Оплата штрафа" representation="" base_Classifier="_HPybMI73EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_ITZNQI73EeOk8_uL5KcaCg" base_Property="_ITYmMI73EeOk8_uL5KcaCg"/>
+  <Default:Documentation xmi:id="_NrUUMI73EeOk8_uL5KcaCg" base_Comment="_NrRQ4I73EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_5M-LQI73EeOk8_uL5KcaCg" base_Property="_5M9kMI73EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_pvde8I74EeOk8_uL5KcaCg" base_Property="_pvc34I74EeOk8_uL5KcaCg"/>
+  <Default:Documentation xmi:id="_zp2rgI74EeOk8_uL5KcaCg" base_Comment="_zpwk4I74EeOk8_uL5KcaCg"/>
+  <Default:Documentation xmi:id="_08JZ0I74EeOk8_uL5KcaCg" base_Comment="_08A28I74EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_4WqY4I74EeOk8_uL5KcaCg" base_Property="_4Wpx0I74EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_A19vIY-3EeOk8_uL5KcaCg" base_Property="_A19vII-3EeOk8_uL5KcaCg"/>
+  <EECProfile:EECDataModel xmi:id="_3MwT4JPBEeOau5lQkkgj3A" businessName="Сведения о контрольном пункте" standardId="TTD-CDT-00016" standardName="Контрольный пункт_ Детали. Тип" concept="Контрольный пункт_ Детали" representation="" analogue="UN/CEFACT: CCL: UN00003553" base_Classifier="_3Mvs0JPBEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_5KMQ8ZPBEeOau5lQkkgj3A" base_Property="_5KMQ8JPBEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_5TmEkZPBEeOau5lQkkgj3A" base_Property="_5TmEkJPBEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_5VYNQJPBEeOau5lQkkgj3A" base_Property="_5VXmMJPBEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_OjfJwJPCEeOau5lQkkgj3A" businessName="Код контрольного пункта" example="" standardId="TTD-SDE-00053" standardName="Контрольный пункт. Идентификатор" concept="Контрольный пункт" representation="Идентификатор" usage="Указывается в соответствии с классификатором «Контрольные пункты транспортного контроля» (С.ТТ.005)" base_Classifier="_OjeisJPCEeOau5lQkkgj3A"/>
+  <Default:Documentation xmi:id="_TNn9oJPCEeOau5lQkkgj3A" base_Comment="_TNkTQJPCEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_bL2YcJPCEeOau5lQkkgj3A" businessName="Контрольный пункт" example="" standardId="TTD-SDT-00010" standardName="Контрольный пункт_ Идентификатор. Тип" concept="Контрольный пункт_ Идентификатор" base_Classifier="_bL1xYJPCEeOau5lQkkgj3A"/>
+  <Default:Documentation xmi:id="_msVZEJPCEeOau5lQkkgj3A" base_Comment="_msSVwJPCEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_tDwOIZPCEeOau5lQkkgj3A" base_Property="_tDwOIJPCEeOau5lQkkgj3A"/>
+  <Default:Documentation xmi:id="_2tr80JPCEeOau5lQkkgj3A" base_Comment="_2toScJPCEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_RzLxMJPIEeOau5lQkkgj3A" businessName="Водитель" example="Аннабель Роджерс" standardId="TTD-SDE-00054" standardName="Водитель. Имя" concept="Водитель" representation="Имя" note="" base_Classifier="_RzLKIJPIEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_Tk6NgJPIEeOau5lQkkgj3A" base_Property="_Tk5mcJPIEeOau5lQkkgj3A"/>
+  <Default:Documentation xmi:id="_YNrIYJPIEeOau5lQkkgj3A" base_Comment="_YNoFEJPIEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_e4haUJPJEeOau5lQkkgj3A" businessName="Место проведения контроля для исполнения уведомления" example="" standardId="TTD-CDE-00022" standardName="Место проведения контроля для исполнения уведомления. Детали" concept="Место проведения контроля для исполнения уведомления" base_Classifier="_e4gzQJPJEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_gS01IJPJEeOau5lQkkgj3A" base_Property="_gSy_8JPJEeOau5lQkkgj3A"/>
+  <Default:Documentation xmi:id="_mejXkJPJEeOau5lQkkgj3A" base_Comment="_megUQJPJEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_ds0p8JPOEeOau5lQkkgj3A" businessName="Код страны" example="BLR" standardId="TTD-SDT-00011" standardName="Страна_ Код. Альфа-3. Тип" concept="Код" representation="" note="Например, код «BLR» обозначает страну «Республика Беларусь»" analogue="UN/CEFACT: CCL: UN02000003" base_Classifier="_dszb0JPOEeOau5lQkkgj3A"/>
+  <Default:Documentation xmi:id="_ds0p8pPOEeOau5lQkkgj3A" base_Comment="_dszb0ZPOEeOau5lQkkgj3A"/>
+  <EECProfile:restriction xmi:id="_ds0p85POEeOau5lQkkgj3A" base_Generalization="_dszb0pPOEeOau5lQkkgj3A"/>
+  <EECProfile:restriction xmi:id="_6ixhkJPOEeOau5lQkkgj3A" base_Generalization="_5ebIoJPOEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_BrfQsJPPEeOau5lQkkgj3A" businessName="Страна регистрации транспортного средства" example="BLR" standardId="TTD-SDE-00055" standardName="Страна регистрации транспортного средства. Код" concept="Страна регистрации транспортного средства" representation="Код" note="" analogue="" base_Classifier="_BrepoJPPEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_EeUksJPPEeOau5lQkkgj3A" businessName="" example="" standardName="" concept="" representation="" note="" base_Property="_EeT9oJPPEeOau5lQkkgj3A"/>
+  <Default:Documentation xmi:id="_mUyzEJPTEeOau5lQkkgj3A" base_Comment="_mUvIsJPTEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_CY42UJPcEeOau5lQkkgj3A" businessName="Сведения о перевозчике" standardId="TTD-CDT-00017" standardName="Перевозчик_ Детали. Тип" concept="Перевозчик_ Детали" base_Classifier="_CY4PQJPcEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_D9MhsJPcEeOau5lQkkgj3A" base_Property="_D9L6oJPcEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_HAc3UJPcEeOau5lQkkgj3A" base_Property="_HAcQQJPcEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_HCNK0ZPcEeOau5lQkkgj3A" base_Property="_HCNK0JPcEeOau5lQkkgj3A"/>
+  <Default:Documentation xmi:id="_v64tIJPfEeOau5lQkkgj3A" base_Comment="_v6wxUJPfEeOau5lQkkgj3A"/>
+  <EECProfile:EECDataModel xmi:id="_2vcfAJSAEeOcbd1HrAmu5w" businessName="Дата выдачи документа" example="2014-02-18" standardId="TTD-SDE-00056" standardName="Дата выдачи документа. Дата" concept="Дата выдачи документа" representation="Дата" analogue="UN/CEFACT: CCL: UN00000315" base_Classifier="_2vap0JSAEeOcbd1HrAmu5w"/>
+  <Default:Documentation xmi:id="_92uDsJSAEeOcbd1HrAmu5w" base_Comment="_92pLMJSAEeOcbd1HrAmu5w"/>
+  <EECProfile:EECDataModel xmi:id="_VpUO0JSEEeOcbd1HrAmu5w" base_Property="_VpTnwJSEEeOcbd1HrAmu5w"/>
+  <EECProfile:EECDataModel xmi:id="_p5Zc0ZSEEeOcbd1HrAmu5w" businessName="Период действия документа" standardId="TTD-CDE-00023" standardName="Период действия документа. Детали" concept="Период действия документа" analogue="UN/CEFACT: CCL: UN00000325" base_Classifier="_p5Zc0JSEEeOcbd1HrAmu5w"/>
+  <EECProfile:EECDataModel xmi:id="_uu_50JSEEeOcbd1HrAmu5w" base_Property="_uu_SwJSEEeOcbd1HrAmu5w"/>
+  <Default:Documentation xmi:id="_3nK0YJSEEeOcbd1HrAmu5w" base_Comment="_3nHxEJSEEeOcbd1HrAmu5w"/>
+  <EECProfile:EECDataModel xmi:id="_nkiBwZSFEeOcbd1HrAmu5w" analogue="UN/CEFACT: CCL: UN00003359" base_Property="_nkiBwJSFEeOcbd1HrAmu5w"/>
+  <EECProfile:EECDataModel xmi:id="_nt71YJSFEeOcbd1HrAmu5w" analogue="UN/CEFACT: CCL: UN00003362" base_Property="_nt7OUJSFEeOcbd1HrAmu5w"/>
+  <EECProfile:EECDataModel xmi:id="_30zyUJSFEeOcbd1HrAmu5w" analogue="UN/CEFACT: CCL: UN00003359" base_Property="_30wvAJSFEeOcbd1HrAmu5w"/>
+  <EECProfile:EECDataModel xmi:id="_300ZYJSFEeOcbd1HrAmu5w" analogue="UN/CEFACT: CCL: UN00003362" base_Property="_30x9IJSFEeOcbd1HrAmu5w"/>
+  <EECProfile:EECDataModel xmi:id="_majKkZU4EeOcbd1HrAmu5w" base_Property="_majKkJU4EeOcbd1HrAmu5w"/>
+  <EECProfile:restriction xmi:id="_mQffgJryEeOH99ingNivxA" base_Generalization="_mP63wJryEeOH99ingNivxA"/>
+  <EECProfile:EECDataModel xmi:id="_eaZ2MJ0lEeO_Ctfl2sHrgw" businessName="Код пункта пропуска" example="" standardId="TTD-SDE-00057" standardName="Пункт пропуска. Идентификатор" concept="Пункт пропуска" representation="Идентификатор" usage="Указывается в соответствии с классификатором «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006)" base_Classifier="_eaTIgJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_eaadQJ0lEeO_Ctfl2sHrgw" base_Property="_eaTIgp0lEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_eaZ2MZ0lEeO_Ctfl2sHrgw" base_Comment="_eaTIgZ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_gTbNUJ0lEeO_Ctfl2sHrgw" businessName="Местонахождение пункта пропуска" example="" standardId="TTD-SDE-00058" standardName="Местонахождение пункта пропуска. Текст" concept="Местонахождение пункта пропуска" representation="Текст" usage="Указывается в соответствии с классификатором «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006)" note="" base_Classifier="_gTZYIJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_gTb0YZ0lEeO_Ctfl2sHrgw" base_Property="_gTZYIp0lEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_gTb0YJ0lEeO_Ctfl2sHrgw" base_Comment="_gTZYIZ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_iDk8UJ0lEeO_Ctfl2sHrgw" businessName="Наименование пункта пропуска" example="" standardId="TTD-SDE-00059" standardName="Пункт пропуска. Имя" concept="Пункт пропуска" representation="Имя" usage="Указывается в соответствии с классификатором «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006)" note="" analogue="" base_Classifier="_iDigEJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_iDljYZ0lEeO_Ctfl2sHrgw" base_Property="_iDigEp0lEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_iDljYJ0lEeO_Ctfl2sHrgw" base_Comment="_iDigEZ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_KMJiQJ0nEeO_Ctfl2sHrgw" businessName="Пункт пропуска" example="" standardId="TTD-SDT-00012" standardName="Пункт пропуска_ Идентификатор. Тип" concept="Пункт пропуска_ Идентификатор" base_Classifier="_KMHtEJ0nEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_KMKJUJ0nEeO_Ctfl2sHrgw" base_Comment="_KMHtEZ0nEeO_Ctfl2sHrgw"/>
+  <EECProfile:restriction xmi:id="_KMKJUZ0nEeO_Ctfl2sHrgw" base_Generalization="_KMHtEp0nEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_hSxfkJ0nEeO_Ctfl2sHrgw" businessName="Сведения о пункте пропуска" standardId="TTD-CDT-00018" standardName="Пункт пропуска_ Детали. Тип" concept="Пункт пропуска_ Детали" representation="" analogue="UN/CEFACT: CCL: UN00003553" base_Classifier="_hSvDUJ0nEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_hSyGoZ0nEeO_Ctfl2sHrgw" base_Property="_hSvDUp0nEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_hSytsJ0nEeO_Ctfl2sHrgw" base_Property="_hSvDVZ0nEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_hSzUwJ0nEeO_Ctfl2sHrgw" base_Property="_hSvDVp0nEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_hSyGoJ0nEeO_Ctfl2sHrgw" base_Comment="_hSvDUZ0nEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_m3TCoJ0oEeO_Ctfl2sHrgw" businessName="Пункт пропуска" standardId="TTD-CDE-00024" standardName="Пункт пропуска. Детали" concept="Пункт пропуска" representation="" usage="" analogue="" base_Classifier="_m3RNcJ0oEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_m3UQwJ0oEeO_Ctfl2sHrgw" base_Property="_m3RNcp0oEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_m3TpsJ0oEeO_Ctfl2sHrgw" base_Comment="_m3RNcZ0oEeO_Ctfl2sHrgw"/>
+  <EECProfile:EECDataModel xmi:id="_LMItsJ0pEeO_Ctfl2sHrgw" base_Property="_LMIGoJ0pEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_xtJf8J0qEeO_Ctfl2sHrgw" base_Comment="_xtEAYJ0qEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_zQb3oJ0qEeO_Ctfl2sHrgw" base_Comment="_zQY0UJ0qEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_0eN5YJ0qEeO_Ctfl2sHrgw" base_Comment="_0eEvcJ0qEeO_Ctfl2sHrgw"/>
+  <Default:Documentation xmi:id="_iIBd0LC1EeOzLtY2xKTFzg" base_Comment="_h2HOcLC1EeOzLtY2xKTFzg"/>
+  <Default:Documentation xmi:id="_lqTRwLC1EeOzLtY2xKTFzg" base_Comment="_lqLV8LC1EeOzLtY2xKTFzg"/>
+  <EECProfile:SimpleType xmi:id="_mbDHwFEGEeOTEaxXgV0mpgst" base_DataType="_mbDHwFEGEeOTEaxXgV0mpg" valueDomain="Значение кода из классификатора «Виды поездки» (С.ТТ.002)" fractionDigits=""/>
+  <EECProfile:SimpleType xmi:id="_F51NYFEIEeOTEaxXgV0mpgst" base_DataType="_F51NYFEIEeOTEaxXgV0mpg" valueDomain="Нормализованная строка символов, не содержащая символов разрыва строки (#xA) и табуляции (#x9)" minLength="" maxLength="" maxInclusive=""/>
+  <EECProfile:SimpleType xmi:id="_TDXIEFELEeOTEaxXgV0mpgst" base_DataType="_TDXIEFELEeOTEaxXgV0mpg" valueDomain="Значение кода из классификатора «Типы транспортных средств» (С.ТТ.001)" pattern=""/>
+  <EECProfile:SimpleType xmi:id="_pUGlQFEWEeOTEaxXgV0mpgst" base_DataType="_pUGlQFEWEeOTEaxXgV0mpg" valueDomain="4 первых цифры кода в соответствии со справочником ТН ВЭД ТС (С.005)" pattern="[0-9]{4}"/>
+  <EECProfile:SimpleType xmi:id="_9D3oUFHCEeOuyKm2YW1K1gst" base_DataType="_9D3oUFHCEeOuyKm2YW1K1g" valueDomain="Структура: символы 1–3 – трехбуквенный код страны в соответствии с классификатором «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001); символы 4–11 – код таможенного поста в соответствии с классификатором ЕЭК «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006); символы 12–17 – день, месяц, две последние цифры текущего года; символы 18–22 – порядковый номер бланка" pattern="[A-Z]{3}[0-9]{8}(0[1-9]|[12][0-9]|30|31)(0[1-9]|1[012])[0-9]{2}[0-9]{5}" fractionDigits=""/>
+  <EECProfile:SimpleType xmi:id="_SyFLwFHEEeOuyKm2YW1K1gst" base_DataType="_SyFLwFHEEeOuyKm2YW1K1g" valueDomain="Значение кода из классификатора «Виды разрешений на поездку» (С.ТТ.003)" fractionDigits=""/>
+  <EECProfile:SimpleType xmi:id="_qrbhoI18EeO5QKVbQiY0wgst" base_DataType="_qrbhoI18EeO5QKVbQiY0wg" valueDomain="Значение кода из классификатора «Виды решений о пропуске» (С.ТТ.008)"/>
+  <EECProfile:SimpleType xmi:id="_aYHHUI2AEeO5QKVbQiY0wgst" base_DataType="_aYHHUI2AEeO5QKVbQiY0wg" valueDomain="Значение кода из классификатора «Типы специальных разрешений» (С.ТТ.007)"/>
+  <EECProfile:SimpleType xmi:id="_bL1xYJPCEeOau5lQkkgj3Ast" base_DataType="_bL1xYJPCEeOau5lQkkgj3A" valueDomain="Значение кода из классификатора «Контрольные пункты транспортного контроля» (С.ТТ.005)"/>
+  <EECProfile:SimpleType xmi:id="_dszb0JPOEeOau5lQkkgj3Ast" base_DataType="_dszb0JPOEeOau5lQkkgj3A" valueDomain="Значение кода из классификатора «Коды для представления наименований стран и подчиненных территорий. Часть 1: Коды стран» (С.001)" length="" pattern="[A-Z]{3}" maxInclusive="" maxExclusive=""/>
+  <EECProfile:SimpleType xmi:id="_KMHtEJ0nEeO_Ctfl2sHrgwst" base_DataType="_KMHtEJ0nEeO_Ctfl2sHrgw" valueDomain="Значение кода из классификатора «Пункты пропуска через государственную границу государств-членов ТС и ЕЭП» (С.ТТ.006)"/>
+  <EECProfile:ComplexType xmi:id="_cQdtoFEHEeOTEaxXgV0mpgst" base_DataType="_cQdtoFEHEeOTEaxXgV0mpg"/>
+  <EECProfile:ComplexType xmi:id="_83gokFEYEeOTEaxXgV0mpgst" base_DataType="_83gokFEYEeOTEaxXgV0mpg"/>
+  <EECProfile:ComplexType xmi:id="_tS4mMFGeEeOuyKm2YW1K1gst" base_DataType="_tS4mMFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexType xmi:id="_uGftEFGhEeOuyKm2YW1K1gst" base_DataType="_uGftEFGhEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexType xmi:id="_yRHAAIzAEeO5QKVbQiY0wgst" base_DataType="_yRHAAIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_RDvVwI18EeO5QKVbQiY0wgst" base_DataType="_RDvVwI18EeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_eCo1II18EeO5QKVbQiY0wgst" base_DataType="_eCo1II18EeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_psTn4I41EeOt3sz48gBxVQst" base_DataType="_psTn4I41EeOt3sz48gBxVQ"/>
+  <EECProfile:ComplexType xmi:id="_gxaMoI45EeOt3sz48gBxVQst" base_DataType="_gxaMoI45EeOt3sz48gBxVQ"/>
+  <EECProfile:ComplexType xmi:id="_9zZ2wI7qEeOCdpZuhK3cCAst" base_DataType="_9zZ2wI7qEeOCdpZuhK3cCA"/>
+  <EECProfile:ComplexType xmi:id="_OgI40I72EeOk8_uL5KcaCgst" base_DataType="_OgI40I72EeOk8_uL5KcaCg"/>
+  <EECProfile:ComplexType xmi:id="_3Mvs0JPBEeOau5lQkkgj3Ast" base_DataType="_3Mvs0JPBEeOau5lQkkgj3A"/>
+  <EECProfile:ComplexType xmi:id="_CY4PQJPcEeOau5lQkkgj3Ast" base_DataType="_CY4PQJPcEeOau5lQkkgj3A"/>
+  <EECProfile:ComplexType xmi:id="_hSvDUJ0nEeO_Ctfl2sHrgwst" base_DataType="_hSvDUJ0nEeO_Ctfl2sHrgw"/>
+  <EECProfile:SimpleElement xmi:id="_m-eFQFEDEeOTEaxXgV0mpgst" base_Class="_m-eFQFEDEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_ohZJMFEGEeOTEaxXgV0mpgst" base_Class="_ohZJMFEGEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_I-ClQFEIEeOTEaxXgV0mpgst" base_Class="_I-ClQFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_mg60UFEIEeOTEaxXgV0mpgst" base_Class="_mg60UFEIEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_kT2REFEOEeOTEaxXgV0mpgst" base_Class="_kT2REFEOEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_wbAzAFEVEeOTEaxXgV0mpgst" base_Class="_wbAzAFEVEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_4w_xEFEWEeOTEaxXgV0mpgst" base_Class="_4w_xEFEWEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_It5nwFEZEeOTEaxXgV0mpgst" base_Class="_It5nwFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_V5nbIFEZEeOTEaxXgV0mpgst" base_Class="_V5nbIFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_nEoVoFEZEeOTEaxXgV0mpgst" base_Class="_nEoVoFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_-fzmoFEZEeOTEaxXgV0mpgst" base_Class="_-fzmoFEZEeOTEaxXgV0mpg"/>
+  <EECProfile:SimpleElement xmi:id="_SGJ2gFGbEeOuyKm2YW1K1gst" base_Class="_SGJ2gFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_dVigEFGbEeOuyKm2YW1K1gst" base_Class="_dVigEFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_OjOF0FGcEeOuyKm2YW1K1gst" base_Class="_OjOF0FGcEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_lJgWMFGcEeOuyKm2YW1K1gst" base_Class="_lJgWMFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_sUCqQFGcEeOuyKm2YW1K1gst" base_Class="_sUCqQFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_7YKUQFGdEeOuyKm2YW1K1gst" base_Class="_7YKUQFGdEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_BfgF8FGeEeOuyKm2YW1K1gst" base_Class="_BfgF8FGeEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_XLIE4FGeEeOuyKm2YW1K1gst" base_Class="_XLIE4FGeEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_v1DoAFGeEeOuyKm2YW1K1gst" base_Class="_v1DoAFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_xb6REFGeEeOuyKm2YW1K1gst" base_Class="_xb6REFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="__g1u8FGfEeOuyKm2YW1K1gst" base_Class="__g1u8FGfEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_7yh0sFGgEeOuyKm2YW1K1gst" base_Class="_7yh0sFGgEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_sgplEFGrEeOuyKm2YW1K1gst" base_Class="_sgplEFGrEeOuyKm2YW1K1g"/>
+  <EECProfile:SimpleElement xmi:id="_lcALQIy_EeO5QKVbQiY0wgst" base_Class="_lcALQIy_EeO5QKVbQiY0wg"/>
+  <EECProfile:SimpleElement xmi:id="_vH_6AIzAEeO5QKVbQiY0wgst" base_Class="_vH_6AIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:SimpleElement xmi:id="_pC_kMI18EeO5QKVbQiY0wgst" base_Class="_pC_kMI18EeO5QKVbQiY0wg"/>
+  <EECProfile:SimpleElement xmi:id="_zX7kcI2MEeOQQexDOjgnqgst" base_Class="_zX7kcI2MEeOQQexDOjgnqg"/>
+  <EECProfile:SimpleElement xmi:id="_D326kI2NEeOQQexDOjgnqgst" base_Class="_D326kI2NEeOQQexDOjgnqg"/>
+  <EECProfile:SimpleElement xmi:id="_o0oIUI2NEeOQQexDOjgnqgst" base_Class="_o0oIUI2NEeOQQexDOjgnqg"/>
+  <EECProfile:SimpleElement xmi:id="_9w8xQI2NEeOQQexDOjgnqgst" base_Class="_9w8xQI2NEeOQQexDOjgnqg"/>
+  <EECProfile:SimpleElement xmi:id="_UVzZ0I40EeOt3sz48gBxVQst" base_Class="_UVzZ0I40EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_wIGKII42EeOt3sz48gBxVQst" base_Class="_wIGKII42EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_CI6rQI43EeOt3sz48gBxVQst" base_Class="_CI6rQI43EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_RYNf8I43EeOt3sz48gBxVQst" base_Class="_RYNf8I43EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_EtK7QI44EeOt3sz48gBxVQst" base_Class="_EtK7QI44EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_Zn2I8I45EeOt3sz48gBxVQst" base_Class="_Zn2I8I45EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_Zn3-II45EeOt3sz48gBxVQst" base_Class="_Zn3-II45EeOt3sz48gBxVQ"/>
+  <EECProfile:SimpleElement xmi:id="_OGGpMI7rEeOCdpZuhK3cCAst" base_Class="_OGGpMI7rEeOCdpZuhK3cCA"/>
+  <EECProfile:SimpleElement xmi:id="_WSPkMI7rEeOCdpZuhK3cCAst" base_Class="_WSPkMI7rEeOCdpZuhK3cCA"/>
+  <EECProfile:SimpleElement xmi:id="_kqqsMI70EeOk8_uL5KcaCgst" base_Class="_kqqsMI70EeOk8_uL5KcaCg"/>
+  <EECProfile:SimpleElement xmi:id="_1JOwYI70EeOk8_uL5KcaCgst" base_Class="_1JOwYI70EeOk8_uL5KcaCg"/>
+  <EECProfile:SimpleElement xmi:id="_OjeisJPCEeOau5lQkkgj3Ast" base_Class="_OjeisJPCEeOau5lQkkgj3A"/>
+  <EECProfile:SimpleElement xmi:id="_RzLKIJPIEeOau5lQkkgj3Ast" base_Class="_RzLKIJPIEeOau5lQkkgj3A"/>
+  <EECProfile:SimpleElement xmi:id="_BrepoJPPEeOau5lQkkgj3Ast" base_Class="_BrepoJPPEeOau5lQkkgj3A"/>
+  <EECProfile:SimpleElement xmi:id="_2vap0JSAEeOcbd1HrAmu5wst" base_Class="_2vap0JSAEeOcbd1HrAmu5w"/>
+  <EECProfile:SimpleElement xmi:id="_eaTIgJ0lEeO_Ctfl2sHrgwst" base_Class="_eaTIgJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:SimpleElement xmi:id="_gTZYIJ0lEeO_Ctfl2sHrgwst" base_Class="_gTZYIJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:SimpleElement xmi:id="_iDigEJ0lEeO_Ctfl2sHrgwst" base_Class="_iDigEJ0lEeO_Ctfl2sHrgw"/>
+  <EECProfile:ComplexElement xmi:id="_BX3UQFGbEeOuyKm2YW1K1gst" base_Class="_BX3UQFGbEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_fPgRoFEHEeOTEaxXgV0mpgst" base_Class="_fPgRoFEHEeOTEaxXgV0mpg"/>
+  <EECProfile:ComplexElement xmi:id="_09B5UFGcEeOuyKm2YW1K1gst" base_Class="_09B5UFGcEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_lXhSIFGeEeOuyKm2YW1K1gst" base_Class="_lXhSIFGeEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_QZEr0FGqEeOuyKm2YW1K1gst" base_Class="_QZEr0FGqEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_5S8L0FGrEeOuyKm2YW1K1gst" base_Class="_5S8L0FGrEeOuyKm2YW1K1g"/>
+  <EECProfile:ComplexElement xmi:id="_0MqGsIzAEeO5QKVbQiY0wgst" base_Class="_0MqGsIzAEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_O8f8cI18EeO5QKVbQiY0wgst" base_Class="_O8f8cI18EeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_cAVmMI18EeO5QKVbQiY0wgst" base_Class="_cAVmMI18EeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_CWrQ4I4rEeOt3sz48gBxVQst" base_Class="_CWrQ4I4rEeOt3sz48gBxVQ"/>
+  <EECProfile:ComplexElement xmi:id="_ExFc0I42EeOt3sz48gBxVQst" base_Class="_ExFc0I42EeOt3sz48gBxVQ"/>
+  <EECProfile:ComplexElement xmi:id="_I5yYwI5QEeOCdpZuhK3cCAst" base_Class="_I5yYwI5QEeOCdpZuhK3cCA"/>
+  <EECProfile:ComplexElement xmi:id="_grzYAI72EeOk8_uL5KcaCgst" base_Class="_grzYAI72EeOk8_uL5KcaCg"/>
+  <EECProfile:ComplexElement xmi:id="_HPybMI73EeOk8_uL5KcaCgst" base_Class="_HPybMI73EeOk8_uL5KcaCg"/>
+  <EECProfile:ComplexElement xmi:id="_e4gzQJPJEeOau5lQkkgj3Ast" base_Class="_e4gzQJPJEeOau5lQkkgj3A"/>
+  <EECProfile:ComplexElement xmi:id="_p5Zc0JSEEeOcbd1HrAmu5wst" base_Class="_p5Zc0JSEEeOcbd1HrAmu5w"/>
+  <EECProfile:ComplexElement xmi:id="_m3RNcJ0oEeO_Ctfl2sHrgwst" base_Class="_m3RNcJ0oEeO_Ctfl2sHrgw"/>
+  <EECProfile:ComplexElement xmi:id="_pIeyEI2FEeO5QKVbQiY0wgst" base_Class="_pIeyEI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_gzgrMI2FEeO5QKVbQiY0wgst" base_Class="_gzgrMI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_toG_EI2FEeO5QKVbQiY0wgst" base_Class="_toG_EI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexElement xmi:id="_dN52cI2FEeO5QKVbQiY0wgst" base_Class="_dN52cI2FEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_HFiEcIyxEeO5QKVbQiY0wgst" base_DataType="_HFiEcIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_YXOOsIyxEeO5QKVbQiY0wgst" base_DataType="_YXOOsIyxEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_jlKt0IyxEeO5QKVbQiY0wgst" base_DataType="_jlKt0IyxEeO5QKVbQiY0wg"/>
+  <EECProfile:ComplexType xmi:id="_rnV0gIyxEeO5QKVbQiY0wgst" base_DataType="_rnV0gIyxEeO5QKVbQiY0wg"/>
+</xmi:XMI>

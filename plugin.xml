@@ -11,7 +11,7 @@
             <metamodel nsURI="http://www.eclipse.org/emf/2002/Ecore"/>
             <metamodel nsURI="http://www.eclipse.org/emf/2003/XMLType"/>
             <metamodel nsURI="http://www.w3.org/2001/XMLSchema"/>
-            <metamodel nsURI="http://www.eclipse.org/ocl/3.1.0/Pivot"/>
+            <metamodel nsURI="http://www.eclipse.org/ocl/2015/Pivot"/>
             <metamodel nsURI="http://www.emftext.org/language/xpath2"/>
             <metamodel nsURI="http://www.eclipse.org/uml2/2.1.0/UML"/>
         </library>

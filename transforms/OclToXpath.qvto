@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2014 Denis Nikiforov.
+ * Copyright (c) 2013, 2015 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,7 +18,7 @@
 import uml2xsd.UtilLib;
 import Helpers;
 
-modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
+modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
 modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
@@ -26,8 +26,8 @@ library OCLtoXPath;
 
 mapping ExpressionInOCL::toXPath() : Expr
 {
-    log("  Transforming OCL expression\n    " + self.body->first().replaceAll('\n', '\n    '));
-    expr := self.bodyExpression.map toExprSingle();
+    log("  Transforming OCL expression\n    " + self.body.replaceAll('\n', '\n    '));
+    expr := self.ownedBody.xmap toExprSingle();
 }
 
 mapping OCLExpression::toExprSingle() : ExprSingle
@@ -67,24 +67,24 @@ mapping OperationCallExp::toOrExpr() : ExprSingle
 when { self.referredOperation.isBoolean('or') }
 {
     init {
-        result := self.source.xmap toExprSingle().orExpr(
-            self.argument->first().xmap toExprSingle());
+        result := self.ownedSource.xmap toExprSingle().orExpr(
+            self.ownedArguments->first().xmap toExprSingle());
     }
 }
 
 mapping OperationCallExp::andExpr() : AndExpr
 when { self.referredOperation.isBoolean('and') }
 {
-    operand := self.source.xmap toExprSingle().andExprOperand();
-    operand += self.argument->first().xmap toExprSingle().andExprOperand();
+    operand := self.ownedSource.xmap toExprSingle().andExprOperand();
+    operand += self.ownedArguments->first().xmap toExprSingle().andExprOperand();
 }
 
 mapping OperationCallExp::implication() : ExprSingle
 when { self.referredOperation.isBoolean('implies') }
 {
     init {
-        result := self.source.xmap toExprSingle().notExpr().orExpr(
-            self.argument->first().xmap toExprSingle());
+        result := self.ownedSource.xmap toExprSingle().notExpr().orExpr(
+            self.ownedArguments->first().xmap toExprSingle());
     }
 }
 
@@ -92,8 +92,8 @@ mapping IteratorExp::exists() : FunctionCall
 when { self.referredIteration.name = 'exists' }
 {
     init {
-        var path := self.source.oclAsType(PropertyCallExp).xmap toPath();
-        path.getLastAxisStep().predicate := self.body.xmap toExprSingle().predicate();
+        var path := self.ownedSource.oclAsType(PropertyCallExp).xmap toPath();
+        path.getLastAxisStep().predicate := self.ownedBody.xmap toExprSingle().predicate();
         result := path.booleanExpr();
     }
 }
@@ -102,8 +102,8 @@ mapping IteratorExp::forAll() : ExprSingle
 when { self.referredIteration.name = 'forAll' }
 {
     init {
-        var path := self.source.oclAsType(PropertyCallExp).xmap toPath();
-        path.getLastAxisStep().predicate := self.body.xmap toExprSingle().notExpr().predicate();
+        var path := self.ownedSource.oclAsType(PropertyCallExp).xmap toPath();
+        path.getLastAxisStep().predicate := self.ownedBody.xmap toExprSingle().notExpr().predicate();
         result := path.notExpr();
     }
 }
@@ -194,27 +194,27 @@ query ExprSingle::predicate() : Predicate =
 // Comparision
 
 mapping OperationCallExp::leftNotNull() : ExprSingle
-when { self.name = '<>' and self.argument->isNullLiteralExp() }
+when { self.name = '<>' and self.ownedArguments->isNullLiteralExp() }
 {
     init {
-        result := self.source.xmap toExprSingle();
+        result := self.ownedSource.xmap toExprSingle();
     }
 }
 
 mapping OperationCallExp::rightNotNull() : ExprSingle
-when { self.name = '<>' and self.source.isNullLiteralExp() }
+when { self.name = '<>' and self.ownedSource.isNullLiteralExp() }
 {
     init {
-        result := self.argument->first().xmap toExprSingle();
+        result := self.ownedArguments->first().xmap toExprSingle();
     }
 }
 
 mapping OperationCallExp::toComparisonExpr() : ComparisonExpr
-when { self.name.toGeneralComp() <> null and not(self.source.isNullLiteralExp() or self.argument->isNullLiteralExp()) }
+when { self.name.toGeneralComp() <> null and not(self.ownedSource.isNullLiteralExp() or self.ownedArguments->isNullLiteralExp()) }
 {
-    left := self.source.xmap toExprSingle().comparisonExprChild();
+    left := self.ownedSource.xmap toExprSingle().comparisonExprChild();
     operator := object GeneralComp { operator := self.name.toGeneralComp() };
-    right := self.argument->first().xmap toExprSingle().comparisonExprChild();
+    right := self.ownedArguments->first().xmap toExprSingle().comparisonExprChild();
 }
 
 query ExprSingle::comparisonExprChild() : ComparisonExprChild =
@@ -245,8 +245,8 @@ query String::toGeneralComp() : GeneralCompKind =
 mapping OperationCallExp::toAdditiveExpr() : AdditiveExpr
 when { self.name.toAdditiveOp() <> null }
 {
-    var lhs := self.source.xmap toExprSingle().additiveExprOperand();
-    var rhs := self.argument->first().xmap toExprSingle().additiveExprOperand();
+    var lhs := self.ownedSource.xmap toExprSingle().additiveExprOperand();
+    var rhs := self.ownedArguments->first().xmap toExprSingle().additiveExprOperand();
     operand := lhs.operand;
     operand += rhs.operand;
     operator := lhs.operator;
@@ -257,8 +257,8 @@ when { self.name.toAdditiveOp() <> null }
 mapping OperationCallExp::toMultiplicativeExpr() : MultiplicativeExpr
 when { self.name.toMultiplicativeOp() <> null }
 {
-    var lhs := self.source.xmap toExprSingle().multiplicativeExprOperand();
-    var rhs := self.argument->first().xmap toExprSingle().multiplicativeExprOperand();
+    var lhs := self.ownedSource.xmap toExprSingle().multiplicativeExprOperand();
+    var rhs := self.ownedArguments->first().xmap toExprSingle().multiplicativeExprOperand();
     operand := lhs.operand;
     operand += rhs.operand;
     operator := lhs.operator;
@@ -310,10 +310,10 @@ mapping PropertyCallExp::toPath() : PathExpr
         // VariableExp (self or iterator variable) is the innermost
         // component in an input tree, but it should be a first step
         // in an output path.
-        result := self.source[PropertyCallExp]->collectOne(xmap toPath());
+        result := self.ownedSource[PropertyCallExp]->collectOne(xmap toPath());
     }
     // Steps must be created only for Data Types. Data Elements must be skipped
-    if (self.referredProperty.owningType.isDataType()) {
+    if (self.referredProperty.owningClass.isDataType()) {
         // Type can be a Set(T)
         var type := self.referredProperty.type.unwrap();
         
@@ -360,29 +360,29 @@ mapping OperationCallExp::asSet() : ExprSingle
 when { self.referredOperation.name = 'oclAsSet' }
 {
     init {
-        result := self.source.xmap toExprSingle();
+        result := self.ownedSource.xmap toExprSingle();
     }
 }
 
 mapping OperationCallExp::count() : FunctionCall
-when { self.referredOperation.name = 'size' and self.referredOperation.owningType.name = 'Collection' }
+when { self.referredOperation.name = 'size' and self.referredOperation.owningClass.name = 'Collection' }
 {
     name := createQName('http://www.w3.org/2005/xpath-functions', 'count', 'fn');
-    arg := self.source.xmap toExprSingle();
+    arg := self.ownedSource.xmap toExprSingle();
 }
 
 mapping OperationCallExp::stringLength() : FunctionCall
-when { self.referredOperation.name = 'size' and self.referredOperation.owningType.name = 'String' }
+when { self.referredOperation.name = 'size' and self.referredOperation.owningClass.name = 'String' }
 {
     name := createQName('http://www.w3.org/2005/xpath-functions', 'string-length', 'fn');
-    arg := self.source.xmap toExprSingle();
+    arg := self.ownedSource.xmap toExprSingle();
 }
 
 mapping OperationCallExp::isEmpty() : ExprSingle
 when { self.referredOperation.name = 'isEmpty' }
 {
     init {
-    	result := self.source.xmap toExprSingle().notExpr();
+    	result := self.ownedSource.xmap toExprSingle().notExpr();
     }
 }
 
@@ -390,7 +390,7 @@ mapping OperationCallExp::notEmpty() : FunctionCall
 when { self.referredOperation.name = 'notEmpty' }
 {
     init {
-        result := self.source.xmap toExprSingle().booleanExpr();
+        result := self.ownedSource.xmap toExprSingle().booleanExpr();
     }
 }
 
@@ -442,8 +442,8 @@ query NamedElement::isDataElement() : Boolean = self.oclIsKindOf(Class);
 query Property::isAttribute() : Boolean = self.getETarget().getAppliedStereotype('EECProfile::Attribute') <> null;
 
 query Operation::isBoolean(name : String) : Boolean = 
-    self.owningType.oclIsKindOf(PrimitiveType) and
-    self.owningType.name = 'Boolean' and
+    self.owningClass.oclIsKindOf(PrimitiveType) and
+    self.owningClass.name = 'Boolean' and
     self.name = name;
 
 query ExprSingle::isFunctionCall(name : QName) : Boolean =

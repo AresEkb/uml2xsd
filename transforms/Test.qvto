@@ -1,14 +1,14 @@
-modeltype ocl 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
+modeltype ocl 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
 
-transformation NewTransformation(in o : ocl, out o2 : ocl);
+transformation Test(in o : ocl, out o2 : ocl);
 
 main() {
 	o.rootObjects()[ExpressionInOCL].map Root2Root();
 }
 
 mapping ExpressionInOCL::Root2Root() : ExpressionInOCL {
-	log('Converting ' + self.body->first());
-	self.bodyExpression.map visit();
+	log('Converting ' + self.body);
+	self.ownedBody.xmap visit();
 }
 
 mapping OCLExpression::visit() : NullLiteralExp
@@ -25,8 +25,8 @@ mapping OperationCallExp::visit() : NullLiteralExp
 	// Operations resolved only during first run of the script!
 	// The script won't resolve them during 2nd, 3rd, ... runs until you restart Eclipse!
 	log('    referredOperation: ' + self.referredOperation.repr());
-	self.source.map visit();
-	self.argument->visit();
+	self.ownedSource.map visit();
+	self.ownedArguments->visit();
 }
 
 mapping PropertyCallExp::visit() : NullLiteralExp
@@ -36,7 +36,7 @@ mapping PropertyCallExp::visit() : NullLiteralExp
 	// The type of an age property won't be resolved because it defined in a nonexistent file:
 	// pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml.oclas#T.PrimitiveTypes.Integer
 	log('    referredProperty.type: ' + self.referredProperty.type.repr());
-	self.source.map visit();
+	self.ownedSource.map visit();
 }
 
 mapping VariableExp::visit() : NullLiteralExp
