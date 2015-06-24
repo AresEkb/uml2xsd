@@ -13,7 +13,7 @@ import uml2xsd.UtilLib;
 import OCLtoXPath;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
-modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/3.1.0/Pivot';
+modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
 modeltype XSD uses 'http://www.w3.org/2001/XMLSchema';
 modeltype VC uses 'http://www.w3.org/2007/XMLSchema-versioning';
 modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';

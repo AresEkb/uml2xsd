@@ -21,8 +21,10 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -42,6 +44,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -57,9 +60,17 @@ import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.uml.UMLStandaloneSetup;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.xtext.essentialocl.EssentialOCLStandaloneSetup;
+import org.eclipse.uml2.uml.Classifier;
+import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.Operation;
+import org.eclipse.uml2.uml.Parameter;
+import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
@@ -74,8 +85,10 @@ public class Main {
     public static void main(String[] args) {
 //        final String input = "model/ReferenceModel.uml";
 //        final String input = "model/SMDataModel.uml";
-        final String input = "model/TTDataModel.uml";
-        final String transform = "transforms/EAEUtoXSD11.qvto";
+        //final String input = "model/TTDataModel.uml";
+        //final String transform = "transforms/EAEUtoXSD11.qvto";
+        final String input = "model/ISO20022.uml";
+        final String transform = "transforms/ISO20022toXSD11.qvto";
 //        final String transform = "transforms/GetXPath.qvto";
         final String output = "output/";
 
@@ -104,6 +117,8 @@ public class Main {
             
             Resource resource = rs.getResource(createFileURI(input), true);
             Model uml = (Model)EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.eINSTANCE.getModel());
+            
+            addDataTypeOperations(rs, uml);
 
             System.out.println("Transforming model by " + transform);
             List<EObject> schemas = transformModel(rs, createFileURI(transform), uml);
@@ -274,45 +289,52 @@ public class Main {
             }
         }
     }
-/*
-    private static void addDataTypeOperations(ResourceSet rs, EObject model)
-            throws ParserException, IOException {
-        MetaModelManager mm = PivotUtil.getMetaModelManager(model.eResource());
-        // TODO: All needed DataType operations must be registered here
-        Root bdt = UML2Pivot.importFromUML(mm, null, model.eResource());
-        final TreeIterator<EObject> iterator = bdt.eAllContents();
+
+    private static void addDataTypeOperations(ResourceSet rs, Model model) throws ParserException
+    {
+        MetamodelManager mm = UtilitiesLibrary.ocl.getMetamodelManager();
+
+        Set<DataType> dataTypes = new HashSet<DataType>();
+        final TreeIterator<EObject> iterator = model.eAllContents();
         while (iterator.hasNext()) {
             EObject obj = iterator.next();
-            //System.out.println("  >>>>>>>>>> " + obj);
-            if (obj instanceof Type) {
-                Type type = (Type)obj;
-                //System.out.println("  >>>>>>>>>> " + type.getName());
-                if (type.getName().equals("WeightMeasureType")) {
-                    System.out.println("  >>>>>>>>>> " + type.getName());
-
-                    System.out.println("  Found owned operations for " + type.getName() + ": " + type.getOwnedOperation().size());
-                    System.out.println("  Found local operations for " + type.getName() + ": " + type.getLocalOperations().size());
-
-                    createOperation(mm, type, "<", mm.getBooleanType(), type);
-                    createOperation(mm, type, ">", mm.getBooleanType(), type);
-                    createOperation(mm, type, "<", mm.getBooleanType(), mm.getRealType());
-                    createOperation(mm, type, ">", mm.getBooleanType(), mm.getRealType());
+            if (obj instanceof DataType) {
+                DataType type = (DataType)obj;
+                dataTypes.add(type);
+                for (Classifier general : type.allParents()) {
+                    dataTypes.add((DataType)general);
                 }
+            }
+        }
+
+        for (DataType dataType : dataTypes) {
+            // DataTypes doens't inherit operations. So we add operations to each inherited DataType
+            for (Operation oper : dataType.getAllOperations()) {
+                createOperation(mm, dataType, oper);
             }
         }
     }
 
-    private static void createOperation(MetaModelManager metaModelManager, Type type,
-            String name, Type returnType, Type param1Type) {
-        Operation compareTo = PivotFactory.eINSTANCE.createOperation();
-        compareTo.setName(name);
-        compareTo.setType(returnType);
-        Parameter param = PivotFactory.eINSTANCE.createParameter();
-        param.setType(param1Type);
-        compareTo.getOwnedParameter().add(param);
-        type.getOwnedOperation().add(compareTo);
+    private static org.eclipse.ocl.pivot.Operation createOperation(MetamodelManager mm, DataType dataType, Operation operation) throws ParserException
+    {
+        org.eclipse.ocl.pivot.DataType asDataType = mm.getASOf(org.eclipse.ocl.pivot.DataType.class, dataType);
+        org.eclipse.ocl.pivot.Operation asOperation = PivotFactory.eINSTANCE.createOperation();
+        asOperation.setName(operation.getName());
+        org.eclipse.ocl.pivot.Type returnType = mm.getASOf(org.eclipse.ocl.pivot.Type.class, operation.getType());
+        asOperation.setType(returnType);
+        for (Parameter param : operation.getOwnedParameters()) {
+            if (param.getDirection() == ParameterDirectionKind.RETURN_LITERAL) {
+                continue;
+            }
+            org.eclipse.ocl.pivot.Parameter asParam = PivotFactory.eINSTANCE.createParameter();
+            org.eclipse.ocl.pivot.Type asParamType = mm.getASOf(org.eclipse.ocl.pivot.Type.class, param.getType());
+            asParam.setType(asParamType);
+            asOperation.getOwnedParameters().add(asParam);
+        }
+        asDataType.getOwnedOperations().add(asOperation);
+        return asOperation;
     }
-*/
+
     private static List<EObject> transformModel(ResourceSet rs, URI transformation, EObject model) throws Exception
     {
         TransformationExecutor executor = new TransformationExecutor(transformation);

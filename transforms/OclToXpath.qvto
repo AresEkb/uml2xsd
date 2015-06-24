@@ -28,6 +28,7 @@ mapping ExpressionInOCL::toXPath() : Expr
 {
     log("  Transforming OCL expression\n    " + self.body.replaceAll('\n', '\n    '));
     expr := self.ownedBody.xmap toExprSingle();
+    log("  to\n    " + result.toString());
 }
 
 mapping OCLExpression::toExprSingle() : ExprSingle

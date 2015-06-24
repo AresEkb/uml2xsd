@@ -24,12 +24,6 @@ transformation EAEUtoXSD11(in m : UML, out x : XSD);
 
 main()
 {
-    m.objectsOfType(Package)->forEach (p) {
-        log('Package: ' + p.name);
-        p.getAppliedStereotypes()->forEach (st) {
-        	log('Stereotype: ' + st.name);
-        };
-    };
     m.objectsOfType(Package)->select(isNamespace() and not(isXMLPT()))->toSchema();
 }
 
