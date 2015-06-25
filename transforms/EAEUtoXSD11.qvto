@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2014 Denis Nikiforov.
+ * Copyright (c) 2013, 2015 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,7 +20,8 @@ modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
-transformation EAEUtoXSD11(in m : UML, out x : XSD);
+transformation EAEUtoXSD11(in m : UML, out x : XSD)
+    extends OCLtoXPath;
 
 main()
 {
@@ -304,3 +305,53 @@ query Enumeration::createNoFixedFacet(name : String) : Sequence(EFeatureMapEntry
     self.ownedLiteral->sortedBy(name)
         ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
             name, object NoFixedFacet { value := val.name; annotation := val.getAnnotation(); }));
+
+query Element::getNS() : Package = self.getNearestPackage().getNS();
+
+query Package::getNS() : Package =
+      if self.getAppliedStereotype('EECProfile::Namespace') <> null then self
+    elif self.owner <> null then self.owner.getNS()
+    else null
+    endif;
+
+query Package::getTargetNS() : String = self.getValue('EECProfile::Namespace', 'name');
+query Package::getTargetNSPrefix() : String = self.getValue('EECProfile::Namespace', 'prefix');
+query Package::getTargetNSVersion() : String = self.getValue('EECProfile::Namespace', 'version');
+
+query NamedElement::getNSWithGuards() : Package
+{
+    assert fatal (self.getQualifiedName() <> null)
+        with log('Unable to resolve element \'' + self.toString() + '\'');
+    var ns := self.getNS();
+    assert fatal (ns <> null)
+        with log('Namespace of a \'' + self.getQualifiedName() + '\' not found');
+    return ns;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Overrides
+
+query NamedElement::getQName() : QName
+{
+    var ns := self.getNSWithGuards();
+    // HACK
+    // var ns := self.getNS();
+    // if (ns = null) {
+    //     return createQName('unknown', self.name, 'un').oclAsType(QName); 
+    // };
+    return createQName(ns.getTargetNS(), self.name, ns.getTargetNSPrefix()).oclAsType(QName);
+}
+
+query NamedElement::getUnprefixedQName() : QName
+{
+    var ns := self.getNSWithGuards();
+    return createQName(self.name).oclAsType(QName);
+}
+
+query Element::is(stereotypeName : String) : Boolean = self.is('EECProfile', stereotypeName);
+
+query NamedElement::isDataType() : Boolean = self.oclIsKindOf(DataType);
+
+query NamedElement::isDataElement() : Boolean = self.oclIsKindOf(Class);
+
+query NamedElement::isAttribute() : Boolean = self.getAppliedStereotype('EECProfile::Attribute') <> null;

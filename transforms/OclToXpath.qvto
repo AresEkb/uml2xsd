@@ -26,9 +26,9 @@ library OCLtoXPath;
 
 mapping ExpressionInOCL::toXPath() : Expr
 {
-    log("  Transforming OCL expression\n    " + self.body.replaceAll('\n', '\n    '));
+    log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
     expr := self.ownedBody.xmap toExprSingle();
-    log("  to\n    " + result.toString());
+    log('    to\n      ' + result.toString());
 }
 
 mapping OCLExpression::toExprSingle() : ExprSingle
@@ -55,17 +55,20 @@ disjuncts
     OperationCallExp::isEmpty,
     OperationCallExp::notEmpty,
     // Literals
+    IntegerLiteralExp::toLiteral,
     UnlimitedNaturalLiteralExp::toLiteral,
     RealLiteralExp::toLiteral,
     StringLiteralExp::toLiteral,
-    BooleanLiteralExp::toLiteral
+    BooleanLiteralExp::toLiteral,
+    // Unknown expressions
+    OCLExpression::riseError
 {}
 
 //////////////////////////////////////////////////////////////////////////////
 // Logic
 
 mapping OperationCallExp::toOrExpr() : ExprSingle
-when { self.referredOperation.isBoolean('or') }
+when { self.referredOperation.isBooleanOperation('or') }
 {
     init {
         result := self.ownedSource.xmap toExprSingle().orExpr(
@@ -74,14 +77,14 @@ when { self.referredOperation.isBoolean('or') }
 }
 
 mapping OperationCallExp::andExpr() : AndExpr
-when { self.referredOperation.isBoolean('and') }
+when { self.referredOperation.isBooleanOperation('and') }
 {
     operand := self.ownedSource.xmap toExprSingle().andExprOperand();
     operand += self.ownedArguments->first().xmap toExprSingle().andExprOperand();
 }
 
 mapping OperationCallExp::implication() : ExprSingle
-when { self.referredOperation.isBoolean('implies') }
+when { self.referredOperation.isBooleanOperation('implies') }
 {
     init {
         result := self.ownedSource.xmap toExprSingle().notExpr().orExpr(
@@ -132,7 +135,8 @@ query ExprSingle::notExpr() : ExprSingle =
         object FunctionCall { name := fn_not; arg := self; }
     endif;
 
-query ExprSingle::orExpr(rhs : ExprSingle) : ExprSingle {
+query ExprSingle::orExpr(rhs : ExprSingle) : ExprSingle
+{
     var operands := self.orExprOperand();
     operands += rhs.orExprOperand();
     return 
@@ -366,14 +370,14 @@ when { self.referredOperation.name = 'oclAsSet' }
 }
 
 mapping OperationCallExp::count() : FunctionCall
-when { self.referredOperation.name = 'size' and self.referredOperation.owningClass.name = 'Collection' }
+when { self.referredOperation.name = 'size' and self.referredOperation.isCollectionOperation() }
 {
     name := createQName('http://www.w3.org/2005/xpath-functions', 'count', 'fn');
     arg := self.ownedSource.xmap toExprSingle();
 }
 
 mapping OperationCallExp::stringLength() : FunctionCall
-when { self.referredOperation.name = 'size' and self.referredOperation.owningClass.name = 'String' }
+when { self.referredOperation.name = 'size' and not self.referredOperation.isCollectionOperation() }
 {
     name := createQName('http://www.w3.org/2005/xpath-functions', 'string-length', 'fn');
     arg := self.ownedSource.xmap toExprSingle();
@@ -397,6 +401,11 @@ when { self.referredOperation.name = 'notEmpty' }
 
 //////////////////////////////////////////////////////////////////////////////
 // Literals
+
+mapping IntegerLiteralExp::toLiteral() : IntegerLiteral
+{
+    value := self.integerSymbol.oclAsType(Integer);
+}
 
 mapping UnlimitedNaturalLiteralExp::toLiteral() : IntegerLiteral
 {
@@ -425,9 +434,15 @@ mapping BooleanLiteralExp::toLiteral() : FunctionCall
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// Helpers
+// Unknown expressions
 
-query String::quote() : String = '\'' + self.replaceAll('\'', '\'\'') + '\'';
+mapping OCLExpression::riseError() : StringLiteral
+{
+    assert fatal (false) with log('Unknown ' + self.metaClassName() + ' ' + self.repr());
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Helpers
 
 query NamedElement::unwrap() : NamedElement =
     if self.oclIsKindOf(SetType) then self.oclAsType(SetType).elementType else self endif;
@@ -436,16 +451,19 @@ query NamedElement::getQName() : QName = self.getETarget().getQName();
 
 query NamedElement::getUnprefixedQName() : QName = self.getETarget().getUnprefixedQName();
 
-query NamedElement::isDataType() : Boolean = self.oclIsKindOf(DataType);
+query NamedElement::isDataType() : Boolean = self.getETarget().isDataType();
 
-query NamedElement::isDataElement() : Boolean = self.oclIsKindOf(Class);
+query NamedElement::isDataElement() : Boolean = self.getETarget().isDataElement();
 
-query Property::isAttribute() : Boolean = self.getETarget().getAppliedStereotype('EECProfile::Attribute') <> null;
+query Property::isAttribute() : Boolean = self.getETarget().isAttribute();
 
-query Operation::isBoolean(name : String) : Boolean = 
+query Operation::isBooleanOperation(name : String) : Boolean = 
     self.owningClass.oclIsKindOf(PrimitiveType) and
     self.owningClass.name = 'Boolean' and
     self.name = name;
+
+query Operation::isCollectionOperation() : Boolean = 
+    self.owningClass.oclIsKindOf(CollectionType);
 
 query ExprSingle::isFunctionCall(name : QName) : Boolean =
     self.oclIsKindOf(FunctionCall) and self.oclAsType(FunctionCall).name = name;

@@ -201,36 +201,10 @@ public class Main {
         }
         return noErrorsFound;
     }
-
-    private static String getOCLExpressionFromConstraint(org.eclipse.uml2.uml.Constraint constraint)
-    {
-        if (constraint.getSpecification() instanceof OpaqueExpression) {
-                OpaqueExpression opaqueExpression = ((OpaqueExpression) constraint.getSpecification());
-
-                // Find the body named OCL
-                int indexOfOCLBody = -1;
-                for (int i = 0; i < opaqueExpression.getLanguages().size() && indexOfOCLBody == -1; i++) {
-                    if (opaqueExpression.getLanguages().get(i).equals("OCL")) {
-                        indexOfOCLBody = i;
-                    }
-                }
-                                                     
-                // If the body was found, continue the check
-                if (indexOfOCLBody != -1) {
-                    String body = opaqueExpression.getBodies().get(indexOfOCLBody);
-                    // HACK
-                    body = body.replace("oclAsType(Package).extension_EECDataModel.standardId",
-                            "getValue(getAppliedStereotype('EECProfile::EECDataModel'), 'standardId').oclAsType(String)");
-                    return body;
-                }
-            }   
-        return null;//there was no proper OCL to be found
-    }
 */
     private static URI createFileURI(String relativePath)
     {
         return URI.createFileURI(new File(relativePath).getAbsolutePath());
-        // return URI.createURI(relativePath).resolve(URI.createFileURI(System.getProperty("user.dir") + "/"));
     }
 
     private static String getSchemaLocation(String targetNamespace)
@@ -256,13 +230,6 @@ public class Main {
         osw.write(prettyFormat(writer.toString()));
         osw.flush();
         osw.close();
-//        Resource res = rs.createResource(fileName);
-//        res.getContents().add(model);
-//        Map<Object, Object> options = new HashMap<Object, Object>();
-//        options.put(XMLResource.OPTION_ENCODING, "UTF-8");
-//        options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
-//        res.save(options);
-//        res.unload();
     }
 
     private static void addDataTypeOperations(ResourceSet rs, Model model) throws ParserException
