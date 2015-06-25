@@ -9,7 +9,7 @@
  *    Denis Nikiforov - initial API and implementation
  */
 
-import uml2xsd.UtilLib;
+import uml2xsd.UtilitiesLibrary;
 import OCLtoXPath;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
@@ -28,15 +28,21 @@ main()
 }
 
 query Element::is(stereotypeName : String) : Boolean =
-    self.getAppliedStereotype('ISO20022Profile::' + stereotypeName) <> null;
+    self.getAppliedStereotypes()->union(self.getAppliedStereotypes().allParents().oclAsType(Stereotype))
+        ->select(owner.oclAsType(Profile).name = 'ISO20022Profile')
+        ->exists(name = stereotypeName);
 
 mapping Classifier::toSchema() : DocumentRoot
 {
     log('  Found message ' + self.name);
     var schemaObj := object SchemaType {
-        targetNamespace := 'urn:iso:std:iso:20022:tech:xsd:pain.001.001.03'; // @TODO
+        targetNamespace := 'urn:iso:std:iso:20022:tech:xsd:pain.001.001.03' + self.name; // @TODO
         anyAttribute := createFeatureMapEntry('http://www.w3.org/2007/XMLSchema-versioning', 'minVersion', '1.1');
         elementFormDefault := FormChoice::qualified;
+    };
+
+    xMLNSPrefixMap += object EStringToStringMapEntry {
+        value := 'urn:iso:std:iso:20022:tech:xsd:pain.001.001.03' + self.name;
     };
     
     schemaObj.element += object TopLevelElement {
@@ -55,113 +61,92 @@ mapping Classifier::toSchema() : DocumentRoot
     };
 
     self.oclAsType(Classifier)->closure(attribute.type.oclAsType(Classifier))->sortedBy(name)->forEach (obj) {
+        //log(obj.name + ' ' + obj.getAppliedStereotypes().name->any(true));
         if obj.is('MessageComponent') then {
     	   schemaObj.complexType += obj->toComplexType(schemaObj);
     	}
-    	elif obj.is('ChoiceComponent') then {
-           schemaObj.complexType += obj->toComplexType(schemaObj);
+     	elif obj.is('ChoiceComponent') then {
+           //schemaObj.complexType += obj->toComplexType(schemaObj);
     	}
+        elif obj.is('CodeSet') then {
+           schemaObj.simpleType += obj.oclAsType(DataType)->toSimpleType2();
+        }
+        elif obj.is('IdentifierSet') then {
+           //schemaObj.complexType += obj->toComplexType(schemaObj);
+        }
+        elif obj.is('Datatype') then {
+           schemaObj.simpleType += obj.oclAsType(DataType)->toSimpleType();
+        }
     	else {
-    	   assert fatal (true);
+    	   assert fatal (false) with log('Mapping of classifiers with ' + obj.getAppliedStereotypes().name->sortedBy(str|str)->sep(',') + ' stereotype is not supported');
     	} endif;
     };
 
     schema := schemaObj;
     
+    /*
     xMLNSPrefixMap += resolveIn(Expr::findQNames, SchemaQNames)
         ->select(schema=schemaObj).qnames
         ->collect(qname|object EStringToStringMapEntry {
             key := qname.getPrefix();
             value := qname.getNamespaceURI();
-        });
+        });*/
 }
 
 mapping DataType::toSimpleType() : TopLevelSimpleType
-when { self.getAllAttributes()->isEmpty() }
+{
+    var types : Dict(String, String);
+    types->put('Decimal', 'decimal');
+    types->put('Binary', 'base64Binary');
+    types->put('Boolean', 'boolean');
+    types->put('String', 'string');
+    types->put('DateTime', 'dateTime');
+    types->put('Date', 'date');
+    types->put('Time', 'time');
+    types->put('Month', 'gMonth');
+    types->put('Year', 'gYear');
+    types->put('Day', 'gDay');
+    types->put('Duration', 'duration');
+    types->put('MonthDay', 'gMonthDay');
+    types->put('YearMonth', 'gYearMonth');
+
+    var stereotypes := self.getAppliedStereotypes()->union(self.getAppliedStereotypes().allParents().oclAsType(Stereotype))
+        ->select(owner.oclAsType(Profile).name = 'ISO20022Profile')
+        ->select(types->hasKey(name));
+
+    assert fatal (stereotypes->size() = 1) with log('DataType "' + self.getAppliedStereotypes().name->sortedBy(str|str)->sep(',') + '" ' + self.name + ' must have exactly one stereotype inherited from Datatype stereotype');
+    var stereotype := stereotypes->any(true).name;
+    
+    name := self.name;
+    restriction := object RestrictionType1 {
+        base := createQName('http://www.w3.org/2001/XMLSchema', types->get(stereotype), 'xs');
+        facetGroup := self.getFacetGroup();
+    };
+}
+
+mapping DataType::toSimpleType2() : TopLevelSimpleType
 {
     name := self.name;
-    annotation := self.getAnnotation();
-    var realizations := Realization.allInstances()
-        ->select(supplier->exists(s|s=self) and client->forAll(getNS().isXMLPT()))
-        .client->selectByKind(Classifier);
-    if (self.generalization->size() = 1) {
-        restriction := object RestrictionType1 {
-            base := self.generalization->any(true).general.getQName();
-            facetGroup := self.getFacetGroup();
-        };
-    }
-    elif (realizations->size() = 1) {
-        restriction := object RestrictionType1 {
-            base := realizations->any(true).getQName();
-            facetGroup := self.getFacetGroup();
-        };
-    }
-    else {
-    	assert fatal (false) with log('DataType \'' + self.getQualifiedName() + '\' must have a base type or a realization');
-    }
+    restriction := object RestrictionType1 {
+        base := createQName('http://www.w3.org/2001/XMLSchema', 'string', 'xs');
+        facetGroup := self.getFacetGroup();
+    };
 }
 
 mapping Classifier::toComplexType(schema : SchemaType) : TopLevelComplexType
 when { self.getAllAttributes()->notEmpty() }
 {
     name := self.name;
-    annotation := self.getAnnotation();
-    if (self.generalization->isEmpty()) {
-        attribute := self.getOwnedAttributes()->toAttribute();
-        sequence := self.map toExplicitGroup();
-        _assert := self.ownedRule.xmap toAssertion(schema);
-    }
-    elif (self.generalization->size() = 1) {
-        var generalization := self.generalization->any(true);
-        var baseType := generalization.general;
-  	    if (self.hasComplexContent()) {
-            complexContent := object ComplexContentType {
-                if (generalization.isRestriction()) {
-                    restriction := object ComplexRestrictionType {
-                        base := baseType.getQName();
-                        attribute := self.getOwnedAttributes()->toAttribute();
-                        sequence := self.map toExplicitGroup();
-                        _assert := self.ownedRule.xmap toAssertion(schema);
-                    }
-                }
-                else {
-                    extension := object ExtensionType {
-                        base := baseType.getQName();
-                        attribute := self.getOwnedAttributes()->toAttribute();
-                        sequence := self.map toExplicitGroup();
-                        _assert := self.ownedRule.xmap toAssertion(schema);
-                    }
-                }
-            }
-        }
-        else {
-            simpleContent := object SimpleContentType {
-                if (generalization.isRestriction()) {
-                    restriction := object SimpleRestrictionType {
-                        base := baseType.getQName();
-                        attribute := self.getOwnedAttributes()->toAttribute();
-                        sequence := self.map toExplicitGroup();
-                        _assert := self.ownedRule.xmap toAssertion(schema);
-                    }
-                }
-                else {
-                    extension := object SimpleExtensionType {
-                        base := baseType.getQName();
-                        attribute := self.getOwnedAttributes()->toAttribute();
-                        sequence := self.map toExplicitGroup();
-                        _assert := self.ownedRule.xmap toAssertion(schema);
-                    }
-                }
-            }
-        }
-    }
+    //attribute := self.getOwnedAttributes()->toAttribute();
+    sequence := self.map toExplicitGroup();
+    _assert := self.ownedRule.xmap toAssertion(schema);
 }
 
 mapping Class::toElement() : TopLevelElement
 {
     name := self.name;
     // TODO: Annotation will be contained in element itself in a new model version
-    annotation := self.attribute->any(true).getAnnotation();
+    //annotation := self.attribute->any(true).getAnnotation();
     // TODO: Property will be named 'value' in a new model version
     var dataType := self.attribute->any(true/*name = 'value'*/).type;
     type := dataType.getQName();
@@ -183,19 +168,20 @@ mapping Property::toAttribute() : Attribute
 }
 
 mapping Classifier::toExplicitGroup() : ExplicitGroup
-when { self.getOwnedElements()->notEmpty() }
+when { self.getAttributes()->notEmpty() }
 {
-    element := self.getOwnedElements()->toLocalElement();
+    element := self.getAttributes()->toLocalElement();
 }
 
 mapping Property::toLocalElement() : LocalElement
 {
-    ref := self.type.getQName();
+    name := self.name;
+    type := self.type.getUnprefixedQName();
     if (self.lower = 0 or self.lower > 1) {
-        minOccurs := self.lower;
+        minOccurs := self.lower.toBigInteger();
     };
     if (self.upper <> 1) {
-        maxOccurs := if self.upper = -1 then AllNNIMember1::unbounded else self.upper endif;
+        maxOccurs := if self.upper = -1 then AllNNIMember1::unbounded else self.upper.toBigInteger() endif;
     };
 }
 
@@ -210,7 +196,7 @@ mapping Constraint::toAssertion(schema : SchemaType) : Assertion
     var xpath := self.toExpressionInOCL().xmap toXPath();
     xpath.xmap findQNames(schema);
     test := xpath.toString();
-    annotation := self.getAnnotation();
+    //annotation := self.getAnnotation();
 }
 
 intermediate class SchemaQNames { schema : SchemaType; qnames : Set(QName); };
@@ -223,7 +209,7 @@ mapping Expr::findQNames(currentSchema : SchemaType) : SchemaQNames
                 ->selectByKind(QName).oclAsSet()
                 ->select(getPrefix() <> null and getNamespaceURI() <> null)->asSet();
 }
-
+/*
 mapping String::toAnnotation() : AnnotationType
 when { self.size() > 0 }
 {
@@ -232,10 +218,10 @@ when { self.size() > 0 }
             self.replaceAll('&nbsp;', ' ').replaceAll('\r\n', '\n').replaceAll('\n', ' '));
     };
 }
-
+*/
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
-
+/*
 query Package::getSchemaLocation() : String =
     self.getTargetNS().replaceAll('^urn:', '').substituteAll(':', '_') + '.xsd';
 
@@ -263,7 +249,7 @@ query Element::getAnnotation() : AnnotationType =
 
 query EnumerationLiteral::getAnnotation() : AnnotationType =
     self.specification[OpaqueExpression].body->toAnnotation()->any(true);
-
+*/
 query DataType::getFacetGroup() : List(EFeatureMapEntry)
 {
     var facetGroup : List(EFeatureMapEntry);
@@ -281,28 +267,35 @@ query DataType::getFacetGroup() : List(EFeatureMapEntry)
     return facetGroup;
 }
 
-query DataType::createFacet(name : String) : EFeatureMapEntry =
-    self.getValue('EECProfile::ValueDomain', name)->selectByKind(String)
-        ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
-            name, object Facet { value := val }))->any(true);
+query DataType::createFacet(name : String) : Bag(EFeatureMapEntry) =
+    let val = self.getValue('EECProfile::ValueDomain', name) in
+    if val <> null
+        then Bag{ createFeatureMapEntry('http://www.w3.org/2001/XMLSchema', name, object Facet { value := val }) }
+        else Bag{} endif;
 
-query DataType::createNumFacet(name : String) : EFeatureMapEntry =
-    self.getValue('EECProfile::ValueDomain', name)->selectByKind(String)
-        ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
-            name, object NumFacet { value := val }))->any(true);
+query DataType::createNumFacet(name : String) : Bag(EFeatureMapEntry) =
+    let val = self.getValue('EECProfile::ValueDomain', name) in
+    if val <> null
+        then Bag{ createFeatureMapEntry('http://www.w3.org/2001/XMLSchema', name, object NumFacet { value := val }) }
+        else Bag{} endif;
 
-query DataType::createTotalDigitsType(name : String) : EFeatureMapEntry =
-    self.getValue('EECProfile::ValueDomain', name)->selectByKind(String)
-        ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
-            name, object TotalDigitsType { value := val }))->any(true);
+query DataType::createTotalDigitsType(name : String) : Bag(EFeatureMapEntry) =
+    let val = self.getValue('EECProfile::ValueDomain', name) in
+    if val <> null
+        then Bag{ createFeatureMapEntry('http://www.w3.org/2001/XMLSchema', name, object TotalDigitsType { value := val }) }
+        else Bag{} endif;
 
-query DataType::createPatternType(name : String) : EFeatureMapEntry =
-    self.getValue('EECProfile::ValueDomain', name)->selectByKind(String)
-        ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
-            name, object PatternType { value := val }))->any(true);
+query DataType::createPatternType(name : String) : Bag(EFeatureMapEntry) =
+    let val = self.getValue('EECProfile::ValueDomain', name) in
+    if val <> null
+        then Bag{ createFeatureMapEntry('http://www.w3.org/2001/XMLSchema', name, object PatternType { value := val }) }
+        else Bag{} endif;
 
 // TODO: Sorting doesn't work
 query Enumeration::createNoFixedFacet(name : String) : Sequence(EFeatureMapEntry) =
     self.ownedLiteral->sortedBy(name)
         ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
-            name, object NoFixedFacet { value := val.name; annotation := val.getAnnotation(); }));
+            name, object NoFixedFacet { value := val.name; /*annotation := val.getAnnotation();*/ }));
+
+query Sequence(String)::sep(separator : String) : String =
+    self->iterate(str; res : String = '' | if res = '' then str else res + separator + str endif);

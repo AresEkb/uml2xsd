@@ -7,7 +7,7 @@
 <plugin>
 
     <extension point="org.eclipse.m2m.qvt.oml.javaBlackboxUnits" id="uml2xsd.UtilitiesLibrary">
-        <library name="UtilLib" class="uml2xsd.UtilitiesLibrary">
+        <library name="UtilitiesLibrary" class="uml2xsd.UtilitiesLibrary">
             <metamodel nsURI="http://www.eclipse.org/emf/2002/Ecore"/>
             <metamodel nsURI="http://www.eclipse.org/emf/2003/XMLType"/>
             <metamodel nsURI="http://www.w3.org/2001/XMLSchema"/>

@@ -15,7 +15,7 @@
 // whole AST and therefore it will be even more complex than an
 // OCL to XPath transformation itself.
 
-import uml2xsd.UtilLib;
+import uml2xsd.UtilitiesLibrary;
 import Helpers;
 
 modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';

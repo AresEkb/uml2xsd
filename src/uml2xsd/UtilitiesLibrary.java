@@ -12,6 +12,7 @@ package uml2xsd;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 
 import javax.xml.namespace.QName;
 
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.eclipse.m2m.qvt.oml.blackbox.java.Module;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -40,6 +42,13 @@ import org.emftext.language.xpath2.resource.xpath2.IXpath2TextResource;
 import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2MetaInformation;
 import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2ResourceFactory;
 
+@Module(packageURIs={
+        "http://www.eclipse.org/emf/2002/Ecore",
+        "http://www.eclipse.org/emf/2003/XMLType",
+        "http://www.w3.org/2001/XMLSchema",
+        "http://www.eclipse.org/ocl/2015/Pivot",
+        "http://www.emftext.org/language/xpath2",
+        "http://www.eclipse.org/uml2/2.1.0/UML"})
 public class UtilitiesLibrary {
 
     public UtilitiesLibrary() {
@@ -75,6 +84,12 @@ public class UtilitiesLibrary {
     public static QName createQName(String namespaceURI, String localPart, String prefix)
     {
         return new QName(namespaceURI, localPart, prefix);
+    }
+
+    @Operation(contextual=true)
+    public static BigInteger toBigInteger(Integer value)
+    {
+        return BigInteger.valueOf(value);
     }
 
     @Operation(contextual=true)

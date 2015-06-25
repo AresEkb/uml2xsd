@@ -11,15 +11,12 @@
 package uml2xsd;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -33,13 +30,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.InvalidRegistryObjectException;
-import org.eclipse.core.runtime.RegistryFactory;
-import org.eclipse.core.runtime.spi.RegistryContributor;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -53,7 +44,6 @@ import org.eclipse.emf.ecore.resource.URIConverter.WriteableOutputStream;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
@@ -83,13 +73,8 @@ import org.w3._2007.xml.schema.versioning.XMLSchemaVersioningPackage;
 public class Main {
 
     public static void main(String[] args) {
-//        final String input = "model/ReferenceModel.uml";
-//        final String input = "model/SMDataModel.uml";
-        //final String input = "model/TTDataModel.uml";
-        //final String transform = "transforms/EAEUtoXSD11.qvto";
-        final String input = "model/ISO20022.uml";
-        final String transform = "transforms/ISO20022toXSD11.qvto";
-//        final String transform = "transforms/GetXPath.qvto";
+        final String input = "model/TTDataModel.uml";
+        //final String input = "model/ISO20022.uml";
         final String output = "output/";
 
         System.out.println("Initialization");
@@ -111,13 +96,27 @@ public class Main {
 
         try {
             System.out.println("Registering blackbox units");
-            registerBlackboxUnits();
+            TransformationExecutor.BlackboxRegistry.INSTANCE.registerModules(UtilitiesLibrary.class);
 
             System.out.println("Loading UML model " + input);
             
             Resource resource = rs.getResource(createFileURI(input), true);
             Model uml = (Model)EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.eINSTANCE.getModel());
             
+            final String transform;
+            if (uml.getAppliedProfile("EECProfile") != null) {
+                System.out.println("EAEU model found");
+                transform = "transforms/EAEUtoXSD11.qvto";
+            }
+            else if (uml.getAppliedProfile("ISO20022Profile") != null) {
+                System.out.println("ISO20022 model found");
+                transform = "transforms/ISO20022toXSD11.qvto";
+            }
+            else {
+                throw new IllegalArgumentException("Unknown model profile. Only EAEU and ISO20022 are supported");
+            }
+            
+            System.out.println("Adding data type operations");
             addDataTypeOperations(rs, uml);
 
             System.out.println("Transforming model by " + transform);
@@ -266,34 +265,8 @@ public class Main {
 //        res.unload();
     }
 
-    private static void registerBlackboxUnits() throws FileNotFoundException, ClassNotFoundException, InvalidRegistryObjectException
-    {
-        IExtensionRegistry ecliseRegistry = RegistryFactory.createRegistry(null, null, null);
-        FileInputStream is = new FileInputStream("plugin.xml");
-        RegistryContributor contributor = new RegistryContributor("1", "test", null, null);
-        ecliseRegistry.addContribution(is, contributor, false, null, null, null);
-
-        for (IExtension ext : ecliseRegistry.getExtensions(contributor)) {
-            if (ext.getExtensionPointUniqueIdentifier().equals("org.eclipse.m2m.qvt.oml.javaBlackboxUnits")) {
-                for (IConfigurationElement config : ext.getConfigurationElements()) {
-                    List<String> packageURIs = new ArrayList<String>();
-                    for (IConfigurationElement chld : config.getChildren()) {
-                        packageURIs.add(chld.getAttribute("nsURI"));
-                    }
-                    BlackboxRegistry.INSTANCE.addStandaloneModule(
-                            Class.forName(config.getAttribute("class")),
-                            "uml2xsd." + config.getAttribute("name"),
-                            config.getAttribute("name"),
-                            packageURIs.toArray(new String[] {}));
-                }
-            }
-        }
-    }
-
     private static void addDataTypeOperations(ResourceSet rs, Model model) throws ParserException
     {
-        MetamodelManager mm = UtilitiesLibrary.ocl.getMetamodelManager();
-
         Set<DataType> dataTypes = new HashSet<DataType>();
         final TreeIterator<EObject> iterator = model.eAllContents();
         while (iterator.hasNext()) {
@@ -307,6 +280,7 @@ public class Main {
             }
         }
 
+        MetamodelManager mm = UtilitiesLibrary.ocl.getMetamodelManager();
         for (DataType dataType : dataTypes) {
             // DataTypes doens't inherit operations. So we add operations to each inherited DataType
             for (Operation oper : dataType.getAllOperations()) {
