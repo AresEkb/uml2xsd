@@ -59,6 +59,7 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Operation;
+import org.eclipse.uml2.uml.PackageImport;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.UMLPackage;
@@ -72,10 +73,14 @@ import org.w3._2007.xml.schema.versioning.XMLSchemaVersioningPackage;
 
 public class Main {
 
+    public enum ModelKind { EAEU, ISO20022 };
+    
     public static void main(String[] args) {
-        final String input = "model/TTDataModel.uml";
+        //final String input = "model/TTDataModel.uml";
         //final String input = "model/ISO20022.uml";
+        final String input = "model/ISO20022_BusinessProcessCatalogue.uml";
         final String output = "output/";
+        final ModelKind modelKind;
 
         System.out.println("Initialization");
         ResourceSet rs = new ResourceSetImpl();
@@ -103,22 +108,22 @@ public class Main {
             Resource resource = rs.getResource(createFileURI(input), true);
             Model uml = (Model)EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.eINSTANCE.getModel());
             
-            final String transform;
             if (uml.getAppliedProfile("EECProfile") != null) {
                 System.out.println("EAEU model found");
-                transform = "transforms/EAEUtoXSD11.qvto";
+                modelKind = ModelKind.EAEU;
             }
             else if (uml.getAppliedProfile("ISO20022Profile") != null) {
                 System.out.println("ISO20022 model found");
-                transform = "transforms/ISO20022toXSD11.qvto";
+                modelKind = ModelKind.ISO20022;
             }
             else {
                 throw new IllegalArgumentException("Unknown model profile. Only EAEU and ISO20022 are supported");
             }
-            
+
             System.out.println("Adding data type operations");
             addDataTypeOperations(rs, uml);
 
+            final String transform = getTransformation(modelKind);
             System.out.println("Transforming model by " + transform);
             List<EObject> schemas = transformModel(rs, createFileURI(transform), uml);
 
@@ -127,7 +132,7 @@ public class Main {
                     DocumentRoot root = (DocumentRoot)obj;
                     SchemaType schema = root.getSchema();
                     if (schema != null) {
-                        String schemaLocation = output + getSchemaLocation(schema.getTargetNamespace());
+                        String schemaLocation = output + getSchemaLocation(schema.getTargetNamespace(), modelKind);
                         System.out.println("Saving XML Schema into " + schemaLocation);
                         saveModel(rs, root, createFileURI(schemaLocation));
                     }
@@ -207,9 +212,28 @@ public class Main {
         return URI.createFileURI(new File(relativePath).getAbsolutePath());
     }
 
-    private static String getSchemaLocation(String targetNamespace)
+    private static String getTransformation(ModelKind modelKind)
     {
-        return targetNamespace.replaceFirst("^urn:", "").replace(':', '_') + ".xsd";
+        switch (modelKind) {
+        case EAEU:
+            return "transforms/EAEUtoXSD11.qvto";
+        case ISO20022:
+            return "transforms/ISO20022toXSD11.qvto";
+        default:
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static String getSchemaLocation(String targetNamespace, ModelKind modelKind)
+    {
+        switch (modelKind) {
+        case EAEU:
+            return targetNamespace.replaceFirst("^urn:", "").replace(':', '_') + ".xsd";
+        case ISO20022:
+            return targetNamespace.replaceFirst("^urn:iso:std:iso:20022:tech:xsd:", "") + ".xsd";
+        default:
+            throw new IllegalArgumentException();
+        }
     }
 
     private static void saveModel(ResourceSet rs, EObject model, URI fileName) throws IOException
@@ -234,24 +258,43 @@ public class Main {
 
     private static void addDataTypeOperations(ResourceSet rs, Model model) throws ParserException
     {
+        // TODO: Recursive search is needed
+        Set<Model> models = new HashSet<Model>();
+        models.add(model);
+        final TreeIterator<EObject> modelIterator = model.eAllContents();
+        while (modelIterator.hasNext()) {
+            EObject obj = modelIterator.next();
+            if (obj instanceof PackageImport) {
+                PackageImport packageImport = (PackageImport)obj;
+                models.add(packageImport.getImportedPackage().getModel());
+            }
+        }
+
         Set<DataType> dataTypes = new HashSet<DataType>();
-        final TreeIterator<EObject> iterator = model.eAllContents();
-        while (iterator.hasNext()) {
-            EObject obj = iterator.next();
-            if (obj instanceof DataType) {
-                DataType type = (DataType)obj;
-                dataTypes.add(type);
-                for (Classifier general : type.allParents()) {
-                    dataTypes.add((DataType)general);
+        System.out.println("  Models:");
+        for (Model m : models) {
+            System.out.println("    " + m.getName());
+            final TreeIterator<EObject> iterator = m.eAllContents();
+            while (iterator.hasNext()) {
+                EObject obj = iterator.next();
+                if (obj instanceof DataType) {
+                    DataType dataType = (DataType)obj;
+                    //System.out.println("  " + dataType);
+                    dataTypes.add(dataType);
+                    for (Classifier general : dataType.allParents()) {
+                        dataTypes.add((DataType)general);
+                    }
                 }
             }
         }
 
         MetamodelManager mm = UtilitiesLibrary.ocl.getMetamodelManager();
+        System.out.println("  Operations:");
         for (DataType dataType : dataTypes) {
             // DataTypes doens't inherit operations. So we add operations to each inherited DataType
             for (Operation oper : dataType.getAllOperations()) {
-                createOperation(mm, dataType, oper);
+                org.eclipse.ocl.pivot.Operation asOper = createOperation(mm, dataType, oper);
+                System.out.println("    " + asOper);
             }
         }
     }

@@ -110,7 +110,7 @@ when { self.getAllAttributes()->notEmpty() }
     if (self.generalization->isEmpty()) {
         attribute := self.getOwnedAttributes()->toAttribute();
         sequence := self.map toExplicitGroup();
-        _assert := self.ownedRule.xmap toAssertion(schema);
+        _assert := self.ownedRule->sortedBy(name).xmap toAssertion(schema);
     }
     elif (self.generalization->size() = 1) {
         var generalization := self.generalization->any(true);
@@ -122,7 +122,7 @@ when { self.getAllAttributes()->notEmpty() }
                         base := baseType.getQName();
                         attribute := self.getOwnedAttributes()->toAttribute();
                         sequence := self.map toExplicitGroup();
-                        _assert := self.ownedRule.xmap toAssertion(schema);
+                        _assert := self.ownedRule->sortedBy(name).xmap toAssertion(schema);
                     }
                 }
                 else {
@@ -130,7 +130,7 @@ when { self.getAllAttributes()->notEmpty() }
                         base := baseType.getQName();
                         attribute := self.getOwnedAttributes()->toAttribute();
                         sequence := self.map toExplicitGroup();
-                        _assert := self.ownedRule.xmap toAssertion(schema);
+                        _assert := self.ownedRule->sortedBy(name).xmap toAssertion(schema);
                     }
                 }
             }
@@ -142,7 +142,7 @@ when { self.getAllAttributes()->notEmpty() }
                         base := baseType.getQName();
                         attribute := self.getOwnedAttributes()->toAttribute();
                         sequence := self.map toExplicitGroup();
-                        _assert := self.ownedRule.xmap toAssertion(schema);
+                        _assert := self.ownedRule->sortedBy(name).xmap toAssertion(schema);
                     }
                 }
                 else {
@@ -150,7 +150,7 @@ when { self.getAllAttributes()->notEmpty() }
                         base := baseType.getQName();
                         attribute := self.getOwnedAttributes()->toAttribute();
                         sequence := self.map toExplicitGroup();
-                        _assert := self.ownedRule.xmap toAssertion(schema);
+                        _assert := self.ownedRule->sortedBy(name).xmap toAssertion(schema);
                     }
                 }
             }

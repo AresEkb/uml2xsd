@@ -29,6 +29,8 @@ modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 transformation ISO20022toXSD11(in m : UML, out x : XSD)
     extends OCLtoXPath;
 
+property profileName : String = 'ISO20022Profile';
+
 main()
 {
     m.objectsOfType(Signal)->select(is('MessageDefinition'))->toSchema();
@@ -36,28 +38,31 @@ main()
 
 mapping Classifier::toSchema() : DocumentRoot
 {
-    log('  Found message ' + self.name);
+    var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
+    var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId;
+    
+    log('  Found message ' + msgId);
     var schemaObj := object SchemaType {
-        targetNamespace := 'urn:iso:std:iso:20022:tech:xsd:pain.001.001.03' + self.name; // @TODO
+        targetNamespace := namespace;
         anyAttribute := createFeatureMapEntry('http://www.w3.org/2007/XMLSchema-versioning', 'minVersion', '1.1');
         elementFormDefault := FormChoice::qualified;
     };
 
     xMLNSPrefixMap += object EStringToStringMapEntry {
-        value := 'urn:iso:std:iso:20022:tech:xsd:pain.001.001.03' + self.name;
+        value := namespace;
     };
     
     schemaObj.element += object TopLevelElement {
-    	name := 'Document';
-    	type := createQName('Document').oclAsType(QName);
+    	name := self.generateXMLTag();
+    	type := self.getUnprefixedQName();
     };
 
     schemaObj.complexType += object TopLevelComplexType {
-        name := 'Document';
+        name := self.generateXMLTag();
         sequence := object ExplicitGroup {
             element := self.attribute->collect(attr|object LocalElement {
-                name := attr.name;
-                type := createQName(attr.type.name).oclAsType(QName);
+                name := attr.generateXMLTag();
+                type := attr.type.getUnprefixedQName();
             });
         };
     };
@@ -110,7 +115,7 @@ mapping Classifier::toSimpleType(schema : SchemaType) : TopLevelSimpleType
     assert fatal (stereotypes->size() = 1) with log('DataType "' + self.getNameWithStereotypes() + '" must have exactly one stereotype stereotype (inherited from Datatype, CodeSet or IdentifierSet)');
     var stereotype := stereotypes->any(true).name;
     
-    name := self.name;
+    name := self.generateXMLTag();
     restriction := object RestrictionType1 {
         base := createQName('http://www.w3.org/2001/XMLSchema', types->get(stereotype), 'xs');
         facetGroup := self.getFacetGroup();
@@ -119,7 +124,7 @@ mapping Classifier::toSimpleType(schema : SchemaType) : TopLevelSimpleType
 
 mapping Classifier::toComplexType(schema : SchemaType) : TopLevelComplexType
 {
-    name := self.name;
+    name := self.generateXMLTag();
     //attribute := self.getOwnedAttributes()->toAttribute();
     if (self.is('MessageComponent')) {
         sequence := self.map toExplicitGroup(schema);
@@ -130,13 +135,13 @@ mapping Classifier::toComplexType(schema : SchemaType) : TopLevelComplexType
     else {
         assert fatal (false);
     };
-    _assert := self.ownedRule.xmap toAssertion(schema);
+    _assert := self.ownedRule->sortedBy(name).xmap toAssertion(schema);
 }
 
 mapping Property::toAttribute(schema : SchemaType) : Attribute
 {
-    name := self.name;
-    type := self.type.getQName();
+    name := self.generateXMLTag();
+    type := self.type.getUnprefixedQName();
     if (self.lower = 1 and self.upper = 1) {
         use := UseType::required;
     } 
@@ -156,7 +161,7 @@ when { self.getAttributes()->notEmpty() }
 
 mapping Property::toLocalElement(schema : SchemaType) : LocalElement
 {
-    name := self.name;
+    name := self.generateXMLTag();
     type := self.type.getUnprefixedQName();
     if (self.lower = 0 or self.lower > 1) {
         minOccurs := self.lower.toBigInteger();
@@ -235,16 +240,44 @@ query Enumeration::createNoFixedFacet(name : String) : Sequence(EFeatureMapEntry
         ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
             name, object NoFixedFacet { value := val.name; }));
 
+// http://www.iso20022.org/documents/general/XML_Tag_algorithm.pdf
+query NamedElement::generateXMLTag() : String
+{
+    var name : String;
+    if (self.is('MessageDefinition')) {
+        name := coalesce(self.getValue(profileName + '::MessageDefinition', 'rooElement'), 'Document');
+    }
+    elif (self.is('MessageBuildingBlock')) {
+        name := self.getValue(profileName + '::MessageBuildingBlock', 'xmlTag');
+    }
+    elif (self.is('MessageElement')) {
+        name := self.getValue(profileName + '::MessageElement', 'xmlTag');
+    }
+    else {
+        name := self.name;
+        if (name.lastIndexOf('.') > 0) {
+            name := name.substring(1, name.lastIndexOf('.'));
+        };
+        name := name.replaceFirst('V\\d+$', '');
+    };
+
+    assert fatal (name <> null and name.size() > 0) with log('For element ' + self.getNameWithStereotypes() + ' generated empty xmlTag');
+    
+    return name;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Overrides
 
+// TODO: OCLtoXPath uses both prefixed and unprefixed names. Something must be refactored.
 query NamedElement::getQName() : QName =
-    createQName(self.name).oclAsType(QName);
+    self.getUnprefixedQName();
+//    assert fatal (false) with log('NamedElement::getQName() must not be used');
 
 query NamedElement::getUnprefixedQName() : QName =
-    createQName(self.name).oclAsType(QName);
+    createQName(self.generateXMLTag()).oclAsType(QName);
 
-query Element::is(stereotypeName : String) : Boolean = self.is('ISO20022Profile', stereotypeName);
+query Element::is(stereotypeName : String) : Boolean = self.is(profileName, stereotypeName);
 
 query NamedElement::isDataType() : Boolean = true;
 
