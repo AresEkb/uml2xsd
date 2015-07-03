@@ -17,32 +17,20 @@
         </library>
     </extension>
 
+
+
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated XMLSchema-versioning -->
+      <!-- @generated iso20022-validation-result -->
       <package
-            uri="http://www.w3.org/2007/XMLSchema-versioning"
-            class="org.w3._2007.xml.schema.versioning.XMLSchemaVersioningPackage"
-            genModel="metamodel/XMLSchema-versioning.genmodel"/>
+            uri="urn:iso20022:validation:result"
+            class="iso20022.validation.result.ValidationResultPackage"
+            genModel="metamodel/iso20022-validation-result.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated XMLSchema-versioning -->
+      <!-- @generated iso20022-validation-result -->
       <parser
-            type="xmlschemaversioning"
-            class="org.w3._2007.xml.schema.versioning.util.XMLSchemaVersioningResourceFactoryImpl"/>
-   </extension>
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated XMLSchema11 -->
-      <package
-            uri="http://www.w3.org/2001/XMLSchema"
-            class="org.w3._2001.xml.schema.XMLSchema11Package"
-            genModel="metamodel/XMLSchema11.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated XMLSchema11 -->
-      <parser
-            type="xsd"
-            class="org.w3._2001.xml.schema.util.XMLSchema11ResourceFactoryImpl"/>
+            type="validationresult"
+            class="iso20022.validation.result.util.ValidationResultResourceFactoryImpl"/>
    </extension>
 </plugin>

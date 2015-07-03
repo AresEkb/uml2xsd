@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="urn:iso20022:validation:result"
+        xmlns="urn:iso20022:validation:result"
+        elementFormDefault="qualified">
+
+    <xs:element name="validationResult" type="validationResultType" />
+    
+    <xs:complexType name="validationResultType">
+        <xs:sequence>
+            <xs:element ref="error" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="error" type="errorType" />
+    
+    <xs:complexType name="errorType">
+        <xs:sequence>
+            <xs:element name="ruleName" type="anyContentType" />
+            <xs:element name="element" type="anyContentType" />
+            <xs:element name="message" type="anyContentType" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="anyContentType" mixed="true">
+        <xs:sequence>
+            <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

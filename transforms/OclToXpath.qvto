@@ -31,6 +31,14 @@ mapping ExpressionInOCL::toXPath() : Expr
     log('    to\n      ' + result.toString());
 }
 
+query ExpressionInOCL::toExprSingle() : ExprSingle
+{
+    log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
+    var expr := self.ownedBody.xmap toExprSingle();
+    log('    to\n      ' + expr.toString());
+    return expr;
+}
+
 mapping OCLExpression::toExprSingle() : ExprSingle
 disjuncts
     // Logic

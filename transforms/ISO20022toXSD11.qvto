@@ -51,14 +51,24 @@ mapping Classifier::toSchema() : DocumentRoot
     xMLNSPrefixMap += object EStringToStringMapEntry {
         value := namespace;
     };
-    
+
     schemaObj.element += object TopLevelElement {
-    	name := self.generateXMLTag();
-    	type := self.getUnprefixedQName();
+        name := 'Document';
+        type := createQName(name);
     };
 
     schemaObj.complexType += object TopLevelComplexType {
-        name := self.generateXMLTag();
+        name := 'Document';
+        sequence := object ExplicitGroup {
+            element := object LocalElement {
+                name := self.generateXMLTag();
+                type := createQName(self.name);
+            };
+        };
+    };
+
+    schemaObj.complexType += object TopLevelComplexType {
+        name := self.name;
         sequence := object ExplicitGroup {
             element := self.attribute->collect(attr|object LocalElement {
                 name := attr.generateXMLTag();
@@ -240,12 +250,11 @@ query Enumeration::createNoFixedFacet(name : String) : Sequence(EFeatureMapEntry
         ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
             name, object NoFixedFacet { value := val.name; }));
 
-// http://www.iso20022.org/documents/general/XML_Tag_algorithm.pdf
 query NamedElement::generateXMLTag() : String
 {
     var name : String;
     if (self.is('MessageDefinition')) {
-        name := coalesce(self.getValue(profileName + '::MessageDefinition', 'rooElement'), 'Document');
+        name := self.getValue(profileName + '::MessageDefinition', 'xmlTag');
     }
     elif (self.is('MessageBuildingBlock')) {
         name := self.getValue(profileName + '::MessageBuildingBlock', 'xmlTag');
@@ -259,6 +268,7 @@ query NamedElement::generateXMLTag() : String
             name := name.substring(1, name.lastIndexOf('.'));
         };
         name := name.replaceFirst('V\\d+$', '');
+        // TODO http://www.iso20022.org/documents/general/XML_Tag_algorithm.pdf
     };
 
     assert fatal (name <> null and name.size() > 0) with log('For element ' + self.getNameWithStereotypes() + ' generated empty xmlTag');

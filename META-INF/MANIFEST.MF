@@ -7,12 +7,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: org.w3._2001.xml.schema,
- org.w3._2001.xml.schema.impl,
- org.w3._2001.xml.schema.util,
- org.w3._2007.xml.schema.versioning,
- org.w3._2007.xml.schema.versioning.impl,
- org.w3._2007.xml.schema.versioning.util
+Export-Package: iso20022.validation.result,
+ iso20022.validation.result.impl,
+ iso20022.validation.result.util
 Require-Bundle: org.eclipse.core.runtime,
  org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.emf.common,
@@ -28,9 +25,13 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xsd;bundle-version="2.10.0",
  org.eclipse.core.runtime.compatibility,
  org.eclipse.uml2.uml;bundle-version="5.0.0",
- org.eclipse.uml2.uml.resources;bundle-version="5.0.0"
+ org.eclipse.uml2.uml.resources;bundle-version="5.0.0",
+ xmodel
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.codegen.ecore.genmodel,
  org.emftext.language.xpath2,
  org.emftext.language.xpath2.resource.xpath2,
- org.emftext.language.xpath2.resource.xpath2.mopp
+ org.emftext.language.xpath2.resource.xpath2.mopp,
+ org.w3._1999.xsl.transform,
+ org.w3._1999.xsl.transform.impl,
+ org.w3._1999.xsl.transform.util

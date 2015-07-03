@@ -1,0 +1,164 @@
+/**
+ * Copyright (c) 2015 Denis Nikiforov.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    Denis Nikiforov - initial API and implementation
+ */
+
+/**
+ * Types, elements and other objects may be duplicated in several output schemas.
+ * So we pass root of the output schema as additional mapping argument to generate duplicate objects.
+ *
+ */
+
+import uml2xsd.UtilitiesLibrary;
+import OCLtoXPath;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
+modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
+modeltype XSLT uses 'http://www.w3.org/1999/XSL/Transform';
+modeltype VR uses 'urn:iso20022:validation:result';
+modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
+
+transformation ISO20022toXSLT20(in m : UML, out x : XSLT)
+    extends OCLtoXPath;
+
+property profileName : String = 'ISO20022Profile';
+
+main()
+{
+    m.objectsOfType(Signal)->select(is('MessageDefinition'))->toSchema();
+}
+
+mapping Classifier::toSchema() : DocumentRoot
+{
+    var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
+    var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId;
+    
+    log('  Found message ' + msgId);
+
+    var stylesheetObj := object TransformType {
+        version := 2;
+        xpathDefaultNamespace := namespace;
+        excludeResultPrefixes := PrefixListOrAllMember1::all;
+    };
+
+    stylesheetObj._import := object ImportType {
+    	href := 'iso20022-validation.xsl';
+    };
+
+    self->closure(attribute.type[Classifier])->sortedBy(name).ownedRule->forEach (obj) {
+        log(obj.repr());
+        stylesheetObj.declarationGroup += createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'template', obj.xmap toTemplate(stylesheetObj));
+    };
+
+    stylesheet := stylesheetObj;
+
+    xMLNSPrefixMap += resolveIn(ExprSingle::findQNames, StylesheetQNames)
+        ->select(stylesheet=stylesheetObj).qnames
+        ->collect(qname|object EStringToStringMapEntry {
+            key := qname.getPrefix();
+            value := qname.getNamespaceURI();
+        });
+}
+
+mapping Constraint::toTemplate(stylesheet : TransformType) : TemplateType
+{
+    log(self.name);
+    var xpath := self.toExpressionInOCL().xmap toExprSingle().notExpr();
+    
+    xpath := object PathExpr {
+    	step := object RootStepExpr { };
+    	step += object SelfStepExpr {
+    		step := object AbbrevForwardStep {
+    			kind := AbbrevForwardStepKind::child;
+    			nodeTest := object QNameTest { name := self.owner![NamedElement].getQName() };
+    			predicate := xpath.predicate();
+    		};
+    	};
+    };
+    
+    xpath.xmap findQNames(stylesheet);
+    match := xpath.toString();
+    mixed := createFeatureMapEntry('urn:iso20022:validation:result', 'error', object ErrorType {
+        ruleName := object AnyContentType {
+        	text := self.name;
+        };
+        element := genPath();
+        message := object AnyContentType {
+            text := self.specification[OpaqueExpression].body->any(true);
+        };
+    });
+}
+
+intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(QName); };
+
+mapping ExprSingle::findQNames(currentStylesheet : TransformType) : StylesheetQNames
+{
+    stylesheet := currentStylesheet;
+    qnames := self.allSubobjects()[EObject]->collect(
+                    obj|obj.eClass().eAttributes->collect(attr|obj.eGet(attr)))
+                ->selectByKind(QName).oclAsSet()
+                ->select(getPrefix() <> null and getNamespaceURI() <> null)->asSet();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Helpers
+
+query genPath() : AnyContentType =
+    object AnyContentType {
+        mixed := createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'callTemplate',
+            object CallTemplateType { name := 'genPath'; });
+    };
+
+query NamedElement::generateXMLTag() : String
+{
+    var name : String;
+    if (self.is('MessageDefinition')) {
+        name := self.getValue(profileName + '::MessageDefinition', 'xmlTag');
+    }
+    elif (self.is('MessageBuildingBlock')) {
+        name := self.getValue(profileName + '::MessageBuildingBlock', 'xmlTag');
+    }
+    elif (self.is('MessageElement')) {
+        name := self.getValue(profileName + '::MessageElement', 'xmlTag');
+    }
+    else {
+        name := self.name;
+        if (name.lastIndexOf('.') > 0) {
+            name := name.substring(1, name.lastIndexOf('.'));
+        };
+        name := name.replaceFirst('V\\d+$', '');
+        // TODO http://www.iso20022.org/documents/general/XML_Tag_algorithm.pdf
+    };
+
+    assert fatal (name <> null and name.size() > 0) with log('For element ' + self.getNameWithStereotypes() + ' generated empty xmlTag');
+    
+    return name;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Overrides
+
+// TODO: OCLtoXPath uses both prefixed and unprefixed names. Something must be refactored.
+query NamedElement::getQName() : TYPE::QName =
+    self.getUnprefixedQName();
+//    assert fatal (false) with log('NamedElement::getQName() must not be used');
+
+query NamedElement::getUnprefixedQName() : TYPE::QName =
+    createQName(self.generateXMLTag()).oclAsType(TYPE::QName);
+
+query Element::is(stereotypeName : String) : Boolean = self.is(profileName, stereotypeName);
+
+query NamedElement::isDataType() : Boolean = true;
+
+query NamedElement::isDataElement() : Boolean = false;
+
+query NamedElement::isAttribute() : Boolean = self.getAppliedStereotype('EECProfile::Attribute') <> null;

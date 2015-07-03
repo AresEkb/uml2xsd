@@ -36,7 +36,7 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
-import org.emftext.language.xpath2.Expr;
+import org.emftext.language.xpath2.AnyExpr;
 import org.emftext.language.xpath2.resource.xpath2.IXpath2TextPrinter;
 import org.emftext.language.xpath2.resource.xpath2.IXpath2TextResource;
 import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2MetaInformation;
@@ -124,6 +124,19 @@ public class UtilitiesLibrary {
             throw new IllegalArgumentException("DocumentRoot class not found in a package with ns URI '" + nsURI + "'");
         }
         EStructuralFeature feature = docRoot.getEStructuralFeature(eStructuralFeature);
+        if (feature == null) {
+            throw new IllegalArgumentException("Feature " + eStructuralFeature + " not found in a package with ns URI '" + nsURI + "'");
+        }
+        if (value instanceof String && feature.getEType() instanceof EDataType) {
+            String string = (String)value;
+            EDataType type = (EDataType)feature.getEType();
+            value = EcoreUtil.createFromString(type, string);
+        }
+        return FeatureMapUtil.createEntry(feature, value);
+    }
+
+    public static FeatureMap.Entry createFeatureMapEntry(EStructuralFeature feature, Object value)
+    {
         if (value instanceof String && feature.getEType() instanceof EDataType) {
             String string = (String)value;
             EDataType type = (EDataType)feature.getEType();
@@ -155,7 +168,7 @@ public class UtilitiesLibrary {
     }
 
     @Operation(contextual=true)
-    public static String toString(Expr expr) throws IOException
+    public static String toString(AnyExpr expr) throws IOException
     {
         ResourceSetImpl rs = new ResourceSetImpl();
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new Xpath2ResourceFactory());

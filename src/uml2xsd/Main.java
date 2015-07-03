@@ -65,21 +65,27 @@ import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
-import org.emftext.language.xpath2.Xpath2Package;
+import org.emftext.language.xpath2.XPath2Package;
+import org.w3._1999.xsl.transform.TransformType;
+import org.w3._1999.xsl.transform.XSLT20Package;
 import org.w3._2001.xml.schema.DocumentRoot;
 import org.w3._2001.xml.schema.SchemaType;
 import org.w3._2001.xml.schema.XMLSchema11Package;
 import org.w3._2007.xml.schema.versioning.XMLSchemaVersioningPackage;
 
+import iso20022.validation.result.ValidationResultPackage;
+
 public class Main {
 
     public enum ModelKind { EAEU, ISO20022 };
+    public enum OutputFormat { XSD11, XSLT20 };
     
     public static void main(String[] args) {
         //final String input = "model/TTDataModel.uml";
-        //final String input = "model/ISO20022.uml";
         final String input = "model/ISO20022_BusinessProcessCatalogue.uml";
         final String output = "output/";
+        final OutputFormat outputFormat = OutputFormat.XSLT20;
+        //final OutputFormat outputFormat = OutputFormat.XSD11;
         final ModelKind modelKind;
 
         System.out.println("Initialization");
@@ -95,9 +101,12 @@ public class Main {
         UMLStandaloneSetup.init();
         
         System.out.println("  Ecore packages");
-        Xpath2Package.eINSTANCE.getEFactoryInstance();
+        XPath2Package.eINSTANCE.getEFactoryInstance();
         XMLSchema11Package.eINSTANCE.getEFactoryInstance();
         XMLSchemaVersioningPackage.eINSTANCE.getEFactoryInstance();
+        XSLT20Package.eINSTANCE.getEFactoryInstance();
+        ValidationResultPackage.eINSTANCE.getEFactoryInstance();
+        //XHTML11Package.eINSTANCE.getEFactoryInstance();
 
         try {
             System.out.println("Registering blackbox units");
@@ -123,7 +132,7 @@ public class Main {
             System.out.println("Adding data type operations");
             addDataTypeOperations(rs, uml);
 
-            final String transform = getTransformation(modelKind);
+            final String transform = getTransformation(modelKind, outputFormat);
             System.out.println("Transforming model by " + transform);
             List<EObject> schemas = transformModel(rs, createFileURI(transform), uml);
 
@@ -132,8 +141,17 @@ public class Main {
                     DocumentRoot root = (DocumentRoot)obj;
                     SchemaType schema = root.getSchema();
                     if (schema != null) {
-                        String schemaLocation = output + getSchemaLocation(schema.getTargetNamespace(), modelKind);
+                        String schemaLocation = output + getSchemaLocation(schema.getTargetNamespace(), modelKind, outputFormat);
                         System.out.println("Saving XML Schema into " + schemaLocation);
+                        saveModel(rs, root, createFileURI(schemaLocation));
+                    }
+                }
+                else if (obj instanceof org.w3._1999.xsl.transform.DocumentRoot) {
+                    org.w3._1999.xsl.transform.DocumentRoot root = (org.w3._1999.xsl.transform.DocumentRoot)obj;
+                    TransformType schema = root.getStylesheet();
+                    if (schema != null) {
+                        String schemaLocation = output + getSchemaLocation(schema.getXpathDefaultNamespace(), modelKind, outputFormat);
+                        System.out.println("Saving XSL Transformation into " + schemaLocation);
                         saveModel(rs, root, createFileURI(schemaLocation));
                     }
                 }
@@ -212,28 +230,42 @@ public class Main {
         return URI.createFileURI(new File(relativePath).getAbsolutePath());
     }
 
-    private static String getTransformation(ModelKind modelKind)
+    private static String getTransformation(ModelKind modelKind, OutputFormat outputFormat)
     {
         switch (modelKind) {
         case EAEU:
-            return "transforms/EAEUtoXSD11.qvto";
+            if (outputFormat == OutputFormat.XSD11) {
+                return "transforms/EAEUtoXSD11.qvto";
+            }
+            break;
         case ISO20022:
-            return "transforms/ISO20022toXSD11.qvto";
-        default:
-            throw new IllegalArgumentException();
+            if (outputFormat == OutputFormat.XSD11) {
+                return "transforms/ISO20022toXSD11.qvto";
+            }
+            else if (outputFormat == OutputFormat.XSLT20) {
+                return "transforms/ISO20022toXSLT20.qvto";
+            }
         }
+        throw new IllegalArgumentException();
     }
 
-    private static String getSchemaLocation(String targetNamespace, ModelKind modelKind)
+    private static String getSchemaLocation(String targetNamespace, ModelKind modelKind, OutputFormat outputFormat)
     {
         switch (modelKind) {
         case EAEU:
-            return targetNamespace.replaceFirst("^urn:", "").replace(':', '_') + ".xsd";
+            if (outputFormat == OutputFormat.XSD11) {
+                return targetNamespace.replaceFirst("^urn:", "").replace(':', '_') + ".xsd";
+            }
         case ISO20022:
-            return targetNamespace.replaceFirst("^urn:iso:std:iso:20022:tech:xsd:", "") + ".xsd";
-        default:
-            throw new IllegalArgumentException();
+            String name = targetNamespace.replaceFirst("^urn:iso:std:iso:20022:tech:xsd:", "");
+            if (outputFormat == OutputFormat.XSD11) {
+                return name + ".xsd";
+            }
+            else if (outputFormat == OutputFormat.XSLT20) {
+                return name + ".xsl";
+            }
         }
+        throw new IllegalArgumentException();
     }
 
     private static void saveModel(ResourceSet rs, EObject model, URI fileName) throws IOException
@@ -279,7 +311,6 @@ public class Main {
                 EObject obj = iterator.next();
                 if (obj instanceof DataType) {
                     DataType dataType = (DataType)obj;
-                    //System.out.println("  " + dataType);
                     dataTypes.add(dataType);
                     for (Classifier general : dataType.allParents()) {
                         dataTypes.add((DataType)general);
@@ -291,7 +322,7 @@ public class Main {
         MetamodelManager mm = UtilitiesLibrary.ocl.getMetamodelManager();
         System.out.println("  Operations:");
         for (DataType dataType : dataTypes) {
-            // DataTypes doens't inherit operations. So we add operations to each inherited DataType
+            // DataTypes doesn't inherit operations. So we add operations to each inherited DataType
             for (Operation oper : dataType.getAllOperations()) {
                 org.eclipse.ocl.pivot.Operation asOper = createOperation(mm, dataType, oper);
                 System.out.println("    " + asOper);
