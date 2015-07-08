@@ -13,6 +13,8 @@
  * Types, elements and other objects may be duplicated in several output schemas.
  * So we pass root of the output schema as additional mapping argument to generate duplicate objects.
  *
+ * XSLT' XML Schema contains a lot of substition groups, so there are a lot of EFeatureMapEntries in the transformation.
+ * Maybe it can be simplified somehow.
  */
 
 import uml2xsd.UtilitiesLibrary;
@@ -33,9 +35,7 @@ property profileName : String = 'ISO20022Profile';
 
 main()
 {
-    m.objectsOfType(Signal)->select(is('MessageDefinition'))->
-        //select(getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier') = 'pain.001.001.03')->
-        toSchema();
+    m.objectsOfType(Signal)->select(is('MessageDefinition'))->toSchema();
 }
 
 mapping Classifier::toSchema() : DocumentRoot
@@ -133,6 +133,7 @@ mapping Constraint::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
                 };
             });
         });
+    instructionGroup += createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'applyTemplates', object ApplyTemplatesType { });
 }
 
 intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(TYPE::QName); };

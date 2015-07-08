@@ -33,6 +33,12 @@
 					<TwnNm>New York</TwnNm>
 					<Ctry>US</Ctry>
 				</PstlAdr>
+				<Id>
+					<OrgId>
+						<BICOrBEI>qw</BICOrBEI>
+						<Othr><Id>qw</Id></Othr>
+					</OrgId>
+				</Id>
 			</Dbtr>
 			<DbtrAcct>
 				<Id>
