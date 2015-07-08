@@ -73,6 +73,8 @@ import org.w3._2001.xml.schema.SchemaType;
 import org.w3._2001.xml.schema.XMLSchema11Package;
 import org.w3._2007.xml.schema.versioning.XMLSchemaVersioningPackage;
 
+import com.google.common.io.Files;
+
 import iso20022.validation.result.ValidationResultPackage;
 
 public class Main {
@@ -86,6 +88,7 @@ public class Main {
         final String output = "output/";
         final OutputFormat outputFormat = OutputFormat.XSLT20;
         //final OutputFormat outputFormat = OutputFormat.XSD11;
+        final String iso20022validationStylysheet = "iso20022-validation.xsl";
         final ModelKind modelKind;
 
         System.out.println("Initialization");
@@ -162,6 +165,10 @@ public class Main {
 //                    saveModel(rs, obj, createFileURI(schemaLocation));
 //                    i++;
 //                }
+            }
+            
+            if (modelKind == ModelKind.ISO20022 && outputFormat == OutputFormat.XSLT20) {
+                Files.copy(new File("xslt/" + iso20022validationStylysheet), new File(output + '/' + iso20022validationStylysheet));
             }
 
             System.out.println("Done!");

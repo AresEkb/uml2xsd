@@ -33,7 +33,9 @@ property profileName : String = 'ISO20022Profile';
 
 main()
 {
-    m.objectsOfType(Signal)->select(is('MessageDefinition'))->toSchema();
+    m.objectsOfType(Signal)->select(is('MessageDefinition'))->
+        //select(getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier') = 'pain.001.001.03')->
+        toSchema();
 }
 
 mapping Classifier::toSchema() : DocumentRoot
@@ -53,10 +55,24 @@ mapping Classifier::toSchema() : DocumentRoot
     	href := 'iso20022-validation.xsl';
     };
 
-    self->closure(attribute.type[Classifier])->sortedBy(name).ownedRule->forEach (obj) {
-        log(obj.repr());
-        stylesheetObj.declarationGroup += createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'template', obj.xmap toTemplate(stylesheetObj));
+    var rootPathExpr := object PathExpr {
+        step := object RootStepExpr { };
+        step += object AbbrevForwardStep {
+            kind := AbbrevForwardStepKind::child;
+            nodeTest := object QNameTest { name := createQName('Document') };
+        };
+        step += object ChildStepExpr {
+            step := object AbbrevForwardStep {
+                kind := AbbrevForwardStepKind::child;
+                nodeTest := object QNameTest { name := self.getQName() };
+            };
+        };
     };
+
+    var props := self.allAttributes()->union(self.allAttributes()->closure(type.oclAsType(Classifier).allAttributes()));
+
+    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->sortedBy(name).ownedRule->
+        collect(rule|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'template', rule.xmap toTemplate(stylesheetObj, rootPathExpr, props)));
 
     stylesheet := stylesheetObj;
 
@@ -68,46 +84,66 @@ mapping Classifier::toSchema() : DocumentRoot
         });
 }
 
-mapping Constraint::toTemplate(stylesheet : TransformType) : TemplateType
+mapping NamedElement::toPathExpr(stylesheet : TransformType, rootPathExpr : PathExpr, props : Set(Property)) : Set(PathExpr)
 {
-    log(self.name);
-    var xpath := self.toExpressionInOCL().xmap toExprSingle().notExpr();
-    
-    xpath := object PathExpr {
-    	step := object RootStepExpr { };
-    	step += object SelfStepExpr {
-    		step := object AbbrevForwardStep {
-    			kind := AbbrevForwardStepKind::child;
-    			nodeTest := object QNameTest { name := self.owner![NamedElement].getQName() };
-    			predicate := xpath.predicate();
-    		};
-    	};
-    };
-    
-    xpath.xmap findQNames(stylesheet);
-    match := xpath.toString();
-    mixed := createFeatureMapEntry('urn:iso20022:validation:result', 'error', object ErrorType {
-        ruleName := object AnyContentType {
-        	text := self.name;
+    init {
+        var parents := props->select(type = self.owner).xmap toPathExpr(stylesheet, rootPathExpr, props);
+        if (parents->isEmpty()) {
+        	result += rootPathExpr.deepclone().oclAsType(PathExpr);
+        }
+        else {
+            result := parents.deepclone()[PathExpr]->asSet();
         };
-        element := genPath();
-        message := object AnyContentType {
-            text := self.specification[OpaqueExpression].body->any(true);
+    }
+    if (self.oclIsKindOf(Property)) {
+        result->forEach (path) {
+            path.step += object ChildStepExpr {
+                step := object AbbrevForwardStep {
+                    kind := AbbrevForwardStepKind::child;
+                    nodeTest := object QNameTest { name := self.getQName() };
+                };
+            };
         };
-    });
+    }
 }
 
-intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(QName); };
+mapping Constraint::toTemplate(stylesheet : TransformType, rootPathExpr : PathExpr, props : Set(Property)) : TemplateType
+{
+    var xpath := self.toExpressionInOCL().xmap toExprSingle().notExpr();
+
+    var context := object UnionExpr {
+        operand := self.xmap toPathExpr(stylesheet, rootPathExpr, props);
+        operation := Sequence{1..operand->size()-1}->collect(UnionOp::vertical_bar);
+    };
+
+    xpath.xmap findQNames(stylesheet);
+    context.xmap findQNames(stylesheet);
+    
+    match := context.toString();
+    instructionGroup := createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'if',
+        object IfType {
+            test := xpath.toString();
+            mixed := createFeatureMapEntry('urn:iso20022:validation:result', 'error', object ErrorType {
+                ruleName := object AnyContentType {
+                    text := self.name;
+                };
+                element := genPath();
+                message := object AnyContentType {
+                    text := self.specification[OpaqueExpression].body->any(true);
+                };
+            });
+        });
+}
+
+intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(TYPE::QName); };
 
 mapping ExprSingle::findQNames(currentStylesheet : TransformType) : StylesheetQNames
 {
     stylesheet := currentStylesheet;
-    qnames := self.allSubobjects()[EObject]->collect(
-                    obj|obj.eClass().eAttributes->collect(attr|obj.eGet(attr)))
-                ->selectByKind(QName).oclAsSet()
-                ->select(getPrefix() <> null and getNamespaceURI() <> null)->asSet();
+    qnames := self.allSubobjects()[EObject]->
+        collect(obj|obj.eClass().eAttributes->collect(attr|obj.eGet(attr)))[TYPE::QName]->
+        select(getPrefix() <> null and getNamespaceURI() <> null)->asSet();
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
