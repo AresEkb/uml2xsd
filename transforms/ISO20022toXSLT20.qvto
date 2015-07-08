@@ -71,8 +71,8 @@ mapping Classifier::toSchema() : DocumentRoot
 
     var props := self.allAttributes()->union(self.allAttributes()->closure(type.oclAsType(Classifier).allAttributes()));
 
-    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->sortedBy(name).ownedRule->
-        collect(rule|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'template', rule.xmap toTemplate(stylesheetObj, rootPathExpr, props)));
+    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->sortedBy(name)->select(ownedRule->notEmpty())->
+        collect(type|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'template', type.xmap toTemplate(stylesheetObj, rootPathExpr, props)));
 
     stylesheet := stylesheetObj;
 
@@ -87,7 +87,8 @@ mapping Classifier::toSchema() : DocumentRoot
 mapping NamedElement::toPathExpr(stylesheet : TransformType, rootPathExpr : PathExpr, props : Set(Property)) : Set(PathExpr)
 {
     init {
-        var parents := props->select(type = self.owner).xmap toPathExpr(stylesheet, rootPathExpr, props);
+        var currentType := if self.oclIsKindOf(Type) then self else self.owner endif;
+        var parents := props->select(type = currentType).xmap toPathExpr(stylesheet, rootPathExpr, props);
         if (parents->isEmpty()) {
         	result += rootPathExpr.deepclone().oclAsType(PathExpr);
         }
@@ -107,33 +108,33 @@ mapping NamedElement::toPathExpr(stylesheet : TransformType, rootPathExpr : Path
     }
 }
 
-mapping Constraint::toTemplate(stylesheet : TransformType, rootPathExpr : PathExpr, props : Set(Property)) : TemplateType
+mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathExpr, props : Set(Property)) : TemplateType
 {
-    var xpath := self.toExpressionInOCL().xmap toExprSingle().notExpr();
-
     var context := object UnionExpr {
-        operand := self.xmap toPathExpr(stylesheet, rootPathExpr, props);
+        operand := self.xmap toPathExpr(stylesheet, rootPathExpr, props)->sortedBy(toString());
         operation := Sequence{1..operand->size()-1}->collect(UnionOp::vertical_bar);
     };
-
-    xpath.xmap findQNames(stylesheet);
     context.xmap findQNames(stylesheet);
-    
     match := context.toString();
-    instructionGroup := createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'if',
-        object IfType {
-            test := xpath.toString();
-            mixed := createFeatureMapEntry('urn:iso20022:validation:result', 'error', object ErrorType {
-                ruleName := object AnyContentType {
-                    text := self.name;
-                };
-                element := genPath();
-                message := object AnyContentType {
-                    text := self.specification[OpaqueExpression].body->any(true);
-                };
-            });
-        });
+    instructionGroup += self.ownedRule->collect(rule|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'if', rule.xmap toIf(stylesheet)));
     instructionGroup += createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'applyTemplates', object ApplyTemplatesType { });
+}
+
+mapping Constraint::toIf(stylesheet : TransformType) : IfType
+{
+    var xpath := self.toExpressionInOCL().xmap toExprSingle().notExpr();
+    xpath.xmap findQNames(stylesheet);
+
+    test := xpath.toString();
+    mixed := createFeatureMapEntry('urn:iso20022:validation:result', 'error', object ErrorType {
+        ruleName := object AnyContentType {
+            text := self.name;
+        };
+        element := genPath();
+        message := object AnyContentType {
+            text := self.specification[OpaqueExpression].body->any(true);
+        };
+    });
 }
 
 intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(TYPE::QName); };
