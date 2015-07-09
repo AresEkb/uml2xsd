@@ -79,8 +79,8 @@ import iso20022.validation.result.ValidationResultPackage;
 
 public class Main {
 
-    public enum ModelKind { EAEU, ISO20022 };
-    public enum OutputFormat { XSD11, XSLT20 };
+    public enum ModelKind { EAEU, ISO20022_ECORE, ISO20022_UML };
+    public enum OutputFormat { XSD11, XSLT20, UML };
     
     public static void main(String[] args) {
         //final String input = "model/TTDataModel.uml";
@@ -126,7 +126,7 @@ public class Main {
             }
             else if (uml.getAppliedProfile("ISO20022Profile") != null) {
                 System.out.println("ISO20022 model found");
-                modelKind = ModelKind.ISO20022;
+                modelKind = ModelKind.ISO20022_UML;
             }
             else {
                 throw new IllegalArgumentException("Unknown model profile. Only EAEU and ISO20022 are supported");
@@ -167,7 +167,7 @@ public class Main {
 //                }
             }
             
-            if (modelKind == ModelKind.ISO20022 && outputFormat == OutputFormat.XSLT20) {
+            if (modelKind == ModelKind.ISO20022_UML && outputFormat == OutputFormat.XSLT20) {
                 Files.copy(new File("xslt/" + iso20022validationStylysheet), new File(output + '/' + iso20022validationStylysheet));
             }
 
@@ -245,13 +245,15 @@ public class Main {
                 return "transforms/EAEUtoXSD11.qvto";
             }
             break;
-        case ISO20022:
+        case ISO20022_UML:
             if (outputFormat == OutputFormat.XSD11) {
                 return "transforms/ISO20022toXSD11.qvto";
             }
             else if (outputFormat == OutputFormat.XSLT20) {
                 return "transforms/ISO20022toXSLT20.qvto";
             }
+        case ISO20022_ECORE:
+            throw new IllegalArgumentException();
         }
         throw new IllegalArgumentException();
     }
@@ -263,7 +265,7 @@ public class Main {
             if (outputFormat == OutputFormat.XSD11) {
                 return targetNamespace.replaceFirst("^urn:", "").replace(':', '_') + ".xsd";
             }
-        case ISO20022:
+        case ISO20022_UML:
             String name = targetNamespace.replaceFirst("^urn:iso:std:iso:20022:tech:xsd:", "");
             if (outputFormat == OutputFormat.XSD11) {
                 return name + ".xsd";
@@ -271,6 +273,8 @@ public class Main {
             else if (outputFormat == OutputFormat.XSLT20) {
                 return name + ".xsl";
             }
+        case ISO20022_ECORE:
+            throw new IllegalArgumentException();
         }
         throw new IllegalArgumentException();
     }
