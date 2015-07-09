@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ISO20022Profile="http:///schemas/ISO20022Profile/_nZMbwB5XEeWTpeRxh6yIfQ/48" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/ISO20022Profile/_nZMbwB5XEeWTpeRxh6yIfQ/48 ISO20022Profile.profile.uml#_nZTwgB5XEeWTpeRxh6yIfQ">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ISO20022Profile="http:///schemas/ISO20022Profile/_Z1baoCR_EeW-eZ1ZLTAX7g/50" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/ISO20022Profile/_Z1baoCR_EeW-eZ1ZLTAX7g/50 ISO20022Profile.profile.uml#_Z1fsECR_EeW-eZ1ZLTAX7g">
   <uml:Model xmi:id="_AelFgB_9EeWTpeRxh6yIfQ" name="ISO20022_DataDictionary">
     <packageImport xmi:id="_AelFgR_9EeWTpeRxh6yIfQ">
       <importedPackage xmi:type="uml:Model" href="ISO20022DataTypes.uml#_lltgoBZvEeW7y7t0CTtgPw"/>
@@ -6533,7 +6533,7 @@
     </packagedElement>
     <profileApplication xmi:id="_AetB0B_9EeWTpeRxh6yIfQ">
       <eAnnotations xmi:id="_AetB0R_9EeWTpeRxh6yIfQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="ISO20022Profile.profile.uml#_nZTwgB5XEeWTpeRxh6yIfQ"/>
+        <references xmi:type="ecore:EPackage" href="ISO20022Profile.profile.uml#_Z1fsECR_EeW-eZ1ZLTAX7g"/>
       </eAnnotations>
       <appliedProfile href="ISO20022Profile.profile.uml#_rspygA6UEeWHY4KRRC3kUQ"/>
     </profileApplication>
