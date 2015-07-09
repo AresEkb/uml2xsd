@@ -35,7 +35,7 @@ property profileName : String = 'ISO20022Profile';
 
 main()
 {
-    m.objectsOfType(Signal)->select(is('MessageDefinition'))->toSchema();
+    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toSchema();
 }
 
 mapping Classifier::toSchema() : DocumentRoot
@@ -69,9 +69,9 @@ mapping Classifier::toSchema() : DocumentRoot
         };
     };
 
-    var props := self.allAttributes()->union(self.allAttributes()->closure(type.oclAsType(Classifier).allAttributes()));
+    var props := self.allAttributes()->closure(type.oclAsType(Classifier).allAttributes())->union(self.allAttributes());
 
-    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->sortedBy(name)->select(ownedRule->notEmpty())->
+    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->select(ownedRule->notEmpty())->
         collect(type|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'template', type.xmap toTemplate(stylesheetObj, rootPathExpr, props)));
 
     stylesheet := stylesheetObj;
@@ -116,7 +116,7 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
     };
     context.xmap findQNames(stylesheet);
     match := context.toString();
-    instructionGroup += self.ownedRule->collect(rule|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'if', rule.xmap toIf(stylesheet)));
+    instructionGroup += self.ownedRule->sortedBy(name)->collect(rule|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'if', rule.xmap toIf(stylesheet)));
     instructionGroup += createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'applyTemplates', object ApplyTemplatesType { });
 }
 
