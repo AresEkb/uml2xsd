@@ -4,6 +4,7 @@
                 xmlns:fn="http://www.w3.org/2005/xpath-functions"
                 xmlns:vr="urn:iso20022:validation:result"
                 xmlns="http://www.w3.org/1999/xhtml"
+				xpath-default-namespace="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03"
                 exclude-result-prefixes="#all">
   
   <xsl:import href="pain.001.001.03.xsl"/>
