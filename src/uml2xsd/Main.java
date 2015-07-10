@@ -50,13 +50,11 @@ import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.uml.UMLStandaloneSetup;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.xtext.essentialocl.EssentialOCLStandaloneSetup;
-import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.DataType;
@@ -69,15 +67,10 @@ import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
-import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.JavaFactory;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.resource.JaMoPPUtil;
-import org.emftext.language.java.resource.java.util.JavaURIUtil;
 import org.emftext.language.xpath2.XPath2Package;
-import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2ResourceFactory;
 import org.w3._1999.xsl.transform.TransformType;
 import org.w3._1999.xsl.transform.XSLT20Package;
 import org.w3._2001.xml.schema.DocumentRoot;
@@ -147,6 +140,7 @@ public class Main {
 
             // TODO: There is a very strange bug. If one will remove the following lines (or move them after addDataTypeOperations()),
             // OCL will not resolve some properties during transformation.
+            // https://www.eclipse.org/forums/index.php/m/1701277/
             try {
                 for (PackageableElement el : uml.getPackagedElements()) {
                     if (el instanceof Classifier) {

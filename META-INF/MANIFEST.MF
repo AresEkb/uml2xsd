@@ -22,19 +22,14 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.m2m.qvt.oml;bundle-version="3.4.0",
  org.eclipse.m2m.qvt.oml.common;bundle-version="3.4.0",
  org.eclipse.m2m.qvt.oml.emf.util;bundle-version="3.4.0",
- org.eclipse.xsd;bundle-version="2.10.0",
  org.eclipse.core.runtime.compatibility,
  org.eclipse.uml2.uml;bundle-version="5.0.0",
  org.eclipse.uml2.uml.resources;bundle-version="5.0.0",
- xmodel,
  org.emftext.language.java;bundle-version="1.4.1",
  org.emftext.language.java.resource;bundle-version="1.4.1",
- org.emftext.language.java.resource.java;bundle-version="1.4.1"
+ org.emftext.language.java.resource.java;bundle-version="1.4.1",
+ org.emftext.language.xpath2;bundle-version="1.0.0",
+ org.emftext.language.xpath2.resource.xpath2;bundle-version="1.0.0",
+ xmodel;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.emf.codegen.ecore.genmodel,
- org.emftext.language.xpath2,
- org.emftext.language.xpath2.resource.xpath2,
- org.emftext.language.xpath2.resource.xpath2.mopp,
- org.w3._1999.xsl.transform,
- org.w3._1999.xsl.transform.impl,
- org.w3._1999.xsl.transform.util
+Import-Package: org.eclipse.emf.codegen.ecore.genmodel
