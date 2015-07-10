@@ -1,0 +1,108 @@
+/**
+ * Copyright (c) 2015 Denis Nikiforov.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    Denis Nikiforov - initial API and implementation
+ */
+
+import uml2xsd.UtilitiesLibrary;
+import ISO20022Helpers;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
+modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
+modeltype JAVA uses 'http://www.emftext.org/java';
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
+
+transformation ISO20022toJava(in m : UML, out j : JAVA);
+
+property profileName : String = 'ISO20022Profile';
+
+main()
+{
+    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toClass();
+}
+
+mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::containers::CompilationUnit
+{
+    object c : JAVA::classifiers::Class {
+        name := self.name.replace('.', '_');
+        //members := self.attribute->toField();
+        
+        members += self.ownedRule->sortedBy(name)->toClassMethod();
+        
+        members += object JAVA::members::ClassMethod {
+        	name := 'isValid';
+        	typeReference := object JAVA::types::_Boolean { };
+            annotationsAndModifiers := object JAVA::modifiers::Public { };
+        	statements := object JAVA::statements::Return {
+        	   returnValue := object JAVA::literals::BooleanLiteral { value := true; };
+        	};
+        };
+    };
+    object cu : JAVA::containers::CompilationUnit {
+        name := self.name;
+        classifiers := c;
+        imports += object JAVA::imports::ClassifierImport {
+        	classifier := createJavaClassifier('java.util.ArrayList'); /*object JAVA::classifiers::Class {
+        		name := 'ArrayList';
+        	};*/
+        	namespaces := Sequence{'java', 'util'};
+        };
+        imports += object JAVA::imports::ClassifierImport {
+            classifier := createJavaClassifier('java.util.List');/*object JAVA::classifiers::Interface {
+                name := 'List';
+            };*/
+            namespaces := Sequence{'java', 'util'};
+        };
+    };
+}
+
+mapping Property::toField() : JAVA::members::Field
+{
+	name := self.name;
+	var fieldType := object JAVA::types::ClassifierReference {
+		target := self.type.oclAsType(Classifier).xmap toClass().c;
+	};
+	annotationsAndModifiers := object JAVA::modifiers::Public { };
+	
+    if (self.upper = 1) {
+  	    typeReference := fieldType;
+	}
+	else {
+        typeReference := object JAVA::types::ClassifierReference {
+		    target := object JAVA::classifiers::Interface {
+                name := 'List';
+            };
+            /*target :=      JAVA::containers::Package.allInstances()->any(p | p.name = 'java.lang').compilationUnits->collect(
+            cu | cu.classifiers)->flatten()->any(c | c.name = 'LinkedList');*/
+        };
+        typeArguments := object JAVA::generics::QualifiedTypeArgument {
+            typeReference := fieldType;
+        };
+	};
+
+	/*
+		type := object JAVA::types::ClassifierReference {
+			target := object JAVA::classifiers::Interface {
+				name := 'List';
+			};
+			typeArguments := object JAVA::generics::QualifiedTypeArgument {
+				type := fieldType;
+			};
+		};*/
+}
+
+mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
+{
+    name := 'check' + self.name;
+    typeReference := object JAVA::types::_Boolean { };
+    annotationsAndModifiers := object JAVA::modifiers::Public { };
+    statements := object JAVA::statements::Return {
+        returnValue := object JAVA::literals::BooleanLiteral { value := true; };
+    };
+}

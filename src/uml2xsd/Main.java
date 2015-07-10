@@ -50,22 +50,34 @@ import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.uml.UMLStandaloneSetup;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.xtext.essentialocl.EssentialOCLStandaloneSetup;
+import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Classifier;
+import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.PackageImport;
+import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
+import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.JavaFactory;
+import org.emftext.language.java.JavaPackage;
+import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.ContainersPackage;
+import org.emftext.language.java.resource.JaMoPPUtil;
+import org.emftext.language.java.resource.java.util.JavaURIUtil;
 import org.emftext.language.xpath2.XPath2Package;
+import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2ResourceFactory;
 import org.w3._1999.xsl.transform.TransformType;
 import org.w3._1999.xsl.transform.XSLT20Package;
 import org.w3._2001.xml.schema.DocumentRoot;
@@ -80,14 +92,13 @@ import iso20022.validation.result.ValidationResultPackage;
 public class Main {
 
     public enum ModelKind { EAEU, ISO20022_ECORE, ISO20022_UML };
-    public enum OutputFormat { XSD11, XSLT20, UML };
+    public enum OutputFormat { XSD11, XSLT20, ISO20022_UML, JAVA };
     
     public static void main(String[] args) {
         //final String input = "model/TTDataModel.uml";
         final String input = "model/ISO20022_BusinessProcessCatalogue.uml";
         final String output = "output/";
         final OutputFormat outputFormat = OutputFormat.XSLT20;
-        //final OutputFormat outputFormat = OutputFormat.XSD11;
         final String iso20022validationStylysheet = "iso20022-validation.xsl";
         final ModelKind modelKind;
 
@@ -98,6 +109,7 @@ public class Main {
         System.out.println("  UML");
         UMLResourcesUtil.init(rs);
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
+        JaMoPPUtil.initialize();
         
         System.out.println("  OCL");
         EssentialOCLStandaloneSetup.doSetup();
@@ -109,6 +121,7 @@ public class Main {
         XMLSchemaVersioningPackage.eINSTANCE.getEFactoryInstance();
         XSLT20Package.eINSTANCE.getEFactoryInstance();
         ValidationResultPackage.eINSTANCE.getEFactoryInstance();
+        JavaPackage.eINSTANCE.getEFactoryInstance();
         //XHTML11Package.eINSTANCE.getEFactoryInstance();
 
         try {
@@ -132,6 +145,22 @@ public class Main {
                 throw new IllegalArgumentException("Unknown model profile. Only EAEU and ISO20022 are supported");
             }
 
+            // TODO: There is a very strange bug. If one will remove the following lines (or move them after addDataTypeOperations()),
+            // OCL will not resolve some properties during transformation.
+            try {
+                for (PackageableElement el : uml.getPackagedElements()) {
+                    if (el instanceof Classifier) {
+                        for (Constraint rule : ((Classifier)el).getOwnedRules()) {
+                            UtilitiesLibrary.toExpressionInOCL(rule);
+                        }
+                    }
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return;
+            }
+
             System.out.println("Adding data type operations");
             addDataTypeOperations(rs, uml);
 
@@ -139,6 +168,7 @@ public class Main {
             System.out.println("Transforming model by " + transform);
             List<EObject> schemas = transformModel(rs, createFileURI(transform), uml);
 
+//            int i = 1;
             for (EObject obj : schemas) {
                 if (obj instanceof DocumentRoot) {
                     DocumentRoot root = (DocumentRoot)obj;
@@ -158,15 +188,21 @@ public class Main {
                         saveModel(rs, root, createFileURI(schemaLocation));
                     }
                 }
+                else if (obj instanceof CompilationUnit) {
+                    CompilationUnit root = (CompilationUnit)obj;
+                    String schemaLocation = output + root.getName() + ".java";
+                    System.out.println("Saving Java-file into " + schemaLocation);
+                    saveModel(rs, root, createFileURI(schemaLocation), false);
+                }
                 // For debug purposes
 //                else {
 //                    String schemaLocation = output + "result" + i + ".xmi";
-//                    System.out.println("Saving result model into " + schemaLocation);
+//                    System.out.println("Saving result model into " + schemaLocation + " (root: " + obj + ")");
 //                    saveModel(rs, obj, createFileURI(schemaLocation));
 //                    i++;
 //                }
             }
-            
+
             if (modelKind == ModelKind.ISO20022_UML && outputFormat == OutputFormat.XSLT20) {
                 Files.copy(new File("xslt/" + iso20022validationStylysheet), new File(output + '/' + iso20022validationStylysheet));
             }
@@ -252,6 +288,9 @@ public class Main {
             else if (outputFormat == OutputFormat.XSLT20) {
                 return "transforms/ISO20022toXSLT20.qvto";
             }
+            else if (outputFormat == OutputFormat.JAVA) {
+                return "transforms/ISO20022toJava.qvto";
+            }
         case ISO20022_ECORE:
             throw new IllegalArgumentException();
         }
@@ -281,20 +320,32 @@ public class Main {
 
     private static void saveModel(ResourceSet rs, EObject model, URI fileName) throws IOException
     {
+        saveModel(rs, model, fileName, true);
+    }
+
+    private static void saveModel(ResourceSet rs, EObject model, URI fileName, boolean isXML) throws IOException
+    {
         StringWriter writer = new StringWriter();
         WriteableOutputStream stream = new WriteableOutputStream(writer, "UTF-8");
         Resource res = rs.createResource(fileName);
         res.getContents().add(model);
         Map<Object, Object> options = new HashMap<Object, Object>();
-        options.put(XMLResource.OPTION_ENCODING, "UTF-8");
-        options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+        if (isXML) {
+            options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+            options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+        }
         res.save(stream, options);
         res.unload();
 
         OutputStreamWriter osw = new OutputStreamWriter(
                 new FileOutputStream(fileName.path()),
                 Charset.forName("UTF-8").newEncoder());
-        osw.write(prettyFormat(writer.toString()));
+        if (isXML) {
+            osw.write(prettyFormat(writer.toString()));
+        }
+        else {
+            osw.write(writer.toString());
+        }
         osw.flush();
         osw.close();
     }

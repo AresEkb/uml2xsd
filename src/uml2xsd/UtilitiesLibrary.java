@@ -36,6 +36,7 @@ import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.xpath2.AnyExpr;
 import org.emftext.language.xpath2.resource.xpath2.IXpath2TextPrinter;
 import org.emftext.language.xpath2.resource.xpath2.IXpath2TextResource;
@@ -48,7 +49,8 @@ import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2ResourceFactory;
         "http://www.w3.org/2001/XMLSchema",
         "http://www.eclipse.org/ocl/2015/Pivot",
         "http://www.emftext.org/language/xpath2",
-        "http://www.eclipse.org/uml2/2.1.0/UML"})
+        "http://www.eclipse.org/uml2/2.1.0/UML",
+        "http://www.emftext.org/java/classifiers"})
 public class UtilitiesLibrary {
 
     public UtilitiesLibrary() {
@@ -177,5 +179,9 @@ public class UtilitiesLibrary {
         IXpath2TextPrinter printer = new Xpath2MetaInformation().createPrinter(buffer, res);
         printer.print(expr);
         return buffer.toString();
+    }
+    
+    public static org.emftext.language.java.classifiers.ConcreteClassifier createJavaClassifier(String fullQualifiedName) {
+        return (org.emftext.language.java.classifiers.ConcreteClassifier)JavaClasspath.get().getClassifier(fullQualifiedName);
     }
 }

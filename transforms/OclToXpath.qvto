@@ -62,6 +62,7 @@ disjuncts
     OperationCallExp::stringLength,
     OperationCallExp::isEmpty,
     OperationCallExp::notEmpty,
+    OperationCallExp::sum,
     // Literals
     IntegerLiteralExp::toLiteral,
     UnlimitedNaturalLiteralExp::toLiteral,
@@ -120,8 +121,8 @@ when { self.referredIteration.name = 'forAll' }
     }
 }
 
-property fn_not : QName = createQName('http://www.w3.org/2005/xpath-functions', 'not', 'fn');
-property fn_boolean : QName = createQName('http://www.w3.org/2005/xpath-functions', 'boolean', 'fn');
+property fn_not : QName = 'not'.createFunctionQName();
+property fn_boolean : QName = 'boolean'.createFunctionQName();
 
 query ExprSingle::booleanExpr() : FunctionCall = object FunctionCall { name := fn_boolean; arg := self; };
 
@@ -380,14 +381,14 @@ when { self.referredOperation.name = 'oclAsSet' }
 mapping OperationCallExp::count() : FunctionCall
 when { self.referredOperation.name = 'size' and self.referredOperation.isCollectionOperation() }
 {
-    name := createQName('http://www.w3.org/2005/xpath-functions', 'count', 'fn');
+    name := 'count'.createFunctionQName();
     arg := self.ownedSource.xmap toExprSingle();
 }
 
 mapping OperationCallExp::stringLength() : FunctionCall
 when { self.referredOperation.name = 'size' and not self.referredOperation.isCollectionOperation() }
 {
-    name := createQName('http://www.w3.org/2005/xpath-functions', 'string-length', 'fn');
+    name := 'string-length'.createFunctionQName();
     arg := self.ownedSource.xmap toExprSingle();
 }
 
@@ -405,6 +406,13 @@ when { self.referredOperation.name = 'notEmpty' }
     init {
         result := self.ownedSource.xmap toExprSingle().booleanExpr();
     }
+}
+
+mapping OperationCallExp::sum() : FunctionCall
+when { self.referredOperation.name = 'sum' and self.referredOperation.isCollectionOperation() }
+{
+    name := 'sum'.createFunctionQName();
+    arg := self.ownedSource.xmap toExprSingle();
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -437,8 +445,7 @@ mapping StringLiteralExp::toLiteral() : StringLiteral
 
 mapping BooleanLiteralExp::toLiteral() : FunctionCall
 {
-    name := createQName('http://www.w3.org/2005/xpath-functions',
-        if self.booleanSymbol then 'true' else 'false' endif, 'fn');
+    name := if self.booleanSymbol then 'true' else 'false' endif.createFunctionQName();
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -475,3 +482,6 @@ query Operation::isCollectionOperation() : Boolean =
 
 query ExprSingle::isFunctionCall(name : QName) : Boolean =
     self.oclIsKindOf(FunctionCall) and self.oclAsType(FunctionCall).name = name;
+
+query String::createFunctionQName() : QName =
+    createQName('http://www.w3.org/2005/xpath-functions', self, 'fn');

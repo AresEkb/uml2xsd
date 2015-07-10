@@ -33,7 +33,7 @@ property profileName : String = 'ISO20022Profile';
 
 main()
 {
-    m.objectsOfType(Signal)->select(is('MessageDefinition'))->toSchema();
+    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toSchema();
 }
 
 mapping Classifier::toSchema() : DocumentRoot

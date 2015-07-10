@@ -1,0 +1,68 @@
+/**
+ * Copyright (c) 2013, 2015 Denis Nikiforov.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    Denis Nikiforov - initial API and implementation
+ */
+
+import uml2xsd.UtilitiesLibrary;
+import Helpers;
+
+library ISO20022Helpers;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
+modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
+
+property profileName : String = 'ISO20022Profile';
+
+///////////////////////////////////////////////////////////////////////////////
+// Helpers
+
+query NamedElement::generateXMLTag() : String
+{
+    var name : String;
+    if (self.is('MessageDefinition')) {
+        name := self.getValue(profileName + '::MessageDefinition', 'xmlTag');
+    }
+    elif (self.is('MessageBuildingBlock')) {
+        name := self.getValue(profileName + '::MessageBuildingBlock', 'xmlTag');
+    }
+    elif (self.is('MessageElement')) {
+        name := self.getValue(profileName + '::MessageElement', 'xmlTag');
+    }
+    else {
+        name := self.name;
+        if (name.lastIndexOf('.') > 0) {
+            name := name.substring(1, name.lastIndexOf('.'));
+        };
+        name := name.replaceFirst('V\\d+$', '');
+        // TODO http://www.iso20022.org/documents/general/XML_Tag_algorithm.pdf
+    };
+
+    assert fatal (name <> null and name.size() > 0) with log('For element ' + self.getNameWithStereotypes() + ' generated empty xmlTag');
+    
+    return name;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Overrides
+
+// TODO: OCLtoXPath uses both prefixed and unprefixed names. Something must be refactored.
+query NamedElement::getQName() : TYPE::QName =
+    self.getUnprefixedQName();
+//    assert fatal (false) with log('NamedElement::getQName() must not be used');
+
+query NamedElement::getUnprefixedQName() : TYPE::QName =
+    createQName(self.generateXMLTag()).oclAsType(TYPE::QName);
+
+query Element::is(stereotypeName : String) : Boolean = self.is(profileName, stereotypeName);
+
+query NamedElement::isDataType() : Boolean = true;
+
+query NamedElement::isDataElement() : Boolean = false;
+
+query NamedElement::isAttribute() : Boolean = self.getAppliedStereotype('EECProfile::Attribute') <> null;
