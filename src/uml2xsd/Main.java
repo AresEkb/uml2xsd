@@ -18,10 +18,8 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -30,12 +28,19 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.GnuParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -50,20 +55,12 @@ import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.uml.UMLStandaloneSetup;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
-import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.xtext.essentialocl.EssentialOCLStandaloneSetup;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
-import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Model;
-import org.eclipse.uml2.uml.Operation;
-import org.eclipse.uml2.uml.PackageImport;
 import org.eclipse.uml2.uml.PackageableElement;
-import org.eclipse.uml2.uml.Parameter;
-import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
@@ -87,11 +84,61 @@ public class Main {
     public enum ModelKind { EAEU, ISO20022_ECORE, ISO20022_UML };
     public enum OutputFormat { XSD11, XSLT20, ISO20022_UML, JAVA };
     
+    private static String input;
+    private static String output;
+    private static OutputFormat outputFormat;
+
     public static void main(String[] args) {
-        //final String input = "model/TTDataModel.uml";
-        final String input = "model/ISO20022_BusinessProcessCatalogue.uml";
-        final String output = "output/";
-        final OutputFormat outputFormat = OutputFormat.XSLT20;
+        Option in = OptionBuilder.withArgName("file")
+                .hasArg()
+                .isRequired()
+                .create("input");
+        Option out = OptionBuilder.withArgName("folder")
+                .hasArg()
+                .isRequired()
+                .create("output");
+        Option formatOpt = OptionBuilder.withArgName("outputFormat")
+                .hasArg()
+                .isRequired()
+                .create("format");
+
+        Options options = new Options();
+        options.addOption(in);
+        options.addOption(out);
+        options.addOption(formatOpt);
+        
+        CommandLineParser parser = new GnuParser();
+        try {
+            CommandLine line = parser.parse( options, args );
+            input = line.getOptionValue("input");
+            output = line.getOptionValue("output");
+            String format = line.getOptionValue("format");
+            switch (format) {
+            case "xsd":
+                outputFormat = OutputFormat.XSD11;
+                break;
+            case "xslt":
+                outputFormat = OutputFormat.XSLT20;
+                break;
+            case "uml":
+                outputFormat = OutputFormat.ISO20022_UML;
+                break;
+            case "java":
+                outputFormat = OutputFormat.JAVA;
+                break;
+            default:
+                System.err.println("Wrong command-line arguments: format must have one of the following values: xsd, xslt, uml, java. Specified value is " + format);
+                return;
+            }
+        }
+        catch( ParseException exp ) {
+            // oops, something went wrong
+            System.err.println("Wrong command-line arguments: " + exp.getMessage());
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("uml2xsd", options);
+            return;
+        }
+        
         final String iso20022validationStylysheet = "iso20022-validation.xsl";
         final ModelKind modelKind;
 
@@ -138,7 +185,7 @@ public class Main {
                 throw new IllegalArgumentException("Unknown model profile. Only EAEU and ISO20022 are supported");
             }
 
-            // TODO: There is a very strange bug. If one will remove the following lines (or move them after addDataTypeOperations()),
+            // TODO: There is a very strange bug. If one will remove the following lines,
             // OCL will not resolve some properties during transformation.
             // https://www.eclipse.org/forums/index.php/m/1701277/
             try {
@@ -155,9 +202,6 @@ public class Main {
                 return;
             }
 
-            System.out.println("Adding data type operations");
-            addDataTypeOperations(rs, uml);
-
             final String transform = getTransformation(modelKind, outputFormat);
             System.out.println("Transforming model by " + transform);
             List<EObject> schemas = transformModel(rs, createFileURI(transform), uml);
@@ -168,7 +212,7 @@ public class Main {
                     DocumentRoot root = (DocumentRoot)obj;
                     SchemaType schema = root.getSchema();
                     if (schema != null) {
-                        String schemaLocation = output + getSchemaLocation(schema.getTargetNamespace(), modelKind, outputFormat);
+                        String schemaLocation = output + File.separator + getSchemaLocation(schema.getTargetNamespace(), modelKind, outputFormat);
                         System.out.println("Saving XML Schema into " + schemaLocation);
                         saveModel(rs, root, createFileURI(schemaLocation));
                     }
@@ -177,20 +221,20 @@ public class Main {
                     org.w3._1999.xsl.transform.DocumentRoot root = (org.w3._1999.xsl.transform.DocumentRoot)obj;
                     TransformType schema = root.getStylesheet();
                     if (schema != null) {
-                        String schemaLocation = output + getSchemaLocation(schema.getXpathDefaultNamespace(), modelKind, outputFormat);
+                        String schemaLocation = output + File.separator + getSchemaLocation(schema.getXpathDefaultNamespace(), modelKind, outputFormat);
                         System.out.println("Saving XSL Transformation into " + schemaLocation);
                         saveModel(rs, root, createFileURI(schemaLocation));
                     }
                 }
                 else if (obj instanceof CompilationUnit) {
                     CompilationUnit root = (CompilationUnit)obj;
-                    String schemaLocation = output + root.getName() + ".java";
+                    String schemaLocation = output + File.separator + root.getName() + ".java";
                     System.out.println("Saving Java-file into " + schemaLocation);
                     saveModel(rs, root, createFileURI(schemaLocation), false);
                 }
                 // For debug purposes
 //                else {
-//                    String schemaLocation = output + "result" + i + ".xmi";
+//                    String schemaLocation = output + File.separator + "result" + i + ".xmi";
 //                    System.out.println("Saving result model into " + schemaLocation + " (root: " + obj + ")");
 //                    saveModel(rs, obj, createFileURI(schemaLocation));
 //                    i++;
@@ -342,68 +386,6 @@ public class Main {
         }
         osw.flush();
         osw.close();
-    }
-
-    private static void addDataTypeOperations(ResourceSet rs, Model model) throws ParserException
-    {
-        // TODO: Recursive search is needed
-        Set<Model> models = new HashSet<Model>();
-        models.add(model);
-        final TreeIterator<EObject> modelIterator = model.eAllContents();
-        while (modelIterator.hasNext()) {
-            EObject obj = modelIterator.next();
-            if (obj instanceof PackageImport) {
-                PackageImport packageImport = (PackageImport)obj;
-                models.add(packageImport.getImportedPackage().getModel());
-            }
-        }
-
-        Set<DataType> dataTypes = new HashSet<DataType>();
-        System.out.println("  Models:");
-        for (Model m : models) {
-            System.out.println("    " + m.getName());
-            final TreeIterator<EObject> iterator = m.eAllContents();
-            while (iterator.hasNext()) {
-                EObject obj = iterator.next();
-                if (obj instanceof DataType) {
-                    DataType dataType = (DataType)obj;
-                    dataTypes.add(dataType);
-                    for (Classifier general : dataType.allParents()) {
-                        dataTypes.add((DataType)general);
-                    }
-                }
-            }
-        }
-
-        MetamodelManager mm = UtilitiesLibrary.ocl.getMetamodelManager();
-        System.out.println("  Operations:");
-        for (DataType dataType : dataTypes) {
-            // DataTypes doesn't inherit operations. So we add operations to each inherited DataType
-            for (Operation oper : dataType.getAllOperations()) {
-                org.eclipse.ocl.pivot.Operation asOper = createOperation(mm, dataType, oper);
-                System.out.println("    " + asOper);
-            }
-        }
-    }
-
-    private static org.eclipse.ocl.pivot.Operation createOperation(MetamodelManager mm, DataType dataType, Operation operation) throws ParserException
-    {
-        org.eclipse.ocl.pivot.DataType asDataType = mm.getASOf(org.eclipse.ocl.pivot.DataType.class, dataType);
-        org.eclipse.ocl.pivot.Operation asOperation = PivotFactory.eINSTANCE.createOperation();
-        asOperation.setName(operation.getName());
-        org.eclipse.ocl.pivot.Type returnType = mm.getASOf(org.eclipse.ocl.pivot.Type.class, operation.getType());
-        asOperation.setType(returnType);
-        for (Parameter param : operation.getOwnedParameters()) {
-            if (param.getDirection() == ParameterDirectionKind.RETURN_LITERAL) {
-                continue;
-            }
-            org.eclipse.ocl.pivot.Parameter asParam = PivotFactory.eINSTANCE.createParameter();
-            org.eclipse.ocl.pivot.Type asParamType = mm.getASOf(org.eclipse.ocl.pivot.Type.class, param.getType());
-            asParam.setType(asParamType);
-            asOperation.getOwnedParameters().add(asParam);
-        }
-        asDataType.getOwnedOperations().add(asOperation);
-        return asOperation;
     }
 
     private static List<EObject> transformModel(ResourceSet rs, URI transformation, EObject model) throws Exception

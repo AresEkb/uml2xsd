@@ -495,7 +495,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_Z1hhUiR_EeW-eZ1ZLTAX7g" name="BusinessArea" eSuperTypes="_Z1gTKSR_EeW-eZ1ZLTAX7g">
           <eAnnotations xmi:id="_Z1hhUyR_EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_Z1hhVCR_EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_Z1hhVSR_EeW-eZ1ZLTAX7g" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_Z1hhVSR_EeW-eZ1ZLTAX7g" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Z1hhViR_EeW-eZ1ZLTAX7g" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -556,10 +556,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_Z1hhgyR_EeW-eZ1ZLTAX7g" name="MessageDefinition" eSuperTypes="_Z1fsICR_EeW-eZ1ZLTAX7g">
           <eAnnotations xmi:id="_Z1hhhCR_EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_Z1hhhSR_EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_Z1hhhiR_EeW-eZ1ZLTAX7g" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_Z1hhhiR_EeW-eZ1ZLTAX7g" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Z1hhhyR_EeW-eZ1ZLTAX7g" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Z1hhhyR_EeW-eZ1ZLTAX7g" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_Z1hhiSR_EeW-eZ1ZLTAX7g" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -586,7 +586,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_Z1hhmSR_EeW-eZ1ZLTAX7g" name="MessageSet" eSuperTypes="_Z1gTKSR_EeW-eZ1ZLTAX7g">
           <eAnnotations xmi:id="_Z1hhmiR_EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_Z1hhmyR_EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_Z1hhnCR_EeW-eZ1ZLTAX7g" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_Z1hhnCR_EeW-eZ1ZLTAX7g" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Z1hhnSR_EeW-eZ1ZLTAX7g" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -1098,7 +1098,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_aMBdSyR8EeW-eZ1ZLTAX7g" name="BusinessArea" eSuperTypes="_aMA2QiR8EeW-eZ1ZLTAX7g">
           <eAnnotations xmi:id="_aMBdTCR8EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_aMBdTSR8EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_aMBdTiR8EeW-eZ1ZLTAX7g" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_aMBdTiR8EeW-eZ1ZLTAX7g" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_aMBdTyR8EeW-eZ1ZLTAX7g" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -1159,10 +1159,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_aMBdfCR8EeW-eZ1ZLTAX7g" name="MessageDefinition" eSuperTypes="_aMAPACR8EeW-eZ1ZLTAX7g">
           <eAnnotations xmi:id="_aMBdfSR8EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_aMBdfiR8EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_aMBdfyR8EeW-eZ1ZLTAX7g" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_aMBdfyR8EeW-eZ1ZLTAX7g" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_aMBdgCR8EeW-eZ1ZLTAX7g" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_aMBdgCR8EeW-eZ1ZLTAX7g" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_aMBdgiR8EeW-eZ1ZLTAX7g" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -1189,7 +1189,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_aMBdkiR8EeW-eZ1ZLTAX7g" name="MessageSet" eSuperTypes="_aMA2QiR8EeW-eZ1ZLTAX7g">
           <eAnnotations xmi:id="_aMBdkyR8EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_aMBdlCR8EeW-eZ1ZLTAX7g" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_aMBdlSR8EeW-eZ1ZLTAX7g" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_aMBdlSR8EeW-eZ1ZLTAX7g" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_aMBdliR8EeW-eZ1ZLTAX7g" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -1701,7 +1701,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_nZU_Bh5XEeWTpeRxh6yIfQ" name="BusinessArea" eSuperTypes="_nZUX5h5XEeWTpeRxh6yIfQ">
           <eAnnotations xmi:id="_nZU_Bx5XEeWTpeRxh6yIfQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_nZU_CB5XEeWTpeRxh6yIfQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_nZU_CR5XEeWTpeRxh6yIfQ" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_nZU_CR5XEeWTpeRxh6yIfQ" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nZU_Ch5XEeWTpeRxh6yIfQ" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -1762,10 +1762,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_nZU_Nx5XEeWTpeRxh6yIfQ" name="MessageDefinition" eSuperTypes="_nZUXnx5XEeWTpeRxh6yIfQ">
           <eAnnotations xmi:id="_nZU_OB5XEeWTpeRxh6yIfQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_nZU_OR5XEeWTpeRxh6yIfQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_nZU_Oh5XEeWTpeRxh6yIfQ" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_nZU_Oh5XEeWTpeRxh6yIfQ" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nZU_Ox5XEeWTpeRxh6yIfQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nZU_Ox5XEeWTpeRxh6yIfQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_nZU_PR5XEeWTpeRxh6yIfQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -1792,7 +1792,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_nZU_TR5XEeWTpeRxh6yIfQ" name="MessageSet" eSuperTypes="_nZUX5h5XEeWTpeRxh6yIfQ">
           <eAnnotations xmi:id="_nZU_Th5XEeWTpeRxh6yIfQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_nZU_Tx5XEeWTpeRxh6yIfQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_nZU_UB5XEeWTpeRxh6yIfQ" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_nZU_UB5XEeWTpeRxh6yIfQ" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nZU_UR5XEeWTpeRxh6yIfQ" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -2304,7 +2304,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_W9_dpRwFEeW2eoq1ZYZdbw" name="BusinessArea" eSuperTypes="_W9-1xxwFEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_W9_dphwFEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_W9_dpxwFEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_W9_dqBwFEeW2eoq1ZYZdbw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_W9_dqBwFEeW2eoq1ZYZdbw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_W9_dqRwFEeW2eoq1ZYZdbw" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -2365,10 +2365,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_W-ADmBwFEeW2eoq1ZYZdbw" name="MessageDefinition" eSuperTypes="_W9-1gBwFEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_W-ADmRwFEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_W-ADmhwFEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_W-ADmxwFEeW2eoq1ZYZdbw" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_W-ADmxwFEeW2eoq1ZYZdbw" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_W-ADnBwFEeW2eoq1ZYZdbw" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_W-ADnBwFEeW2eoq1ZYZdbw" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_W-ADnhwFEeW2eoq1ZYZdbw" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -2395,7 +2395,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_W-ADrhwFEeW2eoq1ZYZdbw" name="MessageSet" eSuperTypes="_W9-1xxwFEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_W-ADrxwFEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_W-ADsBwFEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_W-ADsRwFEeW2eoq1ZYZdbw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_W-ADsRwFEeW2eoq1ZYZdbw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_W-ADshwFEeW2eoq1ZYZdbw" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -2907,7 +2907,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_DhONHxwDEeW2eoq1ZYZdbw" name="BusinessArea" eSuperTypes="_DhNl9xwDEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_DhONIBwDEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_DhONIRwDEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_DhONIhwDEeW2eoq1ZYZdbw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_DhONIhwDEeW2eoq1ZYZdbw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_DhONIxwDEeW2eoq1ZYZdbw" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -2965,10 +2965,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_DhONThwDEeW2eoq1ZYZdbw" name="MessageDefinition" eSuperTypes="_DhNlsBwDEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_DhONTxwDEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_DhONUBwDEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_DhONURwDEeW2eoq1ZYZdbw" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_DhONURwDEeW2eoq1ZYZdbw" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_DhONUhwDEeW2eoq1ZYZdbw" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_DhONUhwDEeW2eoq1ZYZdbw" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_DhONVBwDEeW2eoq1ZYZdbw" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -2992,7 +2992,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_DhONYhwDEeW2eoq1ZYZdbw" name="MessageSet" eSuperTypes="_DhNl9xwDEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_DhONYxwDEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_DhONZBwDEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_DhONZRwDEeW2eoq1ZYZdbw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_DhONZRwDEeW2eoq1ZYZdbw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_DhONZhwDEeW2eoq1ZYZdbw" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -3504,7 +3504,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_MZ3vyhwAEeW2eoq1ZYZdbw" name="BusinessArea" eSuperTypes="_MZ3IzxwAEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_MZ3vyxwAEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_MZ3vzBwAEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_MZ3vzRwAEeW2eoq1ZYZdbw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_MZ3vzRwAEeW2eoq1ZYZdbw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_MZ3vzhwAEeW2eoq1ZYZdbw" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -3562,10 +3562,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_MZ3v-RwAEeW2eoq1ZYZdbw" name="MessageDefinition" eSuperTypes="_MZ2hsBwAEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_MZ3v-hwAEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_MZ3v-xwAEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_MZ3v_BwAEeW2eoq1ZYZdbw" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_MZ3v_BwAEeW2eoq1ZYZdbw" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_MZ3v_RwAEeW2eoq1ZYZdbw" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_MZ3v_RwAEeW2eoq1ZYZdbw" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_MZ3v_xwAEeW2eoq1ZYZdbw" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -3589,7 +3589,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_MZ3wDRwAEeW2eoq1ZYZdbw" name="MessageSet" eSuperTypes="_MZ3IzxwAEeW2eoq1ZYZdbw">
           <eAnnotations xmi:id="_MZ3wDhwAEeW2eoq1ZYZdbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_MZ3wDxwAEeW2eoq1ZYZdbw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_MZ3wEBwAEeW2eoq1ZYZdbw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_MZ3wEBwAEeW2eoq1ZYZdbw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_MZ3wERwAEeW2eoq1ZYZdbw" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -4101,7 +4101,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8qkW4xvgEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_8qjvpxvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_8qkW5BvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_8qkW5RvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_8qkW5hvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_8qkW5hvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8qkW5xvgEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -4159,10 +4159,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8qk9iBvgEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_8qjvYBvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_8qk9iRvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_8qk9ihvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_8qk9ixvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_8qk9ixvgEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8qk9jBvgEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8qk9jBvgEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_8qk9jhvgEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -4186,7 +4186,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8qk9nBvgEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_8qjvpxvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_8qk9nRvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_8qk9nhvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_8qk9nxvgEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_8qk9nxvgEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8qk9oBvgEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -4818,7 +4818,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_VxzWNhvgEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_Vxyu-xvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_VxzWNxvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_VxzWOBvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_VxzWORvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_VxzWORvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_VxzWOhvgEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -4876,10 +4876,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_VxzWZRvgEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_VxyH8BvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_VxzWZhvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_VxzWZxvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_VxzWaBvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_VxzWaBvgEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_VxzWaRvgEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_VxzWaRvgEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_VxzWaxvgEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -4903,7 +4903,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_VxzWeRvgEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_Vxyu-xvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_VxzWehvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_VxzWexvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_VxzWfBvgEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_VxzWfBvgEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_VxzWfRvgEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -5535,7 +5535,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_Mvoy3RvgEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_MvoLOxvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_Mvoy3hvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_Mvoy3xvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_Mvoy4BvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_Mvoy4BvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Mvoy4RvgEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -5593,10 +5593,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_MvozDBvgEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_MvoK8BvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_MvozDRvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_MvozDhvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_MvozDxvgEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_MvozDxvgEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_MvozEBvgEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_MvozEBvgEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_MvozEhvgEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -5620,7 +5620,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_MvozIBvgEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_MvoLOxvgEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_MvozIRvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_MvozIhvgEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_MvozIxvgEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_MvozIxvgEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_MvozJBvgEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -6252,7 +6252,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_jWPS-BvdEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_jWOE-xvdEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_jWPS-RvdEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_jWPS-hvdEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_jWPS-xvdEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_jWPS-xvdEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_jWPS_BvdEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -6310,10 +6310,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_jWPTJxvdEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_jWOEsBvdEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_jWPTKBvdEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_jWPTKRvdEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_jWPTKhvdEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_jWPTKhvdEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_jWPTKxvdEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_jWPTKxvdEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_jWPTLRvdEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -6337,7 +6337,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_jWPTOxvdEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_jWOE-xvdEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_jWPTPBvdEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_jWPTPRvdEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_jWPTPhvdEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_jWPTPhvdEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_jWPTPxvdEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -6969,7 +6969,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="__A-x9BvcEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="__A-KOxvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="__A-x9RvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="__A-x9hvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="__A-x9xvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="__A-x9xvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="__A-x-BvcEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -7027,10 +7027,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="__A_YAxvcEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="__A-J8BvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="__A_YBBvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="__A_YBRvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="__A_YBhvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="__A_YBhvcEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="__A_YBxvcEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="__A_YBxvcEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="__A_YCRvcEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -7054,7 +7054,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="__A_YFxvcEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="__A-KOxvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="__A_YGBvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="__A_YGRvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="__A_YGhvcEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="__A_YGhvcEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="__A_YGxvcEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -7686,7 +7686,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8JdxTBvcEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_8JcjexvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_8JdxTRvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_8JdxThvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_8JdxTxvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_8JdxTxvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8JdxUBvcEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -7744,10 +7744,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8JdxexvcEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_8JcjMBvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_8JdxfBvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_8JdxfRvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_8JdxfhvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_8JdxfhvcEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8JdxfxvcEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8JdxfxvcEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_8JdxgRvcEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -7771,7 +7771,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8JdxjxvcEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_8JcjexvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_8JdxkBvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_8JdxkRvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_8JdxkhvcEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_8JdxkhvcEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8JdxkxvcEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -8403,7 +8403,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_PmrN0hvcEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_PmqmghvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_PmrN0xvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_PmrN1BvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_PmrN1RvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_PmrN1RvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PmrN1hvcEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -8461,10 +8461,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_PmrOARvcEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_Pmp_QBvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_PmrOAhvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_PmrOAxvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_PmrOBBvcEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_PmrOBBvcEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PmrOBRvcEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PmrOBRvcEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PmrOBxvcEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -8488,7 +8488,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_PmrOFRvcEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_PmqmghvcEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_PmrOFhvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_PmrOFxvcEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_PmrOGBvcEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_PmrOGBvcEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PmrOGRvcEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -9120,7 +9120,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_vJqvcxvbEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_vJphqxvbEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_vJqvdBvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_vJqvdRvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_vJqvdhvbEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_vJqvdhvbEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vJqvdxvbEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -9184,10 +9184,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_vJqvphvbEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_vJphYBvbEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_vJqvpxvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_vJqvqBvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_vJqvqRvbEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_vJqvqRvbEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vJqvqhvbEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vJqvqhvbEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vJqvrBvbEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -9211,7 +9211,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_vJqvuhvbEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_vJphqxvbEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_vJqvuxvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_vJqvvBvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_vJqvvRvbEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_vJqvvRvbEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vJqvvhvbEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -9843,7 +9843,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_Q0TUchvbEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_Q0SsyxvbEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_Q0TUcxvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_Q0TUdBvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_Q0TUdRvbEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_Q0TUdRvbEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Q0TUdhvbEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -9919,10 +9919,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_Q0T6sxvbEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_Q0SsgBvbEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_Q0T6tBvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_Q0T6tRvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_Q0T6thvbEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_Q0T6thvbEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Q0T6txvbEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Q0T6txvbEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_Q0T6uRvbEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -9946,7 +9946,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_Q0T6xxvbEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_Q0SsyxvbEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_Q0T6yBvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_Q0T6yRvbEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_Q0T6yhvbEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_Q0T6yhvbEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Q0T6yxvbEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -10578,7 +10578,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_18e9XxvaEeWBxrI9gxRX5Q" name="BusinessArea" eSuperTypes="_18eVjBvaEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_18e9YBvaEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_18e9YRvaEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_18e9YhvaEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_18e9YhvaEeWBxrI9gxRX5Q" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_18e9YxvaEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -10654,10 +10654,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_18fjlRvaEeWBxrI9gxRX5Q" name="MessageDefinition" eSuperTypes="_18ducBvaEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_18fjlhvaEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_18fjlxvaEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_18fjmBvaEeWBxrI9gxRX5Q" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_18fjmBvaEeWBxrI9gxRX5Q" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_18fjmRvaEeWBxrI9gxRX5Q" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_18fjmRvaEeWBxrI9gxRX5Q" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_18fjmxvaEeWBxrI9gxRX5Q" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -10681,7 +10681,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_18fjqRvaEeWBxrI9gxRX5Q" name="MessageSet" eSuperTypes="_18eVjBvaEeWBxrI9gxRX5Q">
           <eAnnotations xmi:id="_18fjqhvaEeWBxrI9gxRX5Q" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_18fjqxvaEeWBxrI9gxRX5Q" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_18fjrBvaEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_18fjrBvaEeWBxrI9gxRX5Q" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_18fjrRvaEeWBxrI9gxRX5Q" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -11313,7 +11313,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_JDD3FxvZEeWZp6Zi6JWmmA" name="BusinessArea" eSuperTypes="_JDDPwRvZEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_JDD3GBvZEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_JDD3GRvZEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_JDD3GhvZEeWZp6Zi6JWmmA" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_JDD3GhvZEeWZp6Zi6JWmmA" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_JDD3GxvZEeWZp6Zi6JWmmA" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -11389,10 +11389,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_JDD3UhvZEeWZp6Zi6JWmmA" name="MessageDefinition" eSuperTypes="_JDCooBvZEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_JDD3UxvZEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_JDD3VBvZEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_JDD3VRvZEeWZp6Zi6JWmmA" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_JDD3VRvZEeWZp6Zi6JWmmA" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_JDD3VhvZEeWZp6Zi6JWmmA" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_JDD3VhvZEeWZp6Zi6JWmmA" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_JDD3WBvZEeWZp6Zi6JWmmA" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -11416,7 +11416,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_JDD3ZhvZEeWZp6Zi6JWmmA" name="MessageSet" eSuperTypes="_JDDPwRvZEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_JDD3ZxvZEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_JDD3aBvZEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_JDD3aRvZEeWZp6Zi6JWmmA" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_JDD3aRvZEeWZp6Zi6JWmmA" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_JDD3ahvZEeWZp6Zi6JWmmA" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -12048,7 +12048,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_WGOnjhvYEeWZp6Zi6JWmmA" name="BusinessArea" eSuperTypes="_WGNZuxvYEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_WGOnjxvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_WGOnkBvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_WGOnkRvYEeWZp6Zi6JWmmA" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_WGOnkRvYEeWZp6Zi6JWmmA" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_WGOnkhvYEeWZp6Zi6JWmmA" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -12124,10 +12124,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_WGOnyRvYEeWZp6Zi6JWmmA" name="MessageDefinition" eSuperTypes="_WGNZcBvYEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_WGOnyhvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_WGOnyxvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_WGOnzBvYEeWZp6Zi6JWmmA" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_WGOnzBvYEeWZp6Zi6JWmmA" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_WGOnzRvYEeWZp6Zi6JWmmA" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_WGOnzRvYEeWZp6Zi6JWmmA" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_WGOnzxvYEeWZp6Zi6JWmmA" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -12151,7 +12151,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_WGOn3RvYEeWZp6Zi6JWmmA" name="MessageSet" eSuperTypes="_WGNZuxvYEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_WGOn3hvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_WGOn3xvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_WGOn4BvYEeWZp6Zi6JWmmA" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_WGOn4BvYEeWZp6Zi6JWmmA" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_WGOn4RvYEeWZp6Zi6JWmmA" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -12783,7 +12783,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_I6g0jRvYEeWZp6Zi6JWmmA" name="BusinessArea" eSuperTypes="_I6gNNhvYEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_I6g0jhvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_I6g0jxvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_I6g0kBvYEeWZp6Zi6JWmmA" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_I6g0kBvYEeWZp6Zi6JWmmA" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_I6g0kRvYEeWZp6Zi6JWmmA" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -12847,10 +12847,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_I6lFthvYEeWZp6Zi6JWmmA" name="MessageDefinition" eSuperTypes="_I6fmEBvYEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_I6lFtxvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_I6lFuBvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_I6lFuRvYEeWZp6Zi6JWmmA" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_I6lFuRvYEeWZp6Zi6JWmmA" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_I6lFuhvYEeWZp6Zi6JWmmA" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_I6lFuhvYEeWZp6Zi6JWmmA" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_I6lFvBvYEeWZp6Zi6JWmmA" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -12874,7 +12874,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_I6lFyhvYEeWZp6Zi6JWmmA" name="MessageSet" eSuperTypes="_I6gNNhvYEeWZp6Zi6JWmmA">
           <eAnnotations xmi:id="_I6lFyxvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_I6lFzBvYEeWZp6Zi6JWmmA" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_I6lFzRvYEeWZp6Zi6JWmmA" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_I6lFzRvYEeWZp6Zi6JWmmA" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_I6lFzhvYEeWZp6Zi6JWmmA" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -13506,7 +13506,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_nbbWgBvUEeWFg40uPQDjBw" name="BusinessArea" eSuperTypes="_nbau2xvUEeWFg40uPQDjBw">
           <eAnnotations xmi:id="_nbbWgRvUEeWFg40uPQDjBw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_nbbWghvUEeWFg40uPQDjBw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_nbbWgxvUEeWFg40uPQDjBw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_nbbWgxvUEeWFg40uPQDjBw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nbbWhBvUEeWFg40uPQDjBw" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -13582,10 +13582,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_nbb8zRvUEeWFg40uPQDjBw" name="MessageDefinition" eSuperTypes="_nbaukBvUEeWFg40uPQDjBw">
           <eAnnotations xmi:id="_nbb8zhvUEeWFg40uPQDjBw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_nbb8zxvUEeWFg40uPQDjBw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_nbb80BvUEeWFg40uPQDjBw" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() &#xD;&#xA;base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
+            <details xmi:id="_nbb80BvUEeWFg40uPQDjBw" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() &#xD;&#xA;base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t.getAppliedStereotype('ISO20022Profile::BusinessArea') &lt;> null) -> size() = 1"/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nbb80RvUEeWFg40uPQDjBw" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nbb80RvUEeWFg40uPQDjBw" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_nbb80xvUEeWFg40uPQDjBw" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -13609,7 +13609,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_nbb84RvUEeWFg40uPQDjBw" name="MessageSet" eSuperTypes="_nbau2xvUEeWFg40uPQDjBw">
           <eAnnotations xmi:id="_nbb84hvUEeWFg40uPQDjBw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_nbb84xvUEeWFg40uPQDjBw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_nbb85BvUEeWFg40uPQDjBw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_nbb85BvUEeWFg40uPQDjBw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nbb85RvUEeWFg40uPQDjBw" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -14241,7 +14241,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_L41kBBvUEeWFg40uPQDjBw" name="BusinessArea" eSuperTypes="_L408ixvUEeWFg40uPQDjBw">
           <eAnnotations xmi:id="_L41kBRvUEeWFg40uPQDjBw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_L41kBhvUEeWFg40uPQDjBw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_L41kBxvUEeWFg40uPQDjBw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_L41kBxvUEeWFg40uPQDjBw" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_L41kCBvUEeWFg40uPQDjBw" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -14317,10 +14317,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_L41kPxvUEeWFg40uPQDjBw" name="MessageDefinition" eSuperTypes="_L408QBvUEeWFg40uPQDjBw">
           <eAnnotations xmi:id="_L41kQBvUEeWFg40uPQDjBw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_L41kQRvUEeWFg40uPQDjBw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_L41kQhvUEeWFg40uPQDjBw" key="documentation" value="base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_L41kQhvUEeWFg40uPQDjBw" key="documentation" value="base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;&#xA;  ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_L41kQxvUEeWFg40uPQDjBw" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_L41kQxvUEeWFg40uPQDjBw" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_L41kRRvUEeWFg40uPQDjBw" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -14344,7 +14344,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_L41kUxvUEeWFg40uPQDjBw" name="MessageSet" eSuperTypes="_L408ixvUEeWFg40uPQDjBw">
           <eAnnotations xmi:id="_L41kVBvUEeWFg40uPQDjBw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_L42KUBvUEeWFg40uPQDjBw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_L42KURvUEeWFg40uPQDjBw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_L42KURvUEeWFg40uPQDjBw" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_L42KUhvUEeWFg40uPQDjBw" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -14976,7 +14976,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_7XxsExvQEeWSctDW53C9DQ" name="BusinessArea" eSuperTypes="_7XweSxvQEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_7XxsFBvQEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_7XxsFRvQEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_7XxsFhvQEeWSctDW53C9DQ" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_7XxsFhvQEeWSctDW53C9DQ" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_7XxsFxvQEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -15052,10 +15052,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_7XxsThvQEeWSctDW53C9DQ" name="MessageDefinition" eSuperTypes="_7XweABvQEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_7XxsTxvQEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_7XxsUBvQEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_7XxsURvQEeWSctDW53C9DQ" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_7XxsURvQEeWSctDW53C9DQ" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_7XxsUhvQEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_7XxsUhvQEeWSctDW53C9DQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_7XxsVBvQEeWSctDW53C9DQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -15079,7 +15079,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_7XxsYhvQEeWSctDW53C9DQ" name="MessageSet" eSuperTypes="_7XweSxvQEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_7XxsYxvQEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_3RrlwA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_7XxsZBvQEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_7XxsZRvQEeWSctDW53C9DQ" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_7XxsZRvQEeWSctDW53C9DQ" key="documentation" value="base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_7XxsZhvQEeWSctDW53C9DQ" name="base_Artifact" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Artifact"/>
@@ -15711,7 +15711,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_YnuDlxvPEeWSctDW53C9DQ" name="BusinessArea" eSuperTypes="_YntcIRvPEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_YnuDmBvPEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_YnuDmRvPEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_YnuDmhvPEeWSctDW53C9DQ" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_YnuDmhvPEeWSctDW53C9DQ" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_YnuDmxvPEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -15787,10 +15787,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_YnuD0hvPEeWSctDW53C9DQ" name="MessageDefinition" eSuperTypes="_Yns04BvPEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_YnuD0xvPEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_YnuD1BvPEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_YnuD1RvPEeWSctDW53C9DQ" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_YnuD1RvPEeWSctDW53C9DQ" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_YnuD1hvPEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_YnuD1hvPEeWSctDW53C9DQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_YnuD2BvPEeWSctDW53C9DQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -16446,7 +16446,7 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_DavH1xvPEeWSctDW53C9DQ" name="BusinessArea" eSuperTypes="_Dat6ChvPEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_DavH2BvPEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_SYR1EA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_DavH2RvPEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_DavH2hvPEeWSctDW53C9DQ" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())"/>
+            <details xmi:id="_DavH2hvPEeWSctDW53C9DQ" key="documentation" value="base_Class.ownedOperation->isEmpty()&#xD;&#xA;base_Class.generalization->isEmpty()&#xD;&#xA;base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;&#xA;forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;&#xA;att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())"/>
           </eAnnotations>
           <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_DavH2xvPEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -16522,10 +16522,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_DavIEhvPEeWSctDW53C9DQ" name="MessageDefinition" eSuperTypes="_Dat5vxvPEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_DavIExvPEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_DavIFBvPEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_DavIFRvPEeWSctDW53C9DQ" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_DavIFRvPEeWSctDW53C9DQ" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_DavIFhvPEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_DavIFhvPEeWSctDW53C9DQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_DavIGBvPEeWSctDW53C9DQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -17257,10 +17257,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_PMhbnRvMEeWSctDW53C9DQ" name="MessageDefinition" eSuperTypes="_PMgNIBvMEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_PMhbnhvMEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_PMhbnxvMEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_PMhboBvMEeWSctDW53C9DQ" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_PMhboBvMEeWSctDW53C9DQ" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PMhboRvMEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PMhboRvMEeWSctDW53C9DQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PMhboxvMEeWSctDW53C9DQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -17992,10 +17992,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_HTfUvhvKEeWSctDW53C9DQ" name="MessageDefinition" eSuperTypes="_HTeGQBvKEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_HTfUvxvKEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_HTfUwBvKEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_HTfUwRvKEeWSctDW53C9DQ" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_HTfUwRvKEeWSctDW53C9DQ" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_HTfUwhvKEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_HTfUwhvKEeWSctDW53C9DQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_HTfUxBvKEeWSctDW53C9DQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -18727,10 +18727,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_PCG4uxtOEeWSctDW53C9DQ" name="MessageDefinition" eSuperTypes="_PCFqIBtOEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_PCG4vBtOEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_PCG4vRtOEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_PCG4vhtOEeWSctDW53C9DQ" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_PCG4vhtOEeWSctDW53C9DQ" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PCG4vxtOEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PCG4vxtOEeWSctDW53C9DQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PCG4wRtOEeWSctDW53C9DQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -19462,10 +19462,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_CnDjFhtNEeWSctDW53C9DQ" name="MessageDefinition" eSuperTypes="_CnCUIBtNEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_CnDjFxtNEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_CnDjGBtNEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_CnDjGRtNEeWSctDW53C9DQ" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_CnDjGRtNEeWSctDW53C9DQ" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CnDjGhtNEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CnDjGhtNEeWSctDW53C9DQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_CnDjHBtNEeWSctDW53C9DQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1">
             <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -20069,10 +20069,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_M894YBtLEeWSctDW53C9DQ" name="MessageDefinition" eSuperTypes="_M88p8BtLEeWSctDW53C9DQ">
           <eAnnotations xmi:id="_M894YRtLEeWSctDW53C9DQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_M894YhtLEeWSctDW53C9DQ" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_M894YxtLEeWSctDW53C9DQ" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_M894YxtLEeWSctDW53C9DQ" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_M894ZBtLEeWSctDW53C9DQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_M894ZBtLEeWSctDW53C9DQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_M894ZhtLEeWSctDW53C9DQ" name="messageDefinitionIdentifier" ordered="false" lowerBound="1" eType="_M88qABtLEeWSctDW53C9DQ"/>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_M894aBtLEeWSctDW53C9DQ" name="rootElement" ordered="false" lowerBound="1" eType="_M88qABtLEeWSctDW53C9DQ"/>
@@ -20656,10 +20656,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_ixC6uBtJEeW-MPbkMQnl7A" name="MessageDefinition" eSuperTypes="_ixAeEBtJEeW-MPbkMQnl7A">
           <eAnnotations xmi:id="_ixC6uRtJEeW-MPbkMQnl7A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_ixC6uhtJEeW-MPbkMQnl7A" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_ixC6uxtJEeW-MPbkMQnl7A" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_ixC6uxtJEeW-MPbkMQnl7A" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_ixC6vBtJEeW-MPbkMQnl7A" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_ixC6vBtJEeW-MPbkMQnl7A" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_ixC6vhtJEeW-MPbkMQnl7A" name="messageDefinitionIdentifier" ordered="false" lowerBound="1" eType="_ixAeIBtJEeW-MPbkMQnl7A"/>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_ixC6wBtJEeW-MPbkMQnl7A" name="rootElement" ordered="false" lowerBound="1" eType="_ixAeIBtJEeW-MPbkMQnl7A"/>
@@ -21241,10 +21241,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_j1RfRxtGEeW-MPbkMQnl7A" name="MessageDefinition" eSuperTypes="_j1PpoBtGEeW-MPbkMQnl7A">
           <eAnnotations xmi:id="_j1RfSBtGEeW-MPbkMQnl7A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_j1RfSRtGEeW-MPbkMQnl7A" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_j1RfShtGEeW-MPbkMQnl7A" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_j1RfShtGEeW-MPbkMQnl7A" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_j1RfSxtGEeW-MPbkMQnl7A" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_j1RfSxtGEeW-MPbkMQnl7A" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1RfTRtGEeW-MPbkMQnl7A" name="messageDefinitionIdentifier" ordered="false" lowerBound="1" eType="_j1PpsBtGEeW-MPbkMQnl7A"/>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_j1RfTxtGEeW-MPbkMQnl7A" name="rootElement" ordered="false" lowerBound="1" eType="_j1PpsBtGEeW-MPbkMQnl7A"/>
@@ -21814,10 +21814,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_S4MJoRW5EeWOTbdjUcg03A" name="MessageDefinition" eSuperTypes="_S4K7MBW5EeWOTbdjUcg03A">
           <eAnnotations xmi:id="_S4MJohW5EeWOTbdjUcg03A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_S4MJoxW5EeWOTbdjUcg03A" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_S4MJpBW5EeWOTbdjUcg03A" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_S4MJpBW5EeWOTbdjUcg03A" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_S4MJpRW5EeWOTbdjUcg03A" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_S4MJpRW5EeWOTbdjUcg03A" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_S4MJpxW5EeWOTbdjUcg03A" name="messageDefinitionIdentifier" ordered="false" lowerBound="1" eType="_S4K7QBW5EeWOTbdjUcg03A"/>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_S4MJqRW5EeWOTbdjUcg03A" name="rootElement" ordered="false" lowerBound="1" eType="_S4K7QBW5EeWOTbdjUcg03A"/>
@@ -22387,10 +22387,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_Ixe1lxT0EeWOTbdjUcg03A" name="MessageDefinition" eSuperTypes="_IxdmcBT0EeWOTbdjUcg03A">
           <eAnnotations xmi:id="_Ixe1mBT0EeWOTbdjUcg03A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_Ixe1mRT0EeWOTbdjUcg03A" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_Ixe1mhT0EeWOTbdjUcg03A" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_Ixe1mhT0EeWOTbdjUcg03A" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Ixe1mxT0EeWOTbdjUcg03A" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_Ixe1mxT0EeWOTbdjUcg03A" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_Ixe1nRT0EeWOTbdjUcg03A" name="messageDefinitionIdentifier" ordered="false" lowerBound="1" eType="_IxdmgBT0EeWOTbdjUcg03A"/>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_Ixe1nxT0EeWOTbdjUcg03A" name="rootElement" ordered="false" lowerBound="1" eType="_IxdmgBT0EeWOTbdjUcg03A"/>
@@ -22960,10 +22960,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_ou43uhTNEeWOTbdjUcg03A" name="MessageDefinition" eSuperTypes="_ou4QABTNEeWOTbdjUcg03A">
           <eAnnotations xmi:id="_ou43uxTNEeWOTbdjUcg03A" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_ou43vBTNEeWOTbdjUcg03A" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_ou43vRTNEeWOTbdjUcg03A" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_ou43vRTNEeWOTbdjUcg03A" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_ou43vhTNEeWOTbdjUcg03A" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_ou43vhTNEeWOTbdjUcg03A" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_ou43wBTNEeWOTbdjUcg03A" name="messageDefinitionIdentifier" ordered="false" lowerBound="1" eType="_ou4QEBTNEeWOTbdjUcg03A"/>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_ou43whTNEeWOTbdjUcg03A" name="rootElement" ordered="false" lowerBound="1" eType="_ou4QEBTNEeWOTbdjUcg03A"/>
@@ -23533,10 +23533,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8-YRphNUEeWwctToESlDLw" name="MessageDefinition" eSuperTypes="_8-XDWBNUEeWwctToESlDLw">
           <eAnnotations xmi:id="_8-YRpxNUEeWwctToESlDLw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_8-YRqBNUEeWwctToESlDLw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_8-YRqRNUEeWwctToESlDLw" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_8-YRqRNUEeWwctToESlDLw" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8-YRqhNUEeWwctToESlDLw" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8-YRqhNUEeWwctToESlDLw" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_8-YRrBNUEeWwctToESlDLw" name="messageDefinitionIdentifier" ordered="false" lowerBound="1" eType="_8-XDaBNUEeWwctToESlDLw"/>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_8-YRrhNUEeWwctToESlDLw" name="rootElement" ordered="false" lowerBound="1" eType="_8-XDaBNUEeWwctToESlDLw"/>
@@ -24106,10 +24106,10 @@
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_6oCFnBNUEeWwctToESlDLw" name="MessageDefinition" eSuperTypes="_6oBeIBNUEeWwctToESlDLw">
           <eAnnotations xmi:id="_6oCFnRNUEeWwctToESlDLw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
           <eAnnotations xmi:id="_6oCFnhNUEeWwctToESlDLw" source="http://www.eclipse.org/emf/2002/GenModel">
-            <details xmi:id="_6oCFnxNUEeWwctToESlDLw" key="documentation" value="base_Class.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Class.general -> isEmpty() "/>
+            <details xmi:id="_6oCFnxNUEeWwctToESlDLw" key="documentation" value="base_Signal.attribute -> select(at | not at.association.oclIsUndefined()).type -> select(t : Type |&#xD;&#xA;t.oclIsTypeOf(BusinessArea)) -> size() = 1&#xD;&#xA;base_Signal.general -> isEmpty() "/>
           </eAnnotations>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_6oCFoBNUEeWwctToESlDLw" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_6oCFoBNUEeWwctToESlDLw" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_6oCFohNUEeWwctToESlDLw" name="messageDefinitionIdentifier" ordered="false" lowerBound="1" eType="_6oBeMBNUEeWwctToESlDLw"/>
           <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_6oCFpBNUEeWwctToESlDLw" name="rootElement" ordered="false" lowerBound="1" eType="_6oBeMBNUEeWwctToESlDLw"/>
@@ -24393,8 +24393,8 @@
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8V4Qzw9nEeWHY4KRRC3kUQ" name="MessageDefinition">
           <eAnnotations xmi:id="_8V4Q0A9nEeWHY4KRRC3kUQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8V4Q0Q9nEeWHY4KRRC3kUQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_8V4Q0Q9nEeWHY4KRRC3kUQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_8V4Q0w9nEeWHY4KRRC3kUQ" name="MessageElement">
@@ -24668,8 +24668,8 @@
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_kiaY4w9jEeWHY4KRRC3kUQ" name="MessageDefinition">
           <eAnnotations xmi:id="_kiaY5A9jEeWHY4KRRC3kUQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_kiaY5Q9jEeWHY4KRRC3kUQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_kiaY5Q9jEeWHY4KRRC3kUQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_kiaY5w9jEeWHY4KRRC3kUQ" name="MessageElement">
@@ -24943,8 +24943,8 @@
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="__mSrcQ9iEeWHY4KRRC3kUQ" name="MessageDefinition">
           <eAnnotations xmi:id="__mSrcg9iEeWHY4KRRC3kUQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="__mSrcw9iEeWHY4KRRC3kUQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="__mSrcw9iEeWHY4KRRC3kUQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="__mSrdQ9iEeWHY4KRRC3kUQ" name="MessageElement">
@@ -25215,8 +25215,8 @@
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_7hjDnQ9iEeWHY4KRRC3kUQ" name="MessageDefinition">
           <eAnnotations xmi:id="_7hjDng9iEeWHY4KRRC3kUQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_7hjDnw9iEeWHY4KRRC3kUQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_7hjDnw9iEeWHY4KRRC3kUQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_7hjDoQ9iEeWHY4KRRC3kUQ" name="MessageElement">
@@ -25487,8 +25487,8 @@
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_L4ddEg9iEeWHY4KRRC3kUQ" name="MessageDefinition">
           <eAnnotations xmi:id="_L4ddEw9iEeWHY4KRRC3kUQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tplqIA9hEeWHY4KRRC3kUQ"/>
-          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_L4ddFA9iEeWHY4KRRC3kUQ" name="base_Class" ordered="false" lowerBound="1">
-            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_L4ddFA9iEeWHY4KRRC3kUQ" name="base_Signal" ordered="false" lowerBound="1">
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Signal"/>
           </eStructuralFeatures>
         </eClassifiers>
         <eClassifiers xmi:type="ecore:EClass" xmi:id="_L4ddFg9iEeWHY4KRRC3kUQ" name="MessageElement">
@@ -28249,7 +28249,7 @@ base_Dependency.supplier->forAll(el | el->selectByKind(Enumeration).extension_Co
           <language>OCL</language>
           <body>base_Class.ownedAttribute->select(not association.oclIsUndefined()) ->&#xD;
 forAll(att | att.aggregation = uml::AggregationKind::composite and&#xD;
-att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())</body>
+att.type->selectByKind(Signal).extension_MessageDefinition->notEmpty())</body>
         </specification>
       </ownedRule>
       <generalization xmi:id="_Mf35cA9wEeWHY4KRRC3kUQ" general="_e0GsUA9QEeWHY4KRRC3kUQ">
@@ -28361,7 +28361,7 @@ att.type->selectByKind(Class).extension_MessageDefinition->notEmpty())</body>
           <eAnnotations xmi:id="_6ocU3RNUEeWwctToESlDLw" source="uml2.extensions">
             <details xmi:id="_6ocU3hNUEeWwctToESlDLw" key="addedInVersion" value="15"/>
           </eAnnotations>
-          <body>&lt;p>A &amp;lt;&amp;lt;MessageBuildingBlock&amp;gt;&amp;gt;-stereotyped Property shall be a memberEnd of an Association between a &amp;lt;&amp;lt;MessageDefinition&amp;gt;&amp;gt;-stereotyped Class and a &amp;lt;&amp;lt;MessageComponentType&amp;gt;&amp;gt;-stereotyped Class, and it specifically shall be the memberEnd on the &amp;lt;&amp;lt;MessageComponentType&amp;gt;-stereotyped Class's side of the Association.&lt;/p></body>
+          <body>&lt;p>A &amp;lt;&amp;lt;MessageBuildingBlock&amp;gt;&amp;gt;-stereotyped Property shall be a memberEnd of an Association between a &amp;lt;&amp;lt;MessageDefinition&amp;gt;&amp;gt;-stereotyped Signal and a &amp;lt;&amp;lt;MessageComponentType&amp;gt;&amp;gt;-stereotyped Class, and it specifically shall be the memberEnd on the &amp;lt;&amp;lt;MessageComponentType&amp;gt;-stereotyped Class's side of the Association.&lt;/p></body>
         </ownedComment>
         <specification xmi:type="uml:OpaqueExpression" xmi:id="_u0A4EA9wEeWHY4KRRC3kUQ">
           <eAnnotations xmi:id="_6ocU3xNUEeWwctToESlDLw" source="uml2.extensions">
@@ -28571,7 +28571,7 @@ includes(base_Property) </body>
             <details xmi:id="_6odi-xNUEeWwctToESlDLw" key="addedInVersion" value="15"/>
           </eAnnotations>
           <language>OCL</language>
-          <body>base_Class.attribute->select(not association.oclIsUndefined()).type&#xD;
+          <body>base_Signal.attribute->select(not association.oclIsUndefined()).type&#xD;
   ->select(t : Type | t->selectByKind(Class).extension_BusinessArea->notEmpty()) -> size() = 1</body>
         </specification>
       </ownedRule>
@@ -28584,7 +28584,7 @@ includes(base_Property) </body>
             <details xmi:id="_6odi_xNUEeWwctToESlDLw" key="addedInVersion" value="15"/>
           </eAnnotations>
           <language>OCL</language>
-          <body>base_Class.general -> isEmpty() </body>
+          <body>base_Signal.general -> isEmpty() </body>
         </specification>
       </ownedRule>
       <generalization xmi:id="_Rb4D8A9xEeWHY4KRRC3kUQ" general="_MAzlYA9QEeWHY4KRRC3kUQ">
@@ -28592,11 +28592,11 @@ includes(base_Property) </body>
           <details xmi:id="_6odjARNUEeWwctToESlDLw" key="addedInVersion" value="15"/>
         </eAnnotations>
       </generalization>
-      <ownedAttribute xmi:id="_v8VI0Q9hEeWHY4KRRC3kUQ" name="base_Class" association="_v8UhwA9hEeWHY4KRRC3kUQ">
+      <ownedAttribute xmi:id="_v8VI0Q9hEeWHY4KRRC3kUQ" name="base_Signal" association="_v8UhwA9hEeWHY4KRRC3kUQ">
         <eAnnotations xmi:id="_L4kxVA9iEeWHY4KRRC3kUQ" source="uml2.extensions">
           <details xmi:id="_L4kxVQ9iEeWHY4KRRC3kUQ" key="addedInVersion" value="10"/>
         </eAnnotations>
-        <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+        <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Signal"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_S-GrsA9xEeWHY4KRRC3kUQ" name="messageDefinitionIdentifier" visibility="public">
         <eAnnotations xmi:id="_6odjAhNUEeWwctToESlDLw" source="uml2.extensions">
@@ -28631,7 +28631,7 @@ includes(base_Property) </body>
         </lowerValue>
       </ownedAttribute>
     </packagedElement>
-    <packagedElement xmi:type="uml:Extension" xmi:id="_v8UhwA9hEeWHY4KRRC3kUQ" name="Class_MessageDefinition" memberEnd="_v8VI0A9hEeWHY4KRRC3kUQ _v8VI0Q9hEeWHY4KRRC3kUQ">
+    <packagedElement xmi:type="uml:Extension" xmi:id="_v8UhwA9hEeWHY4KRRC3kUQ" name="Signal_MessageDefinition" memberEnd="_v8VI0A9hEeWHY4KRRC3kUQ _v8VI0Q9hEeWHY4KRRC3kUQ">
       <eAnnotations xmi:id="_L4kxVg9iEeWHY4KRRC3kUQ" source="uml2.extensions">
         <details xmi:id="_L4kxVw9iEeWHY4KRRC3kUQ" key="addedInVersion" value="10"/>
       </eAnnotations>
@@ -28807,14 +28807,14 @@ base_Property.class.extension_ChoiceComponent->notEmpty()&#xD;
           <eAnnotations xmi:id="_8-g0UBNUEeWwctToESlDLw" source="uml2.extensions">
             <details xmi:id="_8-g0URNUEeWwctToESlDLw" key="addedInVersion" value="16"/>
           </eAnnotations>
-          <body>&lt;p>All utilized elements of a &amp;lt;&amp;lt;MessageSet&amp;gt;&amp;gt;-stereotyped Artefact's manifestation shall be &amp;lt;&amp;lt;MessageDefinition&amp;gt;&amp;gt;-stereotyped Classs.&lt;/p></body>
+          <body>&lt;p>All utilized elements of a &amp;lt;&amp;lt;MessageSet&amp;gt;&amp;gt;-stereotyped Artefact's manifestation shall be &amp;lt;&amp;lt;MessageDefinition&amp;gt;&amp;gt;-stereotyped Signals.&lt;/p></body>
         </ownedComment>
         <specification xmi:type="uml:OpaqueExpression" xmi:id="__5GUQA9xEeWHY4KRRC3kUQ">
           <eAnnotations xmi:id="_6oexHhNUEeWwctToESlDLw" source="uml2.extensions">
             <details xmi:id="_6oexHxNUEeWwctToESlDLw" key="addedInVersion" value="15"/>
           </eAnnotations>
           <language>OCL</language>
-          <body>base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Class).extension_MessageDefinition->notEmpty())</body>
+          <body>base_Artifact.manifestation.utilizedElement->forAll(el | el->selectByKind(Signal).extension_MessageDefinition->notEmpty())</body>
         </specification>
       </ownedRule>
       <generalization xmi:id="_7T2AYA9xEeWHY4KRRC3kUQ" general="_e0GsUA9QEeWHY4KRRC3kUQ">

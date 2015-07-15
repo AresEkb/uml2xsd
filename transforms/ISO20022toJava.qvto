@@ -24,14 +24,19 @@ property profileName : String = 'ISO20022Profile';
 
 main()
 {
-    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toClass();
+    log('Hello');
+    object JAVA::containers::Package {
+    	name := 'package';
+    	compilationUnits += m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->any(true)->toClass().cu;
+    }
 }
 
 mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::containers::CompilationUnit
 {
+    log(self.name);
     object c : JAVA::classifiers::Class {
         name := self.name.replace('.', '_');
-        //members := self.attribute->toField();
+        members := self.attribute->toField();
         
         members += self.ownedRule->sortedBy(name)->toClassMethod();
         
@@ -46,17 +51,20 @@ mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::contain
     };
     object cu : JAVA::containers::CompilationUnit {
         name := self.name;
+        namespaces := Sequence{'iso', 'std'};
         classifiers := c;
         imports += object JAVA::imports::ClassifierImport {
-        	classifier := createJavaClassifier('java.util.ArrayList'); /*object JAVA::classifiers::Class {
+        	//classifier := createJavaClassifier('java.util.ArrayList');
+        	classifier := object JAVA::classifiers::Class {
         		name := 'ArrayList';
-        	};*/
+        	};
         	namespaces := Sequence{'java', 'util'};
         };
         imports += object JAVA::imports::ClassifierImport {
-            classifier := createJavaClassifier('java.util.List');/*object JAVA::classifiers::Interface {
+            //classifier := createJavaClassifier('java.util.List');
+            classifier := object JAVA::classifiers::Interface {
                 name := 'List';
-            };*/
+            };
             namespaces := Sequence{'java', 'util'};
         };
     };
@@ -66,7 +74,10 @@ mapping Property::toField() : JAVA::members::Field
 {
 	name := self.name;
 	var fieldType := object JAVA::types::ClassifierReference {
-		target := self.type.oclAsType(Classifier).xmap toClass().c;
+		//target := self.type.oclAsType(Classifier).xmap toClass().c;
+		target := object JAVA::classifiers::Class {
+			name := self.type.oclAsType(Classifier).xmap toClass().c.name;
+		};
 	};
 	annotationsAndModifiers := object JAVA::modifiers::Public { };
 	
@@ -78,23 +89,11 @@ mapping Property::toField() : JAVA::members::Field
 		    target := object JAVA::classifiers::Interface {
                 name := 'List';
             };
-            /*target :=      JAVA::containers::Package.allInstances()->any(p | p.name = 'java.lang').compilationUnits->collect(
-            cu | cu.classifiers)->flatten()->any(c | c.name = 'LinkedList');*/
         };
         typeArguments := object JAVA::generics::QualifiedTypeArgument {
             typeReference := fieldType;
         };
 	};
-
-	/*
-		type := object JAVA::types::ClassifierReference {
-			target := object JAVA::classifiers::Interface {
-				name := 'List';
-			};
-			typeArguments := object JAVA::generics::QualifiedTypeArgument {
-				type := fieldType;
-			};
-		};*/
 }
 
 mapping Constraint::toClassMethod() : JAVA::members::ClassMethod

@@ -71,8 +71,8 @@ mapping Classifier::toSchema() : DocumentRoot
 
     var props := self.allAttributes()->closure(type.oclAsType(Classifier).allAttributes())->union(self.allAttributes());
 
-    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->select(ownedRule->notEmpty())->
-        collect(type|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'template', type.xmap toTemplate(stylesheetObj, rootPathExpr, props)));
+    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->
+        select(ownedRule->notEmpty())->toTemplate(stylesheetObj, rootPathExpr, props)->toFMEntry('template');
 
     stylesheet := stylesheetObj;
 
@@ -116,8 +116,8 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
     };
     context.xmap findQNames(stylesheet);
     match := context.toString();
-    instructionGroup += self.ownedRule->sortedBy(name)->collect(rule|createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'if', rule.xmap toIf(stylesheet)));
-    instructionGroup += createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'applyTemplates', object ApplyTemplatesType { });
+    instructionGroup += self.ownedRule->sortedBy(name)->toIf(stylesheet)->toFMEntry('if');
+    instructionGroup += object ApplyTemplatesType { }.toFMEntry('applyTemplates');
 }
 
 mapping Constraint::toIf(stylesheet : TransformType) : IfType
@@ -150,10 +150,12 @@ mapping ExprSingle::findQNames(currentStylesheet : TransformType) : StylesheetQN
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
 
+query GenericElementType::toFMEntry(name : String) : EFeatureMapEntry =
+    createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', name, self);
+
 query genPath() : AnyContentType =
     object AnyContentType {
-        mixed := createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', 'callTemplate',
-            object CallTemplateType { name := 'genPath'; });
+        mixed := object CallTemplateType { name := 'genPath'; }.toFMEntry('callTemplate');
     };
 
 query NamedElement::generateXMLTag() : String
