@@ -89,90 +89,30 @@ public class Main {
     private static OutputFormat outputFormat;
 
     public static void main(String[] args) {
-        Option in = OptionBuilder.withArgName("file")
-                .hasArg()
-                .isRequired()
-                .create("input");
-        Option out = OptionBuilder.withArgName("folder")
-                .hasArg()
-                .isRequired()
-                .create("output");
-        Option formatOpt = OptionBuilder.withArgName("outputFormat")
-                .hasArg()
-                .isRequired()
-                .create("format");
-
-        Options options = new Options();
-        options.addOption(in);
-        options.addOption(out);
-        options.addOption(formatOpt);
+        final String iso20022validationStylysheet = "iso20022-validation.xsl";
+        final String iso20022validationStylysheetForHTML = "iso20022-validation-html.xsl";
+        final ModelKind modelKind;
         
-        CommandLineParser parser = new GnuParser();
-        try {
-            CommandLine line = parser.parse( options, args );
-            input = line.getOptionValue("input");
-            output = line.getOptionValue("output");
-            String format = line.getOptionValue("format");
-            switch (format) {
-            case "xsd":
-                outputFormat = OutputFormat.XSD11;
-                break;
-            case "xslt":
-                outputFormat = OutputFormat.XSLT20;
-                break;
-            case "uml":
-                outputFormat = OutputFormat.ISO20022_UML;
-                break;
-            case "java":
-                outputFormat = OutputFormat.JAVA;
-                break;
-            default:
-                System.err.println("Wrong command-line arguments: format must have one of the following values: xsd, xslt, uml, java. Specified value is " + format);
-                return;
+        parseCommandLineArgs(args);
+
+        File outputFolder = new File(output);
+        if (outputFolder.exists()) {
+            if (!outputFolder.isDirectory()) {
+                throw new IllegalArgumentException("Output must be a folder");
             }
         }
-        catch( ParseException exp ) {
-            // oops, something went wrong
-            System.err.println("Wrong command-line arguments: " + exp.getMessage());
-            HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("uml2xsd", options);
-            return;
+        else {
+            outputFolder.mkdirs();
         }
-        
-        final String iso20022validationStylysheet = "iso20022-validation.xsl";
-        final ModelKind modelKind;
 
-        System.out.println("Initialization");
         ResourceSet rs = new ResourceSetImpl();
-        rs.setURIConverter(new CustomURIConverter());
-
-        System.out.println("  UML");
-        UMLResourcesUtil.init(rs);
-        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
-        JaMoPPUtil.initialize();
-        
-        System.out.println("  OCL");
-        EssentialOCLStandaloneSetup.doSetup();
-        UMLStandaloneSetup.init();
-        
-        System.out.println("  Ecore packages");
-        XPath2Package.eINSTANCE.getEFactoryInstance();
-        XMLSchema11Package.eINSTANCE.getEFactoryInstance();
-        XMLSchemaVersioningPackage.eINSTANCE.getEFactoryInstance();
-        XSLT20Package.eINSTANCE.getEFactoryInstance();
-        ValidationResultPackage.eINSTANCE.getEFactoryInstance();
-        JavaPackage.eINSTANCE.getEFactoryInstance();
-        //XHTML11Package.eINSTANCE.getEFactoryInstance();
+        init(rs);
 
         try {
-            System.out.println("Registering blackbox units");
-            TransformationExecutor.BlackboxRegistry.INSTANCE.registerModules(UtilitiesLibrary.class);
-
             System.out.println("Loading UML model " + input);
-            
             Resource resource = rs.getResource(createFileURI(input), true);
             Model uml = (Model)EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.eINSTANCE.getModel());
-            
+
             if (uml.getAppliedProfile("EECProfile") != null) {
                 System.out.println("EAEU model found");
                 modelKind = ModelKind.EAEU;
@@ -187,7 +127,6 @@ public class Main {
 
             // TODO: There is a very strange bug. If one will remove the following lines,
             // OCL will not resolve some properties during transformation.
-            // https://www.eclipse.org/forums/index.php/m/1701277/
             try {
                 for (PackageableElement el : uml.getPackagedElements()) {
                     if (el instanceof Classifier) {
@@ -221,7 +160,7 @@ public class Main {
                     org.w3._1999.xsl.transform.DocumentRoot root = (org.w3._1999.xsl.transform.DocumentRoot)obj;
                     TransformType schema = root.getStylesheet();
                     if (schema != null) {
-                        String schemaLocation = output + File.separator + getSchemaLocation(schema.getXpathDefaultNamespace(), modelKind, outputFormat);
+                        String schemaLocation = output + File.separator + schema.getId() + ".xsl";
                         System.out.println("Saving XSL Transformation into " + schemaLocation);
                         saveModel(rs, root, createFileURI(schemaLocation));
                     }
@@ -243,6 +182,7 @@ public class Main {
 
             if (modelKind == ModelKind.ISO20022_UML && outputFormat == OutputFormat.XSLT20) {
                 Files.copy(new File("xslt/" + iso20022validationStylysheet), new File(output + '/' + iso20022validationStylysheet));
+                Files.copy(new File("xslt/" + iso20022validationStylysheetForHTML), new File(output + '/' + iso20022validationStylysheetForHTML));
             }
 
             System.out.println("Done!");
@@ -250,6 +190,90 @@ public class Main {
             e.printStackTrace();
         }
     }
+    
+    private static void parseCommandLineArgs(String[] args) {
+        Option in = OptionBuilder.withArgName("file")
+                .hasArg()
+                .isRequired()
+                .create("input");
+        Option out = OptionBuilder.withArgName("folder")
+                .hasArg()
+                .isRequired()
+                .create("output");
+        Option formatOpt = OptionBuilder.withArgName("outputFormat")
+                .hasArg()
+                .isRequired()
+                .create("format");
+
+        Options options = new Options();
+        options.addOption(in);
+        options.addOption(out);
+        options.addOption(formatOpt);
+        
+        try {
+            parseCommandLineArgsImpl(options, args);
+        }
+        catch (IllegalArgumentException e) {
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("uml2xsd", options);
+        }
+    }
+    
+    private static void parseCommandLineArgsImpl(Options options, String[] args) {
+        CommandLineParser parser = new GnuParser();
+        try {
+            CommandLine line = parser.parse(options, args);
+            input = line.getOptionValue("input");
+            output = line.getOptionValue("output");
+            String format = line.getOptionValue("format");
+            switch (format) {
+            case "xsd":
+                outputFormat = OutputFormat.XSD11;
+                break;
+            case "xslt":
+                outputFormat = OutputFormat.XSLT20;
+                break;
+            case "uml":
+                outputFormat = OutputFormat.ISO20022_UML;
+                break;
+            case "java":
+                outputFormat = OutputFormat.JAVA;
+                break;
+            default:
+                throw new IllegalArgumentException("Wrong command-line arguments: format must have one of the following values: xsd, xslt, uml, java. Specified value is " + format);
+            }
+        }
+        catch(ParseException e) {
+            throw new IllegalArgumentException("Wrong command-line arguments: " + e.getMessage());
+        }
+    }
+    
+    private static void init(ResourceSet rs) {
+        System.out.println("Initialization");
+        rs.setURIConverter(new CustomURIConverter());
+
+        System.out.println("  UML");
+        UMLResourcesUtil.init(rs);
+        rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
+        JaMoPPUtil.initialize();
+        
+        System.out.println("  OCL");
+        EssentialOCLStandaloneSetup.doSetup();
+        UMLStandaloneSetup.init();
+        
+        System.out.println("  Ecore packages");
+        XPath2Package.eINSTANCE.getEFactoryInstance();
+        XMLSchema11Package.eINSTANCE.getEFactoryInstance();
+        XMLSchemaVersioningPackage.eINSTANCE.getEFactoryInstance();
+        XSLT20Package.eINSTANCE.getEFactoryInstance();
+        ValidationResultPackage.eINSTANCE.getEFactoryInstance();
+        JavaPackage.eINSTANCE.getEFactoryInstance();
+        //XHTML11Package.eINSTANCE.getEFactoryInstance();
+
+        System.out.println("  Blackbox units");
+        TransformationExecutor.BlackboxRegistry.INSTANCE.registerModules(UtilitiesLibrary.class);
+    }
+    
     /*
     private static boolean validateModel(EObject uml) throws ParserException {
         PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory();
@@ -343,12 +367,8 @@ public class Main {
                 return targetNamespace.replaceFirst("^urn:", "").replace(':', '_') + ".xsd";
             }
         case ISO20022_UML:
-            String name = targetNamespace.replaceFirst("^urn:iso:std:iso:20022:tech:xsd:", "");
             if (outputFormat == OutputFormat.XSD11) {
-                return name + ".xsd";
-            }
-            else if (outputFormat == OutputFormat.XSLT20) {
-                return name + ".xsl";
+                return targetNamespace.replaceFirst("^urn:iso:std:iso:20022:tech:xsd:", "") + ".xsd";
             }
         case ISO20022_ECORE:
             throw new IllegalArgumentException();

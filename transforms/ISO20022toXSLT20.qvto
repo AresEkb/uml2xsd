@@ -35,10 +35,11 @@ property profileName : String = 'ISO20022Profile';
 
 main()
 {
-    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toSchema();
+    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheet();
+    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheetForHTML();
 }
 
-mapping Classifier::toSchema() : DocumentRoot
+mapping Classifier::toStylesheet() : DocumentRoot
 {
     var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
     var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId;
@@ -46,6 +47,7 @@ mapping Classifier::toSchema() : DocumentRoot
     log('  Found message ' + msgId);
 
     var stylesheetObj := object TransformType {
+        id := msgId;
         version := 2;
         xpathDefaultNamespace := namespace;
         excludeResultPrefixes := PrefixListOrAllMember1::all;
@@ -82,6 +84,30 @@ mapping Classifier::toSchema() : DocumentRoot
             key := qname.getPrefix();
             value := qname.getNamespaceURI();
         });
+}
+
+mapping Classifier::toStylesheetForHTML() : DocumentRoot
+{
+    var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
+    var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId;
+    
+    log('  Generating HTML version of XSLT for message ' + msgId);
+
+    var stylesheetObj := object TransformType {
+        id := msgId + '-html';
+        version := 2;
+        xpathDefaultNamespace := namespace;
+        excludeResultPrefixes := PrefixListOrAllMember1::all;
+    };
+
+    stylesheetObj._import := object ImportType {
+        href := msgId + '.xsl';
+    };
+    stylesheetObj._import += object ImportType {
+        href := 'iso20022-validation-html.xsl';
+    };
+
+    stylesheet := stylesheetObj;
 }
 
 mapping NamedElement::toPathExpr(stylesheet : TransformType, rootPathExpr : PathExpr, props : Set(Property)) : Set(PathExpr)
