@@ -60,6 +60,13 @@ public class UtilitiesLibrary {
     final static OCL ocl = OCL.newInstance();
 
     final static String DOCUMENT_ROOT = "DocumentRoot";
+    
+    private static int seq = 0;
+
+    public static int getSeqNumber()
+    {
+        return ++seq;
+    }
 
     @Operation(contextual=true)
     public static EList<Property> getAttributes(Classifier classifier)

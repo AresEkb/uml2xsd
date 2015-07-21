@@ -11,62 +11,99 @@
 
 import uml2xsd.UtilitiesLibrary;
 import ISO20022Helpers;
+import OCLtoXPath;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
 modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
 modeltype JAVA uses 'http://www.emftext.org/java';
 modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
+modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 
-transformation ISO20022toJava(in m : UML, out j : JAVA);
-
-property profileName : String = 'ISO20022Profile';
+transformation ISO20022toJava(in m : UML, out j : JAVA)
+    extends OCLtoXPath;
 
 main()
 {
-    log('Hello');
-    object JAVA::containers::Package {
-    	name := 'package';
-    	compilationUnits += m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->any(true)->toClass().cu;
-    }
+    useFunctionQNames := false;
+    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->any(true)->toClass();
 }
 
 mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::containers::CompilationUnit
 {
+    var className := self.name.replace('.', '_');
     log(self.name);
+
     object c : JAVA::classifiers::Class {
-        name := self.name.replace('.', '_');
-        members := self.attribute->toField();
+        name := className;
         
-        members += self.ownedRule->sortedBy(name)->toClassMethod();
-        
-        members += object JAVA::members::ClassMethod {
-        	name := 'isValid';
-        	typeReference := object JAVA::types::_Boolean { };
-            annotationsAndModifiers := object JAVA::modifiers::Public { };
-        	statements := object JAVA::statements::Return {
-        	   returnValue := object JAVA::literals::BooleanLiteral { value := true; };
-        	};
+        _extends := object JAVA::types::ClassifierReference {
+        	target := object JAVA::classifiers::Class { name := 'BaseValidator' };
         };
+        
+        annotationsAndModifiers += object JAVA::annotations::AnnotationInstance {
+            annotation := object JAVA::classifiers::Class { name := 'Generated'; };
+            parameter := object JAVA::annotations::SingleAnnotationParameter {
+            	value := object JAVA::_references::StringReference { value := 'uml2xsd'; };
+            };
+        };
+        annotationsAndModifiers += object JAVA::modifiers::Public { };
+        
+        members += object JAVA::members::Field {
+        	name := 'message';
+        	typeReference := object JAVA::types::NamespaceClassifierReference {
+        		classifierReferences := object JAVA::types::ClassifierReference {
+        			target := object JAVA::classifiers::Class { name := 'Document'; };
+        		};
+        	};
+        	annotationsAndModifiers := object JAVA::modifiers::Private { };
+        };
+        
+        members += object JAVA::members::Constructor {
+            name := className;
+            parameters := object JAVA::parameters::OrdinaryParameter {
+            	name := 'message';
+            	typeReference := object JAVA::types::NamespaceClassifierReference {
+            		classifierReferences := object JAVA::types::ClassifierReference {
+                        target := object JAVA::classifiers::Class { name := 'String'; };
+            	    };
+            	};
+            };
+            annotationsAndModifiers := object JAVA::modifiers::Public { };
+            statements := object JAVA::statements::ExpressionStatement {
+            	expression := object JAVA::expressions::AssignmentExpression {
+            		var s := object JAVA::_references::SelfReference {
+                        next := object JAVA::_references::IdentifierReference {
+                            target := object JAVA::annotations::AnnotationAttribute { name := 'message'; };
+                        };
+            		};
+            		s._self := object JAVA::literals::This { };
+            		child := s;
+            		assignmentOperator := object JAVA::operators::Assignment { };
+            		value := object JAVA::_references::IdentifierReference {
+            			target := object JAVA::classifiers::Class { name := 'Helper'; };
+            			next := object JAVA::_references::MethodCall {
+                            target := object JAVA::members::ClassMethod { name := 'parse'; };
+                            arguments := object JAVA::_references::IdentifierReference {
+                                target := object JAVA::members::Field { name := 'message'; };
+                            };
+                            arguments += object JAVA::_references::StringReference { value := 'WINDOWS-1251'; };
+            			};
+            		};
+            	};
+            };
+        };
+
+        members += self.ownedRule->sortedBy(name)->toClassMethod();
     };
     object cu : JAVA::containers::CompilationUnit {
         name := self.name;
-        namespaces := Sequence{'iso', 'std'};
+        namespaces := 'com.centreit.repiso.ocl.helper'.tokenize('.');
         classifiers := c;
-        imports += object JAVA::imports::ClassifierImport {
-        	//classifier := createJavaClassifier('java.util.ArrayList');
-        	classifier := object JAVA::classifiers::Class {
-        		name := 'ArrayList';
-        	};
-        	namespaces := Sequence{'java', 'util'};
-        };
-        imports += object JAVA::imports::ClassifierImport {
-            //classifier := createJavaClassifier('java.util.List');
-            classifier := object JAVA::classifiers::Interface {
-                name := 'List';
-            };
-            namespaces := Sequence{'java', 'util'};
-        };
+        
+        imports += 'org.w3c.dom.Document'.toInterfaceImport();
+        imports += 'javax.annotation.Generated'.toInterfaceImport();
+        imports += 'java.util.Arrays'.toClassImport();
     };
 }
 
@@ -98,10 +135,263 @@ mapping Property::toField() : JAVA::members::Field
 
 mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
 {
+    log('  Found rule ' + self.name);
     name := 'check' + self.name;
     typeReference := object JAVA::types::_Boolean { };
-    annotationsAndModifiers := object JAVA::modifiers::Public { };
+
+    annotationsAndModifiers += object JAVA::annotations::AnnotationInstance {
+        annotation := object JAVA::classifiers::Class { name := 'RuleMetadata'; };
+        parameter := object JAVA::annotations::AnnotationParameterList {
+            var documentations := self.ownedComment.body->select(size() > 0);
+            if (documentations->notEmpty()) {
+                settings += object JAVA::annotations::AnnotationAttributeSetting {
+                	attribute := object JAVA::members::InterfaceMethod {
+                		name := 'description';
+            	    };
+            	    // TODO: Something more adequate is needed
+                	value := object JAVA::_references::StringReference { value := documentations->any(true); };
+                };
+            };
+            var specifications := self.specification->selectByKind(OpaqueExpression)->select(language->includes('OCL')).body->select(size() > 0);
+            if (specifications->notEmpty()) {
+                settings += object JAVA::annotations::AnnotationAttributeSetting {
+                    attribute := object JAVA::members::InterfaceMethod {
+                        name := 'ocl';
+                    };
+                    // TODO: Something more adequate is needed
+                    value := object JAVA::_references::StringReference { value := specifications->any(true); };
+                };
+            };
+        };
+    };
+
+    annotationsAndModifiers += object JAVA::modifiers::Public { };
+
+    var res : JAVA::expressions::Expression;
+    var expr := self.toExpressionInOCL().ownedBody;
+    if (expr[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('implies'))) {
+    	var premise := expr![OCL::OperationCallExp].ownedSource;
+        var consequent := expr![OCL::OperationCallExp].ownedArguments->any(true);
+        var negateConsequent = false;
+        if (consequent[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('not'))) {
+            negateConsequent := true;
+            consequent := consequent[OCL::OperationCallExp].ownedSource->any(true);
+        };
+        if (consequent[OCL::IteratorExp]->one(referredIteration.name = 'exists')) {
+            var source := consequent[OCL::IteratorExp].ownedSource;
+            var body := consequent[OCL::IteratorExp].ownedBody->any(true);
+            if (source[OCL::OperationCallExp]->one(referredOperation.name = 'allInstances')) {
+                res := object JAVA::expressions::ConditionalOrExpression {
+                    children := object JAVA::expressions::UnaryExpression {
+                        operators := object JAVA::operators::Negate { };
+                        child := premise.xmap toCheckMethodCall();
+                    };
+                    var existsCall := object PathExpr {
+                    	step := object RootStepExpr { };
+                        step += object AbbrevForwardStep {
+                            kind := AbbrevForwardStepKind::child;
+                            nodeTest := object QNameTest { name := consequent[OCL::IteratorExp].ownedIterators->any(true).type.getQName(); };
+                            predicate := body.xmap replaceSelf(body).xmap toExprSingle().predicate();
+                        };
+                    }.xmap toExistsMethodCall(body);
+                    if (negateConsequent) {
+                        children += object JAVA::expressions::UnaryExpression {
+                            operators := object JAVA::operators::Negate { };
+                            child := existsCall;
+                        };
+                    }
+                    else {
+                        children += existsCall;
+                    };
+                };
+            }
+            else {
+                res := expr.xmap toCheckMethodCall();
+            };
+        }
+        else {
+            res := expr.xmap toCheckMethodCall();
+        };
+    }
+    else {
+        res := expr.xmap toCheckMethodCall();
+    };
     statements := object JAVA::statements::Return {
-        returnValue := object JAVA::literals::BooleanLiteral { value := true; };
+        returnValue := res;
     };
 }
+
+mapping OCLExpression::toCheckMethodCall() : JAVA::_references::IdentifierReference
+{
+    target := object JAVA::classifiers::Class {
+        name := 'Helper';
+    };
+    next := object JAVA::_references::MethodCall {
+        target := object JAVA::members::ClassMethod { name := 'check'; };
+        arguments := object JAVA::_references::IdentifierReference {
+            target := object JAVA::members::Field { name := 'message'; };
+        };
+        arguments += object JAVA::_references::StringReference { value := self.xmap toExprSingle().toString(); };
+    };
+}
+
+mapping OCLExpression::replaceSelf(expr : OCLExpression) : OCLExpression
+disjuncts
+    PropertyCallExp::replaceSelf,
+    OperationCallExp::replaceSelf
+{
+}
+
+intermediate class Param { name : String; xpath : OCLExpression; type : String };
+
+property params : Dict(OCLExpression, Set(Param));
+
+mapping PropertyCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
+{
+    init {
+        //log(self.isBasedOnSelf().repr() + ' ' + self.isRelatedToSelf().repr() + ' ' + self.repr());
+        if (self.isBasedOnSelf()) {
+            var id = ':param' + getSeqNumber().toString();
+            var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
+            paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(PropertyCallExp); };
+            params->put(expr, paramSet);
+            result := object StringLiteralExp { stringSymbol := id };
+    	}
+    	else {
+            result := self.deepclone().oclAsType(PropertyCallExp);
+    	};
+    }
+}
+
+mapping OperationCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
+{
+    init {
+        //log(self.isBasedOnSelf().repr() + ' ' + self.isRelatedToSelf().repr() + ' ' + self.repr());
+        if (self.isBasedOnSelf()) {
+            var id = ':param' + getSeqNumber().toString();
+            var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
+            paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(OperationCallExp); };
+            params->put(expr, paramSet);
+            result := object StringLiteralExp { stringSymbol := id };
+        }
+        elif (not(self.isRelatedToSelf())) {
+            result := self.deepclone().oclAsType(OperationCallExp);
+        }
+        else {
+            var op := self.deepclone().oclAsType(OperationCallExp);
+            object op : OperationCallExp {
+                //referredOperation := self.referredOperation;
+            	ownedSource := self.ownedSource.xmap replaceSelf(expr);
+            	ownedArguments := self.ownedArguments->replaceSelf(expr);
+            };
+            result := op;
+        };
+    }
+}
+
+mapping ExprSingle::toExistsMethodCall(expr : OCLExpression) : JAVA::_references::IdentifierReference
+{
+    target := object JAVA::classifiers::Class {
+        name := 'Helper';
+    };
+    next := object JAVA::_references::MethodCall {
+        target := object JAVA::members::ClassMethod { name := 'exists'; };
+        var xpath := self.toString();
+        arguments := object JAVA::_references::IdentifierReference {
+            target := object JAVA::members::Field { name := 'message'; };
+        };
+        arguments += object JAVA::_references::StringReference { value := xpath.replaceAll("'(:param\\d+)'", "$1"); };
+        arguments += object JAVA::_references::IdentifierReference {
+            target := object JAVA::classifiers::Class { name := 'Arrays'; };
+            next := object JAVA::_references::MethodCall {
+                target := object JAVA::members::ClassMethod {
+                    name := 'asList';
+                };
+                arguments := params->get(expr)->toNewConstructorCall();
+            };
+        };
+    };
+}
+
+mapping Param::toNewConstructorCall() : JAVA::instantiations::NewConstructorCall
+{
+    typeReference := object JAVA::types::NamespaceClassifierReference {
+        classifierReferences := object JAVA::types::ClassifierReference {
+            target := object JAVA::classifiers::Class {
+                name := 'XPathParam';
+            };
+        };
+    };
+    arguments := object JAVA::_references::StringReference {
+        value := self.name;
+    };
+    arguments += object JAVA::_references::StringReference {
+        value := self.xpath.xmap toExprSingle().toString();
+    };
+    arguments += object JAVA::_references::IdentifierReference {
+        target := object JAVA::classifiers::Class {
+        	name := self.xpath.getType();
+        };
+        next := object JAVA::_references::ReflectiveClassReference { };
+    };
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Helpers
+
+query OCLExpression::getType() : String
+{
+    if (self.oclIsKindOf(OperationCallExp)) {
+        return self.oclAsType(OperationCallExp).type.getType();
+    }
+    elif (self.oclIsKindOf(PropertyCallExp)) {
+        return  self.oclAsType(PropertyCallExp).type.getType();
+    };
+    assert fatal (false) with log('Unable to determine type of ' + self.repr());
+    return null;
+}
+
+query OCL::Type::getType() : String
+{
+    // TODO: Something more adequate is needed here
+    if (self.name = 'Integer') {
+        return 'Integer';
+    };
+    if (self.oclIsKindOf(OCL::NamedElement)) {
+        if (self.oclAsType(OCL::NamedElement).getETarget().is('String')) {
+            return 'String';
+        };
+    };
+    assert fatal (false) with log('Unknown data type ' + self.metaClassName() + ' ' + self.repr() + ' ' + self.oclIsKindOf(OCL::Element).repr());
+    return null; 
+}
+
+query String::toInterfaceImport() : JAVA::imports::ClassifierImport =
+    let parts = self.tokenize('.') in
+    object JAVA::imports::ClassifierImport {
+        //classifier := createJavaClassifier(self);
+        classifier := object JAVA::classifiers::Interface {
+            name := parts->last();
+        };
+        namespaces := parts->subSequence(1, parts->size() - 1);
+    };
+
+query String::toClassImport() : JAVA::imports::ClassifierImport =
+    let parts = self.tokenize('.') in
+    object JAVA::imports::ClassifierImport {
+        //classifier := createJavaClassifier(self);
+        classifier := object JAVA::classifiers::Class {
+            name := parts->last();
+        };
+        namespaces := parts->subSequence(1, parts->size() - 1);
+    };
+
+query OCLExpression::isRelatedToSelf() : Boolean =
+    if self.oclIsKindOf(PropertyCallExp) then self![PropertyCallExp].ownedSource.isRelatedToSelf()
+    elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isRelatedToSelf() or ownedArguments->forAll(isRelatedToSelf())) 
+    else self.oclIsKindOf(VariableExp) and self![VariableExp].referredVariable.name = 'self' endif;
+
+query OCLExpression::isBasedOnSelf() : Boolean =
+    if self.oclIsKindOf(PropertyCallExp) then self![PropertyCallExp].ownedSource.isBasedOnSelf()
+    elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isBasedOnSelf() and ownedArguments->forAll(isBasedOnSelf())) 
+    else self.oclIsKindOf(VariableExp) and self![VariableExp].referredVariable.name = 'self' endif;

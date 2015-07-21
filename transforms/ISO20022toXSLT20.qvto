@@ -74,7 +74,7 @@ mapping Classifier::toStylesheet() : DocumentRoot
     var props := self.allAttributes()->closure(type.oclAsType(Classifier).allAttributes())->union(self.allAttributes());
 
     stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->
-        select(ownedRule->notEmpty())->toTemplate(stylesheetObj, rootPathExpr, props)->toFMEntry('template');
+        select(ownedRule->exists(isSupported()))->toTemplate(stylesheetObj, rootPathExpr, props)->toFMEntry('template');
 
     stylesheet := stylesheetObj;
 
@@ -114,12 +114,12 @@ mapping NamedElement::toPathExpr(stylesheet : TransformType, rootPathExpr : Path
 {
     init {
         var currentType := if self.oclIsKindOf(Type) then self else self.owner endif;
-        var parents := props->select(type = currentType).xmap toPathExpr(stylesheet, rootPathExpr, props);
-        if (parents->isEmpty()) {
-        	result += rootPathExpr.deepclone().oclAsType(PathExpr);
+        var parents := props->select(type = currentType);
+        if (currentType.oclIsKindOf(Signal) or parents->isEmpty()) {
+            result += rootPathExpr.deepclone().oclAsType(PathExpr);
         }
         else {
-            result := parents.deepclone()[PathExpr]->asSet();
+            result := parents.xmap toPathExpr(stylesheet, rootPathExpr, props).deepclone()[PathExpr]->asSet();
         };
     }
     if (self.oclIsKindOf(Property)) {
@@ -136,8 +136,14 @@ mapping NamedElement::toPathExpr(stylesheet : TransformType, rootPathExpr : Path
 
 mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathExpr, props : Set(Property)) : TemplateType
 {
+    var contexts := self.xmap toPathExpr(stylesheet, rootPathExpr, props);
+    if (contexts->isEmpty()) {
+    	contexts += object PathExpr {
+            step := object RootStepExpr { };
+        };
+    };
     var context := object UnionExpr {
-        operand := self.xmap toPathExpr(stylesheet, rootPathExpr, props)->sortedBy(toString());
+        operand := contexts->sortedBy(toString());
         operation := Sequence{1..operand->size()-1}->collect(UnionOp::vertical_bar);
     };
     context.xmap findQNames(stylesheet);
@@ -147,11 +153,12 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
 }
 
 mapping Constraint::toIf(stylesheet : TransformType) : IfType
+when { self.isSupported() }
 {
     var xpath := self.toExpressionInOCL().xmap toExprSingle().notExpr();
     xpath.xmap findQNames(stylesheet);
-
     test := xpath.toString();
+
     mixed := createFeatureMapEntry('urn:iso20022:validation:result', 'error', object ErrorType {
         ruleName := object AnyContentType {
             text := self.name;
@@ -187,8 +194,10 @@ query genPath() : AnyContentType =
 query NamedElement::generateXMLTag() : String
 {
     var name : String;
+    //log(self.repr());
     if (self.is('MessageDefinition')) {
         name := self.getValue(profileName + '::MessageDefinition', 'xmlTag');
+        //log('!!!' + name);
     }
     elif (self.is('MessageBuildingBlock')) {
         name := self.getValue(profileName + '::MessageBuildingBlock', 'xmlTag');
@@ -209,6 +218,17 @@ query NamedElement::generateXMLTag() : String
     
     return name;
 }
+
+// TODO: Constraints must be parsed only once
+query Constraint::isSupported() : Boolean =
+    self.toExpressionInOCL().ownedBody.isSupported();
+
+query OCLExpression::isSupported() : Boolean =
+    if self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(
+        referredOperation.name <> 'allInstances' and ownedSource.isSupported() and ownedArguments->forAll(isSupported()))
+    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll( 
+        ownedSource.isSupported() and ownedBody->forAll(isSupported()))
+    else true endif;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Overrides

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ProfileBase="http:///schemas/ProfileBase/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/ProfileBase/1 ProfileBase.profile.uml#_IfFYQMmBEdqBcN1R6EvWUw">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ProfileBase="http:///schemas/ProfileBase/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/ProfileBase/1 pathmap://UML2_MSL_PROFILES/ProfileBase.epx#_IfFYQMmBEdqBcN1R6EvWUw">
   <uml:Profile xmi:id="_rspygA6UEeWHY4KRRC3kUQ" name="ISO20022Profile" metamodelReference="_rstc4A6UEeWHY4KRRC3kUQ">
     <eAnnotations xmi:id="_rtLW8A6UEeWHY4KRRC3kUQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <contents xmi:type="ecore:EPackage" xmi:id="_Z1fsECR_EeW-eZ1ZLTAX7g" name="ISO20022Profile" nsURI="http:///schemas/ISO20022Profile/_Z1baoCR_EeW-eZ1ZLTAX7g/50" nsPrefix="ISO20022Profile">
