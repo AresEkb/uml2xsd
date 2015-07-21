@@ -23,6 +23,12 @@ modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 transformation ISO20022toJava(in m : UML, out j : JAVA)
     extends OCLtoXPath;
 
+exception IllegalArgumentException {}
+
+intermediate class Param { name : String; xpath : OCLExpression; type : String };
+
+property params : Dict(OCLExpression, Set(Param));
+
 main()
 {
     useFunctionQNames := false;
@@ -32,7 +38,7 @@ main()
 mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::containers::CompilationUnit
 {
     var className := self.name.replace('.', '_');
-    log(self.name);
+    log('Found message ' + self.name);
 
     object c : JAVA::classifiers::Class {
         name := className;
@@ -167,6 +173,10 @@ mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
 
     annotationsAndModifiers += object JAVA::modifiers::Public { };
 
+    // TODO: The following logic splits OCL-expressions containing allInstances() method
+    // into Helper.check() and Helper.exists() invocations.
+    // It shouldn't be hardcoded. Something more universal is needed here.
+    // The main idea is that all code surrounding allInstances() must be converted into Java code instead of XPath one.
     var res : JAVA::expressions::Expression;
     var expr := self.toExpressionInOCL().ownedBody;
     if (expr[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('implies'))) {
@@ -242,10 +252,6 @@ disjuncts
 {
 }
 
-intermediate class Param { name : String; xpath : OCLExpression; type : String };
-
-property params : Dict(OCLExpression, Set(Param));
-
 mapping PropertyCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
 {
     init {
@@ -266,7 +272,6 @@ mapping PropertyCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
 mapping OperationCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
 {
     init {
-        //log(self.isBasedOnSelf().repr() + ' ' + self.isRelatedToSelf().repr() + ' ' + self.repr());
         if (self.isBasedOnSelf()) {
             var id = 'param' + getSeqNumber().toString();
             var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
@@ -280,7 +285,6 @@ mapping OperationCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
         else {
             var op := self.deepclone().oclAsType(OperationCallExp);
             object op : OperationCallExp {
-                //referredOperation := self.referredOperation;
             	ownedSource := self.ownedSource.xmap replaceSelf(expr);
             	ownedArguments := self.ownedArguments->replaceSelf(expr);
             };
@@ -347,7 +351,7 @@ query OCLExpression::getType() : String
     elif (self.oclIsKindOf(PropertyCallExp)) {
         return  self.oclAsType(PropertyCallExp).type.getType();
     };
-    assert fatal (false) with log('Unable to determine type of ' + self.repr());
+    raise IllegalArgumentException('Unable to determine type of ' + self.repr());
     return null;
 }
 
@@ -356,13 +360,13 @@ query OCL::Type::getType() : String
     // TODO: Something more adequate is needed here
     if (self.name = 'Integer') {
         return 'Integer';
-    };
-    if (self.oclIsKindOf(OCL::NamedElement)) {
+    }
+    elif (self.oclIsKindOf(OCL::NamedElement)) {
         if (self.oclAsType(OCL::NamedElement).getETarget().is('String')) {
             return 'String';
         };
     };
-    assert fatal (false) with log('Unknown data type ' + self.metaClassName() + ' ' + self.repr() + ' ' + self.oclIsKindOf(OCL::Element).repr());
+    raise IllegalArgumentException('Unknown data type ' + self.metaClassName() + ' ' + self.repr() + ' ' + self.oclIsKindOf(OCL::Element).repr());
     return null; 
 }
 
