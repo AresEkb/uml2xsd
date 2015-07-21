@@ -251,11 +251,11 @@ mapping PropertyCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
     init {
         //log(self.isBasedOnSelf().repr() + ' ' + self.isRelatedToSelf().repr() + ' ' + self.repr());
         if (self.isBasedOnSelf()) {
-            var id = ':param' + getSeqNumber().toString();
+            var id = 'param' + getSeqNumber().toString();
             var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
             paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(PropertyCallExp); };
             params->put(expr, paramSet);
-            result := object StringLiteralExp { stringSymbol := id };
+            result := object StringLiteralExp { stringSymbol := ':' + id };
     	}
     	else {
             result := self.deepclone().oclAsType(PropertyCallExp);
@@ -268,11 +268,11 @@ mapping OperationCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
     init {
         //log(self.isBasedOnSelf().repr() + ' ' + self.isRelatedToSelf().repr() + ' ' + self.repr());
         if (self.isBasedOnSelf()) {
-            var id = ':param' + getSeqNumber().toString();
+            var id = 'param' + getSeqNumber().toString();
             var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
             paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(OperationCallExp); };
             params->put(expr, paramSet);
-            result := object StringLiteralExp { stringSymbol := id };
+            result := object StringLiteralExp { stringSymbol := ':' + id };
         }
         elif (not(self.isRelatedToSelf())) {
             result := self.deepclone().oclAsType(OperationCallExp);
