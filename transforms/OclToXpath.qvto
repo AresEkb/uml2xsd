@@ -24,6 +24,8 @@ modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
 library OCLtoXPath;
 
+property useFunctionQNames : Boolean = true;
+
 mapping ExpressionInOCL::toXPath() : Expr
 {
     log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
@@ -44,6 +46,7 @@ disjuncts
     // Logic
     OperationCallExp::toOrExpr,
     OperationCallExp::andExpr,
+    OperationCallExp::toNot,
     OperationCallExp::implication,
     IteratorExp::exists,
     IteratorExp::forAll,
@@ -63,6 +66,7 @@ disjuncts
     OperationCallExp::isEmpty,
     OperationCallExp::notEmpty,
     OperationCallExp::sum,
+    IteratorExp::isUnique,
     // Literals
     IntegerLiteralExp::toLiteral,
     UnlimitedNaturalLiteralExp::toLiteral,
@@ -101,12 +105,22 @@ when { self.referredOperation.isBooleanOperation('implies') }
     }
 }
 
+mapping OperationCallExp::toNot() : ExprSingle
+when { self.referredOperation.isBooleanOperation('not') }
+{
+    init {
+        result := self.ownedSource.xmap toExprSingle().notExpr();
+    }
+}
+
 mapping IteratorExp::exists() : FunctionCall
 when { self.referredIteration.name = 'exists' }
 {
     init {
-        var path := self.ownedSource.oclAsType(PropertyCallExp).xmap toPath();
-        path.getLastAxisStep().predicate := self.ownedBody.xmap toExprSingle().predicate();
+        //var path := self.ownedSource.oclAsType(PropertyCallExp).xmap toPath();
+        var path := self.ownedSource.xmap toExprSingle();
+        assert fatal (path.oclIsKindOf(PathExpr)) with log('PathExpr expected instead of ' + path.metaClassName());
+        path.oclAsType(PathExpr).getLastAxisStep().predicate := self.ownedBody.xmap toExprSingle().predicate();
         result := path.booleanExpr();
     }
 }
@@ -115,33 +129,32 @@ mapping IteratorExp::forAll() : ExprSingle
 when { self.referredIteration.name = 'forAll' }
 {
     init {
-        var path := self.ownedSource.oclAsType(PropertyCallExp).xmap toPath();
-        path.getLastAxisStep().predicate := self.ownedBody.xmap toExprSingle().notExpr().predicate();
+        //var path := self.ownedSource.oclAsType(PropertyCallExp).xmap toPath();
+        var path := self.ownedSource.xmap toExprSingle();
+        assert fatal (path.oclIsKindOf(PathExpr)) with log('PathExpr expected instead of ' + path.metaClassName());
+        path.oclAsType(PathExpr).getLastAxisStep().predicate := self.ownedBody.xmap toExprSingle().notExpr().predicate();
         result := path.notExpr();
     }
 }
 
-property fn_not : QName = 'not'.createFunctionQName();
-property fn_boolean : QName = 'boolean'.createFunctionQName();
-
-query ExprSingle::booleanExpr() : FunctionCall = object FunctionCall { name := fn_boolean; arg := self; };
+query ExprSingle::booleanExpr() : FunctionCall = object FunctionCall { name := 'boolean'.createFunctionQName(); arg := self; };
 
 query ExprSingle::notExpr() : ExprSingle =
     // Simplification: fn:not(fn:not(...)) = fn:boolean(...)
-    if self.isFunctionCall(fn_not) then
+    if self.isFunctionCall('not'.createFunctionQName()) then
         self.oclAsType(FunctionCall).arg->collectOne(booleanExpr())
     // Simplification: fn:not(fn:not(...) and fn:not(...) and ...) = (... or ... or ...)
-    elif self.oclIsKindOf(AndExpr) and self.oclAsType(AndExpr).operand->forAll(isFunctionCall(fn_not)) then
+    elif self.oclIsKindOf(AndExpr) and self.oclAsType(AndExpr).operand->forAll(isFunctionCall('not'.createFunctionQName())) then
         object OrExpr { operand :=
             self.oclAsType(AndExpr).operand->collect(
                 oclAsType(FunctionCall).arg->first().orExprOperand()) }
     // Simplification: fn:not(fn:not(...) or fn:not(...) or ...) = (... and ... and ...)
-    elif self.oclIsKindOf(OrExpr) and self.oclAsType(OrExpr).operand->forAll(isFunctionCall(fn_not)) then
+    elif self.oclIsKindOf(OrExpr) and self.oclAsType(OrExpr).operand->forAll(isFunctionCall('not'.createFunctionQName())) then
         object AndExpr { operand :=
             self.oclAsType(OrExpr).operand->collect(
                 oclAsType(FunctionCall).arg->first().andExprOperand()) }
     else
-        object FunctionCall { name := fn_not; arg := self; }
+        object FunctionCall { name := 'not'.createFunctionQName(); arg := self; }
     endif;
 
 query ExprSingle::orExpr(rhs : ExprSingle) : ExprSingle
@@ -150,7 +163,7 @@ query ExprSingle::orExpr(rhs : ExprSingle) : ExprSingle
     operands += rhs.orExprOperand();
     return 
     // Simplification: fn:not(...) or fn:not(...) = fn:not(... and ...)
-    if operands->forAll(isFunctionCall(fn_not)) then
+    if operands->forAll(isFunctionCall('not'.createFunctionQName())) then
         object AndExpr { operand :=
             operands->collect(
                 oclAsType(FunctionCall).arg->first().andExprOperand()) }.notExpr()
@@ -198,7 +211,7 @@ query PathExpr::getLastAxisStep() : AxisStep
 query ExprSingle::predicate() : Predicate =
     object Predicate { expr :=
         // Simplification: ...[fn:boolean(...)] = ...[...]
-        if self.isFunctionCall(fn_boolean) then
+        if self.isFunctionCall('boolean'.createFunctionQName()) then
             self.oclAsType(FunctionCall).arg->first()
         else
             self
@@ -316,15 +329,62 @@ query String::toMultiplicativeOp() : MultiplicativeOpKind =
 
 //////////////////////////////////////////////////////////////////////////////
 // Path
+/*
+mapping OCLExpression::toPath() : PathExpr
+disjuncts
+    PropertyCallExp::toPath,
+    OperationCallExp::toPath
+{
+}
 
-mapping PropertyCallExp::toPath() : PathExpr
+mapping OperationCallExp::toPath() : PathExpr
 {
     init {
         // PropertyCallExp tree must be flattened.
         // VariableExp (self or iterator variable) is the innermost
         // component in an input tree, but it should be a first step
         // in an output path.
+        log(self.ownedSource.metaClassName());
         result := self.ownedSource[PropertyCallExp]->collectOne(xmap toPath());
+    }
+}
+*/
+
+mapping VariableExp::toPath() : PathExpr
+{
+    init {
+        result := object PathExpr {
+            step := object RootStepExpr { };
+            step += object AbbrevForwardStep {
+                kind := AbbrevForwardStepKind::child;
+                nodeTest := object QNameTest { name := self.type.getQName() };
+            };
+        };
+    }
+}
+
+mapping PropertyCallExp::toPath() : PathExpr
+{
+    init {
+        //log(self.repr());
+        // PropertyCallExp tree must be flattened.
+        // VariableExp (self or iterator variable) is the innermost
+        // component in an input tree, but it should be a first step
+        // in an output path.
+        if (self.ownedSource.oclIsKindOf(VariableExp)) {
+            if (self.ownedSource![VariableExp].referredVariable.name = 'self') {
+                result := self.ownedSource[VariableExp]->collectOne(xmap toPath());
+            }
+            else {
+                result := object PathExpr { };
+            }
+        }
+        elif (self.ownedSource.oclIsKindOf(PropertyCallExp)) {
+            result := self.ownedSource[PropertyCallExp]->collectOne(xmap toPath());
+        }
+        else {
+            assert fatal (false);
+        }
     }
     // Steps must be created only for Data Types. Data Elements must be skipped
     if (self.referredProperty.owningClass.isDataType()) {
@@ -341,7 +401,7 @@ mapping PropertyCallExp::toPath() : PathExpr
             element := type;
         }
         else {
-            assert fatal (true) with log('Something is wrong');
+            assert fatal (false) with log('Something is wrong');
         };
 
         var stepItem : AbbrevForwardStep;
@@ -415,6 +475,31 @@ when { self.referredOperation.name = 'sum' and self.referredOperation.isCollecti
     arg := self.ownedSource.xmap toExprSingle();
 }
 
+mapping IteratorExp::isUnique() : PathExpr
+when { self.referredIteration.name = 'isUnique' }
+{
+    init {
+        var path := self.ownedSource.xmap toExprSingle();
+        assert fatal (path.oclIsKindOf(PathExpr)) with log('PathExpr expected instead of ' + path.metaClassName());
+        var nodesPath := self.ownedBody.xmap toExprSingle();
+        path.oclAsType(PathExpr).getLastAxisStep().predicate := object ComparisonExpr {
+            left := object FunctionCall {
+            	name := 'count'.createFunctionQName();
+            	arg := object FunctionCall {
+                    name := 'distinct-values'.createFunctionQName();
+                    arg := nodesPath;
+                };
+            };
+            operator := object GeneralComp { operator := GeneralCompKind::eq };
+            right := object FunctionCall {
+                name := 'count'.createFunctionQName();
+                arg := nodesPath.deepclone().oclAsType(ExprSingle);
+            };
+        }.predicate();
+        result := path.oclAsType(PathExpr);
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Literals
 
@@ -484,4 +569,6 @@ query ExprSingle::isFunctionCall(name : QName) : Boolean =
     self.oclIsKindOf(FunctionCall) and self.oclAsType(FunctionCall).name = name;
 
 query String::createFunctionQName() : QName =
-    createQName('http://www.w3.org/2005/xpath-functions', self, 'fn');
+    if useFunctionQNames
+    then createQName('http://www.w3.org/2005/xpath-functions', self, 'fn')
+    else createQName(self) endif;
