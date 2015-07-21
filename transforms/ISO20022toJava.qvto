@@ -307,7 +307,7 @@ mapping ExprSingle::toExistsMethodCall(expr : OCLExpression) : JAVA::_references
                 target := object JAVA::members::ClassMethod {
                     name := 'asList';
                 };
-                arguments := params->get(expr)->toNewConstructorCall();
+                arguments := params->get(expr)->sortedBy(name)->toNewConstructorCall();
             };
         };
     };

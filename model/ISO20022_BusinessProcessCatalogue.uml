@@ -142,7 +142,7 @@
         </ownedComment>
         <specification xmi:type="uml:OpaqueExpression" xmi:id="_5lLu4CVZEeWsU9bTnoD-2g">
           <language>OCL</language>
-          <body>GroupHeader.ControlSum = PaymentInformation.CreditTransferTransactionInformation.Amount.InstructedAmount->sum()</body>
+          <body>GroupHeader.ControlSum = PaymentInformation.CreditTransferTransactionInformation.Amount.InstructedAmount.value->sum()</body>
         </specification>
       </ownedRule>
       <ownedRule xmi:id="__5PcACVbEeWsU9bTnoD-2g" name="NumberOfTransactionsRule" constrainedElement="_AffExh_9EeWTpeRxh6yIfQ">

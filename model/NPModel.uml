@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Default="http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2" xmlns:ISO20022Profile="http:///schemas/ISO20022Profile/_Z1baoCR_EeW-eZ1ZLTAX7g/50" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2 Default.profile.uml#_fNwoAAqoEd6-N_NOT9vsCA http:///schemas/ISO20022Profile/_Z1baoCR_EeW-eZ1ZLTAX7g/50 ISO20022Profile.profile.uml#_Z1fsECR_EeW-eZ1ZLTAX7g">
+  <uml:Package xmi:id="_GX320iOwEeWm6eZkT5DvnA" name="NPModel">
+    <packageImport xmi:id="_GX321SOwEeWm6eZkT5DvnA">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_G1zTgCOxEeWm6eZkT5DvnA" name="Дебитор"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_Hik58COxEeWm6eZkT5DvnA" name="Кредитовый перевод">
+      <include xmi:id="_HEmKYCPmEeWm6eZkT5DvnA" name="" addition="_INk-wCOxEeWm6eZkT5DvnA"/>
+      <include xmi:id="_S7WbUCP5EeWm6eZkT5DvnA" addition="_DsS3MCP5EeWm6eZkT5DvnA"/>
+      <include xmi:id="_jfYY4CP6EeWm6eZkT5DvnA" addition="_bFbEUCP6EeWm6eZkT5DvnA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_INk-wCOxEeWm6eZkT5DvnA" name="Инициирование кредитового перевода">
+      <extend xmi:id="_KDFC0CPoEeWm6eZkT5DvnA" extendedCase="_aFl5oCPnEeWm6eZkT5DvnA" extensionLocation="_KDFC0SPoEeWm6eZkT5DvnA"/>
+      <extend xmi:id="_KxC8ECPoEeWm6eZkT5DvnA" extendedCase="_eZ3LMCPnEeWm6eZkT5DvnA" extensionLocation="_KxC8ESPoEeWm6eZkT5DvnA"/>
+      <extend xmi:id="_6fl3ECP4EeWm6eZkT5DvnA" extendedCase="_103NUCP4EeWm6eZkT5DvnA" extensionLocation="_6fl3ESP4EeWm6eZkT5DvnA"/>
+      <extensionPoint xmi:id="_WWtcoCOxEeWm6eZkT5DvnA" name="ExtensionPoint1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_2bIekCO1EeWm6eZkT5DvnA" memberEnd="_2bRogCO1EeWm6eZkT5DvnA _2bbZgiO1EeWm6eZkT5DvnA" navigableOwnedEnd="_2bRogCO1EeWm6eZkT5DvnA _2bbZgiO1EeWm6eZkT5DvnA">
+      <ownedEnd xmi:id="_2bRogCO1EeWm6eZkT5DvnA" name="useCase1" visibility="private" type="_INk-wCOxEeWm6eZkT5DvnA" association="_2bIekCO1EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2bbZgSO1EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2bbZgCO1EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_2bbZgiO1EeWm6eZkT5DvnA" name="плательщик" visibility="private" type="_G1zTgCOxEeWm6eZkT5DvnA" association="_2bIekCO1EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2bbZhCO1EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2bbZgyO1EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_aFl5oCPnEeWm6eZkT5DvnA" name="Коммерческий платеж">
+      <ownedBehavior xmi:type="uml:Interaction" xmi:id="_jLDSMCP7EeWm6eZkT5DvnA" name="Коммерческий платеж">
+        <ownedAttribute xmi:id="_09BfASP7EeWm6eZkT5DvnA" name="Банк Дебитора" type="_syDjUCPoEeWm6eZkT5DvnA"/>
+        <ownedAttribute xmi:id="_zMi_4iP7EeWm6eZkT5DvnA" name="Дебитор" type="_G1zTgCOxEeWm6eZkT5DvnA"/>
+        <ownedConnector xmi:id="_465idCP-EeWm6eZkT5DvnA">
+          <end xmi:id="_465idSP-EeWm6eZkT5DvnA" role="_zMi_4iP7EeWm6eZkT5DvnA"/>
+          <end xmi:id="_465idiP-EeWm6eZkT5DvnA" role="_09BfASP7EeWm6eZkT5DvnA"/>
+        </ownedConnector>
+        <lifeline xmi:id="_zMi_4CP7EeWm6eZkT5DvnA" name="Дебитор" represents="_zMi_4iP7EeWm6eZkT5DvnA" coveredBy="_DdwOcCQFEeWm6eZkT5DvnA _OU-PoCQFEeWm6eZkT5DvnA _OU-PoSQFEeWm6eZkT5DvnA _OU-PoiQFEeWm6eZkT5DvnA _PF6kYiQFEeWm6eZkT5DvnA _PF6kYyQFEeWm6eZkT5DvnA _PF6kZCQFEeWm6eZkT5DvnA _Ujr0oCQFEeWm6eZkT5DvnA _WZ9ZwiQFEeWm6eZkT5DvnA _WZ9ZwyQFEeWm6eZkT5DvnA _WZ9ZxCQFEeWm6eZkT5DvnA _XSVzQiQFEeWm6eZkT5DvnA _XSVzQyQFEeWm6eZkT5DvnA _XSVzRCQFEeWm6eZkT5DvnA _aLf3oSSHEeWOQP4E8CWFmw _Dpw6oiSIEeWOQP4E8CWFmw _Dpw6oySIEeWOQP4E8CWFmw _Dpw6pCSIEeWOQP4E8CWFmw"/>
+        <lifeline xmi:id="_083uACP7EeWm6eZkT5DvnA" name="Банк Дебитора" represents="_09BfASP7EeWm6eZkT5DvnA" coveredBy="_DdwOcCQFEeWm6eZkT5DvnA _OU0eoSQFEeWm6eZkT5DvnA _PF6kYSQFEeWm6eZkT5DvnA _Ujr0oCQFEeWm6eZkT5DvnA _WZ9ZwSQFEeWm6eZkT5DvnA _XSVzQSQFEeWm6eZkT5DvnA _aLf3oiSHEeWOQP4E8CWFmw _aLf3oySHEeWOQP4E8CWFmw _aLf3pCSHEeWOQP4E8CWFmw _Dpw6oSSIEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_aLf3oSSHEeWOQP4E8CWFmw" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_9_X2kCR6EeW9rr1TN1Lk4Q" message="_aLf3oCSHEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_aLf3oiSHEeWOQP4E8CWFmw" covered="_083uACP7EeWm6eZkT5DvnA" event="_9_X2kSR6EeW9rr1TN1Lk4Q" message="_aLf3oCSHEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_aLf3oySHEeWOQP4E8CWFmw" covered="_083uACP7EeWm6eZkT5DvnA" start="_aLf3oiSHEeWOQP4E8CWFmw" finish="_aLf3pCSHEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_aLf3pCSHEeWOQP4E8CWFmw" covered="_083uACP7EeWm6eZkT5DvnA" event="_465iciP-EeWm6eZkT5DvnA" execution="_aLf3oySHEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Dpw6oSSIEeWOQP4E8CWFmw" covered="_083uACP7EeWm6eZkT5DvnA" event="_ERps8CR7EeW9rr1TN1Lk4Q" message="_Dpw6oCSIEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Dpw6oiSIEeWOQP4E8CWFmw" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_ERzd8CR7EeW9rr1TN1Lk4Q" message="_Dpw6oCSIEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_Dpw6oySIEeWOQP4E8CWFmw" covered="_zMi_4CP7EeWm6eZkT5DvnA" start="_Dpw6oiSIEeWOQP4E8CWFmw" finish="_Dpw6pCSIEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_Dpw6pCSIEeWOQP4E8CWFmw" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_465iciP-EeWm6eZkT5DvnA" execution="_Dpw6oySIEeWOQP4E8CWFmw"/>
+        <fragment xmi:type="uml:CombinedFragment" xmi:id="_DdwOcCQFEeWm6eZkT5DvnA" covered="_083uACP7EeWm6eZkT5DvnA _zMi_4CP7EeWm6eZkT5DvnA" interactionOperator="alt">
+          <operand xmi:id="_DdwOcSQFEeWm6eZkT5DvnA">
+            <guard xmi:id="_Dd5YYCQFEeWm6eZkT5DvnA">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_Dd5YYSQFEeWm6eZkT5DvnA">
+                <language></language>
+                <body></body>
+              </specification>
+            </guard>
+            <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_OU0eoSQFEeWm6eZkT5DvnA" covered="_083uACP7EeWm6eZkT5DvnA" event="_dnhIACSGEeWOQP4E8CWFmw" message="_OU0eoCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_OU-PoCQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_dnhIASSGEeWOQP4E8CWFmw" message="_OU0eoCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_OU-PoSQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" start="_OU-PoCQFEeWm6eZkT5DvnA" finish="_OU-PoiQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_OU-PoiQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_465iciP-EeWm6eZkT5DvnA" execution="_OU-PoSQFEeWm6eZkT5DvnA"/>
+          </operand>
+          <operand xmi:id="_Dd5YYiQFEeWm6eZkT5DvnA">
+            <guard xmi:id="_Dd5YYyQFEeWm6eZkT5DvnA">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_Dd5YZCQFEeWm6eZkT5DvnA">
+                <language></language>
+                <body></body>
+              </specification>
+            </guard>
+            <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_PF6kYSQFEeWm6eZkT5DvnA" covered="_083uACP7EeWm6eZkT5DvnA" event="_dnhIACSGEeWOQP4E8CWFmw" message="_PF6kYCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_PF6kYiQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_dnhIASSGEeWOQP4E8CWFmw" message="_PF6kYCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_PF6kYyQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" start="_PF6kYiQFEeWm6eZkT5DvnA" finish="_PF6kZCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_PF6kZCQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_465iciP-EeWm6eZkT5DvnA" execution="_PF6kYyQFEeWm6eZkT5DvnA"/>
+          </operand>
+        </fragment>
+        <fragment xmi:type="uml:CombinedFragment" xmi:id="_Ujr0oCQFEeWm6eZkT5DvnA" covered="_083uACP7EeWm6eZkT5DvnA _zMi_4CP7EeWm6eZkT5DvnA" interactionOperator="alt">
+          <operand xmi:id="_Ujr0oSQFEeWm6eZkT5DvnA">
+            <guard xmi:id="_Ujr0oiQFEeWm6eZkT5DvnA">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_Ujr0oyQFEeWm6eZkT5DvnA">
+                <language></language>
+                <body></body>
+              </specification>
+            </guard>
+            <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_WZ9ZwSQFEeWm6eZkT5DvnA" covered="_083uACP7EeWm6eZkT5DvnA" event="_dnhIACSGEeWOQP4E8CWFmw" message="_WZ9ZwCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_WZ9ZwiQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_dnhIASSGEeWOQP4E8CWFmw" message="_WZ9ZwCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_WZ9ZwyQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" start="_WZ9ZwiQFEeWm6eZkT5DvnA" finish="_WZ9ZxCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_WZ9ZxCQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_465iciP-EeWm6eZkT5DvnA" execution="_WZ9ZwyQFEeWm6eZkT5DvnA"/>
+          </operand>
+          <operand xmi:id="_Ujr0pCQFEeWm6eZkT5DvnA">
+            <guard xmi:id="_Uj0-kCQFEeWm6eZkT5DvnA">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_Uj0-kSQFEeWm6eZkT5DvnA">
+                <language></language>
+                <body></body>
+              </specification>
+            </guard>
+            <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_XSVzQSQFEeWm6eZkT5DvnA" covered="_083uACP7EeWm6eZkT5DvnA" event="_dnhIACSGEeWOQP4E8CWFmw" message="_XSVzQCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_XSVzQiQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_dnhIASSGEeWOQP4E8CWFmw" message="_XSVzQCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_XSVzQyQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" start="_XSVzQiQFEeWm6eZkT5DvnA" finish="_XSVzRCQFEeWm6eZkT5DvnA"/>
+            <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_XSVzRCQFEeWm6eZkT5DvnA" covered="_zMi_4CP7EeWm6eZkT5DvnA" event="_465iciP-EeWm6eZkT5DvnA" execution="_XSVzQyQFEeWm6eZkT5DvnA"/>
+          </operand>
+        </fragment>
+        <message xmi:id="_OU0eoCQFEeWm6eZkT5DvnA" name="PaymentStatusReportV02" messageSort="asynchSignal" receiveEvent="_OU-PoCQFEeWm6eZkT5DvnA" sendEvent="_OU0eoSQFEeWm6eZkT5DvnA" connector="_465idCP-EeWm6eZkT5DvnA">
+          <ownedComment xmi:id="_i3fh8CSIEeWOQP4E8CWFmw" annotatedElement="_OU0eoCQFEeWm6eZkT5DvnA">
+            <body>&lt;p>ACCP&lt;/p></body>
+          </ownedComment>
+        </message>
+        <message xmi:id="_PF6kYCQFEeWm6eZkT5DvnA" name="PaymentStatusReportV02" messageSort="asynchSignal" receiveEvent="_PF6kYiQFEeWm6eZkT5DvnA" sendEvent="_PF6kYSQFEeWm6eZkT5DvnA" connector="_465idCP-EeWm6eZkT5DvnA">
+          <ownedComment xmi:id="_kfxuYCSIEeWOQP4E8CWFmw" annotatedElement="_PF6kYCQFEeWm6eZkT5DvnA">
+            <body>&lt;p>RJCT&lt;/p></body>
+          </ownedComment>
+        </message>
+        <message xmi:id="_WZ9ZwCQFEeWm6eZkT5DvnA" name="PaymentStatusReportV02" messageSort="asynchSignal" receiveEvent="_WZ9ZwiQFEeWm6eZkT5DvnA" sendEvent="_WZ9ZwSQFEeWm6eZkT5DvnA" connector="_465idCP-EeWm6eZkT5DvnA">
+          <ownedComment xmi:id="_nn4HwCSIEeWOQP4E8CWFmw" annotatedElement="_WZ9ZwCQFEeWm6eZkT5DvnA">
+            <body>&lt;p>ACSP&lt;/p></body>
+          </ownedComment>
+        </message>
+        <message xmi:id="_XSVzQCQFEeWm6eZkT5DvnA" name="PaymentStatusReportV02" messageSort="asynchSignal" receiveEvent="_XSVzQiQFEeWm6eZkT5DvnA" sendEvent="_XSVzQSQFEeWm6eZkT5DvnA" connector="_465idCP-EeWm6eZkT5DvnA">
+          <ownedComment xmi:id="_pZZIsCSIEeWOQP4E8CWFmw" annotatedElement="_XSVzQCQFEeWm6eZkT5DvnA">
+            <body>&lt;p>RJCT&lt;/p></body>
+          </ownedComment>
+        </message>
+        <message xmi:id="_aLf3oCSHEeWOQP4E8CWFmw" name="CustomerCreditTransferInitiationV06" messageSort="asynchSignal" receiveEvent="_aLf3oiSHEeWOQP4E8CWFmw" sendEvent="_aLf3oSSHEeWOQP4E8CWFmw" connector="_465idCP-EeWm6eZkT5DvnA"/>
+        <message xmi:id="_Dpw6oCSIEeWOQP4E8CWFmw" name="PaymentStatusReportV02" messageSort="asynchSignal" receiveEvent="_Dpw6oiSIEeWOQP4E8CWFmw" sendEvent="_Dpw6oSSIEeWOQP4E8CWFmw" connector="_465idCP-EeWm6eZkT5DvnA">
+          <ownedComment xmi:id="_UT4HgCSIEeWOQP4E8CWFmw"/>
+          <ownedComment xmi:id="_d9uWoCSIEeWOQP4E8CWFmw" annotatedElement="_Dpw6oCSIEeWOQP4E8CWFmw">
+            <body>&lt;p>RCVD&lt;/p></body>
+          </ownedComment>
+        </message>
+      </ownedBehavior>
+      <extensionPoint xmi:id="_KDFC0SPoEeWm6eZkT5DvnA" name="ExtensionPoint1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_eZ3LMCPnEeWm6eZkT5DvnA" name="Налоговый платеж">
+      <extensionPoint xmi:id="_KxC8ESPoEeWm6eZkT5DvnA" name="ExtensionPoint1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_syDjUCPoEeWm6eZkT5DvnA" name="Банк дебитора"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_wNV-cCPoEeWm6eZkT5DvnA" memberEnd="_wNfvcCPoEeWm6eZkT5DvnA _wNfvcyPoEeWm6eZkT5DvnA" navigableOwnedEnd="_wNfvcCPoEeWm6eZkT5DvnA _wNfvcyPoEeWm6eZkT5DvnA">
+      <ownedEnd xmi:id="_wNfvcCPoEeWm6eZkT5DvnA" name="взаимодействие плательщика и банка-плательщика" visibility="private" type="_INk-wCOxEeWm6eZkT5DvnA" association="_wNV-cCPoEeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wNfvciPoEeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wNfvcSPoEeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wNfvcyPoEeWm6eZkT5DvnA" name="банк дебитора" visibility="private" type="_syDjUCPoEeWm6eZkT5DvnA" association="_wNV-cCPoEeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wNfvdSPoEeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wNfvdCPoEeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_103NUCP4EeWm6eZkT5DvnA" name="Валютный платеж">
+      <extensionPoint xmi:id="_6fl3ESP4EeWm6eZkT5DvnA" name="ExtensionPoint1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_DsS3MCP5EeWm6eZkT5DvnA" name="Межбанковский перевод"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_bFbEUCP6EeWm6eZkT5DvnA" name="Уведомление кредитора"/>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_okvwMCP6EeWm6eZkT5DvnA" name="Банк-посредник"/>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_sn6qsCP6EeWm6eZkT5DvnA" name="Кредитор"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_2CUvoCP6EeWm6eZkT5DvnA" memberEnd="_2CegoCP6EeWm6eZkT5DvnA _2CxbkCP6EeWm6eZkT5DvnA" navigableOwnedEnd="_2CegoCP6EeWm6eZkT5DvnA _2CxbkCP6EeWm6eZkT5DvnA">
+      <ownedEnd xmi:id="_2CegoCP6EeWm6eZkT5DvnA" name="межбанковский перевод" visibility="private" type="_DsS3MCP5EeWm6eZkT5DvnA" association="_2CUvoCP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2CnqkSP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2CnqkCP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_2CxbkCP6EeWm6eZkT5DvnA" name="банк дебитора" visibility="private" type="_syDjUCPoEeWm6eZkT5DvnA" association="_2CUvoCP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2CxbkiP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2CxbkSP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_2tLDcCP6EeWm6eZkT5DvnA" memberEnd="_2tU0cCP6EeWm6eZkT5DvnA _2tU0cyP6EeWm6eZkT5DvnA" navigableOwnedEnd="_2tU0cCP6EeWm6eZkT5DvnA _2tU0cyP6EeWm6eZkT5DvnA">
+      <ownedEnd xmi:id="_2tU0cCP6EeWm6eZkT5DvnA" name="межбанковский перевод" visibility="private" type="_DsS3MCP5EeWm6eZkT5DvnA" association="_2tLDcCP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2tU0ciP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2tU0cSP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_2tU0cyP6EeWm6eZkT5DvnA" name="банк-посредник" visibility="private" type="_okvwMCP6EeWm6eZkT5DvnA" association="_2tLDcCP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2tU0dSP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2tU0dCP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_5s8AMCP6EeWm6eZkT5DvnA" name="Банк кредитора"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_7qpqECP6EeWm6eZkT5DvnA" memberEnd="_7qpqESP6EeWm6eZkT5DvnA _7qzbECP6EeWm6eZkT5DvnA" navigableOwnedEnd="_7qpqESP6EeWm6eZkT5DvnA _7qzbECP6EeWm6eZkT5DvnA">
+      <ownedEnd xmi:id="_7qpqESP6EeWm6eZkT5DvnA" name="уведомление получателя" visibility="private" type="_bFbEUCP6EeWm6eZkT5DvnA" association="_7qpqECP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7qpqEyP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7qpqEiP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_7qzbECP6EeWm6eZkT5DvnA" name="банк кредитора" visibility="private" type="_5s8AMCP6EeWm6eZkT5DvnA" association="_7qpqECP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7qzbEiP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7qzbESP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_8RfAkCP6EeWm6eZkT5DvnA" memberEnd="_8RoxkCP6EeWm6eZkT5DvnA _8RoxkyP6EeWm6eZkT5DvnA" navigableOwnedEnd="_8RoxkCP6EeWm6eZkT5DvnA _8RoxkyP6EeWm6eZkT5DvnA">
+      <ownedEnd xmi:id="_8RoxkCP6EeWm6eZkT5DvnA" name="межбанковский перевод" visibility="private" type="_DsS3MCP5EeWm6eZkT5DvnA" association="_8RfAkCP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8RoxkiP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8RoxkSP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_8RoxkyP6EeWm6eZkT5DvnA" name="банк кредитора" visibility="private" type="_5s8AMCP6EeWm6eZkT5DvnA" association="_8RfAkCP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8RoxlSP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8RoxlCP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_9UR6UCP6EeWm6eZkT5DvnA" memberEnd="_9UR6USP6EeWm6eZkT5DvnA _9UbrUCP6EeWm6eZkT5DvnA" navigableOwnedEnd="_9UR6USP6EeWm6eZkT5DvnA _9UbrUCP6EeWm6eZkT5DvnA">
+      <ownedEnd xmi:id="_9UR6USP6EeWm6eZkT5DvnA" name="уведомление получателя" visibility="private" type="_bFbEUCP6EeWm6eZkT5DvnA" association="_9UR6UCP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9UR6UyP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9UR6UiP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_9UbrUCP6EeWm6eZkT5DvnA" name="кредитор" visibility="private" type="_sn6qsCP6EeWm6eZkT5DvnA" association="_9UR6UCP6EeWm6eZkT5DvnA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9UbrUiP6EeWm6eZkT5DvnA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9UbrUSP6EeWm6eZkT5DvnA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:ExecutionEvent" xmi:id="_465iciP-EeWm6eZkT5DvnA" name="ExecutionEvent1"/>
+    <packagedElement xmi:type="uml:ExecutionEvent" xmi:id="_ChOuESQAEeWm6eZkT5DvnA" name="ExecutionEvent2"/>
+    <packagedElement xmi:type="uml:SendSignalEvent" xmi:id="_9_X2kCR6EeW9rr1TN1Lk4Q" name="SendSignalEvent1">
+      <signal href="ISO20022BusinessProcessCatalog.uml#_EtK1RiSEEeWgu6Vlr1jJbg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:ReceiveSignalEvent" xmi:id="_9_X2kSR6EeW9rr1TN1Lk4Q" name="ReceiveSignalEvent1">
+      <signal href="ISO20022BusinessProcessCatalog.uml#_EtK1RiSEEeWgu6Vlr1jJbg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:SendSignalEvent" xmi:id="_ERps8CR7EeW9rr1TN1Lk4Q" name="SendSignalEvent3">
+      <signal href="ISO20022BusinessProcessCatalog.uml#_EtK1MiSEEeWgu6Vlr1jJbg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:ReceiveSignalEvent" xmi:id="_ERzd8CR7EeW9rr1TN1Lk4Q" name="ReceiveSignalEvent3">
+      <signal href="ISO20022BusinessProcessCatalog.uml#_EtK1MiSEEeWgu6Vlr1jJbg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:SendSignalEvent" xmi:id="_dnhIACSGEeWOQP4E8CWFmw" name="SendSignalEvent5">
+      <signal href="ISO20022BusinessProcessCatalog.uml#_EtK1MiSEEeWgu6Vlr1jJbg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:ReceiveSignalEvent" xmi:id="_dnhIASSGEeWOQP4E8CWFmw" name="ReceiveSignalEvent5">
+      <signal href="ISO20022BusinessProcessCatalog.uml#_EtK1MiSEEeWgu6Vlr1jJbg"/>
+    </packagedElement>
+    <profileApplication xmi:id="_GX321iOwEeWm6eZkT5DvnA">
+      <eAnnotations xmi:id="_GX321yOwEeWm6eZkT5DvnA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_GX322COwEeWm6eZkT5DvnA">
+      <eAnnotations xmi:id="_GX322SOwEeWm6eZkT5DvnA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="Default.profile.uml#_fNwoAAqoEd6-N_NOT9vsCA"/>
+      </eAnnotations>
+      <appliedProfile href="Default.profile.uml#_a_S3wNWLEdiy4IqP8whjFA"/>
+    </profileApplication>
+    <profileApplication xmi:id="_GX322iOwEeWm6eZkT5DvnA">
+      <eAnnotations xmi:id="_GX322yOwEeWm6eZkT5DvnA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="Deployment.profile.uml#_4OVBUD0TEeKt-L0gyEptgQ"/>
+      </eAnnotations>
+      <appliedProfile href="Deployment.profile.uml#_vjbuwOvHEdiDX5bji0iVSA"/>
+    </profileApplication>
+    <profileApplication xmi:id="_mUsRwCP9EeWm6eZkT5DvnA">
+      <eAnnotations xmi:id="_mUsRwSP9EeWm6eZkT5DvnA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="ISO20022Profile.profile.uml#_Z1fsECR_EeW-eZ1ZLTAX7g"/>
+      </eAnnotations>
+      <appliedProfile href="ISO20022Profile.profile.uml#_rspygA6UEeWHY4KRRC3kUQ"/>
+    </profileApplication>
+  </uml:Package>
+  <ISO20022Profile:BusinessTransaction xmi:id="_YFigcCR2EeW6wJNtmSfYIQ" base_Interaction="_jLDSMCP7EeWm6eZkT5DvnA" base_InteractionFragment="_jLDSMCP7EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessRole xmi:id="_c9a_8CR3EeW6wJNtmSfYIQ" base_NamedElement="_syDjUCPoEeWm6eZkT5DvnA" base_Actor="_syDjUCPoEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessRole xmi:id="_eIjWUCR3EeW6wJNtmSfYIQ" base_NamedElement="_5s8AMCP6EeWm6eZkT5DvnA" base_Actor="_5s8AMCP6EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessRole xmi:id="_eIjWUSR3EeW6wJNtmSfYIQ" base_NamedElement="_okvwMCP6EeWm6eZkT5DvnA" base_Actor="_okvwMCP6EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessRole xmi:id="_eIjWUiR3EeW6wJNtmSfYIQ" base_NamedElement="_G1zTgCOxEeWm6eZkT5DvnA" base_Actor="_G1zTgCOxEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessRole xmi:id="_eIjWUyR3EeW6wJNtmSfYIQ" base_NamedElement="_sn6qsCP6EeWm6eZkT5DvnA" base_Actor="_sn6qsCP6EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessProcess xmi:id="_frCcwCR3EeW6wJNtmSfYIQ" base_NamedElement="_103NUCP4EeWm6eZkT5DvnA" base_UseCase="_103NUCP4EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessProcess xmi:id="_frCcwSR3EeW6wJNtmSfYIQ" base_NamedElement="_INk-wCOxEeWm6eZkT5DvnA" base_UseCase="_INk-wCOxEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessProcess xmi:id="_frCcwiR3EeW6wJNtmSfYIQ" base_NamedElement="_aFl5oCPnEeWm6eZkT5DvnA" base_UseCase="_aFl5oCPnEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessProcess xmi:id="_frCcwyR3EeW6wJNtmSfYIQ" base_NamedElement="_Hik58COxEeWm6eZkT5DvnA" base_UseCase="_Hik58COxEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessProcess xmi:id="_frMNwCR3EeW6wJNtmSfYIQ" base_NamedElement="_DsS3MCP5EeWm6eZkT5DvnA" base_UseCase="_DsS3MCP5EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessProcess xmi:id="_frMNwSR3EeW6wJNtmSfYIQ" base_NamedElement="_eZ3LMCPnEeWm6eZkT5DvnA" base_UseCase="_eZ3LMCPnEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessProcess xmi:id="_frMNwiR3EeW6wJNtmSfYIQ" base_NamedElement="_bFbEUCP6EeWm6eZkT5DvnA" base_UseCase="_bFbEUCP6EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:Participant xmi:id="_o2QPICR3EeW6wJNtmSfYIQ" base_NamedElement="_zMi_4CP7EeWm6eZkT5DvnA" base_Lifeline="_zMi_4CP7EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:Participant xmi:id="_o2ZZECR3EeW6wJNtmSfYIQ" base_NamedElement="_083uACP7EeWm6eZkT5DvnA" base_Lifeline="_083uACP7EeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessTransaction xmi:id="_een3gCR4EeW9rr1TN1Lk4Q" base_InteractionFragment="_DdwOcCQFEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessTransaction xmi:id="_f9sdkCR4EeW9rr1TN1Lk4Q" base_InteractionFragment="_Ujr0oCQFEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:MessageTransmission xmi:id="_W9fhASR7EeW9rr1TN1Lk4Q" base_NamedElement="_OU0eoCQFEeWm6eZkT5DvnA" base_Message="_OU0eoCQFEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:MessageTransmission xmi:id="_W9fhAiR7EeW9rr1TN1Lk4Q" base_NamedElement="_PF6kYCQFEeWm6eZkT5DvnA" base_Message="_PF6kYCQFEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:MessageTransmission xmi:id="_W9fhAyR7EeW9rr1TN1Lk4Q" base_NamedElement="_WZ9ZwCQFEeWm6eZkT5DvnA" base_Message="_WZ9ZwCQFEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:MessageTransmission xmi:id="_W9pSACR7EeW9rr1TN1Lk4Q" base_NamedElement="_XSVzQCQFEeWm6eZkT5DvnA" base_Message="_XSVzQCQFEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:BusinessProcessCatalogue xmi:id="_sBdpECSGEeWOQP4E8CWFmw" base_Package="_GX320iOwEeWm6eZkT5DvnA"/>
+  <ISO20022Profile:MessageTransmission xmi:id="_iZ3AMCSHEeWOQP4E8CWFmw" base_NamedElement="_aLf3oCSHEeWOQP4E8CWFmw" base_Message="_aLf3oCSHEeWOQP4E8CWFmw"/>
+  <ISO20022Profile:MessageTransmission xmi:id="_FR59ICSIEeWOQP4E8CWFmw" base_NamedElement="_Dpw6oCSIEeWOQP4E8CWFmw" base_Message="_Dpw6oCSIEeWOQP4E8CWFmw"/>
+  <Default:Documentation xmi:id="_d9uWoSSIEeWOQP4E8CWFmw" base_Comment="_d9uWoCSIEeWOQP4E8CWFmw"/>
+  <Default:Documentation xmi:id="_i3fh8SSIEeWOQP4E8CWFmw" base_Comment="_i3fh8CSIEeWOQP4E8CWFmw"/>
+  <Default:Documentation xmi:id="_kf7fYCSIEeWOQP4E8CWFmw" base_Comment="_kfxuYCSIEeWOQP4E8CWFmw"/>
+  <Default:Documentation xmi:id="_noB4wCSIEeWOQP4E8CWFmw" base_Comment="_nn4HwCSIEeWOQP4E8CWFmw"/>
+  <Default:Documentation xmi:id="_pZi5sCSIEeWOQP4E8CWFmw" base_Comment="_pZZIsCSIEeWOQP4E8CWFmw"/>
+</xmi:XMI>
