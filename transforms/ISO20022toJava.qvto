@@ -38,7 +38,7 @@ main()
 mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::containers::CompilationUnit
 {
     var className := self.name.replace('.', '_');
-    log('Found message ' + self.name);
+    log('  Found message ' + self.name);
 
     object c : JAVA::classifiers::Class {
         name := className;
@@ -141,7 +141,7 @@ mapping Property::toField() : JAVA::members::Field
 
 mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
 {
-    log('  Found rule ' + self.name);
+    log('    Found rule ' + self.name);
     name := 'check' + self.name;
     typeReference := object JAVA::types::_Boolean { };
 
@@ -173,7 +173,7 @@ mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
 
     annotationsAndModifiers += object JAVA::modifiers::Public { };
 
-    // TODO: The following logic splits OCL-expressions containing allInstances() method
+    // TODO: The following logic splits OCL-expression containing allInstances() method
     // into Helper.check() and Helper.exists() invocations.
     // It shouldn't be hardcoded. Something more universal is needed here.
     // The main idea is that all code surrounding allInstances() must be converted into Java code instead of XPath one.

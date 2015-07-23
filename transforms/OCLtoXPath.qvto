@@ -60,13 +60,13 @@ disjuncts
     // Path
     PropertyCallExp::toPathExpr,
     // Functions
-    OperationCallExp::asSet,
+    OperationCallExp::toAsSet,
     OperationCallExp::toCountFunctionCall,
     OperationCallExp::toStringLengthFunctionCall,
     OperationCallExp::toIsEmpty,
     OperationCallExp::toNotEmpty,
     OperationCallExp::toSumFunctionCall,
-    IteratorExp::isUnique,
+    IteratorExp::toIsUnique,
     // Literals
     IntegerLiteralExp::toLiteral,
     UnlimitedNaturalLiteralExp::toLiteral,
@@ -74,7 +74,7 @@ disjuncts
     StringLiteralExp::toLiteral,
     BooleanLiteralExp::toLiteral,
     // Unknown expressions
-    OCLExpression::riseError
+    OCLExpression::raiseError
 {}
 
 //////////////////////////////////////////////////////////////////////////////
@@ -358,7 +358,7 @@ mapping PropertyCallExp::toPathExpr() : PathExpr
             result := self.ownedSource[PropertyCallExp]->collectOne(xmap toPathExpr());
         }
         else {
-            assert fatal (false);
+            raise Exception('Something is wrong');
         }
     }
     // Steps must be created only for Data Types. Data Elements must be skipped
@@ -376,7 +376,7 @@ mapping PropertyCallExp::toPathExpr() : PathExpr
             element := type;
         }
         else {
-            assert fatal (false) with log('Something is wrong');
+            raise Exception('Something is wrong');
         };
 
         var stepItem : AbbrevForwardStep;
@@ -438,7 +438,7 @@ query ExprSingle::predicate() : Predicate =
 //////////////////////////////////////////////////////////////////////////////
 // Functions
 
-mapping OperationCallExp::asSet() : ExprSingle
+mapping OperationCallExp::toAsSet() : ExprSingle
 when { self.referredOperation.name = 'oclAsSet' }
 {
     init {
@@ -483,7 +483,7 @@ when { self.referredOperation.name = 'sum' and self.referredOperation.isCollecti
     arg := self.ownedSource.xmap toExprSingle();
 }
 
-mapping IteratorExp::isUnique() : FunctionCall
+mapping IteratorExp::toIsUnique() : FunctionCall
 when { self.referredIteration.name = 'isUnique' }
 {
     init {
@@ -542,9 +542,9 @@ mapping BooleanLiteralExp::toLiteral() : FunctionCall
 //////////////////////////////////////////////////////////////////////////////
 // Unknown expressions
 
-mapping OCLExpression::riseError() : StringLiteral
+mapping OCLExpression::raiseError() : StringLiteral
 {
-    assert fatal (false) with log('Unknown ' + self.metaClassName() + ' ' + self.repr());
+    raise Exception('Unknown ' + self.metaClassName() + ' ' + self.repr());
 }
 
 //////////////////////////////////////////////////////////////////////////////
