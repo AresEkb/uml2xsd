@@ -33,7 +33,6 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.eclipse.core.runtime.IStatus;
@@ -192,30 +191,25 @@ public class Main {
     }
     
     private static void parseCommandLineArgs(String[] args) {
-        Option in = OptionBuilder.withArgName("file")
-                .hasArg()
-                .isRequired()
-                .create("input");
-        Option out = OptionBuilder.withArgName("folder")
-                .hasArg()
-                .isRequired()
-                .create("output");
-        Option formatOpt = OptionBuilder.withArgName("outputFormat")
-                .hasArg()
-                .isRequired()
-                .create("format");
+        Option inputOpt = new Option("input", true, "Input file name");
+        inputOpt.setRequired(true);
+        Option outputOpt = new Option("output", true, "Output folder name");
+        outputOpt.setRequired(true);
+        Option formatOpt = new Option("format", true, "Output format (xsd, xslt, uml, java)");
+        formatOpt.setRequired(true);
 
         Options options = new Options();
-        options.addOption(in);
-        options.addOption(out);
+        options.addOption(inputOpt);
+        options.addOption(outputOpt);
         options.addOption(formatOpt);
-        
+
         try {
             parseCommandLineArgsImpl(options, args);
         }
         catch (IllegalArgumentException e) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("uml2xsd", options);
+            throw e;
         }
     }
     
