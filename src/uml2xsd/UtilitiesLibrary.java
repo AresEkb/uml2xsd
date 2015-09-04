@@ -170,10 +170,17 @@ public class UtilitiesLibrary {
     }
 
     @Operation(contextual=true)
-    public static ExpressionInOCL toExpressionInOCL(Constraint constraint) throws ParserException
+    public static ExpressionInOCL toExpressionInOCL(Constraint constraint)
     {
-        org.eclipse.ocl.pivot.Constraint asConstraint = ocl.getMetamodelManager().getASOf(org.eclipse.ocl.pivot.Constraint.class, constraint);
-        return ocl.getSpecification(asConstraint);
+    	ExpressionInOCL expr = null;
+    	try {
+    		org.eclipse.ocl.pivot.Constraint asConstraint = ocl.getMetamodelManager().getASOf(org.eclipse.ocl.pivot.Constraint.class, constraint);
+    		expr = ocl.getSpecification(asConstraint);
+    	}
+    	catch (ParserException e) {
+    		e.printStackTrace();
+    	}
+    	return expr;
     }
 
     @Operation(contextual=true)

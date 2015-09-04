@@ -15,6 +15,9 @@
 // whole AST and therefore it will be even more complex than an
 // OCL to XPath transformation itself.
 
+// TODO: Context is needed to transform variables.
+// For example self may be transformed into either empty step or parent step
+
 import uml2xsd.UtilitiesLibrary;
 import Helpers;
 
@@ -26,6 +29,8 @@ library OCLtoXPath;
 
 property useFunctionQNames : Boolean = true;
 
+--intermediate class Context { variables : Dict(OCL::Variable, XPATH2::ExprSingle); };
+/*
 mapping ExpressionInOCL::toXPath() : Expr
 {
     log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
@@ -42,6 +47,14 @@ query ExpressionInOCL::toExprSingle() : ExprSingle
 }
 
 mapping OCLExpression::toExprSingle() : ExprSingle
+{
+	init {
+		var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+		result := self.xmap toExprSingle(variables);
+	}
+}
+*/
+mapping OCLExpression::toExprSingle(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 disjuncts
     // Logic
     OperationCallExp::toOrExpr,
@@ -58,21 +71,28 @@ disjuncts
     OperationCallExp::toAdditiveExpr,
     OperationCallExp::toMultiplicativeExpr,
     // Path
+    VariableExp::toPathExpr1,
+    VariableExp::toPathExpr2,
+    VariableExp::toPathExpr3,
     PropertyCallExp::toPathExpr,
     // Functions
     OperationCallExp::toAsSet,
     OperationCallExp::toCountFunctionCall,
+    OperationCallExp::toIncludesFunctionCall,
     OperationCallExp::toStringLengthFunctionCall,
     OperationCallExp::toIsEmpty,
     OperationCallExp::toNotEmpty,
+    OperationCallExp::toMatches,
     OperationCallExp::toSumFunctionCall,
     IteratorExp::toIsUnique,
+    OperationCallExp::toHasTimezoneFunctionCall,
     // Literals
     IntegerLiteralExp::toLiteral,
     UnlimitedNaturalLiteralExp::toLiteral,
     RealLiteralExp::toLiteral,
     StringLiteralExp::toLiteral,
     BooleanLiteralExp::toLiteral,
+    CollectionLiteralExp::toSequence,
     // Unknown expressions
     OCLExpression::raiseError
 {}
@@ -80,52 +100,52 @@ disjuncts
 //////////////////////////////////////////////////////////////////////////////
 // Logic
 
-mapping OperationCallExp::toOrExpr() : ExprSingle
+mapping OperationCallExp::toOrExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.referredOperation.isBooleanOperation('or') }
 {
     init {
-        result := self.ownedSource.xmap toExprSingle().orExpr(
-            self.ownedArguments->first().xmap toExprSingle());
+        result := self.ownedSource.xmap toExprSingle(variables).orExpr(
+            self.ownedArguments->first().xmap toExprSingle(variables));
     }
 }
 
-mapping OperationCallExp::toAndExpr() : AndExpr
+mapping OperationCallExp::toAndExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : AndExpr
 when { self.referredOperation.isBooleanOperation('and') }
 {
-    operand := self.ownedSource.xmap toExprSingle().andExprOperand();
-    operand += self.ownedArguments->first().xmap toExprSingle().andExprOperand();
+    operand := self.ownedSource.xmap toExprSingle(variables).andExprOperand();
+    operand += self.ownedArguments->first().xmap toExprSingle(variables).andExprOperand();
 }
 
-mapping OperationCallExp::toImplies() : ExprSingle
+mapping OperationCallExp::toImplies(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.referredOperation.isBooleanOperation('implies') }
 {
     init {
-        result := self.ownedSource.xmap toExprSingle().notExpr().orExpr(
-            self.ownedArguments->first().xmap toExprSingle());
+        result := self.ownedSource.xmap toExprSingle(variables).notExpr().orExpr(
+            self.ownedArguments->first().xmap toExprSingle(variables));
     }
 }
 
-mapping OperationCallExp::toNotExpr() : ExprSingle
+mapping OperationCallExp::toNotExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.referredOperation.isBooleanOperation('not') }
 {
     init {
-        result := self.ownedSource.xmap toExprSingle().notExpr();
+        result := self.ownedSource.xmap toExprSingle(variables).notExpr();
     }
 }
 
-mapping IteratorExp::toExists() : FunctionCall
+mapping IteratorExp::toExists(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 when { self.referredIteration.name = 'exists' }
 {
     init {
-        result := self.ownedSource.xmap toPathExpr(self.ownedBody.xmap toExprSingle()).booleanExpr();
+        result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables)).booleanExpr();
     }
 }
 
-mapping IteratorExp::toForAll() : ExprSingle
+mapping IteratorExp::toForAll(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.referredIteration.name = 'forAll' }
 {
     init {
-        result := self.ownedSource.xmap toPathExpr(self.ownedBody.xmap toExprSingle().notExpr()).notExpr();
+        result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables).notExpr()).notExpr();
     }
 }
 
@@ -135,6 +155,9 @@ query ExprSingle::notExpr() : ExprSingle =
     // Simplification: fn:not(fn:not(...)) = fn:boolean(...)
     if self.isFunctionCall('not'.createFunctionQName()) then
         self.oclAsType(FunctionCall).arg->collectOne(booleanExpr())
+    // Simplification: fn:not(fn:boolean(...)) = fn:not(...)
+    elif self.isFunctionCall('boolean'.createFunctionQName()) then
+        self.oclAsType(FunctionCall).arg->collectOne(notExpr())
     // Simplification: fn:not(fn:not(...) and fn:not(...) and ...) = (... or ... or ...)
     elif self.oclIsKindOf(AndExpr) and self.oclAsType(AndExpr).operand->forAll(isFunctionCall('not'.createFunctionQName())) then
         object OrExpr { operand :=
@@ -145,6 +168,12 @@ query ExprSingle::notExpr() : ExprSingle =
         object AndExpr { operand :=
             self.oclAsType(OrExpr).operand->collect(
                 oclAsType(FunctionCall).arg->first().andExprOperand()) }
+    // Simplification: fn:not(fn:exists(...)) = fn:empty(...)
+    elif self.isFunctionCall('exists'.createFunctionQName()) then
+        object FunctionCall { name := 'empty'.createFunctionQName(); arg := self.oclAsType(FunctionCall).arg; }
+    // Simplification: fn:not(fn:empty(...)) = fn:exists(...)
+    elif self.isFunctionCall('empty'.createFunctionQName()) then
+        object FunctionCall { name := 'exists'.createFunctionQName(); arg := self.oclAsType(FunctionCall).arg; }
     else
         object FunctionCall { name := 'not'.createFunctionQName(); arg := self; }
     endif;
@@ -195,28 +224,28 @@ query ExprSingle::andExprOperand() : OrderedSet(AndExprChild) =
 //////////////////////////////////////////////////////////////////////////////
 // Comparision
 
-mapping OperationCallExp::toLeftNotNull() : ExprSingle
+mapping OperationCallExp::toLeftNotNull(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.name = '<>' and self.ownedArguments->isNullLiteralExp() }
 {
     init {
-        result := self.ownedSource.xmap toExprSingle();
+        result := self.ownedSource.xmap toExprSingle(variables);
     }
 }
 
-mapping OperationCallExp::toRightNotNull() : ExprSingle
+mapping OperationCallExp::toRightNotNull(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.name = '<>' and self.ownedSource.isNullLiteralExp() }
 {
     init {
-        result := self.ownedArguments->first().xmap toExprSingle();
+        result := self.ownedArguments->first().xmap toExprSingle(variables);
     }
 }
 
-mapping OperationCallExp::toComparisonExpr() : ComparisonExpr
+mapping OperationCallExp::toComparisonExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ComparisonExpr
 when { self.name.toGeneralComp() <> null and not(self.ownedSource.isNullLiteralExp() or self.ownedArguments->isNullLiteralExp()) }
 {
-    left := self.ownedSource.xmap toExprSingle().comparisonExprChild();
+    left := self.ownedSource.xmap toExprSingle(variables).comparisonExprChild();
     operator := object GeneralComp { operator := self.name.toGeneralComp() };
-    right := self.ownedArguments->first().xmap toExprSingle().comparisonExprChild();
+    right := self.ownedArguments->first().xmap toExprSingle(variables).comparisonExprChild();
 }
 
 query ExprSingle::comparisonExprChild() : ComparisonExprChild =
@@ -244,11 +273,11 @@ query String::toGeneralComp() : GeneralCompKind =
 //////////////////////////////////////////////////////////////////////////////
 // Arithmetic
 
-mapping OperationCallExp::toAdditiveExpr() : AdditiveExpr
+mapping OperationCallExp::toAdditiveExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : AdditiveExpr
 when { self.name.toAdditiveOp() <> null }
 {
-    var lhs := self.ownedSource.xmap toExprSingle().additiveExprOperand();
-    var rhs := self.ownedArguments->first().xmap toExprSingle().additiveExprOperand();
+    var lhs := self.ownedSource.xmap toExprSingle(variables).additiveExprOperand();
+    var rhs := self.ownedArguments->first().xmap toExprSingle(variables).additiveExprOperand();
     operand := lhs.operand;
     operand += rhs.operand;
     operator := lhs.operator;
@@ -256,11 +285,11 @@ when { self.name.toAdditiveOp() <> null }
     operator += rhs.operator;
 }
 
-mapping OperationCallExp::toMultiplicativeExpr() : MultiplicativeExpr
+mapping OperationCallExp::toMultiplicativeExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : MultiplicativeExpr
 when { self.name.toMultiplicativeOp() <> null }
 {
-    var lhs := self.ownedSource.xmap toExprSingle().multiplicativeExprOperand();
-    var rhs := self.ownedArguments->first().xmap toExprSingle().multiplicativeExprOperand();
+    var lhs := self.ownedSource.xmap toExprSingle(variables).multiplicativeExprOperand();
+    var rhs := self.ownedArguments->first().xmap toExprSingle(variables).multiplicativeExprOperand();
     operand := lhs.operand;
     operand += rhs.operand;
     operator := lhs.operator;
@@ -325,20 +354,44 @@ mapping OperationCallExp::toPath() : PathExpr
 }
 */
 
-mapping VariableExp::toPathExpr() : PathExpr
+// TODO: All this code must be refactored
+mapping OCLExpression::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
+disjuncts
+    VariableExp::toPathExpr1,
+    VariableExp::toPathExpr2,
+    VariableExp::toPathExpr3,
+    PropertyCallExp::toPathExpr,
+    OCLExpression::raiseError
 {
-    init {
-        result := object PathExpr {
-            step := object RootStepExpr { };
-            step += object AbbrevForwardStep {
-                kind := AbbrevForwardStepKind::child;
-                nodeTest := object QNameTest { name := self.type.getQName() };
-            };
-        };
-    }
 }
 
-mapping PropertyCallExp::toPathExpr() : PathExpr
+// Self
+mapping VariableExp::toPathExpr1(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
+when { self.referredVariable.name = 'self' }
+{
+    /*step := object RootStepExpr { };
+    step += object AbbrevForwardStep {
+        kind := AbbrevForwardStepKind::child;
+        nodeTest := object QNameTest { name := self.type.getQName() };
+    };*/
+}
+
+// Iterator
+mapping VariableExp::toPathExpr2(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
+when { self.referredVariable.name <> 'self' and self.referredVariable![Variable].representedParameter <> null }
+{
+}
+
+// Declared variable
+mapping VariableExp::toPathExpr3(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
+when { self.referredVariable.name <> 'self' and self.referredVariable![Variable].representedParameter = null }
+{
+    var variable := variables->get(self.referredVariable![Variable]);
+    assert fatal (variable.oclIsKindOf(VarRef)) with log ('Variable ' + self.referredVariable.toString() + ' not found');
+    step := variable![VarRef];
+}
+
+mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
     init {
         //log(self.repr());
@@ -346,9 +399,11 @@ mapping PropertyCallExp::toPathExpr() : PathExpr
         // VariableExp (self or iterator variable) is the innermost
         // component in an input tree, but it should be a first step
         // in an output path.
-        if (self.ownedSource.oclIsKindOf(VariableExp)) {
+        result := self.ownedSource.xmap toPathExpr(variables);
+        /*if (self.ownedSource.oclIsKindOf(VariableExp)) {
             if (self.ownedSource![VariableExp].referredVariable.name = 'self') {
-                result := self.ownedSource[VariableExp]->collectOne(xmap toPathExpr());
+                //result := self.ownedSource[VariableExp]->collectOne(xmap toPathExpr());
+                result := object PathExpr { };
             }
             else {
                 result := object PathExpr { };
@@ -359,12 +414,18 @@ mapping PropertyCallExp::toPathExpr() : PathExpr
         }
         else {
             raise Exception('Something is wrong');
-        }
+        }*/
     }
+    
     // Steps must be created only for Data Types. Data Elements must be skipped
     if (self.referredProperty.owningClass.isDataType()) {
         // Type can be a Set(T)
         var type := self.referredProperty.type.unwrap();
+        
+        // TODO: Something more adequate is needed here
+        if (type.toString() = 'OclVoid') {
+            raise Exception('Property doesn\'t have a type');
+        };
         
         var element : NamedElement;
         // Property is local
@@ -400,12 +461,17 @@ mapping PropertyCallExp::toPathExpr() : PathExpr
             step += object ChildStepExpr { step := stepItem };
         }
     }
+    elif (self.referredProperty.owningClass.isDataElement()) {
+    }
+    else {
+        raise Exception('Something is wrong');
+    }
 }
 
-mapping OCLExpression::toPathExpr(predicate : ExprSingle) : PathExpr
+mapping OCLExpression::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle), predicate : ExprSingle) : PathExpr
 {
     init {
-        var path := self.xmap toExprSingle();
+        var path := self.xmap toExprSingle(variables);
         assert fatal (path.oclIsKindOf(PathExpr)) with log('PathExpr expected instead of ' + path.metaClassName());
         path.oclAsType(PathExpr).getLastAxisStep().predicate := predicate.predicate();
         result := path.oclAsType(PathExpr);
@@ -438,56 +504,78 @@ query ExprSingle::predicate() : Predicate =
 //////////////////////////////////////////////////////////////////////////////
 // Functions
 
-mapping OperationCallExp::toAsSet() : ExprSingle
+mapping OperationCallExp::toAsSet(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.referredOperation.name = 'oclAsSet' }
 {
     init {
-        result := self.ownedSource.xmap toExprSingle();
+        result := self.ownedSource.xmap toExprSingle(variables);
     }
 }
 
-mapping OperationCallExp::toCountFunctionCall() : FunctionCall
+mapping OperationCallExp::toCountFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 when { self.referredOperation.name = 'size' and self.referredOperation.isCollectionOperation() }
 {
     name := 'count'.createFunctionQName();
-    arg := self.ownedSource.xmap toExprSingle();
+    arg := self.ownedSource.xmap toExprSingle(variables);
 }
 
-mapping OperationCallExp::toStringLengthFunctionCall() : FunctionCall
+mapping OperationCallExp::toIncludesFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredOperation.name = 'includes' and self.referredOperation.isCollectionOperation() }
+{
+    name := 'exists'.createFunctionQName();
+    arg := self.xmap toIndexOfFunctionCall(variables);
+}
+
+mapping OperationCallExp::toIndexOfFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+{
+    name := 'index-of'.createFunctionQName();
+    arg := self.ownedSource.xmap toExprSingle(variables);
+    arg += self.ownedArguments->toExprSingle(variables);
+}
+
+mapping OperationCallExp::toStringLengthFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 when { self.referredOperation.name = 'size' and not self.referredOperation.isCollectionOperation() }
 {
     name := 'string-length'.createFunctionQName();
-    arg := self.ownedSource.xmap toExprSingle();
+    arg := self.ownedSource.xmap toExprSingle(variables);
 }
 
-mapping OperationCallExp::toIsEmpty() : ExprSingle
+mapping OperationCallExp::toIsEmpty(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.referredOperation.name = 'isEmpty' }
 {
     init {
-    	result := self.ownedSource.xmap toExprSingle().notExpr();
+    	result := self.ownedSource.xmap toExprSingle(variables).notExpr();
     }
 }
 
-mapping OperationCallExp::toNotEmpty() : FunctionCall
+mapping OperationCallExp::toNotEmpty(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 when { self.referredOperation.name = 'notEmpty' }
 {
     init {
-        result := self.ownedSource.xmap toExprSingle().booleanExpr();
+        result := self.ownedSource.xmap toExprSingle(variables).booleanExpr();
     }
 }
 
-mapping OperationCallExp::toSumFunctionCall() : FunctionCall
+mapping OperationCallExp::toMatches(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredOperation.name = 'matches' and self.ownedArguments->one(oclIsKindOf(StringLiteralExp)) }
+{
+    name := 'matches'.createFunctionQName();
+    arg := self.ownedSource.xmap toExprSingle(variables);
+    arg += self.ownedArguments->toExprSingle(variables);
+}
+
+mapping OperationCallExp::toSumFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 when { self.referredOperation.name = 'sum' and self.referredOperation.isCollectionOperation() }
 {
     name := 'sum'.createFunctionQName();
-    arg := self.ownedSource.xmap toExprSingle();
+    arg := self.ownedSource.xmap toExprSingle(variables);
 }
 
-mapping IteratorExp::toIsUnique() : FunctionCall
+mapping IteratorExp::toIsUnique(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 when { self.referredIteration.name = 'isUnique' }
 {
     init {
-        var nodesPath := self.ownedBody.xmap toExprSingle();
+        var nodesPath := self.ownedBody.xmap toExprSingle(variables);
         var predicate := object ComparisonExpr {
             left := object FunctionCall {
                 name := 'count'.createFunctionQName();
@@ -502,24 +590,60 @@ when { self.referredIteration.name = 'isUnique' }
                 arg := nodesPath.deepclone().oclAsType(ExprSingle);
             }
         };
-        result := self.ownedSource.xmap toPathExpr(predicate).booleanExpr();
+        result := self.ownedSource.xmap toPathExpr(variables, predicate).booleanExpr();
     }
+}
+
+mapping OperationCallExp::toHasTimezoneFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredOperation.name = 'hasTimezone' }
+{
+    name := 'exists'.createFunctionQName();
+    arg := self.xmap toGetTimezoneFunctionCall(variables);
+}
+
+mapping OperationCallExp::toGetTimezoneFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+disjuncts
+    OperationCallExp::toGetTimezoneFromDateTimeFunctionCall,
+    OperationCallExp::toGetTimezoneFromDateFunctionCall,
+    OperationCallExp::toGetTimezoneFromTimeFunctionCall
+{
+}
+
+mapping OperationCallExp::toGetTimezoneFromDateTimeFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredOperation.name = 'hasTimezone' and self.referredOperation.owningClass.isDateTimeType() }
+{
+    name := 'timezone-from-dateTime'.createFunctionQName();
+    arg := self.ownedSource.xmap toExprSingle(variables);
+}
+
+mapping OperationCallExp::toGetTimezoneFromDateFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredOperation.name = 'hasTimezone' and self.referredOperation.owningClass.isDateType() }
+{
+    name := 'timezone-from-date'.createFunctionQName();
+    arg := self.ownedSource.xmap toExprSingle(variables);
+}
+
+mapping OperationCallExp::toGetTimezoneFromTimeFunctionCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredOperation.name = 'hasTimezone' and self.referredOperation.owningClass.isTimeType() }
+{
+    name := 'timezone-from-time'.createFunctionQName();
+    arg := self.ownedSource.xmap toExprSingle(variables);
 }
 
 //////////////////////////////////////////////////////////////////////////////
 // Literals
 
-mapping IntegerLiteralExp::toLiteral() : IntegerLiteral
+mapping IntegerLiteralExp::toLiteral(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : IntegerLiteral
 {
     value := self.integerSymbol.oclAsType(Integer);
 }
 
-mapping UnlimitedNaturalLiteralExp::toLiteral() : IntegerLiteral
+mapping UnlimitedNaturalLiteralExp::toLiteral(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : IntegerLiteral
 {
     value := self.unlimitedNaturalSymbol.oclAsType(Integer);
 }
 
-mapping RealLiteralExp::toLiteral() : NumericLiteral
+mapping RealLiteralExp::toLiteral(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : NumericLiteral
 {
     init {
         var val := self.realSymbol.repr().toReal();
@@ -529,22 +653,32 @@ mapping RealLiteralExp::toLiteral() : NumericLiteral
     }
 }
 
-mapping StringLiteralExp::toLiteral() : StringLiteral
+mapping StringLiteralExp::toLiteral(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : StringLiteral
 {
     value := self.stringSymbol.quote();
 }
 
-mapping BooleanLiteralExp::toLiteral() : FunctionCall
+mapping BooleanLiteralExp::toLiteral(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 {
     name := if self.booleanSymbol then 'true' else 'false' endif.createFunctionQName();
+}
+
+mapping CollectionLiteralExp::toSequence(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ParenthesizedExpr
+{
+    assert fatal (self.ownedParts->forAll(oclIsKindOf(CollectionItem))) with log ('Only CollectionItem supported');
+    expr := object Expr {
+        expr := self.ownedParts[CollectionItem].ownedItem->toExprSingle(variables)
+    };
 }
 
 //////////////////////////////////////////////////////////////////////////////
 // Unknown expressions
 
-mapping OCLExpression::raiseError() : StringLiteral
+mapping OCLExpression::raiseError(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
+    log('Unknown ' + self.metaClassName() + ' ' + self.repr());
     raise Exception('Unknown ' + self.metaClassName() + ' ' + self.repr());
+    //value := 'Unknown ' + self.metaClassName() + ' ' + self.repr();
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -558,6 +692,12 @@ query NamedElement::getQName() : QName = self.getETarget().getQName();
 query NamedElement::getUnprefixedQName() : QName = self.getETarget().getUnprefixedQName();
 
 query NamedElement::isDataType() : Boolean = self.getETarget().isDataType();
+
+query NamedElement::isDateType() : Boolean = self.getETarget().isDateType();
+
+query NamedElement::isDateTimeType() : Boolean = self.getETarget().isDateTimeType();
+
+query NamedElement::isTimeType() : Boolean = self.getETarget().isTimeType();
 
 query NamedElement::isDataElement() : Boolean = self.getETarget().isDataElement();
 

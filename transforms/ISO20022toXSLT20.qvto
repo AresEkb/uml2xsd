@@ -12,9 +12,6 @@
 /**
  * Types, elements and other objects may be duplicated in several output schemas.
  * So we pass root of the output schema as additional mapping argument to generate duplicate objects.
- *
- * XSLT' XML Schema contains a lot of substition groups, so there are a lot of EFeatureMapEntries in the transformation.
- * Maybe it can be simplified somehow.
  */
 
 import uml2xsd.UtilitiesLibrary;
@@ -42,7 +39,7 @@ main()
 mapping Classifier::toStylesheet() : DocumentRoot
 {
     var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
-    var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId;
+    var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId.replaceAll('-.*$', '');
     
     log('  Found message ' + msgId);
 
@@ -74,7 +71,13 @@ mapping Classifier::toStylesheet() : DocumentRoot
     var props := self.allAttributes()->closure(type.oclAsType(Classifier).allAttributes())->union(self.allAttributes());
 
     stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->
-        select(ownedRule->exists(isSupported()))->toTemplate(stylesheetObj, rootPathExpr, props)->toFMEntry('template');
+        //select(ownedRule->exists(isSupported()))->
+        select(ownedRule->notEmpty())->
+        toTemplate(stylesheetObj, rootPathExpr, props)->toFMEntry('template');
+
+//    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->including(self).
+//        ownedRule->sortedBy(name)->
+//        toTemplate2(stylesheetObj, rootPathExpr, props)->toFMEntry('template');
 
     stylesheet := stylesheetObj;
 
@@ -134,6 +137,7 @@ mapping NamedElement::toPathExpr(stylesheet : TransformType, rootPathExpr : Path
     }
 }
 
+-- The mapping is called for each type which has rules.
 mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathExpr, props : Set(Property)) : TemplateType
 {
     var contexts := self.xmap toPathExpr(stylesheet, rootPathExpr, props);
@@ -148,14 +152,65 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
     };
     context.xmap findQNames(stylesheet);
     match := context.toString();
-    instructionGroup += self.ownedRule->sortedBy(name)->toIf(stylesheet)->toFMEntry('if');
+
+    self.ownedRule->sortedBy(name)->forEach (rule) {
+        var expr : OCLExpression;
+        try {
+            expr := rule.toExpressionInOCL().ownedBody;
+        }
+        except () {
+            log('WARNING: Unable to parse expression');
+            expr := object BooleanLiteralExp { booleanSymbol := true };
+        };
+
+        var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+
+        if (expr.isLet()) {
+            var variable := expr![LetExp].ownedVariable;
+            var variableName := rule.name + '_' + variable.name;
+            expr := expr![LetExp].ownedIn;
+            variables->put(variable, object VarRef { varName := createQName(variableName) });
+            instructionGroup += object VariableType {
+            	name := variableName;
+            	try {
+            	    var variableInit := variable.ownedInit.xmap toExprSingle(variables);
+            	    select := variableInit.toString();
+            	}
+            	except () {
+                    log('WARNING: Unable to transform init expression for variable ' + variableName);
+            	}
+            }->toFMEntry('variable');
+        };
+        
+        if (expr.isForAll()) {
+            instructionGroup += rule->toForEach(stylesheet, expr, variables)->toFMEntry('forEach');
+        }
+        else {
+            instructionGroup += rule->toIf(stylesheet, expr, variables)->toFMEntry('if');
+        };
+    };
     instructionGroup += object ApplyTemplatesType { }.toFMEntry('applyTemplates');
 }
 
-mapping Constraint::toIf(stylesheet : TransformType) : IfType
-when { self.isSupported() }
+query OCLExpression::isForAll() : Boolean =
+    self.oclIsKindOf(IteratorExp) and
+    self![IteratorExp].referredIteration.name = 'forAll';
+
+query OCLExpression::isLet() : Boolean =
+    self.oclIsKindOf(LetExp);
+
+mapping Constraint::toIf(stylesheet : TransformType, expr : OCLExpression, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : IfType
 {
-    var xpath := self.toExpressionInOCL().xmap toExprSingle().notExpr();
+    var xpath : ExprSingle;
+    try {
+        log('    Transforming OCL expression\n      ' + expr.toString());
+        xpath := expr.xmap toExprSingle(variables).notExpr();
+        log('    to\n      ' + xpath.toString());
+    }
+    except () {
+        log('WARNING: Unable to transform expression');
+        xpath := object FunctionCall { name := 'false'.createFunctionQName() };
+    };
     xpath.xmap findQNames(stylesheet);
     test := xpath.toString();
 
@@ -168,6 +223,22 @@ when { self.isSupported() }
             text := self.specification[OpaqueExpression].body->any(true);
         };
     });
+}
+
+mapping Constraint::toForEach(stylesheet : TransformType, expr : OCLExpression, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ForEachType
+{
+    var iterator := expr.oclAsType(IteratorExp);
+    var xpath : ExprSingle;
+    try {
+        xpath := iterator.ownedSource.xmap toExprSingle(variables);
+    }
+    except () {
+        log('WARNING: Unable to transform expression');
+        xpath := object ParenthesizedExpr { };
+    };
+    xpath.xmap findQNames(stylesheet);
+    select := xpath.toString();
+    instructionGroup += self->toIf(stylesheet, iterator.ownedBody, variables)->toFMEntry('if');
 }
 
 intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(TYPE::QName); };
@@ -220,15 +291,15 @@ query NamedElement::generateXMLTag() : String
 }
 
 // TODO: Constraints must be parsed only once
-query Constraint::isSupported() : Boolean =
-    self.toExpressionInOCL().ownedBody.isSupported();
+//query Constraint::isSupported() : Boolean =
+//    self.toExpressionInOCL().ownedBody.isSupported();
 
-query OCLExpression::isSupported() : Boolean =
-    if self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(
-        referredOperation.name <> 'allInstances' and ownedSource.isSupported() and ownedArguments->forAll(isSupported()))
-    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll( 
-        ownedSource.isSupported() and ownedBody->forAll(isSupported()))
-    else true endif;
+//query OCLExpression::isSupported() : Boolean =
+//    if self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(
+//        referredOperation.name <> 'allInstances' and ownedSource.isSupported() and ownedArguments->forAll(isSupported()))
+//    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll( 
+//        ownedSource.isSupported() and ownedBody->forAll(isSupported()))
+//    else true endif;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Overrides
@@ -243,7 +314,22 @@ query NamedElement::getUnprefixedQName() : TYPE::QName =
 
 query Element::is(stereotypeName : String) : Boolean = self.is(profileName, stereotypeName);
 
-query NamedElement::isDataType() : Boolean = true;
+query NamedElement::isDataType() : Boolean = self.oclIsKindOf(Classifier);
+
+query NamedElement::isDateType() : Boolean =
+    if self.oclIsKindOf(Classifier)
+    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'Date')
+    else false endif;
+
+query NamedElement::isDateTimeType() : Boolean =
+    if self.oclIsKindOf(Classifier)
+    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'DateTime')
+    else false endif;
+
+query NamedElement::isTimeType() : Boolean =
+    if self.oclIsKindOf(Classifier)
+    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'Time')
+    else false endif;
 
 query NamedElement::isDataElement() : Boolean = false;
 

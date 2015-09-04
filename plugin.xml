@@ -7,13 +7,26 @@
 <plugin>
 
     <extension point="org.eclipse.m2m.qvt.oml.javaBlackboxUnits" id="uml2xsd.UtilitiesLibrary">
-        <library class="uml2xsd.UtilitiesLibrary">
-            <metamodel nsURI="http://www.eclipse.org/emf/2002/Ecore"/>
-            <metamodel nsURI="http://www.eclipse.org/emf/2003/XMLType"/>
-            <metamodel nsURI="http://www.w3.org/2001/XMLSchema"/>
-            <metamodel nsURI="http://www.eclipse.org/ocl/2015/Pivot"/>
-            <metamodel nsURI="http://www.emftext.org/language/xpath2"/>
-            <metamodel nsURI="http://www.eclipse.org/uml2/2.1.0/UML"/>
+        <library
+              class="uml2xsd.UtilitiesLibrary">
+           <metamodel
+                 nsURI="http://www.eclipse.org/emf/2002/Ecore">
+           </metamodel>
+           <metamodel
+                 nsURI="http://www.eclipse.org/emf/2003/XMLType">
+           </metamodel>
+           <metamodel
+                 nsURI="http://www.w3.org/2001/XMLSchema">
+           </metamodel>
+           <metamodel
+                 nsURI="http://www.eclipse.org/ocl/2015/Pivot">
+           </metamodel>
+           <metamodel
+                 nsURI="http://www.emftext.org/language/xpath2">
+           </metamodel>
+           <metamodel
+                 nsURI="http://www.eclipse.org/uml2/2.1.0/UML">
+           </metamodel>
         </library>
     </extension>
 

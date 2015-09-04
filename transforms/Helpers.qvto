@@ -54,6 +54,12 @@ abstract query NamedElement::getUnprefixedQName() : QName;
 
 abstract query NamedElement::isDataType() : Boolean;
 
+abstract query NamedElement::isDateType() : Boolean;
+
+abstract query NamedElement::isDateTimeType() : Boolean;
+
+abstract query NamedElement::isTimeType() : Boolean;
+
 abstract query NamedElement::isDataElement() : Boolean;
 
 abstract query NamedElement::isAttribute() : Boolean;
