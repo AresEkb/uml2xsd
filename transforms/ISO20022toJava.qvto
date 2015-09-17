@@ -201,7 +201,8 @@ mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
                         step += object AbbrevForwardStep {
                             kind := AbbrevForwardStepKind::child;
                             nodeTest := object QNameTest { name := consequent[OCL::IteratorExp].ownedIterators->any(true).type.getQName(); };
-                            predicate := body.xmap replaceSelf(body).xmap toExprSingle().predicate();
+                            var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+                            predicate := body.xmap replaceSelf(body).xmap toExprSingle(variables).predicate();
                         };
                     }.xmap toExistsMethodCall(body);
                     if (negateConsequent) {
@@ -241,7 +242,8 @@ mapping OCLExpression::toCheckMethodCall() : JAVA::_references::IdentifierRefere
         arguments := object JAVA::_references::IdentifierReference {
             target := object JAVA::members::Field { name := 'message'; };
         };
-        arguments += object JAVA::_references::StringReference { value := self.xmap toExprSingle().toString(); };
+        var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+        arguments += object JAVA::_references::StringReference { value := self.xmap toExprSingle(variables).toString(); };
     };
 }
 
@@ -329,8 +331,9 @@ mapping Param::toNewConstructorCall() : JAVA::instantiations::NewConstructorCall
     arguments := object JAVA::_references::StringReference {
         value := self.name;
     };
+    var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
     arguments += object JAVA::_references::StringReference {
-        value := self.xpath.xmap toExprSingle().toString();
+        value := self.xpath.xmap toExprSingle(variables).toString();
     };
     arguments += object JAVA::_references::IdentifierReference {
         target := object JAVA::classifiers::Class {

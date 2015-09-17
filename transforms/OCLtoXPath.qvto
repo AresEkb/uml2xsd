@@ -30,30 +30,15 @@ library OCLtoXPath;
 property useFunctionQNames : Boolean = true;
 
 --intermediate class Context { variables : Dict(OCL::Variable, XPATH2::ExprSingle); };
-/*
+
 mapping ExpressionInOCL::toXPath() : Expr
 {
     log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
-    expr := self.ownedBody.xmap toExprSingle();
+    var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+    expr := self.ownedBody.xmap toExprSingle(variables);
     log('    to\n      ' + result.toString());
 }
 
-query ExpressionInOCL::toExprSingle() : ExprSingle
-{
-    log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
-    var expr := self.ownedBody.xmap toExprSingle();
-    log('    to\n      ' + expr.toString());
-    return expr;
-}
-
-mapping OCLExpression::toExprSingle() : ExprSingle
-{
-	init {
-		var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-		result := self.xmap toExprSingle(variables);
-	}
-}
-*/
 mapping OCLExpression::toExprSingle(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 disjuncts
     // Logic
