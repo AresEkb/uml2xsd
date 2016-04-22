@@ -1,0 +1,125 @@
+/**
+ * Copyright (c) 2016 Denis Nikiforov.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    Denis Nikiforov - initial API and implementation
+ */
+
+import uml2xsd.UtilitiesLibrary;
+import Helpers;
+
+library EAEUHelpers;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
+modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
+
+property profileName : String = 'EECProfile';
+
+///////////////////////////////////////////////////////////////////////////////
+// Helpers
+
+query Element::getNS() : Package = self.getNearestPackage().getNS();
+
+query Package::getNS() : Package =
+    if self.getAppliedStereotype('EECProfile::Namespace') <> null or
+       self.getAppliedStereotype('EECProfile::Platform') <> null then self
+    elif self.owner <> null then self.owner.getNS()
+    else null endif;
+
+query Package::getNSProperty(name : String) : String =
+    if self.getAppliedStereotype('EECProfile::Namespace') <> null
+        then self.getValue('EECProfile::Namespace', name)
+    elif self.getAppliedStereotype('EECProfile::Platform') <> null
+        then self.getValue('EECProfile::Platform', name)
+    else null endif;
+
+query Package::getTargetNS() : String = self.getNSProperty('uri');
+query Package::getTargetNSPrefix() : String = self.getNSProperty('prefix');
+query Package::getTargetNSVersion() : String = self.getNSProperty('version');
+
+query NamedElement::getNSWithGuards() : Package
+{
+    assert fatal (self.getQualifiedName() <> null)
+        with log('Unable to resolve element \'' + self.toString() + '\'');
+    var ns := self.getNS();
+    assert fatal (ns <> null)
+        with log('Namespace of a \'' + self.getQualifiedName() + '\' not found');
+    return ns;
+}
+
+query Package::isXMLPT() : Boolean =
+    self.getAppliedStereotype('EECProfile::Platform') <> null and
+    self.getValue('EECProfile::Platform', 'uri') = 'http://www.w3.org/2001/XMLSchema';
+
+query Classifier::getOwnedAttributes() : Sequence(Property) =
+    self.getAttributes()->select(getAppliedStereotype('EECProfile::Attribute') <> null);
+
+query Classifier::getOwnedElements() : Sequence(Property) =
+    self.getAttributes()->select(getAppliedStereotype('EECProfile::Attribute') = null);
+
+query Classifier::hasComplexContent() : Boolean =
+    if self.getOwnedElements()->notEmpty() then true
+    else self.general->hasComplexContent()->exists(b|b=true) endif;
+
+query Package::isNamespace() : Boolean =
+    self.getAppliedStereotype('EECProfile::Namespace') <> null;
+
+query Generalization::isRestriction() : Boolean =
+    self.getAppliedStereotype('EECProfile::restriction') <> null;
+
+///////////////////////////////////////////////////////////////////////////////
+// Overrides
+
+query NamedElement::getQName() : QName
+{
+    var ns := self.getNSWithGuards();
+    // HACK
+    // var ns := self.getNS();
+    // if (ns = null) {
+    //     return createQName('unknown', self.name, 'un').oclAsType(QName); 
+    // };
+    return createQName(ns.getTargetNS(), self.name, ns.getTargetNSPrefix()).oclAsType(QName);
+}
+
+query NamedElement::getUnprefixedQName() : QName
+{
+    var ns := self.getNSWithGuards();
+    return createQName(self.name).oclAsType(QName);
+}
+
+query Element::is(stereotypeName : String) : Boolean = self.is(profileName, stereotypeName);
+
+query NamedElement::isDataType() : Boolean = self.oclIsKindOf(DataType);
+
+query NamedElement::isBasedOnType(typeName : String) : Boolean =
+    if self.oclIsKindOf(DataType)
+    then self.oclAsType(DataType).allParents()->including(self.oclAsType(DataType))->exists(is('BaseType') and name = typeName)
+    else false endif;
+
+/*
+query NamedElement::isBasedOnType(typeName : String) : Boolean
+{
+    log('>>> ' + self.is('BaseType').repr());
+    log('>>> ' + self.name);
+    log('>>> ' + self.oclAsType(DataType).allParents()->including(self.oclAsType(DataType))->size().repr());
+    log('>>> ' + self.oclAsType(DataType).allParents()->including(self.oclAsType(DataType))->exists(is('BaseType') and name = typeName).repr());
+    if self.oclIsKindOf(DataType)
+    then self.oclAsType(DataType).allParents()->including(self.oclAsType(DataType))->exists(is('BaseType') and name = typeName)
+    else false endif;
+};
+*/
+query NamedElement::isDateType() : Boolean = self.isBasedOnType('DateType');
+
+query NamedElement::isDateTimeType() : Boolean = self.isBasedOnType('DateTimeType');
+
+query NamedElement::isTimeType() : Boolean = self.isBasedOnType('TimeType');
+
+query NamedElement::isDurationType() : Boolean = self.isBasedOnType('DurationType');
+
+query NamedElement::isDataElement() : Boolean = self.oclIsKindOf(Class);
+
+query NamedElement::isAttribute() : Boolean = self.getAppliedStereotype(profileName + '::Attribute') <> null;

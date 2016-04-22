@@ -81,7 +81,7 @@ import iso20022.validation.result.ValidationResultPackage;
 public class Main {
 
     public enum ModelKind { EAEU, ISO20022_ECORE, ISO20022_UML };
-    public enum OutputFormat { XSD11, XSLT20, ISO20022_UML, JAVA };
+    public enum OutputFormat { XSD11, XSLT20, ISO20022_UML, JAVA, XSLT_TEST_CASE };
     
     private static String input;
     private static String output;
@@ -126,7 +126,7 @@ public class Main {
 
             // TODO: There is a very strange bug. If one will remove the following lines,
             // OCL will not resolve some properties during transformation.
-            try {
+            /*try {
                 for (PackageableElement el : uml.getPackagedElements()) {
                     if (el instanceof Classifier) {
                         for (Constraint rule : ((Classifier)el).getOwnedRules()) {
@@ -138,7 +138,7 @@ public class Main {
             catch (Exception e) {
                 e.printStackTrace();
                 return;
-            }
+            }*/
 
             final String transform = getTransformation(modelKind, outputFormat);
             System.out.println("Transforming model by " + transform);
@@ -232,6 +232,9 @@ public class Main {
                 break;
             case "java":
                 outputFormat = OutputFormat.JAVA;
+                break;
+            case "xslt-tc":
+                outputFormat = OutputFormat.XSLT_TEST_CASE;
                 break;
             default:
                 throw new IllegalArgumentException("Wrong command-line arguments: format must have one of the following values: xsd, xslt, uml, java. Specified value is " + format);
@@ -335,6 +338,9 @@ public class Main {
         case EAEU:
             if (outputFormat == OutputFormat.XSD11) {
                 return "transforms/EAEUtoXSD11.qvto";
+            }
+            else if (outputFormat == OutputFormat.XSLT_TEST_CASE) {
+                return "transforms/EAEUtoTestCase.qvto";
             }
             break;
         case ISO20022_UML:

@@ -32,12 +32,14 @@ property params : Dict(OCLExpression, Set(Param));
 main()
 {
     useFunctionQNames := false;
-    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->any(true)->toClass();
+    emptySelf := false;
+    
+    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toClass();
 }
 
 mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::containers::CompilationUnit
 {
-    var className := self.name.replace('.', '_');
+    var className := self.name.quoteJavaName();
     log('  Found message ' + self.name);
 
     object c : JAVA::classifiers::Class {
@@ -65,8 +67,9 @@ mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::contain
         	annotationsAndModifiers := object JAVA::modifiers::Private { };
         };
         
-        members += object JAVA::members::Constructor {
-            name := className;
+        members += object JAVA::members::ClassMethod {
+            name := "init";
+            typeReference := object JAVA::types::_Void { };
             parameters := object JAVA::parameters::OrdinaryParameter {
             	name := 'message';
             	typeReference := object JAVA::types::NamespaceClassifierReference {
@@ -104,12 +107,14 @@ mapping Classifier::toClass() : c : JAVA::classifiers::Class, cu : JAVA::contain
     };
     object cu : JAVA::containers::CompilationUnit {
         name := self.name;
-        namespaces := 'com.centreit.repiso.ocl.helper'.tokenize('.');
+        namespaces := 'com.centreit.repiso.ocl.validator.validation'.tokenize('.');
         classifiers := c;
         
         imports += 'org.w3c.dom.Document'.toInterfaceImport();
         imports += 'javax.annotation.Generated'.toInterfaceImport();
         imports += 'java.util.Arrays'.toClassImport();
+        imports += 'com.centreit.repiso.ocl.validator.validation.BaseValidator'.toClassImport();
+        imports += 'com.centreit.repiso.ocl.validator.validation.Helper'.toClassImport();
     };
 }
 
@@ -142,30 +147,49 @@ mapping Property::toField() : JAVA::members::Field
 mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
 {
     log('    Found rule ' + self.name);
-    name := 'check' + self.name;
+    name := 'check' + self.name.quoteJavaName().capitalize();
     typeReference := object JAVA::types::_Boolean { };
 
     annotationsAndModifiers += object JAVA::annotations::AnnotationInstance {
         annotation := object JAVA::classifiers::Class { name := 'RuleMetadata'; };
         parameter := object JAVA::annotations::AnnotationParameterList {
-            var documentations := self.ownedComment.body->select(size() > 0);
-            if (documentations->notEmpty()) {
+            var ruleId := self.ownedComment->any(eAnnotations->exists(source = "ruleId") and body->notEmpty());
+            if (ruleId <> null) {
                 settings += object JAVA::annotations::AnnotationAttributeSetting {
-                	attribute := object JAVA::members::InterfaceMethod {
-                		name := 'description';
-            	    };
-            	    // TODO: Something more adequate is needed
-                	value := object JAVA::_references::StringReference { value := documentations->any(true); };
+                    attribute := object JAVA::members::InterfaceMethod {
+                        name := 'id';
+                    };
+                    value := object JAVA::_references::StringReference { value := ruleId.body };
                 };
             };
-            var specifications := self.specification->selectByKind(OpaqueExpression)->select(language->includes('OCL')).body->select(size() > 0);
-            if (specifications->notEmpty()) {
+
+            var ruleName := self.ownedComment->any(eAnnotations->exists(source = "ruleName") and body->notEmpty());
+            if (ruleName <> null) {
+                settings += object JAVA::annotations::AnnotationAttributeSetting {
+                    attribute := object JAVA::members::InterfaceMethod {
+                        name := 'name';
+                    };
+                    value := object JAVA::_references::StringReference { value := ruleName.body };
+                };
+            };
+
+            var description := self.ownedComment->any(eAnnotations->exists(source = "description") and body->notEmpty());
+            if (description <> null) {
+                settings += object JAVA::annotations::AnnotationAttributeSetting {
+                    attribute := object JAVA::members::InterfaceMethod {
+                        name := 'description';
+                    };
+                    value := object JAVA::_references::StringReference { value := description.body };
+                };
+            };
+
+            var specification = self.specification->selectByKind(OpaqueExpression)->any(language->includes('OCL') and body->notEmpty());
+            if (specification <> null) {
                 settings += object JAVA::annotations::AnnotationAttributeSetting {
                     attribute := object JAVA::members::InterfaceMethod {
                         name := 'ocl';
                     };
-                    // TODO: Something more adequate is needed
-                    value := object JAVA::_references::StringReference { value := specifications->any(true); };
+                    value := object JAVA::_references::StringReference { value := specification.body->any(size() > 0); };
                 };
             };
         };
@@ -179,41 +203,46 @@ mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
     // The main idea is that all code surrounding allInstances() must be converted into Java code instead of XPath one.
     var res : JAVA::expressions::Expression;
     var expr := self.toExpressionInOCL().ownedBody;
-    if (expr[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('implies'))) {
-    	var premise := expr![OCL::OperationCallExp].ownedSource;
-        var consequent := expr![OCL::OperationCallExp].ownedArguments->any(true);
-        var negateConsequent = false;
-        if (consequent[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('not'))) {
-            negateConsequent := true;
-            consequent := consequent[OCL::OperationCallExp].ownedSource->any(true);
-        };
-        if (consequent[OCL::IteratorExp]->one(referredIteration.name = 'exists')) {
-            var source := consequent[OCL::IteratorExp].ownedSource;
-            var body := consequent[OCL::IteratorExp].ownedBody->any(true);
-            if (source[OCL::OperationCallExp]->one(referredOperation.name = 'allInstances')) {
-                res := object JAVA::expressions::ConditionalOrExpression {
-                    children := object JAVA::expressions::UnaryExpression {
-                        operators := object JAVA::operators::Negate { };
-                        child := premise.xmap toCheckMethodCall();
-                    };
-                    var existsCall := object PathExpr {
-                    	step := object RootStepExpr { };
-                        step += object AbbrevForwardStep {
-                            kind := AbbrevForwardStepKind::child;
-                            nodeTest := object QNameTest { name := consequent[OCL::IteratorExp].ownedIterators->any(true).type.getQName(); };
-                            var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-                            predicate := body.xmap replaceSelf(body).xmap toExprSingle(variables).predicate();
-                        };
-                    }.xmap toExistsMethodCall(body);
-                    if (negateConsequent) {
-                        children += object JAVA::expressions::UnaryExpression {
+    try {
+        if (expr[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('implies'))) {
+            var premise := expr![OCL::OperationCallExp].ownedSource;
+            var consequent := expr![OCL::OperationCallExp].ownedArguments->any(true);
+            var negateConsequent = false;
+            if (consequent[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('not'))) {
+                negateConsequent := true;
+                consequent := consequent[OCL::OperationCallExp].ownedSource->any(true);
+            };
+            if (consequent[OCL::IteratorExp]->one(referredIteration.name = 'exists')) {
+                var source := consequent[OCL::IteratorExp].ownedSource;
+                var body := consequent[OCL::IteratorExp].ownedBody->any(true);
+                if (source[OCL::OperationCallExp]->one(referredOperation.name = 'allInstances')) {
+                    res := object JAVA::expressions::ConditionalOrExpression {
+                        children := object JAVA::expressions::UnaryExpression {
                             operators := object JAVA::operators::Negate { };
-                            child := existsCall;
+                            child := premise.xmap toCheckMethodCall();
                         };
-                    }
-                    else {
-                        children += existsCall;
+                        var existsCall := object PathExpr {
+                            step := object RootStepExpr { };
+                            step += object AbbrevForwardStep {
+                                kind := AbbrevForwardStepKind::child;
+                                nodeTest := object QNameTest { name := consequent[OCL::IteratorExp].ownedIterators->any(true).type.getQName(); };
+                                var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+                                predicate := body.xmap replaceSelf(body).xmap toExprSingle(variables).predicate();
+                            };
+                        }.xmap toExistsMethodCall(body);
+                        if (negateConsequent) {
+                            children += object JAVA::expressions::UnaryExpression {
+                                operators := object JAVA::operators::Negate { };
+                                child := existsCall;
+                            };
+                        }
+                        else {
+                            children += existsCall;
+                        };
                     };
+                }
+                else {
+                    res := expr.xmap toCheckMethodCall();
                 };
             }
             else {
@@ -222,13 +251,22 @@ mapping Constraint::toClassMethod() : JAVA::members::ClassMethod
         }
         else {
             res := expr.xmap toCheckMethodCall();
-        };
+        }
     }
-    else {
-        res := expr.xmap toCheckMethodCall();
+    except () {
+        log('WARNING: Unable to parse expression');
     };
+    
+    var ret : JAVA::expressions::Expression;
+    
+    if(res <> null) {   
+		ret := res;
+    } else {
+    	ret := object JAVA::literals::BooleanLiteral { value := true } 
+    };
+    
     statements := object JAVA::statements::Return {
-        returnValue := res;
+        returnValue := ret;
     };
 }
 
@@ -345,6 +383,12 @@ mapping Param::toNewConstructorCall() : JAVA::instantiations::NewConstructorCall
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
+
+query String::quoteJavaName() : String =
+    self.replaceAll('[^A-Za-z0-9]', '_');
+
+query String::capitalize() : String =
+    self.substring(1, 1).toUpper() + self.substring(2, self.size());
 
 query OCLExpression::getType() : String
 {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2015 Denis Nikiforov.
+ * Copyright (c) 2013, 2016 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,9 +10,10 @@
  */
 
 import uml2xsd.UtilitiesLibrary;
+import EAEUHelpers;
 import OCLtoXPath;
 
-modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
+modeltype UML uses 'http://www.eclipse.org/uml2/3.0.0/UML';
 modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
 modeltype XSD uses 'http://www.w3.org/2001/XMLSchema';
 modeltype VC uses 'http://www.w3.org/2007/XMLSchema-versioning';
@@ -25,10 +26,12 @@ transformation EAEUtoXSD11(in m : UML, out x : XSD)
 
 main()
 {
-    m.objectsOfType(Package)->select(isNamespace() and not(isXMLPT()))->toSchema();
+    emptySelf := true;
+    m.objectsOfType(Package)->toSchema();
 }
 
 mapping Package::toSchema() : DocumentRoot
+when { self.isNamespace() and not(self.isXMLPT()) }
 {
     log("  Found namespace " + self.getTargetNS());
     xMLNSPrefixMap += object EStringToStringMapEntry {
@@ -68,6 +71,8 @@ mapping Package::toSchema() : DocumentRoot
             key := qname.getPrefix();
             value := qname.getNamespaceURI();
         });
+
+    self.packageImport.target[Package]->toSchema();
 }
 
 mapping PackageImport::toImport() : ImportType
@@ -82,9 +87,9 @@ when { self.getAllAttributes()->isEmpty() }
 {
     name := self.name;
     annotation := self.getAnnotation();
-    var realizations := Realization.allInstances()
-        ->select(supplier->exists(s|s=self) and client->forAll(getNS().isXMLPT()))
-        .client->selectByKind(Classifier);
+    var realizations := self.getModel().allOwnedElements()[Realization]
+        ->select(supplier->includes(self) and client->forAll(getNearestPackage().isXMLPT()))
+        .client[Classifier];
     if (self.generalization->size() = 1) {
         restriction := object RestrictionType1 {
             base := self.generalization->any(true).general.getQName();
@@ -193,19 +198,31 @@ mapping Property::toLocalElement() : LocalElement
 {
     ref := self.type.getQName();
     if (self.lower = 0 or self.lower > 1) {
-        minOccurs := self.lower;
+        minOccurs := self.lower.toBigInteger();
     };
     if (self.upper <> 1) {
-        maxOccurs := if self.upper = -1 then AllNNIMember1::unbounded else self.upper endif;
+        maxOccurs := if self.upper = -1 then AllNNIMember1::unbounded else self.upper.toBigInteger() endif;
     };
 }
 
 mapping Constraint::toAssertion(schema : SchemaType) : Assertion
 {
-    var xpath := self.toExpressionInOCL().xmap toXPath();
-    xpath.xmap findQNames(schema);
-    test := xpath.toString();
-    annotation := self.getAnnotation();
+    try {
+        var xpath := self.toExpressionInOCL().xmap toXPath();
+        xpath.xmap findQNames(schema);
+        test := xpath.toString();
+    }
+    except () {
+        assert warning (false) with log('Unable to parse OCL expression');
+        test := 'fn:true()';
+    };
+    annotation := object AnnotationType {
+        documentation += self.getAnnotation().documentation;
+        documentation += object DocumentationType {
+            mixed := createFeatureMapEntry('http://www.eclipse.org/emf/2003/XMLType', 'text',
+                '\n' + self.specification[OpaqueExpression].body.replaceAll('\r', '')->any(true) + '\n');
+        }
+    }
 }
 
 intermediate class SchemaQNames { schema : SchemaType; qnames : Set(QName); };
@@ -224,7 +241,7 @@ when { self.size() > 0 }
 {
     documentation := object DocumentationType {
         mixed := createFeatureMapEntry('http://www.eclipse.org/emf/2003/XMLType', 'text',
-            self.replaceAll('&nbsp;', ' ').replaceAll('\r\n', '\n').replaceAll('\n', ' '));
+            self.clean());
     };
 }
 
@@ -233,25 +250,6 @@ when { self.size() > 0 }
 
 query Package::getSchemaLocation() : String =
     self.getTargetNS().replaceAll('^urn:', '').substituteAll(':', '_') + '.xsd';
-
-query Package::isXMLPT() : Boolean =
-    self.getTargetNS() = 'http://www.w3.org/2001/XMLSchema';
-
-query Classifier::getOwnedAttributes() : Sequence(Property) =
-    self.getAttributes()->select(getAppliedStereotype('EECProfile::Attribute') <> null);
-
-query Classifier::getOwnedElements() : Sequence(Property) =
-    self.getAttributes()->select(getAppliedStereotype('EECProfile::Attribute') = null);
-
-query Classifier::hasComplexContent() : Boolean =
-    if self.getOwnedElements()->notEmpty() then true
-    else self.general->hasComplexContent()->exists(b|b=true) endif;
-
-query Package::isNamespace() : Boolean =
-    self.getAppliedStereotype('EECProfile::Namespace') <> null;
-
-query Generalization::isRestriction() : Boolean =
-    self.getAppliedStereotype('EECProfile::restriction') <> null;
 
 query Element::getAnnotation() : AnnotationType =
     self.ownedComment.body->toAnnotation()->any(true);
@@ -305,28 +303,6 @@ query Enumeration::createNoFixedFacet(name : String) : Sequence(EFeatureMapEntry
     self.ownedLiteral->sortedBy(name)
         ->collect(val|createFeatureMapEntry('http://www.w3.org/2001/XMLSchema',
             name, object NoFixedFacet { value := val.name; annotation := val.getAnnotation(); }));
-
-query Element::getNS() : Package = self.getNearestPackage().getNS();
-
-query Package::getNS() : Package =
-      if self.getAppliedStereotype('EECProfile::Namespace') <> null then self
-    elif self.owner <> null then self.owner.getNS()
-    else null
-    endif;
-
-query Package::getTargetNS() : String = self.getValue('EECProfile::Namespace', 'name');
-query Package::getTargetNSPrefix() : String = self.getValue('EECProfile::Namespace', 'prefix');
-query Package::getTargetNSVersion() : String = self.getValue('EECProfile::Namespace', 'version');
-
-query NamedElement::getNSWithGuards() : Package
-{
-    assert fatal (self.getQualifiedName() <> null)
-        with log('Unable to resolve element \'' + self.toString() + '\'');
-    var ns := self.getNS();
-    assert fatal (ns <> null)
-        with log('Namespace of a \'' + self.getQualifiedName() + '\' not found');
-    return ns;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Overrides

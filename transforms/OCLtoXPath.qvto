@@ -28,15 +28,16 @@ modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 library OCLtoXPath;
 
 property useFunctionQNames : Boolean = true;
+property emptySelf : Boolean = false;
 
 --intermediate class Context { variables : Dict(OCL::Variable, XPATH2::ExprSingle); };
 
 mapping ExpressionInOCL::toXPath() : Expr
 {
-    log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
+    //log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
     var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
     expr := self.ownedBody.xmap toExprSingle(variables);
-    log('    to\n      ' + result.toString());
+    //log('    to\n      ' + result.toString());
 }
 
 mapping OCLExpression::toExprSingle(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
@@ -60,6 +61,7 @@ disjuncts
     VariableExp::toPathExpr2,
     VariableExp::toPathExpr3,
     PropertyCallExp::toPathExpr,
+    IteratorExp::toPathExpr,
     // Functions
     OperationCallExp::toAsSet,
     OperationCallExp::toCountFunctionCall,
@@ -71,6 +73,9 @@ disjuncts
     OperationCallExp::toSumFunctionCall,
     IteratorExp::toIsUnique,
     OperationCallExp::toHasTimezoneFunctionCall,
+    OperationCallExp::toNewDuration,
+    OperationCallExp::toDateCast,
+    OperationCallExp::toGetWorkingDays,
     // Literals
     IntegerLiteralExp::toLiteral,
     UnlimitedNaturalLiteralExp::toLiteral,
@@ -78,6 +83,8 @@ disjuncts
     StringLiteralExp::toLiteral,
     BooleanLiteralExp::toLiteral,
     CollectionLiteralExp::toSequence,
+    // Constructions
+    IfExp::toIfElse,
     // Unknown expressions
     OCLExpression::raiseError
 {}
@@ -116,6 +123,13 @@ when { self.referredOperation.isBooleanOperation('not') }
     init {
         result := self.ownedSource.xmap toExprSingle(variables).notExpr();
     }
+}
+
+mapping IfExp::toIfElse(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : IfExpr
+{
+    test:= self.ownedCondition.xmap toExprSingle(variables);
+    _then:= self.ownedThen.xmap toExprSingle(variables);
+    _else:= self.ownedElse.xmap toExprSingle(variables);
 }
 
 mapping IteratorExp::toExists(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
@@ -318,6 +332,7 @@ query String::toMultiplicativeOp() : MultiplicativeOpKind =
 
 //////////////////////////////////////////////////////////////////////////////
 // Path
+
 /*
 mapping OCLExpression::toPath() : PathExpr
 disjuncts
@@ -354,11 +369,13 @@ disjuncts
 mapping VariableExp::toPathExpr1(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 when { self.referredVariable.name = 'self' }
 {
-    /*step := object RootStepExpr { };
-    step += object AbbrevForwardStep {
-        kind := AbbrevForwardStepKind::child;
-        nodeTest := object QNameTest { name := self.type.getQName() };
-    };*/
+    if (not emptySelf) {
+        step := object RootStepExpr { };
+        step += object AbbrevForwardStep {
+            kind := AbbrevForwardStepKind::child;
+            nodeTest := object QNameTest { name := self.type.getQName() };
+        };
+    }
 }
 
 // Iterator
@@ -461,6 +478,33 @@ mapping OCLExpression::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSi
         path.oclAsType(PathExpr).getLastAxisStep().predicate := predicate.predicate();
         result := path.oclAsType(PathExpr);
     }
+}
+
+// TODO: Refactor it
+mapping IteratorExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
+when { self.referredIteration.name = 'collect' }
+{
+    init {
+        result := self.ownedSource.xmap toPathExpr(variables);
+    }
+    var body := self.ownedBody.xmap toExprSingle(variables);
+    //log(' --- BODY: ' + self.ownedBody.repr());
+    //log(' --- PATH: ' + body.toString());
+    //log(' --- STEP: ' + body.oclAsType(PathExpr).step->asSequence()->at(1).repr());
+    assert fatal (body.oclIsKindOf(PathExpr)) with log('PathExpr expected instead of ' + body.metaClassName());
+    body.oclAsType(PathExpr).step->forEach (s) {
+        if (s.oclIsKindOf(SelfStepExpr)) {
+            step += object ChildStepExpr {
+                step := s.oclAsType(SelfStepExpr).step.oclAsType(StepExpr);
+            }
+        }
+        elif (s.oclIsKindOf(ChildStepExpr)) {
+            step += s;
+        }
+        else {
+        	assert fatal (false);
+        };
+    };
 }
 
 query PathExpr::getLastAxisStep() : AxisStep
@@ -615,6 +659,31 @@ when { self.referredOperation.name = 'hasTimezone' and self.referredOperation.ow
     arg := self.ownedSource.xmap toExprSingle(variables);
 }
 
+mapping OperationCallExp::toNewDuration(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
+when { self.referredOperation.name = 'new' and self.referredOperation.owningClass.isDurationType() }
+{
+    init {
+        result := self.ownedArguments->asSequence()->at(1).xmap toExprSingle(variables);
+    }
+}
+
+mapping OperationCallExp::toDateCast(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
+when { self.referredOperation.name = 'toDate' and self.referredOperation.owningClass.isDateTimeType() }
+{
+    init {
+        result := self.ownedSource.xmap toExprSingle(variables);
+    }
+}
+
+// TODO: It returns duration without any change, but must return working days duration
+mapping OperationCallExp::toGetWorkingDays(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
+when { self.referredOperation.name = 'getWorkingDays' and self.referredOperation.owningClass.isDurationType() }
+{
+    init {
+        result := self.ownedSource.xmap toExprSingle(variables);
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Literals
 
@@ -661,9 +730,9 @@ mapping CollectionLiteralExp::toSequence(variables : Dict(OCL::Variable, XPATH2:
 
 mapping OCLExpression::raiseError(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
-    log('Unknown ' + self.metaClassName() + ' ' + self.repr());
-    raise Exception('Unknown ' + self.metaClassName() + ' ' + self.repr());
-    //value := 'Unknown ' + self.metaClassName() + ' ' + self.repr();
+    var message = 'Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr();
+    log(message);
+    raise Exception(message);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -683,6 +752,8 @@ query NamedElement::isDateType() : Boolean = self.getETarget().isDateType();
 query NamedElement::isDateTimeType() : Boolean = self.getETarget().isDateTimeType();
 
 query NamedElement::isTimeType() : Boolean = self.getETarget().isTimeType();
+
+query NamedElement::isDurationType() : Boolean = self.getETarget().isDurationType();
 
 query NamedElement::isDataElement() : Boolean = self.getETarget().isDataElement();
 

@@ -27,6 +27,13 @@ query coalesce(arg1 : String, arg2 : String) : String =
 query Sequence(String)::sep(separator : String) : String =
     self->iterate(str; res : String = '' | if res = '' then str else res + separator + str endif);
 
+query String::clean() : String =
+    self.replaceAll('<p[^>]*>', '').replaceAll('</p>', '\n')
+        .replaceAll('<br>', '\n')
+        .replaceAll('<[^>]+>', '')
+        .replaceAll('&nbsp;', ' ').replaceAll('\r\n', '\n').replaceAll('\n', ' ')
+        .replaceAll('\\s{2,}', ' ').trim();
+
 ///////////////////////////////////////////////////////////////////////////////
 // Stereotypes
 
@@ -59,6 +66,8 @@ abstract query NamedElement::isDateType() : Boolean;
 abstract query NamedElement::isDateTimeType() : Boolean;
 
 abstract query NamedElement::isTimeType() : Boolean;
+
+abstract query NamedElement::isDurationType() : Boolean;
 
 abstract query NamedElement::isDataElement() : Boolean;
 

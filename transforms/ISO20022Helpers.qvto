@@ -61,7 +61,22 @@ query NamedElement::getUnprefixedQName() : TYPE::QName =
 
 query Element::is(stereotypeName : String) : Boolean = self.is(profileName, stereotypeName);
 
-query NamedElement::isDataType() : Boolean = true;
+query NamedElement::isDataType() : Boolean = self.oclIsKindOf(Classifier);
+
+query NamedElement::isDateType() : Boolean =
+    if self.oclIsKindOf(Classifier)
+    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'Date')
+    else false endif;
+
+query NamedElement::isDateTimeType() : Boolean =
+    if self.oclIsKindOf(Classifier)
+    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'DateTime')
+    else false endif;
+
+query NamedElement::isTimeType() : Boolean =
+    if self.oclIsKindOf(Classifier)
+    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'Time')
+    else false endif;
 
 query NamedElement::isDataElement() : Boolean = false;
 
