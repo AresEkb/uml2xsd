@@ -41,13 +41,13 @@ query OCLExpression::isSupportedByXPath() : Boolean =
         ownedSource.isSupportedByXPath() and ownedBody->forAll(isSupportedByXPath()))
     else true endif;
 
-query OCLExpression::getContext() : OCL::Type;
+query OCLExpression::getContext() : OCL::Variable;
 
-query CallExp::getContext() : OCL::Type =
+query CallExp::getContext() : OCL::Variable =
     self.ownedSource.getContext();
 
-query VariableExp::getContext() : OCL::Type =
-    self.referredVariable.type;
+query VariableExp::getContext() : OCL::Variable =
+    self.referredVariable![OCL::Variable];
 
 query Classifier::getRootPath() : PathExpr =
     object PathExpr {

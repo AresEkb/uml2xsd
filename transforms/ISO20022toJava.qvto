@@ -119,9 +119,9 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
                             arguments := object JAVA::_references::IdentifierReference {
                                 target := object JAVA::members::Field { name := 'message'; };
                             };
-                            arguments += object JAVA::_references::StringReference {
-                                value := self.getRootPath().toString();
-                            };
+                            //arguments += object JAVA::_references::StringReference {
+                            //    value := self.getRootPath().toString();
+                            //};
             			};
             		};
             	};
@@ -187,7 +187,8 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
     parameters := resultParam;
     
     try {
-        statements := self.xmap toValidationCode(self.toExpressionInOCL().ownedBody, rootField, resultParam);
+        var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+        statements := self.xmap toValidationCode(self.toExpressionInOCL().ownedBody, variables, rootField, resultParam);
     }
     except () {
         log('WARNING: Unable to generate validation code');
@@ -204,10 +205,21 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
 
 mapping Constraint::toValidationCode(
     expr : OCLExpression,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
     resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
 disjuncts
     Constraint::toForAll,
+    Constraint::toHelperValidateInvocation
+{
+}
+
+mapping Constraint::toValidationCode2(
+    expr : OCLExpression,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
+    contextVariable : JAVA::_references::ReferenceableElement,
+    resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
+disjuncts
     Constraint::toHelperValidateInvocation
 {
 }
@@ -277,10 +289,14 @@ disjuncts
  */
 mapping Constraint::toForAll(
     expr : OCLExpression,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
     resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
 when { expr.isForAll() }
 {
+    //log('Constraint::toForAll');
+    //log(expr.toString());
+    var contextExpr := expr![IteratorExp].ownedSource;
     result += object JAVA::statements::ForEachLoop {
         var contextParam := object JAVA::parameters::OrdinaryParameter {
             name := 'context';
@@ -297,15 +313,66 @@ when { expr.isForAll() }
                     target := contextVariable;
                 };
                 arguments += object JAVA::_references::StringReference {
-                    var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-                    value := expr![IteratorExp].ownedSource.xmap toExprSingle(variables).toString();
+                    //var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+                    value := contextExpr.xmap toExprSingle(variables).toString();
                 };
             };
         };
         statement := object JAVA::statements::Block {
-            statements += self.xmap toValidationCode(expr![IteratorExp].ownedBody, contextParam, resultVariable);
+            var variables2 := variables;
+            // TODO: This must be refactored. Java variables must be mapped to XPath ones
+            /*var nestingLevelsCount := contextExpr.countNestingLevels();
+            if (nestingLevelsCount > 0) {
+                var path := object PathExpr {
+                    step := object SelfStepExpr {
+                        step := object AbbrevReverseStep { kind := AbbrevReverseStepKind::parent }
+                    };
+                    step += Sequence{1..nestingLevelsCount - 1}->collect(
+                        object ChildStepExpr {
+                            step := object AbbrevReverseStep { kind := AbbrevReverseStepKind::parent }
+                        });
+                };
+                variables2->put(expr.getContext(), path);
+            };*/
+            variables2->put(expr.getContext(), object PathExpr { step := object RootStepExpr { } });
+            expr![IteratorExp].ownedIterators->forEach (iterator) {
+                variables2->put(iterator, object PathExpr {
+                    step := object FunctionCall {
+                        name := createQName('current');
+                    }
+                });
+            };
+            statements += self.xmap toValidationCode2(expr![IteratorExp].ownedBody, variables2, contextParam, resultVariable);
         };
     };
+}
+
+// TODO: It's a bad idea to count levels.
+// It's better to declare an XPath variables for Java variables and to use variable resolver
+query OCLExpression::countNestingLevels() : Integer
+{
+    var message := 'ERROR: Unable to count nesting levels for ' + self.metaClassName();
+    log(message);
+    raise Exception(message);
+    return null;
+}
+
+query PropertyCallExp::countNestingLevels() : Integer =
+    self.ownedSource.countNestingLevels() + 1;
+
+query VariableExp::countNestingLevels() : Integer = 1;
+
+query IteratorExp::countNestingLevels() : Integer
+{
+    if (self.referredIteration.name = 'select') {
+        return self.ownedSource.countNestingLevels();
+    }
+    else {
+        var message := 'ERROR: Unable to count nesting levels for ' + self.metaClassName();
+        log(message);
+        raise Exception(message);
+    };
+    return null;
 }
 
 /**
@@ -319,10 +386,13 @@ when { expr.isForAll() }
  */
 mapping Constraint::toHelperValidateInvocation(
     expr : OCLExpression,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
     resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
 {
-    var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+    //log('Constraint::toHelperValidateInvocation');
+    //log(expr.toString());
+    //log(expr.xmap toExprSingle(variables).toString());
     result += object JAVA::statements::ExpressionStatement {
     	expression := object JAVA::expressions::AssignmentExpression {
             child := object JAVA::_references::IdentifierReference {
@@ -347,9 +417,9 @@ mapping Constraint::toHelperValidateInvocation(
                                 with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
                                     self.ownedComment.body->any(true));
     
-                            arguments += doc->at(2).toMessage(contextVariable, expr.getContext(), variables);
+                            arguments += doc->at(2).toMessage(contextVariable, expr.getContext().type, variables);
                             if (doc->size() >= 3) {
-                                arguments += doc->at(3).toMessage(contextVariable, expr.getContext(), variables);
+                                arguments += doc->at(3).toMessage(contextVariable, expr.getContext().type, variables);
                             };
                         };
                     };

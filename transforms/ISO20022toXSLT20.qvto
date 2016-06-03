@@ -248,12 +248,12 @@ mapping Constraint::toValidate(stylesheet : TransformType, expr : OCLExpression,
     };
     withParam += object WithParamType {
         name := 'error';
-        mixed := doc->at(2).toMessage(stylesheet, expr.getContext(), variables);
+        mixed := doc->at(2).toMessage(stylesheet, expr.getContext().type, variables);
     };
     if (doc->size() >= 3) {
         withParam += object WithParamType {
             name := 'valid';
-            mixed := doc->at(3).toMessage(stylesheet, expr.getContext(), variables);
+            mixed := doc->at(3).toMessage(stylesheet, expr.getContext().type, variables);
         };
     };
 }
