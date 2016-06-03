@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 Denis Nikiforov.
+ * Copyright (c) 2015, 2016 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,20 +15,18 @@
  */
 
 import uml2xsd.UtilitiesLibrary;
+import ISO20022Helpers;
 import OCLtoXPath;
+import DocOCL;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
 modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
 modeltype XSLT uses 'http://www.w3.org/1999/XSL/Transform';
-modeltype VR uses 'urn:iso20022:validation:result';
 modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
-transformation ISO20022toXSLT20(in m : UML, out x : XSLT)
-    extends OCLtoXPath;
-
-property profileName : String = 'ISO20022Profile';
+transformation ISO20022toXSLT20(in m : UML, out x : XSLT);
 
 main()
 {
@@ -57,23 +55,18 @@ mapping Classifier::toStylesheet() : DocumentRoot
     	href := 'iso20022-validation.xsl';
     };
 
-    var rootPathExpr := object PathExpr {
-        step := object RootStepExpr { };
-        step += object AbbrevForwardStep {
-            kind := AbbrevForwardStepKind::child;
-            nodeTest := object QNameTest { name := createQName('Document') };
-        };
-        step += object ChildStepExpr {
-            step := object AbbrevForwardStep {
-                kind := AbbrevForwardStepKind::child;
-                nodeTest := object QNameTest { name := self.getQName() };
-            };
-        };
-    };
+    var rootPathExpr := self.getRootPath();
 
     var props := self.allAttributes()->closure(type.oclAsType(Classifier).allAttributes())->union(self.allAttributes());
 
-    stylesheetObj.declarationGroup := self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->
+    object XMLTypeDocumentRoot {};
+    stylesheetObj.declarationGroup := object VariableType {
+    	name := 'elementNames';
+    	as := 'item()*';
+    	select := 'fn:doc(\'' + msgId + '-metadata.xml\')';
+    }->toFMEntry('variable');
+
+    stylesheetObj.declarationGroup += self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->
         //select(ownedRule->exists(isSupported()))->
         select(ownedRule->notEmpty())->
         toTemplate(stylesheetObj, rootPathExpr, props)->toFMEntry('template');
@@ -155,77 +148,114 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
     };
     context.xmap findQNames(stylesheet);
     match := context.toString();
-
+    
     self.ownedRule->sortedBy(name)->forEach (rule) {
-        var expr : OCLExpression;
         try {
-            expr := rule.toExpressionInOCL().ownedBody;
+            instructionGroup += rule.map toInstructionGroup(stylesheet);
         }
         except () {
-            log('WARNING: Unable to parse expression');
-            expr := object BooleanLiteralExp { booleanSymbol := true };
-        };
+    	   log('WARNING: Unable to generate validation code');
+        }
+    };
 
+    instructionGroup += object ApplyTemplatesType { }.toFMEntry('applyTemplates');
+}
+
+mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EFeatureMapEntry)
+{
+    init {
+        var expr := self.toExpressionInOCL().ownedBody;
         var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
 
         if (expr.isLet()) {
             var variable := expr![LetExp].ownedVariable;
-            var variableName := rule.name + '_' + variable.name;
+            var variableName := self.name + '_' + variable.name;
             expr := expr![LetExp].ownedIn;
             variables->put(variable, object VarRef { varName := createQName(variableName) });
-            instructionGroup += object VariableType {
-            	name := variableName;
-            	try {
-            	    var variableInit := variable.ownedInit.xmap toExprSingle(variables);
-            	    select := variableInit.toString();
-            	}
-            	except () {
+            result += object VariableType {
+                name := variableName;
+                try {
+                    var variableInit := variable.ownedInit.xmap toExprSingle(variables);
+                    select := variableInit.toString();
+                }
+                except () {
                     log('WARNING: Unable to transform init expression for variable ' + variableName);
-            	}
+                }
             }->toFMEntry('variable');
         };
         
         if (expr.isForAll()) {
-            instructionGroup += rule->toForEach(stylesheet, expr, variables)->toFMEntry('forEach');
+            result += self->toForEach(stylesheet, expr, variables)->toFMEntry('forEach');
         }
         else {
-            instructionGroup += rule->toIf(stylesheet, expr, variables)->toFMEntry('if');
-        };
-    };
-    instructionGroup += object ApplyTemplatesType { }.toFMEntry('applyTemplates');
+            result += self->toValidate(stylesheet, expr, variables)->toFMEntry('callTemplate');
+        }
+    }	
 }
 
-query OCLExpression::isForAll() : Boolean =
-    self.oclIsKindOf(IteratorExp) and
-    self![IteratorExp].referredIteration.name = 'forAll';
-
-query OCLExpression::isLet() : Boolean =
-    self.oclIsKindOf(LetExp);
-
-mapping Constraint::toIf(stylesheet : TransformType, expr : OCLExpression, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : IfType
+mapping OCLExpression::toXPath(stylesheet : TransformType, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 {
-    var xpath : ExprSingle;
-    try {
-        log('    Transforming OCL expression\n      ' + expr.toString());
-        xpath := expr.xmap toExprSingle(variables).notExpr();
-        log('    to\n      ' + xpath.toString());
+    init {
+        //try {
+            log('    Transforming OCL expression\n      ' + self.toString());
+            result := self.xmap toExprSingle(variables);
+            log('    to\n      ' + result.toString());
+        //}
+        //except () {
+        //    log('WARNING: Unable to transform expression');
+        //    result := object FunctionCall { name := 'true'.createFunctionQName() };
+        //};
     }
-    except () {
-        log('WARNING: Unable to transform expression');
-        xpath := object FunctionCall { name := 'false'.createFunctionQName() };
-    };
-    xpath.xmap findQNames(stylesheet);
-    test := xpath.toString();
+    result.xmap findQNames(stylesheet);
+}
 
-    mixed := createFeatureMapEntry('urn:iso20022:validation:result', 'error', object ErrorType {
-        ruleName := object AnyContentType {
-            text := self.name;
+query String::toMessage(stylesheet : TransformType, context : OCL::Type, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : Sequence(EFeatureMapEntry) =
+    self.tokenizeDocOCL()->collect(token|
+        if token.isExpr then
+            object ValueOfType {
+                select := token.text.toExpressionInOCL(context).ownedBody.xmap toXPath(stylesheet, variables).toString();
+            }->toFMEntry('valueOf')
+        else
+            object TextType {
+                value := token.text;
+            }->toFMEntry('text')
+        endif);
+
+mapping Constraint::toValidate(stylesheet : TransformType, expr : OCLExpression, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : CallTemplateType
+{
+    name := 'validate';
+    
+    var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
+    assert fatal (doc->size() >= 2 and doc->size() <= 3)
+        with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
+            self.ownedComment.body->any(true));
+    
+    withParam += object WithParamType {
+    	name := 'code';
+    	text := self.name;
+    };
+    withParam += object WithParamType {
+        name := 'isValid';
+        select := expr.xmap toXPath(stylesheet, variables).toString();
+    };
+    withParam += object WithParamType {
+        name := 'definition';
+        text := doc->at(1);
+    };
+    withParam += object WithParamType {
+        name := 'ocl';
+        text := self.specification[OpaqueExpression].body->any(true);
+    };
+    withParam += object WithParamType {
+        name := 'error';
+        mixed := doc->at(2).toMessage(stylesheet, expr.getContext(), variables);
+    };
+    if (doc->size() >= 3) {
+        withParam += object WithParamType {
+            name := 'valid';
+            mixed := doc->at(3).toMessage(stylesheet, expr.getContext(), variables);
         };
-        element := genPath();
-        message := object AnyContentType {
-            text := self.specification[OpaqueExpression].body->any(true);
-        };
-    });
+    };
 }
 
 mapping Constraint::toForEach(stylesheet : TransformType, expr : OCLExpression, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ForEachType
@@ -241,7 +271,7 @@ mapping Constraint::toForEach(stylesheet : TransformType, expr : OCLExpression, 
     };
     xpath.xmap findQNames(stylesheet);
     select := xpath.toString();
-    instructionGroup += self->toIf(stylesheet, iterator.ownedBody, variables)->toFMEntry('if');
+    instructionGroup += self->toValidate(stylesheet, iterator.ownedBody, variables)->toFMEntry('callTemplate');
 }
 
 intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(TYPE::QName); };
@@ -260,39 +290,6 @@ mapping ExprSingle::findQNames(currentStylesheet : TransformType) : StylesheetQN
 query GenericElementType::toFMEntry(name : String) : EFeatureMapEntry =
     createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', name, self);
 
-query genPath() : AnyContentType =
-    object AnyContentType {
-        mixed := object CallTemplateType { name := 'genPath'; }.toFMEntry('callTemplate');
-    };
-
-query NamedElement::generateXMLTag() : String
-{
-    var name : String;
-    //log(self.repr());
-    if (self.is('MessageDefinition')) {
-        name := self.getValue(profileName + '::MessageDefinition', 'xmlTag');
-        //log('!!!' + name);
-    }
-    elif (self.is('MessageBuildingBlock')) {
-        name := self.getValue(profileName + '::MessageBuildingBlock', 'xmlTag');
-    }
-    elif (self.is('MessageElement')) {
-        name := self.getValue(profileName + '::MessageElement', 'xmlTag');
-    }
-    else {
-        name := self.name;
-        if (name.lastIndexOf('.') > 0) {
-            name := name.substring(1, name.lastIndexOf('.'));
-        };
-        name := name.replaceFirst('V\\d+$', '');
-        // TODO http://www.iso20022.org/documents/general/XML_Tag_algorithm.pdf
-    };
-
-    assert fatal (name <> null and name.size() > 0) with log('For element ' + self.getNameWithStereotypes() + ' generated empty xmlTag');
-    
-    return name;
-}
-
 // TODO: Constraints must be parsed only once
 //query Constraint::isSupported() : Boolean =
 //    self.toExpressionInOCL().ownedBody.isSupported();
@@ -303,37 +300,3 @@ query NamedElement::generateXMLTag() : String
 //    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll( 
 //        ownedSource.isSupported() and ownedBody->forAll(isSupported()))
 //    else true endif;
-
-///////////////////////////////////////////////////////////////////////////////
-// Overrides
-
-// TODO: OCLtoXPath uses both prefixed and unprefixed names. Something must be refactored.
-query NamedElement::getQName() : TYPE::QName =
-    self.getUnprefixedQName();
-//    assert fatal (false) with log('NamedElement::getQName() must not be used');
-
-query NamedElement::getUnprefixedQName() : TYPE::QName =
-    createQName(self.generateXMLTag()).oclAsType(TYPE::QName);
-
-query Element::is(stereotypeName : String) : Boolean = self.is(profileName, stereotypeName);
-
-query NamedElement::isDataType() : Boolean = self.oclIsKindOf(Classifier);
-
-query NamedElement::isDateType() : Boolean =
-    if self.oclIsKindOf(Classifier)
-    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'Date')
-    else false endif;
-
-query NamedElement::isDateTimeType() : Boolean =
-    if self.oclIsKindOf(Classifier)
-    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'DateTime')
-    else false endif;
-
-query NamedElement::isTimeType() : Boolean =
-    if self.oclIsKindOf(Classifier)
-    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'Time')
-    else false endif;
-
-query NamedElement::isDataElement() : Boolean = false;
-
-query NamedElement::isAttribute() : Boolean = self.getAppliedStereotype('EECProfile::Attribute') <> null;

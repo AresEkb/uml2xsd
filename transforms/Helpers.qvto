@@ -21,18 +21,56 @@ modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
 query String::quote() : String = '\'' + self.replaceAll('\'', '\'\'') + '\'';
 
+query String::capitalize() : String =
+    self.substring(1, 1).toUpper() + self.substring(2, self.size());
+
 query coalesce(arg1 : String, arg2 : String) : String =
     if arg1 <> null and not(arg1.oclIsInvalid()) and arg1.size() > 0 then arg1 else arg2 endif;
 
 query Sequence(String)::sep(separator : String) : String =
     self->iterate(str; res : String = '' | if res = '' then str else res + separator + str endif);
 
+query String::tokenize(delimiters : Set(String)) : Sequence(String) =
+    self.tokenize(delimiters, false);
+
+query String::tokenize(delimiters : Set(String), returnDelimiters : Boolean) : Sequence(String)
+{
+    var res : List(String);
+    var pos := self.size();
+    var delimiter : String;
+    delimiters->forEach (delim) {
+        var curPos := self.indexOf(delim);
+        if (0 < curPos and curPos < pos) {
+            pos := curPos;
+            delimiter := delim;
+        }
+    };
+    if (pos = self.size()) {
+        res += self;
+    }
+    else {
+        if (pos > 1) {
+            res += self.substring(1, pos - 1);
+        };
+        if (returnDelimiters) {
+            res += delimiter;
+        };
+        res += self.substring(pos + delimiter.size(), self.size()).tokenize(delimiters, returnDelimiters);
+    };
+    return res;
+}
+
 query String::clean() : String =
     self.replaceAll('<p[^>]*>', '').replaceAll('</p>', '\n')
         .replaceAll('<br>', '\n')
         .replaceAll('<[^>]+>', '')
-        .replaceAll('&nbsp;', ' ').replaceAll('\r\n', '\n').replaceAll('\n', ' ')
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('\r\n', '\n').replaceAll('\n', ' ')
         .replaceAll('\\s{2,}', ' ').trim();
+
+query String::cleanML() : String =
+    self.replaceAll('\r\n', '\n').replaceAll('\n{3,}', '\n\n')
+        .replaceAll('[ ]{2,}', ' ').trim();
 
 ///////////////////////////////////////////////////////////////////////////////
 // Stereotypes

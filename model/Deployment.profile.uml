@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ProfileBase="http:///schemas/ProfileBase/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/ProfileBase/1 pathmap://UML2_MSL_PROFILES/ProfileBase.epx#_IfFYQMmBEdqBcN1R6EvWUw">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ProfileBase="http:///schemas/ProfileBase/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/ProfileBase/1 file:/C:/Work/workspace/uml2xsd/model//ProfileBase.profile.uml#_IfFYQMmBEdqBcN1R6EvWUw">
   <uml:Profile xmi:id="_vjbuwOvHEdiDX5bji0iVSA" name="Deployment" metamodelReference="_wW0TgOvHEdiDX5bji0iVSA">
     <eAnnotations xmi:id="_yFOWEuvHEdiDX5bji0iVSA" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <contents xmi:type="ecore:EPackage" xmi:id="_4OVBUD0TEeKt-L0gyEptgQ" name="Deployment" nsURI="http:///schemas/Deployment/_4OQv4D0TEeKt-L0gyEptgQ/2" nsPrefix="Deployment">
@@ -1081,12 +1081,12 @@
     </packagedElement>
     <profileApplication xmi:id="_vjleoPyyEdqtI675F5kkRw">
       <eAnnotations xmi:id="_vjrlQPyyEdqtI675F5kkRw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="ProfileBase.profile.uml#_IfFYQMmBEdqBcN1R6EvWUw"/>
+        <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//ProfileBase.profile.uml#_IfFYQMmBEdqBcN1R6EvWUw"/>
       </eAnnotations>
       <eAnnotations xmi:id="_4OjDwz0TEeKt-L0gyEptgQ" source="uml2.extensions">
         <details xmi:id="_4OjDxD0TEeKt-L0gyEptgQ" key="addedInVersion" value="2"/>
       </eAnnotations>
-      <appliedProfile href="ProfileBase.profile.uml#_bFUAMdWLEdiy4IqP8whjFA"/>
+      <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//ProfileBase.profile.uml#_bFUAMdWLEdiy4IqP8whjFA"/>
     </profileApplication>
   </uml:Profile>
   <ProfileBase:ExtendedImage xmi:id="_vj3ygPyyEdqtI675F5kkRw" data="47494638396110001000E600008284869B9B9BA4A4A4C3C7CFB4B4B4BDBDBDE6E6E684848591959DC8CCD4B5BAC3D1D4DBD6D6D6BFC4CC9B9FA6CDCDCDAFB4BE999DA5F7F7F7ACB0B8BEC3CBEFEFEFCDD1D8C9CDD593979E8B8B8B868788C4C8D0AAAFB7848689A7ACB7B4B9C2919398A5A9B0B0B5BFD0D3DA969BA386898D8384859498A0B9BDC6D6D9E0DADDE3B3B8C1CBCFD6C0C4CD828385B2B7C0C1C5CDB7BCC5A9AFB89CA0A8BABEC7A7ACB4B8BCC5BABFC7D2D6DDC5C8CEA6ABB48E9096B4B9C1DBDEE4ACB0B6C9CDD4A2A6ADA5A8AE939393BBBFC8D8DBE18D8F959B9FA7ACACACBCC1C99398A0C2C7CF888B909599A1C7CCD38E9196CFD3DAB5B9C17E7F80D7DAE1ABAEB59EA2A9C0C5CDCACED68C8C8DCBCFD7C6CBD28F9193D2D6DCDEDEDED5D9DF999DA490949BD4D7DEB1B6BF828282808183FFFFFF00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000021F90401000064002C00000000100010000007A8806482838485868787060100190F4763001A058619184041265A3E53331D938312002103563923581B430E1A158206074E504D0B52445B170D133B630C64020813143F382A3D602C550A3A494264514C6148594F5D290B09142B1E2707BE08353130091616174A3410114B0464AF451C280D03032D372F4662041282156311101F6CF0502042C6170185089420E1C505082A0E308CE162A84080000F0240BAD20B91C78F20430602003B" usageHint="Icon" base_Image="_vaOuUPyyEdqtI675F5kkRw"/>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Default="http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2" xmlns:ISO20022Profile="http:///schemas/ISO20022Profile/_0sp5EEfcEeWh4695FKq7TA/52" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2 file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_fNwoAAqoEd6-N_NOT9vsCA http:///schemas/ISO20022Profile/_0sp5EEfcEeWh4695FKq7TA/52 file:/C:/Work/workspace/uml2xsd/model//ISO20022Profile.profile.uml#_0ssVUEfcEeWh4695FKq7TA">
+  <uml:Model xmi:id="_uW-x0Ci3EeaZCbV7n50qXQ" name="ISO20022_BusinessProcessCatalogue">
+    <packageImport xmi:id="_uW_Y4Ci3EeaZCbV7n50qXQ">
+      <importedPackage xmi:type="uml:Model" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022_DataDictionary_PFR_NRD.uml#_uTyT4Ci3EeaZCbV7n50qXQ"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uW_Y7Ci3EeaZCbV7n50qXQ" name="Securities Trade -  - master"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uW_Y-yi3EeaZCbV7n50qXQ" name="Securities Settlement -  - master"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uW_ZFCi3EeaZCbV7n50qXQ" name="Securities Settlement - Latest version - master"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uW_ZNyi3EeaZCbV7n50qXQ" name="Securities Trade - Latest version - master"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uXAADCi3EeaZCbV7n50qXQ" name="Account Management - Latest version - master"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_uXAnoCi3EeaZCbV7n50qXQ" name="RedemptionOrder">
+      <ownedRule xmi:id="_Blz-MCi4EeaZCbV7n50qXQ" name="rule1" constrainedElement="_uXAnoCi3EeaZCbV7n50qXQ">
+        <ownedComment xmi:id="_8wXfsClbEeajY7EzPpvIkQ" annotatedElement="_Blz-MCi4EeaZCbV7n50qXQ">
+          <body>Описание правила&#xD;
+&#xD;
+Сообщение об ошибке&#xD;
+&#xD;
+Сообщение об успехе</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_BmIHQCi4EeaZCbV7n50qXQ">
+          <language>OCL</language>
+          <body>Document.RedemptionOrderV03.MultipleOrderDetails.IndividualOrderDetails.RelatedPartyDetails&#xD;
+  ->select(ExtendedRole = 'INVS')->forAll(party |&#xD;
+    self.Document.RedemptionOrderV03.Extension.Envelope.oclAsType(XtnsnRedemptionOrder)&#xD;
+      .XtnsnDt.IndividualOrderAdditionalDetails.RelatedPartiesExtendedDetails.Organisation&#xD;
+        ->select(Identification = party.Identification.ProprietaryIdentification.Identification)&#xD;
+        ->forAll(Address->size() = 2 and Address->exists(Type = 'RGST') and Address->exists(Type = 'MLTO')))</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_fDgTYClJEeapvLZMb3Q2ng" name="rule2" constrainedElement="_uXAnoCi3EeaZCbV7n50qXQ">
+        <ownedComment xmi:id="_9M5qsClbEeajY7EzPpvIkQ" annotatedElement="_fDgTYClJEeapvLZMb3Q2ng">
+          <body>Описание правила&#xD;
+&#xD;
+Сообщение об ошибке&#xD;
+&#xD;
+Сообщение об успехе</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_fEPTMClJEeapvLZMb3Q2ng">
+          <language>OCL</language>
+          <body>Document.RedemptionOrderV03.MultipleOrderDetails.IndividualOrderDetails.RelatedPartyDetails->select(Role='FMCO')->forAll(party|&#xD;
+self.Document.RedemptionOrderV03.Extension.Envelope.oclAsType(XtnsnRedemptionOrder).XtnsnDt.RelatedPartiesExtendedDetails.Organisation&#xD;
+->select(Identification=party.Identification.ProprietaryIdentification.Identification)&#xD;
+->forAll(Name.FullName->notEmpty()))</body>
+        </specification>
+      </ownedRule>
+      <ownedAttribute xmi:id="_uXAnoSi3EeaZCbV7n50qXQ" name="AppHdr" aggregation="composite" association="_uXAnpyi3EeaZCbV7n50qXQ">
+        <type xmi:type="uml:Class" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022_DataDictionary_PFR_NRD.uml#_uUCzTSi3EeaZCbV7n50qXQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uXAnoii3EeaZCbV7n50qXQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_uXAnoyi3EeaZCbV7n50qXQ" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_uXAnpCi3EeaZCbV7n50qXQ" name="Document" aggregation="composite" association="_uXAnqSi3EeaZCbV7n50qXQ">
+        <type xmi:type="uml:Class" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022_DataDictionary_PFR_NRD.uml#_uUISbii3EeaZCbV7n50qXQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uXAnpSi3EeaZCbV7n50qXQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_uXAnpii3EeaZCbV7n50qXQ" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_uXAnpyi3EeaZCbV7n50qXQ" memberEnd="_uXAnoSi3EeaZCbV7n50qXQ _uXAnqCi3EeaZCbV7n50qXQ">
+      <ownedEnd xmi:id="_uXAnqCi3EeaZCbV7n50qXQ" type="_uXAnoCi3EeaZCbV7n50qXQ" association="_uXAnpyi3EeaZCbV7n50qXQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_uXAnqSi3EeaZCbV7n50qXQ" memberEnd="_uXAnpCi3EeaZCbV7n50qXQ _uXAnqii3EeaZCbV7n50qXQ">
+      <ownedEnd xmi:id="_uXAnqii3EeaZCbV7n50qXQ" type="_uXAnoCi3EeaZCbV7n50qXQ" association="_uXAnqSi3EeaZCbV7n50qXQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_uXAnqyi3EeaZCbV7n50qXQ" memberEnd="_uXAnrCi3EeaZCbV7n50qXQ _uXAnrSi3EeaZCbV7n50qXQ">
+      <ownedEnd xmi:id="_uXAnrCi3EeaZCbV7n50qXQ" type="_uXAnoCi3EeaZCbV7n50qXQ" aggregation="composite" association="_uXAnqyi3EeaZCbV7n50qXQ"/>
+      <ownedEnd xmi:id="_uXAnrSi3EeaZCbV7n50qXQ" type="_uW_Y7Ci3EeaZCbV7n50qXQ" association="_uXAnqyi3EeaZCbV7n50qXQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uXBOOyi3EeaZCbV7n50qXQ" name="acmt -  - master"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uXBOcSi3EeaZCbV7n50qXQ" name="admi -  - master"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uXBPAyi3EeaZCbV7n50qXQ" name="Administration - Latest version - master"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uXB1wCi3EeaZCbV7n50qXQ" name="Business Application Header - Latest version - master"/>
+    <profileApplication xmi:id="_uXDECSi3EeaZCbV7n50qXQ">
+      <eAnnotations xmi:id="_uXDECii3EeaZCbV7n50qXQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022Profile.profile.uml#_0ssVUEfcEeWh4695FKq7TA"/>
+      </eAnnotations>
+      <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//ISO20022Profile.profile.uml#_rspygA6UEeWHY4KRRC3kUQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_uz_d8Ci3EeaZCbV7n50qXQ">
+      <eAnnotations xmi:id="_u0AFACi3EeaZCbV7n50qXQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_fNwoAAqoEd6-N_NOT9vsCA"/>
+      </eAnnotations>
+      <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_a_S3wNWLEdiy4IqP8whjFA"/>
+    </profileApplication>
+    <profileApplication xmi:id="_u0J2ACi3EeaZCbV7n50qXQ">
+      <eAnnotations xmi:id="_u0J2ASi3EeaZCbV7n50qXQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//Deployment.profile.uml#_4OVBUD0TEeKt-L0gyEptgQ"/>
+      </eAnnotations>
+      <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//Deployment.profile.uml#_vjbuwOvHEdiDX5bji0iVSA"/>
+    </profileApplication>
+    <profileApplication xmi:id="_jR79gClbEeajY7EzPpvIkQ">
+      <eAnnotations xmi:id="_jR8kkClbEeajY7EzPpvIkQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDEEii3EeaZCbV7n50qXQ" base_NamedElement="_uW_ZNyi3EeaZCbV7n50qXQ" base_Class="_uW_ZNyi3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDEFCi3EeaZCbV7n50qXQ" base_NamedElement="_uXBOOyi3EeaZCbV7n50qXQ" base_Class="_uXBOOyi3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDEMyi3EeaZCbV7n50qXQ" base_NamedElement="_uW_Y-yi3EeaZCbV7n50qXQ" base_Class="_uW_Y-yi3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDEdCi3EeaZCbV7n50qXQ" base_NamedElement="_uXAADCi3EeaZCbV7n50qXQ" base_Class="_uXAADCi3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:MessageBuildingBlock xmi:id="_uXDEjii3EeaZCbV7n50qXQ" base_NamedElement="_uXAnpCi3EeaZCbV7n50qXQ" base_Property="_uXAnpCi3EeaZCbV7n50qXQ" xmlTag="Document"/>
+  <ISO20022Profile:MessageBuildingBlock xmi:id="_uXDEkii3EeaZCbV7n50qXQ" base_NamedElement="_uXAnoSi3EeaZCbV7n50qXQ" base_Property="_uXAnoSi3EeaZCbV7n50qXQ" xmlTag="AppHdr"/>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDqvSi3EeaZCbV7n50qXQ" base_NamedElement="_uXB1wCi3EeaZCbV7n50qXQ" base_Class="_uXB1wCi3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:MessageDefinition xmi:id="_uXDqwyi3EeaZCbV7n50qXQ" base_NamedElement="_uXAnoCi3EeaZCbV7n50qXQ" base_Signal="_uXAnoCi3EeaZCbV7n50qXQ" messageDefinitionIdentifier="setr.004.001.03" xmlTag="RedemptionOrder"/>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDq1yi3EeaZCbV7n50qXQ" base_NamedElement="_uW_Y7Ci3EeaZCbV7n50qXQ" base_Class="_uW_Y7Ci3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:BusinessProcessCatalogue xmi:id="_uXDq9ii3EeaZCbV7n50qXQ" base_Package="_uW-x0Ci3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDrBCi3EeaZCbV7n50qXQ" base_NamedElement="_uXBPAyi3EeaZCbV7n50qXQ" base_Class="_uXBPAyi3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDrLyi3EeaZCbV7n50qXQ" base_NamedElement="_uW_ZFCi3EeaZCbV7n50qXQ" base_Class="_uW_ZFCi3EeaZCbV7n50qXQ"/>
+  <ISO20022Profile:BusinessArea xmi:id="_uXDrMii3EeaZCbV7n50qXQ" base_NamedElement="_uXBOcSi3EeaZCbV7n50qXQ" base_Class="_uXBOcSi3EeaZCbV7n50qXQ"/>
+  <Default:Documentation xmi:id="_8wie0ClbEeajY7EzPpvIkQ" base_Comment="_8wXfsClbEeajY7EzPpvIkQ"/>
+  <Default:Documentation xmi:id="_9NJiUClbEeajY7EzPpvIkQ" base_Comment="_9M5qsClbEeajY7EzPpvIkQ"/>
+</xmi:XMI>

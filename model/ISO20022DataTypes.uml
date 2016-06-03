@@ -3,17 +3,44 @@
   <packageImport xmi:id="_lltgohZvEeW7y7t0CTtgPw">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
-  <packageImport xmi:id="_XPLdICVbEeWsU9bTnoD-2g">
-    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#_0"/>
-  </packageImport>
   <packagedElement xmi:type="uml:DataType" xmi:id="_7Mc_kBZvEeW7y7t0CTtgPw" name="String">
     <generalization xmi:id="_GKGuABZyEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
-    <ownedAttribute xmi:id="_z3-pkCVbEeWsU9bTnoD-2g" name="value" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
-    </ownedAttribute>
     <ownedOperation xmi:id="_8ncW4BZvEeW7y7t0CTtgPw" name="size" isQuery="true">
       <ownedParameter xmi:id="_-6vPMBZvEeW7y7t0CTtgPw" name="result" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_VMo80FF9EeWjvelYVaxtjg" name="matches" isQuery="true">
+      <ownedParameter xmi:id="_WwTH8FF9EeWjvelYVaxtjg" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_VMo80VF9EeWjvelYVaxtjg" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_O-PjcCY9Eea3ZLNH3Zxyuw" name="replaceAll" isQuery="true">
+      <ownedParameter xmi:id="_RXbBUCY9Eea3ZLNH3Zxyuw" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_O-PjcSY9Eea3ZLNH3Zxyuw" name="replacement">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_O-PjciY9Eea3ZLNH3Zxyuw" name="result" type="_7Mc_kBZvEeW7y7t0CTtgPw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_YaZ74CY9Eea3ZLNH3Zxyuw" name="replaceFirst" isQuery="true">
+      <ownedParameter xmi:id="_YaZ74SY9Eea3ZLNH3Zxyuw" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_YaZ74iY9Eea3ZLNH3Zxyuw" name="replacement">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_YaZ74yY9Eea3ZLNH3Zxyuw" name="result" type="_7Mc_kBZvEeW7y7t0CTtgPw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_5phzMCY9Eea3ZLNH3Zxyuw" name="toCodePoints" isQuery="true">
+      <ownedParameter xmi:id="_5phzMyY9Eea3ZLNH3Zxyuw" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__KVwYCY9Eea3ZLNH3Zxyuw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__KVJUCY9Eea3ZLNH3Zxyuw"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
@@ -29,21 +56,25 @@
   <packagedElement xmi:type="uml:DataType" xmi:id="_iW9awBZxEeW7y7t0CTtgPw" name="DataType"/>
   <packagedElement xmi:type="uml:DataType" xmi:id="_ndugQBZxEeW7y7t0CTtgPw" name="Date">
     <generalization xmi:id="_zDV4gBZxEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
-    <ownedAttribute xmi:id="_lCYuUCVbEeWsU9bTnoD-2g" name="value" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
-    </ownedAttribute>
+    <ownedOperation xmi:id="_QSG8cE_QEeWd_PzrytVl0g" name="hasTimezone" isQuery="true">
+      <ownedParameter xmi:id="_QSG8cU_QEeWd_PzrytVl0g" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:DataType" xmi:id="_ppJO8BZxEeW7y7t0CTtgPw" name="DateTime">
     <generalization xmi:id="_zaPVkBZxEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
+    <ownedOperation xmi:id="_J6odAE_QEeWd_PzrytVl0g" name="hasTimezone" isQuery="true">
+      <ownedParameter xmi:id="_J6odAU_QEeWd_PzrytVl0g" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:DataType" xmi:id="_r4-jkBZxEeW7y7t0CTtgPw" name="Day">
     <generalization xmi:id="_zvDH8BZxEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
   </packagedElement>
   <packagedElement xmi:type="uml:DataType" xmi:id="_tZO1YBZxEeW7y7t0CTtgPw" name="Decimal">
     <generalization xmi:id="_0ChdkBZxEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
-    <ownedAttribute xmi:id="_yvplACVaEeWsU9bTnoD-2g" name="value" visibility="public">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-    </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:DataType" xmi:id="_vgakUBZxEeW7y7t0CTtgPw" name="Duration">
     <generalization xmi:id="_0YyBcBZxEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
@@ -68,6 +99,11 @@
   </packagedElement>
   <packagedElement xmi:type="uml:DataType" xmi:id="_JN3Z8BZyEeW7y7t0CTtgPw" name="Time">
     <generalization xmi:id="_J7IIkBZyEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
+    <ownedOperation xmi:id="_SgxMYE_QEeWd_PzrytVl0g" name="hasTimezone" isQuery="true">
+      <ownedParameter xmi:id="_SgxMYU_QEeWd_PzrytVl0g" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:DataType" xmi:id="_LCL3QBZyEeW7y7t0CTtgPw" name="Year">
     <generalization xmi:id="_MDWZUBZyEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
@@ -75,8 +111,72 @@
   <packagedElement xmi:type="uml:DataType" xmi:id="_NSTfwBZyEeW7y7t0CTtgPw" name="YearMonth">
     <generalization xmi:id="_OGrjABZyEeW7y7t0CTtgPw" general="_iW9awBZxEeW7y7t0CTtgPw"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_zUDbwBZ2EeW7y7t0CTtgPw" name="IdentifierSet"/>
-  <packagedElement xmi:type="uml:Enumeration" xmi:id="_2jucwBZ2EeW7y7t0CTtgPw" name="CodeSet"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_zUDbwBZ2EeW7y7t0CTtgPw" name="IdentifierSet">
+    <ownedOperation xmi:id="_caEM0FF9EeWjvelYVaxtjg" name="size" isQuery="true">
+      <ownedParameter xmi:id="_caEM0VF9EeWjvelYVaxtjg" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_caFa8FF9EeWjvelYVaxtjg" name="matches" isQuery="true">
+      <ownedParameter xmi:id="_caFa8VF9EeWjvelYVaxtjg" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_caFa8lF9EeWjvelYVaxtjg" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_PuFPgCY-Eea3ZLNH3Zxyuw" name="replaceFirst" isQuery="true">
+      <ownedParameter xmi:id="_PuF2kCY-Eea3ZLNH3Zxyuw" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PuF2kSY-Eea3ZLNH3Zxyuw" name="replacement">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PuF2kiY-Eea3ZLNH3Zxyuw" name="result" type="_7Mc_kBZvEeW7y7t0CTtgPw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_PuGdoCY-Eea3ZLNH3Zxyuw" name="replaceAll" isQuery="true">
+      <ownedParameter xmi:id="_PuGdoSY-Eea3ZLNH3Zxyuw" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PuGdoiY-Eea3ZLNH3Zxyuw" name="replacement">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PuGdoyY-Eea3ZLNH3Zxyuw" name="result" type="_7Mc_kBZvEeW7y7t0CTtgPw" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_2jucwBZ2EeW7y7t0CTtgPw" name="CodeSet">
+    <ownedOperation xmi:id="_Lnc-IFrnEeWm5ba6Si626Q" name="size" isQuery="true">
+      <ownedParameter xmi:id="_Lnc-IVrnEeWm5ba6Si626Q" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_LnezUFrnEeWm5ba6Si626Q" name="matches" isQuery="true">
+      <ownedParameter xmi:id="_LnezUVrnEeWm5ba6Si626Q" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_LnezUlrnEeWm5ba6Si626Q" name="result" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_PXt98CY-Eea3ZLNH3Zxyuw" name="replaceFirst" isQuery="true">
+      <ownedParameter xmi:id="_PXt98SY-Eea3ZLNH3Zxyuw" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PXt98iY-Eea3ZLNH3Zxyuw" name="replacement">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PXt98yY-Eea3ZLNH3Zxyuw" name="result" type="_7Mc_kBZvEeW7y7t0CTtgPw" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_PXvMECY-Eea3ZLNH3Zxyuw" name="replaceAll" isQuery="true">
+      <ownedParameter xmi:id="_PXvMESY-Eea3ZLNH3Zxyuw" name="regex">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PXvMEiY-Eea3ZLNH3Zxyuw" name="replacement">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PXvMEyY-Eea3ZLNH3Zxyuw" name="result" type="_7Mc_kBZvEeW7y7t0CTtgPw" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
   <profileApplication xmi:id="_lltgoxZvEeW7y7t0CTtgPw">
     <eAnnotations xmi:id="_lltgpBZvEeW7y7t0CTtgPw" source="http://www.eclipse.org/uml2/2.0.0/UML">
       <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
@@ -85,14 +185,14 @@
   </profileApplication>
   <profileApplication xmi:id="_lltgpRZvEeW7y7t0CTtgPw">
     <eAnnotations xmi:id="_lltgphZvEeW7y7t0CTtgPw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-      <references xmi:type="ecore:EPackage" href="Default.profile.uml#_fNwoAAqoEd6-N_NOT9vsCA"/>
+      <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_fNwoAAqoEd6-N_NOT9vsCA"/>
     </eAnnotations>
-    <appliedProfile href="Default.profile.uml#_a_S3wNWLEdiy4IqP8whjFA"/>
+    <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_a_S3wNWLEdiy4IqP8whjFA"/>
   </profileApplication>
   <profileApplication xmi:id="_lltgpxZvEeW7y7t0CTtgPw">
     <eAnnotations xmi:id="_lltgqBZvEeW7y7t0CTtgPw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-      <references xmi:type="ecore:EPackage" href="Deployment.profile.uml#_4OVBUD0TEeKt-L0gyEptgQ"/>
+      <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//Deployment.profile.uml#_4OVBUD0TEeKt-L0gyEptgQ"/>
     </eAnnotations>
-    <appliedProfile href="Deployment.profile.uml#_vjbuwOvHEdiDX5bji0iVSA"/>
+    <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//Deployment.profile.uml#_vjbuwOvHEdiDX5bji0iVSA"/>
   </profileApplication>
 </uml:Model>

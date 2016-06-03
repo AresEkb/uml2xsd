@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<element path="Document" name="">
+  <element path="CstmrCdtTrfInitn" name="">
+    <element path="GrpHdr" name="Реквизиты сообщения">
+      <element path="InitgPty" name="Иницииатор (отправитель) сообщения">
+        <element path="Id" name="Идентификация участника платежа">
+          <element path="OrgId" name="Идентификация компании">
+            <element path="Othr" name="Иной вид идентификации">
+            </element>
+          </element>
+        </element>
+      </element>
+    </element>
+    <element path="PmtInf" name="Реквизиты распоряжения по дебету (списания)">
+      <element path="Dbtr" name="Плательщик">
+        <element path="Id" name="Идентификация участника платежа">
+          <element path="OrgId" name="Идентификация компании">
+            <element path="Othr" name="Иной вид идентификации">
+            </element>
+          </element>
+        </element>
+      </element>
+      <element path="CdtTrfTxInf" name="Реквизиты по кредиту (зачисления)">
+        <element path="PmtId" name="">
+        </element>
+        <element path="Cdtr" name="Получатель">
+          <element path="CtctDtls" name="">
+          </element>
+        </element>
+        <element path="RmtInf" name="Информация о платеже">
+          <element path="Ustrd" name="Назначение платежа">
+          </element>
+        </element>
+      </element>
+    </element>
+  </element>
+</element>

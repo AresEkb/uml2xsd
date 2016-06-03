@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 Denis Nikiforov.
+ * Copyright (c) 2015, 2016 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,12 +15,54 @@ import Helpers;
 library ISO20022Helpers;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
+modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
+modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
 property profileName : String = 'ISO20022Profile';
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
+
+query OCLExpression::isForAll() : Boolean =
+    self.oclIsKindOf(IteratorExp) and
+    self![IteratorExp].referredIteration.name = 'forAll';
+
+query OCLExpression::isLet() : Boolean =
+    self.oclIsKindOf(LetExp);
+
+// TODO: I think it doesn't support something like this:
+// SomeClass.allInstances().prop
+// Testing is needed.
+query OCLExpression::isSupportedByXPath() : Boolean =
+    if self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(
+        referredOperation.name <> 'allInstances' and ownedSource.isSupportedByXPath() and ownedArguments->forAll(isSupportedByXPath()))
+    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll( 
+        ownedSource.isSupportedByXPath() and ownedBody->forAll(isSupportedByXPath()))
+    else true endif;
+
+query OCLExpression::getContext() : OCL::Type;
+
+query CallExp::getContext() : OCL::Type =
+    self.ownedSource.getContext();
+
+query VariableExp::getContext() : OCL::Type =
+    self.referredVariable.type;
+
+query Classifier::getRootPath() : PathExpr =
+    object PathExpr {
+        step := object RootStepExpr { };
+        step += object AbbrevForwardStep {
+            kind := AbbrevForwardStepKind::child;
+            nodeTest := object QNameTest { name := createQName('Document') };
+        };
+        step += object ChildStepExpr {
+            step := object AbbrevForwardStep {
+                kind := AbbrevForwardStepKind::child;
+                nodeTest := object QNameTest { name := self.getQName() };
+            };
+        };
+    };
 
 query NamedElement::generateXMLTag() : String
 {

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
+    <CstmrCdtTrfInitn>
+        <GrpHdr>
+            <MsgId>10001</MsgId>
+            <!-- Уникальный идентификатор, правило 1 -->
+            <!-- Ошибка: сообщение с таким номером уже есть в базе -->
+            <CreDtTm>2016-05-19T14:27:07.123Z</CreDtTm>
+            <NbOfTxs>3</NbOfTxs>
+            <!-- Число поручений в сообщении (секций CdtTrfTxInf), правило 2 -->
+            <!-- Ошибка: в сообщении 4 секции CdtTrfTxInf -->
+            <CtrlSum>330</CtrlSum>
+            <!-- Сумма всех поручений (<Amt>/<InstdAmt>), правило 3 -->
+            <!-- Ошибка: сумма = 337 -->
+            <InitgPty>
+                <Id>
+                    <OrgId>
+                        <Othr>
+                            <Id>57020017410</Id>
+                            <!-- ИНН/КИО, правило 4 -->
+                            <!-- Ошибка: 11 символов -->
+                            <SchmeNm>
+                                <Cd>TXID</Cd>
+                                <!-- Признак ИНН, правило 4 -->
+                            </SchmeNm>
+                        </Othr>
+                        <Othr>
+                            <Id>570200174100000000000011</Id>
+                            <SchmeNm>
+                                <Cd>OTHR</Cd>
+                                <!-- Другое значение -->
+                            </SchmeNm>
+                        </Othr>
+                    </OrgId>
+                </Id>
+            </InitgPty>
+        </GrpHdr>
+        <PmtInf>
+            <PmtInfId>payment-001</PmtInfId>
+            <PmtMtd>TRF</PmtMtd>
+            <ReqdExctnDt>2016-05-19</ReqdExctnDt>
+            <Dbtr>
+                <Nm>Плательщик Иванов</Nm>
+                <Id>
+                    <OrgId>
+                        <Othr>
+                            <Id>12345</Id>
+                            <!-- ИНН/КПП Плательщика, правило 5  -->
+                            <!-- В базе 3 значения: 12345, 0123456789, 012345678901 -->
+                            <!-- Ошибка: значение содержится в базе -->
+                            <SchmeNm>
+                                <Cd>TXID</Cd>
+                            </SchmeNm>
+                            <!-- Признак ИНН, правило 5 -->
+                        </Othr>
+                    </OrgId>
+                </Id>
+            </Dbtr>
+            <DbtrAcct>
+                <Id>
+                    <Othr>
+                        <Id>debt-acc-00015</Id>
+                    </Othr>
+                </Id>
+            </DbtrAcct>
+            <DbtrAgt>
+                <FinInstnId>
+                    <Nm>АКБ "Банк Плательщика"</Nm>
+                </FinInstnId>
+            </DbtrAgt>
+            <CdtTrfTxInf>
+                <PmtId>
+                    <EndToEndId>10001</EndToEndId>
+                    <!-- Номер платежного поручения, правило 6 -->
+                    <!-- Ошибка: последние 3 символа не 000 -->
+                </PmtId>
+                <PmtTpInf>
+                    <CtgyPurp>
+                        <Cd>TAXS</Cd>
+                        <!-- Признак налогового платежа (TAXS), правило 8 -->
+                    </CtgyPurp>
+                </PmtTpInf>
+                <Amt>
+                    <InstdAmt Ccy="RUB">100</InstdAmt>
+                </Amt>
+                <Cdtr>
+                    <Nm>Получатель 1</Nm>
+                    <!-- Наименование получателя, правило 7 -->
+                    <CtctDtls>
+                        <Nm>Дополнительно к имени получателя 1</Nm>
+                        <!-- Дополнительное поле для наименования получателя, правило 7 -->
+                    </CtctDtls>
+                </Cdtr>
+                <Tax>
+                    <Cdtr>
+                        <TaxTp>525601001</TaxTp>
+                        <!-- КПП получателя, правило 8 -->
+                    </Cdtr>
+                </Tax>
+                <RmtInf>
+                    <!-- Назначание платежа, правило 9 -->
+                    <Ustrd>Предназначение платежа</Ustrd>
+                    <Ustrd>Для получателя 1</Ustrd>
+                </RmtInf>
+            </CdtTrfTxInf>
+            <CdtTrfTxInf>
+                <PmtId>
+                    <EndToEndId>102000</EndToEndId>
+                    <!-- Номер платежного поручения, правило 4 -->
+                </PmtId>
+                <PmtTpInf>
+                    <CtgyPurp>
+                        <Cd>TAXS</Cd>
+                        <!-- Признак налогового платежа (TAXS), правило 8 -->
+                    </CtgyPurp>
+                </PmtTpInf>
+                <Amt>
+                    <InstdAmt Ccy="RUB">200</InstdAmt>
+                </Amt>
+                <Cdtr>
+                    <Nm>Получатель 2€</Nm>
+                    <!-- Наименование получателя, правило 7 -->
+                    <!-- Ошибка: недопустимый символ -->
+                    <CtctDtls>
+                        <Nm>Дополнительно к имени получателя 2</Nm>
+                        <!-- Дополнительное поле для наименования получателя, правило 7 -->
+                    </CtctDtls>
+                </Cdtr>
+                <Tax>
+                    <Cdtr>
+                        <TaxTp>525601002</TaxTp>
+                        <!-- КПП получателя, правило 8 -->
+                    </Cdtr>
+                </Tax>
+                <RmtInf>
+                    <!-- Назначание платежа, правило 9 -->
+                    <Ustrd>Предназначение платежа</Ustrd>
+                    <Ustrd>Для получателя 2€</Ustrd>
+                    <!-- Ошибка: недопустимый символ -->
+                </RmtInf>
+            </CdtTrfTxInf>
+            <CdtTrfTxInf>
+                <PmtId>
+                    <EndToEndId>10003000</EndToEndId>
+                    <!-- Номер платежного поручения, правило 4 -->
+                </PmtId>
+                <PmtTpInf>
+                    <CtgyPurp>
+                        <Cd>TAXS</Cd>
+                        <!-- Признак налогового платежа (TAXS), правило 8 -->
+                    </CtgyPurp>
+                </PmtTpInf>
+                <Amt>
+                    <InstdAmt Ccy="RUB">30</InstdAmt>
+                </Amt>
+                <Cdtr>
+                    <Nm>Получатель 3</Nm>
+                    <!-- Наименование получателя, правило 7 -->
+                    <CtctDtls>
+                        <Nm>Дополнительно к имени получателя 3</Nm>
+                        <!-- Дополнительное поле для наименования получателя, правило 7 -->
+                    </CtctDtls>
+                </Cdtr>
+                <Tax>
+                    <Cdtr>
+                        <TaxTp>525601003000</TaxTp>
+                        <!-- КПП получателя, правило 8 -->
+                        <!-- Ошибка: неверное количество символов  -->
+                    </Cdtr>
+                </Tax>
+                <RmtInf>
+                    <!-- Назначание платежа, правило 9 -->
+                    <Ustrd>Предназначение платежа</Ustrd>
+                    <Ustrd>Для получателя 3</Ustrd>
+                </RmtInf>
+            </CdtTrfTxInf>
+            <CdtTrfTxInf>
+                <PmtId>
+                    <EndToEndId>1000001111000</EndToEndId>
+                    <!-- Ошибка: номер превышает длину -->
+                    <!-- Номер платежного поручения, правило 4 -->
+                </PmtId>
+                <PmtTpInf>
+                    <CtgyPurp>
+                        <Cd>TAXS</Cd>
+                        <!-- Признак налогового платежа (TAXS), правило 8 -->
+                    </CtgyPurp>
+                </PmtTpInf>
+                <Amt>
+                    <InstdAmt Ccy="RUB">7</InstdAmt>
+                </Amt>
+                <Cdtr>
+                    <Nm>Получатель 4Получатель 4Получатель 4Получатель 4Получатель 4Получатель 4Получатель 4Получатель 4</Nm>
+                    <!-- Наименование получателя, правило 7 -->
+                    <CtctDtls>
+                        <Nm>Дополнительно к имени получателя 4 Дополнительно к имени получателя 4 Дополнительно к имени получателя</Nm>
+                        <!-- Дополнительное поле для наименования получателя, правило 7 -->
+                        <!-- Ошибка: сумма длин превышает 160 символов -->
+                    </CtctDtls>
+                </Cdtr>
+                <Tax>
+                    <Cdtr>
+                        <TaxTp>525601003</TaxTp>
+                        <!-- КПП получателя, правило 8 -->
+                    </Cdtr>
+                </Tax>
+                <RmtInf>
+                    <!-- Назначание платежа, правило 9 -->
+                    <Ustrd>Предназначение платежа</Ustrd>
+                    <Ustrd>Для получателя 4</Ustrd>
+                </RmtInf>
+            </CdtTrfTxInf>
+        </PmtInf>
+    </CstmrCdtTrfInitn>
+</Document>

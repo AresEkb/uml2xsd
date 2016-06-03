@@ -1,0 +1,82 @@
+/**
+ * Copyright (c) 2016 Denis Nikiforov.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    Denis Nikiforov - initial API and implementation
+ */
+
+/**
+ * Some of this queries are redundant. They could be replaced with getConcreteClassifier().
+ * But here is a serialization bug: https://github.com/DevBoost/JaMoPP/issues/28
+ */
+
+modeltype JAVA uses 'http://www.emftext.org/java';
+
+library JavaHelpers;
+
+query JAVA::commons::Commentable::getClass(classifierName : String) : JAVA::classifiers::Class =
+    object JAVA::classifiers::Class {
+        name := classifierName.tokenize('.')->last();
+    };
+
+query JAVA::commons::Commentable::getInterface(classifierName : String) : JAVA::classifiers::Interface =
+    object JAVA::classifiers::Interface {
+        name := classifierName.tokenize('.')->last();
+    };
+
+query JAVA::commons::Commentable::getAnnotation(classifierName : String) : JAVA::classifiers::Annotation =
+    object JAVA::classifiers::Annotation {
+        name := classifierName.tokenize('.')->last();
+    };
+
+query JAVA::commons::Commentable::getClassReference(classifierName : String) : JAVA::types::ClassifierReference =
+    object JAVA::types::ClassifierReference {
+        target := self.getClass(classifierName);
+    };
+
+query JAVA::commons::Commentable::getInterfaceReference(classifierName : String) : JAVA::types::ClassifierReference =
+    object JAVA::types::ClassifierReference {
+        target := self.getInterface(classifierName);
+    };
+
+/*
+query JAVA::commons::Commentable::getConcreteClassifier(classifierName : String) : JAVA::classifiers::ConcreteClassifier =
+    object JAVA::classifiers::Class {
+        name := classifierName.tokenize('.')->last();
+    };
+
+query JAVA::commons::Commentable::getClassifierReference(classifierName : String) : JAVA::types::ClassifierReference =
+    object JAVA::types::ClassifierReference {
+        target := self.getConcreteClassifier(classifierName);
+    };
+*/
+helper addClassImport(inout cu : JAVA::containers::CompilationUnit, classifierName : String) =
+    let parts = classifierName.tokenize('.') in
+    cu.imports += object JAVA::imports::ClassifierImport {
+        classifier := object JAVA::classifiers::Class {
+            name := parts->last();
+        };
+        namespaces := parts->subSequence(1, parts->size() - 1);
+    };
+
+helper addInterfaceImport(inout cu : JAVA::containers::CompilationUnit, classifierName : String) =
+    let parts = classifierName.tokenize('.') in
+    cu.imports += object JAVA::imports::ClassifierImport {
+        classifier := object JAVA::classifiers::Interface {
+            name := parts->last();
+        };
+        namespaces := parts->subSequence(1, parts->size() - 1);
+    };
+
+helper addAnnotationImport(inout cu : JAVA::containers::CompilationUnit, classifierName : String) =
+    let parts = classifierName.tokenize('.') in
+    cu.imports += object JAVA::imports::ClassifierImport {
+        classifier := object JAVA::classifiers::Annotation {
+            name := parts->last();
+        };
+        namespaces := parts->subSequence(1, parts->size() - 1);
+    };

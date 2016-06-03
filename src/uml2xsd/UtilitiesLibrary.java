@@ -31,9 +31,11 @@ import org.eclipse.m2m.qvt.oml.blackbox.java.Module;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.OCLHelper;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
+import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Property;
 import org.emftext.language.java.JavaClasspath;
@@ -178,7 +180,20 @@ public class UtilitiesLibrary {
     		expr = ocl.getSpecification(asConstraint);
     	}
     	catch (ParserException e) {
-    		e.printStackTrace();
+    		System.err.println(e.getMessage());
+    	}
+    	return expr;
+    }
+
+    @Operation(contextual=true)
+    public static ExpressionInOCL toExpressionInOCL(String expression, org.eclipse.ocl.pivot.Type context)
+    {
+    	ExpressionInOCL expr = null;
+    	try {
+            expr = ocl.createQuery(context, expression);
+    	}
+    	catch (ParserException e) {
+    		System.err.println(e.getMessage());
     	}
     	return expr;
     }

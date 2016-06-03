@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Default="http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2" xmlns:ISO20022Profile="http:///schemas/ISO20022Profile/_0sp5EEfcEeWh4695FKq7TA/52" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2 file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_fNwoAAqoEd6-N_NOT9vsCA http:///schemas/ISO20022Profile/_0sp5EEfcEeWh4695FKq7TA/52 file:/C:/Work/workspace/uml2xsd/model//ISO20022Profile.profile.uml#_0ssVUEfcEeWh4695FKq7TA">
+  <uml:Model xmi:id="_5rjtICY1Eea3ZLNH3Zxyuw" name="ISO20022_BusinessProcessCatalogue">
+    <packageImport xmi:id="_5rjtISY1Eea3ZLNH3Zxyuw">
+      <importedPackage xmi:type="uml:Model" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022_DataDictionary_pain.001.001.03.uml#_5qGUkCY1Eea3ZLNH3Zxyuw"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_5rjtIiY1Eea3ZLNH3Zxyuw" name="CustomerCreditTransferInitiationV03">
+      <ownedRule xmi:id="_OXo6oCY2Eea3ZLNH3Zxyuw" name="rule1" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_TplVYCY2Eea3ZLNH3Zxyuw" annotatedElement="_OXo6oCY2Eea3ZLNH3Zxyuw">
+          <body>Идентификатор сообщения должен быть уникальным.&#xD;
+&#xD;
+Ошибка в поле «Идентификатор сообщения»: сообщение с идентификатором ({{GroupHeader.MessageIdentification}}) уже существует в базе.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_OYE_gCY2Eea3ZLNH3Zxyuw" name="">
+          <language>OCL</language>
+          <body>GroupHeader.MessageIdentification->notEmpty()&#xD;
+implies&#xD;
+not CustomerCreditTransferInitiationV03.allInstances()->exists(&#xD;
+GroupHeader.MessageIdentification = self.GroupHeader.MessageIdentification)</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_8Znj8CY3Eea3ZLNH3Zxyuw" name="rule2" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_Dt1_gCY4Eea3ZLNH3Zxyuw" annotatedElement="_8Znj8CY3Eea3ZLNH3Zxyuw">
+          <body>&lt;NbOfTxs> = количеству секций &lt;CdtTrfTxInf> в сообщении.&#xD;
+&#xD;
+Ошибка в поле «Общее число поручений в сообщении»: число поручений ({{GroupHeader.NumberOfTransactions}}) не совпадает с количеством секций CreditTransferTransactionInformation ({{PaymentInformation.CreditTransferTransactionInformation->size()}}).&#xD;
+&#xD;
+Значение поля «Общее число поручений в сообщении» ({{GroupHeader.NumberOfTransactions}}) совпадает с количеством секций CreditTransferTransactionInformation ({{PaymentInformation.CreditTransferTransactionInformation->size()}}).</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_8ZoyECY3Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>GroupHeader.NumberOfTransactions = PaymentInformation.CreditTransferTransactionInformation->size()</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_KypfACY4Eea3ZLNH3Zxyuw" name="rule3" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_TkPQcCY4Eea3ZLNH3Zxyuw" annotatedElement="_KypfACY4Eea3ZLNH3Zxyuw">
+          <body>&lt;CtrlSum> = сумме значений во всех полях &lt;Amt>/&lt;InstdAmt> в сообщении.&#xD;
+&#xD;
+Ошибка в поле «Общая сумма поручений в сообщении»: общая сумма поручений ({{GroupHeader.ControlSum}}) не совпадает с суммой платежей ({{PaymentInformation.CreditTransferTransactionInformation.Amount.InstructedAmount->sum()}}).&#xD;
+&#xD;
+Значение поля «Общая сумма поручений в сообщении» ({{GroupHeader.ControlSum}}) совпадает с суммой платежей ({{PaymentInformation.CreditTransferTransactionInformation.Amount.InstructedAmount->sum()}}).</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_KypfASY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>GroupHeader.ControlSum = PaymentInformation.CreditTransferTransactionInformation.Amount.InstructedAmount->sum()</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_MLN0cCY4Eea3ZLNH3Zxyuw" name="rule4" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_E241wCY5Eea3ZLNH3Zxyuw" annotatedElement="_MLN0cCY4Eea3ZLNH3Zxyuw">
+          <body>Если &lt;SchmeNm>/&lt;Cd> ='TXID', то &lt;Id> содержит только цифры, имеет длину 5/10/12.&#xD;
+&#xD;
+Ошибка в поле «Идентификатор (ИНН/КИО)»: длина поля ({{Identification.size()}}) некорректна.&#xD;
+&#xD;
+Значение поля «Идентификатор (ИНН/КИО)» ({{Identification}}) корректно для &lt;SchmeNm>/&lt;Cd> = '{{SchemeName.Code}}'.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_MLObgCY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>GroupHeader.InitiatingParty.Identification.OrganisationIdentification.Other->forAll(&#xD;
+  SchemeName.Code = 'TXID' implies Identification.matches('^(\\d{5}|\\d{10}|\\d{12})$'))</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_NCHnQCY4Eea3ZLNH3Zxyuw" name="rule5.1" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_JfgmsCY5Eea3ZLNH3Zxyuw" annotatedElement="_NCHnQCY4Eea3ZLNH3Zxyuw">
+          <body>Если &lt;SchmeNm>/&lt;Cd> ='TXID', то &lt;Id> содержит только цифры, имеет длину 5/10/12;&#xD;
+&lt;Id> содержится в справочнике Плательщиков.&#xD;
+&#xD;
+Ошибка в поле «Идентификатор (ИНН/КИО)»: длина поля ({{Identification.size()}}) некорректна.&#xD;
+&#xD;
+Значение поля «Идентификатор (ИНН/КИО)» ({{Identification}}) корректно.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_NCI1YCY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.Debtor.Identification.OrganisationIdentification.Other ->forAll(&#xD;
+  SchemeName.Code = 'TXID' implies Identification.matches('^(\\d{5}|\\d{10}|\\d{12})$'))</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_N37N4CY4Eea3ZLNH3Zxyuw" name="rule5.2" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_Ms5vwCY5Eea3ZLNH3Zxyuw" annotatedElement="_N37N4CY4Eea3ZLNH3Zxyuw">
+          <body>Если &lt;SchmeNm>/&lt;Cd> ='TXID', то &lt;Id> содержит только цифры, имеет длину 5/10/12;&#xD;
+&lt;Id> содержится в справочнике Плательщиков.&#xD;
+&#xD;
+Ошибка в поле «Идентификатор (ИНН/КИО)»: Плательщик ({{Identification}}) отсутствует в справочнике плательщиков.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_N3708CY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.Debtor.Identification.OrganisationIdentification.Other->forAll(&#xD;
+  othr | othr.SchemeName = 'TXID' and othr.Identification->notEmpty()&#xD;
+  implies&#xD;
+  Payer.allInstances()->exists(Identification = othr.Identification))</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_gs0QQCY4Eea3ZLNH3Zxyuw" name="rule6" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_QoOV0CY5Eea3ZLNH3Zxyuw" annotatedElement="_gs0QQCY4Eea3ZLNH3Zxyuw">
+          <body>&lt;EndToEndId> числовое значение в диапазоне от 1 до 999999, последние три символа != '000'.&#xD;
+&#xD;
+Ошибка в поле «Номер платежного поручения»: значение поля ({{EndToEndIdentification}}) некорректно.&#xD;
+&#xD;
+Значение поля «Номер платежного поручения» ({{EndToEndIdentification}}) корректно.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_gs1eYCY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.CreditTransferTransactionInformation.PaymentIdentification->forAll(&#xD;
+  EndToEndIdentification.matches('^\\d{1,6}$') and not EndToEndIdentification.matches('000$'))</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_kGrvECY4Eea3ZLNH3Zxyuw" name="rule7.1" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_TjhCQCY5Eea3ZLNH3Zxyuw" annotatedElement="_kGrvECY4Eea3ZLNH3Zxyuw">
+          <body>Сумма длин значений в &lt;Cdtr>/&lt;Nm> и в &lt;Cdtr>/&lt;CtctDtls>/&lt;Nm> не превышает 160 символов;&#xD;
+В &lt;Cdtr> содержатся только символы с ASCII кодами из списка: 32-125, 168, 184, 185, 192-255.&#xD;
+&#xD;
+Ошибка в поле «Наименование получателя»: сумма полей Creditor.Name и Creditor.ContactDetails.Name превышает 160 символов.&#xD;
+&#xD;
+Сумма полей Creditor.Name и Creditor.ContactDetails.Name ({{Name.size() + ContactDetails.Name.size()}}) не превышает 160 символов.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_kGs9MCY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.CreditTransferTransactionInformation.Creditor->forAll(&#xD;
+  Name.size() + ContactDetails.Name.size() &lt;= 160)</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_ns618CY4Eea3ZLNH3Zxyuw" name="rule7.2" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_Wa6GICY5Eea3ZLNH3Zxyuw" annotatedElement="_ns618CY4Eea3ZLNH3Zxyuw">
+          <body>Сумма длин значений в &lt;Cdtr>/&lt;Nm> и в &lt;Cdtr>/&lt;CtctDtls>/&lt;Nm> не превышает 160 символов;&#xD;
+В &lt;Cdtr> содержатся только символы с ASCII кодами из списка: 32-125, 168, 184, 185, 192-255.&#xD;
+&#xD;
+Ошибка в поле «Наименование получателя»: поле содержит недопустимые символы ({{Name.replaceAll('[ -}Ёё№А-Яа-я]', '').toCodePoints()->asSet()}}).&#xD;
+&#xD;
+Значение поля «Наименование получателя» ({{Name}}) корректно.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_ns8EECY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.CreditTransferTransactionInformation.Creditor->forAll(&#xD;
+  Name.matches('^[ -}Ёё№А-Яа-я]+$'))</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_qmymECY4Eea3ZLNH3Zxyuw" name="rule7.3" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_Y6S5sCY5Eea3ZLNH3Zxyuw" annotatedElement="_qmymECY4Eea3ZLNH3Zxyuw">
+          <body>Сумма длин значений в &lt;Cdtr>/&lt;Nm> и в &lt;Cdtr>/&lt;CtctDtls>/&lt;Nm> не превышает 160 символов;&#xD;
+В &lt;Cdtr> содержатся только символы с ASCII кодами из списка: 32-125, 168, 184, 185, 192-255.&#xD;
+&#xD;
+Ошибка в поле «Наименование получателя»: поле содержит недопустимые символы ({{Name.replaceAll('[ -}Ёё№А-Яа-я]', '').toCodePoints()->asSet()}}).&#xD;
+&#xD;
+Значение поля «Наименование получателя» ({{Name}}) корректно.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_qmz0MCY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.CreditTransferTransactionInformation.Creditor.ContactDetails->forAll(&#xD;
+  Name.matches('^[ -}Ёё№А-Яа-я]+$'))</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_tJxgMCY4Eea3ZLNH3Zxyuw" name="rule8" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_kM2MACY5Eea3ZLNH3Zxyuw" annotatedElement="_tJxgMCY4Eea3ZLNH3Zxyuw">
+          <body>Если &lt;CdtTrfTxInf>\&lt;PmtTpInf>\&lt;CtgyPurp>\&lt;Cd> равно &quot;TAXS&quot;, &lt;TaxTp>= '9 цифр' | '0' | не указано.&#xD;
+&#xD;
+Ошибка в поле «КПП получателя»: значение поля ({{Tax.Creditor.TaxType}}) недопустимо.&#xD;
+&#xD;
+Значение поля «КПП получателя» ({{Tax.Creditor.TaxType}}) корректно.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_tJyHQCY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.CreditTransferTransactionInformation->forAll(&#xD;
+  PaymentTypeInformation.CategoryPurpose->exists(Code = 'TAXS')&#xD;
+  implies&#xD;
+  Tax.Creditor->forAll(TaxType->isEmpty() or TaxType.matches('^(0|\\d{9})$')))</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_vybkgCY4Eea3ZLNH3Zxyuw" name="rule9.1" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_pSaXoCY5Eea3ZLNH3Zxyuw" annotatedElement="_vybkgCY4Eea3ZLNH3Zxyuw">
+          <body>Сумма длин значений всех элементов &lt;Ustrd> не превышает 210 символов;&#xD;
+В каждом элементе &lt;Ustrd> содержатся только символы с ASCII кодами из списка: 32-125, 168, 184, 185, 192-255.&#xD;
+&#xD;
+Ошибка в поле «Назначение платежа»: сумма длин значений ({{Unstructured.size()->sum()}}) превышает 210 символов.&#xD;
+&#xD;
+Сумма для значений поля «Назначение платежа» ({{Unstructured.size()->sum()}}) не превышает 210 символов.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_vycyoCY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.CreditTransferTransactionInformation.RemittanceInformation->forAll(Unstructured.size()->sum() &lt;= 210)</body>
+        </specification>
+      </ownedRule>
+      <ownedRule xmi:id="_wz0wECY4Eea3ZLNH3Zxyuw" name="rule9.2" constrainedElement="_5rjtIiY1Eea3ZLNH3Zxyuw">
+        <ownedComment xmi:id="_sBChECY5Eea3ZLNH3Zxyuw" annotatedElement="_wz0wECY4Eea3ZLNH3Zxyuw">
+          <body>Сумма длин значений всех элементов &lt;Ustrd> не превышает 210 символов;&#xD;
+В каждом элементе &lt;Ustrd> содержатся только символы с ASCII кодами из списка: 32-125, 168, 184, 185, 192-255.&#xD;
+&#xD;
+Ошибка в поле «Назначение платежа»: поле содержит недопустимые символы ({{self.replaceAll('[ -}Ёё№А-Яа-я]', '').toCodePoints()->asSet()}}).&#xD;
+&#xD;
+Значение поля «Назначение платежа» ({{self}}) корректно.</body>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="_wz1XICY4Eea3ZLNH3Zxyuw">
+          <language>OCL</language>
+          <body>PaymentInformation.CreditTransferTransactionInformation.RemittanceInformation.Unstructured->forAll(matches('^[ -}Ёё№А-Яа-я]+$'))</body>
+        </specification>
+      </ownedRule>
+      <ownedAttribute xmi:id="_5rjtIyY1Eea3ZLNH3Zxyuw" name="GroupHeader" aggregation="composite" association="_5rjtKSY1Eea3ZLNH3Zxyuw">
+        <type xmi:type="uml:Class" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022_DataDictionary_pain.001.001.03.uml#_5qGUkiY1Eea3ZLNH3Zxyuw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5rjtJCY1Eea3ZLNH3Zxyuw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5rjtJSY1Eea3ZLNH3Zxyuw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_5rjtJiY1Eea3ZLNH3Zxyuw" name="PaymentInformation" aggregation="composite" association="_5rjtKyY1Eea3ZLNH3Zxyuw">
+        <type xmi:type="uml:Class" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022_DataDictionary_pain.001.001.03.uml#_5qG8BCY1Eea3ZLNH3Zxyuw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5rjtJyY1Eea3ZLNH3Zxyuw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5rjtKCY1Eea3ZLNH3Zxyuw" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_5rjtKSY1Eea3ZLNH3Zxyuw" memberEnd="_5rjtIyY1Eea3ZLNH3Zxyuw _5rjtKiY1Eea3ZLNH3Zxyuw">
+      <ownedEnd xmi:id="_5rjtKiY1Eea3ZLNH3Zxyuw" type="_5rjtIiY1Eea3ZLNH3Zxyuw" association="_5rjtKSY1Eea3ZLNH3Zxyuw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_5rjtKyY1Eea3ZLNH3Zxyuw" memberEnd="_5rjtJiY1Eea3ZLNH3Zxyuw _5rjtLCY1Eea3ZLNH3Zxyuw">
+      <ownedEnd xmi:id="_5rjtLCY1Eea3ZLNH3Zxyuw" type="_5rjtIiY1Eea3ZLNH3Zxyuw" association="_5rjtKyY1Eea3ZLNH3Zxyuw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_5rjtLSY1Eea3ZLNH3Zxyuw" name="Payments Initiation - Archive - master"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_5rjtLiY1Eea3ZLNH3Zxyuw" memberEnd="_5rjtLyY1Eea3ZLNH3Zxyuw _5rjtMCY1Eea3ZLNH3Zxyuw">
+      <ownedEnd xmi:id="_5rjtLyY1Eea3ZLNH3Zxyuw" type="_5rjtIiY1Eea3ZLNH3Zxyuw" aggregation="composite" association="_5rjtLiY1Eea3ZLNH3Zxyuw"/>
+      <ownedEnd xmi:id="_5rjtMCY1Eea3ZLNH3Zxyuw" type="_5rjtLSY1Eea3ZLNH3Zxyuw" association="_5rjtLiY1Eea3ZLNH3Zxyuw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MhwA8CY_Eea3ZLNH3Zxyuw" name="Payer">
+      <ownedAttribute xmi:id="_Tph78CY_Eea3ZLNH3Zxyuw" name="Identification">
+        <type xmi:type="uml:DataType" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022_DataDictionary_pain.001.001.03.uml#_5qGUqCY1Eea3ZLNH3Zxyuw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Tph78SY_Eea3ZLNH3Zxyuw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Tph78iY_Eea3ZLNH3Zxyuw" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <profileApplication xmi:id="_5rjtMSY1Eea3ZLNH3Zxyuw">
+      <eAnnotations xmi:id="_5rjtMiY1Eea3ZLNH3Zxyuw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//ISO20022Profile.profile.uml#_0ssVUEfcEeWh4695FKq7TA"/>
+      </eAnnotations>
+      <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//ISO20022Profile.profile.uml#_rspygA6UEeWHY4KRRC3kUQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_7AEB8CY1Eea3ZLNH3Zxyuw">
+      <eAnnotations xmi:id="_7Ab1YCY1Eea3ZLNH3Zxyuw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_7A028CY1Eea3ZLNH3Zxyuw">
+      <eAnnotations xmi:id="_7A1eACY1Eea3ZLNH3Zxyuw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_fNwoAAqoEd6-N_NOT9vsCA"/>
+      </eAnnotations>
+      <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_a_S3wNWLEdiy4IqP8whjFA"/>
+    </profileApplication>
+    <profileApplication xmi:id="_7BV0UCY1Eea3ZLNH3Zxyuw">
+      <eAnnotations xmi:id="_7BWbYCY1Eea3ZLNH3Zxyuw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/C:/Work/workspace/uml2xsd/model//Deployment.profile.uml#_4OVBUD0TEeKt-L0gyEptgQ"/>
+      </eAnnotations>
+      <appliedProfile href="file:/C:/Work/workspace/uml2xsd/model//Deployment.profile.uml#_vjbuwOvHEdiDX5bji0iVSA"/>
+    </profileApplication>
+  </uml:Model>
+  <ISO20022Profile:BusinessProcessCatalogue xmi:id="_5rjtMyY1Eea3ZLNH3Zxyuw" base_Package="_5rjtICY1Eea3ZLNH3Zxyuw"/>
+  <ISO20022Profile:BusinessArea xmi:id="_5rjtNCY1Eea3ZLNH3Zxyuw" base_NamedElement="_5rjtLSY1Eea3ZLNH3Zxyuw" base_Class="_5rjtLSY1Eea3ZLNH3Zxyuw"/>
+  <ISO20022Profile:MessageBuildingBlock xmi:id="_5rjtNSY1Eea3ZLNH3Zxyuw" base_NamedElement="_5rjtJiY1Eea3ZLNH3Zxyuw" base_Property="_5rjtJiY1Eea3ZLNH3Zxyuw" xmlTag="PmtInf"/>
+  <ISO20022Profile:MessageDefinition xmi:id="_5rjtNiY1Eea3ZLNH3Zxyuw" base_NamedElement="_5rjtIiY1Eea3ZLNH3Zxyuw" base_Signal="_5rjtIiY1Eea3ZLNH3Zxyuw" messageDefinitionIdentifier="pain.001.001.03" xmlTag="CstmrCdtTrfInitn"/>
+  <ISO20022Profile:MessageBuildingBlock xmi:id="_5rjtNyY1Eea3ZLNH3Zxyuw" base_NamedElement="_5rjtIyY1Eea3ZLNH3Zxyuw" base_Property="_5rjtIyY1Eea3ZLNH3Zxyuw" xmlTag="GrpHdr"/>
+  <Default:Documentation xmi:id="_Tt6bwCY2Eea3ZLNH3Zxyuw" base_Comment="_TplVYCY2Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_Dt-iYCY4Eea3ZLNH3Zxyuw" base_Comment="_Dt1_gCY4Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_Tkcr0CY4Eea3ZLNH3Zxyuw" base_Comment="_TkPQcCY4Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_E2_jcCY5Eea3ZLNH3Zxyuw" base_Comment="_E241wCY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_JfqXsCY5Eea3ZLNH3Zxyuw" base_Comment="_JfgmsCY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_MtFV8CY5Eea3ZLNH3Zxyuw" base_Comment="_Ms5vwCY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_QoZ8ACY5Eea3ZLNH3Zxyuw" base_Comment="_QoOV0CY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_TjsocCY5Eea3ZLNH3Zxyuw" base_Comment="_TjhCQCY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_WbFsUCY5Eea3ZLNH3Zxyuw" base_Comment="_Wa6GICY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_Y6bckCY5Eea3ZLNH3Zxyuw" base_Comment="_Y6S5sCY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_kNByMCY5Eea3ZLNH3Zxyuw" base_Comment="_kM2MACY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_pSoaECY5Eea3ZLNH3Zxyuw" base_Comment="_pSaXoCY5Eea3ZLNH3Zxyuw"/>
+  <Default:Documentation xmi:id="_sBNgMCY5Eea3ZLNH3Zxyuw" base_Comment="_sBChECY5Eea3ZLNH3Zxyuw"/>
+  <ISO20022Profile:MessageElement xmi:id="_TpjKECY_Eea3ZLNH3Zxyuw" base_NamedElement="_Tph78CY_Eea3ZLNH3Zxyuw" base_Property="_Tph78CY_Eea3ZLNH3Zxyuw" isTechnical="true" xmlTag="Id"/>
+</xmi:XMI>

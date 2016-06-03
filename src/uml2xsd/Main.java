@@ -63,6 +63,7 @@ import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.resource.JaMoPPUtil;
@@ -253,7 +254,7 @@ public class Main {
         UMLResourcesUtil.init(rs);
         rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", XMI2UMLResource.Factory.INSTANCE);
         JaMoPPUtil.initialize();
-        
+
         System.out.println("  OCL");
         EssentialOCLStandaloneSetup.doSetup();
         UMLStandaloneSetup.init();
@@ -424,7 +425,7 @@ public class Main {
         } else {
             IStatus status = BasicDiagnostic.toIStatus(result);
             for (IStatus error : status.getChildren()) {
-                System.out.println("  " + error);
+                System.err.println("  " + error);
             }
             throw new Exception(status.getMessage());
         }

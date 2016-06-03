@@ -13,21 +13,21 @@
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_IfFYRcmBEdqBcN1R6EvWUw" name="Default_AbstractMetaConstraint" abstract="true">
         <eAnnotations xmi:id="_IfFYRsmBEdqBcN1R6EvWUw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="uml:Stereotype" href="Default.profile.uml#_bADswtWLEdiy4IqP8whjFA"/>
+          <references xmi:type="uml:Stereotype" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_bADswtWLEdiy4IqP8whjFA"/>
         </eAnnotations>
         <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_IfFYR8mBEdqBcN1R6EvWUw" name="evaluationMode" ordered="false" lowerBound="1" eType="_IfFYScmBEdqBcN1R6EvWUw" defaultValueLiteral="batch"/>
         <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_IfFYSMmBEdqBcN1R6EvWUw" name="severity" ordered="false" lowerBound="1" eType="_IfFYTcmBEdqBcN1R6EvWUw" defaultValueLiteral="error"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EEnum" xmi:id="_IfFYScmBEdqBcN1R6EvWUw" name="Default_ConstraintEvaluationMode">
         <eAnnotations xmi:id="_IfFYSsmBEdqBcN1R6EvWUw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="uml:Enumeration" href="Default.profile.uml#_a_S3w9WLEdiy4IqP8whjFA"/>
+          <references xmi:type="uml:Enumeration" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_a_S3w9WLEdiy4IqP8whjFA"/>
         </eAnnotations>
         <eLiterals xmi:id="_IfFYS8mBEdqBcN1R6EvWUw" name="batch"/>
         <eLiterals xmi:id="_IfFYTMmBEdqBcN1R6EvWUw" name="live" value="1"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EEnum" xmi:id="_IfFYTcmBEdqBcN1R6EvWUw" name="Default_ConstraintSeverity">
         <eAnnotations xmi:id="_IfFYTsmBEdqBcN1R6EvWUw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="uml:Enumeration" href="Default.profile.uml#_a_3fgtWLEdiy4IqP8whjFA"/>
+          <references xmi:type="uml:Enumeration" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_a_3fgtWLEdiy4IqP8whjFA"/>
         </eAnnotations>
         <eLiterals xmi:id="_IfFYT8mBEdqBcN1R6EvWUw" name="error"/>
         <eLiterals xmi:id="_IfFYUMmBEdqBcN1R6EvWUw" name="warning" value="1"/>
@@ -68,21 +68,21 @@
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_bFmUFNWLEdiy4IqP8whjFA" name="Default__AbstractMetaConstraint" abstract="true">
         <eAnnotations xmi:id="_bFmUFdWLEdiy4IqP8whjFA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="uml:Stereotype" href="Default.profile.uml#_bADswtWLEdiy4IqP8whjFA"/>
+          <references xmi:type="uml:Stereotype" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_bADswtWLEdiy4IqP8whjFA"/>
         </eAnnotations>
         <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_bFmUFtWLEdiy4IqP8whjFA" name="evaluationMode" lowerBound="1" eType="_bFmUGNWLEdiy4IqP8whjFA" defaultValueLiteral="batch"/>
         <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_bFmUF9WLEdiy4IqP8whjFA" name="severity" lowerBound="1" eType="_bFmUHdWLEdiy4IqP8whjFA" defaultValueLiteral="error"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EEnum" xmi:id="_bFmUGNWLEdiy4IqP8whjFA" name="Default__ConstraintEvaluationMode">
         <eAnnotations xmi:id="_IbqQ08mBEdqBcN1R6EvWUw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="uml:Enumeration" href="Default.profile.uml#_a_S3w9WLEdiy4IqP8whjFA"/>
+          <references xmi:type="uml:Enumeration" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_a_S3w9WLEdiy4IqP8whjFA"/>
         </eAnnotations>
         <eLiterals xmi:id="_bFmUGdWLEdiy4IqP8whjFA" name="batch"/>
         <eLiterals xmi:id="_bFmUG9WLEdiy4IqP8whjFA" name="live" value="1"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EEnum" xmi:id="_bFmUHdWLEdiy4IqP8whjFA" name="Default__ConstraintSeverity">
         <eAnnotations xmi:id="_IbzawMmBEdqBcN1R6EvWUw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-          <references xmi:type="uml:Enumeration" href="Default.profile.uml#_a_3fgtWLEdiy4IqP8whjFA"/>
+          <references xmi:type="uml:Enumeration" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_a_3fgtWLEdiy4IqP8whjFA"/>
         </eAnnotations>
         <eLiterals xmi:id="_bFmUHtWLEdiy4IqP8whjFA" name="error"/>
         <eLiterals xmi:id="_bFmUINWLEdiy4IqP8whjFA" name="warning" value="1"/>
@@ -106,7 +106,7 @@
     <eAnnotations xmi:id="_bFmUKNWLEdiy4IqP8whjFA" source="uml2.extensions">
       <details xmi:id="_bFmUKdWLEdiy4IqP8whjFA" key="addedInVersion" value="0"/>
     </eAnnotations>
-    <importedPackage xmi:type="uml:Profile" href="Default.profile.uml#_a_S3wNWLEdiy4IqP8whjFA"/>
+    <importedPackage xmi:type="uml:Profile" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_a_S3wNWLEdiy4IqP8whjFA"/>
   </packageImport>
   <packageImport xmi:id="_yrEAMPyiEdqPUO--Lw65Tw" visibility="private">
     <eAnnotations xmi:id="_yuThcPyiEdqPUO--Lw65Tw" source="uml2.extensions">
@@ -123,7 +123,7 @@
       <eAnnotations xmi:id="_bFmUK9WLEdiy4IqP8whjFA" source="uml2.extensions">
         <details xmi:id="_bFmULNWLEdiy4IqP8whjFA" key="addedInVersion" value="0"/>
       </eAnnotations>
-      <general xmi:type="uml:Stereotype" href="Default.profile.uml#_bADswtWLEdiy4IqP8whjFA"/>
+      <general xmi:type="uml:Stereotype" href="file:/C:/Work/workspace/uml2xsd/model//Default.profile.uml#_bADswtWLEdiy4IqP8whjFA"/>
     </generalization>
     <ownedAttribute xmi:id="_bFaG1dWLEdiy4IqP8whjFA" name="messageKey">
       <eAnnotations xmi:id="_bFmULdWLEdiy4IqP8whjFA" source="uml2.extensions">
