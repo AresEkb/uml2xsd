@@ -407,7 +407,7 @@ when { self.referredVariable.name = 'self' }
         }
         else {
             if (variables->hasKey(self.referredVariable![Variable])) {
-                result := variables->get(self.referredVariable![Variable])![PathExpr];
+                result := variables->get(self.referredVariable![Variable]).deepclone()![PathExpr];
         	}
         	else {
                 result := object PathExpr {
@@ -443,7 +443,7 @@ when { self.referredVariable.name <> 'self' and self.referredVariable![Variable]
         log('<<<\n');*/
 
         if (variables->hasKey(self.referredVariable![Variable])) {
-            result := variables->get(self.referredVariable![Variable])![PathExpr];
+            result := variables->get(self.referredVariable![Variable]).deepclone()![PathExpr];
         }
         else {
             result := object PathExpr {
@@ -465,7 +465,7 @@ when { self.referredVariable.name <> 'self' and self.referredVariable![Variable]
 {
     var variable := variables->get(self.referredVariable![Variable]);
     assert fatal (variable.oclIsKindOf(VarRef)) with log ('Variable ' + self.referredVariable.toString() + ' not found');
-    step := variable![VarRef];
+    step := variable.deepclone()![VarRef];
 }
 
 mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr

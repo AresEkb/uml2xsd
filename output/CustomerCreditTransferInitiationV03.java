@@ -47,7 +47,7 @@ public class CustomerCreditTransferInitiationV03 extends BaseValidator {
     public void checkRule4(List<Result> results) {
         for (Node context : Helper.iterate(root, "GrpHdr / InitgPty / Id / OrgId / Othr")) {
             results.add(Helper.validate(context,
-                    "fn:not( = \'TXID\') or fn:matches( current ()/ SchmeNm / Cd / Id , \'^(\\d{5}|\\d{10}|\\d{12})$\')",
+                    "fn:not( current ()/ SchmeNm / Cd = \'TXID\') or fn:matches( current ()/ Id , \'^(\\d{5}|\\d{10}|\\d{12})$\')",
                     Helper.format(context, "Ошибка в поле «Идентификатор (ИНН/КИО)»: длина поля (%s) некорректна.",
                             "fn:string-length( Id )"),
                     Helper.format(context,
@@ -60,7 +60,7 @@ public class CustomerCreditTransferInitiationV03 extends BaseValidator {
     public void checkRule5_1(List<Result> results) {
         for (Node context : Helper.iterate(root, "PmtInf / Dbtr / Id / OrgId / Othr")) {
             results.add(Helper.validate(context,
-                    "fn:not( = \'TXID\') or fn:matches( current ()/ SchmeNm / Cd / Id , \'^(\\d{5}|\\d{10}|\\d{12})$\')",
+                    "fn:not( current ()/ SchmeNm / Cd = \'TXID\') or fn:matches( current ()/ Id , \'^(\\d{5}|\\d{10}|\\d{12})$\')",
                     Helper.format(context, "Ошибка в поле «Идентификатор (ИНН/КИО)»: длина поля (%s) некорректна.",
                             "fn:string-length( Id )"),
                     Helper.format(context, "Значение поля «Идентификатор (ИНН/КИО)» (%s) корректно.", "Id")));
@@ -76,7 +76,7 @@ public class CustomerCreditTransferInitiationV03 extends BaseValidator {
     public void checkRule6(List<Result> results) {
         for (Node context : Helper.iterate(root, "PmtInf / CdtTrfTxInf / PmtId")) {
             results.add(Helper.validate(context,
-                    "fn:matches(\'^\\d{1,6}$\') and fn:not(fn:matches( current ()/ EndToEndId / EndToEndId , \'000$\'))",
+                    "fn:matches( current ()/ EndToEndId , \'^\\d{1,6}$\') and fn:not(fn:matches( current ()/ EndToEndId , \'000$\'))",
                     Helper.format(context,
                             "Ошибка в поле «Номер платежного поручения»: значение поля (%s) некорректно.",
                             "EndToEndId"),
@@ -89,7 +89,7 @@ public class CustomerCreditTransferInitiationV03 extends BaseValidator {
     public void checkRule7_1(List<Result> results) {
         for (Node context : Helper.iterate(root, "PmtInf / CdtTrfTxInf / Cdtr")) {
             results.add(Helper.validate(context,
-                    "fn:string-length() + fn:string-length( current ()/ Nm / CtctDtls / Nm ) <= 160",
+                    "fn:string-length( current ()/ Nm ) + fn:string-length( current ()/ CtctDtls / Nm ) <= 160",
                     Helper.format(context,
                             "Ошибка в поле «Наименование получателя»: сумма полей Creditor.Name и Creditor.ContactDetails.Name превышает 160 символов."),
                     Helper.format(context,
@@ -123,7 +123,8 @@ public class CustomerCreditTransferInitiationV03 extends BaseValidator {
     @RuleMetadata(id = "rule8", description = "Если <CdtTrfTxInf>\\<PmtTpInf>\\<CtgyPurp>\\<Cd> равно \"TAXS\", <TaxTp>= \'9 цифр\' | \'0\' | не указано.", ocl = "PaymentInformation.CreditTransferTransactionInformation->forAll(\n  PaymentTypeInformation.CategoryPurpose->exists(Code = \'TAXS\')\n  implies\n  Tax.Creditor->forAll(TaxType->isEmpty() or TaxType.matches(\'^(0|\\\\d{9})$\')))")
     public void checkRule8(List<Result> results) {
         for (Node context : Helper.iterate(root, "PmtInf / CdtTrfTxInf")) {
-            results.add(Helper.validate(context, "",
+            results.add(Helper.validate(context,
+                    "fn:not( current ()/ PmtTpInf / CtgyPurp [ Cd = \'TAXS\'] and current ()/ Tax / Cdtr [fn:not(fn:not( TaxTp ) or fn:matches( TaxTp , \'^(0|\\d{9})$\'))])",
                     Helper.format(context, "Ошибка в поле «КПП получателя»: значение поля (%s) недопустимо.",
                             "Tax / Cdtr / TaxTp"),
                     Helper.format(context, "Значение поля «КПП получателя» (%s) корректно.", "Tax / Cdtr / TaxTp")));
