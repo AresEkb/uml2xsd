@@ -12,7 +12,7 @@
 import uml2xsd.UtilitiesLibrary;
 import Helpers;
 
-library ISO20022Helpers;
+transformation ISO20022Helpers;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
 modeltype OCL 'strict' uses 'http://www.eclipse.org/ocl/2015/Pivot';
@@ -20,6 +20,40 @@ modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
 property profileName : String = 'ISO20022Profile';
+
+intermediate class Rule {
+    id : String;             // required
+    name : String;           // optional
+    description : String;    // required
+    source : String;         // optional
+    ocl : String;            // required
+    errorMessage : String;   // required
+    successMessage : String; // optional
+};
+
+mapping Constraint::toRule() : Rule
+{
+/*
+    id := self.getAnnotation('id');
+    name := self.getAnnotation('name', '');
+    description := self.getAnnotation('description');
+    source := self.getAnnotation('source', '');
+    ocl := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n');
+    errorMessage := self.getAnnotation('errorMessage');
+    successMessage := self.getAnnotation('successMessage', '');
+*/    
+    var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
+    assert fatal (doc->size() >= 2 and doc->size() <= 3)
+        with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
+            self.ownedComment.body->any(true));
+    id := self.name;
+    name := '';
+    description := doc->at(1);
+    source := '';
+    ocl := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n');
+    errorMessage := doc->at(2);
+    successMessage := doc->at(3);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
@@ -40,7 +74,7 @@ query OCLExpression::isSupportedByXPath() : Boolean =
     elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll( 
         ownedSource.isSupportedByXPath() and ownedBody->forAll(isSupportedByXPath()))
     else true endif;
-
+/*
 query OCLExpression::getContext() : OCL::Variable;
 
 query CallExp::getContext() : OCL::Variable =
@@ -48,7 +82,7 @@ query CallExp::getContext() : OCL::Variable =
 
 query VariableExp::getContext() : OCL::Variable =
     self.referredVariable![OCL::Variable];
-
+*/
 query Classifier::getRootPath() : PathExpr =
     object PathExpr {
         step := object RootStepExpr { };
@@ -76,6 +110,9 @@ query NamedElement::generateXMLTag() : String
     elif (self.is('MessageElement')) {
         name := self.getValue(profileName + '::MessageElement', 'xmlTag');
     }
+    elif (self.isAttribute() and self![Property]._datatype.name = 'CurrencyAndAmount' and self.name = 'Currency') {
+        name := 'Ccy';
+    }
     else {
         name := self.name;
         if (name.lastIndexOf('.') > 0) {
@@ -90,6 +127,17 @@ query NamedElement::generateXMLTag() : String
     return name;
 }
 
+// TODO: OCLtoXPath must be refactored, transformations must receive context type or variable
+// So in toPathExpr() the following code 
+//   self.referredProperty.owningClass.isDataType()
+// will be replaced by
+//   context.isDataType()
+// and the following check will be unnecessary
+//   self.getModel().name = 'ISO20022DataTypes'
+query NamedElement::isSimpleType() : Boolean =
+    self.is('Datatype') or self.is('CodeSet') or self.is('IdentifierSet') or
+    self.getModel().name = 'ISO20022DataTypes';
+
 ///////////////////////////////////////////////////////////////////////////////
 // Overrides
 
@@ -103,23 +151,20 @@ query NamedElement::getUnprefixedQName() : TYPE::QName =
 
 query Element::is(stereotypeName : String) : Boolean = self.is(profileName, stereotypeName);
 
-query NamedElement::isDataType() : Boolean = self.oclIsKindOf(Classifier);
+query NamedElement::isDataType() : Boolean =
+    self.is('MessageDefinition') or self.is('MessageComponentType') or
+    self.isSimpleType();
 
 query NamedElement::isDateType() : Boolean =
-    if self.oclIsKindOf(Classifier)
-    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'Date')
-    else false endif;
+    self[Classifier].general->one(name = 'Date');
 
 query NamedElement::isDateTimeType() : Boolean =
-    if self.oclIsKindOf(Classifier)
-    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'DateTime')
-    else false endif;
+    self[Classifier].general->one(name = 'DateTime');
 
 query NamedElement::isTimeType() : Boolean =
-    if self.oclIsKindOf(Classifier)
-    then self.oclAsType(Classifier).allParents()->including(self.oclAsType(Classifier))->exists(name = 'Time')
-    else false endif;
+    self[Classifier].general->one(name = 'Time');
 
 query NamedElement::isDataElement() : Boolean = false;
 
-query NamedElement::isAttribute() : Boolean = self.getAppliedStereotype('EECProfile::Attribute') <> null;
+query NamedElement::isAttribute() : Boolean =
+    self[Property]->one(owner![Classifier].isSimpleType());

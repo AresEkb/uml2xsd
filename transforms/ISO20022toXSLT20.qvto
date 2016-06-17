@@ -164,12 +164,13 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
 mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EFeatureMapEntry)
 {
     init {
-        var expr := self.toExpressionInOCL().ownedBody;
+        var exprInOCL := self.toExpressionInOCL();
+        var expr := exprInOCL.ownedBody;
         var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
 
         if (expr.isLet()) {
             var variable := expr![LetExp].ownedVariable;
-            var variableName := self.name + '_' + variable.name;
+            var variableName := (self.name + '_' + variable.name).toIdentifier();
             expr := expr![LetExp].ownedIn;
             variables->put(variable, object VarRef { varName := createQName(variableName) });
             result += object VariableType {
@@ -185,12 +186,12 @@ mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EF
         };
         
         if (expr.isForAll()) {
-            result += self->toForEach(stylesheet, expr, variables)->toFMEntry('forEach');
+            result += self->toForEach(stylesheet, self![IteratorExp].ownedIterators->first(), expr, variables)->toFMEntry('forEach');
         }
         else {
-            result += self->toValidate(stylesheet, expr, variables)->toFMEntry('callTemplate');
+            result += self->toValidate(stylesheet, exprInOCL.ownedContext, expr, variables)->toFMEntry('callTemplate');
         }
-    }	
+    }
 }
 
 mapping OCLExpression::toXPath(stylesheet : TransformType, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
@@ -221,7 +222,11 @@ query String::toMessage(stylesheet : TransformType, context : OCL::Type, variabl
             }->toFMEntry('text')
         endif);
 
-mapping Constraint::toValidate(stylesheet : TransformType, expr : OCLExpression, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : CallTemplateType
+mapping Constraint::toValidate(
+    stylesheet : TransformType,
+    context : OCL::Variable,
+    expr : OCLExpression,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : CallTemplateType
 {
     name := 'validate';
     
@@ -248,17 +253,21 @@ mapping Constraint::toValidate(stylesheet : TransformType, expr : OCLExpression,
     };
     withParam += object WithParamType {
         name := 'error';
-        mixed := doc->at(2).toMessage(stylesheet, expr.getContext().type, variables);
+        mixed := doc->at(2).toMessage(stylesheet, context.type, variables);
     };
     if (doc->size() >= 3) {
         withParam += object WithParamType {
             name := 'valid';
-            mixed := doc->at(3).toMessage(stylesheet, expr.getContext().type, variables);
+            mixed := doc->at(3).toMessage(stylesheet, context.type, variables);
         };
     };
 }
 
-mapping Constraint::toForEach(stylesheet : TransformType, expr : OCLExpression, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ForEachType
+mapping Constraint::toForEach(
+    stylesheet : TransformType,
+    context : OCL::Variable,
+    expr : OCLExpression,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ForEachType
 {
     var iterator := expr.oclAsType(IteratorExp);
     var xpath : ExprSingle;
@@ -271,7 +280,7 @@ mapping Constraint::toForEach(stylesheet : TransformType, expr : OCLExpression, 
     };
     xpath.xmap findQNames(stylesheet);
     select := xpath.toString();
-    instructionGroup += self->toValidate(stylesheet, iterator.ownedBody, variables)->toFMEntry('callTemplate');
+    instructionGroup += self->toValidate(stylesheet, iterator.ownedIterators->any(true), iterator.ownedBody, variables)->toFMEntry('callTemplate');
 }
 
 intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(TYPE::QName); };

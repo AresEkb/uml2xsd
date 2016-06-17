@@ -17,6 +17,10 @@
 
 // TODO: Context is needed to transform variables.
 // For example self may be transformed into either empty step or parent step
+// XPath expressions for variables can't be determined outside this transformation
+// They must be either fully determinied inside transformations, either must be transformed
+// From the other point of view expressions like $var doesn't need any transformation, they are fixed.
+// Also absolute path must not be transformed. Only relative one needs transformation
 
 import uml2xsd.UtilitiesLibrary;
 import Helpers;
@@ -51,6 +55,7 @@ disjuncts
     OperationCallExp::toNotExpr,
     IteratorExp::toExists,
     IteratorExp::toForAll,
+    IteratorExp::toOne,
     IteratorExp::toSelect,
     // Comparision
     OperationCallExp::toLeftNotNull,
@@ -154,6 +159,17 @@ when { self.referredIteration.name = 'forAll' }
     init {
         result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables).notExpr()).notExpr();
     }
+}
+
+mapping IteratorExp::toOne(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ComparisonExpr
+when { self.referredIteration.name = 'one' }
+{
+    left := object FunctionCall {
+        name := 'count'.createFunctionQName();
+        arg := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables));
+    };
+    operator := object GeneralComp { operator := GeneralCompKind::eq };
+    right := object IntegerLiteral { value := 1 };
 }
 
 mapping IteratorExp::toSelect(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
@@ -493,17 +509,18 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
             raise Exception('Something is wrong');
         }*/
     }
-    
+
     // Steps must be created only for Data Types. Data Elements must be skipped
+    //log('===' + self.repr());
+    //log('>>>' + self.referredProperty.owningClass.repr());
+    //log('>>>' + self.referredProperty.owningClass.isDataType().repr());
     if (self.referredProperty.owningClass.isDataType()) {
         // Type can be a Set(T)
         var type := self.referredProperty.type.unwrap();
-        
+
         // TODO: Something more adequate is needed here
-        if (type.toString() = 'OclVoid') {
-            raise Exception('Property doesn\'t have a type');
-        };
-        
+        assert fatal (type.toString() <> 'OclVoid') with log('Property doesn\'t have a type');
+
         var element : NamedElement;
         // Property is local
         if (type.isDataType()) {
@@ -514,7 +531,7 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
             element := type;
         }
         else {
-            raise Exception('Something is wrong');
+            assert fatal (false) with log('The property ' + self.toString() + ' must refer either type or element');
         };
 
         var stepItem : AbbrevForwardStep;
@@ -560,7 +577,7 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
     elif (self.referredProperty.owningClass.isDataElement()) {
     }
     else {
-        raise Exception('Something is wrong');
+        assert fatal (false) with log('Something is wrong');
     }
 }
 
@@ -888,11 +905,11 @@ mapping OCLExpression::raiseError(variables : Dict(OCL::Variable, XPATH2::ExprSi
 */
 mapping OCLExpression::raiseError(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
-    var message = 'Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr();
-    log(message);
+    //var message = 'Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr();
+    //log(message);
     //log(self![OperationCallExp].referredOperation.name);
     //log((self![OperationCallExp].referredOperation.name = 'oclAsType').repr());
-    raise Exception(message);
+    assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
 }
 
 //////////////////////////////////////////////////////////////////////////////

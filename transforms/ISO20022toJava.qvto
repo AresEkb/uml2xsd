@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    Denis Nikiforov - initial API and implementation
  */
- 
+
 import uml2xsd.UtilitiesLibrary;
 import ISO20022Helpers;
 import JavaHelpers;
@@ -45,15 +45,16 @@ main()
  *
  * package com.centreit.repiso.ocl.validator.validation;
  *
- * import ... 
+ * import java.util.List;
+ * import javax.annotation.Generated;
+ * import org.w3c.dom.Node;
+ * import com.centreit.repiso.ocl.validator.validation.BaseValidator;
+ * import com.centreit.repiso.ocl.validator.validation.Helper;
+ * import com.centreit.repiso.ocl.validator.validation.RuleMetadata;
+ * import com.centreit.repiso.ocl.validator.validation.RuleResult;
  *
  * @Generated("uml2xsd")
  * public class {name} extends BaseValidator {
- *     private Node root;
- *
- *     public void init(String message) {
- *         this.root = Helper.parse(message, "/ Document / {root element name}");
- *     }
  *
  *     {validation methods}
  * }
@@ -61,25 +62,25 @@ main()
  */
 mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
 {
-    var className := self.name.quoteJavaName();
+    var className := self.name.toIdentifier();
     log('  Found message ' + self.name);
 
     name := self.name;
     namespaces := 'com.centreit.repiso.ocl.validator.validation'.tokenize('.');
 
-    addClassImport(result, 'java.util.ArrayList');
     addInterfaceImport(result, 'java.util.List');
     addAnnotationImport(result, 'javax.annotation.Generated');
     addInterfaceImport(result, 'org.w3c.dom.Node');
     addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.BaseValidator');
     addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.Helper');
-    addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.Result');
+    addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.RuleResult');
+    addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.RuleMetadata');
 
     classifiers := object JAVA::classifiers::Class {
         name := className;
-        
+
         _extends := result.getClassReference('com.centreit.repiso.ocl.validator.validation.BaseValidator');
-        
+
         annotationsAndModifiers += object JAVA::annotations::AnnotationInstance {
             annotation := result.getAnnotation('javax.annotation.Generated');
             parameter := object JAVA::annotations::SingleAnnotationParameter {
@@ -94,40 +95,6 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
             annotationsAndModifiers := object JAVA::modifiers::Private { };
         };
 
-        members += rootField;
-        
-        members += object JAVA::members::ClassMethod {
-            name := "init";
-            typeReference := object JAVA::types::_Void { };
-            parameters := object JAVA::parameters::OrdinaryParameter {
-            	name := 'message';
-            	typeReference := object JAVA::types::ClassifierReference {
-                    target := result.getClass('java.lang.String');
-            	};
-            };
-            annotationsAndModifiers := object JAVA::modifiers::Public { };
-            statements := object JAVA::statements::ExpressionStatement {
-            	expression := object JAVA::expressions::AssignmentExpression {
-            		child := object JAVA::_references::IdentifierReference {
-                        target := rootField;
-            		};
-            		assignmentOperator := object JAVA::operators::Assignment { };
-            		value := object JAVA::_references::IdentifierReference {
-            			target := object JAVA::classifiers::Class { name := 'Helper'; };
-            			next := object JAVA::_references::MethodCall {
-                            target := object JAVA::members::ClassMethod { name := 'parse'; };
-                            arguments := object JAVA::_references::IdentifierReference {
-                                target := object JAVA::members::Field { name := 'message'; };
-                            };
-                            //arguments += object JAVA::_references::StringReference {
-                            //    value := self.getRootPath().toString();
-                            //};
-            			};
-            		};
-            	};
-            };
-        };
-
         members += self.ownedRule->sortedBy(name)->toValidationMethod(rootField);
     };
 }
@@ -136,9 +103,11 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
  * Map OCL constraint to the following validation method:
  *
  *     @RuleMetadata(id = "{rule id}",
+ *                   name= "{rule name}",
  *                   description = "{rule description}",
+ *                   source = "{rule source}",
  *                   ocl = "{rule OCL}")
- *     public void check{rule name}(List<Result> results) {
+ *     public void check{rule id}(List<RuleResult> results) {
  *         {validation code}
  *     }
  *
@@ -146,28 +115,35 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
 mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA::members::ClassMethod
 {
     log('    Found rule ' + self.name);
-    name := 'check' + self.name.quoteJavaName().capitalize();
+    var rule := self.xmap toRule();
+    name := 'check' + rule.id.toIdentifier().capitalize();
 
     annotationsAndModifiers += object JAVA::annotations::AnnotationInstance {
         annotation := result.getClass('com.centreit.repiso.ocl.validator.validation.RuleMetadata');
         parameter := object JAVA::annotations::AnnotationParameterList {
-            // TODO: The following logic must be moved to Helper and reused in the XSLT generator
-            var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
-            assert fatal (doc->size() >= 2 and doc->size() <= 3)
-                with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
-                    self.ownedComment.body->any(true));
-
             settings += object JAVA::annotations::AnnotationAttributeSetting {
                 attribute := object JAVA::members::InterfaceMethod { name := 'id' };
-                value := object JAVA::_references::StringReference { value := self.name };
+                value := object JAVA::_references::StringReference { value := rule.id };
+            };
+            if (notEmpty(rule.name)) {
+                settings += object JAVA::annotations::AnnotationAttributeSetting {
+                    attribute := object JAVA::members::InterfaceMethod { name := 'name' };
+                    value := object JAVA::_references::StringReference { value := rule.name };
+                };
             };
             settings += object JAVA::annotations::AnnotationAttributeSetting {
                 attribute := object JAVA::members::InterfaceMethod { name := 'description' };
-                value := object JAVA::_references::StringReference { value := doc->at(1) };
+                value := object JAVA::_references::StringReference { value := rule.description };
+            };
+            if (notEmpty(rule.source)) {
+                settings += object JAVA::annotations::AnnotationAttributeSetting {
+                    attribute := object JAVA::members::InterfaceMethod { name := 'name' };
+                    value := object JAVA::_references::StringReference { value := rule.source };
+                };
             };
             settings += object JAVA::annotations::AnnotationAttributeSetting {
                 attribute := object JAVA::members::InterfaceMethod { name := 'ocl' };
-                value := object JAVA::_references::StringReference { value := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n') };
+                value := object JAVA::_references::StringReference { value := rule.ocl };
             };
         };
     };
@@ -178,17 +154,18 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
         typeReference := object JAVA::types::ClassifierReference {
             target := result.getInterface('java.util.List');
             typeArguments := object JAVA::generics::QualifiedTypeArgument {
-                typeReference := result.getClassReference('com.centreit.repiso.ocl.validator.validation.Result');
+                typeReference := result.getClassReference('com.centreit.repiso.ocl.validator.validation.RuleResult');
             };
         };
     };
-    
+
     typeReference := object JAVA::types::Void { };
     parameters := resultParam;
-    
+
     try {
         var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-        statements := self.xmap toValidationCode(self.toExpressionInOCL().ownedBody, variables, rootField, resultParam);
+        var expr := self.toExpressionInOCL();
+        statements := self.xmap toValidationCode(expr.ownedBody, expr.ownedContext, variables, rootField, resultParam, List { });
     }
     except () {
         log('WARNING: Unable to generate validation code');
@@ -205,26 +182,248 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
 
 mapping Constraint::toValidationCode(
     expr : OCLExpression,
+    context : OCL::Variable,
     variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
-    resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
+    resultVariable : JAVA::_references::ReferenceableElement,
+    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
 disjuncts
+    Constraint::toLet,
     Constraint::toForAll,
-    Constraint::toHelperValidateInvocation
+    Constraint::toHelperCheckInvocation
 {
 }
 
-mapping Constraint::toValidationCode2(
+/**
+ * Map OCL constraint to the variable declaration:
+ *
+ *         Object {varible name} = Helper.variable({context variable}, "{varible name}", "{variable init expression}");
+ *         {validation code}
+ */
+mapping Constraint::toLet(
     expr : OCLExpression,
+    context : OCL::Variable,
     variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
-    resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
-disjuncts
-    Constraint::toHelperValidateInvocation
+    resultVariable : JAVA::_references::ReferenceableElement,
+    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
+when { expr.isLet() }
 {
+    var variableExpr := expr![LetExp].ownedVariable;
+    var variableName := variableExpr.name.toIdentifier();
+    var variables2 = variables;
+    variables2->put(variableExpr, object VarRef { varName := createQName(variableName) });
+    var localVariables2 := localVariables;
+    result += object JAVA::statements::LocalVariableStatement {
+        variable := object JAVA::variables::LocalVariable {
+            name := variableName;
+            typeReference := contextVariable.getClassReference('java.lang.Object');
+            initialValue := object JAVA::_references::IdentifierReference {
+                target := object JAVA::classifiers::Class { name := 'Helper'; };
+                next := object JAVA::_references::MethodCall {
+                    target := object JAVA::members::ClassMethod { name := 'variable'; };
+                    arguments += object JAVA::_references::IdentifierReference {
+                        target := contextVariable;
+                    };
+                    arguments += object JAVA::_references::StringReference {
+                        value := variableName;
+                    };
+                    arguments += object JAVA::_references::StringReference {
+                        value := variableExpr.ownedInit.xmap toExprSingle(variables).toString();
+                    };
+                };
+            };
+        };
+        localVariables2->add(variable);
+    };
+    result += self.xmap toValidationCode(expr![LetExp].ownedIn, context, variables2, contextVariable, resultVariable, localVariables2);
 }
 
- 
+/**
+ * Map OCL constraint to the loop:
+ *
+ *         for (Node context : Helper.iterate(root, "{path}")) {
+ *             {validation code}
+ *         }
+ */
+mapping Constraint::toForAll(
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
+    contextVariable : JAVA::_references::ReferenceableElement,
+    resultVariable : JAVA::_references::ReferenceableElement,
+    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
+when { expr.isForAll() }
+{
+    var contextExpr := expr![IteratorExp].ownedSource;
+    result += object JAVA::statements::ForEachLoop {
+        var contextParam := object JAVA::parameters::OrdinaryParameter {
+            name := 'context';
+            typeReference := object JAVA::types::ClassifierReference {
+                target := contextVariable.getInterface('org.w3c.dom.Node');
+            };
+        };
+        next := contextParam;
+        collection := object JAVA::_references::IdentifierReference {
+            target := object JAVA::classifiers::Class { name := 'Helper'; };
+            next := object JAVA::_references::MethodCall {
+                target := object JAVA::members::ClassMethod { name := 'iterate'; };
+                arguments := object JAVA::_references::IdentifierReference {
+                    target := contextVariable;
+                };
+                arguments += object JAVA::_references::StringReference {
+                    //var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+                    value := contextExpr.xmap toExprSingle(variables).toString();
+                };
+            };
+        };
+        statement := object JAVA::statements::Block {
+            var variables2 := variables;
+            // TODO: This must be refactored. Java variables must be mapped to XPath ones
+            /*var nestingLevelsCount := contextExpr.countNestingLevels();
+            if (nestingLevelsCount > 0) {
+                var path := object PathExpr {
+                    step := object SelfStepExpr {
+                        step := object AbbrevReverseStep { kind := AbbrevReverseStepKind::parent }
+                    };
+                    step += Sequence{1..nestingLevelsCount - 1}->collect(
+                        object ChildStepExpr {
+                            step := object AbbrevReverseStep { kind := AbbrevReverseStepKind::parent }
+                        });
+                };
+                variables2->put(expr.getContext(), path);
+            };*/
+            variables2->put(context, object PathExpr { step := object RootStepExpr { } });
+            expr![IteratorExp].ownedIterators->forEach (iterator) {
+                variables2->put(iterator, object PathExpr {
+                    step := object FunctionCall {
+                        name := createQName('current');
+                    }
+                });
+            };
+            statements += self.xmap toValidationCode(expr![IteratorExp].ownedBody, expr![IteratorExp].ownedIterators->any(true), variables2, contextParam, resultVariable, localVariables);
+        };
+    };
+}
+
+/**
+ * Map OCL constraint to the invocation of Helper.check():
+ *
+ *         result.add(Helper.check(
+ *             context,
+ *             "{rule XPath expression}",
+ *             "{error message}",
+ *             "{valid message}"));
+ */
+mapping Constraint::toHelperCheckInvocation(
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
+    contextVariable : JAVA::_references::ReferenceableElement,
+    resultVariable : JAVA::_references::ReferenceableElement,
+    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
+{
+    result += object JAVA::statements::ExpressionStatement {
+    	expression := object JAVA::expressions::AssignmentExpression {
+            child := object JAVA::_references::IdentifierReference {
+                target := resultVariable;
+                next := object JAVA::_references::MethodCall {
+                    target := object JAVA::members::ClassMethod { name := 'add'; };
+                    arguments := object JAVA::_references::IdentifierReference {
+                        target := object JAVA::classifiers::Class { name := 'Helper'; };
+                        next := object JAVA::_references::MethodCall {
+                            target := object JAVA::members::ClassMethod { name := 'check'; };
+
+                            arguments := object JAVA::_references::IdentifierReference {
+                                target := contextVariable;
+                            };
+                            arguments += object JAVA::_references::StringReference {
+                                value := expr.xmap toExprSingle(variables).toString();
+                            };
+
+                            arguments += object JAVA::_references::IdentifierReference {
+                                target := contextVariable.getClass('java.util.Arrays');
+                                next := object JAVA::_references::MethodCall {
+                                    target := object JAVA::members::ClassMethod { name := 'asList' };
+                                    arguments := localVariables->collect(v|
+                                        object JAVA::_references::IdentifierReference {
+                                            target := v;
+                                        });
+                                };
+                            };
+
+                            var rule := self.xmap toRule();
+                            arguments += rule.errorMessage.toMessage(contextVariable, context.type, variables);
+                            if (notEmpty(rule.successMessage)) {
+                                arguments += rule.successMessage.toMessage(contextVariable, context.type, variables);
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+}
+
+
+/*
+mapping Constraint::toImplies(
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
+    contextVariable : JAVA::_references::ReferenceableElement,
+    resultVariable : JAVA::_references::ReferenceableElement,
+    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
+when { expr[OperationCallExp].referredOperation->one(isBooleanOperation('implies')) }
+{
+    var premise := expr![OCL::OperationCallExp].ownedSource;
+    var consequent := expr![OCL::OperationCallExp].ownedArguments->first();
+
+    result += object JAVA::statements::Condition {
+        condition := object JAVA::_references::IdentifierReference {
+            target := object JAVA::classifiers::Class { name := 'Helper'; };
+            next := object JAVA::_references::MethodCall {
+                target := object JAVA::members::ClassMethod { name := 'evaluate'; };
+                arguments += object JAVA::_references::IdentifierReference {
+                    target := contextVariable;
+                };
+
+            };
+        };
+    };
+            
+        premise.xmap toExprSingle(variables)
+    };
+    
+    
+     object JAVA::expressions::ConditionalOrExpression {
+        children := object JAVA::expressions::UnaryExpression {
+            operators := object JAVA::operators::Negate { };
+            child := premise.xmap toCheckMethodCall();
+        };
+        var existsCall := object PathExpr {
+            step := object RootStepExpr { };
+            step += object AbbrevForwardStep {
+                kind := AbbrevForwardStepKind::child;
+                nodeTest := object QNameTest { name := consequent[OCL::IteratorExp].ownedIterators->any(true).type.getQName(); };
+                var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+                predicate := body.xmap replaceSelf(body).xmap toExprSingle(variables).predicate();
+            };
+        }.xmap toExistsMethodCall(body);
+        if (negateConsequent) {
+            children += object JAVA::expressions::UnaryExpression {
+                operators := object JAVA::operators::Negate { };
+                child := existsCall;
+            };
+        }
+        else {
+            children += existsCall;
+        };
+    };
+
+    result += self.xmap toValidationCode(expr![LetExp].ownedIn, context, variables2, contextVariable, resultVariable, localVariables2);
+}
+*/
 /*
         // TODO: The following logic splits OCL-expression containing allInstances() method
         // into Helper.check() and Helper.exists() invocations.
@@ -277,157 +476,9 @@ disjuncts
         }
         else {
             res := expr.xmap toCheckMethodCall();
-        }*/
+        }
+*/
 
- 
-/**
- * Map OCL constraint to the loop:
- *
- *         for (Node context : Helper.iterate(root, "{path}")) {
- *             {validation code}
- *         }
- */
-mapping Constraint::toForAll(
-    expr : OCLExpression,
-    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
-    contextVariable : JAVA::_references::ReferenceableElement,
-    resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
-when { expr.isForAll() }
-{
-    //log('Constraint::toForAll');
-    //log(expr.toString());
-    var contextExpr := expr![IteratorExp].ownedSource;
-    result += object JAVA::statements::ForEachLoop {
-        var contextParam := object JAVA::parameters::OrdinaryParameter {
-            name := 'context';
-            typeReference := object JAVA::types::ClassifierReference {
-                target := contextVariable.getInterface('org.w3c.dom.Node');
-            };
-        };
-        next := contextParam;
-        collection := object JAVA::_references::IdentifierReference {
-            target := object JAVA::classifiers::Class { name := 'Helper'; };
-            next := object JAVA::_references::MethodCall {
-                target := object JAVA::members::ClassMethod { name := 'iterate'; };
-                arguments := object JAVA::_references::IdentifierReference {
-                    target := contextVariable;
-                };
-                arguments += object JAVA::_references::StringReference {
-                    //var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-                    value := contextExpr.xmap toExprSingle(variables).toString();
-                };
-            };
-        };
-        statement := object JAVA::statements::Block {
-            var variables2 := variables;
-            // TODO: This must be refactored. Java variables must be mapped to XPath ones
-            /*var nestingLevelsCount := contextExpr.countNestingLevels();
-            if (nestingLevelsCount > 0) {
-                var path := object PathExpr {
-                    step := object SelfStepExpr {
-                        step := object AbbrevReverseStep { kind := AbbrevReverseStepKind::parent }
-                    };
-                    step += Sequence{1..nestingLevelsCount - 1}->collect(
-                        object ChildStepExpr {
-                            step := object AbbrevReverseStep { kind := AbbrevReverseStepKind::parent }
-                        });
-                };
-                variables2->put(expr.getContext(), path);
-            };*/
-            variables2->put(expr.getContext(), object PathExpr { step := object RootStepExpr { } });
-            expr![IteratorExp].ownedIterators->forEach (iterator) {
-                variables2->put(iterator, object PathExpr {
-                    step := object FunctionCall {
-                        name := createQName('current');
-                    }
-                });
-            };
-            statements += self.xmap toValidationCode2(expr![IteratorExp].ownedBody, variables2, contextParam, resultVariable);
-        };
-    };
-}
-
-// TODO: It's a bad idea to count levels.
-// It's better to declare an XPath variables for Java variables and to use variable resolver
-query OCLExpression::countNestingLevels() : Integer
-{
-    var message := 'ERROR: Unable to count nesting levels for ' + self.metaClassName();
-    log(message);
-    raise Exception(message);
-    return null;
-}
-
-query PropertyCallExp::countNestingLevels() : Integer =
-    self.ownedSource.countNestingLevels() + 1;
-
-query VariableExp::countNestingLevels() : Integer = 1;
-
-query IteratorExp::countNestingLevels() : Integer
-{
-    if (self.referredIteration.name = 'select') {
-        return self.ownedSource.countNestingLevels();
-    }
-    else {
-        var message := 'ERROR: Unable to count nesting levels for ' + self.metaClassName();
-        log(message);
-        raise Exception(message);
-    };
-    return null;
-}
-
-/**
- * Map OCL constraint to the invocation of Helper.validate():
- *
- *         result.add(Helper.validate(
- *             context,
- *             "{rule XPath expression}",
- *             "{error message}",
- *             "{valid message}"));
- */
-mapping Constraint::toHelperValidateInvocation(
-    expr : OCLExpression,
-    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
-    contextVariable : JAVA::_references::ReferenceableElement,
-    resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
-{
-    //log('Constraint::toHelperValidateInvocation');
-    //log(expr.toString());
-    //log(expr.xmap toExprSingle(variables).toString());
-    result += object JAVA::statements::ExpressionStatement {
-    	expression := object JAVA::expressions::AssignmentExpression {
-            child := object JAVA::_references::IdentifierReference {
-                target := resultVariable;
-                next := object JAVA::_references::MethodCall {
-                    target := object JAVA::members::ClassMethod { name := 'add'; };
-                    arguments := object JAVA::_references::IdentifierReference {
-                        target := object JAVA::classifiers::Class { name := 'Helper'; };
-                        next := object JAVA::_references::MethodCall {
-                            target := object JAVA::members::ClassMethod { name := 'validate'; };
-                            
-                            arguments := object JAVA::_references::IdentifierReference {
-                                target := contextVariable;
-                            };
-                            arguments += object JAVA::_references::StringReference {
-                                value := expr.xmap toExprSingle(variables).toString();
-                            };
-    
-                            // TODO: The following logic must be moved to Helper and reused in the XSLT generator
-                            var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
-                            assert fatal (doc->size() >= 2 and doc->size() <= 3)
-                                with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
-                                    self.ownedComment.body->any(true));
-    
-                            arguments += doc->at(2).toMessage(contextVariable, expr.getContext().type, variables);
-                            if (doc->size() >= 3) {
-                                arguments += doc->at(3).toMessage(contextVariable, expr.getContext().type, variables);
-                            };
-                        };
-                    };
-                };
-            };
-        };
-    };
-}
 
 /**
  * Converts string of the form
@@ -466,11 +517,6 @@ query String::toMessage(contextVariable : JAVA::_references::ReferenceableElemen
         };
     };
 }
-
-
-
-
-
 
 mapping OCLExpression::toCheckMethodCall() : JAVA::_references::IdentifierReference
 {
@@ -584,8 +630,8 @@ mapping Param::toNewConstructorCall() : JAVA::instantiations::NewConstructorCall
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
 
-query String::quoteJavaName() : String =
-    self.replaceAll('[^A-Za-z0-9]', '_');
+//query String::quoteJavaName() : String =
+//    self.replaceAll('[^A-Za-z0-9]', '_');
 
 query OCLExpression::getType() : String
 {
@@ -611,15 +657,46 @@ query OCL::Type::getType() : String
         };
     };
     raise IllegalArgumentException('Unknown data type ' + self.metaClassName() + ' ' + self.repr() + ' ' + self.oclIsKindOf(OCL::Element).repr());
-    return null; 
+    return null;
 }
 
 query OCLExpression::isRelatedToSelf() : Boolean =
     if self.oclIsKindOf(PropertyCallExp) then self![PropertyCallExp].ownedSource.isRelatedToSelf()
-    elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isRelatedToSelf() or ownedArguments->forAll(isRelatedToSelf())) 
+    elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isRelatedToSelf() or ownedArguments->forAll(isRelatedToSelf()))
     else self.oclIsKindOf(VariableExp) and self![VariableExp].referredVariable.name = 'self' endif;
 
 query OCLExpression::isBasedOnSelf() : Boolean =
     if self.oclIsKindOf(PropertyCallExp) then self![PropertyCallExp].ownedSource.isBasedOnSelf()
-    elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isBasedOnSelf() and ownedArguments->forAll(isBasedOnSelf())) 
+    elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isBasedOnSelf() and ownedArguments->forAll(isBasedOnSelf()))
     else self.oclIsKindOf(VariableExp) and self![VariableExp].referredVariable.name = 'self' endif;
+
+
+// TODO: It's a bad idea to count levels.
+// It's better to declare an XPath variables for Java variables and to use variable resolver
+/*
+query OCLExpression::countNestingLevels() : Integer
+{
+    var message := 'ERROR: Unable to count nesting levels for ' + self.metaClassName();
+    log(message);
+    raise Exception(message);
+    return null;
+}
+
+query PropertyCallExp::countNestingLevels() : Integer =
+    self.ownedSource.countNestingLevels() + 1;
+
+query VariableExp::countNestingLevels() : Integer = 1;
+
+query IteratorExp::countNestingLevels() : Integer
+{
+    if (self.referredIteration.name = 'select') {
+        return self.ownedSource.countNestingLevels();
+    }
+    else {
+        var message := 'ERROR: Unable to count nesting levels for ' + self.metaClassName();
+        log(message);
+        raise Exception(message);
+    };
+    return null;
+}
+*/

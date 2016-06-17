@@ -54,7 +54,9 @@ import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.uml.UMLStandaloneSetup;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.essentialocl.EssentialOCLStandaloneSetup;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Constraint;
@@ -130,8 +132,14 @@ public class Main {
             /*try {
                 for (PackageableElement el : uml.getPackagedElements()) {
                     if (el instanceof Classifier) {
-                        for (Constraint rule : ((Classifier)el).getOwnedRules()) {
-                            UtilitiesLibrary.toExpressionInOCL(rule);
+//                        for (Constraint rule : ((Classifier)el).getOwnedRules()) {
+//                            UtilitiesLibrary.toExpressionInOCL(rule);
+//                        }
+                        if (!((Classifier)el).getOwnedRules().isEmpty()) {
+                            OCL ocl = OCL.newInstance();
+                            org.eclipse.ocl.pivot.Class messageAS = ocl.getMetamodelManager().getASOf(org.eclipse.ocl.pivot.Class.class, el);
+                            ExpressionInOCL expr = ocl.createInvariant(messageAS, "CustomerCreditTransferInitiationV03.allInstances()->notEmpty()");
+                            System.out.println("Expression: " + expr);
                         }
                     }
                 }
