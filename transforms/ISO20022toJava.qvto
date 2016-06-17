@@ -36,7 +36,7 @@ property params : Dict(OCLExpression, Set(Param));
 main()
 {
     useFunctionQNames := true;
-    emptySelf := true;
+    emptySelf := false;
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toCompilationUnit();
 }
 
@@ -293,7 +293,15 @@ when { expr.isForAll() }
                 };
                 variables2->put(expr.getContext(), path);
             };*/
-            variables2->put(context, object PathExpr { step := object RootStepExpr { } });
+            // TODO: Refactor it and emptySelf
+            // Relative path is better because of non-determenistic Document root, which is sometimes present, sometimes absent
+            variables2->put(context, object PathExpr {
+                step := object RootStepExpr { };
+                step += object AbbrevForwardStep {
+                    kind := AbbrevForwardStepKind::child;
+                    nodeTest := object QNameTest { name := self.owner![NamedElement].getQName() };
+                };
+            });
             expr![IteratorExp].ownedIterators->forEach (iterator) {
                 variables2->put(iterator, object PathExpr {
                     step := object FunctionCall {
@@ -490,15 +498,24 @@ query String::toMessage(contextVariable : JAVA::_references::ReferenceableElemen
 {
     var str := '';
     var args : List(String);
-    self.tokenizeDocOCL()->forEach (token) {
-        if (token.isExpr) {
-            str := str + '%s';
-            args += token.text.toExpressionInOCL(context).ownedBody.xmap toExprSingle(variables).toString();
-        }
-        else {
-            str := str + token.text;
+    try {
+        // TODO: Ugly hack, refactor it
+        emptySelf := true;
+        self.tokenizeDocOCL()->forEach (token) {
+            if (token.isExpr) {
+                str := str + '%s';
+                args += token.text.toExpressionInOCL(context).ownedBody.xmap toExprSingle(variables).toString();
+            }
+            else {
+                str := str + token.text;
+            };
         };
+    }
+    except () {
+        emptySelf := false;
     };
+    emptySelf := false;
+	
     return object JAVA::_references::IdentifierReference {
         target := contextVariable.getClass('com.centreit.repiso.ocl.validator.validation.Helper');
         next := object JAVA::_references::MethodCall {
