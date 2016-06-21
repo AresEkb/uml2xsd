@@ -38,20 +38,23 @@ main()
     useFunctionQNames := true;
     emptySelf := false;
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toCompilationUnit();
+    //m.objectsOfKind(Classifier)->select(name = 'CustomerCreditTransferInitiationV03')->toCompilationUnit();
 }
 
 /**
  * Map a message definition to the following compilation unit:
  *
- * package com.centreit.repiso.ocl.validator.validation;
+ * package com.centreit.repiso.validator.validation;
  *
+ * import java.util.Arrays;
  * import java.util.List;
  * import javax.annotation.Generated;
  * import org.w3c.dom.Node;
- * import com.centreit.repiso.ocl.validator.validation.BaseValidator;
- * import com.centreit.repiso.ocl.validator.validation.Helper;
- * import com.centreit.repiso.ocl.validator.validation.RuleMetadata;
- * import com.centreit.repiso.ocl.validator.validation.RuleResult;
+ * import com.centreit.repiso.validator.validation.BaseValidator;
+ * import com.centreit.repiso.validator.validation.Helper;
+ * import com.centreit.repiso.validator.validation.RuleMetadata;
+ * import com.centreit.repiso.validator.validation.RuleResult;
+ * import com.centreit.repiso.validator.validation.Variable;
  *
  * @Generated("uml2xsd")
  * public class {name} extends BaseValidator {
@@ -66,20 +69,22 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
     log('  Found message ' + self.name);
 
     name := self.name;
-    namespaces := 'com.centreit.repiso.ocl.validator.validation'.tokenize('.');
+    namespaces := 'com.centreit.repiso.validator.validation'.tokenize('.');
 
+    addClassImport(result, 'java.util.Arrays');
     addInterfaceImport(result, 'java.util.List');
     addAnnotationImport(result, 'javax.annotation.Generated');
     addInterfaceImport(result, 'org.w3c.dom.Node');
-    addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.BaseValidator');
-    addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.Helper');
-    addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.RuleResult');
-    addClassImport(result, 'com.centreit.repiso.ocl.validator.validation.RuleMetadata');
+    addClassImport(result, 'com.centreit.repiso.validator.validation.BaseValidator');
+    addClassImport(result, 'com.centreit.repiso.validator.validation.Helper');
+    addClassImport(result, 'com.centreit.repiso.validator.validation.RuleResult');
+    addClassImport(result, 'com.centreit.repiso.validator.validation.RuleMetadata');
+    addClassImport(result, 'com.centreit.repiso.validator.validation.Variable');
 
     classifiers := object JAVA::classifiers::Class {
         name := className;
 
-        _extends := result.getClassReference('com.centreit.repiso.ocl.validator.validation.BaseValidator');
+        _extends := result.getClassReference('com.centreit.repiso.validator.validation.BaseValidator');
 
         annotationsAndModifiers += object JAVA::annotations::AnnotationInstance {
             annotation := result.getAnnotation('javax.annotation.Generated');
@@ -119,7 +124,7 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
     name := 'check' + rule.id.toIdentifier().capitalize();
 
     annotationsAndModifiers += object JAVA::annotations::AnnotationInstance {
-        annotation := result.getClass('com.centreit.repiso.ocl.validator.validation.RuleMetadata');
+        annotation := result.getClass('com.centreit.repiso.validator.validation.RuleMetadata');
         parameter := object JAVA::annotations::AnnotationParameterList {
             settings += object JAVA::annotations::AnnotationAttributeSetting {
                 attribute := object JAVA::members::InterfaceMethod { name := 'id' };
@@ -154,7 +159,7 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
         typeReference := object JAVA::types::ClassifierReference {
             target := result.getInterface('java.util.List');
             typeArguments := object JAVA::generics::QualifiedTypeArgument {
-                typeReference := result.getClassReference('com.centreit.repiso.ocl.validator.validation.RuleResult');
+                typeReference := result.getClassReference('com.centreit.repiso.validator.validation.RuleResult');
             };
         };
     };
@@ -217,7 +222,7 @@ when { expr.isLet() }
     result += object JAVA::statements::LocalVariableStatement {
         variable := object JAVA::variables::LocalVariable {
             name := variableName;
-            typeReference := contextVariable.getClassReference('java.lang.Object');
+            typeReference := contextVariable.getClassReference('com.centreit.repiso.validator.validation.Variable');
             initialValue := object JAVA::_references::IdentifierReference {
                 target := object JAVA::classifiers::Class { name := 'Helper'; };
                 next := object JAVA::_references::MethodCall {
@@ -273,7 +278,9 @@ when { expr.isForAll() }
                 };
                 arguments += object JAVA::_references::StringReference {
                     //var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+                    //log('=== from ' + contextExpr.toString());
                     value := contextExpr.xmap toExprSingle(variables).toString();
+                    //log('=== to   ' + value);
                 };
             };
         };
@@ -297,9 +304,11 @@ when { expr.isForAll() }
             // Relative path is better because of non-determenistic Document root, which is sometimes present, sometimes absent
             variables2->put(context, object PathExpr {
                 step := object RootStepExpr { };
-                step += object AbbrevForwardStep {
-                    kind := AbbrevForwardStepKind::child;
-                    nodeTest := object QNameTest { name := self.owner![NamedElement].getQName() };
+                step += object SelfStepExpr {
+                	step := object AbbrevForwardStep {
+                        kind := AbbrevForwardStepKind::child;
+                        nodeTest := object QNameTest { name := self.owner![NamedElement].getQName() };
+                    };
                 };
             });
             expr![IteratorExp].ownedIterators->forEach (iterator) {
@@ -517,7 +526,7 @@ query String::toMessage(contextVariable : JAVA::_references::ReferenceableElemen
     emptySelf := false;
 	
     return object JAVA::_references::IdentifierReference {
-        target := contextVariable.getClass('com.centreit.repiso.ocl.validator.validation.Helper');
+        target := contextVariable.getClass('com.centreit.repiso.validator.validation.Helper');
         next := object JAVA::_references::MethodCall {
             target := object JAVA::members::ClassMethod { name := 'format'; };
             arguments := object JAVA::_references::IdentifierReference {
