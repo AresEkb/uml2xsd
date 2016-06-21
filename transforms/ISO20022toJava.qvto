@@ -38,7 +38,6 @@ main()
     useFunctionQNames := true;
     emptySelf := false;
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toCompilationUnit();
-    //m.objectsOfKind(Classifier)->select(name = 'CustomerCreditTransferInitiationV03')->toCompilationUnit();
 }
 
 /**
@@ -202,7 +201,7 @@ disjuncts
 /**
  * Map OCL constraint to the variable declaration:
  *
- *         Object {varible name} = Helper.variable({context variable}, "{varible name}", "{variable init expression}");
+ *         Variable {variable name} = Helper.variable({context variable}, "{varible name}", "{variable init expression}");
  *         {validation code}
  */
 mapping Constraint::toLet(
@@ -503,13 +502,18 @@ when { expr[OperationCallExp].referredOperation->one(isBooleanOperation('implies
  * to
  *   Helper.format(context, "Some text %s, more text %s...", "{XPath expression 1}", ...),
  */
-query String::toMessage(contextVariable : JAVA::_references::ReferenceableElement, context : OCL::Type, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : JAVA::_references::IdentifierReference
+query String::toMessage(
+    contextVariable : JAVA::_references::ReferenceableElement,
+    context : OCL::Type,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : JAVA::_references::IdentifierReference
 {
     var str := '';
     var args : List(String);
     try {
         // TODO: Ugly hack, refactor it
-        emptySelf := true;
+        if (variables->notEmpty()) {
+            emptySelf := true;
+        };
         self.tokenizeDocOCL()->forEach (token) {
             if (token.isExpr) {
                 str := str + '%s';
