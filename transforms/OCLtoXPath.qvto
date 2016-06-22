@@ -57,6 +57,8 @@ disjuncts
     IteratorExp::toForAll,
     IteratorExp::toOne,
     IteratorExp::toSelect,
+    IteratorExp::toReject,
+    OperationCallExp::toIncluding,
     // Comparision
     OperationCallExp::toLeftNotNull,
     OperationCallExp::toRightNotNull,
@@ -69,7 +71,7 @@ disjuncts
     VariableExp::toPathExpr2,
     VariableExp::toPathExpr3,
     PropertyCallExp::toPathExpr,
-    IteratorExp::toPathExpr,
+    IteratorExp::toCollect,
     // Functions
     OperationCallExp::toAsSet,
     OperationCallExp::toAsType,
@@ -97,6 +99,8 @@ disjuncts
     CollectionLiteralExp::toSequence,
     // Constructions
     IfExp::toIfElse,
+    // External
+    IteratorExp::toExternalExists,
     // Unknown expressions
     OCLExpression::raiseError
 {
@@ -146,7 +150,7 @@ mapping IfExp::toIfElse(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : I
 }
 
 mapping IteratorExp::toExists(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
-when { self.referredIteration.name = 'exists' }
+when { self.referredIteration.name = 'exists' and not self.isExternal() }
 {
     init {
         result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables)).booleanExpr();
@@ -160,7 +164,7 @@ when { self.referredIteration.name = 'forAll' }
         result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables).notExpr()).notExpr();
     }
 }
-
+/*
 mapping IteratorExp::toOne(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ComparisonExpr
 when { self.referredIteration.name = 'one' }
 {
@@ -171,6 +175,13 @@ when { self.referredIteration.name = 'one' }
     operator := object GeneralComp { operator := GeneralCompKind::eq };
     right := object IntegerLiteral { value := 1 };
 }
+*/
+mapping IteratorExp::toOne(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredIteration.name = 'one' }
+{
+    name := 'exactly-one'.createFunctionQName();
+    arg := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables));
+}
 
 mapping IteratorExp::toSelect(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.referredIteration.name = 'select' }
@@ -178,6 +189,24 @@ when { self.referredIteration.name = 'select' }
     init {
         result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables));
     }
+}
+
+mapping IteratorExp::toReject(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
+when { self.referredIteration.name = 'reject' }
+{
+    init {
+        result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables).notExpr());
+    }
+}
+
+// TODO: The mapping must return Expr
+mapping OperationCallExp::toIncluding(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ParenthesizedExpr
+when { self.referredOperation.name = 'including' }
+{
+    expr := object Expr {
+        expr := self.ownedSource.xmap toExprSingle(variables);
+        expr += self.ownedArguments.xmap toExprSingle(variables);
+    };
 }
 
 query ExprSingle::booleanExpr() : FunctionCall = object FunctionCall { name := 'boolean'.createFunctionQName(); arg := self; };
@@ -387,6 +416,7 @@ mapping OperationCallExp::toPath() : PathExpr
 */
 
 // TODO: All this code must be refactored
+/*
 mapping OCLExpression::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 disjuncts
     VariableExp::toPathExpr1,
@@ -394,10 +424,10 @@ disjuncts
     VariableExp::toPathExpr3,
     PropertyCallExp::toPathExpr,
     OperationCallExp::toAsTypePath,
-    OCLExpression::raiseError
+    OCLExpression::toOtherPathExpr
 {
 }
-
+*/
 // Self
 mapping VariableExp::toPathExpr1(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 when { self.referredVariable.name = 'self' }
@@ -405,25 +435,31 @@ when { self.referredVariable.name = 'self' }
     // TODO: It must be refactored
     // XPath for self isn't ought to be PathExpr. It may be VarRef (or something else?)
     init {
-        /*log('>>>');
-        variables->forEach (x) {
-        	log(x.toString());
+        /*log('-->>>');
+        variables->keys()->forEach (x) {
+        	log(x.toString() + ' ' + (x = self.referredVariable![Variable]).repr() + ' ' + emptySelf.repr());
         };
-        log('===');
+        //log('===');
         //log(self.getContext().repr());
-        log('<<<\n');*/
+        log('--<<<\n');*/
         if (not emptySelf) {
             result := object PathExpr {
                 step := object RootStepExpr { };
-                step += object AbbrevForwardStep {
-                    kind := AbbrevForwardStepKind::child;
-                    nodeTest := object QNameTest { name := self.type.getQName() };
+                step += object SelfStepExpr {
+                    step := object AbbrevForwardStep {
+                        kind := AbbrevForwardStepKind::child;
+                        nodeTest := object QNameTest { name := self.type.getQName() };
+                    };
                 };
             };
         }
         else {
+            //log('>>> ' + self.toString());
+            //log('=== ' + self.referredVariable![Variable].toString());
+            //log('=== ' + variables->hasKey(self.referredVariable![Variable]).toString());
             if (variables->hasKey(self.referredVariable![Variable])) {
-                result := variables->get(self.referredVariable![Variable]).deepclone()![PathExpr];
+                result := variables->get(self.referredVariable![Variable]).deepclone()![AnyExpr].pathExpr();
+                log(result.toString());
         	}
         	else {
                 result := object PathExpr {
@@ -459,7 +495,8 @@ when { self.referredVariable.name <> 'self' and self.referredVariable![Variable]
         log('<<<\n');*/
 
         if (variables->hasKey(self.referredVariable![Variable])) {
-            result := variables->get(self.referredVariable![Variable]).deepclone()![PathExpr];
+            //log('clone');
+            result := variables->get(self.referredVariable![Variable]).deepclone()![AnyExpr].pathExpr();
         }
         else {
             result := object PathExpr {
@@ -479,11 +516,13 @@ when { self.referredVariable.name <> 'self' and self.referredVariable![Variable]
 mapping VariableExp::toPathExpr3(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 when { self.referredVariable.name <> 'self' and self.referredVariable![Variable].representedParameter = null }
 {
-    var variable := variables->get(self.referredVariable![Variable]);
-    assert fatal (variable.oclIsKindOf(VarRef)) with log ('Variable ' + self.referredVariable.toString() + ' not found');
-    step := variable.deepclone()![VarRef];
+    init {
+        var variable := variables->get(self.referredVariable![Variable]);
+        assert fatal (variable.oclIsKindOf(VarRef)) with log ('Variable ' + self.referredVariable.toString() + ' not found');
+        result := variable.deepclone()![AnyExpr].pathExpr();
+    }
 }
-
+ 
 mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
     init {
@@ -492,7 +531,7 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
         // VariableExp (self or iterator variable) is the innermost
         // component in an input tree, but it should be a first step
         // in an output path.
-        result := self.ownedSource.xmap toPathExpr(variables);
+        result := self.ownedSource.xmap toExprSingle(variables).pathExpr();
         /*if (self.ownedSource.oclIsKindOf(VariableExp)) {
             if (self.ownedSource![VariableExp].referredVariable.name = 'self') {
                 //result := self.ownedSource[VariableExp]->collectOne(xmap toPathExpr());
@@ -510,16 +549,18 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
         }*/
     }
 
+    //log('>>> ' + result.toString());
     // Steps must be created only for Data Types. Data Elements must be skipped
     //log('===' + self.repr());
     //log('>>>' + self.referredProperty.owningClass.repr());
     //log('>>>' + self.referredProperty.owningClass.isDataType().repr());
+    //log(self.referredProperty.repr());
+    //log(self.referredProperty.getETarget().repr());
     if (self.referredProperty.owningClass.isDataType()) {
         // Type can be a Set(T)
         var type := self.referredProperty.type.unwrap();
 
-        // TODO: Something more adequate is needed here
-        assert fatal (type.toString() <> 'OclVoid') with log('Property doesn\'t have a type');
+        assert fatal (type.oclIsKindOf(NamedElement)) with log('Property doesn\'t have a type');
 
         var element : NamedElement;
         // Property is local
@@ -547,6 +588,7 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
                 nodeTest := object QNameTest { name := element.getQName() };
             };
         };
+        //log('item : ' + stepItem.toString());
         
         // Simplification: ./path/... = path/...
         if (step->size() >= 1) {
@@ -584,58 +626,92 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
 mapping OCLExpression::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle), predicate : ExprSingle) : PathExpr
 {
     init {
-        var path := self.xmap toExprSingle(variables);
-        assert fatal (path.oclIsKindOf(PathExpr)) with log('PathExpr expected instead of ' + path.metaClassName());
-        path.oclAsType(PathExpr).getLastAxisStep().predicate += predicate.predicate();
-        result := path.oclAsType(PathExpr);
+        result := self.xmap toExprSingle(variables).pathExpr();
+        result.getLastStepExpr().predicate += predicate.predicate();
     }
 }
 
 // TODO: Refactor it
 // collect iteration indicates multivalued features. It must not be ignored.
-mapping IteratorExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
+mapping IteratorExp::toCollect(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 when { self.referredIteration.name = 'collect' }
 {
     init {
-        result := self.ownedSource.xmap toPathExpr(variables);
+        result := self.ownedSource.xmap toExprSingle(variables).pathExpr();
     }
-    var body := self.ownedBody.xmap toExprSingle(variables);
+    assert fatal (step->notEmpty());
+    //log('>>>collect');
+    // TODO: Pass current iterator variable?
+    var body := self.ownedBody.xmap toExprSingle(variables).pathExpr();
     //log(' --- BODY: ' + self.ownedBody.repr());
     //log(' --- PATH: ' + body.toString());
-    step += object ChildStepExpr {
-        step := if body.oclIsKindOf(StepExprChild)
-            then body.oclAsType(StepExprChild)
-            else object ParenthesizedExpr { expr := body; } endif;
-    };
-    /*
-    assert fatal (body.oclIsKindOf(PathExpr)) with log('PathExpr expected instead of ' + body.metaClassName());
-    body.oclAsType(PathExpr).step->forEach (s) {
-        if (s.oclIsKindOf(SelfStepExpr)) {
+    if (body.step->notEmpty()) {
+        // TODO: It seems that there is a bug in the XPath metamodel.
+        // SelfStepExpr may be only a first step in the path.
+        // See concrete syntax for PathExpr.
+        var firstStep := body.step->at(1);
+        if (firstStep.oclIsKindOf(RootStepExpr)) {
             step += object ChildStepExpr {
-                step := s.oclAsType(SelfStepExpr).step.oclAsType(StepExpr);
-            }
+                step := object FilterExpr {
+                    primaryExpr := object ParenthesizedExpr {
+                        expr := body;
+                    };
+                };
+            };
         }
-        elif (s.oclIsKindOf(ChildStepExpr)) {
-            step += s;
+        elif (firstStep.oclIsKindOf(SelfStepExpr)) {
+            if (step->size() = 1 and step->at(1).oclIsKindOf(RootStepExpr)) {
+                step += firstStep;
+            }
+            else {
+                step += object ChildStepExpr {
+                    step := firstStep![SelfStepExpr].step;
+                };
+            };
+            step += body.step->subOrderedSet(2, body.step->size());
         }
         else {
-        	assert fatal (false);
-        };
+            step += body.step;
+        }
     };
-    */
 }
 
-query PathExpr::getLastAxisStep() : AxisStep
+query AnyExpr::pathExpr() : PathExpr =
+    if self.oclIsKindOf(PathExpr)
+    then self.oclAsType(PathExpr)
+    // TODO: The following logic is too complex, the XPath metamodel must be refactored
+    else object PathExpr {
+        step := object SelfStepExpr {
+            if (self.oclIsKindOf(AxisStep)) {
+                step := self.oclAsType(AxisStep);
+            }
+            else {
+                step := object FilterExpr {
+                    // Simplification: ((...)) = (...)
+                    if (self.oclIsKindOf(FilterExprChild)) {
+                        primaryExpr :=  self.oclAsType(FilterExprChild);
+                    }
+                    else {
+                        primaryExpr :=  object ParenthesizedExpr { expr := self };
+                    }
+                }
+            }
+        }
+    }
+    endif;
+
+query PathExpr::getLastStepExpr() : StepExpr
 {
+    assert fatal (self.step->notEmpty()) with log('Path doesn\'t contain steps');
     var lastStep = self.step->last();
-    var axisStep : AxisStep;
+    var axisStep : StepExpr;
     if (lastStep.oclIsKindOf(SelfStepExpr)) {
-        axisStep := lastStep.oclAsType(SelfStepExpr).step.oclAsType(AxisStep);
+        axisStep := lastStep.oclAsType(SelfStepExpr).step.oclAsType(StepExpr);
     }
     elif (lastStep.oclIsKindOf(ChildStepExpr)) {
-        axisStep := lastStep.oclAsType(ChildStepExpr).step.oclAsType(AxisStep);
+        axisStep := lastStep.oclAsType(ChildStepExpr).step.oclAsType(StepExpr);
     };
-    assert fatal (axisStep <> null) with log('Last AxisStep not found');
+    assert fatal (axisStep <> null) with log('Last StepExpr not found in ' + self.toString());
     return axisStep;
 } 
 
@@ -666,7 +742,7 @@ when { self.referredOperation.name = 'oclAsType' }
         result := self.ownedSource.xmap toExprSingle(variables);
     }
 }
-
+/*
 mapping OperationCallExp::toAsTypePath(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 when { self.referredOperation.name = 'oclAsType' }
 {
@@ -677,7 +753,7 @@ when { self.referredOperation.name = 'oclAsType' }
         //log('<<<');
     }
 }
-
+*/
 mapping OperationCallExp::toDistinctValues(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 when { self.referredOperation.name = 'asSet' and self.ownedArguments->isEmpty() }
 {
@@ -868,6 +944,7 @@ mapping RealLiteralExp::toLiteral(variables : Dict(OCL::Variable, XPATH2::ExprSi
 
 mapping StringLiteralExp::toLiteral(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : StringLiteral
 {
+    // TODO: It must be quoted by the string literal resolver in the XPath project
     value := self.stringSymbol.quote();
 }
 
@@ -876,6 +953,7 @@ mapping BooleanLiteralExp::toLiteral(variables : Dict(OCL::Variable, XPATH2::Exp
     name := if self.booleanSymbol then 'true' else 'false' endif.createFunctionQName();
 }
 
+// TODO: Return type must be Expr? ParenthesizedExpr is added if necessary.
 mapping CollectionLiteralExp::toSequence(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ParenthesizedExpr
 {
     assert fatal (self.ownedParts->forAll(oclIsKindOf(CollectionItem))) with log ('Only CollectionItem supported');
@@ -885,30 +963,31 @@ mapping CollectionLiteralExp::toSequence(variables : Dict(OCL::Variable, XPATH2:
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// Unknown expressions
-/*
-mapping OCLExpression::raiseError(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
+// External expressions
+
+mapping IteratorExp::toExternalExists(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredIteration.name = 'exists' and self.isExternal() }
 {
-    init {
-        if (self![OperationCallExp].referredOperation.name = 'oclAsType') {
-            result := self![OperationCallExp].ownedSource.xmap toExprSingle(variables);
-        }
-        else {
-            var message = '1Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr();
-            log(message);
-            //log(self![OperationCallExp].referredOperation.name);
-            //log((self![OperationCallExp].referredOperation.name = 'oclAsType').repr());
-            raise Exception(message);
-        }
-    }
+    name := createQName('urn:external-functions', 'exists', 'ext');
+    arg := object StringLiteral {
+        // TODO: It must be quoted by the string literal resolver in the XPath project
+        value := self.ownedSource![OperationCallExp].ownedSource.oclAsType(TypeExp).referredType.name.quote();
+    };
+    var variables2 := variables;
+    //self.ownedBody.
+    arg += object StringLiteral {
+        value := self.ownedBody.xmap toExprSingle(variables2).toString().quote();
+    };
 }
-*/
+
+query IteratorExp::isExternal() : Boolean =
+    self.ownedSource[OperationCallExp]->one(referredOperation.name = 'allInstances' and ownedSource.oclIsKindOf(TypeExp));
+
+//////////////////////////////////////////////////////////////////////////////
+// Unknown expressions
+
 mapping OCLExpression::raiseError(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
-    //var message = 'Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr();
-    //log(message);
-    //log(self![OperationCallExp].referredOperation.name);
-    //log((self![OperationCallExp].referredOperation.name = 'oclAsType').repr());
     assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
 }
 

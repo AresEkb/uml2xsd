@@ -28,7 +28,7 @@ exception IllegalArgumentException { }
 
 intermediate class Param { name : String; xpath : OCLExpression; type : String };
 
-property params : Dict(OCLExpression, Set(Param));
+//property params : Dict(OCLExpression, Set(Param));
 
 /**
  * Find all message definitions and map them to compilation units
@@ -36,7 +36,7 @@ property params : Dict(OCLExpression, Set(Param));
 main()
 {
     useFunctionQNames := true;
-    emptySelf := false;
+    emptySelf := true;
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toCompilationUnit();
 }
 
@@ -141,7 +141,7 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
             };
             if (notEmpty(rule.source)) {
                 settings += object JAVA::annotations::AnnotationAttributeSetting {
-                    attribute := object JAVA::members::InterfaceMethod { name := 'name' };
+                    attribute := object JAVA::members::InterfaceMethod { name := 'source' };
                     value := object JAVA::_references::StringReference { value := rule.source };
                 };
             };
@@ -169,7 +169,33 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
     try {
         var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
         var expr := self.toExpressionInOCL();
-        statements := self.xmap toValidationCode(expr.ownedBody, expr.ownedContext, variables, rootField, resultParam, List { });
+        assert fatal (not expr.ownedContext.oclIsInvalid());
+
+        var variableName := '__' + expr.ownedContext.name.toIdentifier();
+        variables->put(expr.ownedContext, object VarRef { varName := createQName(variableName) });
+        
+        var localVariables : List(JAVA::_references::ReferenceableElement);
+        statements += object JAVA::statements::LocalVariableStatement {
+            variable := object JAVA::variables::LocalVariable {
+                name := variableName;
+                typeReference := result.getClassReference('com.centreit.repiso.validator.validation.Variable');
+                initialValue := object JAVA::_references::IdentifierReference {
+                    target := object JAVA::classifiers::Class { name := 'Helper'; };
+                    next := object JAVA::_references::MethodCall {
+                        target := object JAVA::members::ClassMethod { name := 'variable'; };
+                        arguments += object JAVA::_references::IdentifierReference {
+                            target := rootField;
+                        };
+                        arguments += object JAVA::_references::StringReference {
+                            value := variableName;
+                        };
+                    };
+                };
+            };
+            localVariables->add(variable);
+        };
+
+        statements += self.xmap toValidationCode(expr.ownedBody, expr.ownedContext, expr.ownedContext, variables, rootField, resultParam, localVariables);
     }
     except () {
         log('WARNING: Unable to generate validation code');
@@ -186,6 +212,7 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
 
 mapping Constraint::toValidationCode(
     expr : OCLExpression,
+    root : OCL::Variable,
     context : OCL::Variable,
     variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
@@ -201,11 +228,12 @@ disjuncts
 /**
  * Map OCL constraint to the variable declaration:
  *
- *         Variable {variable name} = Helper.variable({context variable}, "{varible name}", "{variable init expression}");
+ *         Variable {variable name} = Helper.variable({context variable}, "{variable name}", "{variable init expression}");
  *         {validation code}
  */
 mapping Constraint::toLet(
     expr : OCLExpression,
+    root : OCL::Variable,
     context : OCL::Variable,
     variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
@@ -220,7 +248,7 @@ when { expr.isLet() }
     var localVariables2 := localVariables;
     result += object JAVA::statements::LocalVariableStatement {
         variable := object JAVA::variables::LocalVariable {
-            name := variableName;
+            name := '__' + variableName;
             typeReference := contextVariable.getClassReference('com.centreit.repiso.validator.validation.Variable');
             initialValue := object JAVA::_references::IdentifierReference {
                 target := object JAVA::classifiers::Class { name := 'Helper'; };
@@ -240,7 +268,7 @@ when { expr.isLet() }
         };
         localVariables2->add(variable);
     };
-    result += self.xmap toValidationCode(expr![LetExp].ownedIn, context, variables2, contextVariable, resultVariable, localVariables2);
+    result += self.xmap toValidationCode(expr![LetExp].ownedIn, root, context, variables2, contextVariable, resultVariable, localVariables2);
 }
 
 /**
@@ -252,6 +280,7 @@ when { expr.isLet() }
  */
 mapping Constraint::toForAll(
     expr : OCLExpression,
+    root : OCL::Variable,
     context : OCL::Variable,
     variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
@@ -278,13 +307,25 @@ when { expr.isForAll() }
                 arguments += object JAVA::_references::StringReference {
                     //var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
                     //log('=== from ' + contextExpr.toString());
-                    value := contextExpr.xmap toExprSingle(variables).toString();
+                    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);//->clone();//.oclAsType(Dict(OCL::Variable, XPATH2::ExprSingle));
+                    variables->keys()->forEach (key) {
+                    	variables2->put(key, variables->get(key));
+                    };
+                    variables2->put(root, object PathExpr {
+                        step := object RootStepExpr { };
+                        step += object SelfStepExpr {
+                            step := object AbbrevForwardStep {
+                                kind := AbbrevForwardStepKind::child;
+                                nodeTest := object QNameTest { name := root.type.getQName() };
+                            };
+                        };
+                    });
+                    value := contextExpr.xmap toExprSingle(variables2).toString();
                     //log('=== to   ' + value);
                 };
             };
         };
         statement := object JAVA::statements::Block {
-            var variables2 := variables;
             // TODO: This must be refactored. Java variables must be mapped to XPath ones
             /*var nestingLevelsCount := contextExpr.countNestingLevels();
             if (nestingLevelsCount > 0) {
@@ -301,23 +342,34 @@ when { expr.isForAll() }
             };*/
             // TODO: Refactor it and emptySelf
             // Relative path is better because of non-determenistic Document root, which is sometimes present, sometimes absent
-            variables2->put(context, object PathExpr {
-                step := object RootStepExpr { };
-                step += object SelfStepExpr {
-                	step := object AbbrevForwardStep {
-                        kind := AbbrevForwardStepKind::child;
-                        nodeTest := object QNameTest { name := self.owner![NamedElement].getQName() };
+            assert fatal (expr![IteratorExp].ownedIterators->size() = 1);
+            var iterator := expr![IteratorExp].ownedIterators->first();
+            var variableName := iterator.name.toIdentifier();
+            var variables2 := variables;
+            variables2->put(iterator, object VarRef { varName := createQName(variableName) });
+            
+            var localVariables2 := localVariables;
+            statements += object JAVA::statements::LocalVariableStatement {
+                variable := object JAVA::variables::LocalVariable {
+                    name := '__' + variableName;
+                    typeReference := contextVariable.getClassReference('com.centreit.repiso.validator.validation.Variable');
+                    initialValue := object JAVA::_references::IdentifierReference {
+                        target := object JAVA::classifiers::Class { name := 'Helper'; };
+                        next := object JAVA::_references::MethodCall {
+                            target := object JAVA::members::ClassMethod { name := 'variable'; };
+                            arguments += object JAVA::_references::IdentifierReference {
+                                target := contextParam;
+                            };
+                            arguments += object JAVA::_references::StringReference {
+                                value := variableName;
+                            };
+                        };
                     };
                 };
-            });
-            expr![IteratorExp].ownedIterators->forEach (iterator) {
-                variables2->put(iterator, object PathExpr {
-                    step := object FunctionCall {
-                        name := createQName('current');
-                    }
-                });
+                localVariables2->add(variable);
             };
-            statements += self.xmap toValidationCode(expr![IteratorExp].ownedBody, expr![IteratorExp].ownedIterators->any(true), variables2, contextParam, resultVariable, localVariables);
+            
+            statements += self.xmap toValidationCode(expr![IteratorExp].ownedBody, root, iterator, variables2, contextParam, resultVariable, localVariables);
         };
     };
 }
@@ -328,11 +380,13 @@ when { expr.isForAll() }
  *         result.add(Helper.check(
  *             context,
  *             "{rule XPath expression}",
+ *             Arrays.asList({variables list}),
  *             "{error message}",
- *             "{valid message}"));
+ *             "{success message}"));
  */
 mapping Constraint::toHelperCheckInvocation(
     expr : OCLExpression,
+    root : OCL::Variable,
     context : OCL::Variable,
     variables : Dict(OCL::Variable, XPATH2::ExprSingle),
     contextVariable : JAVA::_references::ReferenceableElement,
@@ -353,8 +407,10 @@ mapping Constraint::toHelperCheckInvocation(
                             arguments := object JAVA::_references::IdentifierReference {
                                 target := contextVariable;
                             };
+                            log('from ' + expr.toString());
                             arguments += object JAVA::_references::StringReference {
-                                value := expr.xmap toExprSingle(variables).toString();
+                                value := expr/*.xmap replaceSelf(root)*/.xmap toExprSingle(variables).toString();
+                                log('to   ' + value);
                             };
 
                             arguments += object JAVA::_references::IdentifierReference {
@@ -511,9 +567,9 @@ query String::toMessage(
     var args : List(String);
     try {
         // TODO: Ugly hack, refactor it
-        if (variables->notEmpty()) {
-            emptySelf := true;
-        };
+        //if (variables->notEmpty()) {
+        //    emptySelf := true;
+        //};
         self.tokenizeDocOCL()->forEach (token) {
             if (token.isExpr) {
                 str := str + '%s';
@@ -525,9 +581,9 @@ query String::toMessage(
         };
     }
     except () {
-        emptySelf := false;
+        //emptySelf := false;
     };
-    emptySelf := false;
+    //emptySelf := false;
 	
     return object JAVA::_references::IdentifierReference {
         target := contextVariable.getClass('com.centreit.repiso.validator.validation.Helper');
@@ -547,7 +603,7 @@ query String::toMessage(
         };
     };
 }
-
+/*
 mapping OCLExpression::toCheckMethodCall() : JAVA::_references::IdentifierReference
 {
     target := object JAVA::classifiers::Class {
@@ -562,24 +618,27 @@ mapping OCLExpression::toCheckMethodCall() : JAVA::_references::IdentifierRefere
         arguments += object JAVA::_references::StringReference { value := self.xmap toExprSingle(variables).toString(); };
     };
 }
-
-mapping OCLExpression::replaceSelf(expr : OCLExpression) : OCLExpression
+*/
+mapping OCLExpression::replaceSelf(variable : OCL::Variable) : OCLExpression
 disjuncts
     PropertyCallExp::replaceSelf,
     OperationCallExp::replaceSelf
 {
 }
 
-mapping PropertyCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
+mapping PropertyCallExp::replaceSelf(variable : OCL::Variable) : OCLExpression
 {
     init {
         //log(self.isBasedOnSelf().repr() + ' ' + self.isRelatedToSelf().repr() + ' ' + self.repr());
         if (self.isBasedOnSelf()) {
-            var id = 'param' + getSeqNumber().toString();
-            var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
-            paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(PropertyCallExp); };
-            params->put(expr, paramSet);
-            result := object StringLiteralExp { stringSymbol := ':' + id };
+            //var id = 'param' + getSeqNumber().toString();
+            //var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
+            //paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(PropertyCallExp); };
+            //params->put(expr, paramSet);
+            //result := object StringLiteralExp { stringSymbol := ':' + id };
+            result := object VariableExp {
+                referredVariable := variable;
+            };
     	}
     	else {
             result := self.deepclone().oclAsType(PropertyCallExp);
@@ -587,15 +646,20 @@ mapping PropertyCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
     }
 }
 
-mapping OperationCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
+// TODO: Всё это неправильно, видимо нужно найти VariableExp для self и заменить его на какую-то явную переменную
+// А лучше вообще не модифицировать OCL, а учесть эту логику при преобразовании в XPath
+mapping OperationCallExp::replaceSelf(variable : OCL::Variable) : OCLExpression
 {
     init {
         if (self.isBasedOnSelf()) {
-            var id = 'param' + getSeqNumber().toString();
-            var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
-            paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(OperationCallExp); };
-            params->put(expr, paramSet);
-            result := object StringLiteralExp { stringSymbol := ':' + id };
+            //var id = 'param' + getSeqNumber().toString();
+            //var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
+            //paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(OperationCallExp); };
+            //params->put(expr, paramSet);
+            //result := object StringLiteralExp { stringSymbol := ':' + id };
+            result := object VariableExp {
+                referredVariable := variable;
+            };
         }
         elif (not(self.isRelatedToSelf())) {
             result := self.deepclone().oclAsType(OperationCallExp);
@@ -603,14 +667,14 @@ mapping OperationCallExp::replaceSelf(expr : OCLExpression) : OCLExpression
         else {
             var op := self.deepclone().oclAsType(OperationCallExp);
             object op : OperationCallExp {
-            	ownedSource := self.ownedSource.xmap replaceSelf(expr);
-            	ownedArguments := self.ownedArguments->replaceSelf(expr);
+            	ownedSource := self.ownedSource.xmap replaceSelf(variable);
+            	ownedArguments := self.ownedArguments->replaceSelf(variable);
             };
             result := op;
         };
     }
 }
-
+/*
 mapping ExprSingle::toExistsMethodCall(expr : OCLExpression) : JAVA::_references::IdentifierReference
 {
     target := object JAVA::classifiers::Class {
@@ -656,13 +720,13 @@ mapping Param::toNewConstructorCall() : JAVA::instantiations::NewConstructorCall
         next := object JAVA::_references::ReflectiveClassReference { };
     };
 }
-
+*/
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
 
 //query String::quoteJavaName() : String =
 //    self.replaceAll('[^A-Za-z0-9]', '_');
-
+/*
 query OCLExpression::getType() : String
 {
     if (self.oclIsKindOf(OperationCallExp)) {
@@ -689,7 +753,7 @@ query OCL::Type::getType() : String
     raise IllegalArgumentException('Unknown data type ' + self.metaClassName() + ' ' + self.repr() + ' ' + self.oclIsKindOf(OCL::Element).repr());
     return null;
 }
-
+*/
 query OCLExpression::isRelatedToSelf() : Boolean =
     if self.oclIsKindOf(PropertyCallExp) then self![PropertyCallExp].ownedSource.isRelatedToSelf()
     elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isRelatedToSelf() or ownedArguments->forAll(isRelatedToSelf()))
