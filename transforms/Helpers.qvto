@@ -107,10 +107,10 @@ query NamedElement::getAnnotation(name : String) : String
     var annotations := self.ownedComment->select(eAnnotations->exists(source = name)).body;
     var count := annotations->size();
     if (count = 0) {
-        assert fatal (false) with log('Required annotation ' + name + ' is not specified for ' + self.metaClassName() + ' " + self.name + "');
+        assert fatal (false) with log('Required annotation ' + name + ' is not specified for ' + self.metaClassName() + ' "' + self.name + '"');
     }
     elif (count > 1) {
-        assert fatal (false) with log('Multiple annotations ' + name + ' are specified for ' + self.metaClassName() + ' " + self.name + " while exactly one is required');
+        assert fatal (false) with log('Multiple annotations ' + name + ' are specified for ' + self.metaClassName() + ' "' + self.name + '" while exactly one is required');
     };
     return annotations->any(true);
 }

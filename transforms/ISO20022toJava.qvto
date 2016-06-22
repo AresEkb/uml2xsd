@@ -175,7 +175,7 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
         variables->put(expr.ownedContext, object VarRef { varName := createQName(variableName) });
         
         var localVariables : List(JAVA::_references::ReferenceableElement);
-        statements += object JAVA::statements::LocalVariableStatement {
+        var selfVarStatement := object JAVA::statements::LocalVariableStatement {
             variable := object JAVA::variables::LocalVariable {
                 name := variableName;
                 typeReference := result.getClassReference('com.centreit.repiso.validator.validation.Variable');
@@ -195,7 +195,10 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
             localVariables->add(variable);
         };
 
-        statements += self.xmap toValidationCode(expr.ownedBody, expr.ownedContext, expr.ownedContext, variables, rootField, resultParam, localVariables);
+        var validationStatements := self.xmap toValidationCode(expr.ownedBody, expr.ownedContext, expr.ownedContext, variables, rootField, resultParam, localVariables);
+        
+        statements += selfVarStatement;
+        statements += validationStatements;
     }
     except () {
         log('WARNING: Unable to generate validation code');
