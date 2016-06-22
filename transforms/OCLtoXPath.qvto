@@ -164,7 +164,9 @@ when { self.referredIteration.name = 'forAll' }
         result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables).notExpr()).notExpr();
     }
 }
-/*
+
+// Note: fn:exactly-one can't be used here, because it returns a single object contained in the sequence
+// and raises an error if sequence isn't a singleton. But this operation must return true/false instead. 
 mapping IteratorExp::toOne(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ComparisonExpr
 when { self.referredIteration.name = 'one' }
 {
@@ -174,13 +176,6 @@ when { self.referredIteration.name = 'one' }
     };
     operator := object GeneralComp { operator := GeneralCompKind::eq };
     right := object IntegerLiteral { value := 1 };
-}
-*/
-mapping IteratorExp::toOne(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
-when { self.referredIteration.name = 'one' }
-{
-    name := 'exactly-one'.createFunctionQName();
-    arg := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables));
 }
 
 mapping IteratorExp::toSelect(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
@@ -459,7 +454,7 @@ when { self.referredVariable.name = 'self' }
             //log('=== ' + variables->hasKey(self.referredVariable![Variable]).toString());
             if (variables->hasKey(self.referredVariable![Variable])) {
                 result := variables->get(self.referredVariable![Variable]).deepclone()![AnyExpr].pathExpr();
-                log(result.toString());
+                //log(result.toString());
         	}
         	else {
                 result := object PathExpr {
@@ -619,7 +614,7 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
     elif (self.referredProperty.owningClass.isDataElement()) {
     }
     else {
-        assert fatal (false) with log('Something is wrong');
+        assert fatal (false) with log(self.referredProperty.owningClass.name + ' must be either type or element');
     }
 }
 
@@ -980,9 +975,6 @@ when { self.referredIteration.name = 'exists' and self.isExternal() }
     };
 }
 
-query IteratorExp::isExternal() : Boolean =
-    self.ownedSource[OperationCallExp]->one(referredOperation.name = 'allInstances' and ownedSource.oclIsKindOf(TypeExp));
-
 //////////////////////////////////////////////////////////////////////////////
 // Unknown expressions
 
@@ -993,6 +985,24 @@ mapping OCLExpression::raiseError(variables : Dict(OCL::Variable, XPATH2::ExprSi
 
 //////////////////////////////////////////////////////////////////////////////
 // Helpers
+
+query OCLExpression::isExternal() : Boolean =
+    assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+
+query LiteralExp::isExternal() : Boolean = false;
+
+query VariableExp::isExternal() : Boolean = false;
+
+query LetExp::isExternal() : Boolean =
+    self.ownedVariable.ownedInit.isExternal() or self.ownedIn.isExternal();
+
+query PropertyCallExp::isExternal() : Boolean = false;
+
+query OperationCallExp::isExternal() : Boolean =
+    self.ownedSource.isExternal() or self.ownedArguments->exists(isExternal());
+
+query IteratorExp::isExternal() : Boolean =
+    self.ownedSource[OperationCallExp]->one(referredOperation.name = 'allInstances' and ownedSource.oclIsKindOf(TypeExp));
 
 query NamedElement::unwrap() : NamedElement =
     if self.oclIsKindOf(SetType) then self.oclAsType(SetType).elementType else self endif;

@@ -24,9 +24,7 @@ modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 
 transformation ISO20022toJava(in m : UML, out j : JAVA);
 
-exception IllegalArgumentException { }
-
-intermediate class Param { name : String; xpath : OCLExpression; type : String };
+//exception IllegalArgumentException { }
 
 //property params : Dict(OCLExpression, Set(Param));
 
@@ -54,6 +52,7 @@ main()
  * import com.centreit.repiso.validator.validation.RuleMetadata;
  * import com.centreit.repiso.validator.validation.RuleResult;
  * import com.centreit.repiso.validator.validation.Variable;
+ * import com.centreit.repiso.validator.validation.XPathParam;
  *
  * @Generated("uml2xsd")
  * public class {name} extends BaseValidator {
@@ -79,6 +78,7 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
     addClassImport(result, 'com.centreit.repiso.validator.validation.RuleResult');
     addClassImport(result, 'com.centreit.repiso.validator.validation.RuleMetadata');
     addClassImport(result, 'com.centreit.repiso.validator.validation.Variable');
+    addClassImport(result, 'com.centreit.repiso.validator.validation.XPathParam');
 
     classifiers := object JAVA::classifiers::Class {
         name := className;
@@ -407,10 +407,11 @@ mapping Constraint::toHelperCheckInvocation(
                             arguments := object JAVA::_references::IdentifierReference {
                                 target := contextVariable;
                             };
-                            log('from ' + expr.toString());
+                            
                             arguments += object JAVA::_references::StringReference {
-                                value := expr/*.xmap replaceSelf(root)*/.xmap toExprSingle(variables).toString();
-                                log('to   ' + value);
+                                value := expr.replaceLocal().xmap toExprSingle(variables).toString()
+                                    .replaceAll("'(:param\\d+)'", "$1")
+                                    .replaceAll("'(:param\\d+)'", "$1"); // TODO: There is a strange bug, param is quoted twice
                             };
 
                             arguments += object JAVA::_references::IdentifierReference {
@@ -421,6 +422,16 @@ mapping Constraint::toHelperCheckInvocation(
                                         object JAVA::_references::IdentifierReference {
                                             target := v;
                                         });
+                                };
+                            };
+
+                            arguments += object JAVA::_references::IdentifierReference {
+                                target := object JAVA::classifiers::Class { name := 'Arrays'; };
+                                next := object JAVA::_references::MethodCall {
+                                    target := object JAVA::members::ClassMethod {
+                                        name := 'asList';
+                                    };
+                                    arguments := expr.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(variables);
                                 };
                             };
 
@@ -437,123 +448,32 @@ mapping Constraint::toHelperCheckInvocation(
     };
 }
 
-
-/*
-mapping Constraint::toImplies(
-    expr : OCLExpression,
-    context : OCL::Variable,
-    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
-    contextVariable : JAVA::_references::ReferenceableElement,
-    resultVariable : JAVA::_references::ReferenceableElement,
-    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
-when { expr[OperationCallExp].referredOperation->one(isBooleanOperation('implies')) }
+mapping Param::toNewConstructorCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : JAVA::instantiations::NewConstructorCall
 {
-    var premise := expr![OCL::OperationCallExp].ownedSource;
-    var consequent := expr![OCL::OperationCallExp].ownedArguments->first();
-
-    result += object JAVA::statements::Condition {
-        condition := object JAVA::_references::IdentifierReference {
-            target := object JAVA::classifiers::Class { name := 'Helper'; };
-            next := object JAVA::_references::MethodCall {
-                target := object JAVA::members::ClassMethod { name := 'evaluate'; };
-                arguments += object JAVA::_references::IdentifierReference {
-                    target := contextVariable;
-                };
-
-            };
+    typeReference := object JAVA::types::ClassifierReference {
+        target := object JAVA::classifiers::Class {
+            name := 'XPathParam';
         };
     };
-            
-        premise.xmap toExprSingle(variables)
+    arguments := object JAVA::_references::StringReference {
+        value := self.name;
     };
-    
-    
-     object JAVA::expressions::ConditionalOrExpression {
-        children := object JAVA::expressions::UnaryExpression {
-            operators := object JAVA::operators::Negate { };
-            child := premise.xmap toCheckMethodCall();
-        };
-        var existsCall := object PathExpr {
-            step := object RootStepExpr { };
-            step += object AbbrevForwardStep {
-                kind := AbbrevForwardStepKind::child;
-                nodeTest := object QNameTest { name := consequent[OCL::IteratorExp].ownedIterators->any(true).type.getQName(); };
-                var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-                predicate := body.xmap replaceSelf(body).xmap toExprSingle(variables).predicate();
-            };
-        }.xmap toExistsMethodCall(body);
-        if (negateConsequent) {
-            children += object JAVA::expressions::UnaryExpression {
-                operators := object JAVA::operators::Negate { };
-                child := existsCall;
-            };
-        }
-        else {
-            children += existsCall;
-        };
+    arguments += object JAVA::_references::StringReference {
+        value := self.ocl.xmap toExprSingle(variables).toString();
     };
-
-    result += self.xmap toValidationCode(expr![LetExp].ownedIn, context, variables2, contextVariable, resultVariable, localVariables2);
+    arguments += object JAVA::_references::IdentifierReference {
+        target := object JAVA::classifiers::Class {
+            name := self.ocl.getType();
+        };
+        next := object JAVA::_references::ReflectiveClassReference { };
+    };
 }
-*/
-/*
-        // TODO: The following logic splits OCL-expression containing allInstances() method
-        // into Helper.check() and Helper.exists() invocations.
-        // It shouldn't be hardcoded. Something more universal is needed here.
-        // The main idea is that all code surrounding allInstances() must be converted into Java code instead of XPath one.
-        if (expr[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('implies'))) {
-            var premise := expr![OCL::OperationCallExp].ownedSource;
-            var consequent := expr![OCL::OperationCallExp].ownedArguments->any(true);
-            var negateConsequent = false;
-            if (consequent[OCL::OperationCallExp]->one(referredOperation.isBooleanOperation('not'))) {
-                negateConsequent := true;
-                consequent := consequent[OCL::OperationCallExp].ownedSource->any(true);
-            };
-            if (consequent[OCL::IteratorExp]->one(referredIteration.name = 'exists')) {
-                var source := consequent[OCL::IteratorExp].ownedSource;
-                var body := consequent[OCL::IteratorExp].ownedBody->any(true);
-                if (source[OCL::OperationCallExp]->one(referredOperation.name = 'allInstances')) {
-                    res := object JAVA::expressions::ConditionalOrExpression {
-                        children := object JAVA::expressions::UnaryExpression {
-                            operators := object JAVA::operators::Negate { };
-                            child := premise.xmap toCheckMethodCall();
-                        };
-                        var existsCall := object PathExpr {
-                            step := object RootStepExpr { };
-                            step += object AbbrevForwardStep {
-                                kind := AbbrevForwardStepKind::child;
-                                nodeTest := object QNameTest { name := consequent[OCL::IteratorExp].ownedIterators->any(true).type.getQName(); };
-                                var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-                                predicate := body.xmap replaceSelf(body).xmap toExprSingle(variables).predicate();
-                            };
-                        }.xmap toExistsMethodCall(body);
-                        if (negateConsequent) {
-                            children += object JAVA::expressions::UnaryExpression {
-                                operators := object JAVA::operators::Negate { };
-                                child := existsCall;
-                            };
-                        }
-                        else {
-                            children += existsCall;
-                        };
-                    };
-                }
-                else {
-                    res := expr.xmap toCheckMethodCall();
-                };
-            }
-            else {
-                res := expr.xmap toCheckMethodCall();
-            };
-        }
-        else {
-            res := expr.xmap toCheckMethodCall();
-        }
-*/
 
+///////////////////////////////////////////////////////////////////////////////
+// Helpers
 
 /**
- * Converts string of the form
+ * Convert string of the form
  *   Some text {{ocl expression 1}}, more text {{ocl expression 2}}...
  * to
  *   Helper.format(context, "Some text %s, more text %s...", "{XPath expression 1}", ...),
@@ -565,25 +485,15 @@ query String::toMessage(
 {
     var str := '';
     var args : List(String);
-    try {
-        // TODO: Ugly hack, refactor it
-        //if (variables->notEmpty()) {
-        //    emptySelf := true;
-        //};
-        self.tokenizeDocOCL()->forEach (token) {
-            if (token.isExpr) {
-                str := str + '%s';
-                args += token.text.toExpressionInOCL(context).ownedBody.xmap toExprSingle(variables).toString();
-            }
-            else {
-                str := str + token.text;
-            };
+    self.tokenizeDocOCL()->forEach (token) {
+        if (token.isExpr) {
+            str := str + '%s';
+            args += token.text.toExpressionInOCL(context).ownedBody.xmap toExprSingle(variables).toString();
+        }
+        else {
+            str := str + token.text;
         };
-    }
-    except () {
-        //emptySelf := false;
     };
-    //emptySelf := false;
 	
     return object JAVA::_references::IdentifierReference {
         target := contextVariable.getClass('com.centreit.repiso.validator.validation.Helper');
@@ -603,130 +513,122 @@ query String::toMessage(
         };
     };
 }
-/*
-mapping OCLExpression::toCheckMethodCall() : JAVA::_references::IdentifierReference
+
+/**
+ * Check whether each expression in OCL AST is local or external.
+ * Here is an example of the external expression:
+ *   SomeType.allInstances()->exists(externalVariable | ...)
+ * Local expressions are just copied without modifications.
+ * Within external expressions all references to local variables (e.g., self) are replaced by %s.
+ */
+
+query OCLExpression::replaceLocal() : OCLExpression =
+    self.replaceLocal(self);
+
+query OCLExpression::replaceLocal(expr : OCLExpression) : OCLExpression =
+	assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+
+query LiteralExp::replaceLocal(expr : OCLExpression) : OCLExpression = self;
+
+query VariableExp::replaceLocal(expr : OCLExpression) : OCLExpression = self;
+
+query PropertyCallExp::replaceLocal(expr : OCLExpression) : OCLExpression = self;
+
+query OperationCallExp::replaceLocal(expr : OCLExpression) : OCLExpression
 {
-    target := object JAVA::classifiers::Class {
-        name := 'Helper';
+    var op := self.deepclone().oclAsType(OperationCallExp);
+    object op : OperationCallExp {
+        ownedSource := self.ownedSource.replaceLocal(expr);
+        ownedArguments := self.ownedArguments->replaceLocal(expr);
     };
-    next := object JAVA::_references::MethodCall {
-        target := object JAVA::members::ClassMethod { name := 'check'; };
-        arguments := object JAVA::_references::IdentifierReference {
-            target := object JAVA::members::Field { name := 'message'; };
-        };
-        var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-        arguments += object JAVA::_references::StringReference { value := self.xmap toExprSingle(variables).toString(); };
-    };
-}
-*/
-mapping OCLExpression::replaceSelf(variable : OCL::Variable) : OCLExpression
-disjuncts
-    PropertyCallExp::replaceSelf,
-    OperationCallExp::replaceSelf
-{
+    return op;
 }
 
-mapping PropertyCallExp::replaceSelf(variable : OCL::Variable) : OCLExpression
+query IteratorExp::replaceLocal(expr : OCLExpression) : OCLExpression
 {
-    init {
-        //log(self.isBasedOnSelf().repr() + ' ' + self.isRelatedToSelf().repr() + ' ' + self.repr());
-        if (self.isBasedOnSelf()) {
-            //var id = 'param' + getSeqNumber().toString();
-            //var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
-            //paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(PropertyCallExp); };
-            //params->put(expr, paramSet);
-            //result := object StringLiteralExp { stringSymbol := ':' + id };
-            result := object VariableExp {
-                referredVariable := variable;
-            };
-    	}
-    	else {
-            result := self.deepclone().oclAsType(PropertyCallExp);
-    	};
-    }
+    if (self.isExternal()) {
+        var it := self.deepclone().oclAsType(IteratorExp);
+        object it : IteratorExp {
+            assert fatal (self.ownedIterators->size() = 1);
+            ownedBody := self.ownedBody.replaceLocal(expr, self.ownedIterators->first());
+        };
+        return it;
+    };
+    return self;
 }
 
-// TODO: Всё это неправильно, видимо нужно найти VariableExp для self и заменить его на какую-то явную переменную
-// А лучше вообще не модифицировать OCL, а учесть эту логику при преобразовании в XPath
-mapping OperationCallExp::replaceSelf(variable : OCL::Variable) : OCLExpression
+/**
+ * Replaces all local expressions (expressions which aren't based on externalVariable) by %s.
+ */
+
+query OCLExpression::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression =
+    assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+
+query LiteralExp::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression = self;
+
+query PropertyCallExp::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression =
+    if self.isLocalExpression(externalVariable)
+    then expr.xmap toParam(self).xpath
+    else self endif;
+
+query OperationCallExp::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression
 {
-    init {
-        if (self.isBasedOnSelf()) {
-            //var id = 'param' + getSeqNumber().toString();
-            //var paramSet := if params->hasKey(expr) then params->get(expr) else object Set(Param) { } endif;
-            //paramSet += object Param { name := id; xpath := self.deepclone().oclAsType(OperationCallExp); };
-            //params->put(expr, paramSet);
-            //result := object StringLiteralExp { stringSymbol := ':' + id };
-            result := object VariableExp {
-                referredVariable := variable;
-            };
-        }
-        elif (not(self.isRelatedToSelf())) {
-            result := self.deepclone().oclAsType(OperationCallExp);
-        }
-        else {
-            var op := self.deepclone().oclAsType(OperationCallExp);
-            object op : OperationCallExp {
-            	ownedSource := self.ownedSource.xmap replaceSelf(variable);
-            	ownedArguments := self.ownedArguments->replaceSelf(variable);
-            };
-            result := op;
-        };
-    }
-}
-/*
-mapping ExprSingle::toExistsMethodCall(expr : OCLExpression) : JAVA::_references::IdentifierReference
-{
-    target := object JAVA::classifiers::Class {
-        name := 'Helper';
+    if (self.isLocalExpression(externalVariable)) {
+        return expr.xmap toParam(self).xpath;
     };
-    next := object JAVA::_references::MethodCall {
-        target := object JAVA::members::ClassMethod { name := 'exists'; };
-        var xpath := self.toString();
-        arguments := object JAVA::_references::IdentifierReference {
-            target := object JAVA::members::Field { name := 'message'; };
-        };
-        arguments += object JAVA::_references::StringReference { value := xpath.replaceAll("'(:param\\d+)'", "$1"); };
-        arguments += object JAVA::_references::IdentifierReference {
-            target := object JAVA::classifiers::Class { name := 'Arrays'; };
-            next := object JAVA::_references::MethodCall {
-                target := object JAVA::members::ClassMethod {
-                    name := 'asList';
-                };
-                arguments := params->get(expr)->sortedBy(name)->toNewConstructorCall();
-            };
-        };
+    var op := self.deepclone().oclAsType(OperationCallExp);
+    object op : OperationCallExp {
+        ownedSource := self.ownedSource.replaceLocal(expr, externalVariable);
+        ownedArguments := self.ownedArguments->replaceLocal(expr, externalVariable);
+    };
+    return op;
+}
+
+/**
+ * Store param in QVTo trace
+ */
+
+intermediate class Param
+{
+    name : String;
+    ocl : OCLExpression;
+    xpath : StringLiteralExp;
+};
+
+mapping OCLExpression::toParam(expression : OCLExpression) : Param
+{
+    //''.getStrCounter('');
+    var id := 'param' + getSeqNumber().toString();
+    name := id;
+    ocl := expression;
+    xpath := object StringLiteralExp {
+        stringSymbol := ':' + id;
     };
 }
 
-mapping Param::toNewConstructorCall() : JAVA::instantiations::NewConstructorCall
-{
-    typeReference := object JAVA::types::ClassifierReference {
-        target := object JAVA::classifiers::Class {
-            name := 'XPathParam';
-        };
-    };
-    arguments := object JAVA::_references::StringReference {
-        value := self.name;
-    };
-    var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-    arguments += object JAVA::_references::StringReference {
-        value := self.xpath.xmap toExprSingle(variables).toString();
-    };
-    arguments += object JAVA::_references::IdentifierReference {
-        target := object JAVA::classifiers::Class {
-        	name := self.xpath.getType();
-        };
-        next := object JAVA::_references::ReflectiveClassReference { };
-    };
-}
-*/
-///////////////////////////////////////////////////////////////////////////////
-// Helpers
+/**
+ * Check whether expression is based on a variable, which differs from externalVariable (e.g., self).
+ */
 
-//query String::quoteJavaName() : String =
-//    self.replaceAll('[^A-Za-z0-9]', '_');
-/*
+query OCLExpression::isLocalExpression(externalVariable : OCL::Variable) : Boolean =
+    assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+
+query LiteralExp::isLocalExpression(externalVariable : OCL::Variable) : Boolean = false;
+
+query VariableExp::isLocalExpression(externalVariable : OCL::Variable) : Boolean =
+    self.referredVariable <> externalVariable;
+
+query PropertyCallExp::isLocalExpression(externalVariable : OCL::Variable) : Boolean =
+    self.ownedSource.isLocalExpression(externalVariable);
+
+query OperationCallExp::isLocalExpression(externalVariable : OCL::Variable) : Boolean =
+    self.ownedSource.isLocalExpression(externalVariable) and
+    self.ownedArguments->forAll(isLocalExpression(externalVariable));
+
+/**
+ * Detect OCL expression' type
+ */
+
 query OCLExpression::getType() : String
 {
     if (self.oclIsKindOf(OperationCallExp)) {
@@ -735,8 +637,8 @@ query OCLExpression::getType() : String
     elif (self.oclIsKindOf(PropertyCallExp)) {
         return  self.oclAsType(PropertyCallExp).type.getType();
     };
-    raise IllegalArgumentException('Unable to determine type of ' + self.repr());
-    return null;
+    assert fatal (false) with log('Unable to determine type of ' + self.repr());
+    return null; // HACK
 }
 
 query OCL::Type::getType() : String
@@ -750,47 +652,6 @@ query OCL::Type::getType() : String
             return 'String';
         };
     };
-    raise IllegalArgumentException('Unknown data type ' + self.metaClassName() + ' ' + self.repr() + ' ' + self.oclIsKindOf(OCL::Element).repr());
-    return null;
+    assert fatal (false) with log('Unknown data type ' + self.metaClassName() + ' ' + self.repr() + ' ' + self.oclIsKindOf(OCL::Element).repr());
+    return null; // HACK
 }
-*/
-query OCLExpression::isRelatedToSelf() : Boolean =
-    if self.oclIsKindOf(PropertyCallExp) then self![PropertyCallExp].ownedSource.isRelatedToSelf()
-    elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isRelatedToSelf() or ownedArguments->forAll(isRelatedToSelf()))
-    else self.oclIsKindOf(VariableExp) and self![VariableExp].referredVariable.name = 'self' endif;
-
-query OCLExpression::isBasedOnSelf() : Boolean =
-    if self.oclIsKindOf(PropertyCallExp) then self![PropertyCallExp].ownedSource.isBasedOnSelf()
-    elif self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(ownedSource.isBasedOnSelf() and ownedArguments->forAll(isBasedOnSelf()))
-    else self.oclIsKindOf(VariableExp) and self![VariableExp].referredVariable.name = 'self' endif;
-
-
-// TODO: It's a bad idea to count levels.
-// It's better to declare an XPath variables for Java variables and to use variable resolver
-/*
-query OCLExpression::countNestingLevels() : Integer
-{
-    var message := 'ERROR: Unable to count nesting levels for ' + self.metaClassName();
-    log(message);
-    raise Exception(message);
-    return null;
-}
-
-query PropertyCallExp::countNestingLevels() : Integer =
-    self.ownedSource.countNestingLevels() + 1;
-
-query VariableExp::countNestingLevels() : Integer = 1;
-
-query IteratorExp::countNestingLevels() : Integer
-{
-    if (self.referredIteration.name = 'select') {
-        return self.ownedSource.countNestingLevels();
-    }
-    else {
-        var message := 'ERROR: Unable to count nesting levels for ' + self.metaClassName();
-        log(message);
-        raise Exception(message);
-    };
-    return null;
-}
-*/

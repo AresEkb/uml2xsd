@@ -94,7 +94,7 @@ public class Main {
         final String iso20022validationStylysheet = "iso20022-validation.xsl";
         final String iso20022validationStylysheetForHTML = "iso20022-validation-html.xsl";
         final ModelKind modelKind;
-        
+
         parseCommandLineArgs(args);
 
         File outputFolder = new File(output);

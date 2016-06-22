@@ -67,7 +67,7 @@ mapping Classifier::toStylesheet() : DocumentRoot
     }->toFMEntry('variable');
 
     stylesheetObj.declarationGroup += self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->
-        //select(ownedRule->exists(isSupported()))->
+        //select(ownedRule->exists(not isExternal()))->
         select(ownedRule->notEmpty())->
         toTemplate(stylesheetObj, rootPathExpr, props)->toFMEntry('template');
 
@@ -151,7 +151,7 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
     
     self.ownedRule->sortedBy(name)->forEach (rule) {
         try {
-            instructionGroup += rule.map toInstructionGroup(stylesheet);
+            instructionGroup += rule.xmap toInstructionGroup(stylesheet);
         }
         except () {
     	   log('WARNING: Unable to generate validation code');
@@ -168,28 +168,35 @@ mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EF
         var expr := exprInOCL.ownedBody;
         var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
 
-        if (expr.isLet()) {
-            var variable := expr![LetExp].ownedVariable;
-            var variableName := (self.name + '_' + variable.name).toIdentifier();
-            expr := expr![LetExp].ownedIn;
-            variables->put(variable, object VarRef { varName := createQName(variableName) });
-            result += object VariableType {
-                name := variableName;
-                try {
-                    var variableInit := variable.ownedInit.xmap toExprSingle(variables);
-                    select := variableInit.toString();
-                }
-                except () {
-                    log('WARNING: Unable to transform init expression for variable ' + variableName);
-                }
-            }->toFMEntry('variable');
-        };
-        
-        if (expr.isForAll()) {
-            result += self->toForEach(stylesheet, self![IteratorExp].ownedIterators->first(), expr, variables)->toFMEntry('forEach');
+        if (expr.isExternal()) {
+        	result += object CommentType {
+        	   text := 'Rule ' + self.name + ' is unsupported';
+        	}->toFMEntry('comment');
         }
         else {
-            result += self->toValidate(stylesheet, exprInOCL.ownedContext, expr, variables)->toFMEntry('callTemplate');
+            if (expr.isLet()) {
+                var variable := expr![LetExp].ownedVariable;
+                var variableName := (self.name + '_' + variable.name).toIdentifier();
+                expr := expr![LetExp].ownedIn;
+                variables->put(variable, object VarRef { varName := createQName(variableName) });
+                result += object VariableType {
+                    name := variableName;
+                    try {
+                        var variableInit := variable.ownedInit.xmap toExprSingle(variables);
+                        select := variableInit.toString();
+                    }
+                    except () {
+                        log('WARNING: Unable to transform init expression for variable ' + variableName);
+                    }
+                }->toFMEntry('variable');
+            };
+            
+            if (expr.isForAll()) {
+                result += self->toForEach(stylesheet, self![IteratorExp].ownedIterators->first(), expr, variables)->toFMEntry('forEach');
+            }
+            else {
+                result += self->toValidate(stylesheet, exprInOCL.ownedContext, expr, variables)->toFMEntry('callTemplate');
+            }
         }
     }
 }
