@@ -93,7 +93,7 @@ query NamedElement::getNameWithStereotypes() : String =
     '<' + self.getAppliedStereotypes().name->sortedBy(str|str)->sep(',') + '> ' + self.name;
 
 query Element::getValue(stereotypeQName : String, propertyName : String) : String =
-  let stereotype : Stereotype = self.getAppliedStereotypes()->any(qualifiedName = stereotypeQName) in  
+  let stereotype : Stereotype = self.getAppliedStereotypes()->any(qualifiedName = stereotypeQName) in
   if stereotype = null then null else
     let value : String = self.getValue(stereotype, propertyName).oclAsType(String) in
     if value.size() > 0 then value else null endif

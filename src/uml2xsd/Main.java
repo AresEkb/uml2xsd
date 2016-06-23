@@ -54,18 +54,12 @@ import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.uml.UMLStandaloneSetup;
-import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.essentialocl.EssentialOCLStandaloneSetup;
-import org.eclipse.uml2.uml.Classifier;
-import org.eclipse.uml2.uml.Constraint;
 import org.eclipse.uml2.uml.Model;
-import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.resource.JaMoPPUtil;
@@ -78,8 +72,6 @@ import org.w3._2001.xml.schema.XMLSchema11Package;
 import org.w3._2007.xml.schema.versioning.XMLSchemaVersioningPackage;
 
 import com.google.common.io.Files;
-
-import iso20022.validation.result.ValidationResultPackage;
 
 public class Main {
 
@@ -272,7 +264,6 @@ public class Main {
         XMLSchema11Package.eINSTANCE.getEFactoryInstance();
         XMLSchemaVersioningPackage.eINSTANCE.getEFactoryInstance();
         XSLT20Package.eINSTANCE.getEFactoryInstance();
-        ValidationResultPackage.eINSTANCE.getEFactoryInstance();
         JavaPackage.eINSTANCE.getEFactoryInstance();
         //XHTML11Package.eINSTANCE.getEFactoryInstance();
 

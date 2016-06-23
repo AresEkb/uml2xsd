@@ -30,20 +30,4 @@
         </library>
     </extension>
 
-
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated iso20022-validation-result -->
-      <package
-            uri="urn:iso20022:validation:result"
-            class="iso20022.validation.result.ValidationResultPackage"
-            genModel="metamodel/iso20022-validation-result.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated iso20022-validation-result -->
-      <parser
-            type="validationresult"
-            class="iso20022.validation.result.util.ValidationResultResourceFactoryImpl"/>
-   </extension>
 </plugin>

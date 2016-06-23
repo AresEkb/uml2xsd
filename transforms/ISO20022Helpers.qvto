@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    Denis Nikiforov - initial API and implementation
  */
@@ -71,7 +71,7 @@ query OCLExpression::isLet() : Boolean =
 query OCLExpression::isSupportedByXPath() : Boolean =
     if self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(
         referredOperation.name <> 'allInstances' and ownedSource.isSupportedByXPath() and ownedArguments->forAll(isSupportedByXPath()))
-    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll( 
+    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll(
         ownedSource.isSupportedByXPath() and ownedBody->forAll(isSupportedByXPath()))
     else true endif;
 /*
@@ -123,12 +123,12 @@ query NamedElement::generateXMLTag() : String
     };
 
     assert fatal (name <> null and name.size() > 0) with log('For element ' + self.getNameWithStereotypes() + ' generated empty xmlTag');
-    
+
     return name;
 }
 
 // TODO: OCLtoXPath must be refactored, transformations must receive context type or variable
-// So in toPathExpr() the following code 
+// So in toPathExpr() the following code
 //   self.referredProperty.owningClass.isDataType()
 // will be replaced by
 //   context.isDataType()

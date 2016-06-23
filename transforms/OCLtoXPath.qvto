@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    Denis Nikiforov - initial API and implementation
  */
@@ -166,7 +166,7 @@ when { self.referredIteration.name = 'forAll' }
 }
 
 // Note: fn:exactly-one can't be used here, because it returns a single object contained in the sequence
-// and raises an error if sequence isn't a singleton. But this operation must return true/false instead. 
+// and raises an error if sequence isn't a singleton. But this operation must return true/false instead.
 mapping IteratorExp::toOne(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ComparisonExpr
 when { self.referredIteration.name = 'one' }
 {
@@ -237,15 +237,15 @@ query ExprSingle::orExpr(rhs : ExprSingle) : ExprSingle
 {
     var operands := self.orExprOperand();
     operands += rhs.orExprOperand();
-    return 
-    // Simplification: fn:not(...) or fn:not(...) = fn:not(... and ...)
-    if operands->forAll(isFunctionCall('not'.createFunctionQName())) then
-        object AndExpr { operand :=
-            operands->collect(
-                oclAsType(FunctionCall).arg->first().andExprOperand()) }.notExpr()
-    else
-        object OrExpr { operand := operands }
-    endif;
+    return
+        // Simplification: fn:not(...) or fn:not(...) = fn:not(... and ...)
+        if operands->forAll(isFunctionCall('not'.createFunctionQName())) then
+            object AndExpr { operand :=
+                operands->collect(
+                    oclAsType(FunctionCall).arg->first().andExprOperand()) }.notExpr()
+        else
+            object OrExpr { operand := operands }
+        endif;
 }
 
 query ExprSingle::orExprOperand() : OrderedSet(OrExprChild) =
@@ -517,7 +517,7 @@ when { self.referredVariable.name <> 'self' and self.referredVariable![Variable]
         result := variable.deepclone()![AnyExpr].pathExpr();
     }
 }
- 
+
 mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
     init {
@@ -584,7 +584,7 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
             };
         };
         //log('item : ' + stepItem.toString());
-        
+
         // Simplification: ./path/... = path/...
         if (step->size() >= 1) {
             if (step->at(1)[SelfStepExpr].step->one(oclIsKindOf(ContextItemExpr))) {
@@ -596,14 +596,14 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
                 }
         	}
         };
-        
+
         /*log('>>>>>>>>');
         step->forEach (x) {
             log(x.repr());
         };
         log('<<<<<<<<');*/
-        
-        // TODO: The logic is too complex XPath metamodel must be refactored 
+
+        // TODO: The logic is too complex XPath metamodel must be refactored
         if (step->isEmpty() or step->size() = 1 and step->at(1).oclIsKindOf(RootStepExpr)) {
             step += object SelfStepExpr { step := stepItem };
         }
@@ -708,7 +708,7 @@ query PathExpr::getLastStepExpr() : StepExpr
     };
     assert fatal (axisStep <> null) with log('Last StepExpr not found in ' + self.toString());
     return axisStep;
-} 
+}
 
 query ExprSingle::predicate() : Predicate =
     object Predicate { expr :=
@@ -980,14 +980,14 @@ when { self.referredIteration.name = 'exists' and self.isExternal() }
 
 mapping OCLExpression::raiseError(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
-    assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
 }
 
 //////////////////////////////////////////////////////////////////////////////
 // Helpers
 
 query OCLExpression::isExternal() : Boolean =
-    assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
 
 query LiteralExp::isExternal() : Boolean = false;
 
@@ -1025,12 +1025,12 @@ query NamedElement::isDataElement() : Boolean = self.getETarget().isDataElement(
 
 query Property::isAttribute() : Boolean = self.getETarget().isAttribute();
 
-query Operation::isBooleanOperation(name : String) : Boolean = 
+query Operation::isBooleanOperation(name : String) : Boolean =
     self.owningClass.oclIsKindOf(PrimitiveType) and
     self.owningClass.name = 'Boolean' and
     self.name = name;
 
-query Operation::isCollectionOperation() : Boolean = 
+query Operation::isCollectionOperation() : Boolean =
     self.owningClass.oclIsKindOf(CollectionType);
 
 query ExprSingle::isFunctionCall(name : QName) : Boolean =

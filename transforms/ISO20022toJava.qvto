@@ -173,7 +173,7 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
 
         var variableName := '__' + expr.ownedContext.name.toIdentifier();
         variables->put(expr.ownedContext, object VarRef { varName := createQName(variableName) });
-        
+
         var localVariables : List(JAVA::_references::ReferenceableElement);
         var selfVarStatement := object JAVA::statements::LocalVariableStatement {
             variable := object JAVA::variables::LocalVariable {
@@ -196,14 +196,14 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
         };
 
         var validationStatements := self.xmap toValidationCode(expr.ownedBody, expr.ownedContext, expr.ownedContext, variables, rootField, resultParam, localVariables);
-        
+
         statements += selfVarStatement;
         statements += validationStatements;
     }
     except () {
         log('WARNING: Unable to generate validation code');
     };
-    // This code can't be moved into exception handling section, because it seems that sometimes exceptions aren't raised 
+    // This code can't be moved into exception handling section, because it seems that sometimes exceptions aren't raised
     if (statements->isEmpty()) {
         statements += object JAVA::statements::Throw {
             throwable := object JAVA::instantiations::NewConstructorCall {
@@ -350,7 +350,7 @@ when { expr.isForAll() }
             var variableName := iterator.name.toIdentifier();
             var variables2 := variables;
             variables2->put(iterator, object VarRef { varName := createQName(variableName) });
-            
+
             var localVariables2 := localVariables;
             statements += object JAVA::statements::LocalVariableStatement {
                 variable := object JAVA::variables::LocalVariable {
@@ -371,7 +371,7 @@ when { expr.isForAll() }
                 };
                 localVariables2->add(variable);
             };
-            
+
             statements += self.xmap toValidationCode(expr![IteratorExp].ownedBody, root, iterator, variables2, contextParam, resultVariable, localVariables);
         };
     };
@@ -410,9 +410,10 @@ mapping Constraint::toHelperCheckInvocation(
                             arguments := object JAVA::_references::IdentifierReference {
                                 target := contextVariable;
                             };
-                            
+
+                            var expr2 := expr.replaceLocal();
                             arguments += object JAVA::_references::StringReference {
-                                value := expr.replaceLocal().xmap toExprSingle(variables).toString()
+                                value := expr2.replaceLocal().xmap toExprSingle(variables).toString()
                                     .replaceAll("'(:param\\d+)'", "$1")
                                     .replaceAll("'(:param\\d+)'", "$1"); // TODO: There is a strange bug, param is quoted twice
                             };
@@ -434,7 +435,7 @@ mapping Constraint::toHelperCheckInvocation(
                                     target := object JAVA::members::ClassMethod {
                                         name := 'asList';
                                     };
-                                    arguments := expr.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(variables);
+                                    arguments := expr2.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(variables);
                                 };
                             };
 
@@ -497,7 +498,7 @@ query String::toMessage(
             str := str + token.text;
         };
     };
-	
+
     return object JAVA::_references::IdentifierReference {
         target := contextVariable.getClass('com.centreit.repiso.validator.validation.Helper');
         next := object JAVA::_references::MethodCall {
@@ -529,13 +530,13 @@ query OCLExpression::replaceLocal() : OCLExpression =
     self.replaceLocal(self);
 
 query OCLExpression::replaceLocal(expr : OCLExpression) : OCLExpression =
-	assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
 
-query LiteralExp::replaceLocal(expr : OCLExpression) : OCLExpression = self;
+query LiteralExp::replaceLocal(expr : OCLExpression) : OCLExpression = self.deepclone().oclAsType(OCLExpression);
 
-query VariableExp::replaceLocal(expr : OCLExpression) : OCLExpression = self;
+query VariableExp::replaceLocal(expr : OCLExpression) : OCLExpression = self.deepclone().oclAsType(OCLExpression);
 
-query PropertyCallExp::replaceLocal(expr : OCLExpression) : OCLExpression = self;
+query PropertyCallExp::replaceLocal(expr : OCLExpression) : OCLExpression = self.deepclone().oclAsType(OCLExpression);
 
 query OperationCallExp::replaceLocal(expr : OCLExpression) : OCLExpression
 {
@@ -565,7 +566,7 @@ query IteratorExp::replaceLocal(expr : OCLExpression) : OCLExpression
  */
 
 query OCLExpression::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression =
-    assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
 
 query LiteralExp::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression = self;
 
@@ -614,7 +615,7 @@ mapping OCLExpression::toParam(expression : OCLExpression) : Param
  */
 
 query OCLExpression::isLocalExpression(externalVariable : OCL::Variable) : Boolean =
-    assert fatal (false) with log('Unknown expression with meta-class: "' + self.metaClassName() + '" : ' + self.repr());
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
 
 query LiteralExp::isLocalExpression(externalVariable : OCL::Variable) : Boolean = false;
 
@@ -629,7 +630,7 @@ query OperationCallExp::isLocalExpression(externalVariable : OCL::Variable) : Bo
     self.ownedArguments->forAll(isLocalExpression(externalVariable));
 
 /**
- * Detect OCL expression' type
+ * Determine OCL expression' type
  */
 
 query OCLExpression::getType() : String
@@ -655,6 +656,6 @@ query OCL::Type::getType() : String
             return 'String';
         };
     };
-    assert fatal (false) with log('Unknown data type ' + self.metaClassName() + ' ' + self.repr() + ' ' + self.oclIsKindOf(OCL::Element).repr());
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
     return null; // HACK
 }
