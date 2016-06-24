@@ -26,7 +26,6 @@ transformation EAEUtoXSD11(in m : UML, out x : XSD)
 
 main()
 {
-    emptySelf := true;
     m.objectsOfType(Package)->toSchema();
 }
 

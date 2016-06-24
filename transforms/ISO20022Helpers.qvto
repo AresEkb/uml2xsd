@@ -33,26 +33,28 @@ intermediate class Rule {
 
 mapping Constraint::toRule() : Rule
 {
-/*
-    id := self.getAnnotation('id');
-    name := self.getAnnotation('name', '');
-    description := self.getAnnotation('description');
-    source := self.getAnnotation('source', '');
-    ocl := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n');
-    errorMessage := self.getAnnotation('errorMessage');
-    successMessage := self.getAnnotation('successMessage', '');
-*/
-    var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
-    assert fatal (doc->size() >= 2 and doc->size() <= 3)
-        with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
-            self.ownedComment.body->any(true));
-    id := self.name;
-    name := '';
-    description := doc->at(1);
-    source := '';
-    ocl := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n');
-    errorMessage := doc->at(2);
-    successMessage := doc->at(3);
+    if (notEmpty(self.getAnnotation('id', ''))) {
+        id := self.getAnnotation('id');
+        name := self.getAnnotation('name', '');
+        description := self.getAnnotation('description', '');
+        source := self.getAnnotation('source', '');
+        ocl := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n');
+        errorMessage := self.getAnnotation('errorMessage');
+        successMessage := self.getAnnotation('successMessage', '');
+    }
+    else {
+        var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
+        assert fatal (doc->size() >= 2 and doc->size() <= 3)
+            with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
+                self.ownedComment.body->any(true));
+        id := self.name;
+        name := '';
+        description := doc->at(1);
+        source := '';
+        ocl := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n');
+        errorMessage := doc->at(2);
+        successMessage := doc->at(3);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

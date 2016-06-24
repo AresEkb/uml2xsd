@@ -30,9 +30,6 @@ transformation ISO20022toXSLT20(in m : UML, out x : XSLT);
 
 main()
 {
-    useFunctionQNames := true;
-    emptySelf := true;
-
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheet();
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheetForHTML();
 }
@@ -154,7 +151,7 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
             instructionGroup += rule.xmap toInstructionGroup(stylesheet);
         }
         except () {
-           log('WARNING: Unable to generate validation code');
+            log('WARNING: Unable to generate validation code');
         }
     };
 
@@ -170,7 +167,7 @@ mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EF
 
         if (expr.isExternal()) {
             result += object CommentType {
-               text := 'Rule ' + self.name + ' is unsupported';
+                text := 'Rule ' + self.name + ' is unsupported';
             }->toFMEntry('comment');
         }
         else {

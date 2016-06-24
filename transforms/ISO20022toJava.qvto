@@ -24,17 +24,11 @@ modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 
 transformation ISO20022toJava(in m : UML, out j : JAVA);
 
-//exception IllegalArgumentException { }
-
-//property params : Dict(OCLExpression, Set(Param));
-
 /**
  * Find all message definitions and map them to compilation units
  */
 main()
 {
-    useFunctionQNames := true;
-    emptySelf := true;
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toCompilationUnit();
 }
 
@@ -135,9 +129,11 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
                     value := object JAVA::_references::StringReference { value := rule.name };
                 };
             };
-            settings += object JAVA::annotations::AnnotationAttributeSetting {
-                attribute := object JAVA::members::InterfaceMethod { name := 'description' };
-                value := object JAVA::_references::StringReference { value := rule.description };
+            if (notEmpty(rule.description)) {
+                settings += object JAVA::annotations::AnnotationAttributeSetting {
+                    attribute := object JAVA::members::InterfaceMethod { name := 'description' };
+                    value := object JAVA::_references::StringReference { value := rule.description };
+                };
             };
             if (notEmpty(rule.source)) {
                 settings += object JAVA::annotations::AnnotationAttributeSetting {
@@ -246,7 +242,10 @@ when { expr.isLet() }
 {
     var variableExpr := expr![LetExp].ownedVariable;
     var variableName := variableExpr.name.toIdentifier();
-    var variables2 = variables;
+    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
+    variables->keys()->forEach (key) {
+        variables2->put(key, variables->get(key));
+    };
     variables2->put(variableExpr, object VarRef { varName := createQName(variableName) });
     var localVariables2 := localVariables;
     result += object JAVA::statements::LocalVariableStatement {
@@ -310,7 +309,7 @@ when { expr.isForAll() }
                 arguments += object JAVA::_references::StringReference {
                     //var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
                     //log('=== from ' + contextExpr.toString());
-                    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);//->clone();//.oclAsType(Dict(OCL::Variable, XPATH2::ExprSingle));
+                    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
                     variables->keys()->forEach (key) {
                         variables2->put(key, variables->get(key));
                     };
@@ -348,7 +347,10 @@ when { expr.isForAll() }
             assert fatal (expr![IteratorExp].ownedIterators->size() = 1);
             var iterator := expr![IteratorExp].ownedIterators->first();
             var variableName := iterator.name.toIdentifier();
-            var variables2 := variables;
+            var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
+            variables->keys()->forEach (key) {
+                variables2->put(key, variables->get(key));
+            };
             variables2->put(iterator, object VarRef { varName := createQName(variableName) });
 
             var localVariables2 := localVariables;
@@ -413,7 +415,7 @@ mapping Constraint::toHelperCheckInvocation(
 
                             var expr2 := expr.replaceLocal();
                             arguments += object JAVA::_references::StringReference {
-                                value := expr2.replaceLocal().xmap toExprSingle(variables).toString()
+                                value := expr2.xmap toExprSingle(variables).toString()
                                     .replaceAll("'(:param\\d+)'", "$1")
                                     .replaceAll("'(:param\\d+)'", "$1"); // TODO: There is a strange bug, param is quoted twice
                             };
@@ -526,21 +528,13 @@ query String::toMessage(
  * Within external expressions all references to local variables (e.g., self) are replaced by :paramN
  */
 
-query OCLExpression::replaceLocal() : OCLExpression =
-    self.replaceLocal(self);
+query OCLExpression::replaceLocal() : OCLExpression = self.replaceLocal(self);
 
-query OCLExpression::replaceLocal(expr : OCLExpression) : OCLExpression =
-    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
-
-query LiteralExp::replaceLocal(expr : OCLExpression) : OCLExpression = self.deepclone().oclAsType(OCLExpression);
-
-query VariableExp::replaceLocal(expr : OCLExpression) : OCLExpression = self.deepclone().oclAsType(OCLExpression);
-
-query PropertyCallExp::replaceLocal(expr : OCLExpression) : OCLExpression = self.deepclone().oclAsType(OCLExpression);
+query OCLExpression::replaceLocal(expr : OCLExpression) : OCLExpression = self.deepclone();
 
 query OperationCallExp::replaceLocal(expr : OCLExpression) : OCLExpression
 {
-    var op := self.deepclone().oclAsType(OperationCallExp);
+    var op := self.clone();
     object op : OperationCallExp {
         ownedSource := self.ownedSource.replaceLocal(expr);
         ownedArguments := self.ownedArguments->replaceLocal(expr);
@@ -551,63 +545,43 @@ query OperationCallExp::replaceLocal(expr : OCLExpression) : OCLExpression
 query IteratorExp::replaceLocal(expr : OCLExpression) : OCLExpression
 {
     if (self.isExternal()) {
-        var it := self.deepclone().oclAsType(IteratorExp);
+        var it := self.clone();
         object it : IteratorExp {
             assert fatal (self.ownedIterators->size() = 1);
+            ownedSource := self.ownedSource.replaceLocal(expr);
+            ownedIterators := self.ownedIterators.deepclone();
             ownedBody := self.ownedBody.replaceLocal(expr, self.ownedIterators->first());
         };
         return it;
     };
-    return self;
+    return self.deepclone();
 }
 
 /**
- * Replaces all local expressions (expressions which aren't based on externalVariable) by :paramN
+ * Replace all local expressions (expressions which aren't based on externalVariable) by :paramN
  */
 
 query OCLExpression::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression =
     assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
 
-query LiteralExp::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression = self;
+query LiteralExp::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression = self.deepclone();
 
 query PropertyCallExp::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression =
     if self.isLocalExpression(externalVariable)
-    then expr.xmap toParam(self).xpath
-    else self endif;
+    then expr.xmap toParam(self).symbol
+    else self.deepclone() endif;
 
 query OperationCallExp::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression
 {
     if (self.isLocalExpression(externalVariable)) {
-        return expr.xmap toParam(self).xpath;
+        return expr.xmap toParam(self).symbol;
     };
-    var op := self.deepclone().oclAsType(OperationCallExp);
+    var op := self.clone();
     object op : OperationCallExp {
         ownedSource := self.ownedSource.replaceLocal(expr, externalVariable);
         ownedArguments := self.ownedArguments->replaceLocal(expr, externalVariable);
     };
     return op;
-}
-
-/**
- * Store param in QVTo trace
- */
-
-intermediate class Param
-{
-    name : String;
-    ocl : OCLExpression;
-    xpath : StringLiteralExp;
-};
-
-mapping OCLExpression::toParam(expression : OCLExpression) : Param
-{
-    //''.getStrCounter('');
-    var id := 'param' + getSeqNumber().toString();
-    name := id;
-    ocl := expression;
-    xpath := object StringLiteralExp {
-        stringSymbol := ':' + id;
-    };
 }
 
 /**
@@ -630,14 +604,32 @@ query OperationCallExp::isLocalExpression(externalVariable : OCL::Variable) : Bo
     self.ownedArguments->forAll(isLocalExpression(externalVariable));
 
 /**
+ * Store param in QVTo trace
+ */
+
+intermediate class Param
+{
+    name : String;
+    ocl : OCLExpression;
+    symbol : StringLiteralExp;
+};
+
+mapping OCLExpression::toParam(expression : OCLExpression) : Param
+{
+    //''.getStrCounter('');
+    var id := 'param' + getSeqNumber().toString();
+    name := id;
+    ocl := expression;
+    symbol := object StringLiteralExp {
+        stringSymbol := ':' + id;
+    };
+}
+
+/**
  * Determine OCL expression' type
  */
 
-query OCLExpression::getType() : String =
-    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
-
-query OCL::TypedElement::getType() : String =
-    self.type.getType();
+query OCL::TypedElement::getType() : String = self.type.getType();
 
 query OCL::Type::getType() : String
 {

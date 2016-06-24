@@ -31,13 +31,6 @@ modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
 library OCLtoXPath;
 
-property useFunctionQNames : Boolean = true;
-
-// TODO: Replace by context
-property emptySelf : Boolean = false;
-
---intermediate class Context { variables : Dict(OCL::Variable, XPATH2::ExprSingle); };
-
 mapping ExpressionInOCL::toXPath() : Expr
 {
     //log('    Transforming OCL expression\n      ' + self.body.replaceAll('\n', '\n      '));
@@ -67,9 +60,8 @@ disjuncts
     OperationCallExp::toAdditiveExpr,
     OperationCallExp::toMultiplicativeExpr,
     // Path
-    VariableExp::toPathExpr1,
-    VariableExp::toPathExpr2,
-    VariableExp::toPathExpr3,
+    VariableExp::toPathExpr,
+    VariableExp::toVarRef,
     PropertyCallExp::toPathExpr,
     IteratorExp::toCollect,
     // Functions
@@ -389,159 +381,49 @@ query String::toMultiplicativeOp() : MultiplicativeOpKind =
 //////////////////////////////////////////////////////////////////////////////
 // Path
 
-/*
-mapping OCLExpression::toPath() : PathExpr
-disjuncts
-    PropertyCallExp::toPath,
-    OperationCallExp::toPath
+// Self or iterator
+mapping VariableExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
+when { self.referredVariable[Variable]->one(name = 'self' or representedParameter <> null) }
 {
-}
-
-mapping OperationCallExp::toPath() : PathExpr
-{
-    init {
-        // PropertyCallExp tree must be flattened.
-        // VariableExp (self or iterator variable) is the innermost
-        // component in an input tree, but it should be a first step
-        // in an output path.
-        log(self.ownedSource.metaClassName());
-        result := self.ownedSource[PropertyCallExp]->collectOne(xmap toPath());
-    }
-}
-*/
-
-// TODO: All this code must be refactored
-/*
-mapping OCLExpression::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
-disjuncts
-    VariableExp::toPathExpr1,
-    VariableExp::toPathExpr2,
-    VariableExp::toPathExpr3,
-    PropertyCallExp::toPathExpr,
-    OperationCallExp::toAsTypePath,
-    OCLExpression::toOtherPathExpr
-{
-}
-*/
-// Self
-mapping VariableExp::toPathExpr1(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
-when { self.referredVariable.name = 'self' }
-{
-    // TODO: It must be refactored
-    // XPath for self isn't ought to be PathExpr. It may be VarRef (or something else?)
     init {
         /*log('-->>>');
         variables->keys()->forEach (x) {
-            log(x.toString() + ' ' + (x = self.referredVariable![Variable]).repr() + ' ' + emptySelf.repr());
+            log(x.toString() + ' ' + (x = self.referredVariable![Variable]).repr());
         };
-        //log('===');
-        //log(self.getContext().repr());
         log('--<<<\n');*/
-        if (not emptySelf) {
-            result := object PathExpr {
-                step := object RootStepExpr { };
-                step += object SelfStepExpr {
-                    step := object AbbrevForwardStep {
-                        kind := AbbrevForwardStepKind::child;
-                        nodeTest := object QNameTest { name := self.type.getQName() };
-                    };
-                };
-            };
-        }
-        else {
-            //log('>>> ' + self.toString());
-            //log('=== ' + self.referredVariable![Variable].toString());
-            //log('=== ' + variables->hasKey(self.referredVariable![Variable]).toString());
-            if (variables->hasKey(self.referredVariable![Variable])) {
-                result := variables->get(self.referredVariable![Variable]).deepclone()![AnyExpr].pathExpr();
-                //log(result.toString());
-            }
-            else {
-                result := object PathExpr {
-                    step := object SelfStepExpr {
-                        step := object ContextItemExpr { };
-                    };
-                };
-            };
-        }
-    }
-}
-/*
-query OCLExpression::getContext() : OCL::Type;
-
-query CallExp::getContext() : OCL::Type =
-    self.ownedSource.getContext();
-
-query VariableExp::getContext() : OCL::Type =
-    self.referredVariable.type;
-*/
-
-// Iterator
-mapping VariableExp::toPathExpr2(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
-when { self.referredVariable.name <> 'self' and self.referredVariable![Variable].representedParameter <> null }
-{
-    init {
-        /*log('>>>');
-        variables->keys()->forEach (k) {
-            log(k.toString() + ' => ' + variables->get(k).toString());
-        };
-        log('===');
-        log(self.referredVariable.toString());
-        log('<<<\n');*/
-
         if (variables->hasKey(self.referredVariable![Variable])) {
-            //log('clone');
-            result := variables->get(self.referredVariable![Variable]).deepclone()![AnyExpr].pathExpr();
+            result := variables->get(self.referredVariable![Variable]).deepclone().pathExpr();
         }
         else {
+            // TODO: XPath must depend on current context
             result := object PathExpr {
                 step := object SelfStepExpr {
                     step := object ContextItemExpr { };
                 };
             };
         };
-        /*log('>>>iter');
-        step->forEach(x) {
-            log(x.repr());
-        };*/
     }
 }
 
 // Declared variable
-mapping VariableExp::toPathExpr3(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
-when { self.referredVariable.name <> 'self' and self.referredVariable![Variable].representedParameter = null }
+mapping VariableExp::toVarRef(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
+when { self.referredVariable[Variable]->one(representedParameter = null) }
 {
     init {
         var variable := variables->get(self.referredVariable![Variable]);
         assert fatal (variable.oclIsKindOf(VarRef)) with log ('Variable ' + self.referredVariable.toString() + ' not found');
-        result := variable.deepclone()![AnyExpr].pathExpr();
+        result := variable.deepclone().pathExpr();
     }
 }
 
 mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : PathExpr
 {
     init {
-        //log(self.repr());
-        // PropertyCallExp tree must be flattened.
+        // Flatten PropertyCallExp tree
         // VariableExp (self or iterator variable) is the innermost
-        // component in an input tree, but it should be a first step
+        // component of an input tree, but it should be a first step
         // in an output path.
         result := self.ownedSource.xmap toExprSingle(variables).pathExpr();
-        /*if (self.ownedSource.oclIsKindOf(VariableExp)) {
-            if (self.ownedSource![VariableExp].referredVariable.name = 'self') {
-                //result := self.ownedSource[VariableExp]->collectOne(xmap toPathExpr());
-                result := object PathExpr { };
-            }
-            else {
-                result := object PathExpr { };
-            }
-        }
-        elif (self.ownedSource.oclIsKindOf(PropertyCallExp)) {
-            result := self.ownedSource[PropertyCallExp]->collectOne(xmap toPathExpr());
-        }
-        else {
-            raise Exception('Something is wrong');
-        }*/
     }
 
     //log('>>> ' + result.toString());
@@ -846,7 +728,7 @@ when { self.referredIteration.name = 'isUnique' }
             operator := object GeneralComp { operator := GeneralCompKind::eq };
             right := object FunctionCall {
                 name := 'count'.createFunctionQName();
-                arg := nodesPath.deepclone().oclAsType(ExprSingle);
+                arg := nodesPath.deepclone();
             }
         };
         result := self.ownedSource.xmap toPathExpr(variables, predicate).booleanExpr();
@@ -1037,6 +919,4 @@ query ExprSingle::isFunctionCall(name : QName) : Boolean =
     self.oclIsKindOf(FunctionCall) and self.oclAsType(FunctionCall).name = name;
 
 query String::createFunctionQName() : QName =
-    if useFunctionQNames
-    then createQName('http://www.w3.org/2005/xpath-functions', self, 'fn')
-    else createQName(self) endif;
+    createQName('http://www.w3.org/2005/xpath-functions', self, 'fn');
