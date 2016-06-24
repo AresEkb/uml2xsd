@@ -413,9 +413,8 @@ mapping Constraint::toHelperCheckInvocation(
                                 target := contextVariable;
                             };
 
-                            var expr2 := expr.replaceLocal();
                             arguments += object JAVA::_references::StringReference {
-                                value := expr2.xmap toExprSingle(variables).toString()
+                                value := expr.replaceLocal().xmap toExprSingle(variables).toString()
                                     .replaceAll("'(:param\\d+)'", "$1")
                                     .replaceAll("'(:param\\d+)'", "$1"); // TODO: There is a strange bug, param is quoted twice
                             };
@@ -437,7 +436,7 @@ mapping Constraint::toHelperCheckInvocation(
                                     target := object JAVA::members::ClassMethod {
                                         name := 'asList';
                                     };
-                                    arguments := expr2.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(variables);
+                                    arguments := expr.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(variables);
                                 };
                             };
 

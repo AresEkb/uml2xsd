@@ -31,12 +31,15 @@ query String::tokenizeDocOCL() : Sequence(DocOCLToken)
                 assert fatal (itIsExpr) with log('Unexpected }} token at ' + pos.toString() + ' position in "' + self + '"');
                 itIsExpr := false;
             }
-            else res += object DocOCLToken {
-                text := token;
-                isExpr := itIsExpr;
-            };
+            else {
+                res += object DocOCLToken {
+                    text := token;
+                    isExpr := itIsExpr;
+                };
+            }
         };
         pos := pos + token.size();
     };
+    assert fatal (not itIsExpr) with log('Expected }} token at the end of "' + self + '"');
     return res;
 }

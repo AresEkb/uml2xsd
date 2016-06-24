@@ -59,7 +59,10 @@ query String::tokenize(delimiters : Set(String), returnDelimiters : Boolean) : S
         if (returnDelimiters) {
             res += delimiter;
         };
-        res += self.substring(pos + delimiter.size(), self.size()).tokenize(delimiters, returnDelimiters);
+        pos := pos + delimiter.size();
+        if (pos < self.size()) {
+            res += self.substring(pos, self.size()).tokenize(delimiters, returnDelimiters);
+        };
     };
     return res;
 }

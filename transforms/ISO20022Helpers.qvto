@@ -24,7 +24,7 @@ property profileName : String = 'ISO20022Profile';
 intermediate class Rule {
     id : String;             // required
     name : String;           // optional
-    description : String;    // required
+    description : String;    // optional
     source : String;         // optional
     ocl : String;            // required
     errorMessage : String;   // required
