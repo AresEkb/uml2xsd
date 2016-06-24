@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    Denis Nikiforov - initial API and implementation
  */
@@ -41,7 +41,7 @@ mapping Classifier::toStylesheet() : DocumentRoot
 {
     var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
     var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId.replaceAll('-.*$', '');
-    
+
     log('  Found message ' + msgId);
 
     var stylesheetObj := object TransformType {
@@ -52,7 +52,7 @@ mapping Classifier::toStylesheet() : DocumentRoot
     };
 
     stylesheetObj._import := object ImportType {
-    	href := 'iso20022-validation.xsl';
+        href := 'iso20022-validation.xsl';
     };
 
     var rootPathExpr := self.getRootPath();
@@ -61,9 +61,9 @@ mapping Classifier::toStylesheet() : DocumentRoot
 
     object XMLTypeDocumentRoot {};
     stylesheetObj.declarationGroup := object VariableType {
-    	name := 'elementNames';
-    	as := 'item()*';
-    	select := 'fn:doc(\'' + msgId + '-metadata.xml\')';
+        name := 'elementNames';
+        as := 'item()*';
+        select := 'fn:doc(\'' + msgId + '-metadata.xml\')';
     }->toFMEntry('variable');
 
     stylesheetObj.declarationGroup += self->closure(attribute.type[Classifier])->including(self)->sortedBy(name)->
@@ -89,7 +89,7 @@ mapping Classifier::toStylesheetForHTML() : DocumentRoot
 {
     var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
     var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId;
-    
+
     log('  Generating HTML version of XSLT for message ' + msgId);
 
     var stylesheetObj := object TransformType {
@@ -138,7 +138,7 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
 {
     var contexts := self.xmap toPathExpr(stylesheet, rootPathExpr, props);
     if (contexts->isEmpty()) {
-    	contexts += object PathExpr {
+        contexts += object PathExpr {
             step := object RootStepExpr { };
         };
     };
@@ -148,13 +148,13 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
     };
     context.xmap findQNames(stylesheet);
     match := context.toString();
-    
+
     self.ownedRule->sortedBy(name)->forEach (rule) {
         try {
             instructionGroup += rule.xmap toInstructionGroup(stylesheet);
         }
         except () {
-    	   log('WARNING: Unable to generate validation code');
+           log('WARNING: Unable to generate validation code');
         }
     };
 
@@ -169,9 +169,9 @@ mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EF
         var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
 
         if (expr.isExternal()) {
-        	result += object CommentType {
-        	   text := 'Rule ' + self.name + ' is unsupported';
-        	}->toFMEntry('comment');
+            result += object CommentType {
+               text := 'Rule ' + self.name + ' is unsupported';
+            }->toFMEntry('comment');
         }
         else {
             if (expr.isLet()) {
@@ -190,7 +190,7 @@ mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EF
                     }
                 }->toFMEntry('variable');
             };
-            
+
             if (expr.isForAll()) {
                 result += self->toForEach(stylesheet, self![IteratorExp].ownedIterators->first(), expr, variables)->toFMEntry('forEach');
             }
@@ -236,15 +236,15 @@ mapping Constraint::toValidate(
     variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : CallTemplateType
 {
     name := 'validate';
-    
+
     var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
     assert fatal (doc->size() >= 2 and doc->size() <= 3)
         with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
             self.ownedComment.body->any(true));
-    
+
     withParam += object WithParamType {
-    	name := 'code';
-    	text := self.name;
+        name := 'code';
+        text := self.name;
     };
     withParam += object WithParamType {
         name := 'isValid';
@@ -313,6 +313,6 @@ query GenericElementType::toFMEntry(name : String) : EFeatureMapEntry =
 //query OCLExpression::isSupported() : Boolean =
 //    if self.oclIsKindOf(OperationCallExp) then self![OperationCallExp]->forAll(
 //        referredOperation.name <> 'allInstances' and ownedSource.isSupported() and ownedArguments->forAll(isSupported()))
-//    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll( 
+//    elif self.oclIsKindOf(IteratorExp) then self![IteratorExp]->forAll(
 //        ownedSource.isSupported() and ownedBody->forAll(isSupported()))
 //    else true endif;

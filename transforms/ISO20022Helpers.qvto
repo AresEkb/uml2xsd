@@ -41,7 +41,7 @@ mapping Constraint::toRule() : Rule
     ocl := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n');
     errorMessage := self.getAnnotation('errorMessage');
     successMessage := self.getAnnotation('successMessage', '');
-*/    
+*/
     var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
     assert fatal (doc->size() >= 2 and doc->size() <= 3)
         with log('Constraint\' documentation must contain 2 or 3 sections:\n' +

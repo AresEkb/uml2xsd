@@ -46,7 +46,7 @@ main()
  * import java.util.Arrays;
  * import java.util.List;
  * import javax.annotation.Generated;
- * import org.w3c.dom.Node;
+ * import net.sf.saxon.s9api.XdmItem;
  * import com.centreit.repiso.validator.validation.BaseValidator;
  * import com.centreit.repiso.validator.validation.Helper;
  * import com.centreit.repiso.validator.validation.RuleMetadata;
@@ -72,7 +72,7 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
     addClassImport(result, 'java.util.Arrays');
     addInterfaceImport(result, 'java.util.List');
     addAnnotationImport(result, 'javax.annotation.Generated');
-    addInterfaceImport(result, 'org.w3c.dom.Node');
+    addInterfaceImport(result, 'net.sf.saxon.s9api.XdmItem');
     addClassImport(result, 'com.centreit.repiso.validator.validation.BaseValidator');
     addClassImport(result, 'com.centreit.repiso.validator.validation.Helper');
     addClassImport(result, 'com.centreit.repiso.validator.validation.RuleResult');
@@ -88,14 +88,14 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
         annotationsAndModifiers += object JAVA::annotations::AnnotationInstance {
             annotation := result.getAnnotation('javax.annotation.Generated');
             parameter := object JAVA::annotations::SingleAnnotationParameter {
-            	value := object JAVA::_references::StringReference { value := 'uml2xsd'; };
+                value := object JAVA::_references::StringReference { value := 'uml2xsd'; };
             };
         };
         annotationsAndModifiers += object JAVA::modifiers::Public { };
 
         var rootField := object JAVA::members::Field {
             name := 'root';
-            typeReference := result.getClassReference('org.w3c.dom.Node');
+            typeReference := result.getClassReference('net.sf.saxon.s9api.XdmItem');
             annotationsAndModifiers := object JAVA::modifiers::Private { };
         };
 
@@ -277,7 +277,7 @@ when { expr.isLet() }
 /**
  * Map OCL constraint to the loop:
  *
- *         for (Node context : Helper.iterate(root, "{path}")) {
+ *         for (XdmItem context : Helper.iterate(root, "{path}")) {
  *             {validation code}
  *         }
  */
@@ -296,7 +296,7 @@ when { expr.isForAll() }
         var contextParam := object JAVA::parameters::OrdinaryParameter {
             name := 'context';
             typeReference := object JAVA::types::ClassifierReference {
-                target := contextVariable.getInterface('org.w3c.dom.Node');
+                target := contextVariable.getInterface('net.sf.saxon.s9api.XdmItem');
             };
         };
         next := contextParam;
@@ -312,7 +312,7 @@ when { expr.isForAll() }
                     //log('=== from ' + contextExpr.toString());
                     var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);//->clone();//.oclAsType(Dict(OCL::Variable, XPATH2::ExprSingle));
                     variables->keys()->forEach (key) {
-                    	variables2->put(key, variables->get(key));
+                        variables2->put(key, variables->get(key));
                     };
                     variables2->put(root, object PathExpr {
                         step := object RootStepExpr { };
@@ -397,7 +397,7 @@ mapping Constraint::toHelperCheckInvocation(
     localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
 {
     result += object JAVA::statements::ExpressionStatement {
-    	expression := object JAVA::expressions::AssignmentExpression {
+        expression := object JAVA::expressions::AssignmentExpression {
             child := object JAVA::_references::IdentifierReference {
                 target := resultVariable;
                 next := object JAVA::_references::MethodCall {
@@ -523,7 +523,7 @@ query String::toMessage(
  * Here is an example of the external expression:
  *   SomeType.allInstances()->exists(externalVariable | ...)
  * Local expressions are just copied without modifications.
- * Within external expressions all references to local variables (e.g., self) are replaced by %s.
+ * Within external expressions all references to local variables (e.g., self) are replaced by :paramN
  */
 
 query OCLExpression::replaceLocal() : OCLExpression =
@@ -562,7 +562,7 @@ query IteratorExp::replaceLocal(expr : OCLExpression) : OCLExpression
 }
 
 /**
- * Replaces all local expressions (expressions which aren't based on externalVariable) by %s.
+ * Replaces all local expressions (expressions which aren't based on externalVariable) by :paramN
  */
 
 query OCLExpression::replaceLocal(expr : OCLExpression, externalVariable : OCL::Variable) : OCLExpression =
@@ -633,17 +633,11 @@ query OperationCallExp::isLocalExpression(externalVariable : OCL::Variable) : Bo
  * Determine OCL expression' type
  */
 
-query OCLExpression::getType() : String
-{
-    if (self.oclIsKindOf(OperationCallExp)) {
-        return self.oclAsType(OperationCallExp).type.getType();
-    }
-    elif (self.oclIsKindOf(PropertyCallExp)) {
-        return  self.oclAsType(PropertyCallExp).type.getType();
-    };
-    assert fatal (false) with log('Unable to determine type of ' + self.repr());
-    return null; // HACK
-}
+query OCLExpression::getType() : String =
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
+
+query OCL::TypedElement::getType() : String =
+    self.type.getType();
 
 query OCL::Type::getType() : String
 {
@@ -656,6 +650,6 @@ query OCL::Type::getType() : String
             return 'String';
         };
     };
-    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
+    assert fatal (false) with log('Unable to determine type of ' + self.repr());
     return null; // HACK
 }

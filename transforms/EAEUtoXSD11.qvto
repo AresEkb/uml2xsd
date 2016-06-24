@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    Denis Nikiforov - initial API and implementation
  */
@@ -78,8 +78,8 @@ when { self.isNamespace() and not(self.isXMLPT()) }
 mapping PackageImport::toImport() : ImportType
 {
     var ns := self.importedPackage.getNS();
-	namespace := ns.getTargetNS();
-	schemaLocation := ns.getSchemaLocation();
+    namespace := ns.getTargetNS();
+    schemaLocation := ns.getSchemaLocation();
 }
 
 mapping DataType::toSimpleType() : TopLevelSimpleType
@@ -103,7 +103,7 @@ when { self.getAllAttributes()->isEmpty() }
         };
     }
     else {
-    	assert fatal (false) with log('DataType \'' + self.getQualifiedName() + '\' must have a base type or a realization');
+        assert fatal (false) with log('DataType \'' + self.getQualifiedName() + '\' must have a base type or a realization');
     }
 }
 
@@ -120,7 +120,7 @@ when { self.getAllAttributes()->notEmpty() }
     elif (self.generalization->size() = 1) {
         var generalization := self.generalization->any(true);
         var baseType := generalization.general;
-  	    if (self.hasComplexContent()) {
+          if (self.hasComplexContent()) {
             complexContent := object ComplexContentType {
                 if (generalization.isRestriction()) {
                     restriction := object ComplexRestrictionType {
@@ -179,13 +179,13 @@ mapping Property::toAttribute() : Attribute
     type := self.type.getQName();
     if (self.lower = 1 and self.upper = 1) {
         use := UseType::required;
-    } 
+    }
     elif (self.lower = 0 and self.upper = 1) {
         use := UseType::optional;
-    } 
+    }
     elif (self.lower = 0 and self.upper = 0) {
         use := UseType::prohibited;
-    } 
+    }
 }
 
 mapping DataType::toExplicitGroup() : ExplicitGroup
@@ -313,7 +313,7 @@ query NamedElement::getQName() : QName
     // HACK
     // var ns := self.getNS();
     // if (ns = null) {
-    //     return createQName('unknown', self.name, 'un').oclAsType(QName); 
+    //     return createQName('unknown', self.name, 'un').oclAsType(QName);
     // };
     return createQName(ns.getTargetNS(), self.name, ns.getTargetNSPrefix()).oclAsType(QName);
 }

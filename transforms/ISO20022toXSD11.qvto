@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    Denis Nikiforov - initial API and implementation
  */
@@ -40,7 +40,7 @@ mapping Classifier::toSchema() : DocumentRoot
 {
     var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
     var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId;
-    
+
     log('  Found message ' + msgId);
     var schemaObj := object SchemaType {
         targetNamespace := namespace;
@@ -79,18 +79,18 @@ mapping Classifier::toSchema() : DocumentRoot
 
     self->closure(attribute.type[Classifier])->sortedBy(name)->forEach (obj) {
         if (obj.is('MessageComponentType')) {
-    	   schemaObj.complexType += obj->toComplexType(schemaObj);
-    	}
+           schemaObj.complexType += obj->toComplexType(schemaObj);
+        }
         elif (obj.is('Datatype') or obj.is('CodeSet') or obj.is('IdentifierSet')) {
            schemaObj.simpleType += obj->toSimpleType(schemaObj);
         }
-    	else {
-    	   assert fatal (false) with log('Mapping of classifer "' + obj.getNameWithStereotypes() + '" is not supported');
-    	};
+        else {
+           assert fatal (false) with log('Mapping of classifer "' + obj.getNameWithStereotypes() + '" is not supported');
+        };
     };
 
     schema := schemaObj;
-    
+
     xMLNSPrefixMap += resolveIn(Expr::findQNames, SchemaQNames)
         ->select(schema=schemaObj).qnames
         ->collect(qname|object EStringToStringMapEntry {
@@ -124,7 +124,7 @@ mapping Classifier::toSimpleType(schema : SchemaType) : TopLevelSimpleType
 
     assert fatal (stereotypes->size() = 1) with log('DataType "' + self.getNameWithStereotypes() + '" must have exactly one stereotype stereotype (inherited from Datatype, CodeSet or IdentifierSet)');
     var stereotype := stereotypes->any(true).name;
-    
+
     name := self.generateXMLTag();
     restriction := object RestrictionType1 {
         base := createQName('http://www.w3.org/2001/XMLSchema', types->get(stereotype), 'xs');
@@ -154,13 +154,13 @@ mapping Property::toAttribute(schema : SchemaType) : Attribute
     type := self.type.getUnprefixedQName();
     if (self.lower = 1 and self.upper = 1) {
         use := UseType::required;
-    } 
+    }
     elif (self.lower = 0 and self.upper = 1) {
         use := UseType::optional;
-    } 
+    }
     elif (self.lower = 0 and self.upper = 0) {
         use := UseType::prohibited;
-    } 
+    }
 }
 
 mapping Classifier::toExplicitGroup(schema : SchemaType) : ExplicitGroup
@@ -272,7 +272,7 @@ query NamedElement::generateXMLTag() : String
     };
 
     assert fatal (name <> null and name.size() > 0) with log('For element ' + self.getNameWithStereotypes() + ' generated empty xmlTag');
-    
+
     return name;
 }
 

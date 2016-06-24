@@ -432,7 +432,7 @@ when { self.referredVariable.name = 'self' }
     init {
         /*log('-->>>');
         variables->keys()->forEach (x) {
-        	log(x.toString() + ' ' + (x = self.referredVariable![Variable]).repr() + ' ' + emptySelf.repr());
+            log(x.toString() + ' ' + (x = self.referredVariable![Variable]).repr() + ' ' + emptySelf.repr());
         };
         //log('===');
         //log(self.getContext().repr());
@@ -455,14 +455,14 @@ when { self.referredVariable.name = 'self' }
             if (variables->hasKey(self.referredVariable![Variable])) {
                 result := variables->get(self.referredVariable![Variable]).deepclone()![AnyExpr].pathExpr();
                 //log(result.toString());
-        	}
-        	else {
+            }
+            else {
                 result := object PathExpr {
                     step := object SelfStepExpr {
                         step := object ContextItemExpr { };
                     };
                 };
-        	};
+            };
         }
     }
 }
@@ -594,7 +594,7 @@ mapping PropertyCallExp::toPathExpr(variables : Dict(OCL::Variable, XPATH2::Expr
                 else {
                     step := step->subOrderedSet(2, step->size());
                 }
-        	}
+            }
         };
 
         /*log('>>>>>>>>');
@@ -788,7 +788,7 @@ mapping OperationCallExp::toIsEmpty(variables : Dict(OCL::Variable, XPATH2::Expr
 when { self.referredOperation.name = 'isEmpty' }
 {
     init {
-    	result := self.ownedSource.xmap toExprSingle(variables).notExpr();
+        result := self.ownedSource.xmap toExprSingle(variables).notExpr();
     }
 }
 
