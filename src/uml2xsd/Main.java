@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013, 2015 Denis Nikiforov.
+ * Copyright (c) 2013, 2016 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -77,7 +77,7 @@ public class Main {
 
     public enum ModelKind { EAEU, ISO20022_ECORE, ISO20022_UML };
     public enum OutputFormat { XSD11, XSLT20, ISO20022_UML, JAVA, XSLT_TEST_CASE };
-    
+
     private static String input;
     private static String output;
     private static OutputFormat outputFormat;
@@ -190,7 +190,7 @@ public class Main {
             e.printStackTrace();
         }
     }
-    
+
     private static void parseCommandLineArgs(String[] args) {
         Option inputOpt = new Option("input", true, "Input file name");
         inputOpt.setRequired(true);
@@ -213,7 +213,7 @@ public class Main {
             throw e;
         }
     }
-    
+
     private static void parseCommandLineArgsImpl(Options options, String[] args) {
         CommandLineParser parser = new GnuParser();
         try {
@@ -245,7 +245,7 @@ public class Main {
             throw new IllegalArgumentException("Wrong command-line arguments: " + e.getMessage());
         }
     }
-    
+
     private static void init(ResourceSet rs) {
         System.out.println("Initialization");
         rs.setURIConverter(new CustomURIConverter());
@@ -258,7 +258,7 @@ public class Main {
         System.out.println("  OCL");
         EssentialOCLStandaloneSetup.doSetup();
         UMLStandaloneSetup.init();
-        
+
         System.out.println("  Ecore packages");
         XPath2Package.eINSTANCE.getEFactoryInstance();
         XMLSchema11Package.eINSTANCE.getEFactoryInstance();
@@ -270,14 +270,14 @@ public class Main {
         System.out.println("  Blackbox units");
         TransformationExecutor.BlackboxRegistry.INSTANCE.registerModules(UtilitiesLibrary.class);
     }
-    
+
     /*
     private static boolean validateModel(EObject uml) throws ParserException {
         PivotEnvironmentFactory envFactory = new PivotEnvironmentFactory();
         PivotEnvironment environment = envFactory.createEnvironment();
         OCL ocl = OCL.newInstance(environment);
         OCLHelper oclHelper = ocl.createOCLHelper();
-        
+
         boolean noErrorsFound = true;
 
         final TreeIterator<EObject> iterator = uml.eAllContents();

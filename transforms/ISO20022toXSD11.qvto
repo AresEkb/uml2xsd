@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 Denis Nikiforov.
+ * Copyright (c) 2015, 2016 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,7 +15,6 @@
  *
  */
 
-import uml2xsd.UtilitiesLibrary;
 import OCLtoXPath;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/2.1.0/UML';
@@ -79,13 +78,13 @@ mapping Classifier::toSchema() : DocumentRoot
 
     self->closure(attribute.type[Classifier])->sortedBy(name)->forEach (obj) {
         if (obj.is('MessageComponentType')) {
-           schemaObj.complexType += obj->toComplexType(schemaObj);
+            schemaObj.complexType += obj->toComplexType(schemaObj);
         }
         elif (obj.is('Datatype') or obj.is('CodeSet') or obj.is('IdentifierSet')) {
-           schemaObj.simpleType += obj->toSimpleType(schemaObj);
+            schemaObj.simpleType += obj->toSimpleType(schemaObj);
         }
         else {
-           assert fatal (false) with log('Mapping of classifer "' + obj.getNameWithStereotypes() + '" is not supported');
+            assert fatal (false) with log('Mapping of classifer "' + obj.getNameWithStereotypes() + '" is not supported');
         };
     };
 

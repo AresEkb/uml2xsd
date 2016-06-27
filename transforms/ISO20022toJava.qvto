@@ -9,7 +9,6 @@
  *    Denis Nikiforov - initial API and implementation
  */
 
-import uml2xsd.UtilitiesLibrary;
 import ISO20022Helpers;
 import JavaHelpers;
 import OCLtoXPath;

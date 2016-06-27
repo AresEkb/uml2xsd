@@ -1,10 +1,10 @@
 /**
- * Copyright (c) 2013, 2015 Denis Nikiforov.
+ * Copyright (c) 2013, 2016 Denis Nikiforov.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *    Denis Nikiforov - initial API and implementation
  */
@@ -51,16 +51,16 @@ import org.emftext.language.xpath2.resource.xpath2.mopp.Xpath2ResourceFactory;
         "http://www.emftext.org/language/xpath2",
         "http://www.eclipse.org/uml2/2.1.0/UML",
         "http://www.emftext.org/java/classifiers"})
-public class UtilitiesLibrary {
+public final class UtilitiesLibrary {
 
     public UtilitiesLibrary() {
         super();
     }
 
-    final static OCL ocl = OCL.newInstance();
+    private final OCL ocl = OCL.newInstance();
 
-    final static String DOCUMENT_ROOT = "DocumentRoot";
-    
+    private final static String DOCUMENT_ROOT = "DocumentRoot";
+
     private static int seq = 0;
 
     public static int getSeqNumber()
@@ -170,30 +170,30 @@ public class UtilitiesLibrary {
     }
 
     @Operation(contextual=true)
-    public static ExpressionInOCL toExpressionInOCL(Constraint constraint)
+    public ExpressionInOCL toExpressionInOCL(Constraint constraint)
     {
-    	ExpressionInOCL expr = null;
-    	try {
-    		org.eclipse.ocl.pivot.Constraint asConstraint = ocl.getMetamodelManager().getASOf(org.eclipse.ocl.pivot.Constraint.class, constraint);
-    		expr = ocl.getSpecification(asConstraint);
-    	}
-    	catch (ParserException e) {
-    		System.err.println(e.getMessage());
-    	}
-    	return expr;
+        ExpressionInOCL expr = null;
+        try {
+            org.eclipse.ocl.pivot.Constraint asConstraint = ocl.getMetamodelManager().getASOf(org.eclipse.ocl.pivot.Constraint.class, constraint);
+            expr = ocl.getSpecification(asConstraint);
+        }
+        catch (ParserException e) {
+            System.err.println(e.getMessage());
+        }
+        return expr;
     }
 
     @Operation(contextual=true)
-    public static ExpressionInOCL toExpressionInOCL(String expression, org.eclipse.ocl.pivot.Type context)
+    public ExpressionInOCL toExpressionInOCL(String expression, org.eclipse.ocl.pivot.Type context)
     {
-    	ExpressionInOCL expr = null;
-    	try {
+        ExpressionInOCL expr = null;
+        try {
             expr = ocl.createQuery(context, expression);
-    	}
-    	catch (ParserException e) {
-    		System.err.println(e.getMessage());
-    	}
-    	return expr;
+        }
+        catch (ParserException e) {
+            System.err.println(e.getMessage());
+        }
+        return expr;
     }
 
     @Operation(contextual=true)
@@ -207,7 +207,7 @@ public class UtilitiesLibrary {
         printer.print(expr);
         return buffer.toString();
     }
-    
+
     public static org.emftext.language.java.classifiers.ConcreteClassifier createJavaClassifier(String fullQualifiedName) {
         return (org.emftext.language.java.classifiers.ConcreteClassifier)JavaClasspath.get().getClassifier(fullQualifiedName);
     }
