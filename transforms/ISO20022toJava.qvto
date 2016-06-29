@@ -23,11 +23,16 @@ modeltype XPATH2 'strict' uses 'http://www.emftext.org/language/xpath2';
 
 transformation ISO20022toJava(in m : UML, out j : JAVA);
 
+configuration property terminateOnException : Boolean;
+
 /**
  * Find all message definitions and map them to compilation units
  */
 main()
 {
+    if (terminateOnException.oclIsUndefined()) {
+        terminateOnException := true;
+    };
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toCompilationUnit();
 }
 
@@ -161,51 +166,67 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
     typeReference := object JAVA::types::Void { };
     parameters := resultParam;
 
-    try {
-        var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
-        var expr := self.toExpressionInOCL();
-        assert fatal (not expr.ownedContext.oclIsInvalid());
+    if (terminateOnException) {
+        statements := self.toValidationMethodBody(rootField, resultParam);
+        assert fatal (statements->notEmpty()) with log('Unable to generate validation code');
+    }
+    else {
+        try {
+            statements := self.toValidationMethodBody(rootField, resultParam);
+        }
+        except (ex : Exception) {
+            log('WARNING: Unable to generate validation code');
+        };
+        // This code can't be moved into exception handling section, because it seems that sometimes exceptions aren't raised
+        if (statements->isEmpty()) {
+            statements += object JAVA::statements::Throw {
+                throwable := object JAVA::instantiations::NewConstructorCall {
+                    typeReference := result.getClassReference('java.lang.UnsupportedOperationException');
+                };
+            };
+        };
+    };
+}
 
-        var variableName := '__' + expr.ownedContext.name.toIdentifier();
-        variables->put(expr.ownedContext, object VarRef { varName := createQName(variableName) });
+query Constraint::toValidationMethodBody(
+    rootField : JAVA::members::Field,
+    resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
+{
+    var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+    var expr := self.toExpressionInOCL();
+    assert fatal (not expr.ownedContext.oclIsInvalid())
+        with log('Unable to parse "' + self.specification[OpaqueExpression]->any(language->includes('OCL')).body->any(true) + '"');
 
-        var localVariables : List(JAVA::_references::ReferenceableElement);
-        var selfVarStatement := object JAVA::statements::LocalVariableStatement {
-            variable := object JAVA::variables::LocalVariable {
-                name := variableName;
-                typeReference := result.getClassReference('com.centreit.repiso.validator.validation.Variable');
-                initialValue := object JAVA::_references::IdentifierReference {
-                    target := object JAVA::classifiers::Class { name := 'Helper'; };
-                    next := object JAVA::_references::MethodCall {
-                        target := object JAVA::members::ClassMethod { name := 'variable'; };
-                        arguments += object JAVA::_references::IdentifierReference {
-                            target := rootField;
-                        };
-                        arguments += object JAVA::_references::StringReference {
-                            value := variableName;
-                        };
+    var variableName := '__' + expr.ownedContext.name.toIdentifier();
+    variables->put(expr.ownedContext, object VarRef { varName := createQName(variableName) });
+
+    var localVariables : List(JAVA::_references::ReferenceableElement);
+
+    var statements : List(JAVA::statements::Statement);
+
+    statements += object JAVA::statements::LocalVariableStatement {
+        variable := object JAVA::variables::LocalVariable {
+            name := variableName;
+            typeReference := rootField.getClassReference('com.centreit.repiso.validator.validation.Variable');
+            initialValue := object JAVA::_references::IdentifierReference {
+                target := object JAVA::classifiers::Class { name := 'Helper'; };
+                next := object JAVA::_references::MethodCall {
+                    target := object JAVA::members::ClassMethod { name := 'variable'; };
+                    arguments += object JAVA::_references::IdentifierReference {
+                        target := rootField;
+                    };
+                    arguments += object JAVA::_references::StringReference {
+                        value := variableName;
                     };
                 };
             };
-            localVariables->add(variable);
         };
-
-        var validationStatements := self.xmap toValidationCode(expr.ownedBody, expr.ownedContext, expr.ownedContext, variables, rootField, resultParam, localVariables);
-
-        statements += selfVarStatement;
-        statements += validationStatements;
-    }
-    except () {
-        log('WARNING: Unable to generate validation code');
+        localVariables->add(variable);
     };
-    // This code can't be moved into exception handling section, because it seems that sometimes exceptions aren't raised
-    if (statements->isEmpty()) {
-        statements += object JAVA::statements::Throw {
-            throwable := object JAVA::instantiations::NewConstructorCall {
-                typeReference := result.getClassReference('java.lang.UnsupportedOperationException');
-            };
-        };
-    };
+
+    statements += self.xmap toValidationCode(expr.ownedBody, expr.ownedContext, expr.ownedContext, variables, rootField, resultVariable, localVariables);
+
+    return statements;
 }
 
 mapping Constraint::toValidationCode(

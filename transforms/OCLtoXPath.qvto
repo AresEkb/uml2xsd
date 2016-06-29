@@ -58,6 +58,8 @@ disjuncts
     // Arithmetic
     OperationCallExp::toAdditiveExpr,
     OperationCallExp::toMultiplicativeExpr,
+    // Cast
+    OperationCallExp::toInteger,
     // Path
     VariableExp::toPathExpr,
     VariableExp::toVarRef,
@@ -375,6 +377,24 @@ query String::toMultiplicativeOp() : MultiplicativeOpKind =
     elif (self = "/")   then MultiplicativeOpKind::div
     elif (self = "div") then MultiplicativeOpKind::idiv
     elif (self = "mod") then MultiplicativeOpKind::mod
+    endif;
+
+//////////////////////////////////////////////////////////////////////////////
+// Cast
+
+mapping OperationCallExp::toInteger(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : CastExpr
+when { self.referredOperation.name = 'toInteger' }
+{
+    operand := self.ownedSource.xmap toExprSingle(variables).castExprOperand();
+    type := 'integer'.createXSDType();
+}
+
+query ExprSingle::castExprOperand() : CastExprChild =
+    // Simplification: (...) cast as ... = ... cast as ...
+    if self.oclIsKindOf(CastExprChild) then
+        self.oclAsType(CastExprChild)
+    else
+        object ParenthesizedExpr { expr := self }
     endif;
 
 //////////////////////////////////////////////////////////////////////////////
@@ -916,6 +936,13 @@ query Operation::isCollectionOperation() : Boolean =
 
 query ExprSingle::isFunctionCall(name : QName) : Boolean =
     self.oclIsKindOf(FunctionCall) and self.oclAsType(FunctionCall).name = name;
+
+query String::createXSDType() : SingleType =
+    object SingleType {
+        type := object AtomicType {
+            name := createQName('http://www.w3.org/2001/XMLSchema', self, 'xs');
+        };
+    };
 
 query String::createFunctionQName() : QName =
     createQName('http://www.w3.org/2005/xpath-functions', self, 'fn');
