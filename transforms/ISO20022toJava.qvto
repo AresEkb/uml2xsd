@@ -193,6 +193,7 @@ query Constraint::toValidationMethodBody(
     resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
 {
     var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+
     var expr := self.toExpressionInOCL();
     assert fatal (not expr.ownedContext.oclIsInvalid())
         with log('Unable to parse "' + self.specification[OpaqueExpression]->any(language->includes('OCL')).body->any(true) + '"');
@@ -217,6 +218,17 @@ query Constraint::toValidationMethodBody(
                     };
                     arguments += object JAVA::_references::StringReference {
                         value := variableName;
+                    };
+                    arguments += object JAVA::_references::StringReference {
+                        value := object PathExpr {
+                            step := object RootStepExpr { };
+                            step += object SelfStepExpr {
+                                step := object AbbrevForwardStep {
+                                    kind := AbbrevForwardStepKind::child;
+                                    nodeTest := object QNameTest { name := expr.ownedContext.type.getQName() };
+                                };
+                            };
+                        }.toString();
                     };
                 };
             };
@@ -296,7 +308,7 @@ when { expr.isLet() }
 /**
  * Map OCL constraint to the loop:
  *
- *         for (XdmItem context : Helper.iterate(root, "{path}")) {
+ *         for (XdmItem context : Helper.iterate(root, "{path}", Arrays.asList({variables list}))) {
  *             {validation code}
  *         }
  */
@@ -327,23 +339,19 @@ when { expr.isForAll() }
                     target := contextVariable;
                 };
                 arguments += object JAVA::_references::StringReference {
-                    //var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
                     //log('=== from ' + contextExpr.toString());
-                    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
-                    variables->keys()->forEach (key) {
-                        variables2->put(key, variables->get(key));
-                    };
-                    variables2->put(root, object PathExpr {
-                        step := object RootStepExpr { };
-                        step += object SelfStepExpr {
-                            step := object AbbrevForwardStep {
-                                kind := AbbrevForwardStepKind::child;
-                                nodeTest := object QNameTest { name := root.type.getQName() };
-                            };
-                        };
-                    });
-                    value := contextExpr.xmap toExprSingle(variables2).toString();
+                    value := contextExpr.xmap toExprSingle(variables).toString();
                     //log('=== to   ' + value);
+                };
+                arguments += object JAVA::_references::IdentifierReference {
+                    target := contextVariable.getClass('java.util.Arrays');
+                    next := object JAVA::_references::MethodCall {
+                        target := object JAVA::members::ClassMethod { name := 'asList' };
+                        arguments := localVariables->collect(v|
+                            object JAVA::_references::IdentifierReference {
+                                target := v;
+                            });
+                    };
                 };
             };
         };

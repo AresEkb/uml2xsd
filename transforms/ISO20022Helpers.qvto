@@ -42,10 +42,11 @@ mapping Constraint::toRule() : Rule
         successMessage := self.getAnnotation('successMessage', '');
     }
     else {
-        var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
+        var comment := self.ownedComment.body->any(true);
+        assert fatal (not comment.oclIsUndefined()) with log('Constraint ' + self.name + ' must have an ownedComment with body');
+        var doc := comment.cleanML().tokenize(Set { '\n\n' });
         assert fatal (doc->size() >= 2 and doc->size() <= 3)
-            with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
-                self.ownedComment.body->any(true));
+            with log('Documentation of constraint ' + self.name + ' must contain 2 or 3 sections:\n' + comment);
         id := self.name;
         name := '';
         description := doc->at(1);
