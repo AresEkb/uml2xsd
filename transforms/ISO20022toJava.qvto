@@ -221,7 +221,7 @@ query Constraint::toValidationMethodBody(
                     };
                     arguments += object JAVA::_references::StringReference {
                         value := object PathExpr {
-                            step := object RootStepExpr { };
+                            //step := object RootStepExpr { };
                             step += object SelfStepExpr {
                                 step := object AbbrevForwardStep {
                                     kind := AbbrevForwardStepKind::child;
@@ -629,6 +629,10 @@ query PropertyCallExp::isLocalExpression(externalVariable : OCL::Variable) : Boo
 query OperationCallExp::isLocalExpression(externalVariable : OCL::Variable) : Boolean =
     self.ownedSource.isLocalExpression(externalVariable) and
     self.ownedArguments->forAll(isLocalExpression(externalVariable));
+
+query IteratorExp::isLocalExpression(externalVariable : OCL::Variable) : Boolean =
+    self.ownedSource.isLocalExpression(externalVariable) and
+    self.ownedBody->forAll(isLocalExpression(externalVariable));
 
 /**
  * Store param in QVTo trace

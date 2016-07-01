@@ -171,11 +171,39 @@ when { self.referredIteration.name = 'one' }
     right := object IntegerLiteral { value := 1 };
 }
 
+// TODO: This logic must be in all other places too
 mapping IteratorExp::toSelect(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 when { self.referredIteration.name = 'select' }
 {
     init {
-        result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables));
+        assert fatal (self.ownedIterators->size() = 1) with log('Expected exactly 1 iterator in select');
+        var iter := self.ownedIterators->any(true);
+
+        var iterators := self.ownedBody.findNestedIteratorExps();
+
+        if (iterators.hasReferenceTo(iter)) {
+            var variableName := createQName(iter.name);
+            result := object ForExpr {
+                iterator := object Iterator {
+                    varName := variableName;
+                    list := self.ownedSource.xmap toExprSingle(variables);
+                };
+                _return := object IfExpr {
+                    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
+                    variables->keys()->forEach (key) {
+                        variables2->put(key, variables->get(key));
+                    };
+                    variables2->put(iter, object VarRef { varName := variableName });
+
+                    test := self.ownedBody.xmap toExprSingle(variables2);
+                    _then := object VarRef { varName := variableName };
+                    _else := object ParenthesizedExpr { };
+                };
+            };
+        }
+        else {
+            result := self.ownedSource.xmap toPathExpr(variables, self.ownedBody.xmap toExprSingle(variables));
+        };
     }
 }
 
@@ -904,6 +932,48 @@ query OperationCallExp::isExternal() : Boolean =
 
 query IteratorExp::isExternal() : Boolean =
     self.ownedSource[OperationCallExp]->one(referredOperation.name = 'allInstances' and ownedSource.oclIsKindOf(TypeExp));
+
+
+query OCLExpression::findNestedIteratorExps() : Set(IteratorExp) =
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
+
+query LiteralExp::findNestedIteratorExps() : Set(IteratorExp) = Set {};
+
+query TypeExp::findNestedIteratorExps() : Set(IteratorExp) = Set {};
+
+query VariableExp::findNestedIteratorExps() : Set(IteratorExp) = Set {};
+
+query PropertyCallExp::findNestedIteratorExps() : Set(IteratorExp) = Set {};
+
+query OperationCallExp::findNestedIteratorExps() : Set(IteratorExp) =
+    self.ownedSource.findNestedIteratorExps()->union(
+        self.ownedArguments.findNestedIteratorExps()->asSet());
+
+query IteratorExp::findNestedIteratorExps() : Set(IteratorExp) =
+    self.ownedSource.findNestedIteratorExps();
+
+
+query OCLExpression::hasReferenceTo(variable : OCL::Variable) : Boolean =
+    assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
+
+query LiteralExp::hasReferenceTo(variable : OCL::Variable) : Boolean = false;
+
+query TypeExp::hasReferenceTo(variable : OCL::Variable) : Boolean = false;
+
+query VariableExp::hasReferenceTo(variable : OCL::Variable) : Boolean =
+    self.referredVariable = variable;
+
+query PropertyCallExp::hasReferenceTo(variable : OCL::Variable) : Boolean =
+    self.ownedSource.hasReferenceTo(variable);
+
+query OperationCallExp::hasReferenceTo(variable : OCL::Variable) : Boolean =
+    self.ownedSource.hasReferenceTo(variable) or
+    self.ownedArguments->forAll(hasReferenceTo(variable));
+
+query IteratorExp::hasReferenceTo(variable : OCL::Variable) : Boolean =
+    self.ownedSource.hasReferenceTo(variable) or
+    self.ownedBody->forAll(hasReferenceTo(variable));
+
 
 query NamedElement::unwrap() : NamedElement =
     if self.oclIsKindOf(SetType) then self.oclAsType(SetType).elementType else self endif;
