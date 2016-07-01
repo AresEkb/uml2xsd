@@ -102,6 +102,12 @@ public final class UtilitiesLibrary {
     }
 
     @Operation(contextual=true)
+    public static Integer getValue(org.eclipse.ocl.pivot.IntegerLiteralExp literal)
+    {
+        return literal.getIntegerSymbol().intValue();
+    }
+
+    @Operation(contextual=true)
     public static String getLocalPart(Object qname)
     {
         String localPart = ((QName)qname).getLocalPart();
@@ -184,7 +190,7 @@ public final class UtilitiesLibrary {
     }
 
     @Operation(contextual=true)
-    public ExpressionInOCL toExpressionInOCL(String expression, org.eclipse.ocl.pivot.Type context)
+    public ExpressionInOCL toExpressionInOCL(String expression, org.eclipse.ocl.pivot.Type context) //throws ParserException
     {
         ExpressionInOCL expr = null;
         try {

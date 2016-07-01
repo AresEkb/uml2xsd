@@ -74,6 +74,7 @@ disjuncts
     OperationCallExp::toStringLengthFunctionCall,
     OperationCallExp::toIsEmpty,
     OperationCallExp::toNotEmpty,
+    OperationCallExp::toSubstring,
     OperationCallExp::toMatches,
     OperationCallExp::toReplaceAll,
     OperationCallExp::toCodePoints,
@@ -181,7 +182,7 @@ when { self.referredIteration.name = 'select' }
 
         var iterators := self.ownedBody.findNestedIteratorExps();
 
-        if (iterators.hasReferenceTo(iter)) {
+        if (iterators->exists(hasReferenceTo(iter))) {
             var variableName := createQName(iter.name);
             result := object ForExpr {
                 iterator := object Iterator {
@@ -729,6 +730,24 @@ when { self.referredOperation.name = 'notEmpty' }
     }
 }
 
+mapping OperationCallExp::toSubstring(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
+when { self.referredOperation.name = 'substring' }
+{
+    assert fatal (self.ownedArguments->size() = 2);
+    assert fatal (self.ownedArguments->forAll(oclIsKindOf(IntegerLiteralExp)));
+    var startPos := self.ownedArguments[IntegerLiteralExp]->at(1).getValue();
+    var endPos := self.ownedArguments[IntegerLiteralExp]->at(2).getValue();
+    assert fatal (startPos <= endPos);
+    name := 'substring'.createFunctionQName();
+    arg := self.ownedSource.xmap toExprSingle(variables);
+    arg += object IntegerLiteral {
+        value := startPos;
+    };
+    arg += object IntegerLiteral {
+        value := endPos - startPos + 1;
+    };
+}
+
 mapping OperationCallExp::toMatches(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : FunctionCall
 when { self.referredOperation.name = 'matches' and self.ownedArguments->one(oclIsKindOf(StringLiteralExp)) }
 {
@@ -949,8 +968,7 @@ query OperationCallExp::findNestedIteratorExps() : Set(IteratorExp) =
     self.ownedSource.findNestedIteratorExps()->union(
         self.ownedArguments.findNestedIteratorExps()->asSet());
 
-query IteratorExp::findNestedIteratorExps() : Set(IteratorExp) =
-    self.ownedSource.findNestedIteratorExps();
+query IteratorExp::findNestedIteratorExps() : Set(IteratorExp) = Set { self };
 
 
 query OCLExpression::hasReferenceTo(variable : OCL::Variable) : Boolean =
