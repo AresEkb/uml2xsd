@@ -48,7 +48,7 @@ mapping Constraint::toRule() : Rule
         assert fatal (doc->size() >= 2 and doc->size() <= 3)
             with log('Documentation of constraint ' + self.name + ' must contain 2 or 3 sections:\n' + comment);
         id := self.name;
-        name := '';
+        name := self.name;
         description := doc->at(1);
         source := '';
         ocl := self.specification[OpaqueExpression].body->any(true).replace('\r\n', '\n');
@@ -88,11 +88,11 @@ query VariableExp::getContext() : OCL::Variable =
 query Classifier::getRootPath() : PathExpr =
     object PathExpr {
         step := object RootStepExpr { };
-        step += object AbbrevForwardStep {
+        /*step += object AbbrevForwardStep {
             kind := AbbrevForwardStepKind::child;
             nodeTest := object QNameTest { name := createQName('Document') };
-        };
-        step += object ChildStepExpr {
+        };*/
+        step += object SelfStepExpr {
             step := object AbbrevForwardStep {
                 kind := AbbrevForwardStepKind::child;
                 nodeTest := object QNameTest { name := self.getQName() };

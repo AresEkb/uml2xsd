@@ -27,8 +27,13 @@ modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
 transformation ISO20022toXSLT20(in m : UML, out x : XSLT);
 
+configuration property noNamespace : Boolean;
+
 main()
 {
+    if (noNamespace.oclIsUndefined()) {
+        noNamespace := false;
+    };
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheet();
     m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheetForHTML();
 }
@@ -43,7 +48,9 @@ mapping Classifier::toStylesheet() : DocumentRoot
     var stylesheetObj := object TransformType {
         id := msgId;
         version := 2;
-        xpathDefaultNamespace := namespace;
+        if (not noNamespace) {
+            xpathDefaultNamespace := namespace;
+        };
         excludeResultPrefixes := PrefixListOrAllMember1::all;
     };
 
@@ -145,12 +152,30 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
     context.xmap findQNames(stylesheet);
     match := context.toString();
 
-    self.ownedRule->sortedBy(name)->forEach (rule) {
+    instructionGroup += object VariableType {
+        name := '__context';
+        select := '.';
+    }->toFMEntry('variable');
+
+    self.ownedRule->
+        collect(c | Tuple { constraint = c, rule = c.xmap toRule() })->
+        select(notEmpty(rule.name))->sortedBy(rule.name)->forEach (c)
+    {
+        log('    Found rule ' + c.rule.name);
+        var validationStatements : Sequence(EFeatureMapEntry);
         try {
-            instructionGroup += rule.xmap toInstructionGroup(stylesheet);
+            validationStatements := c.constraint.xmap toInstructionGroup(stylesheet);
         }
         except () {
             log('WARNING: Unable to generate validation code');
+        };
+        if (validationStatements->notEmpty()) {
+            instructionGroup += validationStatements;
+        }
+        else {
+            instructionGroup += object CommentType {
+                text := 'Rule ' + c.rule.name + ' is unsupported';
+            }->toFMEntry('comment');
         }
     };
 
@@ -164,12 +189,9 @@ mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EF
         var expr := exprInOCL.ownedBody;
         var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
 
-        if (expr.isExternal()) {
-            result += object CommentType {
-                text := 'Rule ' + self.name + ' is unsupported';
-            }->toFMEntry('comment');
-        }
-        else {
+        if (not expr.isExternal()) {
+            variables->put(exprInOCL.ownedContext, object VarRef { varName := createQName('__context') });
+
             if (expr.isLet()) {
                 var variable := expr![LetExp].ownedVariable;
                 var variableName := (self.name + '_' + variable.name).toIdentifier();
@@ -201,9 +223,9 @@ mapping OCLExpression::toXPath(stylesheet : TransformType, variables : Dict(OCL:
 {
     init {
         //try {
-            log('    Transforming OCL expression\n      ' + self.toString());
+            //log('    Transforming OCL expression\n      ' + self.toString());
             result := self.xmap toExprSingle(variables);
-            log('    to\n      ' + result.toString());
+            //log('    to\n      ' + result.toString());
         //}
         //except () {
         //    log('WARNING: Unable to transform expression');
@@ -233,14 +255,11 @@ mapping Constraint::toValidate(
 {
     name := 'validate';
 
-    var doc := self.ownedComment.body->any(true).cleanML().tokenize(Set { '\n\n' });
-    assert fatal (doc->size() >= 2 and doc->size() <= 3)
-        with log('Constraint\' documentation must contain 2 or 3 sections:\n' +
-            self.ownedComment.body->any(true));
+    var rule := self.xmap toRule();
 
     withParam += object WithParamType {
         name := 'code';
-        text := self.name;
+        text := rule.name;
     };
     withParam += object WithParamType {
         name := 'isValid';
@@ -248,20 +267,20 @@ mapping Constraint::toValidate(
     };
     withParam += object WithParamType {
         name := 'definition';
-        text := doc->at(1);
+        text := rule.description;
     };
     withParam += object WithParamType {
         name := 'ocl';
-        text := self.specification[OpaqueExpression].body->any(true);
+        text := rule.ocl;
     };
     withParam += object WithParamType {
         name := 'error';
-        mixed := doc->at(2).toMessage(stylesheet, context.type, variables);
+        mixed := rule.errorMessage.toMessage(stylesheet, context.type, variables);
     };
-    if (doc->size() >= 3) {
+    if (notEmpty(rule.successMessage)) {
         withParam += object WithParamType {
             name := 'valid';
-            mixed := doc->at(3).toMessage(stylesheet, context.type, variables);
+            mixed := rule.successMessage.toMessage(stylesheet, context.type, variables);
         };
     };
 }
@@ -283,7 +302,14 @@ mapping Constraint::toForEach(
     };
     xpath.xmap findQNames(stylesheet);
     select := xpath.toString();
-    instructionGroup += self->toValidate(stylesheet, iterator.ownedIterators->any(true), iterator.ownedBody, variables)->toFMEntry('callTemplate');
+
+    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
+    variables->keys()->forEach (key) {
+        variables2->put(key, variables->get(key));
+    };
+    variables2->put(iterator.ownedIterators->any(true), object FunctionCall { name := createQName('current') });
+
+    instructionGroup += self->toValidate(stylesheet, iterator.ownedIterators->any(true), iterator.ownedBody, variables2)->toFMEntry('callTemplate');
 }
 
 intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(TYPE::QName); };

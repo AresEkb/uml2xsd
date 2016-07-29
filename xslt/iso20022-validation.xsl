@@ -2,6 +2,7 @@
 <xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fn="http://www.w3.org/2005/xpath-functions"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns="urn:iso20022:validation-result"
                 exclude-result-prefixes="#all">
 
@@ -14,11 +15,11 @@
       <xsl:apply-templates />
     </validationResult>
   </xsl:template>
-  
+
   <xsl:template match="@*|node()">
     <xsl:apply-templates />
   </xsl:template>
-  
+
   <xsl:template name="genPath">
     <xsl:param name="prevPath" />
     <xsl:variable name="currPath" select="concat('/',name(),'[',count(preceding-sibling::*[name() = name(current())])+1,']',$prevPath)" />
@@ -28,7 +29,7 @@
       </xsl:call-template>
     </xsl:for-each>
     <xsl:if test="not(parent::*)">
-      <xsl:value-of select="$currPath" />      
+      <xsl:value-of select="$currPath" />
     </xsl:if>
   </xsl:template>
 
@@ -57,10 +58,10 @@
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
-  
+
   <xsl:template name="validate">
     <xsl:param name="code" />
-    <xsl:param name="isValid" />
+    <xsl:param name="isValid" as="xs:boolean" />
     <xsl:param name="definition" />
     <xsl:param name="ocl" />
     <xsl:param name="error" />

@@ -198,7 +198,7 @@ query Constraint::toValidationMethodBody(
     assert fatal (not expr.ownedContext.oclIsInvalid())
         with log('Unable to parse "' + self.specification[OpaqueExpression]->any(language->includes('OCL')).body->any(true) + '"');
 
-    var variableName := '__' + expr.ownedContext.name.toIdentifier();
+    var variableName := expr.ownedContext.getUniqueName(true);
     variables->put(expr.ownedContext, object VarRef { varName := createQName(variableName) });
 
     var localVariables : List(JAVA::_references::ReferenceableElement);
@@ -207,7 +207,7 @@ query Constraint::toValidationMethodBody(
 
     statements += object JAVA::statements::LocalVariableStatement {
         variable := object JAVA::variables::LocalVariable {
-            name := variableName;
+            name := '__' + variableName;
             typeReference := rootField.getClassReference('com.centreit.repiso.validator.validation.Variable');
             initialValue := object JAVA::_references::IdentifierReference {
                 target := object JAVA::classifiers::Class { name := 'Helper'; };
@@ -256,6 +256,20 @@ disjuncts
 {
 }
 
+mapping Constraint::toValidationCode2(
+    expr : OCLExpression,
+    root : OCL::Variable,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
+    contextVariable : JAVA::_references::ReferenceableElement,
+    resultVariable : JAVA::_references::ReferenceableElement,
+    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
+disjuncts
+    Constraint::toLet,
+    Constraint::toHelperCheckInvocation
+{
+}
+
 /**
  * Map OCL constraint to the variable declaration:
  *
@@ -273,7 +287,7 @@ mapping Constraint::toLet(
 when { expr.isLet() }
 {
     var variableExpr := expr![LetExp].ownedVariable;
-    var variableName := variableExpr.name.toIdentifier();
+    var variableName := variableExpr.getUniqueName();
     var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
     variables->keys()->forEach (key) {
         variables2->put(key, variables->get(key));
@@ -374,7 +388,7 @@ when { expr.isForAll() }
             // Relative path is better because of non-determenistic Document root, which is sometimes present, sometimes absent
             assert fatal (expr![IteratorExp].ownedIterators->size() = 1);
             var iterator := expr![IteratorExp].ownedIterators->first();
-            var variableName := iterator.name.toIdentifier();
+            var variableName := iterator.getUniqueName();
             var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
             variables->keys()->forEach (key) {
                 variables2->put(key, variables->get(key));
@@ -402,7 +416,7 @@ when { expr.isForAll() }
                 localVariables2->add(variable);
             };
 
-            statements += self.xmap toValidationCode(expr![IteratorExp].ownedBody, root, iterator, variables2, contextParam, resultVariable, localVariables);
+            statements += self.xmap toValidationCode2(expr![IteratorExp].ownedBody, root, iterator, variables2, contextParam, resultVariable, localVariables);
         };
     };
 }
