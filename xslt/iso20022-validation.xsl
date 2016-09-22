@@ -97,4 +97,44 @@
     </xsl:choose>
   </xsl:template>
 
+  <xsl:template name="irrelevant">
+    <xsl:param name="code" />
+    <xsl:param name="definition" />
+    <xsl:param name="ocl" />
+    <xsl:variable name="path"><xsl:call-template name="genPath"/></xsl:variable>
+    <xsl:variable name="businessPath">
+      <xsl:call-template name="genBusinessPath">
+        <xsl:with-param name="elementNames" select="$elementNames/node()" />
+        <xsl:with-param name="path" select="fn:substring-after($path, '/')" />
+      </xsl:call-template>
+    </xsl:variable>
+    <irrelevant>
+      <ruleName><xsl:value-of select="$code" /></ruleName>
+      <element><xsl:value-of select="$path" /></element>
+      <businessElement><xsl:value-of select="$businessPath" /></businessElement>
+      <definition><xsl:value-of select="$definition" /></definition>
+      <ocl><xsl:value-of select="$ocl" /></ocl>
+    </irrelevant>
+  </xsl:template>
+
+  <xsl:template name="unsupported">
+    <xsl:param name="code" />
+    <xsl:param name="definition" />
+    <xsl:param name="ocl" />
+    <xsl:variable name="path"><xsl:call-template name="genPath"/></xsl:variable>
+    <xsl:variable name="businessPath">
+      <xsl:call-template name="genBusinessPath">
+        <xsl:with-param name="elementNames" select="$elementNames/node()" />
+        <xsl:with-param name="path" select="fn:substring-after($path, '/')" />
+      </xsl:call-template>
+    </xsl:variable>
+    <unsupported>
+      <ruleName><xsl:value-of select="$code" /></ruleName>
+      <element><xsl:value-of select="$path" /></element>
+      <businessElement><xsl:value-of select="$businessPath" /></businessElement>
+      <definition><xsl:value-of select="$definition" /></definition>
+      <ocl><xsl:value-of select="$ocl" /></ocl>
+    </unsupported>
+  </xsl:template>
+
 </xsl:stylesheet>

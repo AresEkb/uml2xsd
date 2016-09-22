@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:iso20022:validation-result" xmlns:vr="urn:iso20022:validation-result" elementFormDefault="qualified">
+  <xs:element name="validationResult">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="error" type="vr:result" />
+        <xs:element name="valid" type="vr:result" />
+        <xs:element name="irrelevant" type="vr:result2" />
+        <xs:element name="unsupported" type="vr:result2" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element name="ruleName" type="xs:string" />
+      <xs:element name="element" type="xs:string" />
+      <xs:element name="businessElement" type="xs:string" />
+      <xs:element name="definition" type="xs:string" />
+      <xs:element name="ocl" type="xs:string" />
+      <xs:element name="message" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result2">
+    <xs:sequence>
+      <xs:element name="ruleName" type="xs:string" />
+      <xs:element name="element" type="xs:string" />
+      <xs:element name="businessElement" type="xs:string" />
+      <xs:element name="definition" type="xs:string" />
+      <xs:element name="ocl" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

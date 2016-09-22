@@ -223,9 +223,7 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
                 instructionGroup += statements;
             }
             else {
-                instructionGroup += object CommentType {
-                    text := 'Rule ' + c.rule.name + ' is unsupported';
-                }->toFMEntry('comment');
+                instructionGroup += c.constraint.xmap toUnsupported(stylesheet);
             }
         };
     };
@@ -253,6 +251,7 @@ mapping Constraint::toValidationCode(
 disjuncts
     Constraint::toLet,
     Constraint::toForAll,
+    Constraint::toImplies,
     Constraint::toValidate
 {
 }
@@ -264,6 +263,7 @@ mapping Constraint::toValidationCode2(
     variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
 disjuncts
     Constraint::toLet,
+    Constraint::toImplies,
     Constraint::toValidate
 {
 }
@@ -289,6 +289,24 @@ when { expr.isLet() }
     }->toFMEntry('variable');
 
     result += self.xmap toValidationCode(stylesheet, expr![LetExp].ownedIn, context, variables2);
+}
+
+mapping Constraint::toImplies(
+    stylesheet : TransformType,
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
+when { expr.isImplies() }
+{
+    result += object ChooseType {
+        _when := object WhenType {
+            test := expr![OperationCallExp].ownedSource.xmap toXPath(stylesheet, variables).toString();
+            mixed := self.xmap toValidationCode(stylesheet, expr![OperationCallExp].ownedArguments->first(), context, variables);
+        };
+        otherwise := object SequenceConstructor {
+            mixed := self.xmap toIrrelevant(stylesheet);
+        };
+    }->toFMEntry('choose');
 }
 
 mapping Constraint::toForAll(
@@ -350,6 +368,50 @@ mapping Constraint::toValidate(
                 name := 'valid';
                 mixed := rule.successMessage.toMessage(stylesheet, context.type, variables);
             };
+        };
+    }->toFMEntry('callTemplate');
+}
+
+mapping Constraint::toIrrelevant(stylesheet : TransformType) : List(EFeatureMapEntry)
+{
+    result += object CallTemplateType {
+        name := 'irrelevant';
+
+        var rule := self.xmap toRule();
+
+        withParam += object WithParamType {
+            name := 'code';
+            text := rule.name;
+        };
+        withParam += object WithParamType {
+            name := 'definition';
+            text := rule.description;
+        };
+        withParam += object WithParamType {
+            name := 'ocl';
+            text := rule.ocl;
+        };
+    }->toFMEntry('callTemplate');
+}
+
+mapping Constraint::toUnsupported(stylesheet : TransformType) : List(EFeatureMapEntry)
+{
+    result += object CallTemplateType {
+        name := 'unsupported';
+
+        var rule := self.xmap toRule();
+
+        withParam += object WithParamType {
+            name := 'code';
+            text := rule.name;
+        };
+        withParam += object WithParamType {
+            name := 'definition';
+            text := rule.description;
+        };
+        withParam += object WithParamType {
+            name := 'ocl';
+            text := rule.ocl;
         };
     }->toFMEntry('callTemplate');
 }

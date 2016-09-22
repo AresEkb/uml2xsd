@@ -60,12 +60,19 @@ mapping Constraint::toRule() : Rule
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
 
+query OCLExpression::isLet() : Boolean =
+    self.oclIsKindOf(LetExp);
+
+query OCLExpression::isImplies() : Boolean =
+    self.oclIsKindOf(OperationCallExp) and
+    self![OperationCallExp].referredOperation->one(
+        owningClass.oclIsKindOf(OCL::PrimitiveType) and
+        owningClass.name = 'Boolean' and
+        name = 'implies');
+
 query OCLExpression::isForAll() : Boolean =
     self.oclIsKindOf(IteratorExp) and
     self![IteratorExp].referredIteration.name = 'forAll';
-
-query OCLExpression::isLet() : Boolean =
-    self.oclIsKindOf(LetExp);
 
 // TODO: I think it doesn't support something like this:
 // SomeClass.allInstances().prop

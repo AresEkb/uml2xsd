@@ -83,6 +83,60 @@
             <p>Элементы, успешно прошедшие валидацию, отсутствуют.</p>
           </xsl:otherwise>
         </xsl:choose>
+        <xsl:choose>
+          <xsl:when test="$result/vr:irrelevant">
+            <p>Для следующих правил не выполнялась проверка, т.к. для них не выполнено предусловие.</p>
+            <table>
+              <thead>
+                <tr><th>№</th><th>Код</th><th>Расположение</th><th>Бизнес-описание правила</th></tr>
+              </thead>
+              <tbody>
+                <xsl:for-each select="$result/vr:irrelevant">
+                  <tr>
+                    <td><xsl:number /></td>
+                    <td><xsl:value-of select="vr:ruleName" /></td>
+                    <td>
+                      <xsl:if test="fn:string-length(vr:businessElement) > 0">
+                        <xsl:value-of select="vr:businessElement" /><br/><br/>
+                      </xsl:if>
+                      <xsl:value-of select="vr:element" /></td>
+                    <td><xsl:value-of select="vr:definition" /></td>
+                  </tr>
+                </xsl:for-each>
+              </tbody>
+            </table>
+          </xsl:when>
+          <xsl:otherwise>
+            <p>Правила, для которых не выполнялась проверка по причине ложного предусловия, отсутствуют.</p>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:choose>
+          <xsl:when test="$result/vr:unsupported">
+            <p>Для следующих правил не выполнялась проверка, т.к. они не поддерживаются.</p>
+            <table>
+              <thead>
+                <tr><th>№</th><th>Код</th><th>Расположение</th><th>Бизнес-описание правила</th></tr>
+              </thead>
+              <tbody>
+                <xsl:for-each select="$result/vr:unsupported">
+                  <tr>
+                    <td><xsl:number /></td>
+                    <td><xsl:value-of select="vr:ruleName" /></td>
+                    <td>
+                      <xsl:if test="fn:string-length(vr:businessElement) > 0">
+                        <xsl:value-of select="vr:businessElement" /><br/><br/>
+                      </xsl:if>
+                      <xsl:value-of select="vr:element" /></td>
+                    <td><xsl:value-of select="vr:definition" /></td>
+                  </tr>
+                </xsl:for-each>
+              </tbody>
+            </table>
+          </xsl:when>
+          <xsl:otherwise>
+            <p>Не поддерживаемые правила отсутствуют.</p>
+          </xsl:otherwise>
+        </xsl:choose>
       </body>
     </html>
   </xsl:template>
