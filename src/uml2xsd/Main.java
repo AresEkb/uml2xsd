@@ -413,6 +413,7 @@ public class Main {
         TransformationExecutor executor = new TransformationExecutor(transformation);
         ExecutionContextImpl context = new ExecutionContextImpl();
         context.setConfigProperty("terminateOnException", false);
+        context.setConfigProperty("noNamespace", true);
         context.setLog(new WriterLog(new OutputStreamWriter(System.out)));
         EList<EObject> uml = new BasicEList<EObject>();
         uml.add(model);

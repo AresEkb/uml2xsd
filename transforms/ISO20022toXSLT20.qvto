@@ -9,11 +9,6 @@
  *    Denis Nikiforov - initial API and implementation
  */
 
-/**
- * Types, elements and other objects may be duplicated in several output schemas.
- * So we pass root of the output schema as additional mapping argument to generate duplicate objects.
- */
-
 import ISO20022Helpers;
 import OCLtoXPath;
 import DocOCL;
@@ -27,18 +22,59 @@ modeltype TYPE uses 'http://www.eclipse.org/emf/2003/XMLType';
 
 transformation ISO20022toXSLT20(in m : UML, out x : XSLT);
 
+configuration property terminateOnException : Boolean;
 configuration property noNamespace : Boolean;
+configuration property generateXMLresult : Boolean;
+configuration property generateHTMLresult : Boolean;
+configuration property fileName : String;
 
 main()
 {
+    if (terminateOnException.oclIsUndefined()) {
+        terminateOnException := false;
+    };
     if (noNamespace.oclIsUndefined()) {
         noNamespace := false;
     };
-    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheet();
-    m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheetForHTML();
+    if (generateXMLresult.oclIsUndefined()) {
+        generateXMLresult := true;
+    };
+    if (generateHTMLresult.oclIsUndefined()) {
+        generateHTMLresult := true;
+    };
+    if (generateHTMLresult) {
+        generateXMLresult := true;
+    };
+    if (fileName.oclIsUndefined()) {
+        if (generateXMLresult) {
+            m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheet();
+        };
+        if (generateHTMLresult) {
+            m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheetForHTML();
+        };
+    }
+    else {
+        assert fatal (m.objectsOfKind(Classifier)->one(is('MessageDefinition')))
+            with log('fileName parameter was specified so exactly one MessageDefinition is expected. Found: ' +
+                m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->size().toString());
+        if (generateXMLresult) {
+            m.objectsOfKind(Classifier)->any(is('MessageDefinition'))->toStylesheet(fileName);
+        };
+        if (generateHTMLresult) {
+            m.objectsOfKind(Classifier)->any(is('MessageDefinition'))->toStylesheetForHTML(fileName);
+        };
+    }
 }
 
 mapping Classifier::toStylesheet() : DocumentRoot
+{
+    init {
+        var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
+        result := self.xmap toStylesheet(msgId);
+    }
+}
+
+mapping Classifier::toStylesheet(fileName : String) : DocumentRoot
 {
     var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
     var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId.replaceAll('-.*$', '');
@@ -46,7 +82,7 @@ mapping Classifier::toStylesheet() : DocumentRoot
     log('  Found message ' + msgId);
 
     var stylesheetObj := object TransformType {
-        id := msgId;
+        id := fileName;
         version := 2;
         if (not noNamespace) {
             xpathDefaultNamespace := namespace;
@@ -90,20 +126,28 @@ mapping Classifier::toStylesheet() : DocumentRoot
 
 mapping Classifier::toStylesheetForHTML() : DocumentRoot
 {
+    init {
+        var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
+        result := self.xmap toStylesheetForHTML(msgId);
+    }
+}
+
+mapping Classifier::toStylesheetForHTML(fileName : String) : DocumentRoot
+{
     var msgId := self.getValue(profileName + '::MessageDefinition', 'messageDefinitionIdentifier');
     var namespace := 'urn:iso:std:iso:20022:tech:xsd:' + msgId;
 
     log('  Generating HTML version of XSLT for message ' + msgId);
 
     var stylesheetObj := object TransformType {
-        id := msgId + '-html';
+        id := fileName + '-html';
         version := 2;
         xpathDefaultNamespace := namespace;
         excludeResultPrefixes := PrefixListOrAllMember1::all;
     };
 
     stylesheetObj._import := object ImportType {
-        href := msgId + '.xsl';
+        href := fileName + '.xsl';
     };
     stylesheetObj._import += object ImportType {
         href := 'iso20022-validation-html.xsl';
@@ -162,62 +206,168 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
         select(notEmpty(rule.name))->sortedBy(rule.name)->forEach (c)
     {
         log('    Found rule ' + c.rule.name);
-        var validationStatements : Sequence(EFeatureMapEntry);
-        try {
-            validationStatements := c.constraint.xmap toInstructionGroup(stylesheet);
-        }
-        except () {
-            log('WARNING: Unable to generate validation code');
-        };
-        if (validationStatements->notEmpty()) {
-            instructionGroup += validationStatements;
+
+        var statements : Sequence(EFeatureMapEntry);
+        if (terminateOnException) {
+            statements := c.constraint.xmap toInstructionGroup(stylesheet);
+            assert fatal (statements->notEmpty()) with log('Unable to generate validation code');
         }
         else {
-            instructionGroup += object CommentType {
-                text := 'Rule ' + c.rule.name + ' is unsupported';
-            }->toFMEntry('comment');
-        }
+            try {
+                statements := c.constraint.xmap toInstructionGroup(stylesheet);
+            }
+            except (ex : Exception) {
+                log('WARNING: Unable to generate validation code');
+            };
+            if (statements->notEmpty()) {
+                instructionGroup += statements;
+            }
+            else {
+                instructionGroup += object CommentType {
+                    text := 'Rule ' + c.rule.name + ' is unsupported';
+                }->toFMEntry('comment');
+            }
+        };
     };
 
     instructionGroup += object ApplyTemplatesType { }.toFMEntry('applyTemplates');
 }
 
-mapping Constraint::toInstructionGroup(stylesheet : TransformType) : Sequence(EFeatureMapEntry)
+mapping Constraint::toInstructionGroup(stylesheet : TransformType) : List(EFeatureMapEntry)
 {
-    init {
-        var exprInOCL := self.toExpressionInOCL();
-        var expr := exprInOCL.ownedBody;
-        var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+    var expr := self.toExpressionInOCL();
+    assert fatal (not expr.ownedContext.oclIsInvalid())
+        with log('Unable to parse "' + self.specification[OpaqueExpression]->any(language->includes('OCL')).body->any(true) + '"');
 
-        if (not expr.isExternal()) {
-            variables->put(exprInOCL.ownedContext, object VarRef { varName := createQName('__context') });
+    var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
+    variables->put(expr.ownedContext, object VarRef { varName := createQName('__context') });
 
-            if (expr.isLet()) {
-                var variable := expr![LetExp].ownedVariable;
-                var variableName := (self.name + '_' + variable.name).toIdentifier();
-                expr := expr![LetExp].ownedIn;
-                variables->put(variable, object VarRef { varName := createQName(variableName) });
-                result += object VariableType {
-                    name := variableName;
-                    try {
-                        var variableInit := variable.ownedInit.xmap toExprSingle(variables);
-                        select := variableInit.toString();
-                    }
-                    except () {
-                        log('WARNING: Unable to transform init expression for variable ' + variableName);
-                    }
-                }->toFMEntry('variable');
-            };
-
-            if (expr.isForAll()) {
-                result += self->toForEach(stylesheet, self![IteratorExp].ownedIterators->first(), expr, variables)->toFMEntry('forEach');
-            }
-            else {
-                result += self->toValidate(stylesheet, exprInOCL.ownedContext, expr, variables)->toFMEntry('callTemplate');
-            }
-        }
-    }
+    result += self.xmap toValidationCode(stylesheet, expr.ownedBody, expr.ownedContext, variables);
 }
+
+mapping Constraint::toValidationCode(
+    stylesheet : TransformType,
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
+disjuncts
+    Constraint::toLet,
+    Constraint::toForAll,
+    Constraint::toValidate
+{
+}
+
+mapping Constraint::toValidationCode2(
+    stylesheet : TransformType,
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
+disjuncts
+    Constraint::toLet,
+    Constraint::toValidate
+{
+}
+
+mapping Constraint::toLet(
+    stylesheet : TransformType,
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
+when { expr.isLet() }
+{
+    var variableExpr := expr![LetExp].ownedVariable;
+    var variableName := variableExpr.getUniqueName();
+    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
+    variables->keys()->forEach (key) {
+        variables2->put(key, variables->get(key));
+    };
+    variables2->put(variableExpr, object VarRef { varName := createQName(variableName) });
+
+    result += object VariableType {
+        name := variableName;
+        select := variableExpr.ownedInit.xmap toXPath(stylesheet, variables).toString();
+    }->toFMEntry('variable');
+
+    result += self.xmap toValidationCode(stylesheet, expr![LetExp].ownedIn, context, variables2);
+}
+
+mapping Constraint::toForAll(
+    stylesheet : TransformType,
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
+when { expr.isForAll() }
+{
+    var contextExpr := expr![IteratorExp].ownedSource;
+
+    result += object ForEachType {
+        assert fatal (expr![IteratorExp].ownedIterators->size() = 1);
+        var iterator := expr![IteratorExp].ownedIterators->first();
+        var variableName := iterator.getUniqueName();
+        var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
+        variables->keys()->forEach (key) {
+            variables2->put(key, variables->get(key));
+        };
+        variables2->put(iterator, object FunctionCall { name := createQName('current') });
+        select := contextExpr.xmap toXPath(stylesheet, variables).toString();
+        instructionGroup += self.xmap toValidationCode2(stylesheet, expr![IteratorExp].ownedBody, iterator, variables2);
+    }->toFMEntry('forEach');
+}
+
+mapping Constraint::toValidate(
+    stylesheet : TransformType,
+    expr : OCLExpression,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
+{
+    result += object CallTemplateType {
+        name := 'validate';
+
+        var rule := self.xmap toRule();
+
+        withParam += object WithParamType {
+            name := 'code';
+            text := rule.name;
+        };
+        withParam += object WithParamType {
+            name := 'isValid';
+            select := expr.xmap toXPath(stylesheet, variables).toString();
+        };
+        withParam += object WithParamType {
+            name := 'definition';
+            text := rule.description;
+        };
+        withParam += object WithParamType {
+            name := 'ocl';
+            text := rule.ocl;
+        };
+        withParam += object WithParamType {
+            name := 'error';
+            mixed := rule.errorMessage.toMessage(stylesheet, context.type, variables);
+        };
+        if (notEmpty(rule.successMessage)) {
+            withParam += object WithParamType {
+                name := 'valid';
+                mixed := rule.successMessage.toMessage(stylesheet, context.type, variables);
+            };
+        };
+    }->toFMEntry('callTemplate');
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Helpers
+
+query String::toMessage(stylesheet : TransformType, context : OCL::Type, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : Sequence(EFeatureMapEntry) =
+    self.tokenizeDocOCL()->collect(token|
+        if token.isExpr then
+            object ValueOfType {
+                select := token.text.toExpressionInOCL(context).ownedBody.xmap toXPath(stylesheet, variables).toString();
+            }->toFMEntry('valueOf')
+        else
+            object TextType {
+                value := token.text;
+            }->toFMEntry('text')
+        endif);
 
 mapping OCLExpression::toXPath(stylesheet : TransformType, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 {
@@ -235,83 +385,6 @@ mapping OCLExpression::toXPath(stylesheet : TransformType, variables : Dict(OCL:
     result.xmap findQNames(stylesheet);
 }
 
-query String::toMessage(stylesheet : TransformType, context : OCL::Type, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : Sequence(EFeatureMapEntry) =
-    self.tokenizeDocOCL()->collect(token|
-        if token.isExpr then
-            object ValueOfType {
-                select := token.text.toExpressionInOCL(context).ownedBody.xmap toXPath(stylesheet, variables).toString();
-            }->toFMEntry('valueOf')
-        else
-            object TextType {
-                value := token.text;
-            }->toFMEntry('text')
-        endif);
-
-mapping Constraint::toValidate(
-    stylesheet : TransformType,
-    context : OCL::Variable,
-    expr : OCLExpression,
-    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : CallTemplateType
-{
-    name := 'validate';
-
-    var rule := self.xmap toRule();
-
-    withParam += object WithParamType {
-        name := 'code';
-        text := rule.name;
-    };
-    withParam += object WithParamType {
-        name := 'isValid';
-        select := expr.xmap toXPath(stylesheet, variables).toString();
-    };
-    withParam += object WithParamType {
-        name := 'definition';
-        text := rule.description;
-    };
-    withParam += object WithParamType {
-        name := 'ocl';
-        text := rule.ocl;
-    };
-    withParam += object WithParamType {
-        name := 'error';
-        mixed := rule.errorMessage.toMessage(stylesheet, context.type, variables);
-    };
-    if (notEmpty(rule.successMessage)) {
-        withParam += object WithParamType {
-            name := 'valid';
-            mixed := rule.successMessage.toMessage(stylesheet, context.type, variables);
-        };
-    };
-}
-
-mapping Constraint::toForEach(
-    stylesheet : TransformType,
-    context : OCL::Variable,
-    expr : OCLExpression,
-    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ForEachType
-{
-    var iterator := expr.oclAsType(IteratorExp);
-    var xpath : ExprSingle;
-    try {
-        xpath := iterator.ownedSource.xmap toExprSingle(variables);
-    }
-    except () {
-        log('WARNING: Unable to transform expression');
-        xpath := object ParenthesizedExpr { };
-    };
-    xpath.xmap findQNames(stylesheet);
-    select := xpath.toString();
-
-    var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
-    variables->keys()->forEach (key) {
-        variables2->put(key, variables->get(key));
-    };
-    variables2->put(iterator.ownedIterators->any(true), object FunctionCall { name := createQName('current') });
-
-    instructionGroup += self->toValidate(stylesheet, iterator.ownedIterators->any(true), iterator.ownedBody, variables2)->toFMEntry('callTemplate');
-}
-
 intermediate class StylesheetQNames { stylesheet : TransformType; qnames : Set(TYPE::QName); };
 
 mapping ExprSingle::findQNames(currentStylesheet : TransformType) : StylesheetQNames
@@ -321,9 +394,6 @@ mapping ExprSingle::findQNames(currentStylesheet : TransformType) : StylesheetQN
         collect(obj|obj.eClass().eAttributes->collect(attr|obj.eGet(attr)))[TYPE::QName]->
         select(getPrefix() <> null and getNamespaceURI() <> null)->asSet();
 }
-
-///////////////////////////////////////////////////////////////////////////////
-// Helpers
 
 query GenericElementType::toFMEntry(name : String) : EFeatureMapEntry =
     createFeatureMapEntry('http://www.w3.org/1999/XSL/Transform', name, self);
