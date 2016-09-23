@@ -175,7 +175,7 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
             statements := self.toValidationMethodBody(rootField, resultParam);
         }
         except (ex : Exception) {
-            log('WARNING: Unable to generate validation code');
+            assert warning (false) with log(ex.repr());
         };
         // This code can't be moved into exception handling section, because it seems that sometimes exceptions aren't raised
         if (statements->isEmpty()) {
@@ -198,7 +198,7 @@ query Constraint::toValidationMethodBody(
     assert fatal (not expr.ownedContext.oclIsInvalid())
         with log('Unable to parse "' + self.specification[OpaqueExpression]->any(language->includes('OCL')).body->any(true) + '"');
 
-    var variableName := expr.ownedContext.getUniqueName(true);
+    var variableName := self.getUniqueName(expr.ownedContext);
     variables->put(expr.ownedContext, object VarRef { varName := createQName(variableName) });
 
     var localVariables : List(JAVA::_references::ReferenceableElement);
@@ -287,7 +287,7 @@ mapping Constraint::toLet(
 when { expr.isLet() }
 {
     var variableExpr := expr![LetExp].ownedVariable;
-    var variableName := variableExpr.getUniqueName();
+    var variableName := self.getUniqueName(variableExpr);
     var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
     variables->keys()->forEach (key) {
         variables2->put(key, variables->get(key));
@@ -309,7 +309,7 @@ when { expr.isLet() }
                         value := variableName;
                     };
                     arguments += object JAVA::_references::StringReference {
-                        value := variableExpr.ownedInit.xmap toExprSingle(variables).toString();
+                        value := variableExpr.ownedInit.xmap toExprSingle(self, variables).toString();
                     };
                 };
             };
@@ -354,7 +354,7 @@ when { expr.isForAll() }
                 };
                 arguments += object JAVA::_references::StringReference {
                     //log('=== from ' + contextExpr.toString());
-                    value := contextExpr.xmap toExprSingle(variables).toString();
+                    value := contextExpr.xmap toExprSingle(self, variables).toString();
                     //log('=== to   ' + value);
                 };
                 arguments += object JAVA::_references::IdentifierReference {
@@ -388,7 +388,7 @@ when { expr.isForAll() }
             // Relative path is better because of non-determenistic Document root, which is sometimes present, sometimes absent
             assert fatal (expr![IteratorExp].ownedIterators->size() = 1);
             var iterator := expr![IteratorExp].ownedIterators->first();
-            var variableName := iterator.getUniqueName();
+            var variableName := self.getUniqueName(iterator);
             var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
             variables->keys()->forEach (key) {
                 variables2->put(key, variables->get(key));
@@ -456,7 +456,7 @@ mapping Constraint::toHelperCheckInvocation(
                             };
 
                             arguments += object JAVA::_references::StringReference {
-                                value := expr.replaceLocal().xmap toExprSingle(variables).toString()
+                                value := expr.replaceLocal().xmap toExprSingle(self, variables).toString()
                                     .replaceAll("'(:param\\d+)'", "$1")
                                     .replaceAll("'(:param\\d+)'", "$1"); // TODO: There is a strange bug, param is quoted twice
                             };
@@ -478,14 +478,14 @@ mapping Constraint::toHelperCheckInvocation(
                                     target := object JAVA::members::ClassMethod {
                                         name := 'asList';
                                     };
-                                    arguments := expr.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(variables);
+                                    arguments := expr.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(self, variables);
                                 };
                             };
 
                             var rule := self.xmap toRule();
-                            arguments += rule.errorMessage.toMessage(contextVariable, context.type, variables);
+                            arguments += rule.errorMessage.toMessage(contextVariable, context.type, self, variables);
                             if (notEmpty(rule.successMessage)) {
-                                arguments += rule.successMessage.toMessage(contextVariable, context.type, variables);
+                                arguments += rule.successMessage.toMessage(contextVariable, context.type, self, variables);
                             };
                         };
                     };
@@ -495,7 +495,7 @@ mapping Constraint::toHelperCheckInvocation(
     };
 }
 
-mapping Param::toNewConstructorCall(variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : JAVA::instantiations::NewConstructorCall
+mapping Param::toNewConstructorCall(constraint : Constraint, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : JAVA::instantiations::NewConstructorCall
 {
     typeReference := object JAVA::types::ClassifierReference {
         target := object JAVA::classifiers::Class {
@@ -506,7 +506,7 @@ mapping Param::toNewConstructorCall(variables : Dict(OCL::Variable, XPATH2::Expr
         value := self.name;
     };
     arguments += object JAVA::_references::StringReference {
-        value := self.ocl.xmap toExprSingle(variables).toString();
+        value := self.ocl.xmap toExprSingle(constraint, variables).toString();
     };
     arguments += object JAVA::_references::IdentifierReference {
         target := object JAVA::classifiers::Class {
@@ -528,6 +528,7 @@ mapping Param::toNewConstructorCall(variables : Dict(OCL::Variable, XPATH2::Expr
 query String::toMessage(
     contextVariable : JAVA::_references::ReferenceableElement,
     context : OCL::Type,
+    constraint : Constraint,
     variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : JAVA::_references::IdentifierReference
 {
     var str := '';
@@ -535,7 +536,7 @@ query String::toMessage(
     self.tokenizeDocOCL()->forEach (token) {
         if (token.isExpr) {
             str := str + '%s';
-            args += token.text.toExpressionInOCL(context).ownedBody.xmap toExprSingle(variables).toString();
+            args += token.text.toExpressionInOCL(context).ownedBody.xmap toExprSingle(constraint, variables).toString();
         }
         else {
             str := str + token.text;

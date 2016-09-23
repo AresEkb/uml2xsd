@@ -217,7 +217,7 @@ mapping Classifier::toTemplate(stylesheet : TransformType, rootPathExpr : PathEx
                 statements := c.constraint.xmap toInstructionGroup(stylesheet);
             }
             except (ex : Exception) {
-                log('WARNING: Unable to generate validation code');
+                assert warning (false) with log(ex.repr());
             };
             if (statements->notEmpty()) {
                 instructionGroup += statements;
@@ -276,7 +276,7 @@ mapping Constraint::toLet(
 when { expr.isLet() }
 {
     var variableExpr := expr![LetExp].ownedVariable;
-    var variableName := variableExpr.getUniqueName();
+    var variableName := self.getUniqueName(variableExpr);
     var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
     variables->keys()->forEach (key) {
         variables2->put(key, variables->get(key));
@@ -285,7 +285,7 @@ when { expr.isLet() }
 
     result += object VariableType {
         name := variableName;
-        select := variableExpr.ownedInit.xmap toXPath(stylesheet, variables).toString();
+        select := variableExpr.ownedInit.xmap toXPath(stylesheet, self, variables).toString();
     }->toFMEntry('variable');
 
     result += self.xmap toValidationCode(stylesheet, expr![LetExp].ownedIn, context, variables2);
@@ -300,7 +300,7 @@ when { expr.isImplies() }
 {
     result += object ChooseType {
         _when := object WhenType {
-            test := expr![OperationCallExp].ownedSource.xmap toXPath(stylesheet, variables).toString();
+            test := expr![OperationCallExp].ownedSource.xmap toXPath(stylesheet, self, variables).toString();
             mixed := self.xmap toValidationCode(stylesheet, expr![OperationCallExp].ownedArguments->first(), context, variables);
         };
         otherwise := object SequenceConstructor {
@@ -321,13 +321,13 @@ when { expr.isForAll() }
     result += object ForEachType {
         assert fatal (expr![IteratorExp].ownedIterators->size() = 1);
         var iterator := expr![IteratorExp].ownedIterators->first();
-        var variableName := iterator.getUniqueName();
+        var variableName := self.getUniqueName(iterator);
         var variables2 : Dict(OCL::Variable, XPATH2::ExprSingle);
         variables->keys()->forEach (key) {
             variables2->put(key, variables->get(key));
         };
         variables2->put(iterator, object FunctionCall { name := createQName('current') });
-        select := contextExpr.xmap toXPath(stylesheet, variables).toString();
+        select := contextExpr.xmap toXPath(stylesheet, self, variables).toString();
         instructionGroup += self.xmap toValidationCode2(stylesheet, expr![IteratorExp].ownedBody, iterator, variables2);
     }->toFMEntry('forEach');
 }
@@ -349,7 +349,7 @@ mapping Constraint::toValidate(
         };
         withParam += object WithParamType {
             name := 'isValid';
-            select := expr.xmap toXPath(stylesheet, variables).toString();
+            select := expr.xmap toXPath(stylesheet, self, variables).toString();
         };
         withParam += object WithParamType {
             name := 'definition';
@@ -361,12 +361,12 @@ mapping Constraint::toValidate(
         };
         withParam += object WithParamType {
             name := 'error';
-            mixed := rule.errorMessage.toMessage(stylesheet, context.type, variables);
+            mixed := rule.errorMessage.toMessage(stylesheet, context.type, self, variables);
         };
         if (notEmpty(rule.successMessage)) {
             withParam += object WithParamType {
                 name := 'valid';
-                mixed := rule.successMessage.toMessage(stylesheet, context.type, variables);
+                mixed := rule.successMessage.toMessage(stylesheet, context.type, self, variables);
             };
         };
     }->toFMEntry('callTemplate');
@@ -419,11 +419,11 @@ mapping Constraint::toUnsupported(stylesheet : TransformType) : List(EFeatureMap
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
 
-query String::toMessage(stylesheet : TransformType, context : OCL::Type, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : Sequence(EFeatureMapEntry) =
+query String::toMessage(stylesheet : TransformType, context : OCL::Type, constraint : Constraint, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : Sequence(EFeatureMapEntry) =
     self.tokenizeDocOCL()->collect(token|
         if token.isExpr then
             object ValueOfType {
-                select := token.text.toExpressionInOCL(context).ownedBody.xmap toXPath(stylesheet, variables).toString();
+                select := token.text.toExpressionInOCL(context).ownedBody.xmap toXPath(stylesheet, constraint, variables).toString();
             }->toFMEntry('valueOf')
         else
             object TextType {
@@ -431,12 +431,12 @@ query String::toMessage(stylesheet : TransformType, context : OCL::Type, variabl
             }->toFMEntry('text')
         endif);
 
-mapping OCLExpression::toXPath(stylesheet : TransformType, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
+mapping OCLExpression::toXPath(stylesheet : TransformType, constraint : Constraint, variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : ExprSingle
 {
     init {
         //try {
             //log('    Transforming OCL expression\n      ' + self.toString());
-            result := self.xmap toExprSingle(variables);
+            result := self.xmap toExprSingle(constraint, variables);
             //log('    to\n      ' + result.toString());
         //}
         //except () {
