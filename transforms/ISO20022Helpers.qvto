@@ -60,6 +60,13 @@ mapping Constraint::toRule() : Rule
 ///////////////////////////////////////////////////////////////////////////////
 // Helpers
 
+// HACK: ISO 20022 standard doesn't describe how to represent Business Messages
+// So we use a custom annotation.
+// Business Messages are described in the Message Usage Guide for the Business Application Header
+query Classifier::isBusinessMessage() : Boolean =
+    self.is('MessageDefinition') and
+    self.getAnnotation('isBusinessMessage', 'false') = 'true';
+
 query OCLExpression::isLet() : Boolean =
     self.oclIsKindOf(LetExp);
 
@@ -95,16 +102,28 @@ query VariableExp::getContext() : OCL::Variable =
 query Classifier::getRootPath() : PathExpr =
     object PathExpr {
         step := object RootStepExpr { };
-        /*step += object AbbrevForwardStep {
-            kind := AbbrevForwardStepKind::child;
-            nodeTest := object QNameTest { name := createQName('Document') };
-        };*/
-        step += object SelfStepExpr {
-            step := object AbbrevForwardStep {
-                kind := AbbrevForwardStepKind::child;
-                nodeTest := object QNameTest { name := self.getQName() };
+        if (self.isBusinessMessage()) {
+            step += object SelfStepExpr {
+                step := object AbbrevForwardStep {
+                    kind := AbbrevForwardStepKind::child;
+                    nodeTest := object QNameTest { name := self.getQName() };
+                };
             };
-        };
+        }
+        else {
+            step += object SelfStepExpr {
+                step := object AbbrevForwardStep {
+                    kind := AbbrevForwardStepKind::child;
+                    nodeTest := object QNameTest { name := createQName('Document') };
+                };
+            };
+            step += object ChildStepExpr {
+                step := object AbbrevForwardStep {
+                    kind := AbbrevForwardStepKind::child;
+                    nodeTest := object QNameTest { name := self.getQName() };
+                };
+            };
+        }
     };
 
 query NamedElement::generateXMLTag() : String
