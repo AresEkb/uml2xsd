@@ -244,8 +244,9 @@ mapping Constraint::toValidationCode(
     localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
 disjuncts
     Constraint::toLet,
+    Constraint::toImplies,
     Constraint::toForAll,
-    Constraint::toHelperCheckInvocation
+    Constraint::toValidate
 {
 }
 
@@ -259,7 +260,8 @@ mapping Constraint::toValidationCode2(
     localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
 disjuncts
     Constraint::toLet,
-    Constraint::toHelperCheckInvocation
+    Constraint::toImplies,
+    Constraint::toValidate
 {
 }
 
@@ -313,6 +315,65 @@ when { expr.isLet() }
 }
 
 /**
+ * Map OCL constraint to the condition statement:
+ *
+ *         if (Helper.evaluateBool({context variable}, "{precondition}")) {
+ *             {validation code}
+ *         }
+ *         else {
+ *             results.add(Helper.irrelevant({context variable}));
+ *         }
+ */
+mapping Constraint::toImplies(
+    expr : OCLExpression,
+    root : OCL::Variable,
+    context : OCL::Variable,
+    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
+    contextVariable : JAVA::_references::ReferenceableElement,
+    resultVariable : JAVA::_references::ReferenceableElement,
+    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
+when { expr.isImplies() }
+{
+    result += object JAVA::statements::Condition {
+        condition := object JAVA::_references::IdentifierReference {
+            target := object JAVA::classifiers::Class { name := 'Helper'; };
+            next := object JAVA::_references::MethodCall {
+                target := object JAVA::members::ClassMethod { name := 'evaluateBool'; };
+                arguments += object JAVA::_references::IdentifierReference {
+                    target := contextVariable;
+                };
+                arguments += object JAVA::_references::StringReference {
+                    value := expr![OperationCallExp].ownedSource.xmap toExprSingle(self, variables).toString();
+                };
+            };
+        };
+        statement := object JAVA::statements::Block {
+            statements += self.xmap toValidationCode(expr![OperationCallExp].ownedArguments->first(),
+                root, context, variables, contextVariable, resultVariable, localVariables);
+        };
+        elseStatement := object JAVA::statements::Block {
+            statements += object JAVA::statements::ExpressionStatement {
+                expression := object JAVA::_references::IdentifierReference {
+                    target := resultVariable;
+                    next := object JAVA::_references::MethodCall {
+                        target := object JAVA::members::ClassMethod { name := 'add'; };
+                        arguments := object JAVA::_references::IdentifierReference {
+                            target := object JAVA::classifiers::Class { name := 'Helper'; };
+                            next := object JAVA::_references::MethodCall {
+                                target := object JAVA::members::ClassMethod { name := 'irrelevant'; };
+                                arguments := object JAVA::_references::IdentifierReference {
+                                    target := contextVariable;
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+}
+
+/**
  * Map OCL constraint to the loop:
  *
  *         for (XdmItem context : Helper.iterate(root, "{path}", Arrays.asList({variables list}))) {
@@ -363,22 +424,6 @@ when { expr.isForAll() }
             };
         };
         statement := object JAVA::statements::Block {
-            // TODO: This must be refactored. Java variables must be mapped to XPath ones
-            /*var nestingLevelsCount := contextExpr.countNestingLevels();
-            if (nestingLevelsCount > 0) {
-                var path := object PathExpr {
-                    step := object SelfStepExpr {
-                        step := object AbbrevReverseStep { kind := AbbrevReverseStepKind::parent }
-                    };
-                    step += Sequence{1..nestingLevelsCount - 1}->collect(
-                        object ChildStepExpr {
-                            step := object AbbrevReverseStep { kind := AbbrevReverseStepKind::parent }
-                        });
-                };
-                variables2->put(expr.getContext(), path);
-            };*/
-            // TODO: Refactor it and emptySelf
-            // Relative path is better because of non-determenistic Document root, which is sometimes present, sometimes absent
             assert fatal (expr![IteratorExp].ownedIterators->size() = 1);
             var iterator := expr![IteratorExp].ownedIterators->first();
             var variableName := self.getUniqueName(iterator);
@@ -424,7 +469,7 @@ when { expr.isForAll() }
  *             "{error message}",
  *             "{success message}"));
  */
-mapping Constraint::toHelperCheckInvocation(
+mapping Constraint::toValidate(
     expr : OCLExpression,
     root : OCL::Variable,
     context : OCL::Variable,
@@ -434,52 +479,50 @@ mapping Constraint::toHelperCheckInvocation(
     localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
 {
     result += object JAVA::statements::ExpressionStatement {
-        expression := object JAVA::expressions::AssignmentExpression {
-            child := object JAVA::_references::IdentifierReference {
-                target := resultVariable;
-                next := object JAVA::_references::MethodCall {
-                    target := object JAVA::members::ClassMethod { name := 'add'; };
-                    arguments := object JAVA::_references::IdentifierReference {
-                        target := object JAVA::classifiers::Class { name := 'Helper'; };
-                        next := object JAVA::_references::MethodCall {
-                            target := object JAVA::members::ClassMethod { name := 'check'; };
+        expression := object JAVA::_references::IdentifierReference {
+            target := resultVariable;
+            next := object JAVA::_references::MethodCall {
+                target := object JAVA::members::ClassMethod { name := 'add'; };
+                arguments := object JAVA::_references::IdentifierReference {
+                    target := object JAVA::classifiers::Class { name := 'Helper'; };
+                    next := object JAVA::_references::MethodCall {
+                        target := object JAVA::members::ClassMethod { name := 'check'; };
 
-                            arguments := object JAVA::_references::IdentifierReference {
-                                target := contextVariable;
+                        arguments := object JAVA::_references::IdentifierReference {
+                            target := contextVariable;
+                        };
+
+                        arguments += object JAVA::_references::StringReference {
+                            value := expr.replaceLocal().xmap toExprSingle(self, variables).toString()
+                                .replaceAll("'(:param\\d+)'", "$1")
+                                .replaceAll("'(:param\\d+)'", "$1"); // TODO: There is a strange bug, param is quoted twice
+                        };
+
+                        arguments += object JAVA::_references::IdentifierReference {
+                            target := contextVariable.getClass('java.util.Arrays');
+                            next := object JAVA::_references::MethodCall {
+                                target := object JAVA::members::ClassMethod { name := 'asList' };
+                                arguments := localVariables->collect(v|
+                                    object JAVA::_references::IdentifierReference {
+                                        target := v;
+                                    });
                             };
+                        };
 
-                            arguments += object JAVA::_references::StringReference {
-                                value := expr.replaceLocal().xmap toExprSingle(self, variables).toString()
-                                    .replaceAll("'(:param\\d+)'", "$1")
-                                    .replaceAll("'(:param\\d+)'", "$1"); // TODO: There is a strange bug, param is quoted twice
-                            };
-
-                            arguments += object JAVA::_references::IdentifierReference {
-                                target := contextVariable.getClass('java.util.Arrays');
-                                next := object JAVA::_references::MethodCall {
-                                    target := object JAVA::members::ClassMethod { name := 'asList' };
-                                    arguments := localVariables->collect(v|
-                                        object JAVA::_references::IdentifierReference {
-                                            target := v;
-                                        });
+                        arguments += object JAVA::_references::IdentifierReference {
+                            target := object JAVA::classifiers::Class { name := 'Arrays'; };
+                            next := object JAVA::_references::MethodCall {
+                                target := object JAVA::members::ClassMethod {
+                                    name := 'asList';
                                 };
+                                arguments := expr.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(self, variables);
                             };
+                        };
 
-                            arguments += object JAVA::_references::IdentifierReference {
-                                target := object JAVA::classifiers::Class { name := 'Arrays'; };
-                                next := object JAVA::_references::MethodCall {
-                                    target := object JAVA::members::ClassMethod {
-                                        name := 'asList';
-                                    };
-                                    arguments := expr.resolveIn(OCLExpression::toParam, Param)->sortedBy(name)->toNewConstructorCall(self, variables);
-                                };
-                            };
-
-                            var rule := self.xmap toRule();
-                            arguments += rule.errorMessage.toMessage(contextVariable, context.type, self, variables);
-                            if (notEmpty(rule.successMessage)) {
-                                arguments += rule.successMessage.toMessage(contextVariable, context.type, self, variables);
-                            };
+                        var rule := self.xmap toRule();
+                        arguments += rule.errorMessage.toMessage(contextVariable, context.type, self, variables);
+                        if (notEmpty(rule.successMessage)) {
+                            arguments += rule.successMessage.toMessage(contextVariable, context.type, self, variables);
                         };
                     };
                 };

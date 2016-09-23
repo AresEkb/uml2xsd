@@ -42,9 +42,6 @@ main()
     if (generateHTMLresult.oclIsUndefined()) {
         generateHTMLresult := true;
     };
-    if (generateHTMLresult) {
-        generateXMLresult := true;
-    };
     if (fileName.oclIsUndefined()) {
         if (generateXMLresult) {
             m.objectsOfKind(Classifier)->select(is('MessageDefinition'))->toStylesheet();
@@ -250,8 +247,8 @@ mapping Constraint::toValidationCode(
     variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
 disjuncts
     Constraint::toLet,
-    Constraint::toForAll,
     Constraint::toImplies,
+    Constraint::toForAll,
     Constraint::toValidate
 {
 }
