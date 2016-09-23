@@ -97,7 +97,7 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
             annotationsAndModifiers := object JAVA::modifiers::Private { };
         };
 
-        members += self.ownedRule->sortedBy(name)->toValidationMethod(rootField);
+        members += self.ownedRule->sortedBy(name)->toValidationMethod(rootField, self.getRootPath().toString());
     };
 }
 
@@ -114,7 +114,7 @@ mapping Classifier::toCompilationUnit() : JAVA::containers::CompilationUnit
  *     }
  *
  */
-mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA::members::ClassMethod
+mapping Constraint::toValidationMethod(rootField : JAVA::members::Field, rootPath : String) : JAVA::members::ClassMethod
 {
     log('    Found rule ' + self.name);
     var rule := self.xmap toRule();
@@ -167,12 +167,12 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
     parameters := resultParam;
 
     if (terminateOnException) {
-        statements := self.toValidationMethodBody(rootField, resultParam);
+        statements := self.toValidationMethodBody(rootField, rootPath, resultParam);
         assert fatal (statements->notEmpty()) with log('Unable to generate validation code');
     }
     else {
         try {
-            statements := self.toValidationMethodBody(rootField, resultParam);
+            statements := self.toValidationMethodBody(rootField, rootPath, resultParam);
         }
         except (ex : Exception) {
             assert warning (false) with log(ex.repr());
@@ -190,6 +190,7 @@ mapping Constraint::toValidationMethod(rootField : JAVA::members::Field) : JAVA:
 
 query Constraint::toValidationMethodBody(
     rootField : JAVA::members::Field,
+    rootPath : String,
     resultVariable : JAVA::_references::ReferenceableElement) : List(JAVA::statements::Statement)
 {
     var variables : Dict(OCL::Variable, XPATH2::ExprSingle);
@@ -220,15 +221,7 @@ query Constraint::toValidationMethodBody(
                         value := variableName;
                     };
                     arguments += object JAVA::_references::StringReference {
-                        value := object PathExpr {
-                            //step := object RootStepExpr { };
-                            step += object SelfStepExpr {
-                                step := object AbbrevForwardStep {
-                                    kind := AbbrevForwardStepKind::child;
-                                    nodeTest := object QNameTest { name := expr.ownedContext.type.getQName() };
-                                };
-                            };
-                        }.toString();
+                        value := rootPath;
                     };
                 };
             };
