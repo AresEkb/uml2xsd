@@ -250,21 +250,6 @@ disjuncts
 {
 }
 
-mapping Constraint::toValidationCode2(
-    expr : OCLExpression,
-    root : OCL::Variable,
-    context : OCL::Variable,
-    variables : Dict(OCL::Variable, XPATH2::ExprSingle),
-    contextVariable : JAVA::_references::ReferenceableElement,
-    resultVariable : JAVA::_references::ReferenceableElement,
-    localVariables : List(JAVA::_references::ReferenceableElement)) : List(JAVA::statements::Statement)
-disjuncts
-    Constraint::toLet,
-    Constraint::toImplies,
-    Constraint::toValidate
-{
-}
-
 /**
  * Map OCL constraint to the variable declaration:
  *
@@ -317,7 +302,7 @@ when { expr.isLet() }
 /**
  * Map OCL constraint to the condition statement:
  *
- *         if (Helper.evaluateBool({context variable}, "{precondition}")) {
+ *         if (Helper.evaluateBool({context variable}, "{precondition}", Arrays.asList({variables list}))) {
  *             {validation code}
  *         }
  *         else {
@@ -344,6 +329,16 @@ when { expr.isImplies() }
                 };
                 arguments += object JAVA::_references::StringReference {
                     value := expr![OperationCallExp].ownedSource.xmap toExprSingle(self, variables).toString();
+                };
+                arguments += object JAVA::_references::IdentifierReference {
+                    target := contextVariable.getClass('java.util.Arrays');
+                    next := object JAVA::_references::MethodCall {
+                        target := object JAVA::members::ClassMethod { name := 'asList' };
+                        arguments := localVariables->collect(v|
+                            object JAVA::_references::IdentifierReference {
+                                target := v;
+                            });
+                    };
                 };
             };
         };
@@ -393,7 +388,7 @@ when { expr.isForAll() }
     var contextExpr := expr![IteratorExp].ownedSource;
     result += object JAVA::statements::ForEachLoop {
         var contextParam := object JAVA::parameters::OrdinaryParameter {
-            name := 'context';
+            name := self.getUniqueName('context');
             typeReference := object JAVA::types::ClassifierReference {
                 target := contextVariable.getInterface('net.sf.saxon.s9api.XdmItem');
             };
@@ -454,7 +449,7 @@ when { expr.isForAll() }
                 localVariables2->add(variable);
             };
 
-            statements += self.xmap toValidationCode2(expr![IteratorExp].ownedBody, root, iterator, variables2, contextParam, resultVariable, localVariables);
+            statements += self.xmap toValidationCode(expr![IteratorExp].ownedBody, root, iterator, variables2, contextParam, resultVariable, localVariables);
         };
     };
 }
@@ -466,6 +461,7 @@ when { expr.isForAll() }
  *             context,
  *             "{rule XPath expression}",
  *             Arrays.asList({variables list}),
+ *             Arrays.asList({params}),
  *             "{error message}",
  *             "{success message}"));
  */

@@ -253,18 +253,6 @@ disjuncts
 {
 }
 
-mapping Constraint::toValidationCode2(
-    stylesheet : TransformType,
-    expr : OCLExpression,
-    context : OCL::Variable,
-    variables : Dict(OCL::Variable, XPATH2::ExprSingle)) : List(EFeatureMapEntry)
-disjuncts
-    Constraint::toLet,
-    Constraint::toImplies,
-    Constraint::toValidate
-{
-}
-
 mapping Constraint::toLet(
     stylesheet : TransformType,
     expr : OCLExpression,
@@ -325,7 +313,7 @@ when { expr.isForAll() }
         };
         variables2->put(iterator, object FunctionCall { name := createQName('current') });
         select := contextExpr.xmap toXPath(stylesheet, self, variables).toString();
-        instructionGroup += self.xmap toValidationCode2(stylesheet, expr![IteratorExp].ownedBody, iterator, variables2);
+        instructionGroup += self.xmap toValidationCode(stylesheet, expr![IteratorExp].ownedBody, iterator, variables2);
     }->toFMEntry('forEach');
 }
 

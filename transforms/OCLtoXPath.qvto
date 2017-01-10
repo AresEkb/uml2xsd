@@ -191,7 +191,7 @@ query IteratorExp::toForExpr(context : OclAny, variables : Dict(OCL::Variable, X
     var res : ExprSingle;
 
     if (self.isComplex()) {
-        var variableName := createQName(self.getUniqueName(iter));
+        var variableName := createQName(context.getUniqueName(iter));
         res := object ForExpr {
             iterator := object Iterator {
                 varName := variableName;
@@ -756,7 +756,7 @@ mapping OperationCallExp::toLookup(context : OclAny, variables : Dict(OCL::Varia
 
 mapping OperationCallExp::toLookupAll(context : OclAny, variables : Dict(OCL::Variable, XPATH2::ExprSingle), checkExists : Boolean) : QuantifiedExpr
 {
-    var variableName := createQName(self.getUniqueName('_item'));
+    var variableName := createQName(context.getUniqueName('_item'));
     quantifier := QuantifierKind::every;
     iterator := object Iterator {
         varName := variableName;
@@ -1006,13 +1006,16 @@ query OclAny::getUniqueName(variableName : String) : String
     };
     var mappings := varNames->get(self);
     if (mappings->hasKey(variableName)) {
-        var count := mappings->get(variableName);
-        mappings->put(variableName, count + 1);
-        return variableName + count.toString();
+        var count := mappings->get(variableName) + 1;
+        mappings->put(variableName, count);
+        return variableName.appendSuffix(count);
     };
     mappings->put(variableName, 1);
-    return if variableName = '_' then '_1' else variableName endif;
+    return variableName.appendSuffix(1);
 }
+
+query String::appendSuffix(suffix : Integer) : String =
+    if suffix > 1 or self = '_' then self + suffix.toString() else self endif;
 
 query OCLExpression::isExternal() : Boolean =
     assert fatal (false) with log('Not implemented for ' + self.metaClassName() + ' (' + self.repr() + ')');
